@@ -65,7 +65,7 @@ enum RpcErrorCode {
   PUSHTIMEOUT = -6; //客户端PUSH的超时
 }
 message LoginRequest{
-	optional string userName = 1；
+	optional string userName = 1;
 }
 
 message LoginResponse{

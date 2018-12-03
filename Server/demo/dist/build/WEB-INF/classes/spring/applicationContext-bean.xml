@@ -14,7 +14,7 @@
   <bean id="jdbcHandler" class="com.zyd.demo.common.jdbc.JDBCHandler">
     <property name="mapperHelper" ref="mapperHelper"></property>
   </bean>
-  <!-- <bean id="resourceManager" class="com.nkm.common.resource.ResourceManager"></bean> -->
+  <bean id="resourceManager" class="com.nkm.common.resource.ResourceManager"></bean>
   <bean id="baseService" class="com.zyd.demo.common.BaseService">
       <property name="nosqlService" ref="nosqlService"></property>  
       <property name="battleRoomManager" ref="battleRoomManager"></property>  
