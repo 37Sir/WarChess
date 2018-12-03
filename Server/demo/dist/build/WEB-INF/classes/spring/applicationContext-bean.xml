@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <!-- cache -->
+  <bean id="memcachedHandler" class="com.zyd.demo.common.memcached.MemcachedHandler">
+    <property name="mapperHelper" ref="mapperHelper"></property>
+    <property name="mcc" ref="memcachedClient"></property>
+  </bean>
+  <bean id="cacheJDBCHandler" class="com.zyd.demo.common.memcached.CacheJDBCHandler"
+    parent="memcachedHandler">
+    <property name="mapperHelper" ref="mapperHelper"></property>
+  </bean>
+  <bean id="jdbcHandler" class="com.zyd.demo.common.jdbc.JDBCHandler">
+    <property name="mapperHelper" ref="mapperHelper"></property>
+  </bean>
+  <!-- <bean id="resourceManager" class="com.nkm.common.resource.ResourceManager"></bean> -->
+  <bean id="baseService" class="com.zyd.demo.common.BaseService">
+      <property name="nosqlService" ref="nosqlService"></property>  
+      <property name="battleRoomManager" ref="battleRoomManager"></property>  
+      <property name="commonService" ref="commonService"></property>  
+           
+  </bean>
+  <bean id="matchService" class="com.zyd.demo.round.service.MatchService" parent="baseService" init-method="init">
+  </bean>
+  
+  <bean id="battleRoomManager" class="com.zyd.demo.round.service.BattleRoomManager" parent="baseService" init-method="init">
+  </bean>
+  <bean id="commonService" class="com.zyd.demo.common.CommonService" parent="baseService">
+  </bean>
+  
+  <bean id="mapperHelper" class="com.zyd.demo.common.jdbc.MapperHelper">
+  </bean> 
+  <bean id="nosqlService" class="com.zyd.demo.common.nosql.NosqlService">
+    <property name="noSql" ref="nosql"></property>
+  </bean>
+</beans>

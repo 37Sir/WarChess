@@ -1,0 +1,108 @@
+<project name="kp" default="dist" basedir=".">
+	<description>
+    	nkm Service
+    </description>
+
+	<property name="common" location="../democommon"/>
+	<property name="src" location="WEB-INF/src"/>
+	<property name="resources" location="WEB-INF/resources"/>
+	<property name="dist" location="dist"/>
+
+	<path id="java.lib.path">
+		<fileset dir="WEB-INF/lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp/>
+		<mkdir dir="${common}/build/classes"/>
+		<mkdir dir="${dist}"/>
+		<mkdir dir="${dist}/build"/>
+		<mkdir dir="${dist}/build/WEB-INF/classes"/>
+	</target>
+
+	<target name="compile" depends="init,version" description="compile the source" >
+		<javac srcdir="${common}/src" destdir="${common}/build/classes" debug="true" encoding="UTF-8">
+			<classpath refid="java.lib.path"/>
+		</javac>
+		<jar jarfile="WEB-INF/lib/common.jar" basedir="${common}/build/classes" />
+		<javac srcdir="${src}" destdir="${dist}/build/WEB-INF/classes" debug="true" encoding="UTF-8">
+			<classpath refid="java.lib.path"/>
+		</javac>
+		<copy todir="${dist}/build"> 
+			<fileset dir="${basedir}">
+				<include name="*.info"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${dist}/build/WEB-INF">
+			<fileset dir="WEB-INF">
+				<include name="lib/**"/>
+				<include name="resources/**"/>
+				<include name="*.xml"/>
+				<include name="*.properties"/>
+				<exclude name="lib/jsp-api*"/>
+				<exclude name="lib/servlet-api*"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${dist}/build/WEB-INF/classes">
+			<fileset dir="${src}">
+				<exclude name="**/application*.properties"/>
+				<include name="**/*.xml"/>
+				<include name="spring/**/*.xml"/>
+				<include name="**/*.properties"/>
+
+			</fileset>
+		</copy>
+		<copy tofile="${dist}/build/WEB-INF/classes/application.properties" file="${src}/application.properties"> 
+		</copy>
+	</target>
+
+	<target name="wrapper">
+		<html-wrapper 
+	      title="Welcome to nkm System"
+	      file="index.html"
+	      height="100%"
+	      width="100%"
+	      bgcolor="red"
+	      application="mt"
+	      swf="index"
+	      version-major="9"
+	      version-minor="0"
+	      version-revision="0"
+	      history="true"
+	      template="express-installation"
+	      output="${dist}/build"/>
+	</target>
+	<target name="dist" depends="clean,compile"
+        description="generate the distribution" >
+		<tstamp prefix="buildtime" >    
+			<format property="TimeSign" pattern="yyyyMMddHHmmss" />    
+		</tstamp>  
+		<tar destfile="${dist}/kp_${buildtime.TimeSign}.tar" basedir="${dist}/build"/>
+		<war destfile="${dist}/kp.war" basedir="${dist}/build" needxmlfile="false"/>
+	</target>
+   
+ 	<target name="isTrue" if="cn_condition">
+  		<echo> 当前版本${version}正在拷贝国内不变的配置文件，请稍后...</echo>
+  		<copy todir="${dist}/build/WEB-INF/resources">
+		</copy>
+ 	</target>
+
+ 	<target name="isFalse" unless="cn_condition">
+ 		<echo>非国内版本，不拷贝不变的配置文件...</echo>
+ 	</target>
+ 	
+	
+	<target name="version" description="Record build information">
+		<propertyfile file="${dist}/build/build.info">
+		<entry default="now" key="build.time" pattern="yyyy-MM-dd HH.mm.ss" type="date" />
+		</propertyfile>
+	</target>
+	<target name="clean" description="clean up" >
+		<delete dir="${dist}"/>
+	</target>
+</project>

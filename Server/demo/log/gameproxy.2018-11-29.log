@@ -1,0 +1,507 @@
+10:46:03.345 [main] INFO  c.z.d.c.utils.ConfigurationUtil - finished load configuration:
+10:46:03.354 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.runtime.name -->Java(TM) SE Runtime Environment
+10:46:03.355 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.boot.library.path -->C:\Program Files\Java\jre1.8.0_162\bin
+10:46:03.355 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.version -->25.162-b12
+10:46:03.355 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.vendor -->Oracle Corporation
+10:46:03.355 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vendor.url -->http://java.oracle.com/
+10:46:03.355 [main] INFO  c.z.d.c.utils.ConfigurationUtil - path.separator -->;
+10:46:03.355 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.name -->Java HotSpot(TM) 64-Bit Server VM
+10:46:03.355 [main] INFO  c.z.d.c.utils.ConfigurationUtil - file.encoding.pkg -->sun.io
+10:46:03.355 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.country -->CN
+10:46:03.355 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.script -->
+10:46:03.355 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.java.launcher -->SUN_STANDARD
+10:46:03.355 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.os.patch.level -->Service Pack 1
+10:46:03.355 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.specification.name -->Java Virtual Machine Specification
+10:46:03.355 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.dir -->D:\Program Files\tag\demo
+10:46:03.356 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.runtime.version -->1.8.0_162-b12
+10:46:03.356 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.awt.graphicsenv -->sun.awt.Win32GraphicsEnvironment
+10:46:03.356 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.endorsed.dirs -->C:\Program Files\Java\jre1.8.0_162\lib\endorsed
+10:46:03.356 [main] INFO  c.z.d.c.utils.ConfigurationUtil - os.arch -->amd64
+10:46:03.356 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.io.tmpdir -->C:\Users\ZHAOYI~1\AppData\Local\Temp\
+10:46:03.356 [main] INFO  c.z.d.c.utils.ConfigurationUtil - line.separator -->
+10:46:03.356 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.specification.vendor -->Oracle Corporation
+10:46:03.356 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.variant -->
+10:46:03.356 [main] INFO  c.z.d.c.utils.ConfigurationUtil - os.name -->Windows 7
+10:46:03.356 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.jnu.encoding -->GBK
+10:46:03.356 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.library.path -->C:\Program Files\Java\jre1.8.0_162\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jre1.8.0_162/bin/server;C:/Program Files/Java/jre1.8.0_162/bin;C:/Program Files/Java/jre1.8.0_162/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_162\bin;C:\Program Files\Java\jdk1.8.0_162\jre\bin;D:\apache-tomcat-8.5.29\bin;D:\Program Files\mysql-5.6.40-winx64\bin;D:\Program Files\Git\cmd;D:\Program Files\TortoiseSVN\bin;D:\Program Files\apache-maven-3.5.4\bin;D:\apache-ant-1.10.5\bin;D:\Python27;D:\Gradle\gradle-4.10.2\bin;D:\Program Files (x86)\;D:\Program Files\eclipse;;.
+10:46:03.356 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.nio.ch.bugLevel -->
+10:46:03.356 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.specification.name -->Java Platform API Specification
+10:46:03.356 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.class.version -->52.0
+10:46:03.356 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.management.compiler -->HotSpot 64-Bit Tiered Compilers
+10:46:03.356 [main] INFO  c.z.d.c.utils.ConfigurationUtil - os.version -->6.1
+10:46:03.356 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.home -->C:\Users\ZhaoYiDing
+10:46:03.357 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.timezone -->Asia/Shanghai
+10:46:03.357 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.awt.printerjob -->sun.awt.windows.WPrinterJob
+10:46:03.357 [main] INFO  c.z.d.c.utils.ConfigurationUtil - file.encoding -->UTF-8
+10:46:03.357 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.specification.version -->1.8
+10:46:03.357 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.class.path -->D:\Program Files\tag\demo\WEB-INF\classes;D:\Program Files\tag\demo\WEB-INF\lib\commons-configuration-1.5.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-pool-1.6.jar;D:\Program Files\tag\demo\WEB-INF\lib\gson-2.2.4.jar;D:\Program Files\tag\demo\WEB-INF\lib\jedis-2.2.1.jar;D:\Program Files\tag\demo\WEB-INF\lib\logback-access-1.0.13.jar;D:\Program Files\tag\demo\WEB-INF\lib\logback-classic-1.0.13.jar;D:\Program Files\tag\demo\WEB-INF\lib\logback-core-1.0.13.jar;D:\Program Files\tag\demo\WEB-INF\lib\mybatis-3.2.2-sources.jar;D:\Program Files\tag\demo\WEB-INF\lib\mybatis-3.2.2.jar;D:\Program Files\tag\demo\WEB-INF\lib\mybatis-generator-core-1.3.2.jar;D:\Program Files\tag\demo\WEB-INF\lib\mybatis-spring-1.2.0.jar;D:\Program Files\tag\demo\WEB-INF\lib\mysql-connector-java-5.1.25-bin.jar;D:\Program Files\tag\demo\WEB-INF\lib\netty-all-4.1.25.Final.jar;D:\Program Files\tag\demo\WEB-INF\lib\protobuf-java-2.5.0.jar;D:\Program Files\tag\demo\WEB-INF\lib\protobuf-java-format-1.2.jar;D:\Program Files\tag\demo\WEB-INF\lib\slf4j-api-1.7.5.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-aop-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-aspects-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-beans-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-context-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-context-indexer-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-context-support-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-core-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-expression-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-instrument-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-jcl-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-jdbc-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-jms-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-messaging-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-orm-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-oxm-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-test-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-tx-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-web-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-webflux-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-webmvc-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\xmemcached-1.4.2.jar;D:\Program Files\tag\demo\WEB-INF\lib\httpclient-4.3.1.jar;D:\Program Files\tag\demo\WEB-INF\lib\servlet-api-2.5.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-beanutils.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-lang-2.4.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-digester-1.8.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-collections-3.2.1.jar;D:\Program Files\tag\demo\WEB-INF\lib\guava-15.0.jar;D:\Program Files\tag\demo\WEB-INF\lib\kryo-4.0.1.jar;D:\Program Files\tag\democommon\bin;D:\Program Files\tag\democommon\lib\netty-all-4.0.13.Final.jar;D:\Program Files\tag\democommon\lib\protobuf-java-2.5.0.jar;D:\Program Files\tag\democommon\lib\protobuf-java-format-1.2.jar;D:\Program Files\tag\democommon\lib\commons-cli-1.2.jar;D:\Program Files\tag\democommon\lib\commons-codec-1.6.jar;D:\Program Files\tag\democommon\lib\commons-configuration-1.5.jar;D:\Program Files\tag\democommon\lib\commons-lang-2.4.jar;D:\Program Files\tag\democommon\lib\commons-logging-1.1.3.jar;D:\Program Files\tag\democommon\lib\disruptor-3.2.1.jar;D:\Program Files\tag\democommon\lib\fluent-hc-4.3.6.jar;D:\Program Files\tag\democommon\lib\fluent-logger-0.3.1.jar;D:\Program Files\tag\democommon\lib\gson-2.3.1.jar;D:\Program Files\tag\democommon\lib\guava-15.0.jar;D:\Program Files\tag\democommon\lib\httpclient-4.3.6.jar;D:\Program Files\tag\democommon\lib\httpclient-cache-4.3.6.jar;D:\Program Files\tag\democommon\lib\httpcore-4.3.3.jar;D:\Program Files\tag\democommon\lib\httpmime-4.3.6.jar;D:\Program Files\tag\democommon\lib\jackson-core-1.9.13.jar;D:\Program Files\tag\democommon\lib\javassist-3.18.1-GA.jar;D:\Program Files\tag\democommon\lib\jcl-over-slf4j-1.7.5.jar;D:\Program Files\tag\democommon\lib\kryo-2.23.0.jar;D:\Program Files\tag\democommon\lib\logback-access-1.0.13.jar;D:\Program Files\tag\democommon\lib\logback-classic-1.0.13.jar;D:\Program Files\tag\democommon\lib\logback-core-1.0.13.jar;D:\Program Files\tag\democommon\lib\msgpack-0.6.8.jar;D:\Program Files\tag\democommon\lib\servlet-api-2.5.jar;D:\Program Files\tag\democommon\lib\slf4j-api-1.7.5.jar;D:\Program Files\tag\democommon\lib\spring-aop-5.0.4.RELEASE.jar;D:\Program Files\tag\democommon\lib\spring-beans-5.0.4.RELEASE.jar;D:\Program Files\tag\democommon\lib\spring-context-5.0.4.RELEASE.jar;D:\Program Files\tag\democommon\lib\spring-core-5.0.4.RELEASE.jar;D:\Program Files\tag\democommon\lib\spring-expression-5.0.4.RELEASE.jar
+10:46:03.358 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.name -->ZhaoYiDing
+10:46:03.358 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.specification.version -->1.8
+10:46:03.358 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.java.command -->com.zyd.demo.info.InfoServer
+10:46:03.358 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.home -->C:\Program Files\Java\jre1.8.0_162
+10:46:03.358 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.arch.data.model -->64
+10:46:03.358 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.language -->zh
+10:46:03.358 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.specification.vendor -->Oracle Corporation
+10:46:03.358 [main] INFO  c.z.d.c.utils.ConfigurationUtil - awt.toolkit -->sun.awt.windows.WToolkit
+10:46:03.358 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.info -->mixed mode
+10:46:03.358 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.version -->1.8.0_162
+10:46:03.358 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.ext.dirs -->C:\Program Files\Java\jre1.8.0_162\lib\ext;C:\Windows\Sun\Java\lib\ext
+10:46:03.358 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.boot.class.path -->C:\Program Files\Java\jre1.8.0_162\lib\resources.jar;C:\Program Files\Java\jre1.8.0_162\lib\rt.jar;C:\Program Files\Java\jre1.8.0_162\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_162\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_162\lib\jce.jar;C:\Program Files\Java\jre1.8.0_162\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_162\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_162\classes
+10:46:03.358 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vendor -->Oracle Corporation
+10:46:03.358 [main] INFO  c.z.d.c.utils.ConfigurationUtil - file.separator -->\
+10:46:03.358 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vendor.url.bug -->http://bugreport.sun.com/bugreport/
+10:46:03.358 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.io.unicode.encoding -->UnicodeLittle
+10:46:03.358 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.cpu.endian -->little
+10:46:03.358 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.desktop -->windows
+10:46:03.359 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.cpu.isalist -->amd64
+10:46:03.359 [main] INFO  c.z.d.c.utils.ConfigurationUtil - catalina.base -->${app.rootPath}
+10:46:03.359 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.addr -->jdbc:mysql://192.168.80.84:3306/kpdb?characterEncoding=utf8&amp;autoReconnect=true&amp;autoReconnectForPools=true&amp;noAccessToProcedureBodies=true
+10:46:03.359 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.cpu_offset -->5
+10:46:03.359 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.login_task -->1
+10:46:03.359 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.room_game_task -->1
+10:46:03.359 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.third_task -->1
+10:46:03.359 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.main_task -->7
+10:46:03.359 [main] INFO  c.z.d.c.utils.ConfigurationUtil - ibatis.configLocation -->${app.rootPath}/WEB-INF/classes/SqlMapConfig.xml
+10:46:03.359 [main] INFO  c.z.d.c.utils.ConfigurationUtil - cacheKeysTime -->120000
+10:46:03.359 [main] INFO  c.z.d.c.utils.ConfigurationUtil - cacheKeysNum -->1000
+10:46:03.359 [main] INFO  c.z.d.c.utils.ConfigurationUtil - cacheScheduleTime -->1000
+10:46:03.359 [main] INFO  c.z.d.c.utils.ConfigurationUtil - realFlushScheduleTime -->10000
+10:46:03.359 [main] INFO  c.z.d.c.utils.ConfigurationUtil - redisKeySize -->2000
+10:46:03.359 [main] INFO  c.z.d.c.utils.ConfigurationUtil - channel_escape -->500026;600001;860001;
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - S_data_switch -->false
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - S_data_appId -->s1103fda4706ec925dcac0138b3e08b20
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - S_data_debug -->false
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - S_data_debug_imeiId -->867650028595076
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - redis_read_time_out -->60000
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - server.id -->1000
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - gameProxy.addr -->192.168.90.12
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - gameProxy.port -->9001
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.dbname -->kpdb
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.host -->192.168.80.84
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.port -->3306
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.user -->root
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.password -->123456
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.mem.addr -->127.0.0.1
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.mem.port -->11211
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.mem2.addr -->127.0.0.1
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.mem2.port -->11211
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redis.addr -->127.0.0.1
+10:46:03.360 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redis.port -->6379
+10:46:03.361 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redis.password -->123456
+10:46:03.361 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redisCacheKeys.addr -->127.0.0.1
+10:46:03.361 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redisCacheKeys.port -->6379
+10:46:03.361 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redisCacheKeys.password -->123456
+10:46:03.361 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.proxy.addr -->127.0.0.1
+10:46:03.361 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.proxy.port -->8000
+10:46:03.566 [main] INFO  com.zyd.demo.info.ProxyConnection - ..info proxyConnnection start..
+10:46:06.771 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:46:09.774 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:46:12.793 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ProxyConnection disconnected: /127.0.0.1:8089
+10:46:12.894 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ..info proxyConnnection start..
+10:46:15.912 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:46:18.914 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:46:21.915 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ProxyConnection disconnected: /127.0.0.1:8089
+10:46:22.016 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ..info proxyConnnection start..
+10:46:25.034 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:46:28.036 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:46:31.037 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ProxyConnection disconnected: /127.0.0.1:8089
+10:46:31.138 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ..info proxyConnnection start..
+10:46:34.157 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:46:37.159 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:46:40.160 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ProxyConnection disconnected: /127.0.0.1:8089
+10:46:40.261 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ..info proxyConnnection start..
+10:46:43.279 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:46:46.202 [nioEventLoopGroup-2-1] ERROR c.zyd.common.rpc.RpcMessageHandler - 远程主机强迫关闭了一个现有的连接。
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method) ~[na:1.8.0_162]
+	at sun.nio.ch.SocketDispatcher.read(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.IOUtil.read(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.SocketChannelImpl.read(Unknown Source) ~[na:1.8.0_162]
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288) ~[netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1108) ~[netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:345) ~[netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:148) ~[netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:647) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:582) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:499) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:461) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:884) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+10:46:46.203 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ProxyConnection disconnected: /127.0.0.1:8089
+10:46:46.304 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ..info proxyConnnection start..
+10:46:47.316 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ProxyConnection: Connection refused: no further information: /127.0.0.1:8089
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: /127.0.0.1:8089
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[na:1.8.0_162]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(Unknown Source) ~[na:1.8.0_162]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:325) ~[netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340) ~[netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:635) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:582) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:499) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:461) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:884) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+Caused by: java.net.ConnectException: Connection refused: no further information
+	... 11 common frames omitted
+10:46:47.417 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ..info proxyConnnection start..
+10:56:25.507 [main] INFO  c.z.d.c.utils.ConfigurationUtil - finished load configuration:
+10:56:25.515 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.runtime.name -->Java(TM) SE Runtime Environment
+10:56:25.516 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.boot.library.path -->C:\Program Files\Java\jre1.8.0_162\bin
+10:56:25.516 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.version -->25.162-b12
+10:56:25.516 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.vendor -->Oracle Corporation
+10:56:25.516 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vendor.url -->http://java.oracle.com/
+10:56:25.516 [main] INFO  c.z.d.c.utils.ConfigurationUtil - path.separator -->;
+10:56:25.516 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.name -->Java HotSpot(TM) 64-Bit Server VM
+10:56:25.516 [main] INFO  c.z.d.c.utils.ConfigurationUtil - file.encoding.pkg -->sun.io
+10:56:25.516 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.country -->CN
+10:56:25.516 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.script -->
+10:56:25.516 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.java.launcher -->SUN_STANDARD
+10:56:25.517 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.os.patch.level -->Service Pack 1
+10:56:25.517 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.specification.name -->Java Virtual Machine Specification
+10:56:25.517 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.dir -->D:\Program Files\tag\demo
+10:56:25.517 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.runtime.version -->1.8.0_162-b12
+10:56:25.517 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.awt.graphicsenv -->sun.awt.Win32GraphicsEnvironment
+10:56:25.517 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.endorsed.dirs -->C:\Program Files\Java\jre1.8.0_162\lib\endorsed
+10:56:25.517 [main] INFO  c.z.d.c.utils.ConfigurationUtil - os.arch -->amd64
+10:56:25.517 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.io.tmpdir -->C:\Users\ZHAOYI~1\AppData\Local\Temp\
+10:56:25.517 [main] INFO  c.z.d.c.utils.ConfigurationUtil - line.separator -->
+10:56:25.517 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.specification.vendor -->Oracle Corporation
+10:56:25.517 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.variant -->
+10:56:25.517 [main] INFO  c.z.d.c.utils.ConfigurationUtil - os.name -->Windows 7
+10:56:25.517 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.jnu.encoding -->GBK
+10:56:25.517 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.library.path -->C:\Program Files\Java\jre1.8.0_162\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jre1.8.0_162/bin/server;C:/Program Files/Java/jre1.8.0_162/bin;C:/Program Files/Java/jre1.8.0_162/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_162\bin;C:\Program Files\Java\jdk1.8.0_162\jre\bin;D:\apache-tomcat-8.5.29\bin;D:\Program Files\mysql-5.6.40-winx64\bin;D:\Program Files\Git\cmd;D:\Program Files\TortoiseSVN\bin;D:\Program Files\apache-maven-3.5.4\bin;D:\apache-ant-1.10.5\bin;D:\Python27;D:\Gradle\gradle-4.10.2\bin;D:\Program Files (x86)\;D:\Program Files\eclipse;;.
+10:56:25.517 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.nio.ch.bugLevel -->
+10:56:25.518 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.specification.name -->Java Platform API Specification
+10:56:25.518 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.class.version -->52.0
+10:56:25.518 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.management.compiler -->HotSpot 64-Bit Tiered Compilers
+10:56:25.518 [main] INFO  c.z.d.c.utils.ConfigurationUtil - os.version -->6.1
+10:56:25.518 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.home -->C:\Users\ZhaoYiDing
+10:56:25.518 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.timezone -->Asia/Shanghai
+10:56:25.518 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.awt.printerjob -->sun.awt.windows.WPrinterJob
+10:56:25.518 [main] INFO  c.z.d.c.utils.ConfigurationUtil - file.encoding -->UTF-8
+10:56:25.518 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.specification.version -->1.8
+10:56:25.519 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.class.path -->D:\Program Files\tag\demo\WEB-INF\classes;D:\Program Files\tag\demo\WEB-INF\lib\commons-configuration-1.5.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-pool-1.6.jar;D:\Program Files\tag\demo\WEB-INF\lib\gson-2.2.4.jar;D:\Program Files\tag\demo\WEB-INF\lib\jedis-2.2.1.jar;D:\Program Files\tag\demo\WEB-INF\lib\logback-access-1.0.13.jar;D:\Program Files\tag\demo\WEB-INF\lib\logback-classic-1.0.13.jar;D:\Program Files\tag\demo\WEB-INF\lib\logback-core-1.0.13.jar;D:\Program Files\tag\demo\WEB-INF\lib\mybatis-3.2.2-sources.jar;D:\Program Files\tag\demo\WEB-INF\lib\mybatis-3.2.2.jar;D:\Program Files\tag\demo\WEB-INF\lib\mybatis-generator-core-1.3.2.jar;D:\Program Files\tag\demo\WEB-INF\lib\mybatis-spring-1.2.0.jar;D:\Program Files\tag\demo\WEB-INF\lib\mysql-connector-java-5.1.25-bin.jar;D:\Program Files\tag\demo\WEB-INF\lib\netty-all-4.1.25.Final.jar;D:\Program Files\tag\demo\WEB-INF\lib\protobuf-java-2.5.0.jar;D:\Program Files\tag\demo\WEB-INF\lib\protobuf-java-format-1.2.jar;D:\Program Files\tag\demo\WEB-INF\lib\slf4j-api-1.7.5.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-aop-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-aspects-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-beans-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-context-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-context-indexer-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-context-support-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-core-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-expression-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-instrument-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-jcl-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-jdbc-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-jms-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-messaging-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-orm-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-oxm-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-test-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-tx-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-web-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-webflux-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-webmvc-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\xmemcached-1.4.2.jar;D:\Program Files\tag\demo\WEB-INF\lib\httpclient-4.3.1.jar;D:\Program Files\tag\demo\WEB-INF\lib\servlet-api-2.5.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-beanutils.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-lang-2.4.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-digester-1.8.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-collections-3.2.1.jar;D:\Program Files\tag\demo\WEB-INF\lib\guava-15.0.jar;D:\Program Files\tag\demo\WEB-INF\lib\kryo-4.0.1.jar;D:\Program Files\tag\democommon\bin;D:\Program Files\tag\democommon\lib\netty-all-4.0.13.Final.jar;D:\Program Files\tag\democommon\lib\protobuf-java-2.5.0.jar;D:\Program Files\tag\democommon\lib\protobuf-java-format-1.2.jar;D:\Program Files\tag\democommon\lib\commons-cli-1.2.jar;D:\Program Files\tag\democommon\lib\commons-codec-1.6.jar;D:\Program Files\tag\democommon\lib\commons-configuration-1.5.jar;D:\Program Files\tag\democommon\lib\commons-lang-2.4.jar;D:\Program Files\tag\democommon\lib\commons-logging-1.1.3.jar;D:\Program Files\tag\democommon\lib\disruptor-3.2.1.jar;D:\Program Files\tag\democommon\lib\fluent-hc-4.3.6.jar;D:\Program Files\tag\democommon\lib\fluent-logger-0.3.1.jar;D:\Program Files\tag\democommon\lib\gson-2.3.1.jar;D:\Program Files\tag\democommon\lib\guava-15.0.jar;D:\Program Files\tag\democommon\lib\httpclient-4.3.6.jar;D:\Program Files\tag\democommon\lib\httpclient-cache-4.3.6.jar;D:\Program Files\tag\democommon\lib\httpcore-4.3.3.jar;D:\Program Files\tag\democommon\lib\httpmime-4.3.6.jar;D:\Program Files\tag\democommon\lib\jackson-core-1.9.13.jar;D:\Program Files\tag\democommon\lib\javassist-3.18.1-GA.jar;D:\Program Files\tag\democommon\lib\jcl-over-slf4j-1.7.5.jar;D:\Program Files\tag\democommon\lib\kryo-2.23.0.jar;D:\Program Files\tag\democommon\lib\logback-access-1.0.13.jar;D:\Program Files\tag\democommon\lib\logback-classic-1.0.13.jar;D:\Program Files\tag\democommon\lib\logback-core-1.0.13.jar;D:\Program Files\tag\democommon\lib\msgpack-0.6.8.jar;D:\Program Files\tag\democommon\lib\servlet-api-2.5.jar;D:\Program Files\tag\democommon\lib\slf4j-api-1.7.5.jar;D:\Program Files\tag\democommon\lib\spring-aop-5.0.4.RELEASE.jar;D:\Program Files\tag\democommon\lib\spring-beans-5.0.4.RELEASE.jar;D:\Program Files\tag\democommon\lib\spring-context-5.0.4.RELEASE.jar;D:\Program Files\tag\democommon\lib\spring-core-5.0.4.RELEASE.jar;D:\Program Files\tag\democommon\lib\spring-expression-5.0.4.RELEASE.jar
+10:56:25.519 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.name -->ZhaoYiDing
+10:56:25.519 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.specification.version -->1.8
+10:56:25.519 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.java.command -->com.zyd.demo.info.InfoServer
+10:56:25.519 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.home -->C:\Program Files\Java\jre1.8.0_162
+10:56:25.519 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.arch.data.model -->64
+10:56:25.519 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.language -->zh
+10:56:25.519 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.specification.vendor -->Oracle Corporation
+10:56:25.519 [main] INFO  c.z.d.c.utils.ConfigurationUtil - awt.toolkit -->sun.awt.windows.WToolkit
+10:56:25.519 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.info -->mixed mode
+10:56:25.519 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.version -->1.8.0_162
+10:56:25.519 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.ext.dirs -->C:\Program Files\Java\jre1.8.0_162\lib\ext;C:\Windows\Sun\Java\lib\ext
+10:56:25.520 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.boot.class.path -->C:\Program Files\Java\jre1.8.0_162\lib\resources.jar;C:\Program Files\Java\jre1.8.0_162\lib\rt.jar;C:\Program Files\Java\jre1.8.0_162\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_162\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_162\lib\jce.jar;C:\Program Files\Java\jre1.8.0_162\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_162\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_162\classes
+10:56:25.520 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vendor -->Oracle Corporation
+10:56:25.520 [main] INFO  c.z.d.c.utils.ConfigurationUtil - file.separator -->\
+10:56:25.520 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vendor.url.bug -->http://bugreport.sun.com/bugreport/
+10:56:25.520 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.io.unicode.encoding -->UnicodeLittle
+10:56:25.520 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.cpu.endian -->little
+10:56:25.520 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.desktop -->windows
+10:56:25.520 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.cpu.isalist -->amd64
+10:56:25.520 [main] INFO  c.z.d.c.utils.ConfigurationUtil - catalina.base -->${app.rootPath}
+10:56:25.520 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.addr -->jdbc:mysql://192.168.80.84:3306/kpdb?characterEncoding=utf8&amp;autoReconnect=true&amp;autoReconnectForPools=true&amp;noAccessToProcedureBodies=true
+10:56:25.520 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.cpu_offset -->5
+10:56:25.520 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.login_task -->1
+10:56:25.520 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.room_game_task -->1
+10:56:25.521 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.third_task -->1
+10:56:25.521 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.main_task -->7
+10:56:25.521 [main] INFO  c.z.d.c.utils.ConfigurationUtil - ibatis.configLocation -->${app.rootPath}/WEB-INF/classes/SqlMapConfig.xml
+10:56:25.521 [main] INFO  c.z.d.c.utils.ConfigurationUtil - cacheKeysTime -->120000
+10:56:25.521 [main] INFO  c.z.d.c.utils.ConfigurationUtil - cacheKeysNum -->1000
+10:56:25.521 [main] INFO  c.z.d.c.utils.ConfigurationUtil - cacheScheduleTime -->1000
+10:56:25.521 [main] INFO  c.z.d.c.utils.ConfigurationUtil - realFlushScheduleTime -->10000
+10:56:25.521 [main] INFO  c.z.d.c.utils.ConfigurationUtil - redisKeySize -->2000
+10:56:25.521 [main] INFO  c.z.d.c.utils.ConfigurationUtil - channel_escape -->500026;600001;860001;
+10:56:25.521 [main] INFO  c.z.d.c.utils.ConfigurationUtil - S_data_switch -->false
+10:56:25.521 [main] INFO  c.z.d.c.utils.ConfigurationUtil - S_data_appId -->s1103fda4706ec925dcac0138b3e08b20
+10:56:25.521 [main] INFO  c.z.d.c.utils.ConfigurationUtil - S_data_debug -->false
+10:56:25.521 [main] INFO  c.z.d.c.utils.ConfigurationUtil - S_data_debug_imeiId -->867650028595076
+10:56:25.521 [main] INFO  c.z.d.c.utils.ConfigurationUtil - redis_read_time_out -->60000
+10:56:25.521 [main] INFO  c.z.d.c.utils.ConfigurationUtil - server.id -->1000
+10:56:25.521 [main] INFO  c.z.d.c.utils.ConfigurationUtil - gameProxy.addr -->192.168.90.12
+10:56:25.521 [main] INFO  c.z.d.c.utils.ConfigurationUtil - gameProxy.port -->9001
+10:56:25.521 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.dbname -->kpdb
+10:56:25.522 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.host -->192.168.80.84
+10:56:25.522 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.port -->3306
+10:56:25.522 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.user -->root
+10:56:25.522 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.password -->123456
+10:56:25.522 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.mem.addr -->127.0.0.1
+10:56:25.522 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.mem.port -->11211
+10:56:25.522 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.mem2.addr -->127.0.0.1
+10:56:25.522 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.mem2.port -->11211
+10:56:25.522 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redis.addr -->127.0.0.1
+10:56:25.522 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redis.port -->6379
+10:56:25.522 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redis.password -->123456
+10:56:25.522 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redisCacheKeys.addr -->127.0.0.1
+10:56:25.522 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redisCacheKeys.port -->6379
+10:56:25.522 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redisCacheKeys.password -->123456
+10:56:25.522 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.proxy.addr -->127.0.0.1
+10:56:25.522 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.proxy.port -->8000
+10:56:25.728 [main] INFO  com.zyd.demo.info.ProxyConnection - ..info proxyConnnection start..
+10:56:28.934 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:56:31.937 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:56:34.952 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ProxyConnection disconnected: /127.0.0.1:8089
+10:56:35.054 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ..info proxyConnnection start..
+10:56:38.071 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:56:41.073 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:56:44.074 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ProxyConnection disconnected: /127.0.0.1:8089
+10:56:44.175 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ..info proxyConnnection start..
+10:56:47.193 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:56:50.195 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:56:53.196 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ProxyConnection disconnected: /127.0.0.1:8089
+10:56:53.297 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ..info proxyConnnection start..
+10:56:56.315 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:56:59.317 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:57:02.318 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ProxyConnection disconnected: /127.0.0.1:8089
+10:57:02.419 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ..info proxyConnnection start..
+10:57:05.438 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:58:42.464 [main] INFO  c.z.d.c.utils.ConfigurationUtil - finished load configuration:
+10:58:42.472 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.runtime.name -->Java(TM) SE Runtime Environment
+10:58:42.472 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.boot.library.path -->C:\Program Files\Java\jre1.8.0_162\bin
+10:58:42.472 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.version -->25.162-b12
+10:58:42.473 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.vendor -->Oracle Corporation
+10:58:42.473 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vendor.url -->http://java.oracle.com/
+10:58:42.473 [main] INFO  c.z.d.c.utils.ConfigurationUtil - path.separator -->;
+10:58:42.473 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.name -->Java HotSpot(TM) 64-Bit Server VM
+10:58:42.473 [main] INFO  c.z.d.c.utils.ConfigurationUtil - file.encoding.pkg -->sun.io
+10:58:42.473 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.country -->CN
+10:58:42.473 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.script -->
+10:58:42.473 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.java.launcher -->SUN_STANDARD
+10:58:42.473 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.os.patch.level -->Service Pack 1
+10:58:42.473 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.specification.name -->Java Virtual Machine Specification
+10:58:42.473 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.dir -->D:\Program Files\tag\demo
+10:58:42.473 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.runtime.version -->1.8.0_162-b12
+10:58:42.473 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.awt.graphicsenv -->sun.awt.Win32GraphicsEnvironment
+10:58:42.473 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.endorsed.dirs -->C:\Program Files\Java\jre1.8.0_162\lib\endorsed
+10:58:42.473 [main] INFO  c.z.d.c.utils.ConfigurationUtil - os.arch -->amd64
+10:58:42.473 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.io.tmpdir -->C:\Users\ZHAOYI~1\AppData\Local\Temp\
+10:58:42.473 [main] INFO  c.z.d.c.utils.ConfigurationUtil - line.separator -->
+10:58:42.473 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.specification.vendor -->Oracle Corporation
+10:58:42.474 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.variant -->
+10:58:42.474 [main] INFO  c.z.d.c.utils.ConfigurationUtil - os.name -->Windows 7
+10:58:42.474 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.jnu.encoding -->GBK
+10:58:42.474 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.library.path -->C:\Program Files\Java\jre1.8.0_162\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jre1.8.0_162/bin/server;C:/Program Files/Java/jre1.8.0_162/bin;C:/Program Files/Java/jre1.8.0_162/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_162\bin;C:\Program Files\Java\jdk1.8.0_162\jre\bin;D:\apache-tomcat-8.5.29\bin;D:\Program Files\mysql-5.6.40-winx64\bin;D:\Program Files\Git\cmd;D:\Program Files\TortoiseSVN\bin;D:\Program Files\apache-maven-3.5.4\bin;D:\apache-ant-1.10.5\bin;D:\Python27;D:\Gradle\gradle-4.10.2\bin;D:\Program Files (x86)\;D:\Program Files\eclipse;;.
+10:58:42.474 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.nio.ch.bugLevel -->
+10:58:42.474 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.specification.name -->Java Platform API Specification
+10:58:42.474 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.class.version -->52.0
+10:58:42.474 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.management.compiler -->HotSpot 64-Bit Tiered Compilers
+10:58:42.474 [main] INFO  c.z.d.c.utils.ConfigurationUtil - os.version -->6.1
+10:58:42.474 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.home -->C:\Users\ZhaoYiDing
+10:58:42.474 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.timezone -->Asia/Shanghai
+10:58:42.474 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.awt.printerjob -->sun.awt.windows.WPrinterJob
+10:58:42.474 [main] INFO  c.z.d.c.utils.ConfigurationUtil - file.encoding -->UTF-8
+10:58:42.474 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.specification.version -->1.8
+10:58:42.475 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.class.path -->D:\Program Files\tag\demo\WEB-INF\classes;D:\Program Files\tag\demo\WEB-INF\lib\commons-configuration-1.5.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-pool-1.6.jar;D:\Program Files\tag\demo\WEB-INF\lib\gson-2.2.4.jar;D:\Program Files\tag\demo\WEB-INF\lib\jedis-2.2.1.jar;D:\Program Files\tag\demo\WEB-INF\lib\logback-access-1.0.13.jar;D:\Program Files\tag\demo\WEB-INF\lib\logback-classic-1.0.13.jar;D:\Program Files\tag\demo\WEB-INF\lib\logback-core-1.0.13.jar;D:\Program Files\tag\demo\WEB-INF\lib\mybatis-3.2.2-sources.jar;D:\Program Files\tag\demo\WEB-INF\lib\mybatis-3.2.2.jar;D:\Program Files\tag\demo\WEB-INF\lib\mybatis-generator-core-1.3.2.jar;D:\Program Files\tag\demo\WEB-INF\lib\mybatis-spring-1.2.0.jar;D:\Program Files\tag\demo\WEB-INF\lib\mysql-connector-java-5.1.25-bin.jar;D:\Program Files\tag\demo\WEB-INF\lib\netty-all-4.1.25.Final.jar;D:\Program Files\tag\demo\WEB-INF\lib\protobuf-java-2.5.0.jar;D:\Program Files\tag\demo\WEB-INF\lib\protobuf-java-format-1.2.jar;D:\Program Files\tag\demo\WEB-INF\lib\slf4j-api-1.7.5.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-aop-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-aspects-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-beans-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-context-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-context-indexer-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-context-support-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-core-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-expression-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-instrument-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-jcl-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-jdbc-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-jms-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-messaging-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-orm-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-oxm-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-test-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-tx-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-web-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-webflux-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-webmvc-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\xmemcached-1.4.2.jar;D:\Program Files\tag\demo\WEB-INF\lib\httpclient-4.3.1.jar;D:\Program Files\tag\demo\WEB-INF\lib\servlet-api-2.5.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-beanutils.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-lang-2.4.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-digester-1.8.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-collections-3.2.1.jar;D:\Program Files\tag\demo\WEB-INF\lib\guava-15.0.jar;D:\Program Files\tag\demo\WEB-INF\lib\kryo-4.0.1.jar;D:\Program Files\tag\democommon\bin;D:\Program Files\tag\democommon\lib\netty-all-4.0.13.Final.jar;D:\Program Files\tag\democommon\lib\protobuf-java-2.5.0.jar;D:\Program Files\tag\democommon\lib\protobuf-java-format-1.2.jar;D:\Program Files\tag\democommon\lib\commons-cli-1.2.jar;D:\Program Files\tag\democommon\lib\commons-codec-1.6.jar;D:\Program Files\tag\democommon\lib\commons-configuration-1.5.jar;D:\Program Files\tag\democommon\lib\commons-lang-2.4.jar;D:\Program Files\tag\democommon\lib\commons-logging-1.1.3.jar;D:\Program Files\tag\democommon\lib\disruptor-3.2.1.jar;D:\Program Files\tag\democommon\lib\fluent-hc-4.3.6.jar;D:\Program Files\tag\democommon\lib\fluent-logger-0.3.1.jar;D:\Program Files\tag\democommon\lib\gson-2.3.1.jar;D:\Program Files\tag\democommon\lib\guava-15.0.jar;D:\Program Files\tag\democommon\lib\httpclient-4.3.6.jar;D:\Program Files\tag\democommon\lib\httpclient-cache-4.3.6.jar;D:\Program Files\tag\democommon\lib\httpcore-4.3.3.jar;D:\Program Files\tag\democommon\lib\httpmime-4.3.6.jar;D:\Program Files\tag\democommon\lib\jackson-core-1.9.13.jar;D:\Program Files\tag\democommon\lib\javassist-3.18.1-GA.jar;D:\Program Files\tag\democommon\lib\jcl-over-slf4j-1.7.5.jar;D:\Program Files\tag\democommon\lib\kryo-2.23.0.jar;D:\Program Files\tag\democommon\lib\logback-access-1.0.13.jar;D:\Program Files\tag\democommon\lib\logback-classic-1.0.13.jar;D:\Program Files\tag\democommon\lib\logback-core-1.0.13.jar;D:\Program Files\tag\democommon\lib\msgpack-0.6.8.jar;D:\Program Files\tag\democommon\lib\servlet-api-2.5.jar;D:\Program Files\tag\democommon\lib\slf4j-api-1.7.5.jar;D:\Program Files\tag\democommon\lib\spring-aop-5.0.4.RELEASE.jar;D:\Program Files\tag\democommon\lib\spring-beans-5.0.4.RELEASE.jar;D:\Program Files\tag\democommon\lib\spring-context-5.0.4.RELEASE.jar;D:\Program Files\tag\democommon\lib\spring-core-5.0.4.RELEASE.jar;D:\Program Files\tag\democommon\lib\spring-expression-5.0.4.RELEASE.jar
+10:58:42.475 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.name -->ZhaoYiDing
+10:58:42.475 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.specification.version -->1.8
+10:58:42.475 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.java.command -->com.zyd.demo.info.InfoServer
+10:58:42.476 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.home -->C:\Program Files\Java\jre1.8.0_162
+10:58:42.476 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.arch.data.model -->64
+10:58:42.476 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.language -->zh
+10:58:42.476 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.specification.vendor -->Oracle Corporation
+10:58:42.476 [main] INFO  c.z.d.c.utils.ConfigurationUtil - awt.toolkit -->sun.awt.windows.WToolkit
+10:58:42.476 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.info -->mixed mode
+10:58:42.476 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.version -->1.8.0_162
+10:58:42.476 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.ext.dirs -->C:\Program Files\Java\jre1.8.0_162\lib\ext;C:\Windows\Sun\Java\lib\ext
+10:58:42.476 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.boot.class.path -->C:\Program Files\Java\jre1.8.0_162\lib\resources.jar;C:\Program Files\Java\jre1.8.0_162\lib\rt.jar;C:\Program Files\Java\jre1.8.0_162\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_162\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_162\lib\jce.jar;C:\Program Files\Java\jre1.8.0_162\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_162\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_162\classes
+10:58:42.476 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vendor -->Oracle Corporation
+10:58:42.476 [main] INFO  c.z.d.c.utils.ConfigurationUtil - file.separator -->\
+10:58:42.476 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vendor.url.bug -->http://bugreport.sun.com/bugreport/
+10:58:42.476 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.io.unicode.encoding -->UnicodeLittle
+10:58:42.476 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.cpu.endian -->little
+10:58:42.476 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.desktop -->windows
+10:58:42.476 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.cpu.isalist -->amd64
+10:58:42.477 [main] INFO  c.z.d.c.utils.ConfigurationUtil - catalina.base -->${app.rootPath}
+10:58:42.477 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.addr -->jdbc:mysql://192.168.80.84:3306/kpdb?characterEncoding=utf8&amp;autoReconnect=true&amp;autoReconnectForPools=true&amp;noAccessToProcedureBodies=true
+10:58:42.477 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.cpu_offset -->5
+10:58:42.477 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.login_task -->1
+10:58:42.477 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.room_game_task -->1
+10:58:42.477 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.third_task -->1
+10:58:42.477 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.main_task -->7
+10:58:42.477 [main] INFO  c.z.d.c.utils.ConfigurationUtil - ibatis.configLocation -->${app.rootPath}/WEB-INF/classes/SqlMapConfig.xml
+10:58:42.477 [main] INFO  c.z.d.c.utils.ConfigurationUtil - cacheKeysTime -->120000
+10:58:42.477 [main] INFO  c.z.d.c.utils.ConfigurationUtil - cacheKeysNum -->1000
+10:58:42.477 [main] INFO  c.z.d.c.utils.ConfigurationUtil - cacheScheduleTime -->1000
+10:58:42.477 [main] INFO  c.z.d.c.utils.ConfigurationUtil - realFlushScheduleTime -->10000
+10:58:42.477 [main] INFO  c.z.d.c.utils.ConfigurationUtil - redisKeySize -->2000
+10:58:42.477 [main] INFO  c.z.d.c.utils.ConfigurationUtil - channel_escape -->500026;600001;860001;
+10:58:42.477 [main] INFO  c.z.d.c.utils.ConfigurationUtil - S_data_switch -->false
+10:58:42.477 [main] INFO  c.z.d.c.utils.ConfigurationUtil - S_data_appId -->s1103fda4706ec925dcac0138b3e08b20
+10:58:42.478 [main] INFO  c.z.d.c.utils.ConfigurationUtil - S_data_debug -->false
+10:58:42.478 [main] INFO  c.z.d.c.utils.ConfigurationUtil - S_data_debug_imeiId -->867650028595076
+10:58:42.478 [main] INFO  c.z.d.c.utils.ConfigurationUtil - redis_read_time_out -->60000
+10:58:42.478 [main] INFO  c.z.d.c.utils.ConfigurationUtil - server.id -->1000
+10:58:42.478 [main] INFO  c.z.d.c.utils.ConfigurationUtil - gameProxy.addr -->192.168.90.12
+10:58:42.478 [main] INFO  c.z.d.c.utils.ConfigurationUtil - gameProxy.port -->9001
+10:58:42.478 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.dbname -->kpdb
+10:58:42.478 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.host -->192.168.80.84
+10:58:42.478 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.port -->3306
+10:58:42.478 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.user -->root
+10:58:42.478 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.password -->123456
+10:58:42.478 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.mem.addr -->127.0.0.1
+10:58:42.478 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.mem.port -->11211
+10:58:42.478 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.mem2.addr -->127.0.0.1
+10:58:42.478 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.mem2.port -->11211
+10:58:42.478 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redis.addr -->127.0.0.1
+10:58:42.479 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redis.port -->6379
+10:58:42.479 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redis.password -->123456
+10:58:42.479 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redisCacheKeys.addr -->127.0.0.1
+10:58:42.479 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redisCacheKeys.port -->6379
+10:58:42.479 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redisCacheKeys.password -->123456
+10:58:42.479 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.proxy.addr -->127.0.0.1
+10:58:42.479 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.proxy.port -->8000
+10:58:42.689 [main] INFO  com.zyd.demo.info.ProxyConnection - ..info proxyConnnection start..
+10:58:45.935 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:58:48.939 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:58:51.954 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:58:54.956 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:58:57.959 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:59:00.962 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:59:03.965 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:59:06.967 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:59:09.970 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+10:59:10.704 [nioEventLoopGroup-2-1] ERROR c.zyd.common.rpc.RpcMessageHandler - 远程主机强迫关闭了一个现有的连接。
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method) ~[na:1.8.0_162]
+	at sun.nio.ch.SocketDispatcher.read(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.IOUtil.read(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.SocketChannelImpl.read(Unknown Source) ~[na:1.8.0_162]
+	at io.netty.buffer.PooledUnsafeDirectByteBuf.setBytes(PooledUnsafeDirectByteBuf.java:288) ~[netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:1108) ~[netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:345) ~[netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:148) ~[netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:647) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:582) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:499) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:461) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:884) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+10:59:10.707 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ProxyConnection disconnected: /127.0.0.1:8089
+10:59:10.809 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ..info proxyConnnection start..
+10:59:11.815 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ProxyConnection: Connection refused: no further information: /127.0.0.1:8089
+io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: /127.0.0.1:8089
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) ~[na:1.8.0_162]
+	at sun.nio.ch.SocketChannelImpl.finishConnect(Unknown Source) ~[na:1.8.0_162]
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:325) ~[netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340) ~[netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:635) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:582) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:499) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:461) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:884) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) [netty-all-4.1.25.Final.jar:4.1.25.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+Caused by: java.net.ConnectException: Connection refused: no further information
+	... 11 common frames omitted
+10:59:11.916 [nioEventLoopGroup-2-1] INFO  com.zyd.demo.info.ProxyConnection - ..info proxyConnnection start..
+11:10:40.289 [main] INFO  c.z.d.c.utils.ConfigurationUtil - finished load configuration:
+11:10:40.297 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.runtime.name -->Java(TM) SE Runtime Environment
+11:10:40.297 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.boot.library.path -->C:\Program Files\Java\jre1.8.0_162\bin
+11:10:40.297 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.version -->25.162-b12
+11:10:40.297 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.vendor -->Oracle Corporation
+11:10:40.297 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vendor.url -->http://java.oracle.com/
+11:10:40.297 [main] INFO  c.z.d.c.utils.ConfigurationUtil - path.separator -->;
+11:10:40.297 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.name -->Java HotSpot(TM) 64-Bit Server VM
+11:10:40.298 [main] INFO  c.z.d.c.utils.ConfigurationUtil - file.encoding.pkg -->sun.io
+11:10:40.298 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.country -->CN
+11:10:40.298 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.script -->
+11:10:40.298 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.java.launcher -->SUN_STANDARD
+11:10:40.298 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.os.patch.level -->Service Pack 1
+11:10:40.298 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.specification.name -->Java Virtual Machine Specification
+11:10:40.298 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.dir -->D:\Program Files\tag\demo
+11:10:40.298 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.runtime.version -->1.8.0_162-b12
+11:10:40.298 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.awt.graphicsenv -->sun.awt.Win32GraphicsEnvironment
+11:10:40.298 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.endorsed.dirs -->C:\Program Files\Java\jre1.8.0_162\lib\endorsed
+11:10:40.298 [main] INFO  c.z.d.c.utils.ConfigurationUtil - os.arch -->amd64
+11:10:40.298 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.io.tmpdir -->C:\Users\ZHAOYI~1\AppData\Local\Temp\
+11:10:40.298 [main] INFO  c.z.d.c.utils.ConfigurationUtil - line.separator -->
+11:10:40.298 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.specification.vendor -->Oracle Corporation
+11:10:40.298 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.variant -->
+11:10:40.298 [main] INFO  c.z.d.c.utils.ConfigurationUtil - os.name -->Windows 7
+11:10:40.299 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.jnu.encoding -->GBK
+11:10:40.299 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.library.path -->C:\Program Files\Java\jre1.8.0_162\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jre1.8.0_162/bin/server;C:/Program Files/Java/jre1.8.0_162/bin;C:/Program Files/Java/jre1.8.0_162/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Java\jdk1.8.0_162\bin;C:\Program Files\Java\jdk1.8.0_162\jre\bin;D:\apache-tomcat-8.5.29\bin;D:\Program Files\mysql-5.6.40-winx64\bin;D:\Program Files\Git\cmd;D:\Program Files\TortoiseSVN\bin;D:\Program Files\apache-maven-3.5.4\bin;D:\apache-ant-1.10.5\bin;D:\Python27;D:\Gradle\gradle-4.10.2\bin;D:\Program Files (x86)\;D:\Program Files\eclipse;;.
+11:10:40.299 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.nio.ch.bugLevel -->
+11:10:40.299 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.specification.name -->Java Platform API Specification
+11:10:40.299 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.class.version -->52.0
+11:10:40.299 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.management.compiler -->HotSpot 64-Bit Tiered Compilers
+11:10:40.299 [main] INFO  c.z.d.c.utils.ConfigurationUtil - os.version -->6.1
+11:10:40.299 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.home -->C:\Users\ZhaoYiDing
+11:10:40.299 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.timezone -->Asia/Shanghai
+11:10:40.299 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.awt.printerjob -->sun.awt.windows.WPrinterJob
+11:10:40.299 [main] INFO  c.z.d.c.utils.ConfigurationUtil - file.encoding -->UTF-8
+11:10:40.299 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.specification.version -->1.8
+11:10:40.300 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.class.path -->D:\Program Files\tag\demo\WEB-INF\classes;D:\Program Files\tag\demo\WEB-INF\lib\commons-configuration-1.5.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-pool-1.6.jar;D:\Program Files\tag\demo\WEB-INF\lib\gson-2.2.4.jar;D:\Program Files\tag\demo\WEB-INF\lib\jedis-2.2.1.jar;D:\Program Files\tag\demo\WEB-INF\lib\logback-access-1.0.13.jar;D:\Program Files\tag\demo\WEB-INF\lib\logback-classic-1.0.13.jar;D:\Program Files\tag\demo\WEB-INF\lib\logback-core-1.0.13.jar;D:\Program Files\tag\demo\WEB-INF\lib\mybatis-3.2.2-sources.jar;D:\Program Files\tag\demo\WEB-INF\lib\mybatis-3.2.2.jar;D:\Program Files\tag\demo\WEB-INF\lib\mybatis-generator-core-1.3.2.jar;D:\Program Files\tag\demo\WEB-INF\lib\mybatis-spring-1.2.0.jar;D:\Program Files\tag\demo\WEB-INF\lib\mysql-connector-java-5.1.25-bin.jar;D:\Program Files\tag\demo\WEB-INF\lib\netty-all-4.1.25.Final.jar;D:\Program Files\tag\demo\WEB-INF\lib\protobuf-java-2.5.0.jar;D:\Program Files\tag\demo\WEB-INF\lib\protobuf-java-format-1.2.jar;D:\Program Files\tag\demo\WEB-INF\lib\slf4j-api-1.7.5.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-aop-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-aspects-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-beans-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-context-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-context-indexer-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-context-support-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-core-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-expression-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-instrument-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-jcl-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-jdbc-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-jms-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-messaging-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-orm-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-oxm-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-test-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-tx-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-web-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-webflux-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\spring-webmvc-5.0.4.RELEASE.jar;D:\Program Files\tag\demo\WEB-INF\lib\xmemcached-1.4.2.jar;D:\Program Files\tag\demo\WEB-INF\lib\httpclient-4.3.1.jar;D:\Program Files\tag\demo\WEB-INF\lib\servlet-api-2.5.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-beanutils.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-lang-2.4.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-digester-1.8.jar;D:\Program Files\tag\demo\WEB-INF\lib\commons-collections-3.2.1.jar;D:\Program Files\tag\demo\WEB-INF\lib\guava-15.0.jar;D:\Program Files\tag\demo\WEB-INF\lib\kryo-4.0.1.jar;D:\Program Files\tag\democommon\bin;D:\Program Files\tag\democommon\lib\netty-all-4.0.13.Final.jar;D:\Program Files\tag\democommon\lib\protobuf-java-2.5.0.jar;D:\Program Files\tag\democommon\lib\protobuf-java-format-1.2.jar;D:\Program Files\tag\democommon\lib\commons-cli-1.2.jar;D:\Program Files\tag\democommon\lib\commons-codec-1.6.jar;D:\Program Files\tag\democommon\lib\commons-configuration-1.5.jar;D:\Program Files\tag\democommon\lib\commons-lang-2.4.jar;D:\Program Files\tag\democommon\lib\commons-logging-1.1.3.jar;D:\Program Files\tag\democommon\lib\disruptor-3.2.1.jar;D:\Program Files\tag\democommon\lib\fluent-hc-4.3.6.jar;D:\Program Files\tag\democommon\lib\fluent-logger-0.3.1.jar;D:\Program Files\tag\democommon\lib\gson-2.3.1.jar;D:\Program Files\tag\democommon\lib\guava-15.0.jar;D:\Program Files\tag\democommon\lib\httpclient-4.3.6.jar;D:\Program Files\tag\democommon\lib\httpclient-cache-4.3.6.jar;D:\Program Files\tag\democommon\lib\httpcore-4.3.3.jar;D:\Program Files\tag\democommon\lib\httpmime-4.3.6.jar;D:\Program Files\tag\democommon\lib\jackson-core-1.9.13.jar;D:\Program Files\tag\democommon\lib\javassist-3.18.1-GA.jar;D:\Program Files\tag\democommon\lib\jcl-over-slf4j-1.7.5.jar;D:\Program Files\tag\democommon\lib\kryo-2.23.0.jar;D:\Program Files\tag\democommon\lib\logback-access-1.0.13.jar;D:\Program Files\tag\democommon\lib\logback-classic-1.0.13.jar;D:\Program Files\tag\democommon\lib\logback-core-1.0.13.jar;D:\Program Files\tag\democommon\lib\msgpack-0.6.8.jar;D:\Program Files\tag\democommon\lib\servlet-api-2.5.jar;D:\Program Files\tag\democommon\lib\slf4j-api-1.7.5.jar;D:\Program Files\tag\democommon\lib\spring-aop-5.0.4.RELEASE.jar;D:\Program Files\tag\democommon\lib\spring-beans-5.0.4.RELEASE.jar;D:\Program Files\tag\democommon\lib\spring-context-5.0.4.RELEASE.jar;D:\Program Files\tag\democommon\lib\spring-core-5.0.4.RELEASE.jar;D:\Program Files\tag\democommon\lib\spring-expression-5.0.4.RELEASE.jar
+11:10:40.300 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.name -->ZhaoYiDing
+11:10:40.300 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.specification.version -->1.8
+11:10:40.301 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.java.command -->com.zyd.demo.info.InfoServer
+11:10:40.301 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.home -->C:\Program Files\Java\jre1.8.0_162
+11:10:40.301 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.arch.data.model -->64
+11:10:40.301 [main] INFO  c.z.d.c.utils.ConfigurationUtil - user.language -->zh
+11:10:40.301 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.specification.vendor -->Oracle Corporation
+11:10:40.301 [main] INFO  c.z.d.c.utils.ConfigurationUtil - awt.toolkit -->sun.awt.windows.WToolkit
+11:10:40.301 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vm.info -->mixed mode
+11:10:40.301 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.version -->1.8.0_162
+11:10:40.301 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.ext.dirs -->C:\Program Files\Java\jre1.8.0_162\lib\ext;C:\Windows\Sun\Java\lib\ext
+11:10:40.301 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.boot.class.path -->C:\Program Files\Java\jre1.8.0_162\lib\resources.jar;C:\Program Files\Java\jre1.8.0_162\lib\rt.jar;C:\Program Files\Java\jre1.8.0_162\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_162\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_162\lib\jce.jar;C:\Program Files\Java\jre1.8.0_162\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_162\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_162\classes
+11:10:40.301 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vendor -->Oracle Corporation
+11:10:40.301 [main] INFO  c.z.d.c.utils.ConfigurationUtil - file.separator -->\
+11:10:40.302 [main] INFO  c.z.d.c.utils.ConfigurationUtil - java.vendor.url.bug -->http://bugreport.sun.com/bugreport/
+11:10:40.302 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.io.unicode.encoding -->UnicodeLittle
+11:10:40.302 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.cpu.endian -->little
+11:10:40.302 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.desktop -->windows
+11:10:40.302 [main] INFO  c.z.d.c.utils.ConfigurationUtil - sun.cpu.isalist -->amd64
+11:10:40.302 [main] INFO  c.z.d.c.utils.ConfigurationUtil - catalina.base -->${app.rootPath}
+11:10:40.302 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.addr -->jdbc:mysql://192.168.80.84:3306/kpdb?characterEncoding=utf8&amp;autoReconnect=true&amp;autoReconnectForPools=true&amp;noAccessToProcedureBodies=true
+11:10:40.303 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.cpu_offset -->5
+11:10:40.303 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.login_task -->1
+11:10:40.303 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.room_game_task -->1
+11:10:40.303 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.third_task -->1
+11:10:40.303 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.main_task -->7
+11:10:40.303 [main] INFO  c.z.d.c.utils.ConfigurationUtil - ibatis.configLocation -->${app.rootPath}/WEB-INF/classes/SqlMapConfig.xml
+11:10:40.303 [main] INFO  c.z.d.c.utils.ConfigurationUtil - cacheKeysTime -->120000
+11:10:40.303 [main] INFO  c.z.d.c.utils.ConfigurationUtil - cacheKeysNum -->1000
+11:10:40.303 [main] INFO  c.z.d.c.utils.ConfigurationUtil - cacheScheduleTime -->1000
+11:10:40.303 [main] INFO  c.z.d.c.utils.ConfigurationUtil - realFlushScheduleTime -->10000
+11:10:40.303 [main] INFO  c.z.d.c.utils.ConfigurationUtil - redisKeySize -->2000
+11:10:40.303 [main] INFO  c.z.d.c.utils.ConfigurationUtil - channel_escape -->500026;600001;860001;
+11:10:40.303 [main] INFO  c.z.d.c.utils.ConfigurationUtil - S_data_switch -->false
+11:10:40.303 [main] INFO  c.z.d.c.utils.ConfigurationUtil - S_data_appId -->s1103fda4706ec925dcac0138b3e08b20
+11:10:40.303 [main] INFO  c.z.d.c.utils.ConfigurationUtil - S_data_debug -->false
+11:10:40.303 [main] INFO  c.z.d.c.utils.ConfigurationUtil - S_data_debug_imeiId -->867650028595076
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - redis_read_time_out -->60000
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - server.id -->1000
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - gameProxy.addr -->192.168.90.12
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - gameProxy.port -->9001
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.dbname -->kpdb
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.host -->192.168.80.84
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.port -->3306
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.user -->root
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.db.password -->123456
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.mem.addr -->127.0.0.1
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.mem.port -->11211
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.mem2.addr -->127.0.0.1
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.mem2.port -->11211
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redis.addr -->127.0.0.1
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redis.port -->6379
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redis.password -->123456
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redisCacheKeys.addr -->127.0.0.1
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redisCacheKeys.port -->6379
+11:10:40.304 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.redisCacheKeys.password -->123456
+11:10:40.305 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.proxy.addr -->127.0.0.1
+11:10:40.305 [main] INFO  c.z.d.c.utils.ConfigurationUtil - app.proxy.port -->8000
+11:10:40.509 [main] INFO  com.zyd.demo.info.ProxyConnection - ..info proxyConnnection start..
+11:10:43.724 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+11:10:46.729 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+11:10:49.732 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+11:10:52.734 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+11:10:55.736 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+11:10:58.740 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+11:11:01.742 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat
+11:11:04.744 [nioEventLoopGroup-2-1] INFO  infoToProxyHeartBeat - -------------infoToProxyHeartBeat response HeartBeat

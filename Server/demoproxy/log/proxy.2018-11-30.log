@@ -1,0 +1,591 @@
+17:02:38.919 [main] INFO  c.z.p.c.ClientConnectionListener - Client listener running at: /0:0:0:0:0:0:0:0:9012
+17:02:38.992 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:02:38.993 [nioEventLoopGroup-4-2] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:02:38.993 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:04:02.235 [nioEventLoopGroup-2-4] WARN  i.n.channel.DefaultChannelPipeline - An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.lang.ExceptionInInitializerError: null
+	at com.zyd.common.proto.client.ClientProtocol$MessageHeaderInfo.internalGetFieldAccessorTable(ClientProtocol.java:20572) ~[bin/:na]
+	at com.google.protobuf.GeneratedMessage.getAllFieldsMutable(GeneratedMessage.java:105) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.GeneratedMessage.getAllFields(GeneratedMessage.java:153) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat$Printer.print(TextFormat.java:272) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat$Printer.access$400(TextFormat.java:248) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat.printToUnicodeString(TextFormat.java:146) ~[protobuf-java-2.5.0.jar:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.onRequestRpc(ClientConnectionHandler.java:121) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.channelRead0(ClientConnectionHandler.java:75) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.channelRead0(ClientConnectionHandler.java:1) ~[bin/:na]
+	at io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:103) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:253) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:153) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:785) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:122) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+Caused by: java.lang.IllegalArgumentException: Invalid embedded descriptor for "ClientProtocol.proto".
+	at com.google.protobuf.Descriptors$FileDescriptor.internalBuildGeneratedFileFrom(Descriptors.java:301) ~[protobuf-java-2.5.0.jar:na]
+	at com.zyd.common.proto.client.ClientProtocol.<clinit>(ClientProtocol.java:65441) ~[bin/:na]
+	... 25 common frames omitted
+Caused by: com.google.protobuf.Descriptors$DescriptorValidationException: com.zyd.common.proto.client.MessageHeaderRequest.userInfo: ".com.nkm.common.proto.client.MessageHeaderInfo" is not defined.
+	at com.google.protobuf.Descriptors$DescriptorPool.lookupSymbol(Descriptors.java:1784) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FieldDescriptor.crossLink(Descriptors.java:982) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FieldDescriptor.access$700(Descriptors.java:658) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$Descriptor.crossLink(Descriptors.java:625) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$Descriptor.access$500(Descriptors.java:440) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.crossLink(Descriptors.java:394) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.buildFrom(Descriptors.java:252) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.internalBuildGeneratedFileFrom(Descriptors.java:299) ~[protobuf-java-2.5.0.jar:na]
+	... 26 common frames omitted
+17:04:11.079 [nioEventLoopGroup-2-4] ERROR c.z.p.c.ClientConnectionHandler - channelToken:dd598f22-9a1b-41c6-89c5-1d5279d3e472 No rpc call received from client /192.168.90.12:51273 in 3 seconds, close channel. null
+17:04:11.079 [nioEventLoopGroup-2-4] WARN  c.z.p.c.ClientConnectionHandler - Client disconnected: /192.168.90.12:51273 channelToken:dd598f22-9a1b-41c6-89c5-1d5279d3e472
+17:12:26.932 [main] INFO  c.z.p.c.ClientConnectionListener - Client listener running at: /0:0:0:0:0:0:0:0:9012
+17:12:26.966 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:12:26.968 [nioEventLoopGroup-4-2] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:12:26.969 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:13:09.673 [nioEventLoopGroup-2-3] WARN  i.n.channel.DefaultChannelPipeline - An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.lang.ExceptionInInitializerError: null
+	at com.zyd.common.proto.client.ClientProtocol$MessageHeaderInfo.internalGetFieldAccessorTable(ClientProtocol.java:20572) ~[bin/:na]
+	at com.google.protobuf.GeneratedMessage.getAllFieldsMutable(GeneratedMessage.java:105) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.GeneratedMessage.getAllFields(GeneratedMessage.java:153) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat$Printer.print(TextFormat.java:272) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat$Printer.access$400(TextFormat.java:248) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat.printToUnicodeString(TextFormat.java:146) ~[protobuf-java-2.5.0.jar:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.onRequestRpc(ClientConnectionHandler.java:121) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.channelRead0(ClientConnectionHandler.java:75) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.channelRead0(ClientConnectionHandler.java:1) ~[bin/:na]
+	at io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:103) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:253) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:153) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:785) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:122) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+Caused by: java.lang.IllegalArgumentException: Invalid embedded descriptor for "ClientProtocol.proto".
+	at com.google.protobuf.Descriptors$FileDescriptor.internalBuildGeneratedFileFrom(Descriptors.java:301) ~[protobuf-java-2.5.0.jar:na]
+	at com.zyd.common.proto.client.ClientProtocol.<clinit>(ClientProtocol.java:65441) ~[bin/:na]
+	... 25 common frames omitted
+Caused by: com.google.protobuf.Descriptors$DescriptorValidationException: com.zyd.common.proto.client.MessageHeaderRequest.userInfo: ".com.nkm.common.proto.client.MessageHeaderInfo" is not defined.
+	at com.google.protobuf.Descriptors$DescriptorPool.lookupSymbol(Descriptors.java:1784) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FieldDescriptor.crossLink(Descriptors.java:982) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FieldDescriptor.access$700(Descriptors.java:658) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$Descriptor.crossLink(Descriptors.java:625) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$Descriptor.access$500(Descriptors.java:440) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.crossLink(Descriptors.java:394) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.buildFrom(Descriptors.java:252) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.internalBuildGeneratedFileFrom(Descriptors.java:299) ~[protobuf-java-2.5.0.jar:na]
+	... 26 common frames omitted
+17:13:18.631 [nioEventLoopGroup-2-3] ERROR c.z.p.c.ClientConnectionHandler - channelToken:eb75812b-e63b-4cd3-bc3c-e8655cf64eea No rpc call received from client /192.168.90.12:51488 in 3 seconds, close channel. null
+17:13:18.632 [nioEventLoopGroup-2-3] WARN  c.z.p.c.ClientConnectionHandler - Client disconnected: /192.168.90.12:51488 channelToken:eb75812b-e63b-4cd3-bc3c-e8655cf64eea
+17:14:12.043 [main] INFO  c.z.p.c.ClientConnectionListener - Client listener running at: /0:0:0:0:0:0:0:0:9012
+17:14:12.076 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:14:12.077 [nioEventLoopGroup-4-2] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:14:12.078 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:14:37.266 [nioEventLoopGroup-2-3] WARN  i.n.channel.DefaultChannelPipeline - An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.lang.ExceptionInInitializerError: null
+	at com.zyd.common.proto.client.ClientProtocol$MessageHeaderInfo.internalGetFieldAccessorTable(ClientProtocol.java:20572) ~[bin/:na]
+	at com.google.protobuf.GeneratedMessage.getAllFieldsMutable(GeneratedMessage.java:105) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.GeneratedMessage.getAllFields(GeneratedMessage.java:153) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat$Printer.print(TextFormat.java:272) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat$Printer.access$400(TextFormat.java:248) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat.printToUnicodeString(TextFormat.java:146) ~[protobuf-java-2.5.0.jar:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.onRequestRpc(ClientConnectionHandler.java:121) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.channelRead0(ClientConnectionHandler.java:75) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.channelRead0(ClientConnectionHandler.java:1) ~[bin/:na]
+	at io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:103) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:253) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:153) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:785) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:122) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+Caused by: java.lang.IllegalArgumentException: Invalid embedded descriptor for "ClientProtocol.proto".
+	at com.google.protobuf.Descriptors$FileDescriptor.internalBuildGeneratedFileFrom(Descriptors.java:301) ~[protobuf-java-2.5.0.jar:na]
+	at com.zyd.common.proto.client.ClientProtocol.<clinit>(ClientProtocol.java:65441) ~[bin/:na]
+	... 25 common frames omitted
+Caused by: com.google.protobuf.Descriptors$DescriptorValidationException: com.zyd.common.proto.client.MessageHeaderRequest.userInfo: ".com.nkm.common.proto.client.MessageHeaderInfo" is not defined.
+	at com.google.protobuf.Descriptors$DescriptorPool.lookupSymbol(Descriptors.java:1784) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FieldDescriptor.crossLink(Descriptors.java:982) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FieldDescriptor.access$700(Descriptors.java:658) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$Descriptor.crossLink(Descriptors.java:625) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$Descriptor.access$500(Descriptors.java:440) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.crossLink(Descriptors.java:394) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.buildFrom(Descriptors.java:252) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.internalBuildGeneratedFileFrom(Descriptors.java:299) ~[protobuf-java-2.5.0.jar:na]
+	... 26 common frames omitted
+17:14:46.188 [nioEventLoopGroup-2-3] ERROR c.z.p.c.ClientConnectionHandler - channelToken:4f6b610d-9380-48bd-8388-3395f81be89e No rpc call received from client /192.168.90.12:51599 in 3 seconds, close channel. null
+17:14:46.189 [nioEventLoopGroup-2-3] WARN  c.z.p.c.ClientConnectionHandler - Client disconnected: /192.168.90.12:51599 channelToken:4f6b610d-9380-48bd-8388-3395f81be89e
+17:16:41.393 [main] INFO  c.z.p.c.ClientConnectionListener - Client listener running at: /0:0:0:0:0:0:0:0:9012
+17:16:41.426 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:16:41.427 [nioEventLoopGroup-4-2] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:16:41.428 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:16:57.180 [nioEventLoopGroup-2-3] WARN  i.n.channel.DefaultChannelPipeline - An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.lang.ExceptionInInitializerError: null
+	at com.zyd.common.proto.client.ClientProtocol$MessageHeaderInfo.internalGetFieldAccessorTable(ClientProtocol.java:20572) ~[bin/:na]
+	at com.google.protobuf.GeneratedMessage.getAllFieldsMutable(GeneratedMessage.java:105) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.GeneratedMessage.getAllFields(GeneratedMessage.java:153) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat$Printer.print(TextFormat.java:272) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat$Printer.access$400(TextFormat.java:248) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat.printToUnicodeString(TextFormat.java:146) ~[protobuf-java-2.5.0.jar:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.onRequestRpc(ClientConnectionHandler.java:121) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.channelRead0(ClientConnectionHandler.java:75) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.channelRead0(ClientConnectionHandler.java:1) ~[bin/:na]
+	at io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:103) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:253) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:153) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:785) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:122) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+Caused by: java.lang.IllegalArgumentException: Invalid embedded descriptor for "ClientProtocol.proto".
+	at com.google.protobuf.Descriptors$FileDescriptor.internalBuildGeneratedFileFrom(Descriptors.java:301) ~[protobuf-java-2.5.0.jar:na]
+	at com.zyd.common.proto.client.ClientProtocol.<clinit>(ClientProtocol.java:65441) ~[bin/:na]
+	... 25 common frames omitted
+Caused by: com.google.protobuf.Descriptors$DescriptorValidationException: com.zyd.common.proto.client.MessageHeaderRequest.userInfo: ".com.nkm.common.proto.client.MessageHeaderInfo" is not defined.
+	at com.google.protobuf.Descriptors$DescriptorPool.lookupSymbol(Descriptors.java:1784) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FieldDescriptor.crossLink(Descriptors.java:982) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FieldDescriptor.access$700(Descriptors.java:658) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$Descriptor.crossLink(Descriptors.java:625) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$Descriptor.access$500(Descriptors.java:440) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.crossLink(Descriptors.java:394) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.buildFrom(Descriptors.java:252) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.internalBuildGeneratedFileFrom(Descriptors.java:299) ~[protobuf-java-2.5.0.jar:na]
+	... 26 common frames omitted
+17:17:06.105 [nioEventLoopGroup-2-3] ERROR c.z.p.c.ClientConnectionHandler - channelToken:99222ab6-7449-4554-bd1a-d8c139e19d38 No rpc call received from client /192.168.90.12:51717 in 3 seconds, close channel. null
+17:17:06.107 [nioEventLoopGroup-2-3] WARN  c.z.p.c.ClientConnectionHandler - Client disconnected: /192.168.90.12:51717 channelToken:99222ab6-7449-4554-bd1a-d8c139e19d38
+17:23:08.496 [main] INFO  c.z.p.c.ClientConnectionListener - Client listener running at: /0:0:0:0:0:0:0:0:9012
+17:23:08.530 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:23:08.532 [nioEventLoopGroup-4-2] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:23:08.532 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:27:49.318 [main] INFO  c.z.p.c.ClientConnectionListener - Client listener running at: /0:0:0:0:0:0:0:0:9012
+17:27:49.351 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:27:49.353 [nioEventLoopGroup-4-2] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:27:49.353 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:28:02.787 [nioEventLoopGroup-2-3] WARN  i.n.channel.DefaultChannelPipeline - An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.lang.ExceptionInInitializerError: null
+	at com.zyd.common.proto.client.ClientProtocol$MessageHeaderInfo.internalGetFieldAccessorTable(ClientProtocol.java:20572) ~[bin/:na]
+	at com.google.protobuf.GeneratedMessage.getAllFieldsMutable(GeneratedMessage.java:105) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.GeneratedMessage.getAllFields(GeneratedMessage.java:153) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat$Printer.print(TextFormat.java:272) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat$Printer.access$400(TextFormat.java:248) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat.printToUnicodeString(TextFormat.java:146) ~[protobuf-java-2.5.0.jar:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.onRequestRpc(ClientConnectionHandler.java:121) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.channelRead0(ClientConnectionHandler.java:75) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.channelRead0(ClientConnectionHandler.java:1) ~[bin/:na]
+	at io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:103) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:253) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:153) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:785) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:122) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+Caused by: java.lang.IllegalArgumentException: Invalid embedded descriptor for "ClientProtocol.proto".
+	at com.google.protobuf.Descriptors$FileDescriptor.internalBuildGeneratedFileFrom(Descriptors.java:301) ~[protobuf-java-2.5.0.jar:na]
+	at com.zyd.common.proto.client.ClientProtocol.<clinit>(ClientProtocol.java:65441) ~[bin/:na]
+	... 25 common frames omitted
+Caused by: com.google.protobuf.Descriptors$DescriptorValidationException: com.zyd.common.proto.client.MessageHeaderRequest.userInfo: ".com.nkm.common.proto.client.MessageHeaderInfo" is not defined.
+	at com.google.protobuf.Descriptors$DescriptorPool.lookupSymbol(Descriptors.java:1784) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FieldDescriptor.crossLink(Descriptors.java:982) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FieldDescriptor.access$700(Descriptors.java:658) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$Descriptor.crossLink(Descriptors.java:625) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$Descriptor.access$500(Descriptors.java:440) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.crossLink(Descriptors.java:394) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.buildFrom(Descriptors.java:252) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.internalBuildGeneratedFileFrom(Descriptors.java:299) ~[protobuf-java-2.5.0.jar:na]
+	... 26 common frames omitted
+17:28:11.751 [nioEventLoopGroup-2-3] ERROR c.z.p.c.ClientConnectionHandler - channelToken:99cb30df-5e1c-4b51-9d65-9c40876dc900 No rpc call received from client /192.168.90.12:52024 in 3 seconds, close channel. null
+17:28:11.752 [nioEventLoopGroup-2-3] WARN  c.z.p.c.ClientConnectionHandler - Client disconnected: /192.168.90.12:52024 channelToken:99cb30df-5e1c-4b51-9d65-9c40876dc900
+17:29:47.756 [main] INFO  c.z.p.c.ClientConnectionListener - Client listener running at: /0:0:0:0:0:0:0:0:9012
+17:29:47.789 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:29:47.791 [nioEventLoopGroup-4-2] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:29:47.791 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:30:04.758 [nioEventLoopGroup-2-3] WARN  i.n.channel.DefaultChannelPipeline - An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.lang.ExceptionInInitializerError: null
+	at com.zyd.common.proto.client.ClientProtocol$MessageHeaderInfo.internalGetFieldAccessorTable(ClientProtocol.java:20572) ~[bin/:na]
+	at com.google.protobuf.GeneratedMessage.getAllFieldsMutable(GeneratedMessage.java:105) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.GeneratedMessage.getAllFields(GeneratedMessage.java:153) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat$Printer.print(TextFormat.java:272) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat$Printer.access$400(TextFormat.java:248) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat.printToUnicodeString(TextFormat.java:146) ~[protobuf-java-2.5.0.jar:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.onRequestRpc(ClientConnectionHandler.java:121) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.channelRead0(ClientConnectionHandler.java:75) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.channelRead0(ClientConnectionHandler.java:1) ~[bin/:na]
+	at io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:103) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:253) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:153) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:785) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:122) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+Caused by: java.lang.IllegalArgumentException: Invalid embedded descriptor for "ClientProtocol.proto".
+	at com.google.protobuf.Descriptors$FileDescriptor.internalBuildGeneratedFileFrom(Descriptors.java:301) ~[protobuf-java-2.5.0.jar:na]
+	at com.zyd.common.proto.client.ClientProtocol.<clinit>(ClientProtocol.java:65441) ~[bin/:na]
+	... 25 common frames omitted
+Caused by: com.google.protobuf.Descriptors$DescriptorValidationException: com.zyd.common.proto.client.MessageHeaderRequest.userInfo: ".com.nkm.common.proto.client.MessageHeaderInfo" is not defined.
+	at com.google.protobuf.Descriptors$DescriptorPool.lookupSymbol(Descriptors.java:1784) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FieldDescriptor.crossLink(Descriptors.java:982) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FieldDescriptor.access$700(Descriptors.java:658) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$Descriptor.crossLink(Descriptors.java:625) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$Descriptor.access$500(Descriptors.java:440) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.crossLink(Descriptors.java:394) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.buildFrom(Descriptors.java:252) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.internalBuildGeneratedFileFrom(Descriptors.java:299) ~[protobuf-java-2.5.0.jar:na]
+	... 26 common frames omitted
+17:33:04.828 [nioEventLoopGroup-2-3] WARN  c.z.p.c.ClientConnectionHandler - Client disconnected: /192.168.90.12:52166 channelToken:e9775a3a-7087-4a26-815b-7b0e3caf6133
+17:38:54.248 [main] INFO  c.z.p.c.ClientConnectionListener - Client listener running at: /0:0:0:0:0:0:0:0:9012
+17:38:54.281 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:38:54.282 [nioEventLoopGroup-4-2] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:38:54.282 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:41:43.679 [nioEventLoopGroup-2-3] WARN  i.n.channel.DefaultChannelPipeline - An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method) ~[na:1.8.0_162]
+	at sun.nio.ch.SocketDispatcher.read(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.IOUtil.read(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.SocketChannelImpl.read(Unknown Source) ~[na:1.8.0_162]
+	at io.netty.buffer.UnpooledUnsafeDirectByteBuf.setBytes(UnpooledUnsafeDirectByteBuf.java:450) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:871) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:208) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:115) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+17:41:43.680 [nioEventLoopGroup-2-3] WARN  c.z.p.c.ClientConnectionHandler - Client disconnected: /192.168.90.12:52390 channelToken:fb6c30d8-63c5-4bc3-90d6-978e7336b5c8
+17:44:28.041 [main] INFO  c.z.p.c.ClientConnectionListener - Client listener running at: /0:0:0:0:0:0:0:0:9012
+17:44:28.076 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:44:28.078 [nioEventLoopGroup-4-2] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:44:28.078 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:44:38.025 [nioEventLoopGroup-2-3] WARN  i.n.channel.DefaultChannelPipeline - An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.lang.ExceptionInInitializerError: null
+	at com.zyd.common.proto.client.ClientProtocol$MessageHeaderInfo.internalGetFieldAccessorTable(ClientProtocol.java:20572) ~[bin/:na]
+	at com.google.protobuf.GeneratedMessage.getAllFieldsMutable(GeneratedMessage.java:105) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.GeneratedMessage.getAllFields(GeneratedMessage.java:153) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat$Printer.print(TextFormat.java:272) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat$Printer.access$400(TextFormat.java:248) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat.printToUnicodeString(TextFormat.java:146) ~[protobuf-java-2.5.0.jar:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.onRequestRpc(ClientConnectionHandler.java:121) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.channelRead0(ClientConnectionHandler.java:75) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.channelRead0(ClientConnectionHandler.java:1) ~[bin/:na]
+	at io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:103) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:253) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:153) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:785) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:122) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+Caused by: java.lang.IllegalArgumentException: Invalid embedded descriptor for "ClientProtocol.proto".
+	at com.google.protobuf.Descriptors$FileDescriptor.internalBuildGeneratedFileFrom(Descriptors.java:301) ~[protobuf-java-2.5.0.jar:na]
+	at com.zyd.common.proto.client.ClientProtocol.<clinit>(ClientProtocol.java:65441) ~[bin/:na]
+	... 25 common frames omitted
+Caused by: com.google.protobuf.Descriptors$DescriptorValidationException: com.zyd.common.proto.client.MessageHeaderRequest.userInfo: ".com.nkm.common.proto.client.MessageHeaderInfo" is not defined.
+	at com.google.protobuf.Descriptors$DescriptorPool.lookupSymbol(Descriptors.java:1784) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FieldDescriptor.crossLink(Descriptors.java:982) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FieldDescriptor.access$700(Descriptors.java:658) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$Descriptor.crossLink(Descriptors.java:625) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$Descriptor.access$500(Descriptors.java:440) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.crossLink(Descriptors.java:394) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.buildFrom(Descriptors.java:252) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.internalBuildGeneratedFileFrom(Descriptors.java:299) ~[protobuf-java-2.5.0.jar:na]
+	... 26 common frames omitted
+17:48:16.756 [main] INFO  c.z.p.c.ClientConnectionListener - Client listener running at: /0:0:0:0:0:0:0:0:9012
+17:48:16.788 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:48:16.790 [nioEventLoopGroup-4-2] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:48:16.790 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:48:25.948 [nioEventLoopGroup-2-3] WARN  i.n.channel.DefaultChannelPipeline - An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.lang.ExceptionInInitializerError: null
+	at com.zyd.common.proto.client.ClientProtocol$MessageHeaderInfo.internalGetFieldAccessorTable(ClientProtocol.java:20572) ~[bin/:na]
+	at com.google.protobuf.GeneratedMessage.getAllFieldsMutable(GeneratedMessage.java:105) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.GeneratedMessage.getAllFields(GeneratedMessage.java:153) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat$Printer.print(TextFormat.java:272) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat$Printer.access$400(TextFormat.java:248) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat.printToUnicodeString(TextFormat.java:146) ~[protobuf-java-2.5.0.jar:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.onRequestRpc(ClientConnectionHandler.java:120) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.channelRead0(ClientConnectionHandler.java:75) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.channelRead0(ClientConnectionHandler.java:1) ~[bin/:na]
+	at io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:103) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:253) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:153) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:785) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:122) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+Caused by: java.lang.IllegalArgumentException: Invalid embedded descriptor for "ClientProtocol.proto".
+	at com.google.protobuf.Descriptors$FileDescriptor.internalBuildGeneratedFileFrom(Descriptors.java:301) ~[protobuf-java-2.5.0.jar:na]
+	at com.zyd.common.proto.client.ClientProtocol.<clinit>(ClientProtocol.java:65441) ~[bin/:na]
+	... 25 common frames omitted
+Caused by: com.google.protobuf.Descriptors$DescriptorValidationException: com.zyd.common.proto.client.MessageHeaderRequest.userInfo: ".com.nkm.common.proto.client.MessageHeaderInfo" is not defined.
+	at com.google.protobuf.Descriptors$DescriptorPool.lookupSymbol(Descriptors.java:1784) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FieldDescriptor.crossLink(Descriptors.java:982) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FieldDescriptor.access$700(Descriptors.java:658) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$Descriptor.crossLink(Descriptors.java:625) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$Descriptor.access$500(Descriptors.java:440) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.crossLink(Descriptors.java:394) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.buildFrom(Descriptors.java:252) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.internalBuildGeneratedFileFrom(Descriptors.java:299) ~[protobuf-java-2.5.0.jar:na]
+	... 26 common frames omitted
+17:50:16.900 [main] INFO  c.z.p.c.ClientConnectionListener - Client listener running at: /0:0:0:0:0:0:0:0:9012
+17:50:16.931 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:50:16.932 [nioEventLoopGroup-4-2] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:50:16.933 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:50:29.725 [nioEventLoopGroup-2-3] WARN  i.n.channel.DefaultChannelPipeline - An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.lang.ExceptionInInitializerError: null
+	at com.zyd.common.proto.client.ClientProtocol$MessageHeaderInfo.internalGetFieldAccessorTable(ClientProtocol.java:20572) ~[bin/:na]
+	at com.google.protobuf.GeneratedMessage.getAllFieldsMutable(GeneratedMessage.java:105) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.GeneratedMessage.getAllFields(GeneratedMessage.java:153) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat$Printer.print(TextFormat.java:272) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat$Printer.access$400(TextFormat.java:248) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.TextFormat.printToUnicodeString(TextFormat.java:146) ~[protobuf-java-2.5.0.jar:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.onRequestRpc(ClientConnectionHandler.java:120) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.channelRead0(ClientConnectionHandler.java:75) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.channelRead0(ClientConnectionHandler.java:1) ~[bin/:na]
+	at io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:103) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:253) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:153) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:785) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:122) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+Caused by: java.lang.IllegalArgumentException: Invalid embedded descriptor for "ClientProtocol.proto".
+	at com.google.protobuf.Descriptors$FileDescriptor.internalBuildGeneratedFileFrom(Descriptors.java:301) ~[protobuf-java-2.5.0.jar:na]
+	at com.zyd.common.proto.client.ClientProtocol.<clinit>(ClientProtocol.java:65441) ~[bin/:na]
+	... 25 common frames omitted
+Caused by: com.google.protobuf.Descriptors$DescriptorValidationException: com.zyd.common.proto.client.MessageHeaderRequest.userInfo: ".com.nkm.common.proto.client.MessageHeaderInfo" is not defined.
+	at com.google.protobuf.Descriptors$DescriptorPool.lookupSymbol(Descriptors.java:1784) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FieldDescriptor.crossLink(Descriptors.java:982) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FieldDescriptor.access$700(Descriptors.java:658) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$Descriptor.crossLink(Descriptors.java:625) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$Descriptor.access$500(Descriptors.java:440) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.crossLink(Descriptors.java:394) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.buildFrom(Descriptors.java:252) ~[protobuf-java-2.5.0.jar:na]
+	at com.google.protobuf.Descriptors$FileDescriptor.internalBuildGeneratedFileFrom(Descriptors.java:299) ~[protobuf-java-2.5.0.jar:na]
+	... 26 common frames omitted
+17:51:35.328 [main] INFO  c.z.p.c.ClientConnectionListener - Client listener running at: /0:0:0:0:0:0:0:0:9012
+17:51:35.361 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:51:35.363 [nioEventLoopGroup-4-2] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:51:35.363 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:51:57.700 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - dispatching client RPC: 111111111111111111111 to info: /127.0.0.1:55163 request_time:1543571517700
+17:51:57.702 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - dispatching client RPC: 111111111111111111111 to info: /127.0.0.1:55163 request_time:1543571517700
+17:51:57.727 [nioEventLoopGroup-2-3] INFO  c.z.p.c.ClientConnectionHandler - responseRpc####null
+17:51:57.732 [nioEventLoopGroup-2-3] ERROR c.zyd.common.rpc.RpcMessageHandler - null
+java.lang.NullPointerException: null
+	at com.zyd.common.proto.client.ClientProtocol$MessageHeaderResponse$Builder.setRequestToken(ClientProtocol.java:25312) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.responseRpc(ClientConnectionHandler.java:89) ~[bin/:na]
+	at com.zyd.proxy.client.ClientRpcDispatcher$1.onResponse(ClientRpcDispatcher.java:149) ~[bin/:na]
+	at com.zyd.proxy.info.InfoConnectionHandler$1.onResponse(InfoConnectionHandler.java:133) ~[bin/:na]
+	at com.zyd.common.rpc.RpcMessageHandler.channelRead0(RpcMessageHandler.java:44) ~[bin/:na]
+	at com.zyd.common.rpc.RpcMessageHandler.channelRead0(RpcMessageHandler.java:1) ~[bin/:na]
+	at io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:103) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:253) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:153) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:785) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:122) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+17:52:31.232 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - dispatching client RPC: 111111111111111111111 to info: /127.0.0.1:55203 request_time:1543571551231
+17:52:31.233 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - dispatching client RPC: 111111111111111111111 to info: /127.0.0.1:55203 request_time:1543571551231
+17:52:31.244 [nioEventLoopGroup-2-5] INFO  c.z.p.c.ClientConnectionHandler - responseRpc####null
+17:52:31.246 [nioEventLoopGroup-2-5] ERROR c.zyd.common.rpc.RpcMessageHandler - null
+java.lang.NullPointerException: null
+	at com.zyd.common.proto.client.ClientProtocol$MessageHeaderResponse$Builder.setRequestToken(ClientProtocol.java:25312) ~[bin/:na]
+	at com.zyd.proxy.client.ClientConnectionHandler.responseRpc(ClientConnectionHandler.java:89) ~[bin/:na]
+	at com.zyd.proxy.client.ClientRpcDispatcher$1.onResponse(ClientRpcDispatcher.java:149) ~[bin/:na]
+	at com.zyd.proxy.info.InfoConnectionHandler$1.onResponse(InfoConnectionHandler.java:133) ~[bin/:na]
+	at com.zyd.common.rpc.RpcMessageHandler.channelRead0(RpcMessageHandler.java:44) ~[bin/:na]
+	at com.zyd.common.rpc.RpcMessageHandler.channelRead0(RpcMessageHandler.java:1) ~[bin/:na]
+	at io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:103) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:253) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:153) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:785) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:122) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+17:52:41.822 [nioEventLoopGroup-2-6] ERROR c.zyd.common.rpc.RpcMessageHandler - 远程主机强迫关闭了一个现有的连接。
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method) ~[na:1.8.0_162]
+	at sun.nio.ch.SocketDispatcher.read(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.IOUtil.read(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.SocketChannelImpl.read(Unknown Source) ~[na:1.8.0_162]
+	at io.netty.buffer.UnpooledUnsafeDirectByteBuf.setBytes(UnpooledUnsafeDirectByteBuf.java:450) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:871) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:208) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:115) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+17:52:42.967 [nioEventLoopGroup-2-4] WARN  c.z.p.c.ClientConnectionHandler - Client disconnected: /192.168.90.12:55202 channelToken:767a0370-4312-478f-9cea-cfff4a7a5da9
+17:54:23.206 [main] INFO  c.z.p.c.ClientConnectionListener - Client listener running at: /0:0:0:0:0:0:0:0:9012
+17:54:23.238 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:54:23.239 [nioEventLoopGroup-4-2] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:54:23.240 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:54:34.826 [nioEventLoopGroup-4-3] ERROR c.z.p.client.ClientRpcDispatcher - error happened in ClientRpcDispatcher
+java.lang.NullPointerException: null
+	at com.zyd.proxy.client.ClientRpcDispatcher.dispacher(ClientRpcDispatcher.java:113) [bin/:na]
+	at com.zyd.proxy.client.ClientRpcDispatcher.dispatchMain(ClientRpcDispatcher.java:91) [bin/:na]
+	at com.zyd.proxy.client.ClientRpcDispatcher$4.run(ClientRpcDispatcher.java:182) [bin/:na]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) [na:1.8.0_162]
+	at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:129) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:354) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:353) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+17:54:34.827 [nioEventLoopGroup-4-3] ERROR c.z.p.client.ClientRpcDispatcher - error happened in ClientRpcDispatcher
+java.lang.NullPointerException: null
+	at com.zyd.proxy.client.ClientRpcDispatcher.dispacher(ClientRpcDispatcher.java:113) [bin/:na]
+	at com.zyd.proxy.client.ClientRpcDispatcher.dispatchMain(ClientRpcDispatcher.java:91) [bin/:na]
+	at com.zyd.proxy.client.ClientRpcDispatcher$4.run(ClientRpcDispatcher.java:182) [bin/:na]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) [na:1.8.0_162]
+	at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:129) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:354) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:353) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+17:56:29.946 [nioEventLoopGroup-4-3] ERROR c.z.p.client.ClientRpcDispatcher - error happened in ClientRpcDispatcher
+java.lang.NullPointerException: null
+	at com.zyd.proxy.client.ClientRpcDispatcher.dispacher(ClientRpcDispatcher.java:113) [bin/:na]
+	at com.zyd.proxy.client.ClientRpcDispatcher.dispatchMain(ClientRpcDispatcher.java:91) [bin/:na]
+	at com.zyd.proxy.client.ClientRpcDispatcher$4.run(ClientRpcDispatcher.java:182) [bin/:na]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) [na:1.8.0_162]
+	at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:129) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:354) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:353) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+17:56:29.946 [nioEventLoopGroup-4-1] ERROR c.z.p.client.ClientRpcDispatcher - error happened in ClientRpcDispatcher
+java.lang.NullPointerException: null
+	at com.zyd.proxy.client.ClientRpcDispatcher.dispacher(ClientRpcDispatcher.java:113) [bin/:na]
+	at com.zyd.proxy.client.ClientRpcDispatcher.dispatchLogin(ClientRpcDispatcher.java:83) [bin/:na]
+	at com.zyd.proxy.client.ClientRpcDispatcher$2.run(ClientRpcDispatcher.java:166) [bin/:na]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) [na:1.8.0_162]
+	at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:129) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:354) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:353) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+17:58:53.445 [main] INFO  c.z.p.info.InfoConnectionListener - Info listener running at: /0:0:0:0:0:0:0:0:8089
+17:58:53.447 [main] INFO  c.z.p.c.ClientConnectionListener - Client listener running at: /0:0:0:0:0:0:0:0:9012
+17:58:53.479 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:58:53.479 [nioEventLoopGroup-4-2] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:58:53.480 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+17:59:06.863 [nioEventLoopGroup-4-3] ERROR c.z.p.client.ClientRpcDispatcher - error happened in ClientRpcDispatcher
+java.lang.NullPointerException: null
+	at com.zyd.proxy.client.ClientRpcDispatcher.dispacher(ClientRpcDispatcher.java:113) [bin/:na]
+	at com.zyd.proxy.client.ClientRpcDispatcher.dispatchMain(ClientRpcDispatcher.java:91) [bin/:na]
+	at com.zyd.proxy.client.ClientRpcDispatcher$4.run(ClientRpcDispatcher.java:182) [bin/:na]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) [na:1.8.0_162]
+	at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:129) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:354) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:353) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+17:59:06.863 [nioEventLoopGroup-4-1] ERROR c.z.p.client.ClientRpcDispatcher - error happened in ClientRpcDispatcher
+java.lang.NullPointerException: null
+	at com.zyd.proxy.client.ClientRpcDispatcher.dispacher(ClientRpcDispatcher.java:113) [bin/:na]
+	at com.zyd.proxy.client.ClientRpcDispatcher.dispatchLogin(ClientRpcDispatcher.java:83) [bin/:na]
+	at com.zyd.proxy.client.ClientRpcDispatcher$2.run(ClientRpcDispatcher.java:166) [bin/:na]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) [na:1.8.0_162]
+	at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:129) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:354) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:353) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	xmlns:context="http://www.springframework.org/schema/context">
+	
+	
+	<bean id="config" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+		<list>
+			<value>classpath:application.properties</value>
+			<value>classpath:config.properties</value>
+		</list>
+		</property>
+		<property name="fileEncoding" value="utf-8" />
+	</bean>
+	
+	<!--	XMemcached Configuration-->
+	<bean name="memcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder">
+		<!-- XMemcachedClientBuilder have two arguments.First is server list,and second is weights array. -->
+		<constructor-arg>
+			<list>
+				<bean class="java.net.InetSocketAddress">
+					<constructor-arg>
+							<value>${app.mem.addr}</value>
+					</constructor-arg>
+					<constructor-arg>
+							<value>${app.mem.port}</value>
+					</constructor-arg>
+				</bean>
+				<bean class="java.net.InetSocketAddress">
+					<constructor-arg>
+							<value>${app.mem2.addr}</value>
+					</constructor-arg>
+					<constructor-arg>
+							<value>${app.mem2.port}</value>
+					</constructor-arg>
+				</bean>
+			</list>
+		</constructor-arg>
+		<constructor-arg>
+			<list>
+				<value>1</value>
+				<value>1</value>
+			</list>
+		</constructor-arg>
+		<property name="connectionPoolSize" value="16"></property>
+		<property name="commandFactory">
+			<bean class="net.rubyeye.xmemcached.command.TextCommandFactory"></bean>
+		</property>
+		<property name="sessionLocator">
+			<bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"></bean>
+		</property>
+		<property name="transcoder">
+			<bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder" />
+		</property>
+	</bean>
+	<!-- Use factory bean to build memcached client -->
+	<bean name="memcachedRealClient" factory-bean="memcachedClientBuilder"
+				factory-method="build" destroy-method="shutdown"/>		
+	<bean id="memcachedClient"  class="org.springframework.aop.framework.ProxyFactoryBean">
+		 <property name="proxyInterfaces" value="net.rubyeye.xmemcached.MemcachedClient"/>
+		 <property name="target" ref = "memcachedRealClient" />
+	</bean>
+	
+	<!--DataSource: DBCP Configuration-->	
+	<bean id="mainDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="${app.db.addr}" />
+		<property name="username" value="${app.db.user}" />
+		<property name="password" value="${app.db.password}" />
+		<property name="initialSize" value="1" />
+		<property name="maxActive" value="10" />
+		<property name="maxIdle" value="5" />
+		<property name="timeBetweenEvictionRunsMillis" value="3600000" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="true" />
+		<property name="testOnReturn" value="true" />
+		<property name="validationQuery" value="select 1" />
+	</bean>
+
+	<!--Connection Pool: iBatis Configuration-->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:SqlMapConfig.xml"></property>
+		<property name="dataSource" ref="mainDataSource" />
+	</bean>
+	
+	<bean id="nosql" class="com.zyd.demo.common.nosql.impl.Redis" destroy-method="shutdown" init-method="init">
+		<property name="host" value="${app.redis.addr}"/>
+		<property name="port" value="${app.redis.port}"/>
+		<property name="password" value="${app.redis.password}"/>
+	</bean>
+	<bean id="nosqlCacheKeys" class="com.zyd.demo.common.nosql.impl.Redis" destroy-method="shutdown" init-method="init">
+		<property name="host" value="${app.redisCacheKeys.addr}"/>
+		<property name="port" value="${app.redisCacheKeys.port}"/>
+		<property name="password" value="${app.redisCacheKeys.password}"/>
+	</bean>
+	
+	<bean id="ilock" class="com.zyd.demo.common.lock.MemCasLockImpl" >
+		<property name="mcc" ref="memcachedClient"></property>
+		<!-- try getting lock only 3 times -->
+		<property name="tryNum" value="3"></property>
+		<property name="tryIntervalTime" value="100"></property>
+		<property name="expr" value="60"></property>
+	</bean>
+	
+	<import resource="classpath:/spring/applicationContext-bean.xml"/>
+	<import resource="classpath:/spring/applicationContext-servlet.xml"/>
+	
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+	<bean id="springContextUtil" class="com.zyd.demo.common.SpringContextUtil"></bean>
+	
+	<context:component-scan base-package="com.zyd.demo"/>
+</beans>
