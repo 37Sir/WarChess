@@ -1,4 +1,5 @@
-set PROTOC=..\tools\bin\protoc.exe --java_out=..\democommon\src
+set PROTOC=..\Tools\bin\protoc.exe --java_out=..\Server\democommon\src
+set PROTOC=..\Tools\bin\protoc.exe --java_out=..\Client\common\src
 
 %PROTOGEN% ClientProtocol.proto FireBattle.proto
 
