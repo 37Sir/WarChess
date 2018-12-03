@@ -1,0 +1,81 @@
+package com.zyd.common.proto.client;
+
+option optimize_for = SPEED;
+
+message MessageHeaderRequest {
+  optional string name = 1;
+  optional MessageHeaderInfo userInfo = 2;
+  optional string requestToken = 3;
+}
+
+enum EDeviceType {
+  None = 0;
+  IOS = 1;
+  Android = 2;
+}
+
+message MessageHeaderInfo {
+  optional string userToken = 1;
+  optional EDeviceType userDevice = 2 [default = None];
+  optional string requestToken = 4;
+  //客户端不传，服务器自己获取
+  optional string clientIp = 5;
+  optional int64 userId = 7;
+  optional string sign = 90; //md5Str(userId+userToken+version+privateKey)
+  optional string ext = 91; //md5Str
+}
+
+message MessageHeaderResponse {
+  optional int32 error = 1;
+  optional string name = 2;
+  optional string requestToken = 3;
+}
+
+enum ErrorCode{
+	SERVER_ERROR = 1;
+	SHOP_ITEM_WRONG = 17;
+	
+	PLAYER_RMB_NOT_ENOUGH = 21;
+	PLAYER_GOLD_NOT_ENOUGH = 22;
+	
+	PARAMETER_NOT_CORRECT = 50;
+	
+	SYSCONFIG_NOT_CORRECT = 51;
+	HACKER_ERROR = 55;		//md5验证失败
+
+	NOT_GET_LOCK = 300;
+	ACTIVATION_CODE_ERROR = 301;
+
+	DAILY_LOTTO_LIMIT = 400;
+	LOTTO_NOT_FREE = 452;
+	DUPLICATE_REQUEST = 700;
+	VERSION_ERROR = 995;
+	DEVICE_TYPE_NOT_CORRECT = 998;
+	NOT_HAVE_LAST_RESPONSE = 99999;
+	SERVER_MAINTENACE = 100000;	 			//服务器维护状态
+	
+}
+
+enum RpcErrorCode {
+  UNKNOWN = -1;
+  INVALID_PROTOCOL = -2;
+  INVALID_ARG = -3;
+  TIMEOUT = -4;
+  SERVER_BUSY = -5;
+  PUSHTIMEOUT = -6; //客户端PUSH的超时
+}
+message LoginRequest{
+	optional string userName = 1；
+}
+
+message LoginResponse{
+	optional PlayerInfo playerInfo = 1;
+}
+
+message PlayerInfo {
+	optional string userName = 1; 
+	optional int32 userId = 2;
+	
+}
+
+

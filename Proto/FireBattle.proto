@@ -1,0 +1,178 @@
+package com.zyd.common.proto.client;
+
+/////////////////////////////////////// request ////////////////////////////////////
+
+// 匹配玩家请求
+message MatchFairBattleRequest{
+	// 测试加入英雄的数组
+}
+
+// 匹配玩家请求返回
+message MatchFairBattleResponse{
+	
+}
+
+// 取消匹配请求
+message CancelMatchFairBattleRequest{
+
+}
+
+message CancelMatchFairBattleResponse{
+
+}
+
+/** 玩家战斗的桢信息请求*/
+message PlayerBattleMesRequest{
+	/** 操作桢信息*/
+	required BattleMes battleMes = 2;
+}
+
+/** 玩家战斗的桢信息返回 */
+message PlayerBattleMesResponse{
+	/** 是否操作成功*/
+	required bool res = 1;
+	/** 如果操作失败,失败的原因*/
+	optional string error = 2;
+}
+
+/** 玩家战斗结束请求 */
+message FairBattleLevelEndRequest{
+
+	/** 是否主动投降*/
+	optional bool isGiveUp = 2;
+}
+
+/** 玩家战斗结束返回 */
+message FairBattleLevelEndResponse{
+	
+}
+
+
+
+/** 玩家进入游戏后准备完成请求 */
+message FairBattleLevelReadyRequest{
+	
+}
+
+/** 玩家进入游戏后准备完成返回 */
+message FairBattleLevelReadyResponse{
+	
+}
+
+
+
+/** 玩家战斗过程处理完成请求*/
+message FairBattleLevelFattingFinishedRequest{
+	
+}
+
+/** 玩家战斗过程处理完成返回*/
+message FairBattleLevelFattingFinishedResponse{
+
+}
+
+/** 玩家请求所有桢信息请求*/
+message PlayerRequireBattleMesAgainRequest{
+	/** 请求开始桢的桢号*/
+	required int32 startPlayNum = 1;
+	/** 房间号*/
+	optional int64 roomId = 2;
+}
+
+/** 玩家请求所有桢信息返回*/
+message PlayerRequireBattleMesAgainResponse{
+	/** 开始信息*/
+	optional FairBattleLevelStartPush fairBattleLevelSatrt = 1;
+	/** 桢信息*/
+	repeated BattleMes battleMes = 2;
+}
+
+/** 玩家查询是否有正在战斗,如果有,则返回roomId*/
+message CheckPlayerFairBattleExistRequest{
+	
+}
+
+message CheckPlayerFairBattleExistResponse{
+	/** 是否存在*/
+	required bool isExist = 1 ;
+	/** roomId*/
+	optional int64 roomId = 2;	
+}
+
+/** 服务器心跳*/
+message FireBattleHeartBeatRequest{
+}
+
+message FireBattleHeartBeatResponse{
+}
+
+
+/////////////////////////////////////// push ////////////////////////////////////
+/** 玩家可以进行下一帧操作推送*/
+message PlayNextPush{
+	
+}
+
+/** 玩家战斗桢信息推送,包括开始和战斗过程*/
+message ServerBattleMesPush{
+	/** 当前服务器时间,操作时间*/
+	required int64 currentTime = 1;
+	/** 服务器下一步更新时间*/
+	required int64 nextTime = 2;
+	/** 桢信息*/
+	required BattleMes battleMes = 3;
+}
+
+
+/** 匹配完成,玩家进入匹配房间推送 */
+message FairBattleLevelStartPush{
+	/** 战斗玩家信息*/
+	repeated PlayerMes playerMes = 1;
+	/** 第一个操作玩家zoneId */
+	required int32 zoneId = 2;
+	/** 第一个操作玩家userId */
+	required int64 userId = 3;
+	/** 房间id */
+	optional int64 roomId = 4;
+	/** 战斗随机数种子 */
+	optional int32 randomSeed = 5;
+}
+
+/** 游戏正式开始推送 */
+message FairBattleLevelReadyFinishedPush{
+
+}
+
+
+/** 玩家战斗结束推送*/
+message FairBattleLevelEndPush{
+	/** 所有的桢信息,测试用于战斗回放*/
+	repeated BattleMes battleMes = 2;
+	/** 0 正常结束 1 己方投降 2 对方投降*/
+	optional int32 result = 3;
+}
+
+/////////////////////////////////////// message ////////////////////////////////////
+
+/** 桢信息 */
+message BattleMes{
+	/** 当前操作的桢*/
+	required int32 playNum = 1;
+	/** 移动方向x */
+	optional int64 dirX = 2;
+	/** 移动方向y */
+	optional int64 dirY = 3; 
+	/** 是否释放技能 */
+	optional bool playSkill = 4;
+	/** 释放技能的卡牌 */
+	optional int32 itemIndex = 5;
+	/** 是否是进攻方 */
+	optional int64 attckUserId = 6;
+}
+
+/** 战斗玩家信息*/
+message PlayerMes{
+	/** 玩家id*/
+	required int64 userId = 1;
+
+}

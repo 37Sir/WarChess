@@ -1,0 +1,38 @@
+package com.zyd.common.proto.client;
+
+option optimize_for = SPEED;
+
+enum RpcType {
+  RPC_REQUEST = 0;
+  RPC_RESPONSE = 1;
+  RPC_CANCEL = 2;
+  RPC_TRANSMIT = 3;
+  RPC_TRANSMIT_RESPONSE_VALUE = 4;
+  RPC_PUSH_TO_CLIENT = 5;
+  RPC_PROXY_BROAD_CAST = 6;
+  RPC_SERVER_HEART_BEAT_REQUEST = 7;
+  RPC_SERVER_HEART_BEAT_RESPONSE = 8;
+}
+enum RPCQueueIDEnum {
+	LOGIN_QUEUE = 1;
+	ROOM_GAME_QUEUE = 2;
+	THIRD_QUEUE = 3;
+	MAIN_QUEUE = 4;
+}
+message RpcHeader {
+  required RpcType type = 1;
+  required uint32 id = 2;
+  
+  optional uint32 error = 3;
+  optional string name = 4;
+  required RPCQueueIDEnum queueId = 5;
+  optional string requestToken = 6;
+}
+
+message PushHeader{
+	repeated string userToken = 1;
+}
+message ChatPushHeader{
+	repeated string suid = 1;
+}
+
