@@ -1,7 +1,6 @@
 package com.zyd.demo.common.memcached;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
@@ -10,9 +9,11 @@ import org.slf4j.LoggerFactory;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
+import com.zyd.demo.common.enumuration.TableName;
 import com.zyd.demo.common.jdbc.MapperHelper;
 import com.zyd.demo.common.jdbc.MapperHelper.DBCacheMissHandler;
-import com.zyd.demo.common.utils.KpConstants;
+import com.zyd.demo.common.utils.DemoConstants;
+import com.zyd.demo.user.pojo.User;
 import net.rubyeye.xmemcached.MemcachedClient;
 import net.rubyeye.xmemcached.exception.MemcachedException;
 
@@ -40,13 +41,13 @@ public class MemcachedHandler {
     }
 
     public <T> T loadValue(String key, DBCacheMissHandler handler, Class<T> clazz) {
-      return loadValue(key, handler, KpConstants.CACHE_DATA_DAY, clazz);
+      return loadValue(key, handler, DemoConstants.CACHE_DATA_DAY, clazz);
     }
     /**
      * 存储str。
      */
     public String loadValueStr(String key, DBCacheMissHandler handler) {
-        return loadValueStr(key, handler, KpConstants.CACHE_DATA_DAY);
+        return loadValueStr(key, handler, DemoConstants.CACHE_DATA_DAY);
     }
 
     public String loadValueStr(String key) {
@@ -77,7 +78,7 @@ public class MemcachedHandler {
     }
     
     public boolean setCacheStrNoDB(String key, int expr, final String obj) {
-      return setStrValue(key, expr, obj.getBytes());
+        return setStrValue(key, expr, obj.getBytes());
     }
     
     //存string
@@ -135,22 +136,23 @@ public class MemcachedHandler {
     }
     //更新数据库和缓存
     public boolean setCacheEncodeWithDB(String cacheKey, String tableName, int expr, final Object object) {
-        if (tableName.equals("")) {
-
+        if (tableName.equals(TableName.USER.getTableName())) {
+            User obj = (User) object;
+            mapperHelper.getUserMapper().updateByPrimaryKey(obj);
         } 
   
         return setEncodeValue(cacheKey, expr, object);
     }
     
     public boolean setCacheEncodeWithDB(String key, String tableName, final Object obj) {
-        return setCacheEncodeWithDB(key, tableName, KpConstants.CACHE_DATA_DAY, obj);
+        return setCacheEncodeWithDB(key, tableName, DemoConstants.CACHE_DATA_DAY, obj);
     }
     
     public boolean setCacheEncodeNoDB(String key, int expr, final Object obj) {
         return setEncodeValue(key, expr, obj);
     }
     
-    private boolean setEncodeValue(String key, int expr, final Object obj) {
+    public boolean setEncodeValue(String key, int expr, final Object obj) {
         try {
             byte[] value = encode(obj);
             if (value.length > 2048) {

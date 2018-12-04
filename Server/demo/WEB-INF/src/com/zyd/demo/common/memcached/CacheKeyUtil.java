@@ -2,7 +2,7 @@ package com.zyd.demo.common.memcached;
 
 import java.util.Collection;
 import java.util.HashSet;
-import com.zyd.demo.common.utils.KpJoiner;
+import com.zyd.demo.common.utils.DomeJoiner;
 /**
  * 缓存的key值转换操作
  *
@@ -10,11 +10,11 @@ import com.zyd.demo.common.utils.KpJoiner;
 public class CacheKeyUtil {
 	public static final String SPLIT_CHAR 								= "|";
 	public static final String SPLIT_CHAR_2 							= "_";
-	public static final KpJoiner joiner = KpJoiner.on(SPLIT_CHAR);
-	public static final KpJoiner joiner_2 = KpJoiner.on(SPLIT_CHAR_2);
+	public static final DomeJoiner joiner = DomeJoiner.on(SPLIT_CHAR);
+	public static final DomeJoiner joiner_2 = DomeJoiner.on(SPLIT_CHAR_2);
 
 	
-	public static HashSet<String> getCacheKeys(String tableName, Collection<Integer> listKeys, Long userId) {
+	public static HashSet<String> getCacheKeys(String tableName, Collection<Integer> listKeys, Integer userId) {
 	     HashSet<String> result = new HashSet<String>();
 	     for (Integer key : listKeys) {
 	         result.add(getCacheKey(tableName, String.valueOf(key), userId));
@@ -37,7 +37,7 @@ public class CacheKeyUtil {
 	 * @param
 	 * @return 缓存user的数据，与数据表一样
 	 */
-	public static String getCacheKey(String tableName, String ojbId, Long userId){
+	public static String getCacheKey(String tableName, String ojbId, Integer userId){
 		if(tableName != null){
 			tableName = tableName;
 		}

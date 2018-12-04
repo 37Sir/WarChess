@@ -25,7 +25,6 @@ public class ClientRpcDispatcher {
         job.setArgs(args);
         job.setProxy(proxy);
         clientRpcQueue.addJob(job);
-        System.out.println("连接加入队列");
     }
     
     
@@ -49,7 +48,6 @@ public class ClientRpcDispatcher {
             if (conn == null) {
                 continue;
             }
-            System.out.println("开始转发");
             conn.getHandler().requestRPC(job.getArgs(), new  RpcResponseHandler() {
               
               @Override

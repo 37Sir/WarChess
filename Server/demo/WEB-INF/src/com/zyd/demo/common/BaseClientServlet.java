@@ -6,10 +6,12 @@ import com.google.protobuf.TextFormat;
 import com.zyd.common.proto.client.ClientProtocol.EDeviceType;
 import com.zyd.common.proto.client.ClientProtocol.MessageHeaderInfo;
 import com.zyd.common.rpc.Packet;
+import com.zyd.demo.common.memcached.MemcachedHandler;
+import com.zyd.demo.user.service.UserService;
 
 public class BaseClientServlet {
     protected static Logger logger = LoggerFactory.getLogger(BaseClientServlet.class.getName());
-    
+
     public boolean isGuildLock() {
       return false;
     }
@@ -51,5 +53,17 @@ public class BaseClientServlet {
     public void serviceUpdateUserData(Packet msg, String string) {
       
     }
+    
+    protected UserService userService;
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+    
+    
 
 }

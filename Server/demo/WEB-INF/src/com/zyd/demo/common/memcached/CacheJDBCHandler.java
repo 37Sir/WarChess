@@ -3,12 +3,14 @@ package com.zyd.demo.common.memcached;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import org.apache.http.impl.client.DecompressingHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.zyd.demo.common.enumuration.TableName;
 import com.zyd.demo.common.jdbc.MapperHelper.DBCacheMissHandler;
-import com.zyd.demo.common.utils.KpConstants;
+import com.zyd.demo.common.utils.DemoConstants;
 import com.zyd.demo.common.utils.StringUtil;
+import com.zyd.demo.user.pojo.User;
 
 public class CacheJDBCHandler extends MemcachedHandler {
     private static Logger logger = LoggerFactory.getLogger("memcachedFlush");
@@ -24,7 +26,7 @@ public class CacheJDBCHandler extends MemcachedHandler {
                     if ("tab".equals(tableName)) {
                         List<Integer> ids = null;
                         for (final Integer id : ids) {
-                            result += (id + KpConstants.COMMON_DELIMITER);
+                            result += (id + DemoConstants.COMMON_DELIMITER);
                         }
                     } else {
                         logger.error("not found table:{}", tableName);
@@ -36,7 +38,7 @@ public class CacheJDBCHandler extends MemcachedHandler {
             HashSet<Integer> set = new HashSet<Integer>();
             
             if (idsStr != null && !"".equals(idsStr.trim()) && !"null".equals(idsStr.trim())) {
-                for (String s : idsStr.split(KpConstants.COMMON_DELIMITER)) {
+                for (String s : idsStr.split(DemoConstants.COMMON_DELIMITER)) {
                     if (!"null".equals(s.trim()) && !"".equals(s.trim())) {
                         set.add(StringUtil.toInt(s.trim()));
                     }
@@ -53,7 +55,7 @@ public class CacheJDBCHandler extends MemcachedHandler {
     private String idsToString(HashSet<Integer> ids) {
         String res = "";
         for (Integer ins : ids) {
-            res += (ins + KpConstants.COMMON_DELIMITER);
+            res += (ins + DemoConstants.COMMON_DELIMITER);
         }
         return res;
     }
@@ -70,17 +72,16 @@ public class CacheJDBCHandler extends MemcachedHandler {
     /**
      * 这个接口，缓存获取的是不分表的表数据。
      */
-    public <T> T getDataByCacheNoSplit(final String tableName, final Long objId, Class<T> clazz) {
+    public <T> T getDataByCacheNoSplit(final String tableName, final Integer objId, Class<T> clazz) {
         try {
             String cacheKey = CacheKeyUtil.getCacheKeyNoRoute(tableName, String.valueOf(objId));
             DBCacheMissHandler cmHandler = new DBCacheMissHandler() {
-
                 @SuppressWarnings("unchecked")
                 @Override
                 public Object loadFromDB() throws Exception {
                     Object result = null;
-                    if (tableName.equals(TableName.USER.name())) {
-//                        result = mapperHelper.getUserMapper().selectByPrimaryKey(objId);
+                    if (tableName.equals(TableName.USER.getTableName())) {
+                        result = mapperHelper.getUserMapper().selectByPrimaryKey(objId);
                     }
                     return result;
                 }
@@ -93,16 +94,16 @@ public class CacheJDBCHandler extends MemcachedHandler {
     }
     
     
-    public HashSet<Integer> create(String tableName, Object obj) {
+    public HashSet<Integer> create(String tableName, Object obj,User user) {
         HashSet<Integer> setIds = null;
         String idsCacheKey = null;
         String cacheKey = null;
-        if (TableName.USER.name().equals(tableName)) {
-//            User objUser = ((User) obj);
-//            mapperHelper.getUserMapper().insert(objUser);
-//            cacheKey = CacheKeyUtil.getCacheKey(tableName, String.valueOf(objUser.getId()), user.getId());
+        if (TableName.USER.getTableName().equals(tableName)) {
+            User objUser = ((User) obj);
+            mapperHelper.getUserMapper().insert(objUser);
+            cacheKey = CacheKeyUtil.getCacheKeyNoRoute(tableName, String.valueOf(objUser.getId()));
             // 新建user，同时缓存user
-            setCacheEncodeWithDB(cacheKey, tableName, obj);
+            setEncodeValue(cacheKey, DemoConstants.CACHE_DATA_DAY, obj);
             return null;
         } else {
           logger.error("not found table:{}", tableName);
@@ -110,5 +111,9 @@ public class CacheJDBCHandler extends MemcachedHandler {
         return setIds;
     }
     
+    public Integer getUserIdByName(String name) {
+      Integer userId = mapperHelper.getUserMapper().selectByName(name);
+      return userId;
+  }
     
 }

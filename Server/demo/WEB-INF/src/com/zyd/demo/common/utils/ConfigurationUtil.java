@@ -16,7 +16,6 @@ public class ConfigurationUtil {
     private static final ConfigurationFactory factory = new ConfigurationFactory("propertyConfig.xml");
     private static final Logger logger = LoggerFactory.getLogger(ConfigurationUtil.class.getName());
 
-
     
     static {
       try {

@@ -59,7 +59,6 @@ public class ClientConnectionHandler extends SimpleChannelInboundHandler<Packet>
         String requestName = messageHeader.getName();
         if("HeartBeat".equals(requestName)){
             logger.debug("heartbeat channelToken:{}",channelToken);
-            System.out.println("HeartBeat");
         }else{
             user_info_ = messageHeader.getUserInfo();
             if (user_info_.hasUserToken()) {

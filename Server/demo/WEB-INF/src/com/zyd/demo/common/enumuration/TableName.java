@@ -4,14 +4,16 @@ package com.zyd.demo.common.enumuration;
 
 @SuppressWarnings("rawtypes")
 public enum TableName {
-	USER(true, TableName.class);
+	USER(true, TableName.class,"user");
 
 	private Boolean isFenBiao;
 	private Class clazz;
+	private String name; 
 	
-	private TableName(boolean isFenBiao, Class clazz){
+	private TableName(boolean isFenBiao, Class clazz, String name){
 		this.isFenBiao = isFenBiao;
 		this.clazz = clazz;
+		this.name = name;
 	}
 	
 	public boolean getIsFenBiao(){
@@ -30,4 +32,8 @@ public enum TableName {
 		}
 		return null;
 	}
+	
+    public String getTableName() {
+      return name;
+    }
 }

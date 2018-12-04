@@ -3,10 +3,15 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="baseClientServlet" class="com.zyd.demo.common.BaseClientServlet">                
+    <bean id="baseClientServlet" class="com.zyd.demo.common.BaseClientServlet"> 
+    	 <property name="userService" ref="userService"></property>            
+    	
     </bean>
 	<!-- user -->
 	<bean id="test" class="com.zyd.demo.round.servlet.test"
+		parent="baseClientServlet">
+	</bean>
+	<bean id="Login" class="com.zyd.demo.user.servlet.Login"
 		parent="baseClientServlet">
 	</bean>
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />

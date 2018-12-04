@@ -9,6 +9,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.zyd.common.resource.ResourceManager;
+import com.zyd.demo.common.lock.ILock;
 import com.zyd.demo.common.utils.ConfigurationUtil;
 import com.zyd.demo.info.ProxyConnection;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -30,6 +31,7 @@ public class InitServlet extends HttpServlet {
             //load the system config
             resourceManager.init((ApplicationContext)context);
             
+            ConfigurationUtil.infoLock = (ILock)context.getBean("ilock");
             proxy = new ProxyConnection(ConfigurationUtil.PROXY_ADDR, ConfigurationUtil.PROXY_PORT, group);
             proxy.start();
             logger.info("\n\n\n" +

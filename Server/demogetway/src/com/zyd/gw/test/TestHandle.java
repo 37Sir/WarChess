@@ -1,5 +1,6 @@
 package com.zyd.gw.test;
 
+import com.zyd.common.proto.client.ClientProtocol.LoginResponse;
 import com.zyd.common.proto.client.ClientProtocol.MessageHeaderResponse;
 import com.zyd.common.rpc.Packet;
 import io.netty.channel.ChannelHandler;
@@ -11,8 +12,9 @@ public class TestHandle extends SimpleChannelInboundHandler<Packet> {
   @Override
   protected void channelRead0(ChannelHandlerContext arg0, Packet arg1) throws Exception {
     MessageHeaderResponse req = arg1.parseProtobuf(MessageHeaderResponse.PARSER, 0);
+    LoginResponse res = arg1.parseProtobuf(LoginResponse.PARSER, 1);
     System.out.println(req.getError());
-    System.out.println("-------------------");
+    System.out.println(res.getSign());
   }
 
 
