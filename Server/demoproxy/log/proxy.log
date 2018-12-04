@@ -412,3 +412,36 @@ java.io.IOException: 远程主机强迫关闭了一个现有的连接。
 14:39:01.322 [nioEventLoopGroup-2-8] INFO  c.z.p.c.ClientConnectionHandler - responseRpc####Login
 14:39:01.322 [nioEventLoopGroup-2-8] INFO  c.z.p.c.ClientConnectionHandler - channelToken:40d9c2fe-5b31-49aa-a3aa-0612bde82bdd-------------ClientResponseRpc: error=0 size=1
 14:39:11.326 [nioEventLoopGroup-2-11] WARN  c.z.p.c.ClientConnectionHandler - Client disconnected: /192.168.90.12:57318 channelToken:40d9c2fe-5b31-49aa-a3aa-0612bde82bdd
+15:39:11.364 [nioEventLoopGroup-2-8] ERROR c.zyd.common.rpc.RpcMessageHandler - 远程主机强迫关闭了一个现有的连接。
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method) ~[na:1.8.0_162]
+	at sun.nio.ch.SocketDispatcher.read(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.IOUtil.read(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.SocketChannelImpl.read(Unknown Source) ~[na:1.8.0_162]
+	at io.netty.buffer.UnpooledUnsafeDirectByteBuf.setBytes(UnpooledUnsafeDirectByteBuf.java:450) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:871) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:208) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:115) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+15:41:04.883 [main] INFO  c.z.p.info.InfoConnectionListener - Info listener running at: /0:0:0:0:0:0:0:0:8089
+15:41:04.893 [main] INFO  c.z.p.c.ClientConnectionListener - Client listener running at: /0:0:0:0:0:0:0:0:9012
+15:41:04.925 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+15:41:04.925 [nioEventLoopGroup-4-2] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+15:41:04.926 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+15:41:33.981 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - dispatching client RPC: LoLogin to info: /127.0.0.1:52412 request_time:1543909293981
+15:41:34.004 [nioEventLoopGroup-2-3] INFO  c.z.p.c.ClientConnectionHandler - responseRpc####LoLogin
+15:41:34.005 [nioEventLoopGroup-2-3] INFO  c.z.p.c.ClientConnectionHandler - channelToken:24880a86-c588-48cd-9932-98f8be33b3f4-------------ClientResponseRpc: error=1 size=0
+15:41:44.014 [nioEventLoopGroup-2-4] WARN  c.z.p.c.ClientConnectionHandler - Client disconnected: /192.168.90.12:52474 channelToken:24880a86-c588-48cd-9932-98f8be33b3f4
+15:42:12.902 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - dispatching client RPC: Login to info: /127.0.0.1:52412 request_time:1543909332902
+15:42:13.357 [nioEventLoopGroup-2-3] INFO  c.z.p.c.ClientConnectionHandler - responseRpc####Login
+15:42:13.357 [nioEventLoopGroup-2-3] INFO  c.z.p.c.ClientConnectionHandler - channelToken:4e313ad2-15bd-4831-b9e7-ec800072537b-------------ClientResponseRpc: error=0 size=1
+15:42:23.361 [nioEventLoopGroup-2-5] WARN  c.z.p.c.ClientConnectionHandler - Client disconnected: /192.168.90.12:52531 channelToken:4e313ad2-15bd-4831-b9e7-ec800072537b
+15:42:48.533 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - dispatching client RPC: Login to info: /127.0.0.1:52412 request_time:1543909368533
+15:42:48.603 [nioEventLoopGroup-2-3] INFO  c.z.p.c.ClientConnectionHandler - responseRpc####Login
+15:42:48.603 [nioEventLoopGroup-2-3] INFO  c.z.p.c.ClientConnectionHandler - channelToken:4f853a1d-709d-41d1-b362-a141a6de759b-------------ClientResponseRpc: error=0 size=1
+15:42:58.607 [nioEventLoopGroup-2-6] WARN  c.z.p.c.ClientConnectionHandler - Client disconnected: /192.168.90.12:52581 channelToken:4f853a1d-709d-41d1-b362-a141a6de759b

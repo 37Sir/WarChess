@@ -185,3 +185,33 @@ java.io.IOException: 远程主机强迫关闭了一个现有的连接。
 14:38:58.463 [nioEventLoopGroup-2-7] WARN  c.z.g.c.ClientConnectionHandler - new client handler init. channelToken:7c059f22-884a-4222-895e-14870af8cbbf
 14:38:58.463 [nioEventLoopGroup-2-7] INFO  c.z.g.c.ClientConnectionHandler - --------------------------------------Client connected: /127.0.0.1:57314
 14:39:11.324 [nioEventLoopGroup-2-7] ERROR c.z.g.c.ClientConnectionHandler - channelToken:7c059f22-884a-4222-895e-14870af8cbbf No rpc call received from client /127.0.0.1:57314 in 10 seconds, close channel
+15:40:56.984 [main] INFO  c.z.g.c.ClientConnectionHandler - Client listener running at: /0:0:0:0:0:0:0:0:10000
+15:41:30.535 [nioEventLoopGroup-2-2] WARN  c.z.g.c.ClientConnectionHandler - new client handler init. channelToken:0a421ef9-1f37-4941-b496-989680abbbf0
+15:41:30.540 [nioEventLoopGroup-2-2] INFO  c.z.g.c.ClientConnectionHandler - --------------------------------------Client connected: /127.0.0.1:52460
+15:41:34.018 [nioEventLoopGroup-2-1] WARN  i.n.channel.DefaultChannelPipeline - An exceptionCaught() event was fired, and it reached at the tail of the pipeline. It usually means the last handler in the pipeline did not handle the exception.
+java.lang.NullPointerException: null
+	at com.zyd.gw.test.TestHandle.channelRead0(TestHandle.java:17) ~[bin/:na]
+	at com.zyd.gw.test.TestHandle.channelRead0(TestHandle.java:1) ~[bin/:na]
+	at io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:103) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.timeout.IdleStateHandler.channelRead(IdleStateHandler.java:253) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:153) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.invokeChannelRead(DefaultChannelHandlerContext.java:338) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:324) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:785) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:122) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+15:41:44.009 [nioEventLoopGroup-2-2] ERROR c.z.g.c.ClientConnectionHandler - channelToken:0a421ef9-1f37-4941-b496-989680abbbf0 No rpc call received from client /127.0.0.1:52460 in 10 seconds, close channel
+15:42:10.197 [nioEventLoopGroup-2-3] WARN  c.z.g.c.ClientConnectionHandler - new client handler init. channelToken:165c9c9a-fea3-47ac-8c2a-01e2b90bd3d9
+15:42:10.197 [nioEventLoopGroup-2-3] INFO  c.z.g.c.ClientConnectionHandler - --------------------------------------Client connected: /127.0.0.1:52526
+15:42:23.360 [nioEventLoopGroup-2-3] ERROR c.z.g.c.ClientConnectionHandler - channelToken:165c9c9a-fea3-47ac-8c2a-01e2b90bd3d9 No rpc call received from client /127.0.0.1:52526 in 10 seconds, close channel
+15:42:46.035 [nioEventLoopGroup-2-4] WARN  c.z.g.c.ClientConnectionHandler - new client handler init. channelToken:3129e333-2bc0-4dfd-aa9d-2ca8ec7b9b4f
+15:42:46.036 [nioEventLoopGroup-2-4] INFO  c.z.g.c.ClientConnectionHandler - --------------------------------------Client connected: /127.0.0.1:52577
+15:42:58.604 [nioEventLoopGroup-2-4] ERROR c.z.g.c.ClientConnectionHandler - channelToken:3129e333-2bc0-4dfd-aa9d-2ca8ec7b9b4f No rpc call received from client /127.0.0.1:52577 in 10 seconds, close channel
