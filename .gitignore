@@ -51,6 +51,9 @@ Server/demo/dist/*
 *.war
 *.log
 *.class
+*/obj/Debug/
+*/Library/
+*/Temp/
 Client/.vs/Client/v15/Server/sqlite3/storage.ide-shm
 Client/Library/assetDatabase3
 Client/Library/EditorInstance.json
@@ -72,3 +75,8 @@ Client/Temp/UnityTempFile-da9876f5e5923a54d8cfe1a99c19ce24
 Client/Temp/UnityTempFile-dc7a6fb44544397429db3e19acba507f
 Client/Temp/UnityTempFile-de774ef343a85454ebff79d89aa663b1
 Client/Temp/UnityTempFile-f5b38dcbf8aed324d9992f1aa406d1bf
+Client/.vs/Client/v15/.suo
+Client/.vs/Client/v15/Server/sqlite3/storage.ide
+Client/.vs/Client/v15/Server/sqlite3/storage.ide-shm
+Client/.vs/Client/v15/Server/sqlite3/storage.ide-wal
+Client/Assembly-CSharp.csproj
