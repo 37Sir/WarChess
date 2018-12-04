@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.zyd.common.resource.ResourceManager;
 import com.zyd.demo.common.utils.ConfigurationUtil;
@@ -24,10 +25,10 @@ public class InitServlet extends HttpServlet {
         try {
             BeanFactory context = WebApplicationContextUtils.getWebApplicationContext(config.getServletContext());
             ConfigurationUtil.beanFactory = context;
-//            ResourceManager resourceManager = (ResourceManager) context.getBean("resourceManager");
+            ResourceManager resourceManager = (ResourceManager) context.getBean("resourceManager");
             
             //load the system config
-//            resourceManager.init((ApplicationContext)context);
+            resourceManager.init((ApplicationContext)context);
             
             proxy = new ProxyConnection(ConfigurationUtil.PROXY_ADDR, ConfigurationUtil.PROXY_PORT, group);
             proxy.start();

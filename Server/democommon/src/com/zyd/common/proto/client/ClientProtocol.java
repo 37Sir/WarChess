@@ -1296,21 +1296,6 @@ public final class ClientProtocol {
      */
     com.zyd.common.proto.client.ClientProtocol.EDeviceType getUserDevice();
 
-    // optional string version = 3;
-    /**
-     * <code>optional string version = 3;</code>
-     */
-    boolean hasVersion();
-    /**
-     * <code>optional string version = 3;</code>
-     */
-    java.lang.String getVersion();
-    /**
-     * <code>optional string version = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getVersionBytes();
-
     // optional string requestToken = 4;
     /**
      * <code>optional string requestToken = 4;</code>
@@ -1353,51 +1338,6 @@ public final class ClientProtocol {
     com.google.protobuf.ByteString
         getClientIpBytes();
 
-    // optional int32 zoneId = 6;
-    /**
-     * <code>optional int32 zoneId = 6;</code>
-     *
-     * <pre>
-     *serverId 区号
-     * </pre>
-     */
-    boolean hasZoneId();
-    /**
-     * <code>optional int32 zoneId = 6;</code>
-     *
-     * <pre>
-     *serverId 区号
-     * </pre>
-     */
-    int getZoneId();
-
-    // optional string channelId = 89;
-    /**
-     * <code>optional string channelId = 89;</code>
-     *
-     * <pre>
-     *渠道号
-     * </pre>
-     */
-    boolean hasChannelId();
-    /**
-     * <code>optional string channelId = 89;</code>
-     *
-     * <pre>
-     *渠道号
-     * </pre>
-     */
-    java.lang.String getChannelId();
-    /**
-     * <code>optional string channelId = 89;</code>
-     *
-     * <pre>
-     *渠道号
-     * </pre>
-     */
-    com.google.protobuf.ByteString
-        getChannelIdBytes();
-
     // optional int64 userId = 7;
     /**
      * <code>optional int64 userId = 7;</code>
@@ -1407,39 +1347,6 @@ public final class ClientProtocol {
      * <code>optional int64 userId = 7;</code>
      */
     long getUserId();
-
-    // optional string roomId = 8;
-    /**
-     * <code>optional string roomId = 8;</code>
-     */
-    boolean hasRoomId();
-    /**
-     * <code>optional string roomId = 8;</code>
-     */
-    java.lang.String getRoomId();
-    /**
-     * <code>optional string roomId = 8;</code>
-     */
-    com.google.protobuf.ByteString
-        getRoomIdBytes();
-
-    // optional int32 hotUpdateVersion = 9;
-    /**
-     * <code>optional int32 hotUpdateVersion = 9;</code>
-     *
-     * <pre>
-     *热更新版本号
-     * </pre>
-     */
-    boolean hasHotUpdateVersion();
-    /**
-     * <code>optional int32 hotUpdateVersion = 9;</code>
-     *
-     * <pre>
-     *热更新版本号
-     * </pre>
-     */
-    int getHotUpdateVersion();
 
     // optional string sign = 90;
     /**
@@ -1562,53 +1469,28 @@ public final class ClientProtocol {
               }
               break;
             }
-            case 26: {
-              bitField0_ |= 0x00000004;
-              version_ = input.readBytes();
-              break;
-            }
             case 34: {
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000004;
               requestToken_ = input.readBytes();
               break;
             }
             case 42: {
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000008;
               clientIp_ = input.readBytes();
               break;
             }
-            case 48: {
-              bitField0_ |= 0x00000020;
-              zoneId_ = input.readInt32();
-              break;
-            }
             case 56: {
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000010;
               userId_ = input.readInt64();
               break;
             }
-            case 66: {
-              bitField0_ |= 0x00000100;
-              roomId_ = input.readBytes();
-              break;
-            }
-            case 72: {
-              bitField0_ |= 0x00000200;
-              hotUpdateVersion_ = input.readInt32();
-              break;
-            }
-            case 714: {
-              bitField0_ |= 0x00000040;
-              channelId_ = input.readBytes();
-              break;
-            }
             case 722: {
-              bitField0_ |= 0x00000400;
+              bitField0_ |= 0x00000020;
               sign_ = input.readBytes();
               break;
             }
             case 730: {
-              bitField0_ |= 0x00000800;
+              bitField0_ |= 0x00000040;
               ext_ = input.readBytes();
               break;
             }
@@ -1711,49 +1593,6 @@ public final class ClientProtocol {
       return userDevice_;
     }
 
-    // optional string version = 3;
-    public static final int VERSION_FIELD_NUMBER = 3;
-    private java.lang.Object version_;
-    /**
-     * <code>optional string version = 3;</code>
-     */
-    public boolean hasVersion() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional string version = 3;</code>
-     */
-    public java.lang.String getVersion() {
-      java.lang.Object ref = version_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          version_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string version = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getVersionBytes() {
-      java.lang.Object ref = version_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        version_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     // optional string requestToken = 4;
     public static final int REQUESTTOKEN_FIELD_NUMBER = 4;
     private java.lang.Object requestToken_;
@@ -1761,7 +1600,7 @@ public final class ClientProtocol {
      * <code>optional string requestToken = 4;</code>
      */
     public boolean hasRequestToken() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>optional string requestToken = 4;</code>
@@ -1808,7 +1647,7 @@ public final class ClientProtocol {
      * </pre>
      */
     public boolean hasClientIp() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>optional string clientIp = 5;</code>
@@ -1852,85 +1691,6 @@ public final class ClientProtocol {
       }
     }
 
-    // optional int32 zoneId = 6;
-    public static final int ZONEID_FIELD_NUMBER = 6;
-    private int zoneId_;
-    /**
-     * <code>optional int32 zoneId = 6;</code>
-     *
-     * <pre>
-     *serverId 区号
-     * </pre>
-     */
-    public boolean hasZoneId() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional int32 zoneId = 6;</code>
-     *
-     * <pre>
-     *serverId 区号
-     * </pre>
-     */
-    public int getZoneId() {
-      return zoneId_;
-    }
-
-    // optional string channelId = 89;
-    public static final int CHANNELID_FIELD_NUMBER = 89;
-    private java.lang.Object channelId_;
-    /**
-     * <code>optional string channelId = 89;</code>
-     *
-     * <pre>
-     *渠道号
-     * </pre>
-     */
-    public boolean hasChannelId() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional string channelId = 89;</code>
-     *
-     * <pre>
-     *渠道号
-     * </pre>
-     */
-    public java.lang.String getChannelId() {
-      java.lang.Object ref = channelId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          channelId_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string channelId = 89;</code>
-     *
-     * <pre>
-     *渠道号
-     * </pre>
-     */
-    public com.google.protobuf.ByteString
-        getChannelIdBytes() {
-      java.lang.Object ref = channelId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        channelId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     // optional int64 userId = 7;
     public static final int USERID_FIELD_NUMBER = 7;
     private long userId_;
@@ -1938,80 +1698,13 @@ public final class ClientProtocol {
      * <code>optional int64 userId = 7;</code>
      */
     public boolean hasUserId() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <code>optional int64 userId = 7;</code>
      */
     public long getUserId() {
       return userId_;
-    }
-
-    // optional string roomId = 8;
-    public static final int ROOMID_FIELD_NUMBER = 8;
-    private java.lang.Object roomId_;
-    /**
-     * <code>optional string roomId = 8;</code>
-     */
-    public boolean hasRoomId() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
-    }
-    /**
-     * <code>optional string roomId = 8;</code>
-     */
-    public java.lang.String getRoomId() {
-      java.lang.Object ref = roomId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          roomId_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string roomId = 8;</code>
-     */
-    public com.google.protobuf.ByteString
-        getRoomIdBytes() {
-      java.lang.Object ref = roomId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        roomId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional int32 hotUpdateVersion = 9;
-    public static final int HOTUPDATEVERSION_FIELD_NUMBER = 9;
-    private int hotUpdateVersion_;
-    /**
-     * <code>optional int32 hotUpdateVersion = 9;</code>
-     *
-     * <pre>
-     *热更新版本号
-     * </pre>
-     */
-    public boolean hasHotUpdateVersion() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
-    }
-    /**
-     * <code>optional int32 hotUpdateVersion = 9;</code>
-     *
-     * <pre>
-     *热更新版本号
-     * </pre>
-     */
-    public int getHotUpdateVersion() {
-      return hotUpdateVersion_;
     }
 
     // optional string sign = 90;
@@ -2025,7 +1718,7 @@ public final class ClientProtocol {
      * </pre>
      */
     public boolean hasSign() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
      * <code>optional string sign = 90;</code>
@@ -2080,7 +1773,7 @@ public final class ClientProtocol {
      * </pre>
      */
     public boolean hasExt() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional string ext = 91;</code>
@@ -2127,14 +1820,9 @@ public final class ClientProtocol {
     private void initFields() {
       userToken_ = "";
       userDevice_ = com.zyd.common.proto.client.ClientProtocol.EDeviceType.None;
-      version_ = "";
       requestToken_ = "";
       clientIp_ = "";
-      zoneId_ = 0;
-      channelId_ = "";
       userId_ = 0L;
-      roomId_ = "";
-      hotUpdateVersion_ = 0;
       sign_ = "";
       ext_ = "";
     }
@@ -2157,33 +1845,18 @@ public final class ClientProtocol {
         output.writeEnum(2, userDevice_.getNumber());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getVersionBytes());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeBytes(4, getRequestTokenBytes());
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeBytes(5, getClientIpBytes());
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(6, zoneId_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt64(7, userId_);
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeBytes(8, getRoomIdBytes());
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeInt32(9, hotUpdateVersion_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeBytes(89, getChannelIdBytes());
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(90, getSignBytes());
       }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeBytes(91, getExtBytes());
       }
       getUnknownFields().writeTo(output);
@@ -2205,41 +1878,21 @@ public final class ClientProtocol {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getVersionBytes());
+          .computeBytesSize(4, getRequestTokenBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getRequestTokenBytes());
+          .computeBytesSize(5, getClientIpBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getClientIpBytes());
+          .computeInt64Size(7, userId_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, zoneId_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(7, userId_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(8, getRoomIdBytes());
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(9, hotUpdateVersion_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(89, getChannelIdBytes());
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(90, getSignBytes());
       }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(91, getExtBytes());
       }
@@ -2363,26 +2016,16 @@ public final class ClientProtocol {
         bitField0_ = (bitField0_ & ~0x00000001);
         userDevice_ = com.zyd.common.proto.client.ClientProtocol.EDeviceType.None;
         bitField0_ = (bitField0_ & ~0x00000002);
-        version_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
         requestToken_ = "";
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         clientIp_ = "";
-        bitField0_ = (bitField0_ & ~0x00000010);
-        zoneId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        channelId_ = "";
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000008);
         userId_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000080);
-        roomId_ = "";
-        bitField0_ = (bitField0_ & ~0x00000100);
-        hotUpdateVersion_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000010);
         sign_ = "";
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000020);
         ext_ = "";
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -2422,41 +2065,21 @@ public final class ClientProtocol {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.version_ = version_;
+        result.requestToken_ = requestToken_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.requestToken_ = requestToken_;
+        result.clientIp_ = clientIp_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.clientIp_ = clientIp_;
+        result.userId_ = userId_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.zoneId_ = zoneId_;
+        result.sign_ = sign_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
-        }
-        result.channelId_ = channelId_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
-        result.userId_ = userId_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000100;
-        }
-        result.roomId_ = roomId_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000200;
-        }
-        result.hotUpdateVersion_ = hotUpdateVersion_;
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000400;
-        }
-        result.sign_ = sign_;
-        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
-          to_bitField0_ |= 0x00000800;
         }
         result.ext_ = ext_;
         result.bitField0_ = to_bitField0_;
@@ -2483,47 +2106,26 @@ public final class ClientProtocol {
         if (other.hasUserDevice()) {
           setUserDevice(other.getUserDevice());
         }
-        if (other.hasVersion()) {
-          bitField0_ |= 0x00000004;
-          version_ = other.version_;
-          onChanged();
-        }
         if (other.hasRequestToken()) {
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000004;
           requestToken_ = other.requestToken_;
           onChanged();
         }
         if (other.hasClientIp()) {
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000008;
           clientIp_ = other.clientIp_;
-          onChanged();
-        }
-        if (other.hasZoneId()) {
-          setZoneId(other.getZoneId());
-        }
-        if (other.hasChannelId()) {
-          bitField0_ |= 0x00000040;
-          channelId_ = other.channelId_;
           onChanged();
         }
         if (other.hasUserId()) {
           setUserId(other.getUserId());
         }
-        if (other.hasRoomId()) {
-          bitField0_ |= 0x00000100;
-          roomId_ = other.roomId_;
-          onChanged();
-        }
-        if (other.hasHotUpdateVersion()) {
-          setHotUpdateVersion(other.getHotUpdateVersion());
-        }
         if (other.hasSign()) {
-          bitField0_ |= 0x00000400;
+          bitField0_ |= 0x00000020;
           sign_ = other.sign_;
           onChanged();
         }
         if (other.hasExt()) {
-          bitField0_ |= 0x00000800;
+          bitField0_ |= 0x00000040;
           ext_ = other.ext_;
           onChanged();
         }
@@ -2664,87 +2266,13 @@ public final class ClientProtocol {
         return this;
       }
 
-      // optional string version = 3;
-      private java.lang.Object version_ = "";
-      /**
-       * <code>optional string version = 3;</code>
-       */
-      public boolean hasVersion() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional string version = 3;</code>
-       */
-      public java.lang.String getVersion() {
-        java.lang.Object ref = version_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          version_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string version = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getVersionBytes() {
-        java.lang.Object ref = version_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          version_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string version = 3;</code>
-       */
-      public Builder setVersion(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        version_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string version = 3;</code>
-       */
-      public Builder clearVersion() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        version_ = getDefaultInstance().getVersion();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string version = 3;</code>
-       */
-      public Builder setVersionBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        version_ = value;
-        onChanged();
-        return this;
-      }
-
       // optional string requestToken = 4;
       private java.lang.Object requestToken_ = "";
       /**
        * <code>optional string requestToken = 4;</code>
        */
       public boolean hasRequestToken() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <code>optional string requestToken = 4;</code>
@@ -2784,7 +2312,7 @@ public final class ClientProtocol {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000004;
         requestToken_ = value;
         onChanged();
         return this;
@@ -2793,7 +2321,7 @@ public final class ClientProtocol {
        * <code>optional string requestToken = 4;</code>
        */
       public Builder clearRequestToken() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         requestToken_ = getDefaultInstance().getRequestToken();
         onChanged();
         return this;
@@ -2806,7 +2334,7 @@ public final class ClientProtocol {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000004;
         requestToken_ = value;
         onChanged();
         return this;
@@ -2822,7 +2350,7 @@ public final class ClientProtocol {
        * </pre>
        */
       public boolean hasClientIp() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <code>optional string clientIp = 5;</code>
@@ -2874,7 +2402,7 @@ public final class ClientProtocol {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000008;
         clientIp_ = value;
         onChanged();
         return this;
@@ -2887,7 +2415,7 @@ public final class ClientProtocol {
        * </pre>
        */
       public Builder clearClientIp() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         clientIp_ = getDefaultInstance().getClientIp();
         onChanged();
         return this;
@@ -2904,155 +2432,8 @@ public final class ClientProtocol {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000008;
         clientIp_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 zoneId = 6;
-      private int zoneId_ ;
-      /**
-       * <code>optional int32 zoneId = 6;</code>
-       *
-       * <pre>
-       *serverId 区号
-       * </pre>
-       */
-      public boolean hasZoneId() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      /**
-       * <code>optional int32 zoneId = 6;</code>
-       *
-       * <pre>
-       *serverId 区号
-       * </pre>
-       */
-      public int getZoneId() {
-        return zoneId_;
-      }
-      /**
-       * <code>optional int32 zoneId = 6;</code>
-       *
-       * <pre>
-       *serverId 区号
-       * </pre>
-       */
-      public Builder setZoneId(int value) {
-        bitField0_ |= 0x00000020;
-        zoneId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 zoneId = 6;</code>
-       *
-       * <pre>
-       *serverId 区号
-       * </pre>
-       */
-      public Builder clearZoneId() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        zoneId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional string channelId = 89;
-      private java.lang.Object channelId_ = "";
-      /**
-       * <code>optional string channelId = 89;</code>
-       *
-       * <pre>
-       *渠道号
-       * </pre>
-       */
-      public boolean hasChannelId() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      /**
-       * <code>optional string channelId = 89;</code>
-       *
-       * <pre>
-       *渠道号
-       * </pre>
-       */
-      public java.lang.String getChannelId() {
-        java.lang.Object ref = channelId_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          channelId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string channelId = 89;</code>
-       *
-       * <pre>
-       *渠道号
-       * </pre>
-       */
-      public com.google.protobuf.ByteString
-          getChannelIdBytes() {
-        java.lang.Object ref = channelId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          channelId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string channelId = 89;</code>
-       *
-       * <pre>
-       *渠道号
-       * </pre>
-       */
-      public Builder setChannelId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000040;
-        channelId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string channelId = 89;</code>
-       *
-       * <pre>
-       *渠道号
-       * </pre>
-       */
-      public Builder clearChannelId() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        channelId_ = getDefaultInstance().getChannelId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string channelId = 89;</code>
-       *
-       * <pre>
-       *渠道号
-       * </pre>
-       */
-      public Builder setChannelIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000040;
-        channelId_ = value;
         onChanged();
         return this;
       }
@@ -3063,7 +2444,7 @@ public final class ClientProtocol {
        * <code>optional int64 userId = 7;</code>
        */
       public boolean hasUserId() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>optional int64 userId = 7;</code>
@@ -3075,7 +2456,7 @@ public final class ClientProtocol {
        * <code>optional int64 userId = 7;</code>
        */
       public Builder setUserId(long value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000010;
         userId_ = value;
         onChanged();
         return this;
@@ -3084,131 +2465,8 @@ public final class ClientProtocol {
        * <code>optional int64 userId = 7;</code>
        */
       public Builder clearUserId() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000010);
         userId_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      // optional string roomId = 8;
-      private java.lang.Object roomId_ = "";
-      /**
-       * <code>optional string roomId = 8;</code>
-       */
-      public boolean hasRoomId() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
-      }
-      /**
-       * <code>optional string roomId = 8;</code>
-       */
-      public java.lang.String getRoomId() {
-        java.lang.Object ref = roomId_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          roomId_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string roomId = 8;</code>
-       */
-      public com.google.protobuf.ByteString
-          getRoomIdBytes() {
-        java.lang.Object ref = roomId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          roomId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string roomId = 8;</code>
-       */
-      public Builder setRoomId(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000100;
-        roomId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string roomId = 8;</code>
-       */
-      public Builder clearRoomId() {
-        bitField0_ = (bitField0_ & ~0x00000100);
-        roomId_ = getDefaultInstance().getRoomId();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string roomId = 8;</code>
-       */
-      public Builder setRoomIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000100;
-        roomId_ = value;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 hotUpdateVersion = 9;
-      private int hotUpdateVersion_ ;
-      /**
-       * <code>optional int32 hotUpdateVersion = 9;</code>
-       *
-       * <pre>
-       *热更新版本号
-       * </pre>
-       */
-      public boolean hasHotUpdateVersion() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
-      }
-      /**
-       * <code>optional int32 hotUpdateVersion = 9;</code>
-       *
-       * <pre>
-       *热更新版本号
-       * </pre>
-       */
-      public int getHotUpdateVersion() {
-        return hotUpdateVersion_;
-      }
-      /**
-       * <code>optional int32 hotUpdateVersion = 9;</code>
-       *
-       * <pre>
-       *热更新版本号
-       * </pre>
-       */
-      public Builder setHotUpdateVersion(int value) {
-        bitField0_ |= 0x00000200;
-        hotUpdateVersion_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 hotUpdateVersion = 9;</code>
-       *
-       * <pre>
-       *热更新版本号
-       * </pre>
-       */
-      public Builder clearHotUpdateVersion() {
-        bitField0_ = (bitField0_ & ~0x00000200);
-        hotUpdateVersion_ = 0;
         onChanged();
         return this;
       }
@@ -3223,7 +2481,7 @@ public final class ClientProtocol {
        * </pre>
        */
       public boolean hasSign() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
        * <code>optional string sign = 90;</code>
@@ -3275,7 +2533,7 @@ public final class ClientProtocol {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000400;
+  bitField0_ |= 0x00000020;
         sign_ = value;
         onChanged();
         return this;
@@ -3288,7 +2546,7 @@ public final class ClientProtocol {
        * </pre>
        */
       public Builder clearSign() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000020);
         sign_ = getDefaultInstance().getSign();
         onChanged();
         return this;
@@ -3305,7 +2563,7 @@ public final class ClientProtocol {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000400;
+  bitField0_ |= 0x00000020;
         sign_ = value;
         onChanged();
         return this;
@@ -3321,7 +2579,7 @@ public final class ClientProtocol {
        * </pre>
        */
       public boolean hasExt() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
        * <code>optional string ext = 91;</code>
@@ -3373,7 +2631,7 @@ public final class ClientProtocol {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000800;
+  bitField0_ |= 0x00000040;
         ext_ = value;
         onChanged();
         return this;
@@ -3386,7 +2644,7 @@ public final class ClientProtocol {
        * </pre>
        */
       public Builder clearExt() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00000040);
         ext_ = getDefaultInstance().getExt();
         onChanged();
         return this;
@@ -3403,7 +2661,7 @@ public final class ClientProtocol {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000800;
+  bitField0_ |= 0x00000040;
         ext_ = value;
         onChanged();
         return this;
@@ -4128,6 +3386,1536 @@ public final class ClientProtocol {
     // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.MessageHeaderResponse)
   }
 
+  public interface LoginRequestOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional string userName = 1;
+    /**
+     * <code>optional string userName = 1;</code>
+     */
+    boolean hasUserName();
+    /**
+     * <code>optional string userName = 1;</code>
+     */
+    java.lang.String getUserName();
+    /**
+     * <code>optional string userName = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserNameBytes();
+  }
+  /**
+   * Protobuf type {@code com.zyd.common.proto.client.LoginRequest}
+   */
+  public static final class LoginRequest extends
+      com.google.protobuf.GeneratedMessage
+      implements LoginRequestOrBuilder {
+    // Use LoginRequest.newBuilder() to construct.
+    private LoginRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private LoginRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final LoginRequest defaultInstance;
+    public static LoginRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public LoginRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private LoginRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              userName_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_LoginRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_LoginRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.zyd.common.proto.client.ClientProtocol.LoginRequest.class, com.zyd.common.proto.client.ClientProtocol.LoginRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<LoginRequest> PARSER =
+        new com.google.protobuf.AbstractParser<LoginRequest>() {
+      public LoginRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new LoginRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<LoginRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional string userName = 1;
+    public static final int USERNAME_FIELD_NUMBER = 1;
+    private java.lang.Object userName_;
+    /**
+     * <code>optional string userName = 1;</code>
+     */
+    public boolean hasUserName() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string userName = 1;</code>
+     */
+    public java.lang.String getUserName() {
+      java.lang.Object ref = userName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userName = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserNameBytes() {
+      java.lang.Object ref = userName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      userName_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getUserNameBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getUserNameBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.zyd.common.proto.client.ClientProtocol.LoginRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.LoginRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.LoginRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.LoginRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.LoginRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.LoginRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.LoginRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.LoginRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.LoginRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.LoginRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.zyd.common.proto.client.ClientProtocol.LoginRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.zyd.common.proto.client.LoginRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.zyd.common.proto.client.ClientProtocol.LoginRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_LoginRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_LoginRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.zyd.common.proto.client.ClientProtocol.LoginRequest.class, com.zyd.common.proto.client.ClientProtocol.LoginRequest.Builder.class);
+      }
+
+      // Construct using com.zyd.common.proto.client.ClientProtocol.LoginRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_LoginRequest_descriptor;
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.LoginRequest getDefaultInstanceForType() {
+        return com.zyd.common.proto.client.ClientProtocol.LoginRequest.getDefaultInstance();
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.LoginRequest build() {
+        com.zyd.common.proto.client.ClientProtocol.LoginRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.LoginRequest buildPartial() {
+        com.zyd.common.proto.client.ClientProtocol.LoginRequest result = new com.zyd.common.proto.client.ClientProtocol.LoginRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userName_ = userName_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.zyd.common.proto.client.ClientProtocol.LoginRequest) {
+          return mergeFrom((com.zyd.common.proto.client.ClientProtocol.LoginRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.zyd.common.proto.client.ClientProtocol.LoginRequest other) {
+        if (other == com.zyd.common.proto.client.ClientProtocol.LoginRequest.getDefaultInstance()) return this;
+        if (other.hasUserName()) {
+          bitField0_ |= 0x00000001;
+          userName_ = other.userName_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.zyd.common.proto.client.ClientProtocol.LoginRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.zyd.common.proto.client.ClientProtocol.LoginRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string userName = 1;
+      private java.lang.Object userName_ = "";
+      /**
+       * <code>optional string userName = 1;</code>
+       */
+      public boolean hasUserName() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string userName = 1;</code>
+       */
+      public java.lang.String getUserName() {
+        java.lang.Object ref = userName_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string userName = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserNameBytes() {
+        java.lang.Object ref = userName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userName = 1;</code>
+       */
+      public Builder setUserName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userName = 1;</code>
+       */
+      public Builder clearUserName() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userName_ = getDefaultInstance().getUserName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userName = 1;</code>
+       */
+      public Builder setUserNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userName_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.LoginRequest)
+    }
+
+    static {
+      defaultInstance = new LoginRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.LoginRequest)
+  }
+
+  public interface LoginResponseOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;
+    /**
+     * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+     */
+    boolean hasPlayerInfo();
+    /**
+     * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+     */
+    com.zyd.common.proto.client.ClientProtocol.PlayerInfo getPlayerInfo();
+    /**
+     * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+     */
+    com.zyd.common.proto.client.ClientProtocol.PlayerInfoOrBuilder getPlayerInfoOrBuilder();
+  }
+  /**
+   * Protobuf type {@code com.zyd.common.proto.client.LoginResponse}
+   */
+  public static final class LoginResponse extends
+      com.google.protobuf.GeneratedMessage
+      implements LoginResponseOrBuilder {
+    // Use LoginResponse.newBuilder() to construct.
+    private LoginResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private LoginResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final LoginResponse defaultInstance;
+    public static LoginResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public LoginResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private LoginResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.zyd.common.proto.client.ClientProtocol.PlayerInfo.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = playerInfo_.toBuilder();
+              }
+              playerInfo_ = input.readMessage(com.zyd.common.proto.client.ClientProtocol.PlayerInfo.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(playerInfo_);
+                playerInfo_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_LoginResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_LoginResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.zyd.common.proto.client.ClientProtocol.LoginResponse.class, com.zyd.common.proto.client.ClientProtocol.LoginResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<LoginResponse> PARSER =
+        new com.google.protobuf.AbstractParser<LoginResponse>() {
+      public LoginResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new LoginResponse(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<LoginResponse> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;
+    public static final int PLAYERINFO_FIELD_NUMBER = 1;
+    private com.zyd.common.proto.client.ClientProtocol.PlayerInfo playerInfo_;
+    /**
+     * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+     */
+    public boolean hasPlayerInfo() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+     */
+    public com.zyd.common.proto.client.ClientProtocol.PlayerInfo getPlayerInfo() {
+      return playerInfo_;
+    }
+    /**
+     * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+     */
+    public com.zyd.common.proto.client.ClientProtocol.PlayerInfoOrBuilder getPlayerInfoOrBuilder() {
+      return playerInfo_;
+    }
+
+    private void initFields() {
+      playerInfo_ = com.zyd.common.proto.client.ClientProtocol.PlayerInfo.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, playerInfo_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, playerInfo_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.zyd.common.proto.client.ClientProtocol.LoginResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.LoginResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.LoginResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.LoginResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.LoginResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.LoginResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.LoginResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.LoginResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.LoginResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.LoginResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.zyd.common.proto.client.ClientProtocol.LoginResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.zyd.common.proto.client.LoginResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.zyd.common.proto.client.ClientProtocol.LoginResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_LoginResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_LoginResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.zyd.common.proto.client.ClientProtocol.LoginResponse.class, com.zyd.common.proto.client.ClientProtocol.LoginResponse.Builder.class);
+      }
+
+      // Construct using com.zyd.common.proto.client.ClientProtocol.LoginResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getPlayerInfoFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (playerInfoBuilder_ == null) {
+          playerInfo_ = com.zyd.common.proto.client.ClientProtocol.PlayerInfo.getDefaultInstance();
+        } else {
+          playerInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_LoginResponse_descriptor;
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.LoginResponse getDefaultInstanceForType() {
+        return com.zyd.common.proto.client.ClientProtocol.LoginResponse.getDefaultInstance();
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.LoginResponse build() {
+        com.zyd.common.proto.client.ClientProtocol.LoginResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.LoginResponse buildPartial() {
+        com.zyd.common.proto.client.ClientProtocol.LoginResponse result = new com.zyd.common.proto.client.ClientProtocol.LoginResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (playerInfoBuilder_ == null) {
+          result.playerInfo_ = playerInfo_;
+        } else {
+          result.playerInfo_ = playerInfoBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.zyd.common.proto.client.ClientProtocol.LoginResponse) {
+          return mergeFrom((com.zyd.common.proto.client.ClientProtocol.LoginResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.zyd.common.proto.client.ClientProtocol.LoginResponse other) {
+        if (other == com.zyd.common.proto.client.ClientProtocol.LoginResponse.getDefaultInstance()) return this;
+        if (other.hasPlayerInfo()) {
+          mergePlayerInfo(other.getPlayerInfo());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.zyd.common.proto.client.ClientProtocol.LoginResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.zyd.common.proto.client.ClientProtocol.LoginResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;
+      private com.zyd.common.proto.client.ClientProtocol.PlayerInfo playerInfo_ = com.zyd.common.proto.client.ClientProtocol.PlayerInfo.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.zyd.common.proto.client.ClientProtocol.PlayerInfo, com.zyd.common.proto.client.ClientProtocol.PlayerInfo.Builder, com.zyd.common.proto.client.ClientProtocol.PlayerInfoOrBuilder> playerInfoBuilder_;
+      /**
+       * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+       */
+      public boolean hasPlayerInfo() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+       */
+      public com.zyd.common.proto.client.ClientProtocol.PlayerInfo getPlayerInfo() {
+        if (playerInfoBuilder_ == null) {
+          return playerInfo_;
+        } else {
+          return playerInfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+       */
+      public Builder setPlayerInfo(com.zyd.common.proto.client.ClientProtocol.PlayerInfo value) {
+        if (playerInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          playerInfo_ = value;
+          onChanged();
+        } else {
+          playerInfoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+       */
+      public Builder setPlayerInfo(
+          com.zyd.common.proto.client.ClientProtocol.PlayerInfo.Builder builderForValue) {
+        if (playerInfoBuilder_ == null) {
+          playerInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          playerInfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+       */
+      public Builder mergePlayerInfo(com.zyd.common.proto.client.ClientProtocol.PlayerInfo value) {
+        if (playerInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              playerInfo_ != com.zyd.common.proto.client.ClientProtocol.PlayerInfo.getDefaultInstance()) {
+            playerInfo_ =
+              com.zyd.common.proto.client.ClientProtocol.PlayerInfo.newBuilder(playerInfo_).mergeFrom(value).buildPartial();
+          } else {
+            playerInfo_ = value;
+          }
+          onChanged();
+        } else {
+          playerInfoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+       */
+      public Builder clearPlayerInfo() {
+        if (playerInfoBuilder_ == null) {
+          playerInfo_ = com.zyd.common.proto.client.ClientProtocol.PlayerInfo.getDefaultInstance();
+          onChanged();
+        } else {
+          playerInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+       */
+      public com.zyd.common.proto.client.ClientProtocol.PlayerInfo.Builder getPlayerInfoBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getPlayerInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+       */
+      public com.zyd.common.proto.client.ClientProtocol.PlayerInfoOrBuilder getPlayerInfoOrBuilder() {
+        if (playerInfoBuilder_ != null) {
+          return playerInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return playerInfo_;
+        }
+      }
+      /**
+       * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.zyd.common.proto.client.ClientProtocol.PlayerInfo, com.zyd.common.proto.client.ClientProtocol.PlayerInfo.Builder, com.zyd.common.proto.client.ClientProtocol.PlayerInfoOrBuilder> 
+          getPlayerInfoFieldBuilder() {
+        if (playerInfoBuilder_ == null) {
+          playerInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.zyd.common.proto.client.ClientProtocol.PlayerInfo, com.zyd.common.proto.client.ClientProtocol.PlayerInfo.Builder, com.zyd.common.proto.client.ClientProtocol.PlayerInfoOrBuilder>(
+                  playerInfo_,
+                  getParentForChildren(),
+                  isClean());
+          playerInfo_ = null;
+        }
+        return playerInfoBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.LoginResponse)
+    }
+
+    static {
+      defaultInstance = new LoginResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.LoginResponse)
+  }
+
+  public interface PlayerInfoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional string userName = 1;
+    /**
+     * <code>optional string userName = 1;</code>
+     */
+    boolean hasUserName();
+    /**
+     * <code>optional string userName = 1;</code>
+     */
+    java.lang.String getUserName();
+    /**
+     * <code>optional string userName = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserNameBytes();
+
+    // optional int32 userId = 2;
+    /**
+     * <code>optional int32 userId = 2;</code>
+     */
+    boolean hasUserId();
+    /**
+     * <code>optional int32 userId = 2;</code>
+     */
+    int getUserId();
+  }
+  /**
+   * Protobuf type {@code com.zyd.common.proto.client.PlayerInfo}
+   */
+  public static final class PlayerInfo extends
+      com.google.protobuf.GeneratedMessage
+      implements PlayerInfoOrBuilder {
+    // Use PlayerInfo.newBuilder() to construct.
+    private PlayerInfo(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PlayerInfo(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PlayerInfo defaultInstance;
+    public static PlayerInfo getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PlayerInfo getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PlayerInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              userName_ = input.readBytes();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              userId_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_PlayerInfo_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_PlayerInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.zyd.common.proto.client.ClientProtocol.PlayerInfo.class, com.zyd.common.proto.client.ClientProtocol.PlayerInfo.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PlayerInfo> PARSER =
+        new com.google.protobuf.AbstractParser<PlayerInfo>() {
+      public PlayerInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PlayerInfo(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PlayerInfo> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional string userName = 1;
+    public static final int USERNAME_FIELD_NUMBER = 1;
+    private java.lang.Object userName_;
+    /**
+     * <code>optional string userName = 1;</code>
+     */
+    public boolean hasUserName() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string userName = 1;</code>
+     */
+    public java.lang.String getUserName() {
+      java.lang.Object ref = userName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userName = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserNameBytes() {
+      java.lang.Object ref = userName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional int32 userId = 2;
+    public static final int USERID_FIELD_NUMBER = 2;
+    private int userId_;
+    /**
+     * <code>optional int32 userId = 2;</code>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 userId = 2;</code>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
+    private void initFields() {
+      userName_ = "";
+      userId_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getUserNameBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, userId_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getUserNameBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, userId_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.zyd.common.proto.client.ClientProtocol.PlayerInfo prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.zyd.common.proto.client.PlayerInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.zyd.common.proto.client.ClientProtocol.PlayerInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_PlayerInfo_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_PlayerInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.zyd.common.proto.client.ClientProtocol.PlayerInfo.class, com.zyd.common.proto.client.ClientProtocol.PlayerInfo.Builder.class);
+      }
+
+      // Construct using com.zyd.common.proto.client.ClientProtocol.PlayerInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        userName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_PlayerInfo_descriptor;
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.PlayerInfo getDefaultInstanceForType() {
+        return com.zyd.common.proto.client.ClientProtocol.PlayerInfo.getDefaultInstance();
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.PlayerInfo build() {
+        com.zyd.common.proto.client.ClientProtocol.PlayerInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.PlayerInfo buildPartial() {
+        com.zyd.common.proto.client.ClientProtocol.PlayerInfo result = new com.zyd.common.proto.client.ClientProtocol.PlayerInfo(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userName_ = userName_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.userId_ = userId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.zyd.common.proto.client.ClientProtocol.PlayerInfo) {
+          return mergeFrom((com.zyd.common.proto.client.ClientProtocol.PlayerInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.zyd.common.proto.client.ClientProtocol.PlayerInfo other) {
+        if (other == com.zyd.common.proto.client.ClientProtocol.PlayerInfo.getDefaultInstance()) return this;
+        if (other.hasUserName()) {
+          bitField0_ |= 0x00000001;
+          userName_ = other.userName_;
+          onChanged();
+        }
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.zyd.common.proto.client.ClientProtocol.PlayerInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.zyd.common.proto.client.ClientProtocol.PlayerInfo) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional string userName = 1;
+      private java.lang.Object userName_ = "";
+      /**
+       * <code>optional string userName = 1;</code>
+       */
+      public boolean hasUserName() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string userName = 1;</code>
+       */
+      public java.lang.String getUserName() {
+        java.lang.Object ref = userName_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string userName = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserNameBytes() {
+        java.lang.Object ref = userName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userName = 1;</code>
+       */
+      public Builder setUserName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userName = 1;</code>
+       */
+      public Builder clearUserName() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userName_ = getDefaultInstance().getUserName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userName = 1;</code>
+       */
+      public Builder setUserNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userName_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 userId = 2;
+      private int userId_ ;
+      /**
+       * <code>optional int32 userId = 2;</code>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 userId = 2;</code>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>optional int32 userId = 2;</code>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000002;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 userId = 2;</code>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.PlayerInfo)
+    }
+
+    static {
+      defaultInstance = new PlayerInfo(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.PlayerInfo)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_zyd_common_proto_client_MessageHeaderRequest_descriptor;
   private static
@@ -4143,6 +4931,21 @@ public final class ClientProtocol {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_zyd_common_proto_client_MessageHeaderResponse_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_zyd_common_proto_client_LoginRequest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_zyd_common_proto_client_LoginRequest_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_zyd_common_proto_client_LoginResponse_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_zyd_common_proto_client_LoginResponse_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_zyd_common_proto_client_PlayerInfo_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_zyd_common_proto_client_PlayerInfo_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -4156,32 +4959,33 @@ public final class ClientProtocol {
       "roto.client\"|\n\024MessageHeaderRequest\022\014\n\004n" +
       "ame\030\001 \001(\t\022@\n\010userInfo\030\002 \001(\0132..com.zyd.co" +
       "mmon.proto.client.MessageHeaderInfo\022\024\n\014r" +
-      "equestToken\030\003 \001(\t\"\233\002\n\021MessageHeaderInfo\022" +
+      "equestToken\030\003 \001(\t\"\275\001\n\021MessageHeaderInfo\022" +
       "\021\n\tuserToken\030\001 \001(\t\022B\n\nuserDevice\030\002 \001(\0162(" +
       ".com.zyd.common.proto.client.EDeviceType" +
-      ":\004None\022\017\n\007version\030\003 \001(\t\022\024\n\014requestToken\030" +
-      "\004 \001(\t\022\020\n\010clientIp\030\005 \001(\t\022\016\n\006zoneId\030\006 \001(\005\022" +
-      "\021\n\tchannelId\030Y \001(\t\022\016\n\006userId\030\007 \001(\003\022\016\n\006ro",
-      "omId\030\010 \001(\t\022\030\n\020hotUpdateVersion\030\t \001(\005\022\014\n\004" +
-      "sign\030Z \001(\t\022\013\n\003ext\030[ \001(\t\"J\n\025MessageHeader" +
-      "Response\022\r\n\005error\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\024\n" +
-      "\014requestToken\030\003 \001(\t*-\n\013EDeviceType\022\010\n\004No" +
-      "ne\020\000\022\007\n\003IOS\020\001\022\013\n\007Android\020\002*\216\003\n\tErrorCode" +
-      "\022\020\n\014SERVER_ERROR\020\001\022\023\n\017SHOP_ITEM_WRONG\020\021\022" +
-      "\031\n\025PLAYER_RMB_NOT_ENOUGH\020\025\022\032\n\026PLAYER_GOL" +
-      "D_NOT_ENOUGH\020\026\022\031\n\025PARAMETER_NOT_CORRECT\020" +
-      "2\022\031\n\025SYSCONFIG_NOT_CORRECT\0203\022\020\n\014HACKER_E" +
-      "RROR\0207\022\021\n\014NOT_GET_LOCK\020\254\002\022\032\n\025ACTIVATION_",
-      "CODE_ERROR\020\255\002\022\026\n\021DAILY_LOTTO_LIMIT\020\220\003\022\023\n" +
-      "\016LOTTO_NOT_FREE\020\304\003\022\026\n\021DUPLICATE_REQUEST\020" +
-      "\274\005\022\022\n\rVERSION_ERROR\020\343\007\022\034\n\027DEVICE_TYPE_NO" +
-      "T_CORRECT\020\346\007\022\034\n\026NOT_HAVE_LAST_RESPONSE\020\237" +
-      "\215\006\022\027\n\021SERVER_MAINTENACE\020\240\215\006*\247\001\n\014RpcError" +
-      "Code\022\024\n\007UNKNOWN\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020INVALID_PR" +
-      "OTOCOL\020\376\377\377\377\377\377\377\377\377\001\022\030\n\013INVALID_ARG\020\375\377\377\377\377\377\377" +
-      "\377\377\001\022\024\n\007TIMEOUT\020\374\377\377\377\377\377\377\377\377\001\022\030\n\013SERVER_BUSY" +
-      "\020\373\377\377\377\377\377\377\377\377\001\022\030\n\013PUSHTIMEOUT\020\372\377\377\377\377\377\377\377\377\001B\002H" +
-      "\001"
+      ":\004None\022\024\n\014requestToken\030\004 \001(\t\022\020\n\010clientIp" +
+      "\030\005 \001(\t\022\016\n\006userId\030\007 \001(\003\022\014\n\004sign\030Z \001(\t\022\013\n\003" +
+      "ext\030[ \001(\t\"J\n\025MessageHeaderResponse\022\r\n\005er",
+      "ror\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\024\n\014requestToken\030" +
+      "\003 \001(\t\" \n\014LoginRequest\022\020\n\010userName\030\001 \001(\t\"" +
+      "L\n\rLoginResponse\022;\n\nplayerInfo\030\001 \001(\0132\'.c" +
+      "om.zyd.common.proto.client.PlayerInfo\".\n" +
+      "\nPlayerInfo\022\020\n\010userName\030\001 \001(\t\022\016\n\006userId\030" +
+      "\002 \001(\005*-\n\013EDeviceType\022\010\n\004None\020\000\022\007\n\003IOS\020\001\022" +
+      "\013\n\007Android\020\002*\216\003\n\tErrorCode\022\020\n\014SERVER_ERR" +
+      "OR\020\001\022\023\n\017SHOP_ITEM_WRONG\020\021\022\031\n\025PLAYER_RMB_" +
+      "NOT_ENOUGH\020\025\022\032\n\026PLAYER_GOLD_NOT_ENOUGH\020\026" +
+      "\022\031\n\025PARAMETER_NOT_CORRECT\0202\022\031\n\025SYSCONFIG",
+      "_NOT_CORRECT\0203\022\020\n\014HACKER_ERROR\0207\022\021\n\014NOT_" +
+      "GET_LOCK\020\254\002\022\032\n\025ACTIVATION_CODE_ERROR\020\255\002\022" +
+      "\026\n\021DAILY_LOTTO_LIMIT\020\220\003\022\023\n\016LOTTO_NOT_FRE" +
+      "E\020\304\003\022\026\n\021DUPLICATE_REQUEST\020\274\005\022\022\n\rVERSION_" +
+      "ERROR\020\343\007\022\034\n\027DEVICE_TYPE_NOT_CORRECT\020\346\007\022\034" +
+      "\n\026NOT_HAVE_LAST_RESPONSE\020\237\215\006\022\027\n\021SERVER_M" +
+      "AINTENACE\020\240\215\006*\247\001\n\014RpcErrorCode\022\024\n\007UNKNOW" +
+      "N\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020INVALID_PROTOCOL\020\376\377\377\377\377\377\377" +
+      "\377\377\001\022\030\n\013INVALID_ARG\020\375\377\377\377\377\377\377\377\377\001\022\024\n\007TIMEOUT" +
+      "\020\374\377\377\377\377\377\377\377\377\001\022\030\n\013SERVER_BUSY\020\373\377\377\377\377\377\377\377\377\001\022\030\n",
+      "\013PUSHTIMEOUT\020\372\377\377\377\377\377\377\377\377\001B\002H\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4199,13 +5003,31 @@ public final class ClientProtocol {
           internal_static_com_zyd_common_proto_client_MessageHeaderInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_MessageHeaderInfo_descriptor,
-              new java.lang.String[] { "UserToken", "UserDevice", "Version", "RequestToken", "ClientIp", "ZoneId", "ChannelId", "UserId", "RoomId", "HotUpdateVersion", "Sign", "Ext", });
+              new java.lang.String[] { "UserToken", "UserDevice", "RequestToken", "ClientIp", "UserId", "Sign", "Ext", });
           internal_static_com_zyd_common_proto_client_MessageHeaderResponse_descriptor =
             getDescriptor().getMessageTypes().get(2);
           internal_static_com_zyd_common_proto_client_MessageHeaderResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_MessageHeaderResponse_descriptor,
               new java.lang.String[] { "Error", "Name", "RequestToken", });
+          internal_static_com_zyd_common_proto_client_LoginRequest_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_com_zyd_common_proto_client_LoginRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_zyd_common_proto_client_LoginRequest_descriptor,
+              new java.lang.String[] { "UserName", });
+          internal_static_com_zyd_common_proto_client_LoginResponse_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_com_zyd_common_proto_client_LoginResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_zyd_common_proto_client_LoginResponse_descriptor,
+              new java.lang.String[] { "PlayerInfo", });
+          internal_static_com_zyd_common_proto_client_PlayerInfo_descriptor =
+            getDescriptor().getMessageTypes().get(5);
+          internal_static_com_zyd_common_proto_client_PlayerInfo_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_zyd_common_proto_client_PlayerInfo_descriptor,
+              new java.lang.String[] { "UserName", "UserId", });
           return null;
         }
       };

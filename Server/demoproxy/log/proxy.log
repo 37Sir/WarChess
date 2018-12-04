@@ -121,3 +121,49 @@ java.io.IOException: 远程主机强迫关闭了一个现有的连接。
 	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346) [netty-all-4.0.13.Final.jar:4.0.13.Final]
 	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
 	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+14:29:16.602 [main] INFO  c.z.p.info.InfoConnectionListener - Info listener running at: /0:0:0:0:0:0:0:0:8089
+14:29:16.604 [main] INFO  c.z.p.c.ClientConnectionListener - Client listener running at: /0:0:0:0:0:0:0:0:9012
+14:29:16.618 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+14:29:16.619 [nioEventLoopGroup-4-2] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+14:29:16.619 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+14:31:33.504 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - dispatching client RPC: test to info: /127.0.0.1:59397 request_time:1543818693503
+14:31:33.524 [nioEventLoopGroup-2-3] INFO  c.z.p.c.ClientConnectionHandler - responseRpc####test
+14:31:33.526 [nioEventLoopGroup-2-3] INFO  c.z.p.c.ClientConnectionHandler - channelToken:20694463-b187-495b-8106-7c08027f887c-------------ClientResponseRpc: error=0 size=2
+14:31:43.533 [nioEventLoopGroup-2-4] WARN  c.z.p.c.ClientConnectionHandler - Client disconnected: /192.168.90.12:59441 channelToken:20694463-b187-495b-8106-7c08027f887c
+14:31:53.386 [nioEventLoopGroup-2-3] ERROR c.zyd.common.rpc.RpcMessageHandler - 远程主机强迫关闭了一个现有的连接。
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method) ~[na:1.8.0_162]
+	at sun.nio.ch.SocketDispatcher.read(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.IOUtil.read(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.SocketChannelImpl.read(Unknown Source) ~[na:1.8.0_162]
+	at io.netty.buffer.UnpooledUnsafeDirectByteBuf.setBytes(UnpooledUnsafeDirectByteBuf.java:450) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:871) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:208) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:115) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
+14:34:49.354 [main] INFO  c.z.p.info.InfoConnectionListener - Info listener running at: /0:0:0:0:0:0:0:0:8089
+14:34:49.356 [main] INFO  c.z.p.c.ClientConnectionListener - Client listener running at: /0:0:0:0:0:0:0:0:9012
+14:34:49.372 [nioEventLoopGroup-4-1] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+14:34:49.373 [nioEventLoopGroup-4-2] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+14:34:49.373 [nioEventLoopGroup-4-3] INFO  c.z.p.client.ClientRpcDispatcher - ClientRpcDispatcher starting
+14:36:08.163 [nioEventLoopGroup-2-3] ERROR c.zyd.common.rpc.RpcMessageHandler - 远程主机强迫关闭了一个现有的连接。
+java.io.IOException: 远程主机强迫关闭了一个现有的连接。
+	at sun.nio.ch.SocketDispatcher.read0(Native Method) ~[na:1.8.0_162]
+	at sun.nio.ch.SocketDispatcher.read(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.IOUtil.read(Unknown Source) ~[na:1.8.0_162]
+	at sun.nio.ch.SocketChannelImpl.read(Unknown Source) ~[na:1.8.0_162]
+	at io.netty.buffer.UnpooledUnsafeDirectByteBuf.setBytes(UnpooledUnsafeDirectByteBuf.java:450) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.buffer.AbstractByteBuf.writeBytes(AbstractByteBuf.java:871) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.socket.nio.NioSocketChannel.doReadBytes(NioSocketChannel.java:208) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:115) ~[netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at io.netty.util.concurrent.SingleThreadEventExecutor$2.run(SingleThreadEventExecutor.java:101) [netty-all-4.0.13.Final.jar:4.0.13.Final]
+	at java.lang.Thread.run(Unknown Source) [na:1.8.0_162]
