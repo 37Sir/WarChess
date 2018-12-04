@@ -59,7 +59,5 @@
 	<classpathentry kind="lib" path="WEB-INF/lib/spring-webflux-5.0.4.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/spring-webmvc-5.0.4.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/xmemcached-1.4.2.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/objenesis-1.2.jar"/>
-	<classpathentry kind="lib" path="WEB-INF/lib/minlog-1.2.jar"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>

@@ -1,8 +1,6 @@
 package com.zyd.gw.client;
 
 import java.util.concurrent.atomic.AtomicInteger;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import com.zyd.common.rpc.PacketDecoder;
 import com.zyd.common.rpc.PacketEncoder;
 import com.zyd.gw.AppConfig;
@@ -19,7 +17,7 @@ import io.netty.util.concurrent.GenericFutureListener;
 
 public class ClientConnectionListener {
     private static ClientConnectionListener INSTANCE;
-    private static final Logger logger = LoggerFactory.getLogger(ClientConnectionHandler.class.getName());
+    
     private ClientConnectionListener(){};
     
     public static ClientConnectionListener getInstance(){
@@ -47,17 +45,19 @@ public class ClientConnectionListener {
         });
 
         try {
-             ChannelFuture f = bootstrap.bind(AppConfig.CLIENT_BIND_ADDRESS,AppConfig.CLIENT_BIND_PORT).sync();
-            logger.info("Client listener running at: " + f.channel().localAddress());
+              ChannelFuture f = bootstrap.bind(AppConfig.CLIENT_BIND_ADDRESS,AppConfig.CLIENT_BIND_PORT).sync();
+//            logger.info("Client listener running at: " + f.channel().localAddress());
+              System.out.println("----------------------start");
         }
         catch (Exception e) {
-            logger.error("Client listener bind failed: " + e.getMessage(),e);
+//            logger.error("Client listener bind failed: " + e.getMessage(),e);
         }
     }
 
     protected void onChannelConnected(SocketChannel ch) {
         num_clients.incrementAndGet();
         final ClientConnectionHandler conn = new ClientConnectionHandler(ch);
+        
         // remember this connection to manage it later.
         ch.closeFuture().addListener(new GenericFutureListener<ChannelFuture>() {
             @Override
@@ -75,7 +75,7 @@ public class ClientConnectionListener {
         p.addLast("idleStateHandler", new IdleStateHandler(1, 0, 1));
         p.addLast("Handler", conn);
         
-        logger.info("--------------------------------------Client connected: " + ch.remoteAddress());
+//        logger.info("--------------------------------------Client connected: " + ch.remoteAddress());
         
     }
         

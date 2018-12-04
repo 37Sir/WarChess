@@ -2,10 +2,6 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
- <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-    <property name="mapperInterface" value="com.zyd.demo.user.dao.UserMapper"></property>
-    <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
-  </bean>
   <!-- cache -->
   <bean id="memcachedHandler" class="com.zyd.demo.common.memcached.MemcachedHandler">
     <property name="mapperHelper" ref="mapperHelper"></property>
@@ -18,16 +14,13 @@
   <bean id="jdbcHandler" class="com.zyd.demo.common.jdbc.JDBCHandler">
     <property name="mapperHelper" ref="mapperHelper"></property>
   </bean>
-  <bean id="resourceManager" class="com.zyd.common.resource.ResourceManager"></bean>
-  
+  <bean id="resourceManager" class="com.nkm.common.resource.ResourceManager"></bean>
   <bean id="baseService" class="com.zyd.demo.common.BaseService">
       <property name="nosqlService" ref="nosqlService"></property>  
       <property name="battleRoomManager" ref="battleRoomManager"></property>  
       <property name="commonService" ref="commonService"></property>  
-      <property name="userService" ref="userService"></property>  
-      <property name="cacheJDBCHandler" ref="cacheJDBCHandler"></property>                      
+           
   </bean>
-  
   <bean id="matchService" class="com.zyd.demo.round.service.MatchService" parent="baseService" init-method="init">
   </bean>
   
@@ -36,11 +29,7 @@
   <bean id="commonService" class="com.zyd.demo.common.CommonService" parent="baseService">
   </bean>
   
-  <bean id="userService" class="com.zyd.demo.user.service.UserService" parent="baseService">
-  </bean>
-  
   <bean id="mapperHelper" class="com.zyd.demo.common.jdbc.MapperHelper">
-      <property name="userMapper" ref="userMapper"></property>		
   </bean> 
   <bean id="nosqlService" class="com.zyd.demo.common.nosql.NosqlService">
     <property name="noSql" ref="nosql"></property>

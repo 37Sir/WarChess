@@ -3873,21 +3873,6 @@ public final class ClientProtocol {
      * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
      */
     com.zyd.common.proto.client.ClientProtocol.PlayerInfoOrBuilder getPlayerInfoOrBuilder();
-
-    // optional string sign = 2;
-    /**
-     * <code>optional string sign = 2;</code>
-     */
-    boolean hasSign();
-    /**
-     * <code>optional string sign = 2;</code>
-     */
-    java.lang.String getSign();
-    /**
-     * <code>optional string sign = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getSignBytes();
   }
   /**
    * Protobuf type {@code com.zyd.common.proto.client.LoginResponse}
@@ -3953,11 +3938,6 @@ public final class ClientProtocol {
               bitField0_ |= 0x00000001;
               break;
             }
-            case 18: {
-              bitField0_ |= 0x00000002;
-              sign_ = input.readBytes();
-              break;
-            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -4020,52 +4000,8 @@ public final class ClientProtocol {
       return playerInfo_;
     }
 
-    // optional string sign = 2;
-    public static final int SIGN_FIELD_NUMBER = 2;
-    private java.lang.Object sign_;
-    /**
-     * <code>optional string sign = 2;</code>
-     */
-    public boolean hasSign() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional string sign = 2;</code>
-     */
-    public java.lang.String getSign() {
-      java.lang.Object ref = sign_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          sign_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string sign = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getSignBytes() {
-      java.lang.Object ref = sign_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        sign_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
     private void initFields() {
       playerInfo_ = com.zyd.common.proto.client.ClientProtocol.PlayerInfo.getDefaultInstance();
-      sign_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4082,9 +4018,6 @@ public final class ClientProtocol {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, playerInfo_);
       }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getSignBytes());
-      }
       getUnknownFields().writeTo(output);
     }
 
@@ -4097,10 +4030,6 @@ public final class ClientProtocol {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, playerInfo_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getSignBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4225,8 +4154,6 @@ public final class ClientProtocol {
           playerInfoBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        sign_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -4263,10 +4190,6 @@ public final class ClientProtocol {
         } else {
           result.playerInfo_ = playerInfoBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.sign_ = sign_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4285,11 +4208,6 @@ public final class ClientProtocol {
         if (other == com.zyd.common.proto.client.ClientProtocol.LoginResponse.getDefaultInstance()) return this;
         if (other.hasPlayerInfo()) {
           mergePlayerInfo(other.getPlayerInfo());
-        }
-        if (other.hasSign()) {
-          bitField0_ |= 0x00000002;
-          sign_ = other.sign_;
-          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4433,80 +4351,6 @@ public final class ClientProtocol {
           playerInfo_ = null;
         }
         return playerInfoBuilder_;
-      }
-
-      // optional string sign = 2;
-      private java.lang.Object sign_ = "";
-      /**
-       * <code>optional string sign = 2;</code>
-       */
-      public boolean hasSign() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional string sign = 2;</code>
-       */
-      public java.lang.String getSign() {
-        java.lang.Object ref = sign_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          sign_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string sign = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getSignBytes() {
-        java.lang.Object ref = sign_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          sign_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string sign = 2;</code>
-       */
-      public Builder setSign(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        sign_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string sign = 2;</code>
-       */
-      public Builder clearSign() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        sign_ = getDefaultInstance().getSign();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string sign = 2;</code>
-       */
-      public Builder setSignBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        sign_ = value;
-        onChanged();
-        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.LoginResponse)
@@ -5123,26 +4967,25 @@ public final class ClientProtocol {
       "ext\030[ \001(\t\"J\n\025MessageHeaderResponse\022\r\n\005er",
       "ror\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\024\n\014requestToken\030" +
       "\003 \001(\t\" \n\014LoginRequest\022\020\n\010userName\030\001 \001(\t\"" +
-      "Z\n\rLoginResponse\022;\n\nplayerInfo\030\001 \001(\0132\'.c" +
-      "om.zyd.common.proto.client.PlayerInfo\022\014\n" +
-      "\004sign\030\002 \001(\t\".\n\nPlayerInfo\022\020\n\010userName\030\001 " +
-      "\001(\t\022\016\n\006userId\030\002 \001(\005*-\n\013EDeviceType\022\010\n\004No" +
-      "ne\020\000\022\007\n\003IOS\020\001\022\013\n\007Android\020\002*\216\003\n\tErrorCode" +
-      "\022\020\n\014SERVER_ERROR\020\001\022\023\n\017SHOP_ITEM_WRONG\020\021\022" +
-      "\031\n\025PLAYER_RMB_NOT_ENOUGH\020\025\022\032\n\026PLAYER_GOL" +
-      "D_NOT_ENOUGH\020\026\022\031\n\025PARAMETER_NOT_CORRECT\020",
-      "2\022\031\n\025SYSCONFIG_NOT_CORRECT\0203\022\020\n\014HACKER_E" +
-      "RROR\0207\022\021\n\014NOT_GET_LOCK\020\254\002\022\032\n\025ACTIVATION_" +
-      "CODE_ERROR\020\255\002\022\026\n\021DAILY_LOTTO_LIMIT\020\220\003\022\023\n" +
-      "\016LOTTO_NOT_FREE\020\304\003\022\026\n\021DUPLICATE_REQUEST\020" +
-      "\274\005\022\022\n\rVERSION_ERROR\020\343\007\022\034\n\027DEVICE_TYPE_NO" +
-      "T_CORRECT\020\346\007\022\034\n\026NOT_HAVE_LAST_RESPONSE\020\237" +
-      "\215\006\022\027\n\021SERVER_MAINTENACE\020\240\215\006*\247\001\n\014RpcError" +
-      "Code\022\024\n\007UNKNOWN\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020INVALID_PR" +
-      "OTOCOL\020\376\377\377\377\377\377\377\377\377\001\022\030\n\013INVALID_ARG\020\375\377\377\377\377\377\377" +
-      "\377\377\001\022\024\n\007TIMEOUT\020\374\377\377\377\377\377\377\377\377\001\022\030\n\013SERVER_BUSY",
-      "\020\373\377\377\377\377\377\377\377\377\001\022\030\n\013PUSHTIMEOUT\020\372\377\377\377\377\377\377\377\377\001B\002H" +
-      "\001"
+      "L\n\rLoginResponse\022;\n\nplayerInfo\030\001 \001(\0132\'.c" +
+      "om.zyd.common.proto.client.PlayerInfo\".\n" +
+      "\nPlayerInfo\022\020\n\010userName\030\001 \001(\t\022\016\n\006userId\030" +
+      "\002 \001(\005*-\n\013EDeviceType\022\010\n\004None\020\000\022\007\n\003IOS\020\001\022" +
+      "\013\n\007Android\020\002*\216\003\n\tErrorCode\022\020\n\014SERVER_ERR" +
+      "OR\020\001\022\023\n\017SHOP_ITEM_WRONG\020\021\022\031\n\025PLAYER_RMB_" +
+      "NOT_ENOUGH\020\025\022\032\n\026PLAYER_GOLD_NOT_ENOUGH\020\026" +
+      "\022\031\n\025PARAMETER_NOT_CORRECT\0202\022\031\n\025SYSCONFIG",
+      "_NOT_CORRECT\0203\022\020\n\014HACKER_ERROR\0207\022\021\n\014NOT_" +
+      "GET_LOCK\020\254\002\022\032\n\025ACTIVATION_CODE_ERROR\020\255\002\022" +
+      "\026\n\021DAILY_LOTTO_LIMIT\020\220\003\022\023\n\016LOTTO_NOT_FRE" +
+      "E\020\304\003\022\026\n\021DUPLICATE_REQUEST\020\274\005\022\022\n\rVERSION_" +
+      "ERROR\020\343\007\022\034\n\027DEVICE_TYPE_NOT_CORRECT\020\346\007\022\034" +
+      "\n\026NOT_HAVE_LAST_RESPONSE\020\237\215\006\022\027\n\021SERVER_M" +
+      "AINTENACE\020\240\215\006*\247\001\n\014RpcErrorCode\022\024\n\007UNKNOW" +
+      "N\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020INVALID_PROTOCOL\020\376\377\377\377\377\377\377" +
+      "\377\377\001\022\030\n\013INVALID_ARG\020\375\377\377\377\377\377\377\377\377\001\022\024\n\007TIMEOUT" +
+      "\020\374\377\377\377\377\377\377\377\377\001\022\030\n\013SERVER_BUSY\020\373\377\377\377\377\377\377\377\377\001\022\030\n",
+      "\013PUSHTIMEOUT\020\372\377\377\377\377\377\377\377\377\001B\002H\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5178,7 +5021,7 @@ public final class ClientProtocol {
           internal_static_com_zyd_common_proto_client_LoginResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_LoginResponse_descriptor,
-              new java.lang.String[] { "PlayerInfo", "Sign", });
+              new java.lang.String[] { "PlayerInfo", });
           internal_static_com_zyd_common_proto_client_PlayerInfo_descriptor =
             getDescriptor().getMessageTypes().get(5);
           internal_static_com_zyd_common_proto_client_PlayerInfo_fieldAccessorTable = new

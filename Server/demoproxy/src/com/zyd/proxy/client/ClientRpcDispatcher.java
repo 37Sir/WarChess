@@ -65,6 +65,7 @@ public class ClientRpcDispatcher {
             job.request_time = System.currentTimeMillis();
             job.setQueueId(RPCQueueIDEnum.MAIN_QUEUE);
             if(Arrays.asList(ConfigurationUtil.LOGIN_QUEUE).contains(name)){
+                System.out.println("LOGINF------------------------------");
                 job.setQueueId(RPCQueueIDEnum.LOGIN_QUEUE);
                 loginQueue.addJob(job);
             }else if(Arrays.asList(ConfigurationUtil.ROOM_GAME_SERVER_QUEUE).contains(name)){
@@ -109,8 +110,8 @@ public class ClientRpcDispatcher {
                 if (conn == null) {    
                     rpcQueue.numNotHaveIdleConn ++ ;
                     if(tag==0){
-                        logger.warn("Not Have Idle InfoConn in ClientRpcDispatcher,{} times in last second.queueId:{},requestName:{}",
-                                rpcQueue.numNotHaveIdleConn,job.getQueueId(),job.name);
+    //                    logger.warn("Not Have Idle InfoConn in ClientRpcDispatcher,{} times in last second.queueId:{},requestName:{}",
+    //                            rpcQueue.numNotHaveIdleConn,job.getQueueId(),job.name);
                         tag=1;
                     }
                     clientRcpQueue.queue.addFirst(job);
@@ -122,12 +123,25 @@ public class ClientRpcDispatcher {
                 final ClientConnectionHandler client = job.client;
                 final long request_time = job.request_time;
                 final long enqueue_time = System.currentTimeMillis();
+    //            rpcQueue.processing++;   
+    //            if (rpcQueue.maximum_processing < rpcQueue.processing){
+    //                rpcQueue.maximum_processing = rpcQueue.processing;
+    //            }
+                System.out.println("proxy开----------------");
     
                 logger.info("dispatching client RPC: {} to info: {} request_time:{}", job.name, conn.getChannel().remoteAddress().toString(),job.request_time);
                 conn.requestRpc(job.name, job.args, new RpcResponseHandler() {
                     @Override
                     public void onResponse(int error, Packet results) {
-
+    //                    long curTime = System.currentTimeMillis();
+    //                    long responseTime = curTime - request_time;
+    //                    long processTime = curTime - enqueue_time;
+    //                    num_client_response_ok++;
+    ////                    rpcQueue.processing--;
+    //                    rpcQueue.num_processed++;
+    //                    rpcQueue.total_response_time += (int)responseTime;
+    //                    rpcQueue.total_process_time += (int)processTime;
+                        System.out.println("---------------接收-------------");
                         client.responseRpc(error, results);
                         
                     }
@@ -170,10 +184,18 @@ public class ClientRpcDispatcher {
     public class RpcQueue {
       public final LinkedBlockingDeque<ClientRpcJob> queue = new LinkedBlockingDeque<ClientRpcJob>();
       public int capacity = 20000;
+      public int processing = 0;
       private String queueName;
   
-
+      // for monitor
+      public int maximum_queue_used;
+      public int maximum_processing;
       public int numNotHaveIdleConn = 0;
+      public int num_processed;
+      public int total_response_time;
+      public int average_response_time;
+      public int total_process_time;
+      public int average_process_time;
       private ServiceProto.QueueStatus.Builder queueBuilder = QueueStatus.newBuilder();
       public RpcQueue(String name) {
           this.queueName = name;
@@ -189,10 +211,36 @@ public class ClientRpcDispatcher {
   
           queue.add(job);
   
+          int size = queue.size();
+          if (size > maximum_queue_used)
+              maximum_queue_used = size;
           
           return true;
       }
     
+      public void updateMonitor(ServiceProto.ProxyStatus.Builder proxyStatusBuilder) {
+          ServiceProto.QueueStatus.Builder queueBuilder = this.queueBuilder;
+  
+          if (num_processed > 0) {
+              average_response_time = total_response_time / num_processed;
+              average_process_time = total_process_time / num_processed;
+          }
+          
+          queueBuilder.setName(queueName);
+          queueBuilder.setQueueUsed(maximum_queue_used);
+          queueBuilder.setNumProcessing(maximum_processing);
+          queueBuilder.setNumProcessed(num_processed);
+          queueBuilder.setNumNotHaveIdleConn(numNotHaveIdleConn);
+          queueBuilder.setAverageResponseTime(average_response_time);
+          queueBuilder.setAverageProcessTime(average_process_time);
+          proxyStatusBuilder.addQueue(queueBuilder);
+          maximum_queue_used = queue.size();
+          maximum_processing = 0;
+          num_processed = 0;
+          total_response_time = 0;
+          total_process_time = 0;
+          numNotHaveIdleConn = 0;
+      }
   
       public String getQueueName() {
           return queueName;

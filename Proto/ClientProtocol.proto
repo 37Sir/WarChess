@@ -70,7 +70,6 @@ message LoginRequest{
 
 message LoginResponse{
 	optional PlayerInfo playerInfo = 1;
-	optional string sign = 2;
 }
 
 message PlayerInfo {

@@ -49,7 +49,7 @@ public class PacketDecoder extends ByteToMessageDecoder {
           }
           decoding.buffers.add(in.readBytes(length - 1));
       }
-      else { 
+      else {
           out.add(decoding);
           decoding = new Packet();
       }

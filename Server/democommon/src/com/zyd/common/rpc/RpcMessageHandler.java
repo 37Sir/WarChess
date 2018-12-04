@@ -28,6 +28,7 @@ public abstract class RpcMessageHandler extends SimpleChannelInboundHandler<Pack
         switch (request.getType().getNumber()) {
           case RpcType.RPC_REQUEST_VALUE:
               Packet args = new Packet(msg.buffers, 1, msg.buffers.size());
+              System.out.println("request");
               logger.debug("request.getId:{}, request.getName:{}",request.getId(),request.getName());
               onRequestRpc(request.getId(), request.getName(), args,request.getQueueId());
               break;
@@ -35,6 +36,8 @@ public abstract class RpcMessageHandler extends SimpleChannelInboundHandler<Pack
           case RpcType.RPC_RESPONSE_VALUE:
             System.out.println(processing);
               RpcResponseHandler handler = processing.remove(request.getId());
+              System.out.println("response");
+              System.out.println(handler);
               if (handler != null) {
                   logger.debug("onResponse.getId:{}, onResponse.getName:{},{}",request.getId(),request.getName(),request.getError());
                   handler.onResponse(request.getError(), new Packet(msg.buffers, 1, msg.buffers.size()));
@@ -82,6 +85,7 @@ public abstract class RpcMessageHandler extends SimpleChannelInboundHandler<Pack
         header.setId(0);
         if (handler != null) {
             header.setId(updateNextRequestId());
+            System.out.println("id"+request_id+"加入");
             processing.put(header.getId(), handler);
         }
         header.setQueueId(queueId);

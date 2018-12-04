@@ -25,8 +25,10 @@ public class InfoProxyConnectionHandler extends SimpleChannelInboundHandler<Pack
         MessageHeaderResponse res = msg.parseProtobuf(MessageHeaderResponse.PARSER, 0);
         if(res.getName() != null && "#HeartBeat".equals(res.getName())){
           logger.debug("accept heartbeat from proxy");
+          System.out.println("心跳-------------------");
           requestHearBeat();
         }else{
+          System.out.println("info-------------------");
           responseRPC(res.getError(), msg);
         }
 

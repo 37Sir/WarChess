@@ -45,6 +45,7 @@ public class ClientConnectionHandler extends SimpleChannelInboundHandler<Packet>
         if("HeartBeat".equals(messageHeader.getName())){
             logger.info("heartbeat channelToken:{}",channelToken);
         }else{
+            System.out.println("getway收到连接：" + messageHeader.getName());
             checkVailableInfoProxy();
             ClientRpcDispatcher.getInstance().addClientRequest(this, msg,connect);
         }
