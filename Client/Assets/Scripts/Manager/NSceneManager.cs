@@ -22,14 +22,17 @@ namespace Framework
             SceneManager.LoadScene(sceneName);
         }
 
-        //public void OnSceneChanged(Scene s1, Scene s2)
-        //{
-        //    if (loadingScene != null && s2.name == loadingScene)
-        //    {
-        //        App.LuaManager.CallFunction("SceneLoader." + loadingScene);
-        //        loadingScene = null;
-        //    }
-        //}
+        public void OnSceneChanged(Scene s1, Scene s2)
+        {
+            if (loadingScene != null && s2.name == loadingScene)
+            {
+                
+                loadingScene = null;
+                App.UIManager.BindUIControl();
+                App.UIManager.RegisterPanel("SLogin", "LoginPanel", UILayerType.NormalLayer, false);
+                App.UIManager.OpenPanel("LoginPanel");
+            }
+        }
 
         public void LoadSceneAsync(string sceneName, Action<string, float> callback)
         {
@@ -58,13 +61,13 @@ namespace Framework
             }
         }
 
-        //public override void OnManagerReady()
-        //{
-        //    SceneManager.activeSceneChanged += OnSceneChanged;
-        //}
-        //public override void OnManagerDestroy()
-        //{
-        //    SceneManager.activeSceneChanged -= OnSceneChanged;
-        //}
+        public override void OnManagerReady()
+        {
+            SceneManager.activeSceneChanged += OnSceneChanged;
+        }
+        public override void OnManagerDestroy()
+        {
+            SceneManager.activeSceneChanged -= OnSceneChanged;
+        }
     }
 }

@@ -9,7 +9,7 @@ public class Config{
 
     public static readonly int RpcTimeout = 10000;                  //rpc请求的超时时间ms
     public static readonly string RpcNamespace = "Com.Violet.Rpc";
-
+    public static readonly string UIBaseDir = "UIRes";
 
     public class Game
     {

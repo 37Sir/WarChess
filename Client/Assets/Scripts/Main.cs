@@ -20,12 +20,16 @@ public class Main : MonoBehaviour {
         AddManager();
 
         App.NSceneManager.LoadScene("SLogin");
+        
     }
 
     void AddManager()
     {
         App.Instance.AddManager<NetworkManager>(ManagerName.Network);
         App.Instance.AddManager<NSceneManager>(ManagerName.Scene);
+        App.Instance.AddManager<ObjectPoolManager>(ManagerName.ObjectPool);
+        App.Instance.AddManager<UIManager>(ManagerName.UI);
+        App.Instance.AddManager<ResourceManager>(ManagerName.Resource);
     }
 
     void InitManager()

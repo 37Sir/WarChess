@@ -14,9 +14,7 @@ namespace Framework
                 return m_isInited;
             }
         }
-        public string moduleName;
         public string viewName;
-
         protected int handle = 0;
 
         public virtual void InitView(params object[] args)

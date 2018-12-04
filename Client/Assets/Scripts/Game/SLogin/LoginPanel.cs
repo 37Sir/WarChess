@@ -2,9 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
-class LoginPanel
+public class LoginPanel
 {
+    public void InitView()
+    {
+        Debug.Log("login panel Inited");
+    }
 
+    public void OpenView()
+    {
+
+    }
 }
 

@@ -1,15 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 namespace Framework
 {
     public class Widget : View
     {
+        private Type m_objectType;
+        private object m_object;
+
         public override void InitView(params object[] args)
         {
             base.InitView(args);
-            handle = App.LuaManager.InitializeLuaObject(viewName);
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            m_object = assembly.CreateInstance(viewName);
             if (gameObject.activeSelf)
             {
                 StartCoroutine(OnInitView(args));
@@ -34,23 +40,27 @@ namespace Framework
 
         public override void CloseView()
         {
-            if (handle > 0) App.LuaManager.CallObjectFunction(handle, "CloseView");
+            MethodInfo mi = m_objectType.GetMethod("CloseView");
+            mi.Invoke(m_object, null);
         }
 
         public override void DestroyView()
         {
-            if (handle > 0) App.LuaManager.CallObjectFunction(handle, "DestroyView");
+            MethodInfo mi = m_objectType.GetMethod("DestroyView");
+            mi.Invoke(m_object, null);
             base.DestroyView();
         }
 
         protected virtual void OnInitViewEnd(params object[] args)
         {
-            if (handle > 0) App.LuaManager.CallObjectFunction(handle, "InitView", gameObject);
+            MethodInfo mi = m_objectType.GetMethod("InitView");
+            mi.Invoke(m_object, null);
             m_isInited = true;
         }
         protected virtual void OnWaitInitOpenViewEnd(params object[] args)
         {
-            if (handle > 0) App.LuaManager.CallObjectFunction(handle, "OpenView");
+            MethodInfo mi = m_objectType.GetMethod("OpenView");
+            mi.Invoke(m_object, null);
         }
 
         protected virtual IEnumerator OnInitView(params object[] args)

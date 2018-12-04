@@ -115,6 +115,30 @@ namespace Framework
                 return App.Instance.GetManager<NSceneManager>(ManagerName.Scene);
             }
         }
+
+        public static ResourceManager ResourceManager
+        {
+            get
+            {
+                return App.Instance.GetManager<ResourceManager>(ManagerName.Resource);
+            }
+        }
+
+        public static UIManager UIManager
+        {
+            get
+            {
+                return App.Instance.GetManager<UIManager>(ManagerName.UI);
+            }
+        }
+
+        public static ObjectPoolManager ObjectPoolManager
+        {
+            get
+            {
+                return App.Instance.GetManager<ObjectPoolManager>(ManagerName.ObjectPool);
+            }
+        }
         #endregion
     }
 
