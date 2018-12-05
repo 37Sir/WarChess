@@ -174,7 +174,6 @@ public class ClientRpcDispatcher {
   
 
       public int numNotHaveIdleConn = 0;
-      private ServiceProto.QueueStatus.Builder queueBuilder = QueueStatus.newBuilder();
       public RpcQueue(String name) {
           this.queueName = name;
       }
@@ -183,7 +182,7 @@ public class ClientRpcDispatcher {
       public boolean addJob(ClientRpcJob job) {
           
           if (queue.size() >= capacity) {
-  //            logger.error("queue {} is full",queueName);
+              logger.error("queue {} is full",queueName);
               return false;
           }
   

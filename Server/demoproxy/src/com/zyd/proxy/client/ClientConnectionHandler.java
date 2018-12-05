@@ -64,7 +64,7 @@ public class ClientConnectionHandler extends SimpleChannelInboundHandler<Packet>
                 ClientConnectPushUtil.clientConnectionHandlerMap.put(user_info_.getUserToken(), this);  
                 logger.debug("add client token:{} ,size:{}",user_info_.getUserToken(),ClientConnectPushUtil.clientConnectionHandlerMap.size());  
             }
-            calling_rpc_token = requestName;
+            calling_rpc_token = requestToken;
             MessageHeaderInfo.Builder b = MessageHeaderInfo.newBuilder();
             b.mergeFrom(user_info_);
             b.setRequestToken(requestToken);

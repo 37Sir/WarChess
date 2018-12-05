@@ -103,7 +103,7 @@ public class BattleRoom {
 			}
 			// 把所有人准备并且遍历所有玩家,如果所有玩家都准备发送准备完成推送
 			dealUserMap.put(userMatchInfo.getUid(), new Object());
-
+			disrupOne(PushReqestName.OnePlayerReady, userMatchInfo, null);
 			if (dealUserMap.size() == userMatchInfoList.size()) {
 				battleStatus = BattleStatus.fightWaiting;
 				dealUserMap.clear();
@@ -303,7 +303,8 @@ public class BattleRoom {
 				// 根据游戏的状态进行超时处理
 				if (battleStatus.equals(BattleStatus.start)) {
 					// 如果玩家长时间没有发送准备请求,那么战斗完成退出
-					battleFinished();
+				    //有玩家未准备，则退出此次匹配
+//					battleFinished();
 				} else if (battleStatus.equals(BattleStatus.fighting)) {
 					nextTime = System.currentTimeMillis() + BattleConfig.playReadTime;
 					currentPlayNum = currentPlayNum + 1;
