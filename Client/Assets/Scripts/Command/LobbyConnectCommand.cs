@@ -14,6 +14,6 @@ public class LobbyConnectCommand: SimpleCommand
     public override void Execute(INotification notification)
     {
         Debug.Log("LobbyConnectCommand Execute!");
-        App.NetworkManager.Init();
+        App.NetworkManager.Init(true);
     }
 }
