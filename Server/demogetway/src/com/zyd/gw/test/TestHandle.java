@@ -12,9 +12,7 @@ public class TestHandle extends SimpleChannelInboundHandler<Packet> {
   @Override
   protected void channelRead0(ChannelHandlerContext arg0, Packet arg1) throws Exception {
     MessageHeaderResponse req = arg1.parseProtobuf(MessageHeaderResponse.PARSER, 0);
-    LoginResponse res = arg1.parseProtobuf(LoginResponse.PARSER, 1);
     System.out.println(req.getError());
-    System.out.println(res.getSign());
   }
 
 

@@ -15,6 +15,7 @@ import com.zyd.common.rpc.RpcMessageHandler;
 import com.zyd.common.rpc.RpcResponseHandler;
 import com.zyd.demo.common.BaseClientServlet;
 import com.zyd.demo.common.exception.BaseException;
+import com.zyd.demo.common.push.ProxyPushUtil;
 import com.zyd.demo.common.utils.ConfigurationUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -113,6 +114,7 @@ public class ProxyConnection {
             try {
                 future.sync();
                 connected = true;
+                ProxyPushUtil.proxyhandler = handler;
             } catch (Exception e) {
                 logger.info("ProxyConnection: " + e.getMessage(),e);
                 connected = false;

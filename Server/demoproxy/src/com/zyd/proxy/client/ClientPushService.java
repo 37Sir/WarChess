@@ -23,7 +23,7 @@ public class ClientPushService implements Runnable {
 				 if(data.getLastPushTime()!=null && (System.currentTimeMillis()-data.getLastPushTime())<3*1000l){
 					 continue;
 				 }
-				 
+				 System.out.println(token+"---------------------------------------------"+data.toString());
 				ClientConnectPushUtil.pushToClient(data.getResult(), data.getUserTokenList(),data.getName(),token);
 			} catch (Exception e) {
 				logger.error("error happened in push service ",e);

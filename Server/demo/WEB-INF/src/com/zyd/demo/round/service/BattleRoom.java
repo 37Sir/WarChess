@@ -52,7 +52,7 @@ public class BattleRoom {
 	// 当前操作桢的索引
 	private int currentPlayNum = 0;
 	// 结束阶段发送的用户 Uid-FairBattleLevelEndRequest
-	private Map<Long, FairBattleLevelEndRequest> fairBattleLevelEndRequestMap = new HashMap<>();
+	private Map<Integer, FairBattleLevelEndRequest> fairBattleLevelEndRequestMap = new HashMap<>();
 	// 是否可以将房间移出
 	public boolean canRemove = false;
 	// 房间状态
@@ -60,13 +60,13 @@ public class BattleRoom {
 	// 开始的玩家userId
 	private long startUserId;
 	// 完成操作的玩家
-	private Map<Long, Object> dealUserMap = new HashMap<>();
+	private Map<Integer, Object> dealUserMap = new HashMap<>();
 	// 房间管理器
 	private BattleRoomManager battleRoomManager;
 	// 是否是主动放弃结束
 	private boolean isGiveUp = false;
 	// 主动放弃的玩家
-	private Long giveUpUserId = null;
+	private Integer giveUpUserId = null;
 
 
 	private static final Logger logger = LoggerFactory.getLogger(BattleRoom.class);
@@ -87,7 +87,7 @@ public class BattleRoom {
 			playerBuilder.setUserId(userMatchInfo.getUid());
 			builder.addPlayerMes(playerBuilder);
 		}
-
+		builder.setZoneId(1000);
 		builder.setUserId(startUserId);
 		builder.setRoomId(roomId);
 		disrupAll(PushReqestName.FairBattleLevelStartPush, builder.build());

@@ -20,7 +20,7 @@ message MessageHeaderInfo {
   optional string requestToken = 4;
   //客户端不传，服务器自己获取
   optional string clientIp = 5;
-  optional int64 userId = 7;
+  optional int32 userId = 7;
   optional string sign = 90; //md5Str(userId+userToken+version+privateKey)
   optional string ext = 91; //md5Str
 }
@@ -78,5 +78,6 @@ message PlayerInfo {
 	optional int32 userId = 2;
 	
 }
+
 
 

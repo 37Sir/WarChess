@@ -26,6 +26,7 @@ public class ProxyPushUtil {
 	}
 	
 	public static void pushToProxy(String name,String token,Packet data){
+	        System.out.println(proxyhandler.toString() + proxyhandler.getChannel().isActive() );
 			if(proxyhandler != null && proxyhandler.getChannel().isActive()){
 				logger.info("push data from server to proxy. name:{},token:{}",name,token);
 				proxyhandler.requestRpc("#"+name, new Packet(data),null, RPCQueueIDEnum.MAIN_QUEUE);

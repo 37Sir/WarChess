@@ -26,11 +26,12 @@ public class Login extends BaseClientServlet {
     @Override
     public Packet serviceBeforeLogin(Packet paramValues, String rpcName) throws Exception {
         MessageHeaderInfo mi = paramValues.parseProtobuf(MessageHeaderInfo.PARSER, 0);
+        String token = mi.getUserToken();
         logRequest(mi, paramValues);
         LoginRequest req = paramValues.parseProtobuf(LoginRequest.PARSER, 1);
         String userName = req.getUserName();
         
-        LoginResponse.Builder res = userService.login(userName);
+        LoginResponse.Builder res = userService.login(userName,token);
         logResponse(new Packet(res));
         return new Packet(res);
     }

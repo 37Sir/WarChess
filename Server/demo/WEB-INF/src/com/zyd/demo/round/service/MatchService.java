@@ -77,13 +77,16 @@ public class MatchService extends BaseService {
 						}
 						// 将两个人的数据在匹配队列中删除
 						// 如果两个人的ip相同 测试使用
-						if (value.getClientIp().equals(matchValue.getClientIp())) {
-							match.remove(key);
-							match.remove(matchKey);
-							// TODO 判断匹配规则
-							// 进入匹配
-							doMatch(value, matchValue);
-						}
+//						if (value.getClientIp().equals(matchValue.getClientIp())) {
+//
+//							continue;
+//							// TODO 判断匹配规则
+//						}
+                        match.remove(key);
+                        match.remove(matchKey);
+						// 进入匹配
+						System.out.println("匹配成功");
+						doMatch(value, matchValue);
 					}
 				}
 				isMatching.set(false);
@@ -104,7 +107,6 @@ public class MatchService extends BaseService {
 		List<UserMatchInfo> userMatchInfos = new ArrayList<>();
 		userMatchInfos.add(user);
 		userMatchInfos.add(toUser);
-
 		BattleRoom battleRoom = new BattleRoom(battleRoomManager,commonService, user, toUser);
 		battleRoomManager.addNewBattleRoom(battleRoom);
 	}

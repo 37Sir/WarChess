@@ -5,13 +5,16 @@
 
     <bean id="baseClientServlet" class="com.zyd.demo.common.BaseClientServlet"> 
     	 <property name="userService" ref="userService"></property>            
-    	
+    	 <property name="matchService" ref="matchService"></property>            
     </bean>
+   	<bean id="PlayerMatch" class="com.zyd.demo.round.servlet.PlayerMatch"
+		parent="baseClientServlet">
+	</bean>
 	<!-- user -->
 	<bean id="test" class="com.zyd.demo.round.servlet.test"
 		parent="baseClientServlet">
 	</bean>
-	<bean id="login" class="com.zyd.demo.user.servlet.Login"
+	<bean id="Login" class="com.zyd.demo.user.servlet.Login"
 		parent="baseClientServlet">
 	</bean>
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />

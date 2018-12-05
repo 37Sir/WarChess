@@ -1,5 +1,6 @@
 package com.zyd.proxy;
 
+import com.zyd.proxy.client.ClientConnectPushUtil;
 import com.zyd.proxy.client.ClientConnectionListener;
 import com.zyd.proxy.client.ClientRpcDispatcher;
 import com.zyd.proxy.info.InfoConnectionListener;
@@ -15,6 +16,7 @@ public class ProxyServer {
     InfoConnectionListener.getInstance().startup(mainGroup);
     ClientConnectionListener.getInstance().startup(mainGroup);
     ClientRpcDispatcher.getInstance().startup();
+    ClientConnectPushUtil.init();
 
 
     }

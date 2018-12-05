@@ -7,6 +7,7 @@ import com.zyd.common.proto.client.ClientProtocol.EDeviceType;
 import com.zyd.common.proto.client.ClientProtocol.MessageHeaderInfo;
 import com.zyd.common.rpc.Packet;
 import com.zyd.demo.common.memcached.MemcachedHandler;
+import com.zyd.demo.round.service.MatchService;
 import com.zyd.demo.user.service.UserService;
 
 public class BaseClientServlet {
@@ -46,15 +47,26 @@ public class BaseClientServlet {
     }
     private Packet checkInit(MessageHeaderInfo cui, Packet paramValues, String rpcName, boolean isGuildLock) throws Exception {
         Packet returnvalue = null;
+        logRequest(cui, paramValues);
         returnvalue = service(paramValues,1);
-        return null;
+        logResponse(returnvalue);
+        return returnvalue;
     }
 
     public void serviceUpdateUserData(Packet msg, String string) {
       
     }
-    
+    protected MatchService matchService;
     protected UserService userService;
+
+        
+    public MatchService getMatchService() {
+      return matchService;
+    }
+
+    public void setMatchService(MatchService matchService) {
+      this.matchService = matchService;
+    }
 
     public UserService getUserService() {
         return userService;

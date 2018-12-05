@@ -78,7 +78,7 @@ public class BattleRoomManager extends BaseService {
 			}
 			battleRoom.start();
 		} catch (Exception e) {
-			logger.error("can not get the room id");
+			logger.error("can not get the room id"+e);
 		}
 		
 	}

@@ -3,7 +3,7 @@ package com.zyd.demo.round.pojo;
 
 
 public class UserMatchInfo {
-	private Long uid;
+	private Integer uid;
 	private String token;
 	// 进入游戏后玩家是否准备
 	private boolean ready = false;
@@ -42,10 +42,10 @@ public class UserMatchInfo {
 	public void setToken(String token) {
 		this.token = token;
 	}
-	public Long getUid() {
+	public Integer getUid() {
 		return uid;
 	}
-	public void setUid(Long uid) {
+	public void setUid(Integer uid) {
 		this.uid = uid;
 	}
 }
