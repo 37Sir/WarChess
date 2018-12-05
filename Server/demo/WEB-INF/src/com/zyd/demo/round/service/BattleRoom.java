@@ -10,26 +10,29 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.google.protobuf.MessageLite;
+import com.zyd.common.proto.client.ClientProtocol.ErrorCode;
 import com.zyd.common.proto.client.WarChess.BattleMes;
-import com.zyd.common.proto.client.WarChess.FairBattleLevelEndPush;
+import com.zyd.common.proto.client.WarChess.PlayerEndPush;
 import com.zyd.common.proto.client.WarChess.FairBattleLevelEndRequest;
 import com.zyd.common.proto.client.WarChess.FairBattleLevelEndResponse;
 import com.zyd.common.proto.client.WarChess.FairBattleLevelFattingFinishedRequest;
 import com.zyd.common.proto.client.WarChess.FairBattleLevelFattingFinishedResponse;
-import com.zyd.common.proto.client.WarChess.FairBattleLevelReadyFinishedPush;
-import com.zyd.common.proto.client.WarChess.FairBattleLevelReadyRequest;
-import com.zyd.common.proto.client.WarChess.FairBattleLevelReadyResponse;
-import com.zyd.common.proto.client.WarChess.FairBattleLevelStartPush;
+import com.zyd.common.proto.client.WarChess.PlayerReadyFinishedPush;
+import com.zyd.common.proto.client.WarChess.PlayerStartPush;
+import com.zyd.common.proto.client.WarChess.OnePlayerReady;
 import com.zyd.common.proto.client.WarChess.PlayNextPush;
 import com.zyd.common.proto.client.WarChess.PlayerBattleMesRequest;
 import com.zyd.common.proto.client.WarChess.PlayerBattleMesResponse;
 import com.zyd.common.proto.client.WarChess.PlayerMes;
+import com.zyd.common.proto.client.WarChess.PlayerNotReady;
+import com.zyd.common.proto.client.WarChess.PlayerReadyRequest;
 import com.zyd.common.proto.client.WarChess.PlayerRequireBattleMesAgainRequest;
 import com.zyd.common.proto.client.WarChess.PlayerRequireBattleMesAgainResponse;
 import com.zyd.common.proto.client.WarChess.ServerBattleMesPush;
 import com.zyd.common.rpc.Packet;
 import com.zyd.demo.common.CommonService;
 import com.zyd.demo.common.enumuration.PushReqestName;
+import com.zyd.demo.common.exception.BaseException;
 import com.zyd.demo.round.pojo.UserMatchInfo;
 
 
@@ -52,7 +55,7 @@ public class BattleRoom {
 	// 当前操作桢的索引
 	private int currentPlayNum = 0;
 	// 结束阶段发送的用户 Uid-FairBattleLevelEndRequest
-	private Map<Integer, FairBattleLevelEndRequest> fairBattleLevelEndRequestMap = new HashMap<>();
+	private Map<Integer, FairBattleLevelEndRequest> battleEndRequestMap = new HashMap<>();
 	// 是否可以将房间移出
 	public boolean canRemove = false;
 	// 房间状态
@@ -79,7 +82,7 @@ public class BattleRoom {
 		startUserId = userMatchInfoList.get(actor).getUid();
 
 		// 推送信息
-		FairBattleLevelStartPush.Builder builder = FairBattleLevelStartPush.newBuilder();
+		PlayerStartPush.Builder builder = PlayerStartPush.newBuilder();
 
 		// 玩家信息
 		for (UserMatchInfo userMatchInfo : userMatchInfoList) {
@@ -90,33 +93,44 @@ public class BattleRoom {
 		builder.setZoneId(1000);
 		builder.setUserId(startUserId);
 		builder.setRoomId(roomId);
-		disrupAll(PushReqestName.FairBattleLevelStartPush, builder.build());
+		disrupAll(PushReqestName.PlayerStartPush, builder.build());
 	}
 
 	/** 处理玩家的开始请求 */
-	public FairBattleLevelReadyResponse doRequest(UserMatchInfo userMatchInfo,
-			FairBattleLevelReadyRequest battleMesRequest) {
+	public void doRequest(UserMatchInfo userMatchInfo,
+	    PlayerReadyRequest battleMesRequest) {
 		lock.lock();
 		try {
 			if (!battleStatus.equals(BattleStatus.start)) {
-				return FairBattleLevelReadyResponse.newBuilder().build();
-			}
-			// 把所有人准备并且遍历所有玩家,如果所有玩家都准备发送准备完成推送
+	            logger.warn("PLAYER_NOT_START userId:{}",userMatchInfo.getUid());
+	            throw new BaseException(ErrorCode.PLAYER_NOT_START_VALUE);
+	        }
 			dealUserMap.put(userMatchInfo.getUid(), new Object());
-			disrupOne(PushReqestName.OnePlayerReady, userMatchInfo, null);
+			//将玩家点击准备的动作发给对战的客户端
+			OnePlayerReady.Builder onePlayerReady = OnePlayerReady.newBuilder();
+			onePlayerReady.setUserId(userMatchInfo.getUid());
+			UserMatchInfo toUserMatchInfo = null; 
+			for (UserMatchInfo u : userMatchInfoList) {
+			    if (u.getUid() != userMatchInfo.getUid()) {
+			        toUserMatchInfo = u;
+			    }
+			}
+			disrupOne(PushReqestName.OnePlayerReady, toUserMatchInfo, onePlayerReady.build());
+			
+	        // 把所有人准备并且遍历所有玩家,如果所有玩家都准备发送准备完成推送
 			if (dealUserMap.size() == userMatchInfoList.size()) {
 				battleStatus = BattleStatus.fightWaiting;
 				dealUserMap.clear();
 				nextTime = System.currentTimeMillis() + BattleConfig.playTime;
-				disrupAll(PushReqestName.FairBattleLevelReadyFinishedPush,
-						FairBattleLevelReadyFinishedPush.newBuilder().build());
+				disrupAll(PushReqestName.PlayerReadyFinishedPush,
+						PlayerReadyFinishedPush.newBuilder().build());
 			}
 		} catch (Exception e) {
 			logger.error("", e);
 		} finally {
 			lock.unlock();
 		}
-		return FairBattleLevelReadyResponse.newBuilder().build();
+		return ;
 	}
 
 	/** 处理玩家发送的桢请求 */
@@ -210,8 +224,8 @@ public class BattleRoom {
 			}
 
 			battleStatus = BattleStatus.waitFinish;
-			fairBattleLevelEndRequestMap.put(userMatchInfo.getUid(), fairBattleLevelEndRequest);
-			if (fairBattleLevelEndRequestMap.size() >= 2) {
+			battleEndRequestMap.put(userMatchInfo.getUid(), fairBattleLevelEndRequest);
+			if (battleEndRequestMap.size() >= 2) {
 				// 战斗结束
 				battleFinished();
 			} else {
@@ -233,7 +247,7 @@ public class BattleRoom {
 			PlayerRequireBattleMesAgainResponse.Builder responseBuilder = PlayerRequireBattleMesAgainResponse
 					.newBuilder();
 
-			FairBattleLevelStartPush.Builder startBuilder = FairBattleLevelStartPush.newBuilder();
+			PlayerStartPush.Builder startBuilder = PlayerStartPush.newBuilder();
 			// 玩家信息
 			for (UserMatchInfo userMatchInfo : userMatchInfoList) {
 				PlayerMes.Builder playerBuilder = PlayerMes.newBuilder();
@@ -242,7 +256,7 @@ public class BattleRoom {
 				startBuilder.addPlayerMes(playerBuilder);
 			}
 			startBuilder.setUserId(startUserId);
-			responseBuilder.setFairBattleLevelSatrt(startBuilder);
+			responseBuilder.setPlayerSatrt(startBuilder);
 			//
 //			if (startPlayNum <= serverBattleMesList.size()) {
 //				List<BattleMes> battleMes = serverBattleMesList.subList(startPlayNum - 1, serverBattleMesList.size());
@@ -259,7 +273,7 @@ public class BattleRoom {
 
 	/** 战斗结束 */
 	public void battleFinished() {
-		FairBattleLevelEndPush.Builder builder = FairBattleLevelEndPush.newBuilder();
+		PlayerEndPush.Builder builder = PlayerEndPush.newBuilder();
 //		// 所有的桢信息
 //		for (BattleMes battleMes : serverBattleMesList) {
 //			builder.addBattleMes(battleMes);
@@ -267,7 +281,7 @@ public class BattleRoom {
 		if (!isGiveUp) {
 			builder.setResult(0);
 			// 推送结束信息
-			disrupAll(PushReqestName.FairBattleLevelEndPush, builder.build());
+			disrupAll(PushReqestName.PlayerEndPush, builder.build());
 		} else {
 			for (UserMatchInfo userMatchInfo : userMatchInfoList) {
 				if (userMatchInfo.getUid().equals(giveUpUserId)) {
@@ -275,7 +289,7 @@ public class BattleRoom {
 				} else {
 					builder.setResult(2);
 				}
-				disrupOne(PushReqestName.FairBattleLevelEndPush, userMatchInfo, builder.build());
+				disrupOne(PushReqestName.PlayerEndPush, userMatchInfo, builder.build());
 			}
 		}
 
@@ -302,9 +316,8 @@ public class BattleRoom {
 				 */
 				// 根据游戏的状态进行超时处理
 				if (battleStatus.equals(BattleStatus.start)) {
-					// 如果玩家长时间没有发送准备请求,那么战斗完成退出
-				    //有玩家未准备，则退出此次匹配
-//					battleFinished();
+				    //有玩家长时间未准备，则退出此次匹配
+				    havaPlayerNotReady();
 				} else if (battleStatus.equals(BattleStatus.fighting)) {
 					nextTime = System.currentTimeMillis() + BattleConfig.playReadTime;
 					currentPlayNum = currentPlayNum + 1;
@@ -341,10 +354,27 @@ public class BattleRoom {
 		}
 	}
 
-	/** 保存战斗桢 */
-	public void saveBattleMes(BattleMes battleMes) {
-//		serverBattleMesList.add(battleMes);
-	}
+	 /**玩家未准备退出房间和匹配,并将未准备玩家信息发送给客户端*/
+	private void havaPlayerNotReady() {
+	    PlayerNotReady.Builder playerNotReady = PlayerNotReady.newBuilder();
+	    for ( UserMatchInfo userMatchInfo :userMatchInfoList) {
+	        if (!dealUserMap.containsKey(userMatchInfo.getUid())) {
+	            playerNotReady.addUserId(userMatchInfo.getUid());
+	        }
+	    }
+	    //将信息推送给玩家
+	    disrupAll(PushReqestName.PlayerNotReady, playerNotReady.build());
+	    
+	    battleStatus = BattleStatus.finished;
+	    canRemove = true;
+	    battleRoomManager.removeBattleRoom(this);
+	    return;
+    }
+
+    /** 保存战斗桢 */
+  	public void saveBattleMes(BattleMes battleMes) {
+  	  //		serverBattleMesList.add(battleMes);
+  	}
 
 	public BattleRoom(BattleRoomManager battleRoomManager, CommonService commonService,
 			UserMatchInfo... userMatchInfos) {

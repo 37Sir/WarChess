@@ -145,13 +145,13 @@ public final class ClientProtocol {
      */
     ACTIVATION_CODE_ERROR(8, 301),
     /**
-     * <code>DAILY_LOTTO_LIMIT = 400;</code>
+     * <code>PLAYER_NOT_MATCH_SUCCESS = 400;</code>
      */
-    DAILY_LOTTO_LIMIT(9, 400),
+    PLAYER_NOT_MATCH_SUCCESS(9, 400),
     /**
-     * <code>LOTTO_NOT_FREE = 452;</code>
+     * <code>PLAYER_NOT_START = 401;</code>
      */
-    LOTTO_NOT_FREE(10, 452),
+    PLAYER_NOT_START(10, 401),
     /**
      * <code>DUPLICATE_REQUEST = 700;</code>
      */
@@ -219,13 +219,13 @@ public final class ClientProtocol {
      */
     public static final int ACTIVATION_CODE_ERROR_VALUE = 301;
     /**
-     * <code>DAILY_LOTTO_LIMIT = 400;</code>
+     * <code>PLAYER_NOT_MATCH_SUCCESS = 400;</code>
      */
-    public static final int DAILY_LOTTO_LIMIT_VALUE = 400;
+    public static final int PLAYER_NOT_MATCH_SUCCESS_VALUE = 400;
     /**
-     * <code>LOTTO_NOT_FREE = 452;</code>
+     * <code>PLAYER_NOT_START = 401;</code>
      */
-    public static final int LOTTO_NOT_FREE_VALUE = 452;
+    public static final int PLAYER_NOT_START_VALUE = 401;
     /**
      * <code>DUPLICATE_REQUEST = 700;</code>
      */
@@ -265,8 +265,8 @@ public final class ClientProtocol {
         case 55: return HACKER_ERROR;
         case 300: return NOT_GET_LOCK;
         case 301: return ACTIVATION_CODE_ERROR;
-        case 400: return DAILY_LOTTO_LIMIT;
-        case 452: return LOTTO_NOT_FREE;
+        case 400: return PLAYER_NOT_MATCH_SUCCESS;
+        case 401: return PLAYER_NOT_START;
         case 700: return DUPLICATE_REQUEST;
         case 995: return VERSION_ERROR;
         case 998: return DEVICE_TYPE_NOT_CORRECT;
@@ -5127,22 +5127,22 @@ public final class ClientProtocol {
       "om.zyd.common.proto.client.PlayerInfo\022\014\n" +
       "\004sign\030\002 \001(\t\".\n\nPlayerInfo\022\020\n\010userName\030\001 " +
       "\001(\t\022\016\n\006userId\030\002 \001(\005*-\n\013EDeviceType\022\010\n\004No" +
-      "ne\020\000\022\007\n\003IOS\020\001\022\013\n\007Android\020\002*\216\003\n\tErrorCode" +
+      "ne\020\000\022\007\n\003IOS\020\001\022\013\n\007Android\020\002*\227\003\n\tErrorCode" +
       "\022\020\n\014SERVER_ERROR\020\001\022\023\n\017SHOP_ITEM_WRONG\020\021\022" +
       "\031\n\025PLAYER_RMB_NOT_ENOUGH\020\025\022\032\n\026PLAYER_GOL" +
       "D_NOT_ENOUGH\020\026\022\031\n\025PARAMETER_NOT_CORRECT\020",
       "2\022\031\n\025SYSCONFIG_NOT_CORRECT\0203\022\020\n\014HACKER_E" +
       "RROR\0207\022\021\n\014NOT_GET_LOCK\020\254\002\022\032\n\025ACTIVATION_" +
-      "CODE_ERROR\020\255\002\022\026\n\021DAILY_LOTTO_LIMIT\020\220\003\022\023\n" +
-      "\016LOTTO_NOT_FREE\020\304\003\022\026\n\021DUPLICATE_REQUEST\020" +
-      "\274\005\022\022\n\rVERSION_ERROR\020\343\007\022\034\n\027DEVICE_TYPE_NO" +
-      "T_CORRECT\020\346\007\022\034\n\026NOT_HAVE_LAST_RESPONSE\020\237" +
-      "\215\006\022\027\n\021SERVER_MAINTENACE\020\240\215\006*\247\001\n\014RpcError" +
-      "Code\022\024\n\007UNKNOWN\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020INVALID_PR" +
-      "OTOCOL\020\376\377\377\377\377\377\377\377\377\001\022\030\n\013INVALID_ARG\020\375\377\377\377\377\377\377" +
-      "\377\377\001\022\024\n\007TIMEOUT\020\374\377\377\377\377\377\377\377\377\001\022\030\n\013SERVER_BUSY",
-      "\020\373\377\377\377\377\377\377\377\377\001\022\030\n\013PUSHTIMEOUT\020\372\377\377\377\377\377\377\377\377\001B\002H" +
-      "\001"
+      "CODE_ERROR\020\255\002\022\035\n\030PLAYER_NOT_MATCH_SUCCES" +
+      "S\020\220\003\022\025\n\020PLAYER_NOT_START\020\221\003\022\026\n\021DUPLICATE" +
+      "_REQUEST\020\274\005\022\022\n\rVERSION_ERROR\020\343\007\022\034\n\027DEVIC" +
+      "E_TYPE_NOT_CORRECT\020\346\007\022\034\n\026NOT_HAVE_LAST_R" +
+      "ESPONSE\020\237\215\006\022\027\n\021SERVER_MAINTENACE\020\240\215\006*\247\001\n" +
+      "\014RpcErrorCode\022\024\n\007UNKNOWN\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020I" +
+      "NVALID_PROTOCOL\020\376\377\377\377\377\377\377\377\377\001\022\030\n\013INVALID_AR" +
+      "G\020\375\377\377\377\377\377\377\377\377\001\022\024\n\007TIMEOUT\020\374\377\377\377\377\377\377\377\377\001\022\030\n\013SE",
+      "RVER_BUSY\020\373\377\377\377\377\377\377\377\377\001\022\030\n\013PUSHTIMEOUT\020\372\377\377\377" +
+      "\377\377\377\377\377\001B\002H\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

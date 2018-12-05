@@ -3,21 +3,21 @@ package com.zyd.common.proto.client;
 /////////////////////////////////////// request ////////////////////////////////////
 
 // 匹配玩家请求
-message MatchFairBattleRequest{
+message PlayerMatchRequest{
 	// 测试加入英雄的数组
 }
 
 // 匹配玩家请求返回
-message MatchFairBattleResponse{
+message PlayerMatchResponse{
 	
 }
 
 // 取消匹配请求
-message CancelMatchFairBattleRequest{
+message PlayerCancelMatchRequest{
 
 }
 
-message CancelMatchFairBattleResponse{
+message PlayerCancelMatchResponse{
 
 }
 
@@ -50,12 +50,12 @@ message FairBattleLevelEndResponse{
 
 
 /** 玩家进入游戏后准备完成请求 */
-message FairBattleLevelReadyRequest{
+message PlayerReadyRequest{
 	
 }
 
 /** 玩家进入游戏后准备完成返回 */
-message FairBattleLevelReadyResponse{
+message PlayerReadyResponse{
 	
 }
 
@@ -82,7 +82,7 @@ message PlayerRequireBattleMesAgainRequest{
 /** 玩家请求所有桢信息返回*/
 message PlayerRequireBattleMesAgainResponse{
 	/** 开始信息*/
-	optional FairBattleLevelStartPush fairBattleLevelSatrt = 1;
+	optional PlayerStartPush playerSatrt = 1;
 	/** 桢信息*/
 	repeated BattleMes battleMes = 2;
 }
@@ -99,12 +99,6 @@ message CheckPlayerFairBattleExistResponse{
 	optional int64 roomId = 2;	
 }
 
-/** 服务器心跳*/
-message FireBattleHeartBeatRequest{
-}
-
-message FireBattleHeartBeatResponse{
-}
 
 
 /////////////////////////////////////// push ////////////////////////////////////
@@ -125,7 +119,7 @@ message ServerBattleMesPush{
 
 
 /** 匹配完成,玩家进入匹配房间推送 */
-message FairBattleLevelStartPush{
+message PlayerStartPush{
 	/** 战斗玩家信息*/
 	repeated PlayerMes playerMes = 1;
 	/** 第一个操作玩家zoneId */
@@ -139,13 +133,13 @@ message FairBattleLevelStartPush{
 }
 
 /** 游戏正式开始推送 */
-message FairBattleLevelReadyFinishedPush{
+message PlayerReadyFinishedPush{
 
 }
 
 
 /** 玩家战斗结束推送*/
-message FairBattleLevelEndPush{
+message PlayerEndPush{
 	/** 所有的桢信息,测试用于战斗回放*/
 	repeated BattleMes battleMes = 2;
 	/** 0 正常结束 1 己方投降 2 对方投降*/
@@ -175,4 +169,12 @@ message PlayerMes{
 	/** 玩家id*/
 	required int64 userId = 1;
 
+}
+
+message OnePlayerReady {
+	required int32 userId = 1;
+}
+
+message PlayerNotReady{
+	repeated int32 userId = 1;
 }

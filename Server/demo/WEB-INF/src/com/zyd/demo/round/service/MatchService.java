@@ -124,7 +124,7 @@ public class MatchService extends BaseService {
 	}
 
 	// 移除玩家匹配队列
-	public void removeWaitUser(String token, Long userId) {
+	public void removeWaitUser(String token, Integer userId) {
 		String userKey = token;
 		// 待加入信息
 		cancelPlayer.put(userKey, userId);

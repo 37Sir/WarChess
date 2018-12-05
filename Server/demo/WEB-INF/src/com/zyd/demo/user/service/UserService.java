@@ -51,7 +51,7 @@ public class UserService extends BaseService {
         return req;
     }
 
-    private User getUserById(Integer userId) {
+    public User getUserById(Integer userId) {
         User result = cacheJDBCHandler.getDataByCacheNoSplit(TableName.USER.getTableName(), userId, User.class);
         return result;
     }
