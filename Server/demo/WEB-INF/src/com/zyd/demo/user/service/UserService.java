@@ -16,7 +16,7 @@ import com.zyd.demo.user.pojo.User;
 public class UserService extends BaseService {
 
     @SuppressWarnings("unused")
-    public LoginResponse.Builder login(String userName) throws BaseException {
+    public LoginResponse.Builder login(String userName,String token) throws BaseException {
         LoginResponse.Builder req = LoginResponse.newBuilder();
         //验证用户名的合法性
         if (userName == null || "".equals(userName) || userName.length() > DemoConstants.USER_NICK_NAME_MAX_LENGTH) {
@@ -40,7 +40,7 @@ public class UserService extends BaseService {
                 playerInfo.setUserId(userId);
                 playerInfo.setUserName(userName);
                 req.setPlayerInfo(playerInfo);
-                String md5String = MD5Util.md5(userName + userId+DemoConstants.PRIVATE_KEY); 
+                String md5String = MD5Util.md5(token + userId+DemoConstants.PRIVATE_KEY); 
                 req.setSign(md5String);
                 updateUser(user);
             } finally {
@@ -60,7 +60,7 @@ public class UserService extends BaseService {
         Date lastLoginTime,Date updateTime, Date createTime) {
         User user = new User(id,userName,rank,gold,diamond,winCount,loseCount,lastLoginTime,updateTime,createTime);
         cacheJDBCHandler.create(TableName.USER.getTableName(), user, user);
-        return null;
+        return user;
     }
 
     private Integer  getUserByName(String userName) {

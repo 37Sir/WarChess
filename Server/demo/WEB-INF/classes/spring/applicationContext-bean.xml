@@ -6,6 +6,8 @@
     <property name="mapperInterface" value="com.zyd.demo.user.dao.UserMapper"></property>
     <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
   </bean>
+  <bean name="proxyPushUtil" class="com.zyd.demo.common.push.ProxyPushUtil" init-method="init"></bean>
+  
   <!-- cache -->
   <bean id="memcachedHandler" class="com.zyd.demo.common.memcached.MemcachedHandler">
     <property name="mapperHelper" ref="mapperHelper"></property>

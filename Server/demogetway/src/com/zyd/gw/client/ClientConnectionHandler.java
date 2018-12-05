@@ -102,7 +102,7 @@ public class ClientConnectionHandler extends SimpleChannelInboundHandler<Packet>
                                 && ctx.channel().isActive()) {
                             logger.error("channelToken:{} No rpc call received from client {} in {} seconds, close channel",
                                     channelToken, getChannel().remoteAddress().toString(),AppConfig.HEART_BEAT_SECONDS);
-                            ctx.close();
+//                            ctx.close();
                         }
                     }
                 }

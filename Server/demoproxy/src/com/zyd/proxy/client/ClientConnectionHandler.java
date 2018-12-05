@@ -30,7 +30,6 @@ public class ClientConnectionHandler extends SimpleChannelInboundHandler<Packet>
    
      private String calling_rpc_token;
      private String last_rpc;
-     private Packet lastResponse;
      private MessageHeaderInfo user_info_ = MessageHeaderInfo.getDefaultInstance();
     public ClientConnectionHandler(SocketChannel ch) {
         this.channel = ch;
@@ -38,7 +37,7 @@ public class ClientConnectionHandler extends SimpleChannelInboundHandler<Packet>
     public void onConnectionClosed() {
       String token = user_info_.getUserToken();
       logger.warn("Client disconnected: {} channelToken:{}" , channel.remoteAddress(),channelToken);
-  //    ClientConnectPushUtil.clientConnectionHandlerMap.remove(token);
+      ClientConnectPushUtil.clientConnectionHandlerMap.remove(token);
     }
     
     public void responseRpcAgain(int error, Packet rets) {
@@ -47,7 +46,7 @@ public class ClientConnectionHandler extends SimpleChannelInboundHandler<Packet>
       header.setError(error);
       header.setRequestToken(last_rpc);
       int size = rets.buffers.size();
-//      logger.info("channelToken:{}--------------responseRpcAgain: error={} size={}" ,channelToken, error,size);
+      logger.info("channelToken:{}--------------responseRpcAgain: error={} size={}" ,channelToken, error,size);
       lastReceiveRPCTime = System.currentTimeMillis();
       channel.writeAndFlush(new Packet(header, rets));
   }
@@ -80,7 +79,6 @@ public class ClientConnectionHandler extends SimpleChannelInboundHandler<Packet>
         if (error != 300) {
             last_rpc = calling_rpc_token;
             calling_rpc_token = null;
-            lastResponse = rets;
             logger.info("responseRpc####"+last_rpc);
             MessageHeaderResponse.Builder header = MessageHeaderResponse.newBuilder();
             header.setError(error);
@@ -101,7 +99,6 @@ public class ClientConnectionHandler extends SimpleChannelInboundHandler<Packet>
             lastReceiveRPCTime = System.currentTimeMillis();        
             last_rpc = null;
             calling_rpc_token = null;
-            lastResponse = null;
             
             int size = rets.buffers.size();
             logger.info("channelToken:{}-------------ClientResponseRpc: error={} size={}" ,channelToken, error,size);

@@ -44,6 +44,7 @@ public class ClientConnectPushUtil {
 					header.setName(name);
 					header.setError(0);
 					Packet ddd = new Packet(header, data);
+					System.out.println("写回-------------------------------");
 					handler.getChannel().writeAndFlush(ddd);
 					
 					ClientConnectPushUtil.pushData.remove(token);

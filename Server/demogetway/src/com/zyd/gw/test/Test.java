@@ -2,6 +2,7 @@ package com.zyd.gw.test;
 
 import java.util.Scanner;
 import com.zyd.common.proto.client.ClientProtocol.LoginRequest;
+import com.zyd.common.proto.client.ClientProtocol.MessageHeaderInfo;
 import com.zyd.common.proto.client.ClientProtocol.MessageHeaderRequest;
 import com.zyd.common.rpc.Packet;
 import com.zyd.common.rpc.PacketDecoder;
@@ -42,8 +43,10 @@ public class Test {
       try {
         Channel ch = bootstrap.connect("127.0.0.1",10000).sync().channel();
         MessageHeaderRequest.Builder req = MessageHeaderRequest.newBuilder();
-        LoginRequest.Builder login = LoginRequest.newBuilder();
-        login.setUserName("Login");
+        MessageHeaderInfo.Builder mes = MessageHeaderInfo.newBuilder();
+        mes.setUserId(1);
+        mes.setUserToken("login");
+        req.setUserInfo(mes);
         while(true){
           Scanner sc  = new Scanner(System.in);
           String s = sc.nextLine();

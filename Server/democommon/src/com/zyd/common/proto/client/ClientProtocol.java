@@ -1338,15 +1338,15 @@ public final class ClientProtocol {
     com.google.protobuf.ByteString
         getClientIpBytes();
 
-    // optional int64 userId = 7;
+    // optional int32 userId = 7;
     /**
-     * <code>optional int64 userId = 7;</code>
+     * <code>optional int32 userId = 7;</code>
      */
     boolean hasUserId();
     /**
-     * <code>optional int64 userId = 7;</code>
+     * <code>optional int32 userId = 7;</code>
      */
-    long getUserId();
+    int getUserId();
 
     // optional string sign = 90;
     /**
@@ -1481,7 +1481,7 @@ public final class ClientProtocol {
             }
             case 56: {
               bitField0_ |= 0x00000010;
-              userId_ = input.readInt64();
+              userId_ = input.readInt32();
               break;
             }
             case 722: {
@@ -1691,19 +1691,19 @@ public final class ClientProtocol {
       }
     }
 
-    // optional int64 userId = 7;
+    // optional int32 userId = 7;
     public static final int USERID_FIELD_NUMBER = 7;
-    private long userId_;
+    private int userId_;
     /**
-     * <code>optional int64 userId = 7;</code>
+     * <code>optional int32 userId = 7;</code>
      */
     public boolean hasUserId() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional int64 userId = 7;</code>
+     * <code>optional int32 userId = 7;</code>
      */
-    public long getUserId() {
+    public int getUserId() {
       return userId_;
     }
 
@@ -1822,7 +1822,7 @@ public final class ClientProtocol {
       userDevice_ = com.zyd.common.proto.client.ClientProtocol.EDeviceType.None;
       requestToken_ = "";
       clientIp_ = "";
-      userId_ = 0L;
+      userId_ = 0;
       sign_ = "";
       ext_ = "";
     }
@@ -1851,7 +1851,7 @@ public final class ClientProtocol {
         output.writeBytes(5, getClientIpBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt64(7, userId_);
+        output.writeInt32(7, userId_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(90, getSignBytes());
@@ -1886,7 +1886,7 @@ public final class ClientProtocol {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(7, userId_);
+          .computeInt32Size(7, userId_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2020,7 +2020,7 @@ public final class ClientProtocol {
         bitField0_ = (bitField0_ & ~0x00000004);
         clientIp_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        userId_ = 0L;
+        userId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
         sign_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -2438,35 +2438,35 @@ public final class ClientProtocol {
         return this;
       }
 
-      // optional int64 userId = 7;
-      private long userId_ ;
+      // optional int32 userId = 7;
+      private int userId_ ;
       /**
-       * <code>optional int64 userId = 7;</code>
+       * <code>optional int32 userId = 7;</code>
        */
       public boolean hasUserId() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional int64 userId = 7;</code>
+       * <code>optional int32 userId = 7;</code>
        */
-      public long getUserId() {
+      public int getUserId() {
         return userId_;
       }
       /**
-       * <code>optional int64 userId = 7;</code>
+       * <code>optional int32 userId = 7;</code>
        */
-      public Builder setUserId(long value) {
+      public Builder setUserId(int value) {
         bitField0_ |= 0x00000010;
         userId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 userId = 7;</code>
+       * <code>optional int32 userId = 7;</code>
        */
       public Builder clearUserId() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        userId_ = 0L;
+        userId_ = 0;
         onChanged();
         return this;
       }
@@ -5119,7 +5119,7 @@ public final class ClientProtocol {
       "\021\n\tuserToken\030\001 \001(\t\022B\n\nuserDevice\030\002 \001(\0162(" +
       ".com.zyd.common.proto.client.EDeviceType" +
       ":\004None\022\024\n\014requestToken\030\004 \001(\t\022\020\n\010clientIp" +
-      "\030\005 \001(\t\022\016\n\006userId\030\007 \001(\003\022\014\n\004sign\030Z \001(\t\022\013\n\003" +
+      "\030\005 \001(\t\022\016\n\006userId\030\007 \001(\005\022\014\n\004sign\030Z \001(\t\022\013\n\003" +
       "ext\030[ \001(\t\"J\n\025MessageHeaderResponse\022\r\n\005er",
       "ror\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\024\n\014requestToken\030" +
       "\003 \001(\t\" \n\014LoginRequest\022\020\n\010userName\030\001 \001(\t\"" +
