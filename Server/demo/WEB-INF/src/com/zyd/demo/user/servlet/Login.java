@@ -21,7 +21,8 @@ public class Login extends BaseClientServlet {
     @Override
     public void logResponse(Packet returnParam) {
         logger.info("logResponse Login {}",
-            TextFormat.printToUnicodeString(returnParam.parseProtobuf(LoginResponse.PARSER, 0)));    }
+            TextFormat.printToUnicodeString(returnParam.parseProtobuf(LoginResponse.PARSER, 0)));    
+    }
 
     @Override
     public Packet serviceBeforeLogin(Packet paramValues, String rpcName) throws Exception {

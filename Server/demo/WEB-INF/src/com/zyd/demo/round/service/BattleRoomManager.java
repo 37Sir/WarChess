@@ -8,17 +8,18 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.zyd.common.proto.client.ClientProtocol.ErrorCode;
 import com.zyd.common.proto.client.WarChess.FairBattleLevelEndRequest;
 import com.zyd.common.proto.client.WarChess.FairBattleLevelEndResponse;
 import com.zyd.common.proto.client.WarChess.FairBattleLevelFattingFinishedRequest;
 import com.zyd.common.proto.client.WarChess.FairBattleLevelFattingFinishedResponse;
-import com.zyd.common.proto.client.WarChess.FairBattleLevelReadyRequest;
-import com.zyd.common.proto.client.WarChess.FairBattleLevelReadyResponse;
 import com.zyd.common.proto.client.WarChess.PlayerBattleMesRequest;
 import com.zyd.common.proto.client.WarChess.PlayerBattleMesResponse;
+import com.zyd.common.proto.client.WarChess.PlayerReadyRequest;
 import com.zyd.common.proto.client.WarChess.PlayerRequireBattleMesAgainRequest;
 import com.zyd.common.proto.client.WarChess.PlayerRequireBattleMesAgainResponse;
 import com.zyd.demo.common.BaseService;
+import com.zyd.demo.common.exception.BaseException;
 import com.zyd.demo.round.pojo.UserMatchInfo;
 
 
@@ -134,8 +135,9 @@ public class BattleRoomManager extends BaseService {
 		}
 	}
 
-	/** 准备请求 */
-	public FairBattleLevelReadyResponse onRequest(String token ,FairBattleLevelReadyRequest battleMesRequest) {
+	/** 准备请求 
+	 * @throws BaseException */
+	public void onRequest(String token ,PlayerReadyRequest battleMesRequest) throws BaseException {
 		BattleRoom battleRoom = null;
 		String userKey = token;
 		Long roomId = userToRoomIdMap.get(userKey);
@@ -144,9 +146,10 @@ public class BattleRoomManager extends BaseService {
 			battleRoom = battleRoomMap.get(roomId);
 		}
 		if (battleRoom == null || userMatchInfo == null) {
-			return null;
+            logger.warn("PLAYER_NOT_MATCH_SUCCESS userName:{}",token);
+            throw new BaseException(ErrorCode.PLAYER_NOT_MATCH_SUCCESS_VALUE); 
 		}
-		return battleRoom.doRequest(userMatchInfo, battleMesRequest);
+		battleRoom.doRequest(userMatchInfo, battleMesRequest);
 	}
 	
 	/** 得到战斗房间*/

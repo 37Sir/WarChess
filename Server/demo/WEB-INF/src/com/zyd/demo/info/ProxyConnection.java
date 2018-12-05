@@ -79,8 +79,7 @@ public class ProxyConnection {
             mainJobRunningGroup = new NioEventLoopGroup(1);
             loginJobRunningGroup = new NioEventLoopGroup(1);
             roomGameRunningGroup = new NioEventLoopGroup(1);
-        }
-        
+        }        
     }
     
     public void start() {
@@ -197,7 +196,7 @@ public class ProxyConnection {
                           final long startTime = System.currentTimeMillis();
                           Packet result = null;
                           BaseClientServlet servlet = (BaseClientServlet) beanFactory.getBean(name);
-                          result = servlet.serviceWithViladate(args, name,false);
+                          result = servlet.serviceWithViladate(args, name);
                           logGapTimeWithOutRes(name, id, startTime);
                           handler.responseRpc(id, 0, result,RPCQueueIDEnum.ROOM_GAME_QUEUE);
                       } catch (BaseException e) {
@@ -220,7 +219,7 @@ public class ProxyConnection {
                             Packet result = null;
                             logHeardMessage(name, id, args);
                             BaseClientServlet servlet = (BaseClientServlet) beanFactory.getBean(name);
-                            result = servlet.serviceWithViladate(args, name, servlet.isGuildLock());
+                            result = servlet.serviceWithViladate(args, name);
                             logGapTimeWithOutRes(name, id, startTime);
                             updateUserGuide(args);                             
                             handler.responseRpc(id, 0, args,RPCQueueIDEnum.MAIN_QUEUE);
