@@ -523,7 +523,7 @@ namespace Framework
                         if (panelLayerData.panel != null && !panelLayerData.panel.isInited)
                         {
                             panelLayerData.gameObject.SetActive(true);
-                            panelLayerData.panel.InitView(panelData.canRepeat);
+                            panelLayerData.panel.InitView(panelLayerData.gameObject);
                             needOpenView = true;
                         }
                     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PureMVC.Patterns.Facade;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Framework
     public class App
     {
         static App m_instance;
+        static Facade m_facade;
         static GameObject m_GameGlobal;
         static Dictionary<string, object> m_Managers = new Dictionary<string, object>();
         static string m_MainName = "Global";
@@ -39,6 +41,16 @@ namespace Framework
                 return m_instance;
             }
         }
+
+        public static Facade Facade
+        {
+            get
+            {
+                if (m_facade == null) m_facade = new Facade("Facade");
+                return m_facade;
+            }
+        }
+
         /// <summary>
         /// 添加管理器
         /// </summary>

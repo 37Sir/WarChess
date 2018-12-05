@@ -72,7 +72,7 @@ namespace Framework
         protected virtual void OnInitViewEnd(params object[] args)
         {
             MethodInfo mi = m_objectType.GetMethod("InitView");
-            mi.Invoke(m_object, null);
+            mi.Invoke(m_object, args);
             m_isInited = true;
         }
         protected virtual void OnWaitInitOpenViewEnd(params object[] args)
