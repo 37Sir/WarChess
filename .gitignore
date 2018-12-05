@@ -80,3 +80,5 @@ Client/.vs/Client/v15/Server/sqlite3/storage.ide
 Client/.vs/Client/v15/Server/sqlite3/storage.ide-shm
 Client/.vs/Client/v15/Server/sqlite3/storage.ide-wal
 Client/Assembly-CSharp.csproj
+Client/Assembly-CSharp-Editor.csproj
+Client/Client.sln

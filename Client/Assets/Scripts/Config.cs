@@ -10,6 +10,11 @@ public class Config{
     public static readonly int RpcTimeout = 10000;                  //rpc请求的超时时间ms
     public static readonly string RpcNamespace = "Com.Violet.Rpc";
     public static readonly string UIBaseDir = "UIRes";
+    public static readonly string SoundsRoot = "";
+    public static readonly string EffectsRoot = "";
+    public static readonly string EffectPacksRoot = "";
+    public static readonly string TweenPacksRoot = "";
+    public static readonly string EffectConfigPath = "";
 
     public class Game
     {

@@ -151,6 +151,22 @@ namespace Framework
                 return App.Instance.GetManager<ObjectPoolManager>(ManagerName.ObjectPool);
             }
         }
+
+        public static EffectManager EffectManager
+        {
+            get
+            {
+                return App.Instance.GetManager<EffectManager>(ManagerName.Effect);
+            }
+        }
+
+        public static SoundManager SoundManager
+        {
+            get
+            {
+                return App.Instance.GetManager<SoundManager>(ManagerName.Sound);
+            }
+        }
         #endregion
     }
 

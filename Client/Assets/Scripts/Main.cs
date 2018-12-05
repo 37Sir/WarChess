@@ -31,6 +31,8 @@ public class Main : MonoBehaviour {
         App.Instance.AddManager<ObjectPoolManager>(ManagerName.ObjectPool);
         App.Instance.AddManager<UIManager>(ManagerName.UI);
         App.Instance.AddManager<ResourceManager>(ManagerName.Resource);
+        App.Instance.AddManager<EffectManager>(ManagerName.Effect);
+        App.Instance.AddManager<SoundManager>(ManagerName.Sound);
     }
 
     void InitManager()
