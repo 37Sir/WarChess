@@ -88,9 +88,9 @@ public class BattleRoom {
 		for (UserMatchInfo userMatchInfo : userMatchInfoList) {
 			PlayerMes.Builder playerBuilder = PlayerMes.newBuilder();
 			playerBuilder.setUserId(userMatchInfo.getUid());
+			playerBuilder.setUserName(userMatchInfo.getToken());
 			builder.addPlayerMes(playerBuilder);
 		}
-		builder.setZoneId(1000);
 		builder.setUserId(startUserId);
 		builder.setRoomId(roomId);
 		disrupAll(PushReqestName.PlayerStartPush, builder.build());

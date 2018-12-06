@@ -119,7 +119,6 @@ public class InfoConnectionHandler extends RpcMessageHandler{
       if (jobRunningMax < jobRunning)
           jobRunningMax = jobRunning;
       final long startTime = System.currentTimeMillis();
-      System.out.println("info开始发送");
       super.requestRpc(name, args, new RpcResponseHandler() {
           @Override
           public void onResponse(int error, Packet results) {

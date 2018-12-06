@@ -16,7 +16,7 @@ public class PlayerCancelMatch extends BaseClientServlet{
     @Override
     public void logRequest(MessageHeaderInfo cui, Packet paramValues) {
         logger.info("logRequest PlayerCancelMatch {}, {}", TextFormat.printToUnicodeString(cui),
-            TextFormat.printToUnicodeString(paramValues.parseProtobuf(PlayerCancelMatchRequest.PARSER, 1))); 
+            TextFormat.printToUnicodeString(paramValues.parseProtobuf(PlayerCancelMatchRequest.PARSER, 1)) );
     }
 
     @Override

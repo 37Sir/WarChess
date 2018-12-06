@@ -8222,9 +8222,9 @@ public final class WarChess {
     com.zyd.common.proto.client.WarChess.PlayerMesOrBuilder getPlayerMesOrBuilder(
         int index);
 
-    // required int32 zoneId = 2;
+    // optional int32 zoneId = 2;
     /**
-     * <code>required int32 zoneId = 2;</code>
+     * <code>optional int32 zoneId = 2;</code>
      *
      * <pre>
      ** 第一个操作玩家zoneId 
@@ -8232,7 +8232,7 @@ public final class WarChess {
      */
     boolean hasZoneId();
     /**
-     * <code>required int32 zoneId = 2;</code>
+     * <code>optional int32 zoneId = 2;</code>
      *
      * <pre>
      ** 第一个操作玩家zoneId 
@@ -8476,11 +8476,11 @@ public final class WarChess {
       return playerMes_.get(index);
     }
 
-    // required int32 zoneId = 2;
+    // optional int32 zoneId = 2;
     public static final int ZONEID_FIELD_NUMBER = 2;
     private int zoneId_;
     /**
-     * <code>required int32 zoneId = 2;</code>
+     * <code>optional int32 zoneId = 2;</code>
      *
      * <pre>
      ** 第一个操作玩家zoneId 
@@ -8490,7 +8490,7 @@ public final class WarChess {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required int32 zoneId = 2;</code>
+     * <code>optional int32 zoneId = 2;</code>
      *
      * <pre>
      ** 第一个操作玩家zoneId 
@@ -8584,10 +8584,6 @@ public final class WarChess {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasZoneId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       if (!hasUserId()) {
         memoizedIsInitialized = 0;
         return false;
@@ -8896,10 +8892,6 @@ public final class WarChess {
       }
 
       public final boolean isInitialized() {
-        if (!hasZoneId()) {
-          
-          return false;
-        }
         if (!hasUserId()) {
           
           return false;
@@ -9244,10 +9236,10 @@ public final class WarChess {
         return playerMesBuilder_;
       }
 
-      // required int32 zoneId = 2;
+      // optional int32 zoneId = 2;
       private int zoneId_ ;
       /**
-       * <code>required int32 zoneId = 2;</code>
+       * <code>optional int32 zoneId = 2;</code>
        *
        * <pre>
        ** 第一个操作玩家zoneId 
@@ -9257,7 +9249,7 @@ public final class WarChess {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required int32 zoneId = 2;</code>
+       * <code>optional int32 zoneId = 2;</code>
        *
        * <pre>
        ** 第一个操作玩家zoneId 
@@ -9267,7 +9259,7 @@ public final class WarChess {
         return zoneId_;
       }
       /**
-       * <code>required int32 zoneId = 2;</code>
+       * <code>optional int32 zoneId = 2;</code>
        *
        * <pre>
        ** 第一个操作玩家zoneId 
@@ -9280,7 +9272,7 @@ public final class WarChess {
         return this;
       }
       /**
-       * <code>required int32 zoneId = 2;</code>
+       * <code>optional int32 zoneId = 2;</code>
        *
        * <pre>
        ** 第一个操作玩家zoneId 
@@ -11702,9 +11694,9 @@ public final class WarChess {
   public interface PlayerMesOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required int64 userId = 1;
+    // required int32 userId = 1;
     /**
-     * <code>required int64 userId = 1;</code>
+     * <code>required int32 userId = 1;</code>
      *
      * <pre>
      ** 玩家id
@@ -11712,13 +11704,28 @@ public final class WarChess {
      */
     boolean hasUserId();
     /**
-     * <code>required int64 userId = 1;</code>
+     * <code>required int32 userId = 1;</code>
      *
      * <pre>
      ** 玩家id
      * </pre>
      */
-    long getUserId();
+    int getUserId();
+
+    // optional string userName = 2;
+    /**
+     * <code>optional string userName = 2;</code>
+     */
+    boolean hasUserName();
+    /**
+     * <code>optional string userName = 2;</code>
+     */
+    java.lang.String getUserName();
+    /**
+     * <code>optional string userName = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserNameBytes();
   }
   /**
    * Protobuf type {@code com.zyd.common.proto.client.PlayerMes}
@@ -11777,7 +11784,12 @@ public final class WarChess {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              userId_ = input.readInt64();
+              userId_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              userName_ = input.readBytes();
               break;
             }
           }
@@ -11820,11 +11832,11 @@ public final class WarChess {
     }
 
     private int bitField0_;
-    // required int64 userId = 1;
+    // required int32 userId = 1;
     public static final int USERID_FIELD_NUMBER = 1;
-    private long userId_;
+    private int userId_;
     /**
-     * <code>required int64 userId = 1;</code>
+     * <code>required int32 userId = 1;</code>
      *
      * <pre>
      ** 玩家id
@@ -11834,18 +11846,62 @@ public final class WarChess {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required int64 userId = 1;</code>
+     * <code>required int32 userId = 1;</code>
      *
      * <pre>
      ** 玩家id
      * </pre>
      */
-    public long getUserId() {
+    public int getUserId() {
       return userId_;
     }
 
+    // optional string userName = 2;
+    public static final int USERNAME_FIELD_NUMBER = 2;
+    private java.lang.Object userName_;
+    /**
+     * <code>optional string userName = 2;</code>
+     */
+    public boolean hasUserName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string userName = 2;</code>
+     */
+    public java.lang.String getUserName() {
+      java.lang.Object ref = userName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          userName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string userName = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserNameBytes() {
+      java.lang.Object ref = userName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        userName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
-      userId_ = 0L;
+      userId_ = 0;
+      userName_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -11864,7 +11920,10 @@ public final class WarChess {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, userId_);
+        output.writeInt32(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getUserNameBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -11877,7 +11936,11 @@ public final class WarChess {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, userId_);
+          .computeInt32Size(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getUserNameBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -11999,8 +12062,10 @@ public final class WarChess {
 
       public Builder clear() {
         super.clear();
-        userId_ = 0L;
+        userId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
+        userName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -12033,6 +12098,10 @@ public final class WarChess {
           to_bitField0_ |= 0x00000001;
         }
         result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.userName_ = userName_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -12051,6 +12120,11 @@ public final class WarChess {
         if (other == com.zyd.common.proto.client.WarChess.PlayerMes.getDefaultInstance()) return this;
         if (other.hasUserId()) {
           setUserId(other.getUserId());
+        }
+        if (other.hasUserName()) {
+          bitField0_ |= 0x00000002;
+          userName_ = other.userName_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -12083,10 +12157,10 @@ public final class WarChess {
       }
       private int bitField0_;
 
-      // required int64 userId = 1;
-      private long userId_ ;
+      // required int32 userId = 1;
+      private int userId_ ;
       /**
-       * <code>required int64 userId = 1;</code>
+       * <code>required int32 userId = 1;</code>
        *
        * <pre>
        ** 玩家id
@@ -12096,30 +12170,30 @@ public final class WarChess {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required int64 userId = 1;</code>
+       * <code>required int32 userId = 1;</code>
        *
        * <pre>
        ** 玩家id
        * </pre>
        */
-      public long getUserId() {
+      public int getUserId() {
         return userId_;
       }
       /**
-       * <code>required int64 userId = 1;</code>
+       * <code>required int32 userId = 1;</code>
        *
        * <pre>
        ** 玩家id
        * </pre>
        */
-      public Builder setUserId(long value) {
+      public Builder setUserId(int value) {
         bitField0_ |= 0x00000001;
         userId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int64 userId = 1;</code>
+       * <code>required int32 userId = 1;</code>
        *
        * <pre>
        ** 玩家id
@@ -12127,7 +12201,81 @@ public final class WarChess {
        */
       public Builder clearUserId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0L;
+        userId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional string userName = 2;
+      private java.lang.Object userName_ = "";
+      /**
+       * <code>optional string userName = 2;</code>
+       */
+      public boolean hasUserName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string userName = 2;</code>
+       */
+      public java.lang.String getUserName() {
+        java.lang.Object ref = userName_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          userName_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string userName = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserNameBytes() {
+        java.lang.Object ref = userName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string userName = 2;</code>
+       */
+      public Builder setUserName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userName = 2;</code>
+       */
+      public Builder clearUserName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userName_ = getDefaultInstance().getUserName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string userName = 2;</code>
+       */
+      public Builder setUserNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        userName_ = value;
         onChanged();
         return this;
       }
@@ -13176,7 +13324,7 @@ public final class WarChess {
       "\0229\n\tbattleMes\030\003 \002(\0132&.com.zyd.common.pro" +
       "to.client.BattleMes\"\220\001\n\017PlayerStartPush\022" +
       "9\n\tplayerMes\030\001 \003(\0132&.com.zyd.common.prot" +
-      "o.client.PlayerMes\022\016\n\006zoneId\030\002 \002(\005\022\016\n\006us" +
+      "o.client.PlayerMes\022\016\n\006zoneId\030\002 \001(\005\022\016\n\006us" +
       "erId\030\003 \002(\003\022\016\n\006roomId\030\004 \001(\003\022\022\n\nrandomSeed" +
       "\030\005 \001(\005\"\031\n\027PlayerReadyFinishedPush\"Z\n\rPla" +
       "yerEndPush\0229\n\tbattleMes\030\002 \003(\0132&.com.zyd.",
@@ -13184,9 +13332,9 @@ public final class WarChess {
       "\003 \001(\005\"s\n\tBattleMes\022\017\n\007playNum\030\001 \002(\005\022\014\n\004d" +
       "irX\030\002 \001(\003\022\014\n\004dirY\030\003 \001(\003\022\021\n\tplaySkill\030\004 \001" +
       "(\010\022\021\n\titemIndex\030\005 \001(\005\022\023\n\013attckUserId\030\006 \001" +
-      "(\003\"\033\n\tPlayerMes\022\016\n\006userId\030\001 \002(\003\" \n\016OnePl" +
-      "ayerReady\022\016\n\006userId\030\001 \002(\005\" \n\016PlayerNotRe" +
-      "ady\022\016\n\006userId\030\001 \003(\005"
+      "(\003\"-\n\tPlayerMes\022\016\n\006userId\030\001 \002(\005\022\020\n\010userN" +
+      "ame\030\002 \001(\t\" \n\016OnePlayerReady\022\016\n\006userId\030\001 " +
+      "\002(\005\" \n\016PlayerNotReady\022\016\n\006userId\030\001 \003(\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -13330,7 +13478,7 @@ public final class WarChess {
           internal_static_com_zyd_common_proto_client_PlayerMes_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerMes_descriptor,
-              new java.lang.String[] { "UserId", });
+              new java.lang.String[] { "UserId", "UserName", });
           internal_static_com_zyd_common_proto_client_OnePlayerReady_descriptor =
             getDescriptor().getMessageTypes().get(23);
           internal_static_com_zyd_common_proto_client_OnePlayerReady_fieldAccessorTable = new

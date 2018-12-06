@@ -33,7 +33,6 @@ public abstract class RpcMessageHandler extends SimpleChannelInboundHandler<Pack
               break;
               
           case RpcType.RPC_RESPONSE_VALUE:
-            System.out.println(processing);
               RpcResponseHandler handler = processing.remove(request.getId());
               if (handler != null) {
                   logger.debug("onResponse.getId:{}, onResponse.getName:{},{}",request.getId(),request.getName(),request.getError());

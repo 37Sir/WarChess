@@ -5,9 +5,16 @@
 
     <bean id="baseClientServlet" class="com.zyd.demo.common.BaseClientServlet"> 
     	 <property name="userService" ref="userService"></property>            
-    	 <property name="matchService" ref="matchService"></property>            
+    	 <property name="matchService" ref="matchService"></property>
+    	 <property name="battleRoomManager" ref="battleRoomManager"></property>                        
     </bean>
    	<bean id="PlayerMatch" class="com.zyd.demo.round.servlet.PlayerMatch"
+		parent="baseClientServlet">
+	</bean>
+	<bean id="PlayerReady" class="com.zyd.demo.round.servlet.PlayerReady"
+		parent="baseClientServlet">
+	</bean>
+	<bean id="PlayerCancelMatch" class="com.zyd.demo.round.servlet.PlayerCancelMatch"
 		parent="baseClientServlet">
 	</bean>
 	<!-- user -->
