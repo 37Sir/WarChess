@@ -41,8 +41,8 @@ namespace com.zyd.common.proto.client {
     HACKER_ERROR = 55,
     NOT_GET_LOCK = 300,
     ACTIVATION_CODE_ERROR = 301,
-    DAILY_LOTTO_LIMIT = 400,
-    LOTTO_NOT_FREE = 452,
+    PLAYER_NOT_MATCH_SUCCESS = 400,
+    PLAYER_NOT_START = 401,
     DUPLICATE_REQUEST = 700,
     VERSION_ERROR = 995,
     DEVICE_TYPE_NOT_CORRECT = 998,
@@ -581,11 +581,11 @@ namespace com.zyd.common.proto.client {
     #endif//
     public const int UserIdFieldNumber = 7;
     private bool hasUserId;
-    private long userId_;
+    private int userId_;
     public bool HasUserId {
       get { return hasUserId; }
     }
-    public long UserId {
+    public int UserId {
       get { return userId_; }
     }
     
@@ -643,7 +643,7 @@ namespace com.zyd.common.proto.client {
         output.WriteString(5, field_names[0], ClientIp);
       }
       if (hasUserId) {
-        output.WriteInt64(7, field_names[5], UserId);
+        output.WriteInt32(7, field_names[5], UserId);
       }
       if (hasSign) {
         output.WriteString(90, field_names[3], Sign);
@@ -676,7 +676,7 @@ namespace com.zyd.common.proto.client {
           size += pb::CodedOutputStream.ComputeStringSize(5, ClientIp);
         }
         if (hasUserId) {
-          size += pb::CodedOutputStream.ComputeInt64Size(7, UserId);
+          size += pb::CodedOutputStream.ComputeInt32Size(7, UserId);
         }
         if (hasSign) {
           size += pb::CodedOutputStream.ComputeStringSize(90, Sign);
@@ -955,7 +955,7 @@ namespace com.zyd.common.proto.client {
               break;
             }
             case 56: {
-              result.hasUserId = input.ReadInt64(ref result.userId_);
+              result.hasUserId = input.ReadInt32(ref result.userId_);
               break;
             }
             case 722: {
@@ -1059,11 +1059,11 @@ namespace com.zyd.common.proto.client {
       public bool HasUserId {
         get { return result.hasUserId; }
       }
-      public long UserId {
+      public int UserId {
         get { return result.UserId; }
         set { SetUserId(value); }
       }
-      public Builder SetUserId(long value) {
+      public Builder SetUserId(int value) {
         PrepareBuilder();
         result.hasUserId = true;
         result.userId_ = value;
@@ -1072,7 +1072,7 @@ namespace com.zyd.common.proto.client {
       public Builder ClearUserId() {
         PrepareBuilder();
         result.hasUserId = false;
-        result.userId_ = 0L;
+        result.userId_ = 0;
         return this;
       }
       
@@ -1857,8 +1857,8 @@ namespace com.zyd.common.proto.client {
   public sealed partial class LoginResponse : pb::GeneratedMessageLite<LoginResponse, LoginResponse.Builder> {
     private LoginResponse() { }
     private static readonly LoginResponse defaultInstance = new LoginResponse().MakeReadOnly();
-    private static readonly string[] _loginResponseFieldNames = new string[] { "playerInfo" };
-    private static readonly uint[] _loginResponseFieldTags = new uint[] { 10 };
+    private static readonly string[] _loginResponseFieldNames = new string[] { "playerInfo", "sign" };
+    private static readonly uint[] _loginResponseFieldTags = new uint[] { 10, 18 };
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
@@ -1891,6 +1891,19 @@ namespace com.zyd.common.proto.client {
     }
     
     #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int SignFieldNumber = 2;
+    private bool hasSign;
+    private string sign_ = "";
+    public bool HasSign {
+      get { return hasSign; }
+    }
+    public string Sign {
+      get { return sign_; }
+    }
+    
+    #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
     public override bool IsInitialized {
@@ -1908,6 +1921,9 @@ namespace com.zyd.common.proto.client {
       if (hasPlayerInfo) {
         output.WriteMessage(1, field_names[0], PlayerInfo);
       }
+      if (hasSign) {
+        output.WriteString(2, field_names[1], Sign);
+      }
     }
     
     private int memoizedSerializedSize = -1;
@@ -1923,6 +1939,9 @@ namespace com.zyd.common.proto.client {
         if (hasPlayerInfo) {
           size += pb::CodedOutputStream.ComputeMessageSize(1, PlayerInfo);
         }
+        if (hasSign) {
+          size += pb::CodedOutputStream.ComputeStringSize(2, Sign);
+        }
         memoizedSerializedSize = size;
         return size;
       }
@@ -1932,6 +1951,7 @@ namespace com.zyd.common.proto.client {
     public override int GetHashCode() {
       int hash = GetType().GetHashCode();
       if (hasPlayerInfo) hash ^= playerInfo_.GetHashCode();
+      if (hasSign) hash ^= sign_.GetHashCode();
       return hash;
     }
     
@@ -1939,6 +1959,7 @@ namespace com.zyd.common.proto.client {
       LoginResponse other = obj as LoginResponse;
       if (other == null) return false;
       if (hasPlayerInfo != other.hasPlayerInfo || (hasPlayerInfo && !playerInfo_.Equals(other.playerInfo_))) return false;
+      if (hasSign != other.hasSign || (hasSign && !sign_.Equals(other.sign_))) return false;
       return true;
     }
     
@@ -2102,6 +2123,9 @@ namespace com.zyd.common.proto.client {
         if (other.HasPlayerInfo) {
           MergePlayerInfo(other.PlayerInfo);
         }
+        if (other.HasSign) {
+          Sign = other.Sign;
+        }
         return this;
       }
       
@@ -2141,6 +2165,10 @@ namespace com.zyd.common.proto.client {
               }
               input.ReadMessage(subBuilder, extensionRegistry);
               PlayerInfo = subBuilder.BuildPartial();
+              break;
+            }
+            case 18: {
+              result.hasSign = input.ReadString(ref result.sign_);
               break;
             }
           }
@@ -2187,6 +2215,27 @@ namespace com.zyd.common.proto.client {
         PrepareBuilder();
         result.hasPlayerInfo = false;
         result.playerInfo_ = null;
+        return this;
+      }
+      
+      public bool HasSign {
+        get { return result.hasSign; }
+      }
+      public string Sign {
+        get { return result.Sign; }
+        set { SetSign(value); }
+      }
+      public Builder SetSign(string value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasSign = true;
+        result.sign_ = value;
+        return this;
+      }
+      public Builder ClearSign() {
+        PrepareBuilder();
+        result.hasSign = false;
+        result.sign_ = "";
         return this;
       }
     }

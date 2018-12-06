@@ -6,27 +6,26 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class LoginPanelMediator : Mediator
+public class LobbyPanelMediator : Mediator
 {
-    public new const string NAME = "LoginPanelMediator";
-    private LoginPanel m_viewComponent;
+    public new const string NAME = "LobbyPanelMediator";
+    private LobbyPanel m_viewComponent;
 
-    public LoginPanelMediator(LoginPanel loginPanel) : base(NAME)
+    public LobbyPanelMediator(LobbyPanel lobbyPanel) : base(NAME)
     {
-        m_viewComponent = loginPanel;
+        m_viewComponent = lobbyPanel;
     }
 
     public override void OnRegister()
     {
         base.OnRegister();
-        Debug.Log("login panel mediator on registed");
+        Debug.Log("Lobby panel mediator on registed");
     }
 
     public override IList<string> ListNotificationInterests()
     {
         IList<string> list = new List<string>();
-        list.Add(NotificationConstant.LevelUp);
-        list.Add(NotificationConstant.LoginResponse);
+
         return list;
     }
 
@@ -37,8 +36,8 @@ public class LoginPanelMediator : Mediator
             case NotificationConstant.LevelUp:
                 Debug.Log("Level Up!!");
                 break;
-            case NotificationConstant.LoginResponse:
-                m_viewComponent.OnLoginSuccess();
+            case NotificationConstant.MatchResponse:
+                //m_viewComponent.OnMatchSuccess();
                 break;
             default:
                 break;
@@ -55,9 +54,9 @@ public class LoginPanelMediator : Mediator
         SendNotification(NotificationConstant.LobbyConnect);
     }
 
-    public void NotifyLogin()
+    public void NotifyBeginMatch()
     {
-        SendNotification(NotificationConstant.Login);
+        SendNotification(NotificationConstant.Match);
     }
 }
 

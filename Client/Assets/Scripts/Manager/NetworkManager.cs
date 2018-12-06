@@ -7,14 +7,10 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Framework
 {
-    enum NetworkType
-    {
-        TCP = 1,
-        UDP = 2,
-    }
 
     class SocketConfig
     {
@@ -24,13 +20,13 @@ namespace Framework
         public int loopTime;
         public int pipelineTime;
         public int heartBeatTime;
-        public NetworkType type;
+        public Config.NetworkType type;
         public int blockSize;
         public SocketConfig(string host, int port, int type, int blockSize, int connectedTimeout, int loopTime, int pipelineTime, int heartBeatTime)
         {
             this.host = host;
             this.port = port;
-            this.type = (NetworkType)type;
+            this.type = (Config.NetworkType)type;
             this.connectedTimeout = connectedTimeout;
             this.loopTime = loopTime;
             this.pipelineTime = pipelineTime;
@@ -46,18 +42,22 @@ namespace Framework
     {
         public delegate void DelegateRPC(int error, List<byte[]> bytes);
         public delegate void DelegatePushRPC(string name, List<byte[]> bytes);
-        private Socket m_socket;     //当前连接
-        private SocketConfig m_Config;
-        private DelegateRPC m_callback;
-        private DelegatePushRPC pushrpc = null;
+        private Socket m_socket;                    //当前连接
+        private SocketConfig m_Config;      
+        private string m_token;                     //token
+        private string m_sign;
+        private int m_userId = -1;
+        private DelegateRPC m_callback;             //普通请求callback
+        private Dictionary<string, DelegatePushRPC> m_pushCallMap = new Dictionary<string, DelegatePushRPC>();//push消息监听
+        private DelegatePushRPC m_pushCall = null;  //push消息监听
         private bool m_DealPipeline;
 
-        private static bool m_isReady;      //
+        private static bool m_isReady;      
         private static bool m_isQueue;
 
         private int m_receiveHeadSize;              //头内容
         int m_receiveHeadShift;
-        byte[] m_receiveBuff;               //接受的容器
+        byte[] m_receiveBuff;                       //接受的容器
         int m_receiveBuffPos;
        
         bool m_Loop;
@@ -65,6 +65,41 @@ namespace Framework
         List<byte[]> m_Pipeline;
         long m_HeartBeatLast;
         List<byte[]> m_receivePacket = new List<byte[]>();//收到的包
+        public string Token
+        {
+            get
+            {
+                return m_token;
+            }
+            set
+            {
+                m_token = value;
+            }
+        }
+
+        public string Sign
+        {
+            get
+            {
+                return m_sign;
+            }
+            set
+            {
+                m_sign = value;
+            }
+        }
+
+        public int UserId
+        {
+            get
+            {
+                return m_userId;
+            }
+            set
+            {
+                m_userId = value;
+            }
+        }
 
         #region Public Method
 
@@ -76,7 +111,6 @@ namespace Framework
         {
             Release();
             m_isReady = false;
-            //m_isQueue = false;
         }
 
 
@@ -124,6 +158,27 @@ namespace Framework
             SendRequest(headerBytes, bodyBytes);
         }
 
+        public void Request(string name, byte[] body, DelegateRPC callback)
+        {
+            m_callback = callback;
+            MessageHeaderRequest.Builder header = MessageHeaderRequest.CreateBuilder();
+            header.SetName(name);
+
+            MessageHeaderInfo.Builder messageHeaderInfo = MessageHeaderInfo.CreateBuilder();
+            messageHeaderInfo.SetUserToken(m_token);
+            if (m_sign != null)
+            {
+                messageHeaderInfo.SetSign(m_sign);
+            }
+            if (m_userId != -1)
+            {
+                messageHeaderInfo.SetUserId(m_userId);
+            }
+            header.SetUserInfo(messageHeaderInfo);
+            byte[] headerBytes = header.Build().ToByteArray();
+            SendRequest(headerBytes, body);
+        }
+
         public void SetConfig(string host, int port, int type, int blockSize, int connectedTimeout, int loopTime, int pipelineTime, int heartBeatTime)
         {
             SocketConfig config = new SocketConfig(host, port, type, blockSize, connectedTimeout, loopTime, pipelineTime, heartBeatTime);
@@ -133,6 +188,19 @@ namespace Framework
         SocketConfig GetConfig()
         {
             return m_Config;
+        }
+
+        /// <summary>
+        /// 注册Push消息监听
+        /// </summary>
+        /// <param name="delegatePush"></param>
+        public void RegisterPushCall(string name, DelegatePushRPC delegatePush)
+        {
+            //delegatePush.Method.Name; todo 一个消息可以有多个监听
+            if(!m_pushCallMap.ContainsKey(name))
+            {
+                m_pushCallMap.Add(name, delegatePush);
+            }
         }
 
         #endregion Public Method
@@ -170,15 +238,14 @@ namespace Framework
                 Debugger.LogError("No NetworkConfig, Connect Failed.");
                 return;
             }
-            Socket socket = null;
             switch (config.type)
             {
-                case NetworkType.TCP:
+                case Config.NetworkType.TCP:
                     IPAddress[] addr = Dns.GetHostAddresses(config.host);
                     var clientEndPoint = new IPEndPoint(addr[0], config.port);
                     m_socket = new Socket(addr[0].AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                    socket.Connect(clientEndPoint);
-                    if (socket.Connected)
+                    m_socket.Connect(clientEndPoint);
+                    if (m_socket.Connected)
                     {
                         OnConnected(true);
                     }
@@ -198,7 +265,7 @@ namespace Framework
                 m_DealPipeline = true;
                 m_HeartBeat = true;
                 m_Loop = true;
-                StartCoroutine(OnDataReceived());
+                StartCoroutine(CheckSocket());
             }
             else
             {
@@ -272,87 +339,117 @@ namespace Framework
             }
         }
 
+        /// <summary>
+        /// 分发push消息
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="packet"></param>
         protected void ResponsePush(string name, List<byte[]> packet)
         {
-            if (pushrpc != null)
+            if (m_pushCallMap.ContainsKey(name))
             {
-                pushrpc(name, packet);
+                m_pushCallMap[name](name, packet);
             }
         }
+
+        /// <summary>
+        /// 检测socket状态
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerator CheckSocket()
+        {
+            if(m_socket != null)
+            {
+                while (true)
+                {
+                    if(m_socket.Poll(0, SelectMode.SelectError))
+                    {
+                        Debug.LogError("Failed to connect to server .");
+                        OnDisconnected();
+                        break;
+                    }
+                    else if(m_socket.Poll(0, SelectMode.SelectRead))
+                    {
+                        int available = m_socket.Available;
+                        if (available > 0)
+                            OnDataReceived();
+                        else
+                        {
+                            OnDisconnected();
+                            break;
+                        }                          
+                    }
+                    yield return null;
+                }
+                //SendRequests();
+            }
+        }
+
 
         /// <summary>
         /// 接收数据
         /// </summary>
         /// <returns></returns>
-        private IEnumerator OnDataReceived()
+        private void OnDataReceived()
         {
             byte[] temp_buff = new byte[1];
-            if(m_socket != null)
+            while(m_socket != null && m_socket.Available > 0)
             {
-                while (!m_socket.Connected)
+                int available = m_socket.Available;
+                if (m_receiveBuff == null)
                 {
-                    int available = m_socket.Available;
-                    if (available > 0)
-                    {                  
-                        if (m_receiveBuff == null)
-                        {
-                            if (1 != m_socket.Receive(temp_buff, 1, SocketFlags.None))
-                                yield return null;
-                            byte data = temp_buff[0];
-                            m_receiveHeadSize |= (data & 0x7f) << m_receiveHeadShift;
-
-                            // still has data
-                            if ((data & 0x80) != 0)
-                            {
-                                m_receiveHeadShift += 7;
-                            }
-                            else
-                            {
-                                // a zero size means buffer sequence ends, a whole packet is received.
-                                if (m_receiveHeadSize == 0)
-                                {
-                                    m_receiveHeadSize = 0;
-                                    m_receiveHeadShift = 0;
-                                    OnPackedReceived(m_receivePacket);
-                                    m_receivePacket.Clear();
-                                    break;
-                                }
-                                else
-                                {
-                                    int buffer_size = m_receiveHeadSize - 1;
-                                    m_receiveHeadSize = 0;
-                                    m_receiveHeadShift = 0;
-                                    m_receiveBuffPos = 0;
-
-                                    if (buffer_size > 0)
-                                        m_receiveBuff = new byte[buffer_size];
-                                    else
-                                        m_receivePacket.Add(new byte[0]);
-                                }
-                            }
-                        }
+                    if (1 != m_socket.Receive(temp_buff, 1, SocketFlags.None))
+                        return;
+                    byte data = temp_buff[0];
+                    m_receiveHeadSize |= (data & 0x7f) << m_receiveHeadShift;
+                    // still has data
+                    if ((data & 0x80) != 0)
+                    {
+                        m_receiveHeadShift += 7;
                     }
-
-                    // we are receiving the packet content
                     else
                     {
-                        // size can read at this time.
-                        int recv_size = m_receiveBuff.Length - m_receiveBuffPos;
-                        if (recv_size > available)
-                            recv_size = available;
-                        // read data
-                        int num_readed = m_socket.Receive(m_receiveBuff, m_receiveBuffPos, recv_size, SocketFlags.None);
-                        // move read position
-                        m_receiveBuffPos += num_readed;
-                        // the entire buffer is received
-                        if (m_receiveBuffPos >= m_receiveBuff.Length)
+                        // a zero size means buffer sequence ends, a whole packet is received.
+                        if (m_receiveHeadSize == 0)
                         {
-                            m_receivePacket.Add(m_receiveBuff);
-                            m_receiveBuff = null;
+                            m_receiveHeadSize = 0;
+                            m_receiveHeadShift = 0;
+                            OnPackedReceived(m_receivePacket);
+                            m_receivePacket.Clear();
+                            break;
+                        }
+                        else
+                        {
+                            int buffer_size = m_receiveHeadSize - 1;
+                            m_receiveHeadSize = 0;
+                            m_receiveHeadShift = 0;
+                            m_receiveBuffPos = 0;
+
+                            if (buffer_size > 0)
+                                m_receiveBuff = new byte[buffer_size];
+                            else
+                                m_receivePacket.Add(new byte[0]);
                         }
                     }
                 }
-                OnDisconnected();
+                // we are receiving the packet content
+                else
+                {
+                    // size can read at this time.
+                    int recv_size = m_receiveBuff.Length - m_receiveBuffPos;
+                    if (recv_size > available)
+                        recv_size = available;
+                    // read data
+                    int num_readed = m_socket.Receive(m_receiveBuff, m_receiveBuffPos, recv_size, SocketFlags.None);
+                    // move read position
+                    m_receiveBuffPos += num_readed;
+                    // the entire buffer is received
+                    if (m_receiveBuffPos >= m_receiveBuff.Length)
+                    {
+                        m_receivePacket.Add(m_receiveBuff);
+                        m_receiveBuff = null;
+                    }
+                }
             }
         }
 

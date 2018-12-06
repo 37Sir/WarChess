@@ -19,9 +19,8 @@ public class Main : MonoBehaviour {
     {
         DontDestroyOnLoad(gameObject);  //防止销毁自己
         AddManager();
-
+        App.NetworkManager.Init(true);
         App.NSceneManager.LoadScene("SLogin");
-        
     }
 
     void AddManager()

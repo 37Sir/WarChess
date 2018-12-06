@@ -22,6 +22,20 @@ public class Config{
         public static int WaitingReady = 60;                        //准备等待秒数
         public static int WaitingRound = 30;                        //回合等待秒数
     }
+
+    public enum NetworkType
+    {
+        TCP = 0,
+        UDP = 1,
+    }
+
+    public class PushMessage
+    {
+        public const string MatchSuccess = "PlayerStartPush";
+        public const string PlayerNotReady = "PlayerNotReady";
+        public const string OnePlayerReady = "OnePlayerReady";
+        public const string PlayerReadyFinish = "PlayerReadyFinishedPush";
+    }
 }
 
 public class ManagerName

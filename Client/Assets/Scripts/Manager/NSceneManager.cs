@@ -18,6 +18,8 @@ namespace Framework
 
         public void LoadScene(string sceneName)
         {
+            App.UIManager.ReleaseAllPanel();
+            App.ObjectPoolManager.ReleaseObjectPool();
             loadingScene = sceneName;
             SceneManager.LoadScene(sceneName);
         }
@@ -26,11 +28,9 @@ namespace Framework
         {
             if (loadingScene != null && s2.name == loadingScene)
             {
-                
+                Type t = typeof(SceneLoader);
+                t.GetMethod(loadingScene).Invoke(null, null);
                 loadingScene = null;
-                App.UIManager.BindUIControl();
-                App.UIManager.RegisterPanel("SLogin", "LoginPanel", UILayerType.NormalLayer, false);
-                App.UIManager.OpenPanel("LoginPanel");
             }
         }
 
