@@ -27,6 +27,6 @@ public class MatchCommand : SimpleCommand
 
     private void Response(int error, List<byte[]> btData)
     {
-        Debug.Log("Begin Match");
+        SendNotification(NotificationConstant.MatchResponse);
     }
 }

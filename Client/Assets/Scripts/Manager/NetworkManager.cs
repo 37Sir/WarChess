@@ -314,7 +314,6 @@ namespace Framework
             {
                 error = header.Error;
                 packet.RemoveAt(0);
-                Debug.Log("Header Error Code = " + error);
             }
 
             //push 的消息

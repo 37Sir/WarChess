@@ -25,7 +25,7 @@ public class LobbyPanelMediator : Mediator
     public override IList<string> ListNotificationInterests()
     {
         IList<string> list = new List<string>();
-
+        list.Add(NotificationConstant.MatchResponse);
         return list;
     }
 
@@ -37,7 +37,7 @@ public class LobbyPanelMediator : Mediator
                 Debug.Log("Level Up!!");
                 break;
             case NotificationConstant.MatchResponse:
-                //m_viewComponent.OnMatchSuccess();
+                m_viewComponent.OnResponseMatch();
                 break;
             default:
                 break;
