@@ -370,7 +370,7 @@ namespace Framework
                     else if(m_socket.Poll(0, SelectMode.SelectRead))
                     {
                         int available = m_socket.Available;
-                        if (available > 0)
+                        if (available  > 0)
                             OnDataReceived();
                         else
                         {

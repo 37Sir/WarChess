@@ -1,0 +1,60 @@
+﻿using Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class PVPPanel
+{
+    private Button m_ready;
+    private GameObject m_piece;
+    private PVPPanelMediator m_mediator;
+    private UserDataProxy m_proxy;//todo
+
+    public void InitView(GameObject gameObject)
+    {
+        m_mediator = new PVPPanelMediator(this);
+        m_proxy = new UserDataProxy();
+        App.Facade.RegisterMediator(m_mediator);
+        App.Facade.RegisterProxy(m_proxy);
+        m_piece = GameObject.Find("m_Chess");
+        m_ready = gameObject.transform.Find("m_Ready").gameObject.GetComponent<Button>();
+        m_ready.onClick.AddListener(OnReadyClick);
+    }
+
+    public void OpenView()
+    {
+        InitChessBoard();
+    }
+
+    /// <summary>
+    /// 初始化棋盘
+    /// </summary>
+    private void InitChessBoard()
+    {
+        foreach(Piece piece in m_mediator.pieces.Values)
+        {
+            GameObject temp = GameObject.Instantiate(m_piece);//todo
+            PieceItem pieceItem = new PieceItem();
+            pieceItem.InitView(temp, piece);
+        }
+    }
+
+    private void OnReadyClick()
+    {
+
+    }
+
+    public void CloseView()
+    {
+
+    }
+
+    public void DestroyView()
+    {
+
+    }
+}
+

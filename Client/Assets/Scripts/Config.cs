@@ -16,6 +16,8 @@ public class Config{
     public static readonly string TweenPacksRoot = "";
     public static readonly string EffectConfigPath = "";
 
+    public static float PieceWidth = 5.5f;
+
     public class Game
     {
         public static int WaitingFindEnemy = 45;                    //匹配等待秒数
@@ -27,6 +29,22 @@ public class Config{
     {
         TCP = 0,
         UDP = 1,
+    }
+
+    public enum PieceColor
+    {
+        BLACK = 0,
+        WHITE = 1,
+    }
+
+    public enum PieceType
+    {
+        P = 0,
+        N = 1,
+        B = 2,
+        R = 3,
+        Q = 4,
+        K = 5,
     }
 
     public class PushMessage
