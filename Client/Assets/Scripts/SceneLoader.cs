@@ -25,6 +25,8 @@ public class SceneLoader
 
     public static void SGame()
     {
-
+        App.UIManager.BindUIControl();
+        App.UIManager.RegisterPanel("SGame", "PVPPanel", UILayerType.NormalLayer, false);
+        App.UIManager.OpenPanel("PVPPanel");
     }
 }

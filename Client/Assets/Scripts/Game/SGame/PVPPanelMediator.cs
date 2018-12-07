@@ -10,7 +10,7 @@ public class PVPPanelMediator : Mediator
 {
     public new const string NAME = "PVPPanelMediator";
     private PVPPanel m_viewComponent;
-    public Dictionary<string, Piece> pieces;
+    public List<Piece> pieces = new List<Piece>();
     
     public PVPPanelMediator(PVPPanel pvpPanel) : base(NAME)
     {
@@ -42,21 +42,21 @@ public class PVPPanelMediator : Mediator
     {
         Piece temp;
         temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.B, 1, 2);
-        pieces.Add("P", temp);
+        pieces.Add(temp);
         temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.B, 2, 2);
-        pieces.Add("P", temp);
+        pieces.Add(temp);
         temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.B, 3, 2);
-        pieces.Add("P", temp);
+        pieces.Add(temp);
         temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.B, 4, 2);
-        pieces.Add("P", temp);
+        pieces.Add(temp);
         temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.B, 5, 2);
-        pieces.Add("P", temp);
+        pieces.Add(temp);
         temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.B, 6, 2);
-        pieces.Add("P", temp);
+        pieces.Add(temp);
         temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.B, 7, 2);
-        pieces.Add("P", temp);
+        pieces.Add(temp);
         temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.B, 8, 2);
-        pieces.Add("P", temp);
+        pieces.Add(temp);
     }
 }
 

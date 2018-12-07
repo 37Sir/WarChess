@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class LobbyPanel
 {
     private Button m_PVP;
+    private Button m_PVE;
     private Button m_cancel;
     private GameObject m_Select;
     private GameObject m_Searching;
@@ -34,11 +35,13 @@ public class LobbyPanel
         App.Facade.RegisterProxy(m_proxy);
         m_Select = gameObject.transform.Find("m_Select").gameObject;
         m_Searching = gameObject.transform.Find("m_Searching").gameObject;
+        m_PVE = gameObject.transform.Find("m_Select/m_PVE").gameObject.GetComponent<Button>();
         m_PVP = gameObject.transform.Find("m_Select/m_PVP").gameObject.GetComponent<Button>();
         m_cancel = gameObject.transform.Find("m_Searching/m_CancelBtn").gameObject.GetComponent<Button>();
         m_SearchTime = gameObject.transform.Find("m_Searching/m_SearchContainer/m_SearchTime").gameObject.GetComponent<Text>();
 
         m_PVP.onClick.AddListener(OnPVPClick);
+        m_PVE.onClick.AddListener(OnPVEClick);
         m_cancel.onClick.AddListener(OnCancelClick);
         App.Facade.RegisterCommand(NotificationConstant.Match, () => new MatchCommand());
         App.NetworkManager.RegisterPushCall(Config.PushMessage.MatchSuccess, OnMatchSuccess);
@@ -50,6 +53,16 @@ public class LobbyPanel
     public void OpenView()
     {
         Debug.Log("Lobby Panel Opened");
+    }
+
+    public void CloseView()
+    {
+
+    }
+
+    public void DestroyView()
+    {
+
     }
 
     /// <summary>
@@ -117,6 +130,11 @@ public class LobbyPanel
     private void OnPVPClick()
     {
         m_mediator.NotifyBeginMatch();
+    }
+
+    private void OnPVEClick()
+    {
+        App.NSceneManager.LoadScene("SGame");
     }
 
     private void OnCancelClick()

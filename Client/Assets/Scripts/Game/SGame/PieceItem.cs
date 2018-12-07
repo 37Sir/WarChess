@@ -12,6 +12,7 @@ public class PieceItem
     private TextMesh m_Type;//棋子类型
     public void InitView(GameObject gameObject, Piece pieceData)
     {
+        m_gameObject = gameObject;
         m_mediator = new PieceItemMediator(this);
         App.Facade.RegisterMediator(m_mediator);
         m_mediator.InitPieceData(pieceData);
@@ -42,7 +43,7 @@ public class PieceItem
                 m_Type.text = "王";
                 break;
         }
-        m_gameObject.transform.position = new Vector3((pieceData.x - 1) * Config.PieceWidth, (pieceData.y - 1) * Config.PieceWidth);
+        m_gameObject.transform.localPosition = new Vector3((pieceData.x - 1) * Config.PieceWidth, 0, (pieceData.y - 1) * Config.PieceWidth);
 
     }
 
