@@ -8,15 +8,15 @@ public enum PushReqestName {
 	// 玩家可以进行下一帧操作推送
     PlayNextPush("PlayNextPush"),
 	// 匹配开始推送
-    PlayerStartPush("FairBattleLevelStartPush"),
+    PlayerStartPush("PlayerStartPush"),
     // 玩家战斗结束推送
-    PlayerEndPush("FairBattleLevelEndPush"),
+    PlayerEndPush("PlayerEndPush"),
     //有玩家玩家未准备    
     PlayerNotReady("PlayerNotReady"),
     //某一玩家准备消息推送
     OnePlayerReady("OnePlayerReady"),
     // 所有玩家准备完成推送
-    PlayerReadyFinishedPush("FairBattleLevelReadyFinishedPush");
+    PlayerReadyFinishedPush("PlayerReadyFinishedPush");
 	PushReqestName(String name) {
 		this.requestName = name;
 	}

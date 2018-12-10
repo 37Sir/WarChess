@@ -9,6 +9,7 @@ import com.zyd.common.rpc.Packet;
 import com.zyd.demo.common.exception.BaseException;
 import com.zyd.demo.common.utils.ConfigurationUtil;
 import com.zyd.demo.round.service.BattleRoomManager;
+import com.zyd.demo.round.service.ChessService;
 import com.zyd.demo.round.service.MatchService;
 import com.zyd.demo.user.pojo.User;
 import com.zyd.demo.user.service.UserService;
@@ -76,8 +77,19 @@ public class BaseClientServlet {
     protected MatchService matchService;
     protected UserService userService;
     protected BattleRoomManager battleRoomManager;
+    protected ChessService chessService;
+
     
-    
+    public ChessService getChessService() {
+      return chessService;
+    }
+
+
+    public void setChessService(ChessService chessService) {
+      this.chessService = chessService;
+    }
+
+
     public BattleRoomManager getBattleRoomManager() {
       return battleRoomManager;
     }

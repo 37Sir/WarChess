@@ -24,7 +24,7 @@ message PlayerCancelMatchResponse{
 /** 玩家战斗的桢信息请求*/
 message PlayerBattleMesRequest{
 	/** 操作桢信息*/
-	required BattleMes battleMes = 2;
+	optional BattleMes battleMes = 2;
 }
 
 /** 玩家战斗的桢信息返回 */
@@ -122,14 +122,10 @@ message ServerBattleMesPush{
 message PlayerStartPush{
 	/** 战斗玩家信息*/
 	repeated PlayerMes playerMes = 1;
-	/** 第一个操作玩家zoneId */
-	optional int32 zoneId = 2;
 	/** 第一个操作玩家userId */
-	required int64 userId = 3;
+	required int32 userId = 3;
 	/** 房间id */
-	optional int64 roomId = 4;
-	/** 战斗随机数种子 */
-	optional int32 randomSeed = 5;
+	optional int32 roomId = 4;
 }
 
 /** 游戏正式开始推送 */
@@ -150,18 +146,9 @@ message PlayerEndPush{
 
 /** 桢信息 */
 message BattleMes{
-	/** 当前操作的桢*/
-	required int32 playNum = 1;
-	/** 移动方向x */
-	optional int64 dirX = 2;
-	/** 移动方向y */
-	optional int64 dirY = 3; 
-	/** 是否释放技能 */
-	optional bool playSkill = 4;
-	/** 释放技能的卡牌 */
-	optional int32 itemIndex = 5;
-	/** 是否是进攻方 */
-	optional int64 attckUserId = 6;
+	optional int32 from =1 ; //初始位置
+	optional int32 to = 2 ; //移动位置
+	
 }
 
 /** 战斗玩家信息*/

@@ -41,7 +41,6 @@ public class InfoProxyConnectionHandler extends SimpleChannelInboundHandler<Pack
       channel.writeAndFlush(new Packet(request));
   }
     private void responseRPC(int error, Packet results) {
-      System.out.println("response------------");
         handler.onResponse(error, results);
       
     }

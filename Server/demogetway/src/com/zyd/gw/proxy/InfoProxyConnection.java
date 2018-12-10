@@ -1,5 +1,7 @@
 package com.zyd.gw.proxy;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.zyd.common.rpc.PacketDecoder;
 import com.zyd.common.rpc.PacketEncoder;
 import com.zyd.gw.pojo.ProxyPojo;
@@ -21,6 +23,7 @@ public class InfoProxyConnection {
   private final EventLoopGroup group;
   private InfoProxyConnectionHandler handler;
   private boolean connected;
+  static Logger logger = LoggerFactory.getLogger(InfoProxyConnection.class.getName());
 
   public InfoProxyConnection(String host, int port,  EventLoopGroup group) {
     this.host = host;
@@ -88,12 +91,12 @@ public class InfoProxyConnection {
                 @Override
                 public void operationComplete(ChannelFuture future) throws Exception {
                     try {
-//                        logger.error("ProxyConnection ++{}",future.channel().isActive());
+                        logger.error("ProxyConnection ++{}",future.channel().isActive());
                         if (!connected) {
                           onDisconnected();
                         }
                     } catch (Exception e) {
-//                        logger.error("ProxyConnection disconnected: " + e.getMessage(),e);
+                        logger.error("ProxyConnection disconnected: " + e.getMessage(),e);
                     }
                 }
             });
@@ -112,13 +115,11 @@ public class InfoProxyConnection {
     }
     
     protected void onConnected() {
-//      logger.info("Connect to infoProxyConnect success! {}:{} serverId:{}",host,port,serverId);
-        System.out.println("Connect to infoProxyConnect success! "+host+port);
+        logger.info("Connect to infoProxyConnect success! {}:{}",host,port);
     }
     
     protected void onDisconnected() {
-//      logger.info("infoProxyConnect disconnected!  {}:{} serverId:{}",host,port,serverId);
-        System.out.println("infoProxyConnect disconnected!  {}:{} serverId:{}"+host+port);
+        logger.info("infoProxyConnect disconnected!  {}:{}",host,port);
         group.shutdownGracefully();
     }
 

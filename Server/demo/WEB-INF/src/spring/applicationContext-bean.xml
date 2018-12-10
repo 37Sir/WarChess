@@ -27,7 +27,9 @@
       <property name="battleRoomManager" ref="battleRoomManager"></property>  
       <property name="commonService" ref="commonService"></property>  
       <property name="userService" ref="userService"></property>  
-      <property name="cacheJDBCHandler" ref="cacheJDBCHandler"></property>                      
+      <property name="cacheJDBCHandler" ref="cacheJDBCHandler"></property>
+      <property name="chessService" ref="chessService"></property>                      
+                            
   </bean>
   
   <bean id="matchService" class="com.zyd.demo.round.service.MatchService" parent="baseService" init-method="init">
@@ -40,7 +42,8 @@
   
   <bean id="userService" class="com.zyd.demo.user.service.UserService" parent="baseService">
   </bean>
-  
+  <bean id="chessService" class="com.zyd.demo.user.service.ChessService" parent="baseService">
+  </bean>
   <bean id="mapperHelper" class="com.zyd.demo.common.jdbc.MapperHelper">
       <property name="userMapper" ref="userMapper"></property>		
   </bean> 

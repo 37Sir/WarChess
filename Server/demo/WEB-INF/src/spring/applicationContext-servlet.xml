@@ -6,7 +6,8 @@
     <bean id="baseClientServlet" class="com.zyd.demo.common.BaseClientServlet"> 
     	 <property name="userService" ref="userService"></property>            
     	 <property name="matchService" ref="matchService"></property>
-    	 <property name="battleRoomManager" ref="battleRoomManager"></property>                        
+    	 <property name="battleRoomManager" ref="battleRoomManager"></property> 
+         <property name="chessService" ref="chessService"></property>                         
     </bean>
    	<bean id="PlayerMatch" class="com.zyd.demo.round.servlet.PlayerMatch"
 		parent="baseClientServlet">

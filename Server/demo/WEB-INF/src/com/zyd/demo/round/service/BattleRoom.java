@@ -54,6 +54,10 @@ public class BattleRoom {
 //	public List<BattleMes> serverBattleMesList = new ArrayList<>();
 	// 当前操作桢的索引
 	private int currentPlayNum = 0;
+	//玩家1棋子index——type
+	private Map<Integer, Integer> userOne = new HashMap<>();
+	//玩家2棋子index——type
+    private Map<Integer, Integer> userTwo = new HashMap<>();
 	// 结束阶段发送的用户 Uid-FairBattleLevelEndRequest
 	private Map<Integer, FairBattleLevelEndRequest> battleEndRequestMap = new HashMap<>();
 	// 是否可以将房间移出
@@ -70,8 +74,15 @@ public class BattleRoom {
 	private boolean isGiveUp = false;
 	// 主动放弃的玩家
 	private Integer giveUpUserId = null;
-
-
+	//玩家1王的位置
+	int kingOne = 5;
+	//玩家2王的位置
+	int kingTwo = 61;
+	//玩家1是否被将军
+	boolean jiangjunOne = false;
+	//顽家2是否被将军
+	boolean jiangjunTwo = false;
+	
 	private static final Logger logger = LoggerFactory.getLogger(BattleRoom.class);
 
 	/** 战斗开始 */
@@ -121,6 +132,7 @@ public class BattleRoom {
 			if (dealUserMap.size() == userMatchInfoList.size()) {
 				battleStatus = BattleStatus.fightWaiting;
 				dealUserMap.clear();
+				initChess();
 				nextTime = System.currentTimeMillis() + BattleConfig.playTime;
 				disrupAll(PushReqestName.PlayerReadyFinishedPush,
 						PlayerReadyFinishedPush.newBuilder().build());
@@ -408,17 +420,93 @@ public class BattleRoom {
 		}
 		return nextItem;
 	}
-
-	public List<UserMatchInfo> getUserMatchInfoList() {
-		return userMatchInfoList;
+	
+	/**
+	 * 初始化玩家棋子，固定的写死
+	 * 1:兵  2 ：车 3：马  4：象 5：王后 6：王
+	 */
+	public void initChess() {
+	    for (int i = 1; i <= 6; i++) {
+	        if (i==1) {
+	            for (int y = 9; y<=16; y++ ) {
+	                userOne.put(y, 1);
+                    userTwo.put(y+40, 1);
+	            }
+	        } else if (i==2) {
+	            userOne.put(1, 2);
+	            userOne.put(8, 2);
+	            userTwo.put(57, 2);
+	            userTwo.put(64, 2);
+	        } else if (i == 3 ) {
+                userOne.put(2, 3);
+                userOne.put(7, 3);
+                userTwo.put(58, 3);
+                userTwo.put(63, 3);	            
+	        } else if (i == 4) {
+                userOne.put(3, 4);
+                userOne.put(6, 4);
+                userTwo.put(59, 4);
+                userTwo.put(62, 4);  	            
+	        } else if (i == 5) {
+                userOne.put(4, 5);
+                userTwo.put(60, 5);	            
+	        } else if (i == 6) {
+                userOne.put(5, 6);
+                userTwo.put(61, 6); 	            
+	        }
+	    }
 	}
+	/**是否可以走棋*/
+	public boolean isCanMove(int nextItem, int from, int to ) {
+	    if (nextItem == 0) {
+	        //对应方是否在初始位置有棋子
+	        if (!userOne.containsKey(from) || userOne.containsKey(to)) {
+	            return false;
+	        }
+	        chessMove(userOne.get(from),from,to);
+	    } else {
+            if (!userTwo.containsKey(from) || userTwo.containsKey(to)) {
+                  return false;
+            }	      
+	    }	    
+	    return true;
+	}
+	
+	/**
+	 * 是否能移动
+	 */
+	private void chessMove(Integer integer, int from, int to) {
+	    if (integer.intValue() == 1) {
+	        
+	    }
+    }
+
+    public List<UserMatchInfo> getUserMatchInfoList() {
+  		return userMatchInfoList;
+  	}
 
 	public void setUserMatchInfoList(List<UserMatchInfo> userMatchInfoList) {
 		this.userMatchInfoList = userMatchInfoList;
+	}		
+
+	public Map<Integer, Integer> getUserOne() {
+        return userOne;
 	}
 
-	enum BattleStatus {
-		start, fighting, fightWaiting, waitFinish, finished
-	}
+	public void setUserOne(Map<Integer, Integer> userOne) {
+	  this.userOne = userOne;
+    }
+
+    public Map<Integer, Integer> getUserTwo() {
+        return userTwo;
+    }
+
+    public void setUserTwo(Map<Integer, Integer> userTwo) {
+        this.userTwo = userTwo;
+    }
+
+    enum BattleStatus {
+  		start, fighting, fightWaiting, waitFinish, finished
+  	}
 
 }

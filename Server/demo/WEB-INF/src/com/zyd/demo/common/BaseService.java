@@ -3,6 +3,7 @@ package com.zyd.demo.common;
 import com.zyd.demo.common.memcached.CacheJDBCHandler;
 import com.zyd.demo.common.nosql.NosqlService;
 import com.zyd.demo.round.service.BattleRoomManager;
+import com.zyd.demo.round.service.ChessService;
 import com.zyd.demo.user.service.UserService;
 
 public class BaseService {
@@ -12,9 +13,17 @@ public class BaseService {
     protected CommonService commonService;
     protected UserService userService;
     protected CacheJDBCHandler cacheJDBCHandler;
+    protected ChessService chessService;
 
-    
-    
+   
+    public ChessService getChessService() {
+      return chessService;
+    }
+
+    public void setChessService(ChessService chessService) {
+      this.chessService = chessService;
+    }
+
     public CacheJDBCHandler getCacheJDBCHandler() {
       return cacheJDBCHandler;
     }
