@@ -15,8 +15,6 @@ import com.zyd.common.proto.client.WarChess.BattleMes;
 import com.zyd.common.proto.client.WarChess.PlayerEndPush;
 import com.zyd.common.proto.client.WarChess.FairBattleLevelEndRequest;
 import com.zyd.common.proto.client.WarChess.FairBattleLevelEndResponse;
-import com.zyd.common.proto.client.WarChess.FairBattleLevelFattingFinishedRequest;
-import com.zyd.common.proto.client.WarChess.FairBattleLevelFattingFinishedResponse;
 import com.zyd.common.proto.client.WarChess.PlayerReadyFinishedPush;
 import com.zyd.common.proto.client.WarChess.PlayerStartPush;
 import com.zyd.common.proto.client.WarChess.OnePlayerReady;
@@ -25,6 +23,8 @@ import com.zyd.common.proto.client.WarChess.PlayerBattleMesRequest;
 import com.zyd.common.proto.client.WarChess.PlayerBattleMesResponse;
 import com.zyd.common.proto.client.WarChess.PlayerMes;
 import com.zyd.common.proto.client.WarChess.PlayerNotReady;
+import com.zyd.common.proto.client.WarChess.PlayerPaintingEndRequest;
+import com.zyd.common.proto.client.WarChess.PlayerPaintingEndResponse;
 import com.zyd.common.proto.client.WarChess.PlayerReadyRequest;
 import com.zyd.common.proto.client.WarChess.PlayerRequireBattleMesAgainRequest;
 import com.zyd.common.proto.client.WarChess.PlayerRequireBattleMesAgainResponse;
@@ -39,7 +39,7 @@ import com.zyd.demo.round.pojo.UserMatchInfo;
 // 对战房间
 public class BattleRoom {
 	// 战斗房间的id
-	public Long roomId;
+	public long roomId;
 	// 对战成员
 	private List<UserMatchInfo> userMatchInfoList;
 	// 当前动作玩家的索引
@@ -48,16 +48,18 @@ public class BattleRoom {
 	private long nextTime = 0;
 	//
 	private CommonService commonService;
+	
+	private ChessService chessService;
 	// 房间操作锁
 	private Lock lock = new ReentrantLock();
 	// 历史桢信息
-//	public List<BattleMes> serverBattleMesList = new ArrayList<>();
+	public List<BattleMes> serverBattleMesList = new ArrayList<>();
 	// 当前操作桢的索引
 	private int currentPlayNum = 0;
 	//玩家1棋子index——type
-	private Map<Integer, Integer> userOne = new HashMap<>();
+	private Map<Integer, String> userOne = new HashMap<>();
 	//玩家2棋子index——type
-    private Map<Integer, Integer> userTwo = new HashMap<>();
+    private Map<Integer, String> userTwo = new HashMap<>();
 	// 结束阶段发送的用户 Uid-FairBattleLevelEndRequest
 	private Map<Integer, FairBattleLevelEndRequest> battleEndRequestMap = new HashMap<>();
 	// 是否可以将房间移出
@@ -65,9 +67,11 @@ public class BattleRoom {
 	// 房间状态
 	public BattleStatus battleStatus = BattleStatus.start;
 	// 开始的玩家userId
-	private long startUserId;
+	private int startUserId;
 	// 完成操作的玩家
 	private Map<Integer, Object> dealUserMap = new HashMap<>();
+	//吃掉的棋子回合-（userID_位置_棋子类型）
+	private Map<Integer, String> captureMap = new HashMap<>();
 	// 房间管理器
 	private BattleRoomManager battleRoomManager;
 	// 是否是主动放弃结束
@@ -75,9 +79,9 @@ public class BattleRoom {
 	// 主动放弃的玩家
 	private Integer giveUpUserId = null;
 	//玩家1王的位置
-	int kingOne = 5;
+	int kingOne = 61;
 	//玩家2王的位置
-	int kingTwo = 61;
+	int kingTwo = 5;
 	//玩家1是否被将军
 	boolean jiangjunOne = false;
 	//顽家2是否被将军
@@ -150,42 +154,101 @@ public class BattleRoom {
 			PlayerBattleMesRequest playerBattleMesRequest) {
 		lock.lock();
 		try {
+            PlayerBattleMesResponse.Builder battleMesResponse = PlayerBattleMesResponse.newBuilder();
 			if (!battleStatus.equals(BattleStatus.fighting)) {
-				PlayerBattleMesResponse.Builder battleMesResponse = PlayerBattleMesResponse.newBuilder();
 				battleMesResponse.setRes(false);
 				return battleMesResponse.build();
 			}
 			BattleMes battleMes = playerBattleMesRequest.getBattleMes();
 			// 如果关键帧不是自增的
 			if (battleMes.getPlayNum() != currentPlayNum + 1) {
-				PlayerBattleMesResponse.Builder battleMesResponse = PlayerBattleMesResponse.newBuilder();
 				battleMesResponse.setRes(false);
 				return battleMesResponse.build();
 			}
 
 			if (!userMatchInfo.getUid().equals(userMatchInfoList.get(actor).getUid())) {
-				PlayerBattleMesResponse.Builder battleMesResponse = PlayerBattleMesResponse.newBuilder();
 				battleMesResponse.setRes(false);
 				return battleMesResponse.build();
 			}
-			battleStatus = BattleStatus.fightWaiting;
-			nextTime = System.currentTimeMillis() + BattleConfig.playReadTime;
-			currentPlayNum = currentPlayNum + 1;
-			// 保存桢
-			saveBattleMes(battleMes);
+	        int from = battleMes.getFrom();
+	        int to = battleMes.getTo();
+	        Map<Integer, String> OtherUserChess = new HashMap<>();
+	        Map<Integer, String> myChess = new HashMap<>();
+	        Boolean isFirst = false;
+	        checkFirstPlayer(OtherUserChess,myChess,userMatchInfo.getUid(),isFirst);
+	        //移动还是吃子
+			if (!userOne.containsKey(to) && !userTwo.containsKey(to)) {
+			    //是否移动成功
+			    if (!chessService.checkMove(from, to, OtherUserChess, myChess, isFirst)) {
+		             battleMesResponse.setRes(false);
+		             battleMesResponse.setError("移动操作有误");
+		             return battleMesResponse.build();
+			    } else {
+			          myChess.put(from, myChess.get(from));
+			          if (myChess.get(from) == "k") {
+			              if (userMatchInfo.getUid() == startUserId) {
+			                  kingOne = to;  
+			              } else {
+			                  kingTwo = to;
+			              }
+			          }
+			          myChess.remove(from);
+			    }
+			} else {
+			    //是否成功吃子
+			    if (!chessService.CheckNotPawnMove(from, to, OtherUserChess, myChess)) {
+                    battleMesResponse.setRes(false);
+                    battleMesResponse.setError("吃子操作有误");
+                    return battleMesResponse.build();
+			    } else {
+                    myChess.put(from, myChess.get(from));
+                    if (myChess.get(from) == "k") {
+                        if (userMatchInfo.getUid() == startUserId) {
+                            kingOne = to;  
+                        } else {
+                            kingTwo = to;
+                        }
+                   }
+                   captureMap.put(currentPlayNum,String.valueOf(userMatchInfoList.get(nextActorIndex()))+
+                       "_"+String.valueOf(to) + "_" + OtherUserChess.get(to));
+                   myChess.remove(from);
+                   OtherUserChess.remove(to);
+			    }
+			}
+			//操作方国王位置
+            int myKing = 0;
+            int otherKing = 0;
+            if (userMatchInfo.getUid() == startUserId) {
+                myKing = kingOne;
+                otherKing = kingTwo;
+            } else {
+                myKing = kingTwo;
+                otherKing = kingOne;
+            }
 
-			ServerBattleMesPush.Builder builder = ServerBattleMesPush.newBuilder();
-			builder.setBattleMes(battleMes);
-			builder.setCurrentTime(System.currentTimeMillis());
-			builder.setNextTime(nextTime);
-
-			// 操作信息推送
-			disrupAll(PushReqestName.ServerBattleMesPush, builder.build());
-			// 下一步操作赋值
-			actor = nextActorIndex();
-
-			PlayerBattleMesResponse.Builder battleMesResponse = PlayerBattleMesResponse.newBuilder();
-			battleMesResponse.setRes(true);
+            battleStatus = BattleStatus.fightWaiting;
+            nextTime = System.currentTimeMillis() + BattleConfig.playReadTime;
+            currentPlayNum = currentPlayNum + 1;
+            // 保存桢
+            saveBattleMes(battleMes);
+            
+            ServerBattleMesPush.Builder builder = ServerBattleMesPush.newBuilder();
+            builder.setBattleMes(battleMes);
+            builder.setCurrentTime(System.currentTimeMillis());
+            builder.setNextTime(nextTime);
+            
+            // 操作信息推送
+//            disrupAll(PushReqestName.ServerBattleMesPush, builder.build());
+            disrupOne(PushReqestName.ServerBattleMesPush, userMatchInfoList.get(nextActorIndex()), builder.build());
+            //国王被吃，游戏结束
+            if (!OtherUserChess.containsKey(otherKing)) {
+                
+            } else {
+              
+            }
+            // 下一步操作赋值
+            actor = nextActorIndex();
+            battleMesResponse.setRes(true);
 			return battleMesResponse.build();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -197,10 +260,23 @@ public class BattleRoom {
 		battleMesResponse.setRes(false);
 		return battleMesResponse.build();
 	}
+	
+	/*判断先手方*/
+	private void checkFirstPlayer(Map<Integer, String> otherUserChess, Map<Integer, String> myChess,
+        Integer uid, Boolean isFirst) {
+	    if ( uid.intValue() != startUserId) {
+	        otherUserChess = userOne;
+	        myChess = userTwo;
+	        isFirst = true;
+	    } else {
+	        otherUserChess = userTwo;
+	        myChess = userOne;
+	        isFirst = false;
+	    }
+    }
 
-	/** 处理玩家发送的桢处理完成请求 */
-	public FairBattleLevelFattingFinishedResponse doRequest(UserMatchInfo userMatchInfo,
-			FairBattleLevelFattingFinishedRequest requst) {
+    /** 处理玩家发送的桢处理完成请求 */
+	public PlayerPaintingEndResponse doRequest(UserMatchInfo userMatchInfo) {
 		lock.lock();
 		try {
 			if (battleStatus.equals(BattleStatus.fightWaiting)) {
@@ -217,7 +293,7 @@ public class BattleRoom {
 		} finally {
 			lock.unlock();
 		}
-		return FairBattleLevelFattingFinishedResponse.newBuilder().build();
+		return PlayerPaintingEndResponse.newBuilder().build();
 	}
 
 	/** 战斗结束请求 */
@@ -319,13 +395,6 @@ public class BattleRoom {
 		lock.lock();
 		try {
 			if (System.currentTimeMillis() > nextTime) {
-				// 如果所有的玩家都掉线,游戏结束
-				/*
-				 * boolean hasConnect = false; for (UserMatchInfo userMatchInfo
-				 * : userMatchInfoList) { if (userMatchInfo.isConnect()) {
-				 * hasConnect = true; break; } } if (!hasConnect) {
-				 * battleFinished(); return; }
-				 */
 				// 根据游戏的状态进行超时处理
 				if (battleStatus.equals(BattleStatus.start)) {
 				    //有玩家长时间未准备，则退出此次匹配
@@ -344,7 +413,7 @@ public class BattleRoom {
 					builder.setBattleMes(battleMesBuilder.build());
 					builder.setCurrentTime(System.currentTimeMillis());
 					builder.setNextTime(nextTime);
-
+                    
 					// 操作信息推送
 					disrupAll(PushReqestName.ServerBattleMesPush, builder.build());
 					// 下一步操作赋值
@@ -385,7 +454,7 @@ public class BattleRoom {
 
     /** 保存战斗桢 */
   	public void saveBattleMes(BattleMes battleMes) {
-  	  //		serverBattleMesList.add(battleMes);
+  	  		serverBattleMesList.add(battleMes);
   	}
 
 	public BattleRoom(BattleRoomManager battleRoomManager, CommonService commonService,
@@ -423,63 +492,39 @@ public class BattleRoom {
 	
 	/**
 	 * 初始化玩家棋子，固定的写死
-	 * 1:兵  2 ：车 3：马  4：象 5：王后 6：王
+	 * p:兵  r ：车 n：马  b：象 q：王后  k：王
 	 */
 	public void initChess() {
 	    for (int i = 1; i <= 6; i++) {
 	        if (i==1) {
 	            for (int y = 9; y<=16; y++ ) {
-	                userOne.put(y, 1);
-                    userTwo.put(y+40, 1);
+	                userTwo.put(y, "p");
+                    userOne.put(y+40, "p");
 	            }
 	        } else if (i==2) {
-	            userOne.put(1, 2);
-	            userOne.put(8, 2);
-	            userTwo.put(57, 2);
-	            userTwo.put(64, 2);
+	            userTwo.put(1, "r");
+  	            userTwo.put(8, "r");
+  	            userOne.put(57, "r");
+  	            userOne.put(64, "r");
 	        } else if (i == 3 ) {
-                userOne.put(2, 3);
-                userOne.put(7, 3);
-                userTwo.put(58, 3);
-                userTwo.put(63, 3);	            
+	            userTwo.put(2, "n");
+	            userTwo.put(7, "n");
+	            userOne.put(58, "n");
+	            userOne.put(63, "n");	            
 	        } else if (i == 4) {
-                userOne.put(3, 4);
-                userOne.put(6, 4);
-                userTwo.put(59, 4);
-                userTwo.put(62, 4);  	            
+	            userTwo.put(3, "b");
+	            userTwo.put(6, "b");
+                userOne.put(59, "b");
+                userOne.put(62, "b");  	            
 	        } else if (i == 5) {
-                userOne.put(4, 5);
-                userTwo.put(60, 5);	            
+	            userTwo.put(4, "q");
+	            userOne.put(60, "q");	            
 	        } else if (i == 6) {
-                userOne.put(5, 6);
-                userTwo.put(61, 6); 	            
+	            userTwo.put(5, "k");
+	            userOne.put(61, "k"); 	            
 	        }
 	    }
 	}
-	/**是否可以走棋*/
-	public boolean isCanMove(int nextItem, int from, int to ) {
-	    if (nextItem == 0) {
-	        //对应方是否在初始位置有棋子
-	        if (!userOne.containsKey(from) || userOne.containsKey(to)) {
-	            return false;
-	        }
-	        chessMove(userOne.get(from),from,to);
-	    } else {
-            if (!userTwo.containsKey(from) || userTwo.containsKey(to)) {
-                  return false;
-            }	      
-	    }	    
-	    return true;
-	}
-	
-	/**
-	 * 是否能移动
-	 */
-	private void chessMove(Integer integer, int from, int to) {
-	    if (integer.intValue() == 1) {
-	        
-	    }
-    }
 
     public List<UserMatchInfo> getUserMatchInfoList() {
   		return userMatchInfoList;
@@ -489,19 +534,19 @@ public class BattleRoom {
 		this.userMatchInfoList = userMatchInfoList;
 	}		
 
-	public Map<Integer, Integer> getUserOne() {
+	public Map<Integer, String> getUserOne() {
         return userOne;
 	}
 
-	public void setUserOne(Map<Integer, Integer> userOne) {
+	public void setUserOne(Map<Integer, String> userOne) {
 	  this.userOne = userOne;
     }
 
-    public Map<Integer, Integer> getUserTwo() {
+    public Map<Integer, String> getUserTwo() {
         return userTwo;
     }
 
-    public void setUserTwo(Map<Integer, Integer> userTwo) {
+    public void setUserTwo(Map<Integer, String> userTwo) {
         this.userTwo = userTwo;
     }
 

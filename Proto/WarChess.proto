@@ -62,12 +62,12 @@ message PlayerReadyResponse{
 
 
 /** 玩家战斗过程处理完成请求*/
-message FairBattleLevelFattingFinishedRequest{
+message PlayerPaintingEndRequest{
 	
 }
 
 /** 玩家战斗过程处理完成返回*/
-message FairBattleLevelFattingFinishedResponse{
+message PlayerPaintingEndResponse{
 
 }
 
@@ -102,7 +102,7 @@ message CheckPlayerFairBattleExistResponse{
 
 
 /////////////////////////////////////// push ////////////////////////////////////
-/** 玩家可以进行下一帧操作推送*/
+/** 玩家可以开始下一轮倒计时了*/
 message PlayNextPush{
 	
 }
@@ -125,7 +125,7 @@ message PlayerStartPush{
 	/** 第一个操作玩家userId */
 	required int32 userId = 3;
 	/** 房间id */
-	optional int32 roomId = 4;
+	optional int64 roomId = 4;
 }
 
 /** 游戏正式开始推送 */
@@ -136,6 +136,7 @@ message PlayerReadyFinishedPush{
 
 /** 玩家战斗结束推送*/
 message PlayerEndPush{
+	optional int32 winUserId = 1; //胜利玩家ID
 	/** 所有的桢信息,测试用于战斗回放*/
 	repeated BattleMes battleMes = 2;
 	/** 0 正常结束 1 己方投降 2 对方投降*/
@@ -146,8 +147,10 @@ message PlayerEndPush{
 
 /** 桢信息 */
 message BattleMes{
-	optional int32 from =1 ; //初始位置
-	optional int32 to = 2 ; //移动位置
+	optional int32 PlayNum = 1; //回合数
+	optional int32 from =2 ; //初始位置
+	optional int32 to = 3 ; //移动位置
+	optional int32 userId = 4; //操作的玩家ID 
 	
 }
 

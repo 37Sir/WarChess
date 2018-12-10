@@ -17,13 +17,13 @@ public class PlayerBattleMes extends BaseClientServlet {
 
       @Override
       public void logRequest(MessageHeaderInfo cui, Packet paramValues) {
-          logger.info("logRequest PlayerCancelMatch {}, {}", TextFormat.printToUnicodeString(cui),
+          logger.info("logRequest PlayerCancelMatchRequest {}, {}", TextFormat.printToUnicodeString(cui),
               TextFormat.printToUnicodeString(paramValues.parseProtobuf(PlayerCancelMatchRequest.PARSER, 1)) );
       }
   
       @Override
       public void logResponse(Packet returnParam) {
-          logger.info("logResponse PlayerCancelMatch {}",
+          logger.info("logResponse PlayerCancelMatchResponse {}",
               TextFormat.printToUnicodeString(returnParam.parseProtobuf(PlayerCancelMatchResponse.PARSER, 0)));  
       }
   

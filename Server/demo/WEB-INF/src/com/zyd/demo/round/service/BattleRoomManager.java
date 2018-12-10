@@ -11,10 +11,10 @@ import org.slf4j.LoggerFactory;
 import com.zyd.common.proto.client.ClientProtocol.ErrorCode;
 import com.zyd.common.proto.client.WarChess.FairBattleLevelEndRequest;
 import com.zyd.common.proto.client.WarChess.FairBattleLevelEndResponse;
-import com.zyd.common.proto.client.WarChess.FairBattleLevelFattingFinishedRequest;
-import com.zyd.common.proto.client.WarChess.FairBattleLevelFattingFinishedResponse;
 import com.zyd.common.proto.client.WarChess.PlayerBattleMesRequest;
 import com.zyd.common.proto.client.WarChess.PlayerBattleMesResponse;
+import com.zyd.common.proto.client.WarChess.PlayerPaintingEndRequest;
+import com.zyd.common.proto.client.WarChess.PlayerPaintingEndResponse;
 import com.zyd.common.proto.client.WarChess.PlayerReadyRequest;
 import com.zyd.common.proto.client.WarChess.PlayerRequireBattleMesAgainRequest;
 import com.zyd.common.proto.client.WarChess.PlayerRequireBattleMesAgainResponse;
@@ -165,8 +165,7 @@ public class BattleRoomManager extends BaseService {
 
 
 	/** 战斗完成请求 */
-	public FairBattleLevelFattingFinishedResponse onRequest(String token,
-			FairBattleLevelFattingFinishedRequest request) {
+	public PlayerPaintingEndResponse onRequest(String token) {
 		BattleRoom battleRoom = null;
 		String userKey = token;
 		Long roomId = userToRoomIdMap.get(userKey);
@@ -177,7 +176,7 @@ public class BattleRoomManager extends BaseService {
 		if (battleRoom == null || userMatchInfo == null) {
 			return null;
 		}
-		return battleRoom.doRequest(userMatchInfo, request);
+		return battleRoom.doRequest(userMatchInfo);
 	}
 
 	/** 战斗结束请求 */

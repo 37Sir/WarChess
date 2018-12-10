@@ -223,7 +223,7 @@ public class ChessService extends BaseService {
        }       
    }
    /**
-    * 除兵外的移动检验
+    * 除兵外的移动检验以及所有的吃子校验
     * @return
     */
    public boolean CheckNotPawnMove(int from ,int to ,Map<Integer, String> OtherUserChess,Map<Integer, String>  myChess){
