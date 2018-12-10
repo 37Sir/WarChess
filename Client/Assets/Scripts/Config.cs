@@ -18,6 +18,9 @@ public class Config{
 
     public static float PieceWidth = 5.5f;
 
+    public static float MoveDistanceCross = 1.3f * PieceWidth;
+    public static float MoveDistance = 0.7f * PieceWidth;
+
     public class Game
     {
         public static int WaitingFindEnemy = 45;                    //匹配等待秒数

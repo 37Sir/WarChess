@@ -1,4 +1,5 @@
-﻿using PureMVC.Interfaces;
+﻿using Framework;
+using PureMVC.Interfaces;
 using PureMVC.Patterns.Mediator;
 using System;
 using System.Collections.Generic;
@@ -25,14 +26,24 @@ public class PieceItemMediator : Mediator
     public override IList<string> ListNotificationInterests()
     {
         IList<string> list = new List<string>();
-
+        list.Add(NotificationConstant.OnDragEnd);
         return list;
     }
 
     public override void HandleNotification(INotification notification)
     {
+        var body = (object[])notification.Body;
         switch (notification.Name)
         {
+            case NotificationConstant.OnDragEnd:
+                if((Config.PieceColor)body[2] != pieceData.color)
+                {
+                    if((float)body[0] == m_viewComponent.m_X && (float)body[1] == m_viewComponent.m_Z)
+                    {
+                        m_viewComponent.BeAttached();
+                    }
+                }
+                break;
             default:
                 break;
         }
@@ -41,6 +52,16 @@ public class PieceItemMediator : Mediator
     public void InitPieceData(Piece pieceData)
     {
         this.pieceData = pieceData;
+    }
+
+    public void NotityDragEnd(object[] body)
+    {
+        App.Facade.SendNotification(NotificationConstant.OnDragEnd, body);
+    }
+
+    public void NotityGameOver(object body)
+    {
+        App.Facade.SendNotification(NotificationConstant.OnGameOver, body);
     }
 }
 

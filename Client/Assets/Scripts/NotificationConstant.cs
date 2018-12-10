@@ -15,4 +15,8 @@ public class NotificationConstant
     /// notify respons
     public const string LoginResponse = "LoginResponse";
     public const string MatchResponse = "MatchResponse";
+
+    /// notify
+    public const string OnDragEnd = "OnDragEnd";
+    public const string OnGameOver = "OnGameOver";
 }

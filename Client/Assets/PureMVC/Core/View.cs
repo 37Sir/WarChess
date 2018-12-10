@@ -95,21 +95,21 @@ namespace PureMVC.Core
             if (!mediatorMap.ContainsKey(mediator.MediatorName))
             {
                 mediatorMap.Add(mediator.MediatorName, mediator);
-                mediator.InitializeNotifier(multitonKey);
-
-                IList<string> interests = mediator.ListNotificationInterests();
-
-                if (interests.Count > 0)
-                {
-                    IObserver observer = new Observer(mediator.HandleNotification, mediator);
-                    for (int i = 0; i < interests.Count; i++)
-                    {
-                        RegisterObserver(interests[i], observer);
-                    }
-                }
-                // alert the mediator that it has been registered
-                mediator.OnRegister();
             }
+            //todo
+            mediator.InitializeNotifier(multitonKey);
+
+            IList<string> interests = mediator.ListNotificationInterests();
+            if (interests.Count > 0)
+            {
+                IObserver observer = new Observer(mediator.HandleNotification, mediator);
+                for (int i = 0; i < interests.Count; i++)
+                {
+                    RegisterObserver(interests[i], observer);
+                }
+            }
+            // alert the mediator that it has been registered
+            mediator.OnRegister();
         }
 
         public virtual IMediator RetrieveMediator(string mediatorName)

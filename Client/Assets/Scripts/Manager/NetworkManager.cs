@@ -49,7 +49,6 @@ namespace Framework
         private int m_userId = -1;
         private DelegateRPC m_callback;             //普通请求callback
         private Dictionary<string, DelegatePushRPC> m_pushCallMap = new Dictionary<string, DelegatePushRPC>();//push消息监听
-        private DelegatePushRPC m_pushCall = null;  //push消息监听
         private bool m_DealPipeline;
 
         private static bool m_isReady;      
