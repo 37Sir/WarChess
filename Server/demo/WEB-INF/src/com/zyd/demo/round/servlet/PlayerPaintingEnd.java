@@ -9,7 +9,7 @@ import com.zyd.common.proto.client.WarChess.PlayerPaintingEndResponse;
 import com.zyd.common.rpc.Packet;
 import com.zyd.demo.common.BaseClientServlet;
 import com.zyd.demo.user.pojo.User;
-
+/*玩家图像渲染完成，可以开始下一回合的接口*/
 public class PlayerPaintingEnd extends BaseClientServlet {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 

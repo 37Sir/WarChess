@@ -61,12 +61,12 @@ message PlayerReadyResponse{
 
 
 
-/** 玩家战斗过程处理完成请求*/
+/** 玩家走棋图像渲染完成的请求*/
 message PlayerPaintingEndRequest{
 	
 }
 
-/** 玩家战斗过程处理完成返回*/
+/** 玩家走棋图像渲染完成的返回*/
 message PlayerPaintingEndResponse{
 
 }
