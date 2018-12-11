@@ -42,7 +42,7 @@
   
   <bean id="userService" class="com.zyd.demo.user.service.UserService" parent="baseService">
   </bean>
-  <bean id="chessService" class="com.zyd.demo.user.service.ChessService" parent="baseService">
+  <bean id="chessService" class="com.zyd.demo.round.service.ChessService" parent="baseService">
   </bean>
   <bean id="mapperHelper" class="com.zyd.demo.common.jdbc.MapperHelper">
       <property name="userMapper" ref="userMapper"></property>		

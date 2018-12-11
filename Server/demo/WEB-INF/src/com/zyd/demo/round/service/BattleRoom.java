@@ -68,14 +68,16 @@ public class BattleRoom {
 	public BattleStatus battleStatus = BattleStatus.start;
 	// 开始的玩家userId
 	private int startUserId;
+	//后手玩家ID
+	private int afterUserId;
 	// 完成操作的玩家
 	private Map<Integer, Object> dealUserMap = new HashMap<>();
 	//吃掉的棋子回合-（userID_位置_棋子类型）
 	private Map<Integer, String> captureMap = new HashMap<>();
 	// 房间管理器
 	private BattleRoomManager battleRoomManager;
-	// 是否是主动放弃结束
-	private boolean isGiveUp = false;
+	// 是否是主动放弃结束,0:没有，1：有，2：超时
+	private int isGiveUp = 0;
 	// 主动放弃的玩家
 	private Integer giveUpUserId = null;
 	//玩家1王的位置
@@ -95,7 +97,7 @@ public class BattleRoom {
 		actor = 0;
 		battleStatus = BattleStatus.start;
 		startUserId = userMatchInfoList.get(actor).getUid();
-
+		afterUserId = userMatchInfoList.get(actor+1).getUid();
 		// 推送信息
 		PlayerStartPush.Builder builder = PlayerStartPush.newBuilder();
 
@@ -217,6 +219,7 @@ public class BattleRoom {
 			}
 			//操作方国王位置
             int myKing = 0;
+            //对方国王的位置
             int otherKing = 0;
             if (userMatchInfo.getUid() == startUserId) {
                 myKing = kingOne;
@@ -242,9 +245,7 @@ public class BattleRoom {
             disrupOne(PushReqestName.ServerBattleMesPush, userMatchInfoList.get(nextActorIndex()), builder.build());
             //国王被吃，游戏结束
             if (!OtherUserChess.containsKey(otherKing)) {
-                
-            } else {
-              
+                battleFinished(userMatchInfoList.get(nextActorIndex()).getUid());
             }
             // 下一步操作赋值
             actor = nextActorIndex();
@@ -261,7 +262,7 @@ public class BattleRoom {
 		return battleMesResponse.build();
 	}
 	
-	/*判断先手方*/
+	/**判断等待的人是否为先手方*/
 	private void checkFirstPlayer(Map<Integer, String> otherUserChess, Map<Integer, String> myChess,
         Integer uid, Boolean isFirst) {
 	    if ( uid.intValue() != startUserId) {
@@ -304,10 +305,10 @@ public class BattleRoom {
 
 			// 主动结束
 			if (fairBattleLevelEndRequest.getIsGiveUp()) {
-				this.isGiveUp = true;
+				this.isGiveUp = 1;
 				this.giveUpUserId = userMatchInfo.getUid();
 				// 战斗结束
-				battleFinished();
+//				battleFinished();
 				return FairBattleLevelEndResponse.newBuilder().build();
 			}
 
@@ -315,7 +316,7 @@ public class BattleRoom {
 			battleEndRequestMap.put(userMatchInfo.getUid(), fairBattleLevelEndRequest);
 			if (battleEndRequestMap.size() >= 2) {
 				// 战斗结束
-				battleFinished();
+//				battleFinished();
 			} else {
 				// 设置结束倒计时
 				nextTime = System.currentTimeMillis() + BattleConfig.finishReadyTime;
@@ -360,17 +361,27 @@ public class BattleRoom {
 	}
 
 	/** 战斗结束 */
-	public void battleFinished() {
+	public void battleFinished(int userId) {
 		PlayerEndPush.Builder builder = PlayerEndPush.newBuilder();
 //		// 所有的桢信息
 //		for (BattleMes battleMes : serverBattleMesList) {
 //			builder.addBattleMes(battleMes);
 //		}
-		if (!isGiveUp) {
+		if (isGiveUp == 0) {
 			builder.setResult(0);
+			builder.setWinUserId(userId);
 			// 推送结束信息
 			disrupAll(PushReqestName.PlayerEndPush, builder.build());
-		} else {
+		} else if (isGiveUp == 2) {
+            for (UserMatchInfo userMatchInfo : userMatchInfoList) {
+              if (userMatchInfo.getUid().equals(giveUpUserId)) {
+                  builder.setResult(3);
+              } else {
+                  builder.setResult(4);
+              }
+              disrupOne(PushReqestName.PlayerEndPush, userMatchInfo, builder.build());
+            }		    
+		}else {
 			for (UserMatchInfo userMatchInfo : userMatchInfoList) {
 				if (userMatchInfo.getUid().equals(giveUpUserId)) {
 					builder.setResult(1);
@@ -400,33 +411,15 @@ public class BattleRoom {
 				    //有玩家长时间未准备，则退出此次匹配
 				    havaPlayerNotReady();
 				} else if (battleStatus.equals(BattleStatus.fighting)) {
-					nextTime = System.currentTimeMillis() + BattleConfig.playReadTime;
-					currentPlayNum = currentPlayNum + 1;
-
-					BattleMes.Builder battleMesBuilder = BattleMes.newBuilder();
-					battleMesBuilder.setPlayNum(currentPlayNum);
-					battleStatus = BattleStatus.fightWaiting;
-
-					// 保存桢
-					saveBattleMes(battleMesBuilder.build());
-					ServerBattleMesPush.Builder builder = ServerBattleMesPush.newBuilder();
-					builder.setBattleMes(battleMesBuilder.build());
-					builder.setCurrentTime(System.currentTimeMillis());
-					builder.setNextTime(nextTime);
-                    
-					// 操作信息推送
-					disrupAll(PushReqestName.ServerBattleMesPush, builder.build());
-					// 下一步操作赋值
-					actor = nextActorIndex();
+  				    giveUpUserId = userMatchInfoList.get(actor).getUid();
+  				    isGiveUp = 2;
+				    battleFinished(userMatchInfoList.get(nextActorIndex()).getUid());
 				} else if (battleStatus.equals(BattleStatus.fightWaiting)) {
 					dealUserMap.clear();
 					nextTime = System.currentTimeMillis() + BattleConfig.playTime;
 					battleStatus = BattleStatus.fighting;
 					disrupAll(PushReqestName.PlayNextPush, PlayNextPush.newBuilder().build());
-				} else if (battleStatus.equals(BattleStatus.waitFinish)) {
-					// 战斗结束
-					battleFinished();
-				}
+				} 
 			}
 		} catch (Exception e) {
 			logger.error("", e);

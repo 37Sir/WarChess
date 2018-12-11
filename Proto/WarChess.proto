@@ -123,7 +123,7 @@ message PlayerStartPush{
 	/** 战斗玩家信息*/
 	repeated PlayerMes playerMes = 1;
 	/** 第一个操作玩家userId */
-	required int32 userId = 3;
+	optional int32 userId = 3;
 	/** 房间id */
 	optional int64 roomId = 4;
 }
@@ -139,7 +139,7 @@ message PlayerEndPush{
 	optional int32 winUserId = 1; //胜利玩家ID
 	/** 所有的桢信息,测试用于战斗回放*/
 	repeated BattleMes battleMes = 2;
-	/** 0 正常结束 1 己方投降 2 对方投降*/
+	/** 0 正常结束 1 己方投降 2 对方投降 3 己方超时 4 对方超时*/
 	optional int32 result = 3;
 }
 

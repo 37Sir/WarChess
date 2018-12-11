@@ -18,6 +18,12 @@
 	<bean id="PlayerCancelMatch" class="com.zyd.demo.round.servlet.PlayerCancelMatch"
 		parent="baseClientServlet">
 	</bean>
+	<bean id="PlayerPaintingEnd" class="com.zyd.demo.round.servlet.PlayerPaintingEnd"
+		parent="baseClientServlet">
+	</bean>
+	<bean id="PlayerBattleMes" class="com.zyd.demo.round.servlet.PlayerBattleMes"
+		parent="baseClientServlet">
+	</bean>
 	<!-- user -->
 	<bean id="test" class="com.zyd.demo.round.servlet.test"
 		parent="baseClientServlet">
