@@ -18,8 +18,9 @@ public class Config{
 
     public static float PieceWidth = 5.5f;
 
-    public static float MoveDistanceCross = 1.3f * PieceWidth;
-    public static float MoveDistance = 0.7f * PieceWidth;
+    public static float MoveDistanceCross = 1.3f * PieceWidth;//没用
+    public static float MoveDistance = 0.7f * PieceWidth;//中层边界
+    public static float TipsDistance = 0.3f * PieceWidth;//内层边界
 
     public class Game
     {
@@ -34,10 +35,16 @@ public class Config{
         UDP = 1,
     }
 
+    public class Board
+    {
+        public static int MaxX = 8;
+        public static int MaxY = 8;
+    }
+
     public enum PieceColor
     {
-        BLACK = 0,
-        WHITE = 1,
+        WHITE = 0,
+        BLACK = 1,     
     }
 
     public enum PieceType
@@ -56,6 +63,7 @@ public class Config{
         public const string PlayerNotReady = "PlayerNotReady";
         public const string OnePlayerReady = "OnePlayerReady";
         public const string PlayerReadyFinish = "PlayerReadyFinishedPush";
+        public const string OtherMove = "OtherMovePush";
     }
 }
 

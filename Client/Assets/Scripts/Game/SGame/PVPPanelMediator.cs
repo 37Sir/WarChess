@@ -1,4 +1,5 @@
-﻿using PureMVC.Interfaces;
+﻿using Framework;
+using PureMVC.Interfaces;
 using PureMVC.Patterns.Mediator;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ public class PVPPanelMediator : Mediator
         IList<string> list = new List<string>();
         list.Add(NotificationConstant.OnDragEnd);
         list.Add(NotificationConstant.OnGameOver);
+        list.Add(NotificationConstant.OnTipsShow);
         return list;
     }
 
@@ -37,84 +39,29 @@ public class PVPPanelMediator : Mediator
         switch (notification.Name)
         {
             case NotificationConstant.OnDragEnd:
+                m_viewComponent.OnTipsHide();
+                if (body == null) return;
                 m_viewComponent.EndCurRound();
                 break;
             case NotificationConstant.OnGameOver:
                 m_viewComponent.OnGameOver((Config.PieceColor)body);
+                break;
+            case NotificationConstant.OnTipsShow:
+                m_viewComponent.OnTipsShow((Vector2)body);
                 break;
             default:
                 break;
         }
     }
 
+    private void DoMove(Vector2 from, Vector2 to)
+    {
+
+    }
+
     public void InitBoardData()
     {
-        Piece temp;
-        temp = new Piece(Config.PieceColor.WHITE, Config.PieceType.P, 1, 2);
-        selfPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.WHITE, Config.PieceType.P, 2, 2);
-        selfPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.WHITE, Config.PieceType.P, 3, 2);
-        selfPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.WHITE, Config.PieceType.P, 4, 2);
-        selfPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.WHITE, Config.PieceType.P, 5, 2);
-        selfPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.WHITE, Config.PieceType.P, 6, 2);
-        selfPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.WHITE, Config.PieceType.P, 7, 2);
-        selfPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.WHITE, Config.PieceType.P, 8, 2);
-        selfPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.WHITE, Config.PieceType.R, 1, 1);
-        selfPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.WHITE, Config.PieceType.N, 2, 1);
-        selfPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.WHITE, Config.PieceType.B, 3, 1);
-        selfPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.WHITE, Config.PieceType.Q, 4, 1);
-        selfPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.WHITE, Config.PieceType.K, 5, 1);
-        selfPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.WHITE, Config.PieceType.B, 6, 1);
-        selfPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.WHITE, Config.PieceType.N, 7, 1);
-        selfPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.WHITE, Config.PieceType.R, 8, 1);
-        selfPieces.Add(temp);
-
-        temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.P, 1, 7);
-        enemyPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.P, 2, 7);
-        enemyPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.P, 3, 7);
-        enemyPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.P, 4, 7);
-        enemyPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.P, 5, 7);
-        enemyPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.P, 6, 7);
-        enemyPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.P, 7, 7);
-        enemyPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.P, 8, 7);
-        enemyPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.R, 1, 8);
-        enemyPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.N, 2, 8);
-        enemyPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.B, 3, 8);
-        enemyPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.Q, 4, 8);
-        enemyPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.K, 5, 8);
-        enemyPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.B, 6, 8);
-        enemyPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.N, 7, 8);
-        enemyPieces.Add(temp);
-        temp = new Piece(Config.PieceColor.BLACK, Config.PieceType.R, 8, 8);
-        enemyPieces.Add(temp);
+        App.ChessLogic.Init();     //初始化走棋逻辑
     }
 }
 
