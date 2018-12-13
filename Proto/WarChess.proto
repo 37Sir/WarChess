@@ -138,6 +138,7 @@ message PlayerEndPush{
 	optional int32 winUserId = 1; //胜利玩家ID
 	/** 所有的桢信息,测试用于战斗回放*/
 	repeated BattleMes battleMes = 2;
+	/** 0 正常结束 1 己方投降 2 对方投降 3 己方超时 4 对方超时 5 游戏错误 6 逼和 7 和局*/
 	optional int32 result = 3;
 }
 

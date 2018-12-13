@@ -196,7 +196,7 @@ public class ProxyConnection {
                           final long startTime = System.currentTimeMillis();
                           Packet result = null;
                           BaseClientServlet servlet = (BaseClientServlet) beanFactory.getBean(name);
-                          result = servlet.serviceWithViladate(args, name);
+                          result = servlet.serviceWithViladate0(args, name);
                           logGapTimeWithOutRes(name, id, startTime);
                           handler.responseRpc(id, 0, result,RPCQueueIDEnum.ROOM_GAME_QUEUE);
                       } catch (BaseException e) {
@@ -222,15 +222,14 @@ public class ProxyConnection {
                             result = servlet.serviceWithViladate(args, name);
                             logGapTimeWithOutRes(name, id, startTime);
                             updateUserGuide(args);                             
-                            handler.responseRpc(id, 0, args,RPCQueueIDEnum.MAIN_QUEUE);
+                            handler.responseRpc(id, 0, result,RPCQueueIDEnum.MAIN_QUEUE);
                           
                       } catch(BaseException e){
                           if(e.getErrrorCode() == ErrorCode.SERVER_ERROR_VALUE){
                               logger.warn(name + "|base error happened in onRequestRpc : " +e.getErrrorCode()+" "+ErrorCode.valueOf(e.getErrrorCode()).name(),e);
                           }else{
                               logger.warn(name + "|base error happened in onRequestRpc : " +e.getErrrorCode()+" "+ErrorCode.valueOf(e.getErrrorCode()).name());
-                          }
-                          
+                          }                          
                           handler.responseRpc(id, e.getErrrorCode(), null,RPCQueueIDEnum.MAIN_QUEUE);
                       } catch (Exception e) {
                           logger.error(name + "|error happened in onRequestRpc : ", e);
