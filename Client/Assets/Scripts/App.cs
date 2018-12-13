@@ -11,6 +11,7 @@ namespace Framework
     {
         static App m_instance;
         static Facade m_facade;
+        static ChessLogic m_chessLogic;
         static GameObject m_GameGlobal;
         static Dictionary<string, object> m_Managers = new Dictionary<string, object>();
         static string m_MainName = "Global";
@@ -48,6 +49,15 @@ namespace Framework
             {
                 if (m_facade == null) m_facade = new Facade("Facade");
                 return m_facade;
+            }
+        }
+
+        public static ChessLogic ChessLogic
+        {
+            get
+            {
+                if (m_chessLogic == null) m_chessLogic = new ChessLogic();
+                return m_chessLogic;
             }
         }
 

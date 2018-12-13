@@ -32,13 +32,15 @@ public class PieceItemMediator : Mediator
 
     public override void HandleNotification(INotification notification)
     {
-        var body = (object[])notification.Body;
+        var body = notification.Body;
         switch (notification.Name)
         {
             case NotificationConstant.OnDragEnd:
-                if((Config.PieceColor)body[2] != pieceData.color)
+                if (body == null) return;
+                var piece = (object[])body;
+                if ((Config.PieceColor)piece[2] != pieceData.color)
                 {
-                    if((float)body[0] == m_viewComponent.m_X && (float)body[1] == m_viewComponent.m_Z)
+                    if((float)piece[0] == m_viewComponent.m_X && (float)piece[1] == m_viewComponent.m_Z)
                     {
                         m_viewComponent.BeAttached();
                     }
@@ -62,6 +64,11 @@ public class PieceItemMediator : Mediator
     public void NotityGameOver(object body)
     {
         App.Facade.SendNotification(NotificationConstant.OnGameOver, body);
+    }
+
+    public void NotifyDragTips(object body)
+    {
+        App.Facade.SendNotification(NotificationConstant.OnTipsShow, body);
     }
 }
 

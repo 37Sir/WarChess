@@ -13,6 +13,7 @@ public class PieceItem:MonoBehaviour
     private GameObject m_Model;//棋子模型
     private Vector3 m_beginPos;//初始位置
     public bool isEnemy = false;
+    private bool m_isTipsShow = false;
     public float m_X;
     public float m_Z;
     public void InitView(GameObject gameObject, Piece pieceData)
@@ -103,6 +104,14 @@ public class PieceItem:MonoBehaviour
     public void OnDrag(Vector3 currentPosition)
     {
         transform.position = currentPosition;
+        var px = transform.position.x - m_beginPos.x;
+        var pz = transform.position.z - m_beginPos.z;
+        var d = Math.Sqrt(px * px + pz * pz);
+        if(d >= Config.TipsDistance && m_isTipsShow == false)
+        {
+            m_isTipsShow = true;
+            m_mediator.NotifyDragTips(new Vector2(m_X, m_Z));
+        }        
     }
 
     /// <summary>
@@ -110,21 +119,34 @@ public class PieceItem:MonoBehaviour
     /// </summary>
     public void OnDragEnd()
     {
+        m_isTipsShow = false;
         var px = transform.position.x - m_beginPos.x;
         var pz = transform.position.z - m_beginPos.z;
         var d = Math.Sqrt(px * px + pz * pz);
         var dx = Math.Abs(px);
         var dz = Math.Abs(pz);
+        int xblock = (int)Math.Round(dx / Config.PieceWidth, 0);
+        int zblock = (int)Math.Round(dz / Config.PieceWidth, 0);
         var dir = GetDirectByDeltaXZ(px, pz);
-        if (d >= Config.MoveDistance)
+        Vector2 to = new Vector2(m_X + xblock * dir.x, m_Z + zblock * dir.y);     
+        if (d >= Config.MoveDistance)//todo 不能直接套用
         {
-            SetPiecePos(m_X + dir.x, m_Z + dir.y);
-            object[] body = { m_X, m_Z, m_mediator.pieceData.color};
-            m_mediator.NotityDragEnd(body);
+            object[] body = { m_X, m_Z, m_mediator.pieceData.color, to };
+            if (App.ChessLogic.DoMove(new Vector2(m_X - 1, m_Z - 1), new Vector2(to.x - 1, to.y - 1)))
+            {
+                SetPiecePos(to.x, to.y);
+                m_mediator.NotityDragEnd(body);
+            }
+            else
+            {
+                SetPiecePos(m_X, m_Z);
+                m_mediator.NotityDragEnd(null);//不能移动
+            }           
         }
         else
         {
             SetPiecePos(m_X, m_Z);
+            m_mediator.NotityDragEnd(null);//距离不够 驳回
         }
     }
 
