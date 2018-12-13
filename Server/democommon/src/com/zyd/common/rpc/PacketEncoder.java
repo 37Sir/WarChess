@@ -4,8 +4,10 @@ import com.google.protobuf.CodedOutputStream;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.handler.codec.MessageToByteEncoder;
 
+@Sharable
 public class PacketEncoder extends MessageToByteEncoder<Packet> {
   @Override
   protected void encode( ChannelHandlerContext ctx, Packet msg, ByteBuf out) throws Exception {

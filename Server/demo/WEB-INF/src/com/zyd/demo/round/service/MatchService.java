@@ -116,7 +116,7 @@ public class MatchService extends BaseService {
 		// TODO 测试
 		battleRoomManager.removeBattleRoom(userMatchInfo.getToken());
 
-		String userKey = getUserKey(userMatchInfo.getToken());
+		String userKey = userMatchInfo.getToken();
 		// 移除即将删除的玩家队列
 		cancelPlayer.remove(userKey);
 		// 待加入信息

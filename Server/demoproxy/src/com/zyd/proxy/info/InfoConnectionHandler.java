@@ -52,10 +52,10 @@ public class InfoConnectionHandler extends RpcMessageHandler{
         PushHeader pushHeader = args.parseProtobuf(PushHeader.PARSER, 0);
         String token = UUID.randomUUID().toString();
         
-        System.out.println(name);
-        for(String u:pushHeader.getUserTokenList()){
-            System.out.println(u);
-        }
+//        System.out.println(name);
+//        for(String u:pushHeader.getUserTokenList()){
+//            System.out.println(u);
+//        }
         
         ClientConnectPushUtil.pushData.put(token,new PushTaskData(name, new Packet(args.buffers.get(1)), token, null, pushHeader.getUserTokenList()));
         ClientConnectPushUtil.queue.add(token);

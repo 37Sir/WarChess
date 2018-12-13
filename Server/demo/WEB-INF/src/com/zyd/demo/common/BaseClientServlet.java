@@ -42,6 +42,28 @@ public class BaseClientServlet {
         MessageHeaderInfo cui = paramValues.parseProtobuf(MessageHeaderInfo.PARSER, 0);
         return checkInit(cui, paramValues, rpcName);
     }
+    // game request from client
+    public Packet serviceWithViladate0(Packet paramValues, String rpcName) throws Exception {
+        MessageHeaderInfo cui = paramValues.parseProtobuf(MessageHeaderInfo.PARSER, 0);
+        return checkInit0(cui, paramValues, rpcName);
+    }
+    //房间操作不加锁
+    private Packet checkInit0(MessageHeaderInfo cui, Packet paramValues, String rpcName) throws Exception {
+      int userId = cui.getUserId();
+      Packet returnvalue = null;
+
+      User user = userService.getUserById(userId);
+      logRequest(cui, paramValues);
+      returnvalue = service(paramValues,1,user);
+      logResponse(returnvalue);                         
+      
+      if (returnvalue == null || returnvalue.buffers.size() == 0) {
+        logger.error("lockTrace returnParam not get lock value userId:{}", userId);
+      } else {
+          logResponse(returnvalue);                         
+      }
+      return returnvalue;
+  }
     public Packet service(Packet paramValues, Integer deviceType,User user) throws Exception {
         return paramValues;
     }
@@ -68,9 +90,12 @@ public class BaseClientServlet {
             logger.error("lockTrace not get lock value userId:{}", userId);
             throw new BaseException(ErrorCode.NOT_GET_LOCK_VALUE);
         }
+        
+        if (returnvalue == null || returnvalue.buffers.size() == 0) {
+          logger.error("lockTrace returnParam not get lock value userId:{}", userId);
+        }
         return returnvalue;
     }
-
     public void serviceUpdateUserData(Packet msg, String string) {
       
     }

@@ -4,6 +4,8 @@ import java.util.Scanner;
 import com.zyd.common.proto.client.ClientProtocol.LoginRequest;
 import com.zyd.common.proto.client.ClientProtocol.MessageHeaderInfo;
 import com.zyd.common.proto.client.ClientProtocol.MessageHeaderRequest;
+import com.zyd.common.proto.client.WarChess.PlayerMatchRequest;
+import com.zyd.common.proto.client.WarChess.PlayerReadyRequest;
 import com.zyd.common.rpc.Packet;
 import com.zyd.common.rpc.PacketDecoder;
 import com.zyd.common.rpc.PacketEncoder;
@@ -44,6 +46,8 @@ public class Test {
         Channel ch = bootstrap.connect("127.0.0.1",10000).sync().channel();
         MessageHeaderRequest.Builder req = MessageHeaderRequest.newBuilder();
         MessageHeaderInfo.Builder mes = MessageHeaderInfo.newBuilder();
+        PlayerReadyRequest.Builder mes1 = PlayerReadyRequest.newBuilder(); 
+        PlayerMatchRequest.Builder mes2 = PlayerMatchRequest.newBuilder();
         mes.setUserId(1);
         mes.setUserToken("login");
         req.setUserInfo(mes);
@@ -51,7 +55,7 @@ public class Test {
           Scanner sc  = new Scanner(System.in);
           String s = sc.nextLine();
           req.setName(s);
-          ch.writeAndFlush(new Packet(req,req));
+          ch.writeAndFlush(new Packet(req,mes2));
         }
       } catch (InterruptedException e) {
         // TODO Auto-generated catch block

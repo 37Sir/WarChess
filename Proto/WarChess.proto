@@ -4,7 +4,6 @@ package com.zyd.common.proto.client;
 
 // 匹配玩家请求
 message PlayerMatchRequest{
-	// 测试加入英雄的数组
 }
 
 // 匹配玩家请求返回
@@ -120,7 +119,7 @@ message ServerBattleMesPush{
 
 /** 匹配完成,玩家进入匹配房间推送 */
 message PlayerStartPush{
-	/** 战斗玩家信息*/
+	/** 游戏玩家信息*/
 	repeated PlayerMes playerMes = 1;
 	/** 第一个操作玩家userId */
 	optional int32 userId = 3;
@@ -134,12 +133,11 @@ message PlayerReadyFinishedPush{
 }
 
 
-/** 玩家战斗结束推送*/
+/** 玩家游戏结束推送*/
 message PlayerEndPush{
 	optional int32 winUserId = 1; //胜利玩家ID
 	/** 所有的桢信息,测试用于战斗回放*/
 	repeated BattleMes battleMes = 2;
-	/** 0 正常结束 1 己方投降 2 对方投降 3 己方超时 4 对方超时*/
 	optional int32 result = 3;
 }
 
