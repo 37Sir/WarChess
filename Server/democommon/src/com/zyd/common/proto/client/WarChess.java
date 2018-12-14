@@ -1276,7 +1276,7 @@ public final class WarChess {
      * <code>optional .com.zyd.common.proto.client.BattleMes battleMes = 2;</code>
      *
      * <pre>
-     ** 操作桢信息
+     ** 操作回合信息
      * </pre>
      */
     boolean hasBattleMes();
@@ -1284,7 +1284,7 @@ public final class WarChess {
      * <code>optional .com.zyd.common.proto.client.BattleMes battleMes = 2;</code>
      *
      * <pre>
-     ** 操作桢信息
+     ** 操作回合信息
      * </pre>
      */
     com.zyd.common.proto.client.WarChess.BattleMes getBattleMes();
@@ -1292,7 +1292,7 @@ public final class WarChess {
      * <code>optional .com.zyd.common.proto.client.BattleMes battleMes = 2;</code>
      *
      * <pre>
-     ** 操作桢信息
+     ** 操作回合信息
      * </pre>
      */
     com.zyd.common.proto.client.WarChess.BattleMesOrBuilder getBattleMesOrBuilder();
@@ -1301,7 +1301,7 @@ public final class WarChess {
    * Protobuf type {@code com.zyd.common.proto.client.PlayerBattleMesRequest}
    *
    * <pre>
-   ** 玩家战斗的桢信息请求
+   ** 玩家游戏的回合信息请求
    * </pre>
    */
   public static final class PlayerBattleMesRequest extends
@@ -1412,7 +1412,7 @@ public final class WarChess {
      * <code>optional .com.zyd.common.proto.client.BattleMes battleMes = 2;</code>
      *
      * <pre>
-     ** 操作桢信息
+     ** 操作回合信息
      * </pre>
      */
     public boolean hasBattleMes() {
@@ -1422,7 +1422,7 @@ public final class WarChess {
      * <code>optional .com.zyd.common.proto.client.BattleMes battleMes = 2;</code>
      *
      * <pre>
-     ** 操作桢信息
+     ** 操作回合信息
      * </pre>
      */
     public com.zyd.common.proto.client.WarChess.BattleMes getBattleMes() {
@@ -1432,7 +1432,7 @@ public final class WarChess {
      * <code>optional .com.zyd.common.proto.client.BattleMes battleMes = 2;</code>
      *
      * <pre>
-     ** 操作桢信息
+     ** 操作回合信息
      * </pre>
      */
     public com.zyd.common.proto.client.WarChess.BattleMesOrBuilder getBattleMesOrBuilder() {
@@ -1552,7 +1552,7 @@ public final class WarChess {
      * Protobuf type {@code com.zyd.common.proto.client.PlayerBattleMesRequest}
      *
      * <pre>
-     ** 玩家战斗的桢信息请求
+     ** 玩家游戏的回合信息请求
      * </pre>
      */
     public static final class Builder extends
@@ -1687,7 +1687,7 @@ public final class WarChess {
        * <code>optional .com.zyd.common.proto.client.BattleMes battleMes = 2;</code>
        *
        * <pre>
-       ** 操作桢信息
+       ** 操作回合信息
        * </pre>
        */
       public boolean hasBattleMes() {
@@ -1697,7 +1697,7 @@ public final class WarChess {
        * <code>optional .com.zyd.common.proto.client.BattleMes battleMes = 2;</code>
        *
        * <pre>
-       ** 操作桢信息
+       ** 操作回合信息
        * </pre>
        */
       public com.zyd.common.proto.client.WarChess.BattleMes getBattleMes() {
@@ -1711,7 +1711,7 @@ public final class WarChess {
        * <code>optional .com.zyd.common.proto.client.BattleMes battleMes = 2;</code>
        *
        * <pre>
-       ** 操作桢信息
+       ** 操作回合信息
        * </pre>
        */
       public Builder setBattleMes(com.zyd.common.proto.client.WarChess.BattleMes value) {
@@ -1731,7 +1731,7 @@ public final class WarChess {
        * <code>optional .com.zyd.common.proto.client.BattleMes battleMes = 2;</code>
        *
        * <pre>
-       ** 操作桢信息
+       ** 操作回合信息
        * </pre>
        */
       public Builder setBattleMes(
@@ -1749,7 +1749,7 @@ public final class WarChess {
        * <code>optional .com.zyd.common.proto.client.BattleMes battleMes = 2;</code>
        *
        * <pre>
-       ** 操作桢信息
+       ** 操作回合信息
        * </pre>
        */
       public Builder mergeBattleMes(com.zyd.common.proto.client.WarChess.BattleMes value) {
@@ -1772,7 +1772,7 @@ public final class WarChess {
        * <code>optional .com.zyd.common.proto.client.BattleMes battleMes = 2;</code>
        *
        * <pre>
-       ** 操作桢信息
+       ** 操作回合信息
        * </pre>
        */
       public Builder clearBattleMes() {
@@ -1789,7 +1789,7 @@ public final class WarChess {
        * <code>optional .com.zyd.common.proto.client.BattleMes battleMes = 2;</code>
        *
        * <pre>
-       ** 操作桢信息
+       ** 操作回合信息
        * </pre>
        */
       public com.zyd.common.proto.client.WarChess.BattleMes.Builder getBattleMesBuilder() {
@@ -1801,7 +1801,7 @@ public final class WarChess {
        * <code>optional .com.zyd.common.proto.client.BattleMes battleMes = 2;</code>
        *
        * <pre>
-       ** 操作桢信息
+       ** 操作回合信息
        * </pre>
        */
       public com.zyd.common.proto.client.WarChess.BattleMesOrBuilder getBattleMesOrBuilder() {
@@ -1815,7 +1815,7 @@ public final class WarChess {
        * <code>optional .com.zyd.common.proto.client.BattleMes battleMes = 2;</code>
        *
        * <pre>
-       ** 操作桢信息
+       ** 操作回合信息
        * </pre>
        */
       private com.google.protobuf.SingleFieldBuilder<
@@ -1895,7 +1895,7 @@ public final class WarChess {
    * Protobuf type {@code com.zyd.common.proto.client.PlayerBattleMesResponse}
    *
    * <pre>
-   ** 玩家战斗的桢信息返回 
+   ** 玩家游戏的回合信息返回 
    * </pre>
    */
   public static final class PlayerBattleMesResponse extends
@@ -2200,7 +2200,7 @@ public final class WarChess {
      * Protobuf type {@code com.zyd.common.proto.client.PlayerBattleMesResponse}
      *
      * <pre>
-     ** 玩家战斗的桢信息返回 
+     ** 玩家游戏的回合信息返回 
      * </pre>
      */
     public static final class Builder extends
@@ -2516,7 +2516,7 @@ public final class WarChess {
    * Protobuf type {@code com.zyd.common.proto.client.FairBattleLevelEndRequest}
    *
    * <pre>
-   ** 玩家战斗结束请求 
+   ** 玩家游戏结束请求 
    * </pre>
    */
   public static final class FairBattleLevelEndRequest extends
@@ -2749,7 +2749,7 @@ public final class WarChess {
      * Protobuf type {@code com.zyd.common.proto.client.FairBattleLevelEndRequest}
      *
      * <pre>
-     ** 玩家战斗结束请求 
+     ** 玩家游戏结束请求 
      * </pre>
      */
     public static final class Builder extends
@@ -2934,7 +2934,7 @@ public final class WarChess {
    * Protobuf type {@code com.zyd.common.proto.client.FairBattleLevelEndResponse}
    *
    * <pre>
-   ** 玩家战斗结束返回 
+   ** 玩家游戏结束返回 
    * </pre>
    */
   public static final class FairBattleLevelEndResponse extends
@@ -3128,7 +3128,7 @@ public final class WarChess {
      * Protobuf type {@code com.zyd.common.proto.client.FairBattleLevelEndResponse}
      *
      * <pre>
-     ** 玩家战斗结束返回 
+     ** 玩家游戏结束返回 
      * </pre>
      */
     public static final class Builder extends
@@ -3885,7 +3885,7 @@ public final class WarChess {
    * Protobuf type {@code com.zyd.common.proto.client.PlayerPaintingEndRequest}
    *
    * <pre>
-   ** 玩家战斗过程处理完成请求
+   ** 玩家走棋图像渲染完成的请求
    * </pre>
    */
   public static final class PlayerPaintingEndRequest extends
@@ -4079,7 +4079,7 @@ public final class WarChess {
      * Protobuf type {@code com.zyd.common.proto.client.PlayerPaintingEndRequest}
      *
      * <pre>
-     ** 玩家战斗过程处理完成请求
+     ** 玩家走棋图像渲染完成的请求
      * </pre>
      */
     public static final class Builder extends
@@ -4202,7 +4202,7 @@ public final class WarChess {
    * Protobuf type {@code com.zyd.common.proto.client.PlayerPaintingEndResponse}
    *
    * <pre>
-   ** 玩家战斗过程处理完成返回
+   ** 玩家走棋图像渲染完成的返回
    * </pre>
    */
   public static final class PlayerPaintingEndResponse extends
@@ -4396,7 +4396,7 @@ public final class WarChess {
      * Protobuf type {@code com.zyd.common.proto.client.PlayerPaintingEndResponse}
      *
      * <pre>
-     ** 玩家战斗过程处理完成返回
+     ** 玩家走棋图像渲染完成的返回
      * </pre>
      */
     public static final class Builder extends
@@ -7003,7 +7003,7 @@ public final class WarChess {
    * Protobuf type {@code com.zyd.common.proto.client.PlayNextPush}
    *
    * <pre>
-   ** 玩家可以进行下一帧操作推送
+   ** 玩家可以开始下一轮倒计时了
    * </pre>
    */
   public static final class PlayNextPush extends
@@ -7197,7 +7197,7 @@ public final class WarChess {
      * Protobuf type {@code com.zyd.common.proto.client.PlayNextPush}
      *
      * <pre>
-     ** 玩家可以进行下一帧操作推送
+     ** 玩家可以开始下一轮倒计时了
      * </pre>
      */
     public static final class Builder extends
@@ -8146,7 +8146,7 @@ public final class WarChess {
      * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
      *
      * <pre>
-     ** 战斗玩家信息
+     ** 游戏玩家信息
      * </pre>
      */
     java.util.List<com.zyd.common.proto.client.WarChess.PlayerMes> 
@@ -8155,7 +8155,7 @@ public final class WarChess {
      * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
      *
      * <pre>
-     ** 战斗玩家信息
+     ** 游戏玩家信息
      * </pre>
      */
     com.zyd.common.proto.client.WarChess.PlayerMes getPlayerMes(int index);
@@ -8163,7 +8163,7 @@ public final class WarChess {
      * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
      *
      * <pre>
-     ** 战斗玩家信息
+     ** 游戏玩家信息
      * </pre>
      */
     int getPlayerMesCount();
@@ -8171,7 +8171,7 @@ public final class WarChess {
      * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
      *
      * <pre>
-     ** 战斗玩家信息
+     ** 游戏玩家信息
      * </pre>
      */
     java.util.List<? extends com.zyd.common.proto.client.WarChess.PlayerMesOrBuilder> 
@@ -8180,15 +8180,15 @@ public final class WarChess {
      * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
      *
      * <pre>
-     ** 战斗玩家信息
+     ** 游戏玩家信息
      * </pre>
      */
     com.zyd.common.proto.client.WarChess.PlayerMesOrBuilder getPlayerMesOrBuilder(
         int index);
 
-    // required int32 userId = 3;
+    // optional int32 userId = 3;
     /**
-     * <code>required int32 userId = 3;</code>
+     * <code>optional int32 userId = 3;</code>
      *
      * <pre>
      ** 第一个操作玩家userId 
@@ -8196,7 +8196,7 @@ public final class WarChess {
      */
     boolean hasUserId();
     /**
-     * <code>required int32 userId = 3;</code>
+     * <code>optional int32 userId = 3;</code>
      *
      * <pre>
      ** 第一个操作玩家userId 
@@ -8345,7 +8345,7 @@ public final class WarChess {
      * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
      *
      * <pre>
-     ** 战斗玩家信息
+     ** 游戏玩家信息
      * </pre>
      */
     public java.util.List<com.zyd.common.proto.client.WarChess.PlayerMes> getPlayerMesList() {
@@ -8355,7 +8355,7 @@ public final class WarChess {
      * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
      *
      * <pre>
-     ** 战斗玩家信息
+     ** 游戏玩家信息
      * </pre>
      */
     public java.util.List<? extends com.zyd.common.proto.client.WarChess.PlayerMesOrBuilder> 
@@ -8366,7 +8366,7 @@ public final class WarChess {
      * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
      *
      * <pre>
-     ** 战斗玩家信息
+     ** 游戏玩家信息
      * </pre>
      */
     public int getPlayerMesCount() {
@@ -8376,7 +8376,7 @@ public final class WarChess {
      * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
      *
      * <pre>
-     ** 战斗玩家信息
+     ** 游戏玩家信息
      * </pre>
      */
     public com.zyd.common.proto.client.WarChess.PlayerMes getPlayerMes(int index) {
@@ -8386,7 +8386,7 @@ public final class WarChess {
      * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
      *
      * <pre>
-     ** 战斗玩家信息
+     ** 游戏玩家信息
      * </pre>
      */
     public com.zyd.common.proto.client.WarChess.PlayerMesOrBuilder getPlayerMesOrBuilder(
@@ -8394,11 +8394,11 @@ public final class WarChess {
       return playerMes_.get(index);
     }
 
-    // required int32 userId = 3;
+    // optional int32 userId = 3;
     public static final int USERID_FIELD_NUMBER = 3;
     private int userId_;
     /**
-     * <code>required int32 userId = 3;</code>
+     * <code>optional int32 userId = 3;</code>
      *
      * <pre>
      ** 第一个操作玩家userId 
@@ -8408,7 +8408,7 @@ public final class WarChess {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required int32 userId = 3;</code>
+     * <code>optional int32 userId = 3;</code>
      *
      * <pre>
      ** 第一个操作玩家userId 
@@ -8452,10 +8452,6 @@ public final class WarChess {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasUserId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       for (int i = 0; i < getPlayerMesCount(); i++) {
         if (!getPlayerMes(i).isInitialized()) {
           memoizedIsInitialized = 0;
@@ -8728,10 +8724,6 @@ public final class WarChess {
       }
 
       public final boolean isInitialized() {
-        if (!hasUserId()) {
-          
-          return false;
-        }
         for (int i = 0; i < getPlayerMesCount(); i++) {
           if (!getPlayerMes(i).isInitialized()) {
             
@@ -8777,7 +8769,7 @@ public final class WarChess {
        * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
        *
        * <pre>
-       ** 战斗玩家信息
+       ** 游戏玩家信息
        * </pre>
        */
       public java.util.List<com.zyd.common.proto.client.WarChess.PlayerMes> getPlayerMesList() {
@@ -8791,7 +8783,7 @@ public final class WarChess {
        * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
        *
        * <pre>
-       ** 战斗玩家信息
+       ** 游戏玩家信息
        * </pre>
        */
       public int getPlayerMesCount() {
@@ -8805,7 +8797,7 @@ public final class WarChess {
        * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
        *
        * <pre>
-       ** 战斗玩家信息
+       ** 游戏玩家信息
        * </pre>
        */
       public com.zyd.common.proto.client.WarChess.PlayerMes getPlayerMes(int index) {
@@ -8819,7 +8811,7 @@ public final class WarChess {
        * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
        *
        * <pre>
-       ** 战斗玩家信息
+       ** 游戏玩家信息
        * </pre>
        */
       public Builder setPlayerMes(
@@ -8840,7 +8832,7 @@ public final class WarChess {
        * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
        *
        * <pre>
-       ** 战斗玩家信息
+       ** 游戏玩家信息
        * </pre>
        */
       public Builder setPlayerMes(
@@ -8858,7 +8850,7 @@ public final class WarChess {
        * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
        *
        * <pre>
-       ** 战斗玩家信息
+       ** 游戏玩家信息
        * </pre>
        */
       public Builder addPlayerMes(com.zyd.common.proto.client.WarChess.PlayerMes value) {
@@ -8878,7 +8870,7 @@ public final class WarChess {
        * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
        *
        * <pre>
-       ** 战斗玩家信息
+       ** 游戏玩家信息
        * </pre>
        */
       public Builder addPlayerMes(
@@ -8899,7 +8891,7 @@ public final class WarChess {
        * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
        *
        * <pre>
-       ** 战斗玩家信息
+       ** 游戏玩家信息
        * </pre>
        */
       public Builder addPlayerMes(
@@ -8917,7 +8909,7 @@ public final class WarChess {
        * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
        *
        * <pre>
-       ** 战斗玩家信息
+       ** 游戏玩家信息
        * </pre>
        */
       public Builder addPlayerMes(
@@ -8935,7 +8927,7 @@ public final class WarChess {
        * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
        *
        * <pre>
-       ** 战斗玩家信息
+       ** 游戏玩家信息
        * </pre>
        */
       public Builder addAllPlayerMes(
@@ -8953,7 +8945,7 @@ public final class WarChess {
        * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
        *
        * <pre>
-       ** 战斗玩家信息
+       ** 游戏玩家信息
        * </pre>
        */
       public Builder clearPlayerMes() {
@@ -8970,7 +8962,7 @@ public final class WarChess {
        * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
        *
        * <pre>
-       ** 战斗玩家信息
+       ** 游戏玩家信息
        * </pre>
        */
       public Builder removePlayerMes(int index) {
@@ -8987,7 +8979,7 @@ public final class WarChess {
        * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
        *
        * <pre>
-       ** 战斗玩家信息
+       ** 游戏玩家信息
        * </pre>
        */
       public com.zyd.common.proto.client.WarChess.PlayerMes.Builder getPlayerMesBuilder(
@@ -8998,7 +8990,7 @@ public final class WarChess {
        * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
        *
        * <pre>
-       ** 战斗玩家信息
+       ** 游戏玩家信息
        * </pre>
        */
       public com.zyd.common.proto.client.WarChess.PlayerMesOrBuilder getPlayerMesOrBuilder(
@@ -9012,7 +9004,7 @@ public final class WarChess {
        * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
        *
        * <pre>
-       ** 战斗玩家信息
+       ** 游戏玩家信息
        * </pre>
        */
       public java.util.List<? extends com.zyd.common.proto.client.WarChess.PlayerMesOrBuilder> 
@@ -9027,7 +9019,7 @@ public final class WarChess {
        * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
        *
        * <pre>
-       ** 战斗玩家信息
+       ** 游戏玩家信息
        * </pre>
        */
       public com.zyd.common.proto.client.WarChess.PlayerMes.Builder addPlayerMesBuilder() {
@@ -9038,7 +9030,7 @@ public final class WarChess {
        * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
        *
        * <pre>
-       ** 战斗玩家信息
+       ** 游戏玩家信息
        * </pre>
        */
       public com.zyd.common.proto.client.WarChess.PlayerMes.Builder addPlayerMesBuilder(
@@ -9050,7 +9042,7 @@ public final class WarChess {
        * <code>repeated .com.zyd.common.proto.client.PlayerMes playerMes = 1;</code>
        *
        * <pre>
-       ** 战斗玩家信息
+       ** 游戏玩家信息
        * </pre>
        */
       public java.util.List<com.zyd.common.proto.client.WarChess.PlayerMes.Builder> 
@@ -9072,10 +9064,10 @@ public final class WarChess {
         return playerMesBuilder_;
       }
 
-      // required int32 userId = 3;
+      // optional int32 userId = 3;
       private int userId_ ;
       /**
-       * <code>required int32 userId = 3;</code>
+       * <code>optional int32 userId = 3;</code>
        *
        * <pre>
        ** 第一个操作玩家userId 
@@ -9085,7 +9077,7 @@ public final class WarChess {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required int32 userId = 3;</code>
+       * <code>optional int32 userId = 3;</code>
        *
        * <pre>
        ** 第一个操作玩家userId 
@@ -9095,7 +9087,7 @@ public final class WarChess {
         return userId_;
       }
       /**
-       * <code>required int32 userId = 3;</code>
+       * <code>optional int32 userId = 3;</code>
        *
        * <pre>
        ** 第一个操作玩家userId 
@@ -9108,7 +9100,7 @@ public final class WarChess {
         return this;
       }
       /**
-       * <code>required int32 userId = 3;</code>
+       * <code>optional int32 userId = 3;</code>
        *
        * <pre>
        ** 第一个操作玩家userId 
@@ -9569,7 +9561,7 @@ public final class WarChess {
      * <code>optional int32 result = 3;</code>
      *
      * <pre>
-     ** 0 正常结束 1 己方投降 2 对方投降
+     ** 0 正常结束 1 己方投降 2 对方投降 3 己方超时 4 对方超时 5 游戏错误 6 逼和 7 和局
      * </pre>
      */
     boolean hasResult();
@@ -9577,7 +9569,7 @@ public final class WarChess {
      * <code>optional int32 result = 3;</code>
      *
      * <pre>
-     ** 0 正常结束 1 己方投降 2 对方投降
+     ** 0 正常结束 1 己方投降 2 对方投降 3 己方超时 4 对方超时 5 游戏错误 6 逼和 7 和局
      * </pre>
      */
     int getResult();
@@ -9586,7 +9578,7 @@ public final class WarChess {
    * Protobuf type {@code com.zyd.common.proto.client.PlayerEndPush}
    *
    * <pre>
-   ** 玩家战斗结束推送
+   ** 玩家游戏结束推送
    * </pre>
    */
   public static final class PlayerEndPush extends
@@ -9785,7 +9777,7 @@ public final class WarChess {
      * <code>optional int32 result = 3;</code>
      *
      * <pre>
-     ** 0 正常结束 1 己方投降 2 对方投降
+     ** 0 正常结束 1 己方投降 2 对方投降 3 己方超时 4 对方超时 5 游戏错误 6 逼和 7 和局
      * </pre>
      */
     public boolean hasResult() {
@@ -9795,7 +9787,7 @@ public final class WarChess {
      * <code>optional int32 result = 3;</code>
      *
      * <pre>
-     ** 0 正常结束 1 己方投降 2 对方投降
+     ** 0 正常结束 1 己方投降 2 对方投降 3 己方超时 4 对方超时 5 游戏错误 6 逼和 7 和局
      * </pre>
      */
     public int getResult() {
@@ -9931,7 +9923,7 @@ public final class WarChess {
      * Protobuf type {@code com.zyd.common.proto.client.PlayerEndPush}
      *
      * <pre>
-     ** 玩家战斗结束推送
+     ** 玩家游戏结束推送
      * </pre>
      */
     public static final class Builder extends
@@ -10467,7 +10459,7 @@ public final class WarChess {
        * <code>optional int32 result = 3;</code>
        *
        * <pre>
-       ** 0 正常结束 1 己方投降 2 对方投降
+       ** 0 正常结束 1 己方投降 2 对方投降 3 己方超时 4 对方超时 5 游戏错误 6 逼和 7 和局
        * </pre>
        */
       public boolean hasResult() {
@@ -10477,7 +10469,7 @@ public final class WarChess {
        * <code>optional int32 result = 3;</code>
        *
        * <pre>
-       ** 0 正常结束 1 己方投降 2 对方投降
+       ** 0 正常结束 1 己方投降 2 对方投降 3 己方超时 4 对方超时 5 游戏错误 6 逼和 7 和局
        * </pre>
        */
       public int getResult() {
@@ -10487,7 +10479,7 @@ public final class WarChess {
        * <code>optional int32 result = 3;</code>
        *
        * <pre>
-       ** 0 正常结束 1 己方投降 2 对方投降
+       ** 0 正常结束 1 己方投降 2 对方投降 3 己方超时 4 对方超时 5 游戏错误 6 逼和 7 和局
        * </pre>
        */
       public Builder setResult(int value) {
@@ -10500,7 +10492,7 @@ public final class WarChess {
        * <code>optional int32 result = 3;</code>
        *
        * <pre>
-       ** 0 正常结束 1 己方投降 2 对方投降
+       ** 0 正常结束 1 己方投降 2 对方投降 3 己方超时 4 对方超时 5 游戏错误 6 逼和 7 和局
        * </pre>
        */
       public Builder clearResult() {
@@ -10595,6 +10587,24 @@ public final class WarChess {
      * </pre>
      */
     int getUserId();
+
+    // optional int32 promption = 5;
+    /**
+     * <code>optional int32 promption = 5;</code>
+     *
+     * <pre>
+     *兵升变信息：-1没有，其余：为兵升变后的棋子
+     * </pre>
+     */
+    boolean hasPromption();
+    /**
+     * <code>optional int32 promption = 5;</code>
+     *
+     * <pre>
+     *兵升变信息：-1没有，其余：为兵升变后的棋子
+     * </pre>
+     */
+    int getPromption();
   }
   /**
    * Protobuf type {@code com.zyd.common.proto.client.BattleMes}
@@ -10669,6 +10679,11 @@ public final class WarChess {
             case 32: {
               bitField0_ |= 0x00000008;
               userId_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              promption_ = input.readInt32();
               break;
             }
           }
@@ -10807,11 +10822,36 @@ public final class WarChess {
       return userId_;
     }
 
+    // optional int32 promption = 5;
+    public static final int PROMPTION_FIELD_NUMBER = 5;
+    private int promption_;
+    /**
+     * <code>optional int32 promption = 5;</code>
+     *
+     * <pre>
+     *兵升变信息：-1没有，其余：为兵升变后的棋子
+     * </pre>
+     */
+    public boolean hasPromption() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 promption = 5;</code>
+     *
+     * <pre>
+     *兵升变信息：-1没有，其余：为兵升变后的棋子
+     * </pre>
+     */
+    public int getPromption() {
+      return promption_;
+    }
+
     private void initFields() {
       playNum_ = 0;
       from_ = 0;
       to_ = 0;
       userId_ = 0;
+      promption_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -10837,6 +10877,9 @@ public final class WarChess {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(4, userId_);
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, promption_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -10861,6 +10904,10 @@ public final class WarChess {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, userId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, promption_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -10990,6 +11037,8 @@ public final class WarChess {
         bitField0_ = (bitField0_ & ~0x00000004);
         userId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
+        promption_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -11034,6 +11083,10 @@ public final class WarChess {
           to_bitField0_ |= 0x00000008;
         }
         result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.promption_ = promption_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -11061,6 +11114,9 @@ public final class WarChess {
         }
         if (other.hasUserId()) {
           setUserId(other.getUserId());
+        }
+        if (other.hasPromption()) {
+          setPromption(other.getPromption());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -11285,6 +11341,55 @@ public final class WarChess {
         return this;
       }
 
+      // optional int32 promption = 5;
+      private int promption_ ;
+      /**
+       * <code>optional int32 promption = 5;</code>
+       *
+       * <pre>
+       *兵升变信息：-1没有，其余：为兵升变后的棋子
+       * </pre>
+       */
+      public boolean hasPromption() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 promption = 5;</code>
+       *
+       * <pre>
+       *兵升变信息：-1没有，其余：为兵升变后的棋子
+       * </pre>
+       */
+      public int getPromption() {
+        return promption_;
+      }
+      /**
+       * <code>optional int32 promption = 5;</code>
+       *
+       * <pre>
+       *兵升变信息：-1没有，其余：为兵升变后的棋子
+       * </pre>
+       */
+      public Builder setPromption(int value) {
+        bitField0_ |= 0x00000010;
+        promption_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 promption = 5;</code>
+       *
+       * <pre>
+       *兵升变信息：-1没有，其余：为兵升变后的棋子
+       * </pre>
+       */
+      public Builder clearPromption() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        promption_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.BattleMes)
     }
 
@@ -11336,7 +11441,7 @@ public final class WarChess {
    * Protobuf type {@code com.zyd.common.proto.client.PlayerMes}
    *
    * <pre>
-   ** 战斗玩家信息
+   ** 游戏玩家信息
    * </pre>
    */
   public static final class PlayerMes extends
@@ -11629,7 +11734,7 @@ public final class WarChess {
      * Protobuf type {@code com.zyd.common.proto.client.PlayerMes}
      *
      * <pre>
-     ** 战斗玩家信息
+     ** 游戏玩家信息
      * </pre>
      */
     public static final class Builder extends
@@ -12929,15 +13034,16 @@ public final class WarChess {
       "zyd.common.proto.client.BattleMes\"l\n\017Pla" +
       "yerStartPush\0229\n\tplayerMes\030\001 \003(\0132&.com.zy" +
       "d.common.proto.client.PlayerMes\022\016\n\006userI" +
-      "d\030\003 \002(\005\022\016\n\006roomId\030\004 \001(\003\"\031\n\027PlayerReadyFi" +
+      "d\030\003 \001(\005\022\016\n\006roomId\030\004 \001(\003\"\031\n\027PlayerReadyFi" +
       "nishedPush\"m\n\rPlayerEndPush\022\021\n\twinUserId" +
       "\030\001 \001(\005\0229\n\tbattleMes\030\002 \003(\0132&.com.zyd.comm" +
       "on.proto.client.BattleMes\022\016\n\006result\030\003 \001(",
-      "\005\"F\n\tBattleMes\022\017\n\007PlayNum\030\001 \001(\005\022\014\n\004from\030" +
-      "\002 \001(\005\022\n\n\002to\030\003 \001(\005\022\016\n\006userId\030\004 \001(\005\"-\n\tPla" +
-      "yerMes\022\016\n\006userId\030\001 \002(\005\022\020\n\010userName\030\002 \001(\t" +
-      "\" \n\016OnePlayerReady\022\016\n\006userId\030\001 \002(\005\" \n\016Pl" +
-      "ayerNotReady\022\016\n\006userId\030\001 \003(\005"
+      "\005\"Y\n\tBattleMes\022\017\n\007PlayNum\030\001 \001(\005\022\014\n\004from\030" +
+      "\002 \001(\005\022\n\n\002to\030\003 \001(\005\022\016\n\006userId\030\004 \001(\005\022\021\n\tpro" +
+      "mption\030\005 \001(\005\"-\n\tPlayerMes\022\016\n\006userId\030\001 \002(" +
+      "\005\022\020\n\010userName\030\002 \001(\t\" \n\016OnePlayerReady\022\016\n" +
+      "\006userId\030\001 \002(\005\" \n\016PlayerNotReady\022\016\n\006userI" +
+      "d\030\001 \003(\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -13075,7 +13181,7 @@ public final class WarChess {
           internal_static_com_zyd_common_proto_client_BattleMes_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_BattleMes_descriptor,
-              new java.lang.String[] { "PlayNum", "From", "To", "UserId", });
+              new java.lang.String[] { "PlayNum", "From", "To", "UserId", "Promption", });
           internal_static_com_zyd_common_proto_client_PlayerMes_descriptor =
             getDescriptor().getMessageTypes().get(22);
           internal_static_com_zyd_common_proto_client_PlayerMes_fieldAccessorTable = new

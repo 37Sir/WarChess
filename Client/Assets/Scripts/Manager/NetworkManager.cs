@@ -196,9 +196,9 @@ namespace Framework
         public void RegisterPushCall(string name, DelegatePushRPC delegatePush)
         {
             //delegatePush.Method.Name; todo 一个消息可以有多个监听
-            if(!m_pushCallMap.ContainsKey(name))
+            if(!m_pushCallMap.ContainsKey("#"+name))
             {
-                m_pushCallMap.Add(name, delegatePush);
+                m_pushCallMap.Add("#" + name, delegatePush);
             }
         }
 

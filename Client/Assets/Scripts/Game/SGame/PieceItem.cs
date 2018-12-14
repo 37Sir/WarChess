@@ -1,5 +1,6 @@
 ﻿using Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,22 +10,31 @@ public class PieceItem:MonoBehaviour
 {
     private GameObject m_gameObject;
     private PieceItemMediator m_mediator;
+    private string m_name;
+    private PVPProxy m_pvpProxy;
     private TextMesh m_Type;//棋子类型
     private GameObject m_Model;//棋子模型
     private Vector3 m_beginPos;//初始位置
-    public bool isEnemy = false;
+    public Config.PieceColor selfColor;
     private bool m_isTipsShow = false;
     public float m_X;
     public float m_Z;
-    public void InitView(GameObject gameObject, Piece pieceData)
+    public bool isDead = false;
+    public bool isPVE = false;
+
+    public void InitView(GameObject gameObject, Piece pieceData, bool pve = false)
     {
+        isPVE = pve;
         m_gameObject = gameObject;
-        m_mediator = new PieceItemMediator(this);
-        App.Facade.RegisterMediator(m_mediator);
-        m_mediator.InitPieceData(pieceData);
         m_Type = gameObject.transform.Find("m_Type").GetComponent<TextMesh>();
         m_Model = gameObject.transform.Find("m_Model").gameObject;
+        m_pvpProxy = App.Facade.RetrieveProxy("PVPProxy") as PVPProxy;
         InitPieceShow(pieceData);
+        m_name = m_X + "_" + m_Z;
+        m_mediator = new PieceItemMediator(this, m_name);
+        App.Facade.RegisterMediator(m_mediator);       
+        m_mediator.InitPieceData(pieceData);
+       
         OpenView();
     }
 
@@ -56,10 +66,14 @@ public class PieceItem:MonoBehaviour
             var mesh = m_Model.GetComponent<MeshRenderer>();
             mesh.material.color = Color.black;
             m_Type.color = Color.white;
-            if(isEnemy == true)
+        }
+        //不是自己的棋子 不能拖
+        if (isPVE == false)
+        {
+            if (m_pvpProxy.GetSelfColor() != pieceData.color)
             {
                 var collider = GetComponent<CapsuleCollider>();
-                if(collider != null)
+                if (collider != null)
                 {
                     collider.enabled = false;
                 }
@@ -85,8 +99,21 @@ public class PieceItem:MonoBehaviour
             object loseColor = m_mediator.pieceData.color;
             m_mediator.NotityGameOver(loseColor);
         }
+        isDead = true;
+        gameObject.SetActive(false);
+        OnDestroy();
+    }
+
+    private void OnDestroy()
+    {
+        App.Facade.RemoveMediator(m_mediator.MediatorName);
         Destroy(gameObject);
         Destroy(this);
+    }
+
+    public void OnGameOver()
+    {
+        OnDestroy();
     }
 
     /// <summary>
@@ -134,8 +161,15 @@ public class PieceItem:MonoBehaviour
             object[] body = { m_X, m_Z, m_mediator.pieceData.color, to };
             if (App.ChessLogic.DoMove(new Vector2(m_X - 1, m_Z - 1), new Vector2(to.x - 1, to.y - 1)))
             {
-                SetPiecePos(to.x, to.y);
-                m_mediator.NotityDragEnd(body);
+                var piece = App.ChessLogic.GetPiece((int)to.x - 1, (int)to.y - 1);//移动后的棋子
+                if(piece % 10 == (int)Config.PieceType.P && ((int)to.y == 1 || (int)to.y == 8))
+                {
+                    m_mediator.NotityPPromote(body);
+                }
+                else
+                {
+                    m_mediator.NotityDragEnd(body);
+                }              
             }
             else
             {
@@ -175,5 +209,50 @@ public class PieceItem:MonoBehaviour
             }
         }
         return directs[dId];
+    }
+
+    /// <summary>
+    /// 其他人走棋
+    /// </summary>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    public void DoMove(Vector2 from, Vector2 to, Vector2 type)
+    {
+        if(from.x == m_X && from.y == m_Z)
+        {
+            if (App.ChessLogic.DoMove(new Vector2(from.x - 1, from.y - 1), new Vector2(to.x - 1, to.y - 1)))
+            {
+                m_mediator.NotifyMoveEnd(new Vector2[] {from, to, type});
+                if (isPVE == false)
+                {
+                    m_mediator.NotifyEndTurn();
+                }              
+                Debug.Log("正常移动！！ fromx: " + from.x + "fromy" + from.y);
+            }
+            else
+            {
+                Debug.Log("非法移动！！ On Other");
+            }
+        }
+    }
+
+    public void OnPromoted(int type)
+    {
+        App.ChessLogic.PPromoted(new Vector2Int((int)m_X - 1, (int)m_Z - 1), type);
+        switch ((Config.PieceType)type)
+        {
+            case Config.PieceType.N:
+                m_Type.text = "马";
+                break;
+            case Config.PieceType.B:
+                m_Type.text = "象";
+                break;
+            case Config.PieceType.R:
+                m_Type.text = "车";
+                break;
+            case Config.PieceType.Q:
+                m_Type.text = "后";
+                break;
+        }
     }
 }

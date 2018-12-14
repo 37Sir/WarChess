@@ -1,4 +1,5 @@
-﻿using Framework;
+﻿using com.zyd.common.proto.client;
+using Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,15 +25,20 @@ public class LobbyPanel
     private GameObject m_object;
     private LobbyPanelMediator m_mediator;
     private UserDataProxy m_proxy;//todo
+    private PVPProxy m_pvpProxy;
+    private PVEProxy m_pveProxy;
 
     public void InitView(GameObject gameObject)
     {
         Debug.Log("Lobby Panel Inited");
         m_object = gameObject;
         m_mediator = new LobbyPanelMediator(this);
-        m_proxy = new UserDataProxy();
+        m_pvpProxy = new PVPProxy();
+        m_pveProxy = new PVEProxy();
         App.Facade.RegisterMediator(m_mediator);
-        App.Facade.RegisterProxy(m_proxy);
+        App.Facade.RegisterProxy(m_pvpProxy);
+        App.Facade.RegisterProxy(m_pveProxy);
+        m_proxy = App.Facade.RetrieveProxy("UserDataProxy") as UserDataProxy;
         m_Select = gameObject.transform.Find("m_Select").gameObject;
         m_Searching = gameObject.transform.Find("m_Searching").gameObject;
         m_PVE = gameObject.transform.Find("m_Select/m_PVE").gameObject.GetComponent<Button>();
@@ -45,12 +51,9 @@ public class LobbyPanel
         m_cancel.onClick.AddListener(OnCancelClick);
         App.Facade.RegisterCommand(NotificationConstant.Match, () => new MatchCommand());
         App.NetworkManager.RegisterPushCall(Config.PushMessage.MatchSuccess, OnMatchSuccess);
-        App.NetworkManager.RegisterPushCall(Config.PushMessage.OnePlayerReady, OnOnePlayerReady);
-        App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerNotReady, OnPlayerNotReady);
-        App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerReadyFinish, OnReadyFinish);
     }
 
-    public void OpenView()
+    public void OpenView(object intent)
     {
         Debug.Log("Lobby Panel Opened");
     }
@@ -62,7 +65,7 @@ public class LobbyPanel
 
     public void DestroyView()
     {
-
+        App.Facade.RemoveMediator(m_mediator.MediatorName);
     }
 
     /// <summary>
@@ -107,22 +110,24 @@ public class LobbyPanel
     #region Push Callback
     public void OnMatchSuccess(string name, List<byte[]> packet)
     {
+        var push = PlayerStartPush.ParseFrom(packet[0]);
+        var selfId = m_proxy.GetPlayerId();
+        var playerMes1 = push.GetPlayerMes(0);
+        var playerMes2 = push.GetPlayerMes(1);
+        var firstHandId = push.UserId;
+        if(playerMes1.UserId == selfId)
+        {
+            m_pvpProxy.SetEnemyName(playerMes2.UserName);
+        }
+        else
+        {
+            m_pvpProxy.SetEnemyName(playerMes1.UserName);
+        }
+        m_pvpProxy.SetFirstId(firstHandId);
+        StopMatchTimer();
+        App.Facade.RemoveMediator("LobbyPanelMediator");
+        App.NSceneManager.LoadScene("SGame");      
         Debug.Log("On Match Success");
-    }
-
-    public void OnPlayerNotReady(string name, List<byte[]> packet)
-    {
-        Debug.Log("On Player Not Ready");
-    }
-
-    public void OnOnePlayerReady(string name, List<byte[]> packet)
-    {
-        Debug.Log("On One Player Ready");
-    }
-
-    public void OnReadyFinish(string name, List<byte[]> packet)
-    {
-        Debug.Log("On Ready Finish");
     }
     #endregion
 
@@ -134,7 +139,8 @@ public class LobbyPanel
 
     private void OnPVEClick()
     {
-        App.NSceneManager.LoadScene("SGame");
+        App.Facade.RemoveMediator("LobbyPanelMediator");
+        App.NSceneManager.LoadScene("SGame01");
     }
 
     private void OnCancelClick()

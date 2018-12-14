@@ -11,11 +11,14 @@ using UnityEngine;
 public class LoginCommand : SimpleCommand
 {
     public const string NAME = "LoginCommand";
+    private UserDataProxy m_userProxy;
 
     public override void Execute(INotification notification)
     {
+        string userName = notification.Body.ToString();
+        m_userProxy = Facade.RetrieveProxy("UserDataProxy") as UserDataProxy;
         Debug.Log("LoginCommand Execute!");
-        Request("liujialiang");
+        Request(userName);
     }
 
     private void Request(string userName)
@@ -32,7 +35,7 @@ public class LoginCommand : SimpleCommand
         var playerInfo = response.PlayerInfo;
         var userName = playerInfo.UserName;
         var userId = playerInfo.UserId;
-
+        m_userProxy.SetPlayerInfo(userName, userId);
         App.NetworkManager.UserId = userId;
         Debug.Log("Login Success ! UserName: " + userName + " UserId: " + userId);
 

@@ -78,7 +78,7 @@ namespace Framework
         protected virtual void OnWaitInitOpenViewEnd(params object[] args)
         {
             MethodInfo mi = m_objectType.GetMethod("OpenView");
-            mi.Invoke(m_object, null);
+            mi.Invoke(m_object, args);
         }
 
         protected virtual IEnumerator OnInitView(params object[] args)

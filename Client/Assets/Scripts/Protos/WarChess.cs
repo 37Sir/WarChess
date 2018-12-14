@@ -1138,8 +1138,6 @@ namespace com.zyd.common.proto.client {
      #endif//
     public override bool IsInitialized {
       get {
-        if (!hasBattleMes) return false;
-        if (!BattleMes.IsInitialized) return false;
         return true;
       }
     }
@@ -2926,26 +2924,26 @@ namespace com.zyd.common.proto.client {
     }
   }
   
-  public sealed partial class FairBattleLevelFattingFinishedRequest : pb::GeneratedMessageLite<FairBattleLevelFattingFinishedRequest, FairBattleLevelFattingFinishedRequest.Builder> {
-    private FairBattleLevelFattingFinishedRequest() { }
-    private static readonly FairBattleLevelFattingFinishedRequest defaultInstance = new FairBattleLevelFattingFinishedRequest().MakeReadOnly();
-    private static readonly string[] _fairBattleLevelFattingFinishedRequestFieldNames = new string[] {  };
-    private static readonly uint[] _fairBattleLevelFattingFinishedRequestFieldTags = new uint[] {  };
+  public sealed partial class PlayerPaintingEndRequest : pb::GeneratedMessageLite<PlayerPaintingEndRequest, PlayerPaintingEndRequest.Builder> {
+    private PlayerPaintingEndRequest() { }
+    private static readonly PlayerPaintingEndRequest defaultInstance = new PlayerPaintingEndRequest().MakeReadOnly();
+    private static readonly string[] _playerPaintingEndRequestFieldNames = new string[] {  };
+    private static readonly uint[] _playerPaintingEndRequestFieldTags = new uint[] {  };
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedRequest DefaultInstance {
+    public static PlayerPaintingEndRequest DefaultInstance {
       get { return defaultInstance; }
     }
     
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public override FairBattleLevelFattingFinishedRequest DefaultInstanceForType {
+    public override PlayerPaintingEndRequest DefaultInstanceForType {
       get { return DefaultInstance; }
     }
     
-    protected override FairBattleLevelFattingFinishedRequest ThisMessage {
+    protected override PlayerPaintingEndRequest ThisMessage {
       get { return this; }
     }
     
@@ -2963,7 +2961,7 @@ namespace com.zyd.common.proto.client {
      #endif//
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
-      string[] field_names = _fairBattleLevelFattingFinishedRequestFieldNames;
+      string[] field_names = _playerPaintingEndRequestFieldNames;
     }
     
     private int memoizedSerializedSize = -1;
@@ -2988,7 +2986,7 @@ namespace com.zyd.common.proto.client {
     }
     
     public override bool Equals(object obj) {
-      FairBattleLevelFattingFinishedRequest other = obj as FairBattleLevelFattingFinishedRequest;
+      PlayerPaintingEndRequest other = obj as PlayerPaintingEndRequest;
       if (other == null) return false;
       return true;
     }
@@ -2998,64 +2996,64 @@ namespace com.zyd.common.proto.client {
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedRequest ParseFrom(pb::ByteString data) {
+    public static PlayerPaintingEndRequest ParseFrom(pb::ByteString data) {
       return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
     }
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedRequest ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+    public static PlayerPaintingEndRequest ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
     }
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedRequest ParseFrom(byte[] data) {
+    public static PlayerPaintingEndRequest ParseFrom(byte[] data) {
       return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
     }
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedRequest ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+    public static PlayerPaintingEndRequest ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
     }
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedRequest ParseFrom(global::System.IO.Stream input) {
+    public static PlayerPaintingEndRequest ParseFrom(global::System.IO.Stream input) {
       return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
     }
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedRequest ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+    public static PlayerPaintingEndRequest ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedRequest ParseDelimitedFrom(global::System.IO.Stream input) {
+    public static PlayerPaintingEndRequest ParseDelimitedFrom(global::System.IO.Stream input) {
       return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
     }
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedRequest ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+    public static PlayerPaintingEndRequest ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
       return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
     }
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedRequest ParseFrom(pb::ICodedInputStream input) {
+    public static PlayerPaintingEndRequest ParseFrom(pb::ICodedInputStream input) {
       return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
     }
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedRequest ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+    public static PlayerPaintingEndRequest ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
-    private FairBattleLevelFattingFinishedRequest MakeReadOnly() {
+    private PlayerPaintingEndRequest MakeReadOnly() {
       return this;
     }
     
@@ -3074,11 +3072,11 @@ namespace com.zyd.common.proto.client {
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static Builder CreateBuilder(FairBattleLevelFattingFinishedRequest prototype) {
+    public static Builder CreateBuilder(PlayerPaintingEndRequest prototype) {
       return new Builder(prototype);
     }
     
-    public sealed partial class Builder : pb::GeneratedBuilderLite<FairBattleLevelFattingFinishedRequest, Builder> {
+    public sealed partial class Builder : pb::GeneratedBuilderLite<PlayerPaintingEndRequest, Builder> {
       protected override Builder ThisBuilder {
         get { return this; }
       }
@@ -3086,18 +3084,18 @@ namespace com.zyd.common.proto.client {
         result = DefaultInstance;
         resultIsReadOnly = true;
       }
-      internal Builder(FairBattleLevelFattingFinishedRequest cloneFrom) {
+      internal Builder(PlayerPaintingEndRequest cloneFrom) {
         result = cloneFrom;
         resultIsReadOnly = true;
       }
       
       private bool resultIsReadOnly;
-      private FairBattleLevelFattingFinishedRequest result;
+      private PlayerPaintingEndRequest result;
       
-      private FairBattleLevelFattingFinishedRequest PrepareBuilder() {
+      private PlayerPaintingEndRequest PrepareBuilder() {
         if (resultIsReadOnly) {
-          FairBattleLevelFattingFinishedRequest original = result;
-          result = new FairBattleLevelFattingFinishedRequest();
+          PlayerPaintingEndRequest original = result;
+          result = new PlayerPaintingEndRequest();
           resultIsReadOnly = false;
           MergeFrom(original);
         }
@@ -3108,7 +3106,7 @@ namespace com.zyd.common.proto.client {
         get { return result.IsInitialized; }
       }
       
-      protected override FairBattleLevelFattingFinishedRequest MessageBeingBuilt {
+      protected override PlayerPaintingEndRequest MessageBeingBuilt {
         get { return PrepareBuilder(); }
       }
       
@@ -3126,11 +3124,11 @@ namespace com.zyd.common.proto.client {
         }
       }
       
-      public override FairBattleLevelFattingFinishedRequest DefaultInstanceForType {
-        get { return global::com.zyd.common.proto.client.FairBattleLevelFattingFinishedRequest.DefaultInstance; }
+      public override PlayerPaintingEndRequest DefaultInstanceForType {
+        get { return global::com.zyd.common.proto.client.PlayerPaintingEndRequest.DefaultInstance; }
       }
       
-      public override FairBattleLevelFattingFinishedRequest BuildPartial() {
+      public override PlayerPaintingEndRequest BuildPartial() {
         if (resultIsReadOnly) {
           return result;
         }
@@ -3139,16 +3137,16 @@ namespace com.zyd.common.proto.client {
       }
       
       public override Builder MergeFrom(pb::IMessageLite other) {
-        if (other is FairBattleLevelFattingFinishedRequest) {
-          return MergeFrom((FairBattleLevelFattingFinishedRequest) other);
+        if (other is PlayerPaintingEndRequest) {
+          return MergeFrom((PlayerPaintingEndRequest) other);
         } else {
           base.MergeFrom(other);
           return this;
         }
       }
       
-      public override Builder MergeFrom(FairBattleLevelFattingFinishedRequest other) {
-        if (other == global::com.zyd.common.proto.client.FairBattleLevelFattingFinishedRequest.DefaultInstance) return this;
+      public override Builder MergeFrom(PlayerPaintingEndRequest other) {
+        if (other == global::com.zyd.common.proto.client.PlayerPaintingEndRequest.DefaultInstance) return this;
         PrepareBuilder();
         return this;
       }
@@ -3163,9 +3161,9 @@ namespace com.zyd.common.proto.client {
         string field_name;
         while (input.ReadTag(out tag, out field_name)) {
           if(tag == 0 && field_name != null) {
-            int field_ordinal = global::System.Array.BinarySearch(_fairBattleLevelFattingFinishedRequestFieldNames, field_name, global::System.StringComparer.Ordinal);
+            int field_ordinal = global::System.Array.BinarySearch(_playerPaintingEndRequestFieldNames, field_name, global::System.StringComparer.Ordinal);
             if(field_ordinal >= 0)
-              tag = _fairBattleLevelFattingFinishedRequestFieldTags[field_ordinal];
+              tag = _playerPaintingEndRequestFieldTags[field_ordinal];
             else {
               ParseUnknownField(input, extensionRegistry, tag, field_name);
               continue;
@@ -3189,31 +3187,31 @@ namespace com.zyd.common.proto.client {
       }
       
     }
-    static FairBattleLevelFattingFinishedRequest() {
+    static PlayerPaintingEndRequest() {
       object.ReferenceEquals(global::com.zyd.common.proto.client.WarChess.Descriptor, null);
     }
   }
   
-  public sealed partial class FairBattleLevelFattingFinishedResponse : pb::GeneratedMessageLite<FairBattleLevelFattingFinishedResponse, FairBattleLevelFattingFinishedResponse.Builder> {
-    private FairBattleLevelFattingFinishedResponse() { }
-    private static readonly FairBattleLevelFattingFinishedResponse defaultInstance = new FairBattleLevelFattingFinishedResponse().MakeReadOnly();
-    private static readonly string[] _fairBattleLevelFattingFinishedResponseFieldNames = new string[] {  };
-    private static readonly uint[] _fairBattleLevelFattingFinishedResponseFieldTags = new uint[] {  };
+  public sealed partial class PlayerPaintingEndResponse : pb::GeneratedMessageLite<PlayerPaintingEndResponse, PlayerPaintingEndResponse.Builder> {
+    private PlayerPaintingEndResponse() { }
+    private static readonly PlayerPaintingEndResponse defaultInstance = new PlayerPaintingEndResponse().MakeReadOnly();
+    private static readonly string[] _playerPaintingEndResponseFieldNames = new string[] {  };
+    private static readonly uint[] _playerPaintingEndResponseFieldTags = new uint[] {  };
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedResponse DefaultInstance {
+    public static PlayerPaintingEndResponse DefaultInstance {
       get { return defaultInstance; }
     }
     
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public override FairBattleLevelFattingFinishedResponse DefaultInstanceForType {
+    public override PlayerPaintingEndResponse DefaultInstanceForType {
       get { return DefaultInstance; }
     }
     
-    protected override FairBattleLevelFattingFinishedResponse ThisMessage {
+    protected override PlayerPaintingEndResponse ThisMessage {
       get { return this; }
     }
     
@@ -3231,7 +3229,7 @@ namespace com.zyd.common.proto.client {
      #endif//
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
-      string[] field_names = _fairBattleLevelFattingFinishedResponseFieldNames;
+      string[] field_names = _playerPaintingEndResponseFieldNames;
     }
     
     private int memoizedSerializedSize = -1;
@@ -3256,7 +3254,7 @@ namespace com.zyd.common.proto.client {
     }
     
     public override bool Equals(object obj) {
-      FairBattleLevelFattingFinishedResponse other = obj as FairBattleLevelFattingFinishedResponse;
+      PlayerPaintingEndResponse other = obj as PlayerPaintingEndResponse;
       if (other == null) return false;
       return true;
     }
@@ -3266,64 +3264,64 @@ namespace com.zyd.common.proto.client {
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedResponse ParseFrom(pb::ByteString data) {
+    public static PlayerPaintingEndResponse ParseFrom(pb::ByteString data) {
       return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
     }
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedResponse ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+    public static PlayerPaintingEndResponse ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
     }
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedResponse ParseFrom(byte[] data) {
+    public static PlayerPaintingEndResponse ParseFrom(byte[] data) {
       return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
     }
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedResponse ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+    public static PlayerPaintingEndResponse ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
     }
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedResponse ParseFrom(global::System.IO.Stream input) {
+    public static PlayerPaintingEndResponse ParseFrom(global::System.IO.Stream input) {
       return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
     }
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedResponse ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+    public static PlayerPaintingEndResponse ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedResponse ParseDelimitedFrom(global::System.IO.Stream input) {
+    public static PlayerPaintingEndResponse ParseDelimitedFrom(global::System.IO.Stream input) {
       return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
     }
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedResponse ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+    public static PlayerPaintingEndResponse ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
       return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
     }
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedResponse ParseFrom(pb::ICodedInputStream input) {
+    public static PlayerPaintingEndResponse ParseFrom(pb::ICodedInputStream input) {
       return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
     }
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static FairBattleLevelFattingFinishedResponse ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+    public static PlayerPaintingEndResponse ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
-    private FairBattleLevelFattingFinishedResponse MakeReadOnly() {
+    private PlayerPaintingEndResponse MakeReadOnly() {
       return this;
     }
     
@@ -3342,11 +3340,11 @@ namespace com.zyd.common.proto.client {
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
-    public static Builder CreateBuilder(FairBattleLevelFattingFinishedResponse prototype) {
+    public static Builder CreateBuilder(PlayerPaintingEndResponse prototype) {
       return new Builder(prototype);
     }
     
-    public sealed partial class Builder : pb::GeneratedBuilderLite<FairBattleLevelFattingFinishedResponse, Builder> {
+    public sealed partial class Builder : pb::GeneratedBuilderLite<PlayerPaintingEndResponse, Builder> {
       protected override Builder ThisBuilder {
         get { return this; }
       }
@@ -3354,18 +3352,18 @@ namespace com.zyd.common.proto.client {
         result = DefaultInstance;
         resultIsReadOnly = true;
       }
-      internal Builder(FairBattleLevelFattingFinishedResponse cloneFrom) {
+      internal Builder(PlayerPaintingEndResponse cloneFrom) {
         result = cloneFrom;
         resultIsReadOnly = true;
       }
       
       private bool resultIsReadOnly;
-      private FairBattleLevelFattingFinishedResponse result;
+      private PlayerPaintingEndResponse result;
       
-      private FairBattleLevelFattingFinishedResponse PrepareBuilder() {
+      private PlayerPaintingEndResponse PrepareBuilder() {
         if (resultIsReadOnly) {
-          FairBattleLevelFattingFinishedResponse original = result;
-          result = new FairBattleLevelFattingFinishedResponse();
+          PlayerPaintingEndResponse original = result;
+          result = new PlayerPaintingEndResponse();
           resultIsReadOnly = false;
           MergeFrom(original);
         }
@@ -3376,7 +3374,7 @@ namespace com.zyd.common.proto.client {
         get { return result.IsInitialized; }
       }
       
-      protected override FairBattleLevelFattingFinishedResponse MessageBeingBuilt {
+      protected override PlayerPaintingEndResponse MessageBeingBuilt {
         get { return PrepareBuilder(); }
       }
       
@@ -3394,11 +3392,11 @@ namespace com.zyd.common.proto.client {
         }
       }
       
-      public override FairBattleLevelFattingFinishedResponse DefaultInstanceForType {
-        get { return global::com.zyd.common.proto.client.FairBattleLevelFattingFinishedResponse.DefaultInstance; }
+      public override PlayerPaintingEndResponse DefaultInstanceForType {
+        get { return global::com.zyd.common.proto.client.PlayerPaintingEndResponse.DefaultInstance; }
       }
       
-      public override FairBattleLevelFattingFinishedResponse BuildPartial() {
+      public override PlayerPaintingEndResponse BuildPartial() {
         if (resultIsReadOnly) {
           return result;
         }
@@ -3407,16 +3405,16 @@ namespace com.zyd.common.proto.client {
       }
       
       public override Builder MergeFrom(pb::IMessageLite other) {
-        if (other is FairBattleLevelFattingFinishedResponse) {
-          return MergeFrom((FairBattleLevelFattingFinishedResponse) other);
+        if (other is PlayerPaintingEndResponse) {
+          return MergeFrom((PlayerPaintingEndResponse) other);
         } else {
           base.MergeFrom(other);
           return this;
         }
       }
       
-      public override Builder MergeFrom(FairBattleLevelFattingFinishedResponse other) {
-        if (other == global::com.zyd.common.proto.client.FairBattleLevelFattingFinishedResponse.DefaultInstance) return this;
+      public override Builder MergeFrom(PlayerPaintingEndResponse other) {
+        if (other == global::com.zyd.common.proto.client.PlayerPaintingEndResponse.DefaultInstance) return this;
         PrepareBuilder();
         return this;
       }
@@ -3431,9 +3429,9 @@ namespace com.zyd.common.proto.client {
         string field_name;
         while (input.ReadTag(out tag, out field_name)) {
           if(tag == 0 && field_name != null) {
-            int field_ordinal = global::System.Array.BinarySearch(_fairBattleLevelFattingFinishedResponseFieldNames, field_name, global::System.StringComparer.Ordinal);
+            int field_ordinal = global::System.Array.BinarySearch(_playerPaintingEndResponseFieldNames, field_name, global::System.StringComparer.Ordinal);
             if(field_ordinal >= 0)
-              tag = _fairBattleLevelFattingFinishedResponseFieldTags[field_ordinal];
+              tag = _playerPaintingEndResponseFieldTags[field_ordinal];
             else {
               ParseUnknownField(input, extensionRegistry, tag, field_name);
               continue;
@@ -3457,7 +3455,7 @@ namespace com.zyd.common.proto.client {
       }
       
     }
-    static FairBattleLevelFattingFinishedResponse() {
+    static PlayerPaintingEndResponse() {
       object.ReferenceEquals(global::com.zyd.common.proto.client.WarChess.Descriptor, null);
     }
   }
@@ -3885,9 +3883,6 @@ namespace com.zyd.common.proto.client {
       get {
         if (HasPlayerSatrt) {
           if (!PlayerSatrt.IsInitialized) return false;
-        }
-        foreach (global::com.zyd.common.proto.client.BattleMes element in BattleMesList) {
-          if (!element.IsInitialized) return false;
         }
         return true;
       }
@@ -5223,7 +5218,6 @@ namespace com.zyd.common.proto.client {
         if (!hasCurrentTime) return false;
         if (!hasNextTime) return false;
         if (!hasBattleMes) return false;
-        if (!BattleMes.IsInitialized) return false;
         return true;
       }
     }
@@ -5597,8 +5591,8 @@ namespace com.zyd.common.proto.client {
   public sealed partial class PlayerStartPush : pb::GeneratedMessageLite<PlayerStartPush, PlayerStartPush.Builder> {
     private PlayerStartPush() { }
     private static readonly PlayerStartPush defaultInstance = new PlayerStartPush().MakeReadOnly();
-    private static readonly string[] _playerStartPushFieldNames = new string[] { "playerMes", "randomSeed", "roomId", "userId", "zoneId" };
-    private static readonly uint[] _playerStartPushFieldTags = new uint[] { 10, 40, 32, 24, 16 };
+    private static readonly string[] _playerStartPushFieldNames = new string[] { "playerMes", "roomId", "userId" };
+    private static readonly uint[] _playerStartPushFieldTags = new uint[] { 10, 32, 24 };
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
@@ -5635,26 +5629,13 @@ namespace com.zyd.common.proto.client {
     #if UNITY_EDITOR
     [pb.FieldNumber]
     #endif//
-    public const int ZoneIdFieldNumber = 2;
-    private bool hasZoneId;
-    private int zoneId_;
-    public bool HasZoneId {
-      get { return hasZoneId; }
-    }
-    public int ZoneId {
-      get { return zoneId_; }
-    }
-    
-    #if UNITY_EDITOR
-    [pb.FieldNumber]
-    #endif//
     public const int UserIdFieldNumber = 3;
     private bool hasUserId;
-    private long userId_;
+    private int userId_;
     public bool HasUserId {
       get { return hasUserId; }
     }
-    public long UserId {
+    public int UserId {
       get { return userId_; }
     }
     
@@ -5672,24 +5653,10 @@ namespace com.zyd.common.proto.client {
     }
     
     #if UNITY_EDITOR
-    [pb.FieldNumber]
-    #endif//
-    public const int RandomSeedFieldNumber = 5;
-    private bool hasRandomSeed;
-    private int randomSeed_;
-    public bool HasRandomSeed {
-      get { return hasRandomSeed; }
-    }
-    public int RandomSeed {
-      get { return randomSeed_; }
-    }
-    
-    #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
     public override bool IsInitialized {
       get {
-        if (!hasUserId) return false;
         foreach (global::com.zyd.common.proto.client.PlayerMes element in PlayerMesList) {
           if (!element.IsInitialized) return false;
         }
@@ -5706,17 +5673,11 @@ namespace com.zyd.common.proto.client {
       if (playerMes_.Count > 0) {
         output.WriteMessageArray(1, field_names[0], playerMes_);
       }
-      if (hasZoneId) {
-        output.WriteInt32(2, field_names[4], ZoneId);
-      }
       if (hasUserId) {
-        output.WriteInt64(3, field_names[3], UserId);
+        output.WriteInt32(3, field_names[2], UserId);
       }
       if (hasRoomId) {
-        output.WriteInt64(4, field_names[2], RoomId);
-      }
-      if (hasRandomSeed) {
-        output.WriteInt32(5, field_names[1], RandomSeed);
+        output.WriteInt64(4, field_names[1], RoomId);
       }
     }
     
@@ -5733,17 +5694,11 @@ namespace com.zyd.common.proto.client {
         foreach (global::com.zyd.common.proto.client.PlayerMes element in PlayerMesList) {
           size += pb::CodedOutputStream.ComputeMessageSize(1, element);
         }
-        if (hasZoneId) {
-          size += pb::CodedOutputStream.ComputeInt32Size(2, ZoneId);
-        }
         if (hasUserId) {
-          size += pb::CodedOutputStream.ComputeInt64Size(3, UserId);
+          size += pb::CodedOutputStream.ComputeInt32Size(3, UserId);
         }
         if (hasRoomId) {
           size += pb::CodedOutputStream.ComputeInt64Size(4, RoomId);
-        }
-        if (hasRandomSeed) {
-          size += pb::CodedOutputStream.ComputeInt32Size(5, RandomSeed);
         }
         memoizedSerializedSize = size;
         return size;
@@ -5755,10 +5710,8 @@ namespace com.zyd.common.proto.client {
       int hash = GetType().GetHashCode();
       foreach(global::com.zyd.common.proto.client.PlayerMes i in playerMes_)
         hash ^= i.GetHashCode();
-      if (hasZoneId) hash ^= zoneId_.GetHashCode();
       if (hasUserId) hash ^= userId_.GetHashCode();
       if (hasRoomId) hash ^= roomId_.GetHashCode();
-      if (hasRandomSeed) hash ^= randomSeed_.GetHashCode();
       return hash;
     }
     
@@ -5768,10 +5721,8 @@ namespace com.zyd.common.proto.client {
       if(playerMes_.Count != other.playerMes_.Count) return false;
       for(int ix=0; ix < playerMes_.Count; ix++)
         if(!playerMes_[ix].Equals(other.playerMes_[ix])) return false;
-      if (hasZoneId != other.hasZoneId || (hasZoneId && !zoneId_.Equals(other.zoneId_))) return false;
       if (hasUserId != other.hasUserId || (hasUserId && !userId_.Equals(other.userId_))) return false;
       if (hasRoomId != other.hasRoomId || (hasRoomId && !roomId_.Equals(other.roomId_))) return false;
-      if (hasRandomSeed != other.hasRandomSeed || (hasRandomSeed && !randomSeed_.Equals(other.randomSeed_))) return false;
       return true;
     }
     
@@ -5936,17 +5887,11 @@ namespace com.zyd.common.proto.client {
         if (other.playerMes_.Count != 0) {
           result.playerMes_.Add(other.playerMes_);
         }
-        if (other.HasZoneId) {
-          ZoneId = other.ZoneId;
-        }
         if (other.HasUserId) {
           UserId = other.UserId;
         }
         if (other.HasRoomId) {
           RoomId = other.RoomId;
-        }
-        if (other.HasRandomSeed) {
-          RandomSeed = other.RandomSeed;
         }
         return this;
       }
@@ -5984,20 +5929,12 @@ namespace com.zyd.common.proto.client {
               input.ReadMessageArray(tag, field_name, result.playerMes_, global::com.zyd.common.proto.client.PlayerMes.DefaultInstance, extensionRegistry);
               break;
             }
-            case 16: {
-              result.hasZoneId = input.ReadInt32(ref result.zoneId_);
-              break;
-            }
             case 24: {
-              result.hasUserId = input.ReadInt64(ref result.userId_);
+              result.hasUserId = input.ReadInt32(ref result.userId_);
               break;
             }
             case 32: {
               result.hasRoomId = input.ReadInt64(ref result.roomId_);
-              break;
-            }
-            case 40: {
-              result.hasRandomSeed = input.ReadInt32(ref result.randomSeed_);
               break;
             }
           }
@@ -6051,34 +5988,14 @@ namespace com.zyd.common.proto.client {
         return this;
       }
       
-      public bool HasZoneId {
-        get { return result.hasZoneId; }
-      }
-      public int ZoneId {
-        get { return result.ZoneId; }
-        set { SetZoneId(value); }
-      }
-      public Builder SetZoneId(int value) {
-        PrepareBuilder();
-        result.hasZoneId = true;
-        result.zoneId_ = value;
-        return this;
-      }
-      public Builder ClearZoneId() {
-        PrepareBuilder();
-        result.hasZoneId = false;
-        result.zoneId_ = 0;
-        return this;
-      }
-      
       public bool HasUserId {
         get { return result.hasUserId; }
       }
-      public long UserId {
+      public int UserId {
         get { return result.UserId; }
         set { SetUserId(value); }
       }
-      public Builder SetUserId(long value) {
+      public Builder SetUserId(int value) {
         PrepareBuilder();
         result.hasUserId = true;
         result.userId_ = value;
@@ -6087,7 +6004,7 @@ namespace com.zyd.common.proto.client {
       public Builder ClearUserId() {
         PrepareBuilder();
         result.hasUserId = false;
-        result.userId_ = 0L;
+        result.userId_ = 0;
         return this;
       }
       
@@ -6108,26 +6025,6 @@ namespace com.zyd.common.proto.client {
         PrepareBuilder();
         result.hasRoomId = false;
         result.roomId_ = 0L;
-        return this;
-      }
-      
-      public bool HasRandomSeed {
-        get { return result.hasRandomSeed; }
-      }
-      public int RandomSeed {
-        get { return result.RandomSeed; }
-        set { SetRandomSeed(value); }
-      }
-      public Builder SetRandomSeed(int value) {
-        PrepareBuilder();
-        result.hasRandomSeed = true;
-        result.randomSeed_ = value;
-        return this;
-      }
-      public Builder ClearRandomSeed() {
-        PrepareBuilder();
-        result.hasRandomSeed = false;
-        result.randomSeed_ = 0;
         return this;
       }
     }
@@ -6407,8 +6304,8 @@ namespace com.zyd.common.proto.client {
   public sealed partial class PlayerEndPush : pb::GeneratedMessageLite<PlayerEndPush, PlayerEndPush.Builder> {
     private PlayerEndPush() { }
     private static readonly PlayerEndPush defaultInstance = new PlayerEndPush().MakeReadOnly();
-    private static readonly string[] _playerEndPushFieldNames = new string[] { "battleMes", "result" };
-    private static readonly uint[] _playerEndPushFieldTags = new uint[] { 18, 24 };
+    private static readonly string[] _playerEndPushFieldNames = new string[] { "battleMes", "result", "winUserId" };
+    private static readonly uint[] _playerEndPushFieldTags = new uint[] { 18, 24, 8 };
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
@@ -6425,6 +6322,19 @@ namespace com.zyd.common.proto.client {
     
     protected override PlayerEndPush ThisMessage {
       get { return this; }
+    }
+    
+    #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int WinUserIdFieldNumber = 1;
+    private bool hasWinUserId;
+    private int winUserId_;
+    public bool HasWinUserId {
+      get { return hasWinUserId; }
+    }
+    public int WinUserId {
+      get { return winUserId_; }
     }
     
     #if UNITY_EDITOR
@@ -6460,9 +6370,6 @@ namespace com.zyd.common.proto.client {
      #endif//
     public override bool IsInitialized {
       get {
-        foreach (global::com.zyd.common.proto.client.BattleMes element in BattleMesList) {
-          if (!element.IsInitialized) return false;
-        }
         return true;
       }
     }
@@ -6473,6 +6380,9 @@ namespace com.zyd.common.proto.client {
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
       string[] field_names = _playerEndPushFieldNames;
+      if (hasWinUserId) {
+        output.WriteInt32(1, field_names[2], WinUserId);
+      }
       if (battleMes_.Count > 0) {
         output.WriteMessageArray(2, field_names[0], battleMes_);
       }
@@ -6491,6 +6401,9 @@ namespace com.zyd.common.proto.client {
         if (size != -1) return size;
         
         size = 0;
+        if (hasWinUserId) {
+          size += pb::CodedOutputStream.ComputeInt32Size(1, WinUserId);
+        }
         foreach (global::com.zyd.common.proto.client.BattleMes element in BattleMesList) {
           size += pb::CodedOutputStream.ComputeMessageSize(2, element);
         }
@@ -6505,6 +6418,7 @@ namespace com.zyd.common.proto.client {
     #region Lite runtime methods
     public override int GetHashCode() {
       int hash = GetType().GetHashCode();
+      if (hasWinUserId) hash ^= winUserId_.GetHashCode();
       foreach(global::com.zyd.common.proto.client.BattleMes i in battleMes_)
         hash ^= i.GetHashCode();
       if (hasResult) hash ^= result_.GetHashCode();
@@ -6514,6 +6428,7 @@ namespace com.zyd.common.proto.client {
     public override bool Equals(object obj) {
       PlayerEndPush other = obj as PlayerEndPush;
       if (other == null) return false;
+      if (hasWinUserId != other.hasWinUserId || (hasWinUserId && !winUserId_.Equals(other.winUserId_))) return false;
       if(battleMes_.Count != other.battleMes_.Count) return false;
       for(int ix=0; ix < battleMes_.Count; ix++)
         if(!battleMes_[ix].Equals(other.battleMes_[ix])) return false;
@@ -6679,6 +6594,9 @@ namespace com.zyd.common.proto.client {
       public override Builder MergeFrom(PlayerEndPush other) {
         if (other == global::com.zyd.common.proto.client.PlayerEndPush.DefaultInstance) return this;
         PrepareBuilder();
+        if (other.HasWinUserId) {
+          WinUserId = other.WinUserId;
+        }
         if (other.battleMes_.Count != 0) {
           result.battleMes_.Add(other.battleMes_);
         }
@@ -6717,6 +6635,10 @@ namespace com.zyd.common.proto.client {
               ParseUnknownField(input, extensionRegistry, tag, field_name);
               break;
             }
+            case 8: {
+              result.hasWinUserId = input.ReadInt32(ref result.winUserId_);
+              break;
+            }
             case 18: {
               input.ReadMessageArray(tag, field_name, result.battleMes_, global::com.zyd.common.proto.client.BattleMes.DefaultInstance, extensionRegistry);
               break;
@@ -6731,6 +6653,26 @@ namespace com.zyd.common.proto.client {
         return this;
       }
       
+      
+      public bool HasWinUserId {
+        get { return result.hasWinUserId; }
+      }
+      public int WinUserId {
+        get { return result.WinUserId; }
+        set { SetWinUserId(value); }
+      }
+      public Builder SetWinUserId(int value) {
+        PrepareBuilder();
+        result.hasWinUserId = true;
+        result.winUserId_ = value;
+        return this;
+      }
+      public Builder ClearWinUserId() {
+        PrepareBuilder();
+        result.hasWinUserId = false;
+        result.winUserId_ = 0;
+        return this;
+      }
       
       public pbc::IPopsicleList<global::com.zyd.common.proto.client.BattleMes> BattleMesList {
         get { return PrepareBuilder().battleMes_; }
@@ -6804,8 +6746,8 @@ namespace com.zyd.common.proto.client {
   public sealed partial class BattleMes : pb::GeneratedMessageLite<BattleMes, BattleMes.Builder> {
     private BattleMes() { }
     private static readonly BattleMes defaultInstance = new BattleMes().MakeReadOnly();
-    private static readonly string[] _battleMesFieldNames = new string[] { "attckUserId", "dirX", "dirY", "itemIndex", "playNum", "playSkill" };
-    private static readonly uint[] _battleMesFieldTags = new uint[] { 48, 16, 24, 40, 8, 32 };
+    private static readonly string[] _battleMesFieldNames = new string[] { "PlayNum", "from", "promption", "to", "userId" };
+    private static readonly uint[] _battleMesFieldTags = new uint[] { 8, 16, 40, 24, 32 };
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
@@ -6840,66 +6782,53 @@ namespace com.zyd.common.proto.client {
     #if UNITY_EDITOR
     [pb.FieldNumber]
     #endif//
-    public const int DirXFieldNumber = 2;
-    private bool hasDirX;
-    private long dirX_;
-    public bool HasDirX {
-      get { return hasDirX; }
+    public const int FromFieldNumber = 2;
+    private bool hasFrom;
+    private int from_;
+    public bool HasFrom {
+      get { return hasFrom; }
     }
-    public long DirX {
-      get { return dirX_; }
-    }
-    
-    #if UNITY_EDITOR
-    [pb.FieldNumber]
-    #endif//
-    public const int DirYFieldNumber = 3;
-    private bool hasDirY;
-    private long dirY_;
-    public bool HasDirY {
-      get { return hasDirY; }
-    }
-    public long DirY {
-      get { return dirY_; }
+    public int From {
+      get { return from_; }
     }
     
     #if UNITY_EDITOR
     [pb.FieldNumber]
     #endif//
-    public const int PlaySkillFieldNumber = 4;
-    private bool hasPlaySkill;
-    private bool playSkill_;
-    public bool HasPlaySkill {
-      get { return hasPlaySkill; }
+    public const int ToFieldNumber = 3;
+    private bool hasTo;
+    private int to_;
+    public bool HasTo {
+      get { return hasTo; }
     }
-    public bool PlaySkill {
-      get { return playSkill_; }
-    }
-    
-    #if UNITY_EDITOR
-    [pb.FieldNumber]
-    #endif//
-    public const int ItemIndexFieldNumber = 5;
-    private bool hasItemIndex;
-    private int itemIndex_;
-    public bool HasItemIndex {
-      get { return hasItemIndex; }
-    }
-    public int ItemIndex {
-      get { return itemIndex_; }
+    public int To {
+      get { return to_; }
     }
     
     #if UNITY_EDITOR
     [pb.FieldNumber]
     #endif//
-    public const int AttckUserIdFieldNumber = 6;
-    private bool hasAttckUserId;
-    private long attckUserId_;
-    public bool HasAttckUserId {
-      get { return hasAttckUserId; }
+    public const int UserIdFieldNumber = 4;
+    private bool hasUserId;
+    private int userId_;
+    public bool HasUserId {
+      get { return hasUserId; }
     }
-    public long AttckUserId {
-      get { return attckUserId_; }
+    public int UserId {
+      get { return userId_; }
+    }
+    
+    #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int PromptionFieldNumber = 5;
+    private bool hasPromption;
+    private int promption_;
+    public bool HasPromption {
+      get { return hasPromption; }
+    }
+    public int Promption {
+      get { return promption_; }
     }
     
     #if UNITY_EDITOR
@@ -6907,7 +6836,6 @@ namespace com.zyd.common.proto.client {
      #endif//
     public override bool IsInitialized {
       get {
-        if (!hasPlayNum) return false;
         return true;
       }
     }
@@ -6919,22 +6847,19 @@ namespace com.zyd.common.proto.client {
       int size = SerializedSize;
       string[] field_names = _battleMesFieldNames;
       if (hasPlayNum) {
-        output.WriteInt32(1, field_names[4], PlayNum);
+        output.WriteInt32(1, field_names[0], PlayNum);
       }
-      if (hasDirX) {
-        output.WriteInt64(2, field_names[1], DirX);
+      if (hasFrom) {
+        output.WriteInt32(2, field_names[1], From);
       }
-      if (hasDirY) {
-        output.WriteInt64(3, field_names[2], DirY);
+      if (hasTo) {
+        output.WriteInt32(3, field_names[3], To);
       }
-      if (hasPlaySkill) {
-        output.WriteBool(4, field_names[5], PlaySkill);
+      if (hasUserId) {
+        output.WriteInt32(4, field_names[4], UserId);
       }
-      if (hasItemIndex) {
-        output.WriteInt32(5, field_names[3], ItemIndex);
-      }
-      if (hasAttckUserId) {
-        output.WriteInt64(6, field_names[0], AttckUserId);
+      if (hasPromption) {
+        output.WriteInt32(5, field_names[2], Promption);
       }
     }
     
@@ -6951,20 +6876,17 @@ namespace com.zyd.common.proto.client {
         if (hasPlayNum) {
           size += pb::CodedOutputStream.ComputeInt32Size(1, PlayNum);
         }
-        if (hasDirX) {
-          size += pb::CodedOutputStream.ComputeInt64Size(2, DirX);
+        if (hasFrom) {
+          size += pb::CodedOutputStream.ComputeInt32Size(2, From);
         }
-        if (hasDirY) {
-          size += pb::CodedOutputStream.ComputeInt64Size(3, DirY);
+        if (hasTo) {
+          size += pb::CodedOutputStream.ComputeInt32Size(3, To);
         }
-        if (hasPlaySkill) {
-          size += pb::CodedOutputStream.ComputeBoolSize(4, PlaySkill);
+        if (hasUserId) {
+          size += pb::CodedOutputStream.ComputeInt32Size(4, UserId);
         }
-        if (hasItemIndex) {
-          size += pb::CodedOutputStream.ComputeInt32Size(5, ItemIndex);
-        }
-        if (hasAttckUserId) {
-          size += pb::CodedOutputStream.ComputeInt64Size(6, AttckUserId);
+        if (hasPromption) {
+          size += pb::CodedOutputStream.ComputeInt32Size(5, Promption);
         }
         memoizedSerializedSize = size;
         return size;
@@ -6975,11 +6897,10 @@ namespace com.zyd.common.proto.client {
     public override int GetHashCode() {
       int hash = GetType().GetHashCode();
       if (hasPlayNum) hash ^= playNum_.GetHashCode();
-      if (hasDirX) hash ^= dirX_.GetHashCode();
-      if (hasDirY) hash ^= dirY_.GetHashCode();
-      if (hasPlaySkill) hash ^= playSkill_.GetHashCode();
-      if (hasItemIndex) hash ^= itemIndex_.GetHashCode();
-      if (hasAttckUserId) hash ^= attckUserId_.GetHashCode();
+      if (hasFrom) hash ^= from_.GetHashCode();
+      if (hasTo) hash ^= to_.GetHashCode();
+      if (hasUserId) hash ^= userId_.GetHashCode();
+      if (hasPromption) hash ^= promption_.GetHashCode();
       return hash;
     }
     
@@ -6987,11 +6908,10 @@ namespace com.zyd.common.proto.client {
       BattleMes other = obj as BattleMes;
       if (other == null) return false;
       if (hasPlayNum != other.hasPlayNum || (hasPlayNum && !playNum_.Equals(other.playNum_))) return false;
-      if (hasDirX != other.hasDirX || (hasDirX && !dirX_.Equals(other.dirX_))) return false;
-      if (hasDirY != other.hasDirY || (hasDirY && !dirY_.Equals(other.dirY_))) return false;
-      if (hasPlaySkill != other.hasPlaySkill || (hasPlaySkill && !playSkill_.Equals(other.playSkill_))) return false;
-      if (hasItemIndex != other.hasItemIndex || (hasItemIndex && !itemIndex_.Equals(other.itemIndex_))) return false;
-      if (hasAttckUserId != other.hasAttckUserId || (hasAttckUserId && !attckUserId_.Equals(other.attckUserId_))) return false;
+      if (hasFrom != other.hasFrom || (hasFrom && !from_.Equals(other.from_))) return false;
+      if (hasTo != other.hasTo || (hasTo && !to_.Equals(other.to_))) return false;
+      if (hasUserId != other.hasUserId || (hasUserId && !userId_.Equals(other.userId_))) return false;
+      if (hasPromption != other.hasPromption || (hasPromption && !promption_.Equals(other.promption_))) return false;
       return true;
     }
     
@@ -7155,20 +7075,17 @@ namespace com.zyd.common.proto.client {
         if (other.HasPlayNum) {
           PlayNum = other.PlayNum;
         }
-        if (other.HasDirX) {
-          DirX = other.DirX;
+        if (other.HasFrom) {
+          From = other.From;
         }
-        if (other.HasDirY) {
-          DirY = other.DirY;
+        if (other.HasTo) {
+          To = other.To;
         }
-        if (other.HasPlaySkill) {
-          PlaySkill = other.PlaySkill;
+        if (other.HasUserId) {
+          UserId = other.UserId;
         }
-        if (other.HasItemIndex) {
-          ItemIndex = other.ItemIndex;
-        }
-        if (other.HasAttckUserId) {
-          AttckUserId = other.AttckUserId;
+        if (other.HasPromption) {
+          Promption = other.Promption;
         }
         return this;
       }
@@ -7207,23 +7124,19 @@ namespace com.zyd.common.proto.client {
               break;
             }
             case 16: {
-              result.hasDirX = input.ReadInt64(ref result.dirX_);
+              result.hasFrom = input.ReadInt32(ref result.from_);
               break;
             }
             case 24: {
-              result.hasDirY = input.ReadInt64(ref result.dirY_);
+              result.hasTo = input.ReadInt32(ref result.to_);
               break;
             }
             case 32: {
-              result.hasPlaySkill = input.ReadBool(ref result.playSkill_);
+              result.hasUserId = input.ReadInt32(ref result.userId_);
               break;
             }
             case 40: {
-              result.hasItemIndex = input.ReadInt32(ref result.itemIndex_);
-              break;
-            }
-            case 48: {
-              result.hasAttckUserId = input.ReadInt64(ref result.attckUserId_);
+              result.hasPromption = input.ReadInt32(ref result.promption_);
               break;
             }
           }
@@ -7253,103 +7166,83 @@ namespace com.zyd.common.proto.client {
         return this;
       }
       
-      public bool HasDirX {
-        get { return result.hasDirX; }
+      public bool HasFrom {
+        get { return result.hasFrom; }
       }
-      public long DirX {
-        get { return result.DirX; }
-        set { SetDirX(value); }
+      public int From {
+        get { return result.From; }
+        set { SetFrom(value); }
       }
-      public Builder SetDirX(long value) {
+      public Builder SetFrom(int value) {
         PrepareBuilder();
-        result.hasDirX = true;
-        result.dirX_ = value;
+        result.hasFrom = true;
+        result.from_ = value;
         return this;
       }
-      public Builder ClearDirX() {
+      public Builder ClearFrom() {
         PrepareBuilder();
-        result.hasDirX = false;
-        result.dirX_ = 0L;
-        return this;
-      }
-      
-      public bool HasDirY {
-        get { return result.hasDirY; }
-      }
-      public long DirY {
-        get { return result.DirY; }
-        set { SetDirY(value); }
-      }
-      public Builder SetDirY(long value) {
-        PrepareBuilder();
-        result.hasDirY = true;
-        result.dirY_ = value;
-        return this;
-      }
-      public Builder ClearDirY() {
-        PrepareBuilder();
-        result.hasDirY = false;
-        result.dirY_ = 0L;
+        result.hasFrom = false;
+        result.from_ = 0;
         return this;
       }
       
-      public bool HasPlaySkill {
-        get { return result.hasPlaySkill; }
+      public bool HasTo {
+        get { return result.hasTo; }
       }
-      public bool PlaySkill {
-        get { return result.PlaySkill; }
-        set { SetPlaySkill(value); }
+      public int To {
+        get { return result.To; }
+        set { SetTo(value); }
       }
-      public Builder SetPlaySkill(bool value) {
+      public Builder SetTo(int value) {
         PrepareBuilder();
-        result.hasPlaySkill = true;
-        result.playSkill_ = value;
+        result.hasTo = true;
+        result.to_ = value;
         return this;
       }
-      public Builder ClearPlaySkill() {
+      public Builder ClearTo() {
         PrepareBuilder();
-        result.hasPlaySkill = false;
-        result.playSkill_ = false;
-        return this;
-      }
-      
-      public bool HasItemIndex {
-        get { return result.hasItemIndex; }
-      }
-      public int ItemIndex {
-        get { return result.ItemIndex; }
-        set { SetItemIndex(value); }
-      }
-      public Builder SetItemIndex(int value) {
-        PrepareBuilder();
-        result.hasItemIndex = true;
-        result.itemIndex_ = value;
-        return this;
-      }
-      public Builder ClearItemIndex() {
-        PrepareBuilder();
-        result.hasItemIndex = false;
-        result.itemIndex_ = 0;
+        result.hasTo = false;
+        result.to_ = 0;
         return this;
       }
       
-      public bool HasAttckUserId {
-        get { return result.hasAttckUserId; }
+      public bool HasUserId {
+        get { return result.hasUserId; }
       }
-      public long AttckUserId {
-        get { return result.AttckUserId; }
-        set { SetAttckUserId(value); }
+      public int UserId {
+        get { return result.UserId; }
+        set { SetUserId(value); }
       }
-      public Builder SetAttckUserId(long value) {
+      public Builder SetUserId(int value) {
         PrepareBuilder();
-        result.hasAttckUserId = true;
-        result.attckUserId_ = value;
+        result.hasUserId = true;
+        result.userId_ = value;
         return this;
       }
-      public Builder ClearAttckUserId() {
+      public Builder ClearUserId() {
         PrepareBuilder();
-        result.hasAttckUserId = false;
-        result.attckUserId_ = 0L;
+        result.hasUserId = false;
+        result.userId_ = 0;
+        return this;
+      }
+      
+      public bool HasPromption {
+        get { return result.hasPromption; }
+      }
+      public int Promption {
+        get { return result.Promption; }
+        set { SetPromption(value); }
+      }
+      public Builder SetPromption(int value) {
+        PrepareBuilder();
+        result.hasPromption = true;
+        result.promption_ = value;
+        return this;
+      }
+      public Builder ClearPromption() {
+        PrepareBuilder();
+        result.hasPromption = false;
+        result.promption_ = 0;
         return this;
       }
     }

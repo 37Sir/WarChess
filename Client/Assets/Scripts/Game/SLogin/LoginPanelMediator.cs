@@ -25,7 +25,6 @@ public class LoginPanelMediator : Mediator
     public override IList<string> ListNotificationInterests()
     {
         IList<string> list = new List<string>();
-        list.Add(NotificationConstant.LevelUp);
         list.Add(NotificationConstant.LoginResponse);
         return list;
     }
@@ -34,9 +33,6 @@ public class LoginPanelMediator : Mediator
     {
         switch (notification.Name)
         {
-            case NotificationConstant.LevelUp:
-                Debug.Log("Level Up!!");
-                break;
             case NotificationConstant.LoginResponse:
                 m_viewComponent.OnLoginSuccess();
                 break;
@@ -55,9 +51,9 @@ public class LoginPanelMediator : Mediator
         SendNotification(NotificationConstant.LobbyConnect);
     }
 
-    public void NotifyLogin()
+    public void NotifyLogin(string userName)
     {
-        SendNotification(NotificationConstant.Login);
+        SendNotification(NotificationConstant.Login, userName);
     }
 }
 
