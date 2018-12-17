@@ -34,5 +34,6 @@
 	<classpathentry kind="lib" path="lib/spring-context-5.0.4.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/spring-core-5.0.4.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/spring-expression-5.0.4.RELEASE.jar"/>
+	<classpathentry kind="src" path="/nkm-common"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
