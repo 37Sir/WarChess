@@ -43,6 +43,7 @@ public class PVEPanel
         m_proxy = App.Facade.RetrieveProxy("UserDataProxy") as UserDataProxy;
         m_pveProxy = App.Facade.RetrieveProxy("PVEProxy") as PVEProxy;
         InitUIBinder(gameObject);
+        m_chess.SetActive(false);
         m_ready.onClick.AddListener(OnReadyClick);
         m_test.onClick.AddListener(OnRoundStart);   }
 
@@ -124,10 +125,14 @@ public class PVEPanel
 
                     App.ObjectPoolManager.RegisteObject(pieceName, "FX/" + pieceName, 0, 30, -1);
                     App.ObjectPoolManager.Instantiate(pieceName, (GameObject obj) => {
+                        if(color == (int)Config.PieceColor.BLACK)
+                        {
+                            obj.transform.localRotation = Quaternion.Euler(0, 180, 0);
+                        }
                         obj.SetActive(true);
                         obj.transform.parent = temp.transform;
                         obj.transform.localPosition = Vector3.zero;
-                        obj.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
+                        obj.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
                         pieceItem.pieceModel = obj;
 
                     });                                   
@@ -150,8 +155,8 @@ public class PVEPanel
             {
                 obj.SetActive(true);
                 obj.transform.parent = m_qizi.transform;
-                obj.transform.localPosition = new Vector3(to.x * Config.PieceWidth, 2f, to.y * Config.PieceWidth);
-                obj.transform.localScale = new Vector3(40, 40, 1);
+                obj.transform.localPosition = new Vector3(to.x * Config.PieceWidth, 0.5f, to.y * Config.PieceWidth);
+                obj.transform.localScale = new Vector3(15, 15, 1);
                 m_tips.Add(obj);
             });
         }

@@ -74,8 +74,11 @@ public class ModelDrag : MonoBehaviour
         if(go != null)
         {
             m_pieceItem = go.GetComponent<PieceItem>();
-            m_pieceItem.OnDragBegin();
-            isDrage = true;
+            if (m_pieceItem != null)
+            {
+                m_pieceItem.OnDragBegin();
+                isDrage = true;
+            }
         }
     }
 

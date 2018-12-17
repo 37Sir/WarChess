@@ -101,7 +101,7 @@ public class PieceItem:MonoBehaviour
     /// <param name="currentPosition"></param>
     public void OnDrag(Vector3 currentPosition)
     {
-        transform.position = currentPosition;
+        transform.position = new Vector3(currentPosition.x, m_beginPos.y, currentPosition.z);
         var px = transform.position.x - m_beginPos.x;
         var pz = transform.position.z - m_beginPos.z;
         var d = Math.Sqrt(px * px + pz * pz);

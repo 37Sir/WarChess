@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33875631742987638}
   - component: {fileID: 23637949730415676}
   m_Layer: 0
-  m_Name: Flagpole Black
+  m_Name: Flagpole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,14 +51,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1206300752043334}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -9.29, y: 5.22, z: 9.13}
+  m_LocalRotation: {x: 0, y: -0.043619387, z: -0, w: 0.99904823}
+  m_LocalPosition: {x: 9.3243065, y: 5.47, z: -8.951484}
   m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_Children:
   - {fileID: 4743245306354576}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4743245306354576
 Transform:
   m_ObjectHideFlags: 1
@@ -66,8 +66,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1914556281916178}
   m_LocalRotation: {x: 0.7071068, y: -0.0000000018626451, z: 0.0000000018626451, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.8827275, z: 0.2618183}
-  m_LocalScale: {x: 1.3000028, y: 1, z: 1.9000021}
+  m_LocalPosition: {x: -0, y: 1.01, z: 0.38}
+  m_LocalScale: {x: 1.3000002, y: 1, z: 1.9000002}
   m_Children: []
   m_Father: {fileID: 4145497599533960}
   m_RootOrder: 0
@@ -86,7 +86,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2156d065a457b084e80f9e488a434e66, type: 2}
+  - {fileID: 2100000, guid: c19f0fa87db003e47b4affd3bca737b6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -153,4 +153,4 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1206300752043334}
-  m_Mesh: {fileID: 4300000, guid: 388b1fc9762913c4bb9f114ca05fa42a, type: 3}
+  m_Mesh: {fileID: 4300012, guid: a37ee4bae1783f54e959927a0ae7a5e8, type: 3}

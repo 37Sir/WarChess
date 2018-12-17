@@ -16,7 +16,7 @@ public class Config{
     public static readonly string TweenPacksRoot = "Resources/ArtRes/TweenPacks";
     public static readonly string EffectConfigPath = "";
 
-    public static float PieceWidth = 5f;
+    public static float PieceWidth = 2f;
 
     public static float MoveDistanceCross = 1.3f * PieceWidth;//没用
     public static float MoveDistance = 0.7f * PieceWidth;//中层边界
