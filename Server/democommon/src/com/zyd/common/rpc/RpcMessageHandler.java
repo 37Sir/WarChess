@@ -9,6 +9,7 @@ import com.zyd.common.proto.client.RpcProtocol.RpcType;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.util.ReferenceCountUtil;
 
 public abstract class RpcMessageHandler extends SimpleChannelInboundHandler<Packet> {
   
@@ -25,6 +26,8 @@ public abstract class RpcMessageHandler extends SimpleChannelInboundHandler<Pack
     @Override
     protected void channelRead0(ChannelHandlerContext arg0, Packet msg) throws Exception {
         RpcHeader request = msg.parseProtobuf(RpcHeader.PARSER, 0);
+        try {
+ 
         switch (request.getType().getNumber()) {
           case RpcType.RPC_REQUEST_VALUE:
               Packet args = new Packet(msg.buffers, 1, msg.buffers.size());
@@ -47,7 +50,10 @@ public abstract class RpcMessageHandler extends SimpleChannelInboundHandler<Pack
            case RpcType.RPC_SERVER_HEART_BEAT_RESPONSE_VALUE:
               onResponseHeartBeatSend();
               break;
-          }
+          }        
+         } finally {
+             ReferenceCountUtil.release(msg);
+         }
     }
     public RpcMessageHandler(Channel channel) {
       this.channel = channel;

@@ -341,6 +341,16 @@ public class ChessService extends BaseService {
         }
        return last_move;
    }
+   //得到对应的棋子类型
+   public static String getShiftsType(int value) {
+       String type = "";
+       for (Map.Entry<String, Integer> entry : shifts.entrySet()) {
+            if (value == entry.getValue().intValue()) {
+                type = entry.getKey();
+            }
+       }
+       return type;
+   }
      //测试有无棋可以走的方法
    public static void main(String[] args) {
      //玩家1棋子index——type

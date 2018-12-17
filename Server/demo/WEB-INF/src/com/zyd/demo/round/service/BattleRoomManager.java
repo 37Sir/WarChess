@@ -21,6 +21,7 @@ import com.zyd.common.proto.client.WarChess.PlayerRequireBattleMesAgainResponse;
 import com.zyd.demo.common.BaseService;
 import com.zyd.demo.common.exception.BaseException;
 import com.zyd.demo.round.pojo.UserMatchInfo;
+import com.zyd.demo.user.pojo.User;
 
 
 // 房间管理器
@@ -193,7 +194,20 @@ public class BattleRoomManager extends BaseService {
 		}
 		return battleRoom.doRequest(userMatchInfo, request);
 	}
-
+	
+	/**玩家交互的请求*/
+	public void onMutually(int type ,User user) {
+	    BattleRoom battleRoom = null;
+	    String userKey = user.getUserName();
+        Long roomId = userToRoomIdMap.get(userKey);
+        UserMatchInfo userMatchInfo = userMatchInfoMap.get(userKey);
+        if (roomId != null) {
+          battleRoom = battleRoomMap.get(roomId);
+        }
+        if (battleRoom == null || userMatchInfo == null) {
+        }
+        battleRoom.onMutually(type,userMatchInfo);
+	}
 	/** 初始化方法 */
 	public void init() {
 		onUpdate();

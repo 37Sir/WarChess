@@ -9,4 +9,6 @@ public class BattleConfig {
 	public static int finishReadyTime = 5 * 1000;
 	/** 等待玩家发送准备完成的时间*/
 	public static int startReadyTime = 20 * 1000;
+	/**同意悔棋的是时间*/
+	public static int unDoTime = 30 * 1000;
 }

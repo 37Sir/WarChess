@@ -266,7 +266,7 @@ public class ProxyConnection {
       protected void onRequestHeartBeatSend() {
           lastReceiveRPCTime = System.currentTimeMillis();
           super.responseServerHeartBeat();
-          //infoHeartBeat.info("-------------infoToProxyHeartBeat response HeartBeat");
+//          infoHeartBeat.info("-------------infoToProxyHeartBeat response HeartBeat");
       }
 
       @Override

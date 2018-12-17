@@ -16,7 +16,16 @@ public enum PushReqestName {
     //某一玩家准备消息推送
     OnePlayerReady("OnePlayerReady"),
     // 所有玩家准备完成推送
-    PlayerReadyFinishedPush("PlayerReadyFinishedPush");
+    PlayerReadyFinishedPush("PlayerReadyFinishedPush"),
+    //玩家同意请求推送
+    PlayerAgreePush("PlayerAgreePush"),
+    //玩家不同意请求推送
+    PlayerNotAgreePush("PlayerNotAgreePush"),
+    //玩家悔棋信息的推送
+    PlayerUndoInfoPush("PlayerUndoInfoPush"),
+    //玩家请求悔棋推送
+    PlayerUndoPush("PlayerUndoPush");
+  
 	PushReqestName(String name) {
 		this.requestName = name;
 	}

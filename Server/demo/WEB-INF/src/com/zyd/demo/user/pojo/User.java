@@ -14,8 +14,10 @@ public class User {
     private Integer diamond;
 
     private Integer winCount;
-
+    
     private Integer loseCount;
+    
+    private Integer drawCount;
 
     private Date lastLoginTime;
     
@@ -24,7 +26,7 @@ public class User {
     private Date createTime;
 
     public User(Integer id, String userName, Integer rank, Integer gold, Integer diamond, Integer winCount, 
-        Integer loseCount,Date lastLoginTime, Date updateTime, Date createTime) {
+        Integer loseCount, Integer drawCount ,Date lastLoginTime, Date updateTime, Date createTime) {
         this.id = id;
         this.userName = userName;
         this.rank = rank;
@@ -32,6 +34,7 @@ public class User {
         this.diamond = diamond;
         this.winCount = winCount;
         this.loseCount = loseCount;
+        this.drawCount = drawCount;
         this.lastLoginTime = lastLoginTime;
         this.updateTime = updateTime;
         this.createTime = createTime;
@@ -95,6 +98,14 @@ public class User {
 
     public void setLoseCount(Integer loseCount) {
         this.loseCount = loseCount;
+    }
+
+    public Integer getDrawCount() {
+      return drawCount;
+    }
+
+    public void setDrawCount(Integer drawCount) {
+      this.drawCount = drawCount;
     }
 
     public Date getLastLoginTime() {

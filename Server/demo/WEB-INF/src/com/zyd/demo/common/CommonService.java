@@ -13,6 +13,7 @@ import com.zyd.common.rpc.Packet;
 import com.zyd.demo.common.enumuration.PushReqestName;
 import com.zyd.demo.common.push.ProxyPushUtil;
 import com.zyd.demo.common.push.PushTaskData;
+import com.zyd.demo.user.pojo.User;
 
 
 public class CommonService extends BaseService {
@@ -35,5 +36,12 @@ public class CommonService extends BaseService {
 		ProxyPushUtil.pushData.put(token, new PushTaskData(name.getRequestName(), new Packet(pushHeader,pushData)));
 		ProxyPushUtil.queue.add(token);
 		logger.info("add push data to proxy , request:{},userTokenList:{} content:{}",name,TextFormat.printToString(pushHeader),content);
+	}
+	public User getUserById(int s) {
+	    return userService.getUserById(s);
+	}
+	
+	public void updateUser(User u) {
+	    userService.updateUser(u);
 	}
 }

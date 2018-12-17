@@ -1,7 +1,21 @@
 package com.zyd.common.proto.client;
 
 /////////////////////////////////////// request ////////////////////////////////////
+//玩家交互的请求
+message PlayerMutuallyRequest{
+	optional int32 type = 1; //交互的类型（1为悔棋2为和局）
+}
+//玩家交互的返回
+message PlayerMutuallyResponse{
+}
+//玩家交互的反馈
+message PlayerMutuallyFeedbackRequest {
+	optional bool isAgree = 1;
+}
+//玩家交互反馈的返回
+message PlayerMutuallyFeedbackResponse{
 
+}
 // 匹配玩家请求
 message PlayerMatchRequest{
 }
@@ -100,6 +114,15 @@ message CheckPlayerFairBattleExistResponse{
 
 
 /////////////////////////////////////// push ////////////////////////////////////
+/**玩家悔棋的信息*/
+message PlayerUndoInfoPush {
+	required UndoInfo undoInfo = 1;//一回合悔棋信息
+}
+message UndoInfo {
+	optional BattleMes battleMes = 1;
+	optional bool isEat= 2 ; //是否有棋子被吃
+	optional int32  type = 3 ; //被吃棋子类型信息
+}
 /** 玩家可以开始下一轮倒计时了*/
 message PlayNextPush{
 	

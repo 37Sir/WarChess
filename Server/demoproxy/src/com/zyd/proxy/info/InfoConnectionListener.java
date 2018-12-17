@@ -63,6 +63,7 @@ public class InfoConnectionListener {
     protected void onChannelConnected(SocketChannel ch) {
         final InfoConnectionHandler conn = new InfoConnectionHandler(ch);
         connections.add(conn);
+        System.out.println(connections.size()+"------------------");
         ch.closeFuture().addListener(new GenericFutureListener<ChannelFuture>() {
           @Override
           public void operationComplete(ChannelFuture future) throws Exception {

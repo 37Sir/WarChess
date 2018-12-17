@@ -1,6 +1,7 @@
 package com.zyd.demo.round.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,7 @@ import com.zyd.demo.common.CommonService;
 import com.zyd.demo.common.enumuration.PushReqestName;
 import com.zyd.demo.common.exception.BaseException;
 import com.zyd.demo.round.pojo.UserMatchInfo;
+import com.zyd.demo.user.pojo.User;
 
 
 // 对战房间
@@ -70,6 +72,8 @@ public class BattleRoom {
 	private Map<Integer, Object> dealUserMap = new HashMap<>();
 	//吃掉的棋子回合-（userID_位置_棋子类型）
 	private Map<Integer, String> captureMap = new HashMap<>();
+	//兵升变的回合(回合-userId_from)
+	private Map<Integer, String> promotionMap = new HashMap<>();
 	// 房间管理器
 	private BattleRoomManager battleRoomManager;
 	// 是否是主动放弃结束,0:正常结束，1：有，2：超时 3：游戏错误 4 逼和 5平局
@@ -81,14 +85,15 @@ public class BattleRoom {
 	int kingOne = 61;
 	//玩家2王的位置
 	int kingTwo = 5;
+	//玩家被连续将军的次数(userID-count)
+	Map<Integer, Integer> genera = new HashMap<>();
 	//玩家1是否被将军
 	boolean jiangjunOne = false;
 	//顽家2是否被将军
 	boolean jiangjunTwo = false;
-	//玩家1被连续将军次数
-	int generalOne = 0;
-	//玩家2被连续将军的次数
-	int generalTwo = 0;
+	//悔棋方ID
+	private int undoUserId;
+	
 	private static final Logger logger = LoggerFactory.getLogger(BattleRoom.class);
 
 	/** 战斗开始 */
@@ -96,6 +101,8 @@ public class BattleRoom {
 		nextTime = System.currentTimeMillis() + BattleConfig.startReadyTime;
 		actor = 0;
 		battleStatus = BattleStatus.start;
+		//打乱顺序，避免每次先手方为同一玩家
+		Collections.shuffle(userMatchInfoList);
 		startUserId = userMatchInfoList.get(actor).getUid();
 		afterUserId = userMatchInfoList.get(actor+1).getUid();
 		// 推送信息
@@ -183,6 +190,8 @@ public class BattleRoom {
 			}
 	        int from = battleMes.getFrom();
 	        int to = battleMes.getTo();
+	        int promotion = battleMes.getPromption();
+	        int otherUserId = userMatchInfoList.get(nextActorIndex()).getUid();
 	        Map<Integer, String> OtherUserChess = getOtherPlayerChess(userMatchInfo.getUid());
 	        Map<Integer, String> myChess = getNowPlayerChess(userMatchInfo.getUid());
 	        Boolean isFirst = false;
@@ -195,6 +204,23 @@ public class BattleRoom {
                 battleMesResponse.setRes(false);
                 battleMesResponse.setError("操作位置无棋子");
                 return battleMesResponse.build();
+	        }
+	        //兵升变的条件是否满足
+	        if (promotion > 0) {
+	            int second = 0; 
+	            if (otherUserId == startUserId) {
+	                second = 6;
+	            } else {
+	                second = 1;
+	            }
+                if (ChessService.getRank(from) != second
+                    || myChess.get(from) != "p" || promotion >= 5){
+                    isGiveUp = 3;
+                    battleFinished(winUserId);            
+                    battleMesResponse.setRes(false);
+                    battleMesResponse.setError("不满足兵升变条件");
+                    return battleMesResponse.build();                  
+                }
 	        }
 	        //移动还是吃子
 			if (!userOne.containsKey(to) && !userTwo.containsKey(to)) {
@@ -229,7 +255,7 @@ public class BattleRoom {
                             kingTwo = to;
                         }
                    }
-                   captureMap.put(currentPlayNum,String.valueOf(userMatchInfoList.get(nextActorIndex()).getUid())+
+                   captureMap.put(currentPlayNum,String.valueOf(otherUserId)+
                        "_"+String.valueOf(to) + "_" + OtherUserChess.get(to));
                    myChess.remove(from);
                    OtherUserChess.remove(to);
@@ -254,9 +280,14 @@ public class BattleRoom {
                 battleMesResponse.setError("移动后会被将军");
                 return battleMesResponse.build();
             }
+            //处理兵升变的情况
+            doPromotion(to, promotion, myChess);
+            promotionMap.put(currentPlayNum, userMatchInfo.getUid() +"_"+ from);
             battleStatus = BattleStatus.fightWaiting;
             nextTime = System.currentTimeMillis() + BattleConfig.playReadTime;
             currentPlayNum = currentPlayNum + 1;
+            //长将的处理
+            checkGenera(otherUserId, OtherUserChess, myChess, isFirst, otherKing); 
             // 保存桢
             saveBattleMes(battleMes);
             
@@ -300,6 +331,32 @@ public class BattleRoom {
 		battleMesResponse.setRes(false);
 		return battleMesResponse.build();
 	}
+	/**长将的处理*/
+    public void checkGenera(int otherUserId, Map<Integer, String> OtherUserChess,
+        Map<Integer, String> myChess, Boolean isFirst, int otherKing) {
+        //移动后对方是否存在被将军的情况
+        if (ChessService.attacked(myChess,OtherUserChess,  otherKing, !isFirst)) {
+            genera.put(otherUserId, genera.get(otherUserId) +1 );   
+            
+        } else {
+            genera.put(otherUserId, 0 );
+        }
+        //连续将军次数大于5次，则平局
+        if (genera.get(otherUserId).intValue() >= 5) {
+            isGiveUp = 5 ;
+            battleStatus = BattleStatus.waitFinish;
+        }
+    }
+	/**处理兵升变*/
+    public void doPromotion(int to, int promotion, Map<Integer, String> myChess) {
+        if (promotion > 0 && myChess.get(to) == "p") {
+            //移动后的兵是否在第1行或者第8行
+            if (ChessService.getRank(to) == 0 || ChessService.getRank(to) == 7){
+                String type = ChessService.getShiftsType(promotion);
+                myChess.put(to, type);
+            }
+        }
+    }
 	
 	/**判断等待的人是否为先手方*/
 	private void checkFirstPlayer(Map<Integer, String> otherUserChess, Map<Integer, String> myChess,
@@ -425,12 +482,28 @@ public class BattleRoom {
 //			builder.addBattleMes(battleMes);
 //		}
 		//正常结束
+		User u1 = commonService.getUserById(startUserId);
+		User u2 = commonService.getUserById(afterUserId);
 		if (isGiveUp == 0) {
+		    if (u1.getId() == userId) {
+		        u1.setWinCount(u1.getWinCount()+1);
+		        u2.setLoseCount(u2.getLoseCount()+1);
+		    } else {
+                u2.setWinCount(u2.getWinCount()+1);
+                u1.setLoseCount(u1.getLoseCount()+1);
+		    }
 			builder.setResult(0);
 			builder.setWinUserId(userId);
 			// 推送结束信息
 			disrupAll(PushReqestName.PlayerEndPush, builder.build());
 		} else if (isGiveUp == 2) {
+            if (u1.getId() == userId) {
+                u1.setWinCount(u1.getWinCount()+1);
+                u2.setLoseCount(u2.getLoseCount()+1);
+            } else {
+                u2.setWinCount(u2.getWinCount()+1);
+                u1.setLoseCount(u1.getLoseCount()+1);
+            }		  
             for (UserMatchInfo userMatchInfo : userMatchInfoList) {
               if (userMatchInfo.getUid().equals(giveUpUserId)) {
                   builder.setResult(3);
@@ -443,9 +516,13 @@ public class BattleRoom {
 		    builder.setResult(5);
             disrupAll(PushReqestName.PlayerEndPush, builder.build());
 		} else if (isGiveUp == 4) {
+            u1.setDrawCount(u1.getDrawCount()+1);
+            u2.setDrawCount(u2.getDrawCount()+1);
             builder.setResult(6);
             disrupAll(PushReqestName.PlayerEndPush, builder.build());		    
 		} else if (isGiveUp == 5) {
+		    u1.setDrawCount(u1.getDrawCount()+1);
+		    u2.setDrawCount(u2.getDrawCount()+1);
             builder.setResult(7);
             disrupAll(PushReqestName.PlayerEndPush, builder.build());		  
 		} else {
@@ -458,7 +535,8 @@ public class BattleRoom {
 				disrupOne(PushReqestName.PlayerEndPush, userMatchInfo, builder.build());
 			}
 		}
-
+        commonService.updateUser(u1);
+        commonService.updateUser(u2);
 		battleStatus = BattleStatus.finished;
 		canRemove = true;
 		battleRoomManager.removeBattleRoom(this);
@@ -513,7 +591,10 @@ public class BattleRoom {
 	    battleRoomManager.removeBattleRoom(this);
 	    return;
     }
-
+	/**玩家的交互请求*/
+    public void onMutually(int type, UserMatchInfo userMatchInfo) {
+      
+    }
     /** 保存战斗桢 */
   	public void saveBattleMes(BattleMes battleMes) {
   	  		serverBattleMesList.add(battleMes);
@@ -586,6 +667,8 @@ public class BattleRoom {
 	            userOne.put(61, "k"); 	            
 	        }
 	    }
+	    genera.put(startUserId, 0);
+	    genera.put(afterUserId, 0);
 	}
 
     public List<UserMatchInfo> getUserMatchInfoList() {
@@ -615,6 +698,8 @@ public class BattleRoom {
     enum BattleStatus {
   		start, fighting, fightWaiting, waitFinish, finished
   	}
+
+
     
     
 }

@@ -26,7 +26,7 @@ public class UserService extends BaseService {
         Integer  userId = getUserByName(userName);
         User user = null;
         if (userId == null) {
-            user = buildNewUser(null,userName,1000,0,0,0,0,new Date(),new Date(), new Date());
+            user = buildNewUser(null,userName,1000,0,0,0,0,0,new Date(),new Date(), new Date());
         } else {
             user = getUserById(userId);
         }
@@ -57,8 +57,8 @@ public class UserService extends BaseService {
     }
 
     private User buildNewUser(Integer id, String userName,int rank, int gold, int diamond, int winCount, int loseCount, 
-        Date lastLoginTime,Date updateTime, Date createTime) {
-        User user = new User(id,userName,rank,gold,diamond,winCount,loseCount,lastLoginTime,updateTime,createTime);
+        int drawCount ,Date lastLoginTime,Date updateTime, Date createTime) {
+        User user = new User(id,userName,rank,gold,diamond,winCount,loseCount,drawCount,lastLoginTime,updateTime,createTime);
         cacheJDBCHandler.create(TableName.USER.getTableName(), user, user);
         return user;
     }
