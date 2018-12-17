@@ -62,9 +62,9 @@ namespace PureMVC.Core
             {
                 // Copy observers from reference array to working array, 
                 // since the reference array may change during the notification loop
-                foreach (IObserver observer in observers_ref)
+                for(int index=0; index < observers_ref.Count; index++)
                 {
-                    observer.NotifyObserver(notification);
+                    observers_ref[index].NotifyObserver(notification);
                 }
             }
         }

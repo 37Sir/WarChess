@@ -12,11 +12,11 @@ public class Config{
     public static readonly string UIBaseDir = "UIRes";
     public static readonly string SoundsRoot = "";
     public static readonly string EffectsRoot = "";
-    public static readonly string EffectPacksRoot = "";
-    public static readonly string TweenPacksRoot = "";
+    public static readonly string EffectPacksRoot = "Resources/ArtRes/EffectPacks";
+    public static readonly string TweenPacksRoot = "Resources/ArtRes/TweenPacks";
     public static readonly string EffectConfigPath = "";
 
-    public static float PieceWidth = 5.5f;
+    public static float PieceWidth = 5f;
 
     public static float MoveDistanceCross = 1.3f * PieceWidth;//没用
     public static float MoveDistance = 0.7f * PieceWidth;//中层边界
@@ -26,7 +26,14 @@ public class Config{
     {
         public static int WaitingFindEnemy = 45;                    //匹配等待秒数
         public static int WaitingReady = 60;                        //准备等待秒数
-        public static int WaitingRound = 30;                        //回合等待秒数
+        public static int WaitingRound = 60;                        //回合等待秒数
+    }
+
+    public enum GameResult
+    {
+        WIN = 0,
+        LOSE = 1,
+        DRAW = 2,
     }
 
     public enum NetworkType
@@ -59,11 +66,14 @@ public class Config{
 
     public class PushMessage
     {
-        public const string MatchSuccess = "PlayerStartPush";
         public const string PlayerNotReady = "PlayerNotReady";
         public const string OnePlayerReady = "OnePlayerReady";
+
+        public const string MatchSuccess = "PlayerStartPush";
         public const string PlayerReadyFinish = "PlayerReadyFinishedPush";
-        public const string OtherMove = "OtherMovePush";
+        public const string OtherMove = "ServerBattleMesPush";
+        public const string PlayNext = "PlayNextPush";
+        public const string PlayerEnd = "PlayerEndPush";
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using Framework;
+﻿using com.zyd.common.proto.client;
+using Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ public class PVPPanel
     //templet
     private PVPPanelMediator m_mediator;
     private UserDataProxy m_proxy;//todo
+    private PVPProxy m_pvpProxy;
 
     //UI object
     private Button m_ready;
@@ -21,9 +23,13 @@ public class PVPPanel
     private GameObject m_enemyReady;
     private Text m_selfTimer;
     private Text m_enemyTimer;
+    private Image m_userImage;
+    private Image m_enemyImage;
     private Button m_test;
+    private Camera m_worldCamera;
 
     public bool isTurn = true;
+    public int roundNum = 0;
     public Config.PieceColor selfColor = Config.PieceColor.WHITE;//自己的颜色
     private IEnumerator m_roundTimer;   //计时器
     private List<GameObject> m_tips = new List<GameObject>();
@@ -33,32 +39,59 @@ public class PVPPanel
     {
         //templet
         m_mediator = new PVPPanelMediator(this);
-        m_proxy = new UserDataProxy();
         App.Facade.RegisterMediator(m_mediator);
-        App.Facade.RegisterProxy(m_proxy);
+        m_proxy = App.Facade.RetrieveProxy("UserDataProxy") as UserDataProxy;
+        m_pvpProxy = App.Facade.RetrieveProxy("PVPProxy") as PVPProxy;
         InitUIBinder(gameObject);
 
         m_piece.SetActive(false);
         m_ready.onClick.AddListener(OnReadyClick);
         m_test.onClick.AddListener(OnRoundStart);
-        App.NetworkManager.RegisterPushCall(Config.PushMessage.OtherMove, ShowOtherMove);      
+        App.Facade.RegisterCommand(NotificationConstant.PlayerReady, () => new PlayerReadyCommand());
+        App.Facade.RegisterCommand(NotificationConstant.DoMove, () => new DoMoveCommand());
+        App.Facade.RegisterCommand(NotificationConstant.EndTurn, () => new EndTurnCommand());
+        
+        App.NetworkManager.RegisterPushCall(Config.PushMessage.OtherMove, ShowOtherMove);
+        App.NetworkManager.RegisterPushCall(Config.PushMessage.OnePlayerReady, OnOnePlayerReady);
+        App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerNotReady, OnPlayerNotReady);
+        App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerReadyFinish, OnReadyFinish);
+        App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayNext, OnNextPlay);
+        App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerEnd, OnGameOver);
     }
 
     private void InitUIBinder(GameObject gameObject)
     {
         m_piece = GameObject.Find("m_Chess");
         m_qizi = GameObject.Find("qizi");
+        m_worldCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         m_selfTimer = gameObject.transform.Find("Container/m_SelfTimer").GetComponent<Text>();
         m_enemyTimer = gameObject.transform.Find("Container/m_EnemyTimer").GetComponent<Text>();
+        m_userImage = gameObject.transform.Find("Container/m_SelfIcon").GetComponent<Image>();
+        m_enemyImage = gameObject.transform.Find("Container/m_EnemyIcon").GetComponent<Image>();
         m_modelDrag = GameObject.Find("board").GetComponent<ModelDrag>();
         m_ready = gameObject.transform.Find("Container/m_Ready").gameObject.GetComponent<Button>();
         m_enemyReady = gameObject.transform.Find("Container/m_EnemyReady").gameObject;
         m_test = gameObject.transform.Find("Container/test").GetComponent<Button>();
     }
 
-    public void OpenView()
+    public void OpenView(object intent)
     {
-
+        int firstId = m_pvpProxy.GetFirstId();
+        int userId = m_proxy.GetPlayerId();
+        if(firstId == userId)
+        {
+            isTurn = true;
+            m_pvpProxy.SetSelfColor(Config.PieceColor.WHITE);
+        }
+        else
+        {
+            isTurn = false;
+            m_worldCamera.transform.localRotation = Quaternion.Euler(90, 180, 0);
+            m_pvpProxy.SetSelfColor(Config.PieceColor.BLACK);
+        }
+        m_userImage.GetComponentInChildren<Text>().text = m_proxy.GetPlayerName();
+        m_enemyImage.GetComponentInChildren<Text>().text = m_pvpProxy.GetEnemyName();
+        InitTimer();
     }
 
     /// <summary>
@@ -108,7 +141,15 @@ public class PVPPanel
 
     private void ShowOtherMove(string name, List<byte[]> packet)
     {
-
+        var pushMes = ServerBattleMesPush.ParseFrom(packet[0]);
+        int fromIndex = pushMes.BattleMes.From;
+        int toIndex = pushMes.BattleMes.To;
+        int type = pushMes.BattleMes.Promption;
+        var from = IndexToCoor(fromIndex);
+        var to = IndexToCoor(toIndex);
+        Debug.Log("Push====: ShowOtherMove; from:" + from + " to:" + to + " type:" + type);
+        m_mediator.NotifyOtherMove(new Vector2[] {from, to, new Vector2(type, 0)});//todo response
+        roundNum++;
     }
 
     public void OnTipsHide()
@@ -122,8 +163,8 @@ public class PVPPanel
 
     private void InitTimer()
     {
-        m_selfTimer.gameObject.SetActive(true);
-        m_enemyTimer.gameObject.SetActive(true);
+        m_selfTimer.gameObject.SetActive(false);
+        m_enemyTimer.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -135,23 +176,35 @@ public class PVPPanel
         m_enemyReady.gameObject.SetActive(false);
         m_mediator.InitBoardData();//初始化棋盘数据
         InitChessBoard();          //初始化棋盘表现
-        InitTimer();
-        OnRoundStart();         
+        roundNum = 1;
+        if (isTurn)
+        {
+            OnRoundStart();
+        }               
     }
 
-    public void OnGameOver(Config.PieceColor loseColor)
+    public void OnGameOver(string name, List<byte[]> packet)
     {
+        var pushMes = PlayerEndPush.ParseFrom(packet[0]);
+        var winId = pushMes.WinUserId;
+        var result = pushMes.Result;
         Debug.Log("GameOver!!");
-        if(loseColor == selfColor)
+        if(result >= 6)
         {
-            Debug.Log("You Lose!!");
+            App.UIManager.OpenPanel("ResultPanel", Config.GameResult.DRAW);
         }
         else
         {
-            Debug.Log("You Win!!");
+            if (winId == m_proxy.GetPlayerId())
+            {
+                App.UIManager.OpenPanel("ResultPanel", Config.GameResult.WIN);
+            }
+            else
+            {
+                App.UIManager.OpenPanel("ResultPanel", Config.GameResult.LOSE);
+            }
         }
         StopRoundTimer();
-        App.NSceneManager.LoadScene("SLobby");
     }
 
     /// <summary>
@@ -166,7 +219,7 @@ public class PVPPanel
     }
 
     /// <summary>
-    /// 回合结束
+    /// 自己的回合结束 
     /// </summary>
     private void OnRoundEnd()
     {
@@ -174,6 +227,29 @@ public class PVPPanel
         m_modelDrag.isTurn = isTurn;
         StopRoundTimer();
         StartRoundTimer();
+        roundNum++;
+        Debug.Log("=======RoundEnd======== num: " + roundNum);
+    }
+
+    /// <summary>
+    /// 将军
+    /// </summary>
+    public void OnCheck(int color)
+    {
+        if(color == (int)selfColor)
+        {
+            Debug.Log("=======被将军======== ");
+        }
+        else
+        {
+            Debug.Log("=======将军======== ");
+        }
+    }
+
+    ///兵晋升
+    public void OnPPromote()
+    {
+        App.UIManager.OpenPanel("TypeSelectPanel");
     }
 
     public void EndCurRound()
@@ -181,9 +257,20 @@ public class PVPPanel
         OnRoundEnd();
     }
 
+    public void ShowMove(Vector2 from, Vector2 to, int type)
+    {
+        m_mediator.NotifyMoveEnd(new Vector2[] {from, to, new Vector2(type, 0)});
+        m_mediator.NotifyEndTurn();
+    }
+
+    public void OnReadyResponse()
+    {
+        m_ready.gameObject.SetActive(false);
+    }
+
     private void OnReadyClick()
     {
-        OnGameStart();
+        m_mediator.NotifySelfReady();
     }
 
     #region Private Method
@@ -236,6 +323,35 @@ public class PVPPanel
     }
     #endregion
 
+    public void OnPlayerNotReady(string name, List<byte[]> packet)
+    {
+        Debug.Log("On Player Not Ready");
+    }
+
+    public void OnOnePlayerReady(string name, List<byte[]> packet)
+    {
+        m_enemyReady.SetActive(true);
+    }
+
+    public void OnReadyFinish(string name, List<byte[]> packet)
+    {
+        OnGameStart();
+        Debug.Log("On Ready Finish");
+    }
+
+    public void OnNextPlay(string name, List<byte[]> packet)
+    {
+        Debug.Log("Push:OnNextPlayPush");
+        if (isTurn == true)
+        {
+            EndCurRound();
+        }
+        else
+        {
+            OnRoundStart();
+        }
+    }
+
     public void CloseView()
     {
 
@@ -243,7 +359,16 @@ public class PVPPanel
 
     public void DestroyView()
     {
+        App.Facade.RemoveMediator(m_mediator.MediatorName);
+    }
 
+    ///index转坐标 且棋盘翻转
+    private Vector2 IndexToCoor(int index)
+    {
+        int y = (64 - index) / Config.Board.MaxX + 1;
+        int dx = (64 - index) % Config.Board.MaxX - 1;
+        int x = Config.Board.MaxX - dx - 1;
+        return new Vector2(x, y);
     }
 }
 

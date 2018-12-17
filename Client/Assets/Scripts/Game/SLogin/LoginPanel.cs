@@ -35,7 +35,7 @@ public class LoginPanel
         App.Facade.RegisterCommand(NotificationConstant.Login, () => new LoginCommand());
     }
 
-    public void OpenView()
+    public void OpenView(object intent)
     {
         Debug.Log("login panel Opened");
         App.NetworkManager.SetConfig("192.168.90.12", 10000, (int)Config.NetworkType.TCP, 512, 5000, 1, 1, 5000);
@@ -50,9 +50,10 @@ public class LoginPanel
 
     private void OnLoginClick()
     {
-        App.NetworkManager.Token = "liujialiang";
+        string userName = m_userName.text;
+        App.NetworkManager.Token = userName;
         
-        m_mediator.NotifyLogin();
+        m_mediator.NotifyLogin(userName);
     }
 
     public void CloseView()
@@ -62,7 +63,7 @@ public class LoginPanel
 
     public void DestroyView()
     {
-
+        App.Facade.RemoveMediator(m_mediator.MediatorName);
     }
 }
 

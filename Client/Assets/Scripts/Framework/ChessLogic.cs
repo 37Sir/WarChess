@@ -66,6 +66,11 @@ public class ChessLogic
         new int[]{13, 11, 12, 14, 15, 12, 11, 13},
     };
 
+    private Vector2Int[] m_kings = {
+        new Vector2Int(4, 0),
+        new Vector2Int(4, 7),
+    };
+
     private int[][] m_pawn =
     {
         new int[]{0, 0, 0, 0, 0, 0, 0, 0},
@@ -113,6 +118,77 @@ public class ChessLogic
     }
 
     /// <summary>
+    /// 王被将
+    /// </summary>
+    /// <returns></returns>
+    public bool IsCheck(int kingColor)
+    {
+        Vector2Int kingPos = m_kings[kingColor];
+        for (int y = 0; y < Config.Board.MaxY; y++)
+        {
+            for (int x = 0; x < Config.Board.MaxX; x++)
+            {
+                int piece = GetPiece(x, y);
+                int color = piece / 10;
+                if (color == kingColor || piece == -1) continue;
+                if (CanMove(new Vector2(x, y), kingPos))
+                {
+                    return true;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// 被将的预判
+    /// </summary>
+    /// <returns>走完这步棋是否被将</returns>
+    public bool IsCheckPre(int kingColor, Vector2 from, Vector2 to)
+    {
+        Vector2 kingPos;
+        int fromX = (int)from.x;
+        int fromY = (int)from.y;
+        int toX = (int)to.x;
+        int toY = (int)to.y;
+        int tempPiece = GetPiece(fromX, fromY);
+        if (tempPiece % 10 == (int)Config.PieceType.K)
+        {
+            kingPos = to;
+        }
+        else
+        {
+            kingPos = m_kings[kingColor];
+        }
+        int[,] temp = CopyBoard();
+        temp[fromY,fromX] = -1;
+        temp[toY,toX] = tempPiece;
+
+        for (int y = 0; y < Config.Board.MaxY; y++)
+        {
+            for (int x = 0; x < Config.Board.MaxX; x++)
+            {
+                int piece = temp[y,x];
+                int color = piece / 10;
+                if (color == kingColor || piece == -1) continue;
+                if (CanMovePre(new Vector2(x, y), kingPos, temp))
+                {
+                    return true;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
     /// 目标位置是否可走
     /// </summary>
     /// <returns></returns>
@@ -126,7 +202,7 @@ public class ChessLogic
 
         int toX = (int)to.x;
         int toY = (int)to.y;
-        int toType = GetPiece(toX, toY) % 10;
+        int toType = GetPiece(toX, toY);
         int toColor;
         int toSquare = SQUARES[toY][toX];
 
@@ -135,6 +211,7 @@ public class ChessLogic
             return false;
         }
         fromColor = fromType / 10;
+
         if(toType < 0)
         {
             toColor = -1;
@@ -145,29 +222,48 @@ public class ChessLogic
         }
         int difference = toSquare - fromSquare;
         int index = difference + 119;
-
+        toType = toType % 10;
+        fromType = fromType % 10;
         if (toColor == fromColor) return false;//todo如果王车易位 需要修改
-
         if (fromType == (int)Config.PieceType.P)//todo 小兵直走
         {
-            if (toType >= 0) return false;
-            //小兵第一次移动可以走两步 之后只有一步
-            if(Math.Abs(from.y - to.y) > m_pawn[fromColor][fromX])
-            {
-                return false;
-            }
-            if (difference < 0)
-            {
-                if (fromColor == (int)Config.PieceColor.WHITE && from.x == to.x)
+            if (toType < 0)
+            {               
+                if (difference < 0)
                 {
-                    return true;
+                    if (GetPiece((int)from.x, (int)from.y + 1) == -1 && fromColor == (int)Config.PieceColor.WHITE && from.x == to.x)
+                    {
+                        //小兵第一次移动可以走两步 之后只有一步
+                        int step = 1;                     
+                        if (from.y == 1)
+                        {
+                            step = 2;
+                        }
+                        if (Math.Abs(from.y - to.y) > step) return false;
+                        if (GetPiece(toX, toY) >= 0) return false;
+                        if (IsCheckPre(fromColor, from, to) == false)
+                        {
+                            return true;
+                        }
+                    }
                 }
-            }
-            else
-            {
-                if (fromColor == (int)Config.PieceColor.BLACK && from.x == to.x)
+                else
                 {
-                    return true;
+                    if (GetPiece((int)from.x, (int)from.y - 1) == -1 && fromColor == (int)Config.PieceColor.BLACK && from.x == to.x)
+                    {
+                        //小兵第一次移动可以走两步 之后只有一步
+                        int step = 1;
+                        if (from.y == 6)
+                        {
+                            step = 2;
+                        }
+                        if (Math.Abs(from.y - to.y) > step) return false;
+                        if (GetPiece(toX, toY) >= 0) return false;
+                        if (IsCheckPre(fromColor, from, to) == false)
+                        {
+                            return true;
+                        }
+                    }
                 }
             }
         }
@@ -175,37 +271,68 @@ public class ChessLogic
         if ((ATTACKS[index] & (1 << SHIFTS[fromType]))!=0)
         {
             //判断是否小兵往回走 *小兵直走斜吃
-            if(fromType == (int)Config.PieceType.P)
+            if (fromType == (int)Config.PieceType.P)
             {
                 if (toType < 0 || toColor == fromColor) return false;
-                if (difference > 0)
+                if (difference < 0)
                 {
-                    if (fromColor == (int)Config.PieceColor.WHITE) return true;
+                    if (fromColor == (int)Config.PieceColor.WHITE)
+                    {
+                        if (IsCheckPre(fromColor, from, to) == false)
+                        {
+                            return true;
+                        }
+                    }
                 }
                 else
                 {
-                    if (fromColor == (int)Config.PieceColor.BLACK) return true;
+                    if (fromColor == (int)Config.PieceColor.BLACK)
+                    {
+                        if (IsCheckPre(fromColor, from, to) == false)
+                        {
+                            return true;
+                        }
+                    }
                 }
             }
-            //如果是王或者马 不必判断阻挡
-            if (fromType == (int)Config.PieceType.N || fromType == (int)Config.PieceType.K) return true;
-
-            //判断阻挡
-            int offset = RAYS[index];
-            int j = toSquare + offset;
-            bool blocked = false;
-            while(j != fromSquare)
+            else
             {
-                int y = 7 - j / 16;
-                int x = j % 16;
-                if (GetPiece(x, y) >= 0)
+                //如果是王或者马 不必判断阻挡
+                if (fromType == (int)Config.PieceType.N || fromType == (int)Config.PieceType.K)
                 {
-                    blocked = true;
-                    break;
+                    if (IsCheckPre(fromColor, from, to) == false)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-                j += offset;
+
+                //判断阻挡
+                int offset = RAYS[index];
+                int j = toSquare + offset;
+                bool blocked = false;
+                while (j != fromSquare)
+                {
+                    int y = 7 - j / 16;
+                    int x = j % 16;
+                    if (GetPiece(x, y) >= 0)
+                    {
+                        blocked = true;
+                        break;
+                    }
+                    j += offset;
+                }
+                if (!blocked)
+                {
+                    if (IsCheckPre(fromColor, from, to) == false)
+                    {
+                        return true;
+                    }
+                }
             }
-            if (!blocked) return true;
         }
         return false;
     }
@@ -229,9 +356,13 @@ public class ChessLogic
         {
             m_board[fromY][fromX] = -1;
             m_board[toY][toX] = fromType;
-            if(fromType == (int)Config.PieceType.P)
+            if(fromType % 10 == (int)Config.PieceType.P)
             {
                 m_pawn[fromColor][fromX] = 1;
+            }
+            if (fromType % 10 == (int)Config.PieceType.K)
+            {
+                m_kings[fromColor] = new Vector2Int(toX, toY);
             }
             return true;
         }
@@ -260,9 +391,112 @@ public class ChessLogic
         return moves;
     }
 
+    /// <summary>
+    /// 兵晋升
+    /// </summary>
+    public void PPromoted(Vector2Int pos, int type)
+    {
+        if(pos.y == 7)
+        {
+            m_board[pos.y][pos.x] = type;
+        }
+        else
+        {
+            m_board[pos.y][pos.x] = type + 10;
+        }
+    }
+
     public int GetPiece(int x, int y)
     {
         return m_board[y][x];
+    }
+
+    /// <summary>
+    /// 可走预判
+    /// </summary>
+    /// <returns></returns>
+    private bool CanMovePre(Vector2 from, Vector2 to, int[,] temp)
+    {
+        int fromX = (int)from.x;
+        int fromY = (int)from.y;
+        int fromType = temp[fromY,fromX];
+        int fromColor;
+        int fromSquare = SQUARES[fromY][fromX];
+
+        int toX = (int)to.x;
+        int toY = (int)to.y;
+        int toType = temp[toY,toX];
+        int toColor;
+        int toSquare = SQUARES[toY][toX];
+
+        if (fromType < 0)
+        {
+            return false;
+        }
+        fromColor = fromType / 10;
+
+        if (toType < 0)
+        {
+            toColor = -1;
+        }
+        else
+        {
+            toColor = toType / 10;
+        }
+        int difference = toSquare - fromSquare;
+        int index = difference + 119;
+        toType = toType % 10;
+        fromType = fromType % 10;
+
+        if ((ATTACKS[index] & (1 << SHIFTS[fromType])) != 0)
+        {
+            //判断是否小兵往回走 *小兵直走斜吃
+            if (fromType == (int)Config.PieceType.P)
+            {
+                if (toType < 0 || toColor == fromColor) return false;
+                if (difference > 0)
+                {
+                    if (fromColor == (int)Config.PieceColor.WHITE) return true;
+                }
+                else
+                {
+                    if (fromColor == (int)Config.PieceColor.BLACK) return true;
+                }
+            }
+            //如果是王或者马 不必判断阻挡
+            if (fromType == (int)Config.PieceType.N || fromType == (int)Config.PieceType.K) return true;
+
+            //判断阻挡
+            int offset = RAYS[index];
+            int j = toSquare + offset;
+            bool blocked = false;
+            while (j != fromSquare)
+            {
+                int y = 7 - j / 16;
+                int x = j % 16;
+                if (temp[y,x] >= 0)
+                {
+                    blocked = true;
+                    break;
+                }
+                j += offset;
+            }
+            if (!blocked) return true;
+        }
+        return false;
+    }
+
+    private int[,] CopyBoard()
+    {
+        int[,] arr = new int[Config.Board.MaxY, Config.Board.MaxY];
+        for (int y = 0; y < Config.Board.MaxY; y++)
+        {
+            for (int x = 0; x < Config.Board.MaxX; x++)
+            {
+                arr[y,x] = m_board[y][x];
+            }
+        }
+        return arr;
     }
 }
 

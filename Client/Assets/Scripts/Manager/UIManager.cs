@@ -124,7 +124,7 @@ namespace Framework
         }
 
         //打开panel
-        public void OpenPanel(string name)
+        public void OpenPanel(string name, object intent = null)
         {
             UIPanelData panelData = GetPanelData(name);
             if (panelData != null)
@@ -159,7 +159,7 @@ namespace Framework
                     layerData.resourceName = panelData.resourceName;
                     layerData.uid = curUid;
                     layerData.baseUid = curUid;
-                    //layerData.intent = intent;
+                    layerData.intent = intent;
                     layerData.level = panelData.layerLevel;
                     panelLayerList.Add(layerData);
                     m_LayersUidMap[layerData.level]++;
@@ -418,7 +418,7 @@ namespace Framework
                     panelLayerData.canvas = null;
                     panelLayerData.gameObject = null;
                     panelLayerData.panel = null;
-                    //panelLayerData.intent = null;
+                    panelLayerData.intent = null;
                     panelLayerData.doInstance = false;
                     CleanLayerUid();
                 }
@@ -502,7 +502,7 @@ namespace Framework
                     if (panelLayerData.panel != null)
                     {
                         panelLayerData.panel.OpenView();
-                        //panelLayerData.intent = null;
+                        panelLayerData.intent = null;
                     }
                 }
             }
@@ -536,8 +536,8 @@ namespace Framework
                         panelLayerData.gameObject.SetActive(true);
                         if (panelLayerData.panel != null)
                         {
-                            panelLayerData.panel.OpenView();
-                            //panelLayerData.intent = null;
+                            panelLayerData.panel.OpenView(panelLayerData.intent);
+                            panelLayerData.intent = null;
                         }
                     }
                     if (!panelLayerData.active)
@@ -688,6 +688,7 @@ namespace Framework
         public int zIndex;
         public int baseUid;
         public bool active;
+        public object intent;
         public Canvas canvas;
         public Panel panel;
         public bool inited;

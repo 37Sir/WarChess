@@ -20,16 +20,21 @@ public class UserDataProxy:Proxy
         Debug.Log("User Data Proxy Registed");
     }
 
-    public void SetPlayerInfo()
+    public void SetPlayerInfo(string userName, int userId)
     {
-        m_userData.UserName = "liujialiang";
-        m_userData.UserId = 1111;
+        m_userData.UserName = userName;
+        m_userData.UserId = userId;
         m_userData.Gold = 9999;
     }
 
     public string GetPlayerName()
     {
         return m_userData.UserName;
+    }
+
+    public int GetPlayerId()
+    {
+        return m_userData.UserId;
     }
 }
 
