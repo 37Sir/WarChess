@@ -48,6 +48,8 @@ enum ErrorCode{
 
 	PLAYER_NOT_MATCH_SUCCESS = 400;
 	PLAYER_NOT_START = 401;
+	PLAYER_ROOM_NOT_HAVA = 402;
+	PLAYER_CAN_NOT_UNDO = 403; //不满足悔棋条件
 	
 	DUPLICATE_REQUEST = 700;
 	VERSION_ERROR = 995;
@@ -77,7 +79,7 @@ message LoginResponse{
 message PlayerInfo {
 	optional string userName = 1; 
 	optional int32 userId = 2;
-	
+	optional int32 rank = 3; //玩家分数
 }
 
 

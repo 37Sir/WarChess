@@ -8475,31 +8475,50 @@ public final class WarChess {
   public interface PlayerUndoInfoPushOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required .com.zyd.common.proto.client.UndoInfo undoInfo = 1;
+    // repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;
     /**
-     * <code>required .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+     * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
      *
      * <pre>
      *一回合悔棋信息
      * </pre>
      */
-    boolean hasUndoInfo();
+    java.util.List<com.zyd.common.proto.client.WarChess.UndoInfo> 
+        getUndoInfoList();
     /**
-     * <code>required .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+     * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
      *
      * <pre>
      *一回合悔棋信息
      * </pre>
      */
-    com.zyd.common.proto.client.WarChess.UndoInfo getUndoInfo();
+    com.zyd.common.proto.client.WarChess.UndoInfo getUndoInfo(int index);
     /**
-     * <code>required .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+     * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
      *
      * <pre>
      *一回合悔棋信息
      * </pre>
      */
-    com.zyd.common.proto.client.WarChess.UndoInfoOrBuilder getUndoInfoOrBuilder();
+    int getUndoInfoCount();
+    /**
+     * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+     *
+     * <pre>
+     *一回合悔棋信息
+     * </pre>
+     */
+    java.util.List<? extends com.zyd.common.proto.client.WarChess.UndoInfoOrBuilder> 
+        getUndoInfoOrBuilderList();
+    /**
+     * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+     *
+     * <pre>
+     *一回合悔棋信息
+     * </pre>
+     */
+    com.zyd.common.proto.client.WarChess.UndoInfoOrBuilder getUndoInfoOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code com.zyd.common.proto.client.PlayerUndoInfoPush}
@@ -8557,16 +8576,11 @@ public final class WarChess {
               break;
             }
             case 10: {
-              com.zyd.common.proto.client.WarChess.UndoInfo.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000001) == 0x00000001)) {
-                subBuilder = undoInfo_.toBuilder();
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                undoInfo_ = new java.util.ArrayList<com.zyd.common.proto.client.WarChess.UndoInfo>();
+                mutable_bitField0_ |= 0x00000001;
               }
-              undoInfo_ = input.readMessage(com.zyd.common.proto.client.WarChess.UndoInfo.PARSER, extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(undoInfo_);
-                undoInfo_ = subBuilder.buildPartial();
-              }
-              bitField0_ |= 0x00000001;
+              undoInfo_.add(input.readMessage(com.zyd.common.proto.client.WarChess.UndoInfo.PARSER, extensionRegistry));
               break;
             }
           }
@@ -8577,6 +8591,9 @@ public final class WarChess {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          undoInfo_ = java.util.Collections.unmodifiableList(undoInfo_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -8608,53 +8625,70 @@ public final class WarChess {
       return PARSER;
     }
 
-    private int bitField0_;
-    // required .com.zyd.common.proto.client.UndoInfo undoInfo = 1;
+    // repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;
     public static final int UNDOINFO_FIELD_NUMBER = 1;
-    private com.zyd.common.proto.client.WarChess.UndoInfo undoInfo_;
+    private java.util.List<com.zyd.common.proto.client.WarChess.UndoInfo> undoInfo_;
     /**
-     * <code>required .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+     * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
      *
      * <pre>
      *一回合悔棋信息
      * </pre>
      */
-    public boolean hasUndoInfo() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
-     *
-     * <pre>
-     *一回合悔棋信息
-     * </pre>
-     */
-    public com.zyd.common.proto.client.WarChess.UndoInfo getUndoInfo() {
+    public java.util.List<com.zyd.common.proto.client.WarChess.UndoInfo> getUndoInfoList() {
       return undoInfo_;
     }
     /**
-     * <code>required .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+     * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
      *
      * <pre>
      *一回合悔棋信息
      * </pre>
      */
-    public com.zyd.common.proto.client.WarChess.UndoInfoOrBuilder getUndoInfoOrBuilder() {
+    public java.util.List<? extends com.zyd.common.proto.client.WarChess.UndoInfoOrBuilder> 
+        getUndoInfoOrBuilderList() {
       return undoInfo_;
+    }
+    /**
+     * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+     *
+     * <pre>
+     *一回合悔棋信息
+     * </pre>
+     */
+    public int getUndoInfoCount() {
+      return undoInfo_.size();
+    }
+    /**
+     * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+     *
+     * <pre>
+     *一回合悔棋信息
+     * </pre>
+     */
+    public com.zyd.common.proto.client.WarChess.UndoInfo getUndoInfo(int index) {
+      return undoInfo_.get(index);
+    }
+    /**
+     * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+     *
+     * <pre>
+     *一回合悔棋信息
+     * </pre>
+     */
+    public com.zyd.common.proto.client.WarChess.UndoInfoOrBuilder getUndoInfoOrBuilder(
+        int index) {
+      return undoInfo_.get(index);
     }
 
     private void initFields() {
-      undoInfo_ = com.zyd.common.proto.client.WarChess.UndoInfo.getDefaultInstance();
+      undoInfo_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
-      if (!hasUndoInfo()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -8662,8 +8696,8 @@ public final class WarChess {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, undoInfo_);
+      for (int i = 0; i < undoInfo_.size(); i++) {
+        output.writeMessage(1, undoInfo_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -8674,9 +8708,9 @@ public final class WarChess {
       if (size != -1) return size;
 
       size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+      for (int i = 0; i < undoInfo_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, undoInfo_);
+          .computeMessageSize(1, undoInfo_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8800,11 +8834,11 @@ public final class WarChess {
       public Builder clear() {
         super.clear();
         if (undoInfoBuilder_ == null) {
-          undoInfo_ = com.zyd.common.proto.client.WarChess.UndoInfo.getDefaultInstance();
+          undoInfo_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           undoInfoBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
@@ -8832,16 +8866,15 @@ public final class WarChess {
       public com.zyd.common.proto.client.WarChess.PlayerUndoInfoPush buildPartial() {
         com.zyd.common.proto.client.WarChess.PlayerUndoInfoPush result = new com.zyd.common.proto.client.WarChess.PlayerUndoInfoPush(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
         if (undoInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            undoInfo_ = java.util.Collections.unmodifiableList(undoInfo_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
           result.undoInfo_ = undoInfo_;
         } else {
           result.undoInfo_ = undoInfoBuilder_.build();
         }
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -8857,18 +8890,37 @@ public final class WarChess {
 
       public Builder mergeFrom(com.zyd.common.proto.client.WarChess.PlayerUndoInfoPush other) {
         if (other == com.zyd.common.proto.client.WarChess.PlayerUndoInfoPush.getDefaultInstance()) return this;
-        if (other.hasUndoInfo()) {
-          mergeUndoInfo(other.getUndoInfo());
+        if (undoInfoBuilder_ == null) {
+          if (!other.undoInfo_.isEmpty()) {
+            if (undoInfo_.isEmpty()) {
+              undoInfo_ = other.undoInfo_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureUndoInfoIsMutable();
+              undoInfo_.addAll(other.undoInfo_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.undoInfo_.isEmpty()) {
+            if (undoInfoBuilder_.isEmpty()) {
+              undoInfoBuilder_.dispose();
+              undoInfoBuilder_ = null;
+              undoInfo_ = other.undoInfo_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              undoInfoBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUndoInfoFieldBuilder() : null;
+            } else {
+              undoInfoBuilder_.addAllMessages(other.undoInfo_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
-        if (!hasUndoInfo()) {
-          
-          return false;
-        }
         return true;
       }
 
@@ -8891,97 +8943,197 @@ public final class WarChess {
       }
       private int bitField0_;
 
-      // required .com.zyd.common.proto.client.UndoInfo undoInfo = 1;
-      private com.zyd.common.proto.client.WarChess.UndoInfo undoInfo_ = com.zyd.common.proto.client.WarChess.UndoInfo.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
+      // repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;
+      private java.util.List<com.zyd.common.proto.client.WarChess.UndoInfo> undoInfo_ =
+        java.util.Collections.emptyList();
+      private void ensureUndoInfoIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          undoInfo_ = new java.util.ArrayList<com.zyd.common.proto.client.WarChess.UndoInfo>(undoInfo_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
           com.zyd.common.proto.client.WarChess.UndoInfo, com.zyd.common.proto.client.WarChess.UndoInfo.Builder, com.zyd.common.proto.client.WarChess.UndoInfoOrBuilder> undoInfoBuilder_;
+
       /**
-       * <code>required .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+       * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
        *
        * <pre>
        *一回合悔棋信息
        * </pre>
        */
-      public boolean hasUndoInfo() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
-       *
-       * <pre>
-       *一回合悔棋信息
-       * </pre>
-       */
-      public com.zyd.common.proto.client.WarChess.UndoInfo getUndoInfo() {
+      public java.util.List<com.zyd.common.proto.client.WarChess.UndoInfo> getUndoInfoList() {
         if (undoInfoBuilder_ == null) {
-          return undoInfo_;
+          return java.util.Collections.unmodifiableList(undoInfo_);
         } else {
-          return undoInfoBuilder_.getMessage();
+          return undoInfoBuilder_.getMessageList();
         }
       }
       /**
-       * <code>required .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+       * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
        *
        * <pre>
        *一回合悔棋信息
        * </pre>
        */
-      public Builder setUndoInfo(com.zyd.common.proto.client.WarChess.UndoInfo value) {
+      public int getUndoInfoCount() {
         if (undoInfoBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          undoInfo_ = value;
-          onChanged();
+          return undoInfo_.size();
         } else {
-          undoInfoBuilder_.setMessage(value);
+          return undoInfoBuilder_.getCount();
         }
-        bitField0_ |= 0x00000001;
-        return this;
       }
       /**
-       * <code>required .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+       * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+       *
+       * <pre>
+       *一回合悔棋信息
+       * </pre>
+       */
+      public com.zyd.common.proto.client.WarChess.UndoInfo getUndoInfo(int index) {
+        if (undoInfoBuilder_ == null) {
+          return undoInfo_.get(index);
+        } else {
+          return undoInfoBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
        *
        * <pre>
        *一回合悔棋信息
        * </pre>
        */
       public Builder setUndoInfo(
-          com.zyd.common.proto.client.WarChess.UndoInfo.Builder builderForValue) {
+          int index, com.zyd.common.proto.client.WarChess.UndoInfo value) {
         if (undoInfoBuilder_ == null) {
-          undoInfo_ = builderForValue.build();
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUndoInfoIsMutable();
+          undoInfo_.set(index, value);
           onChanged();
         } else {
-          undoInfoBuilder_.setMessage(builderForValue.build());
+          undoInfoBuilder_.setMessage(index, value);
         }
-        bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>required .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+       * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
        *
        * <pre>
        *一回合悔棋信息
        * </pre>
        */
-      public Builder mergeUndoInfo(com.zyd.common.proto.client.WarChess.UndoInfo value) {
+      public Builder setUndoInfo(
+          int index, com.zyd.common.proto.client.WarChess.UndoInfo.Builder builderForValue) {
         if (undoInfoBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              undoInfo_ != com.zyd.common.proto.client.WarChess.UndoInfo.getDefaultInstance()) {
-            undoInfo_ =
-              com.zyd.common.proto.client.WarChess.UndoInfo.newBuilder(undoInfo_).mergeFrom(value).buildPartial();
-          } else {
-            undoInfo_ = value;
-          }
+          ensureUndoInfoIsMutable();
+          undoInfo_.set(index, builderForValue.build());
           onChanged();
         } else {
-          undoInfoBuilder_.mergeFrom(value);
+          undoInfoBuilder_.setMessage(index, builderForValue.build());
         }
-        bitField0_ |= 0x00000001;
         return this;
       }
       /**
-       * <code>required .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+       * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+       *
+       * <pre>
+       *一回合悔棋信息
+       * </pre>
+       */
+      public Builder addUndoInfo(com.zyd.common.proto.client.WarChess.UndoInfo value) {
+        if (undoInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUndoInfoIsMutable();
+          undoInfo_.add(value);
+          onChanged();
+        } else {
+          undoInfoBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+       *
+       * <pre>
+       *一回合悔棋信息
+       * </pre>
+       */
+      public Builder addUndoInfo(
+          int index, com.zyd.common.proto.client.WarChess.UndoInfo value) {
+        if (undoInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUndoInfoIsMutable();
+          undoInfo_.add(index, value);
+          onChanged();
+        } else {
+          undoInfoBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+       *
+       * <pre>
+       *一回合悔棋信息
+       * </pre>
+       */
+      public Builder addUndoInfo(
+          com.zyd.common.proto.client.WarChess.UndoInfo.Builder builderForValue) {
+        if (undoInfoBuilder_ == null) {
+          ensureUndoInfoIsMutable();
+          undoInfo_.add(builderForValue.build());
+          onChanged();
+        } else {
+          undoInfoBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+       *
+       * <pre>
+       *一回合悔棋信息
+       * </pre>
+       */
+      public Builder addUndoInfo(
+          int index, com.zyd.common.proto.client.WarChess.UndoInfo.Builder builderForValue) {
+        if (undoInfoBuilder_ == null) {
+          ensureUndoInfoIsMutable();
+          undoInfo_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          undoInfoBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+       *
+       * <pre>
+       *一回合悔棋信息
+       * </pre>
+       */
+      public Builder addAllUndoInfo(
+          java.lang.Iterable<? extends com.zyd.common.proto.client.WarChess.UndoInfo> values) {
+        if (undoInfoBuilder_ == null) {
+          ensureUndoInfoIsMutable();
+          super.addAll(values, undoInfo_);
+          onChanged();
+        } else {
+          undoInfoBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
        *
        * <pre>
        *一回合悔棋信息
@@ -8989,54 +9141,113 @@ public final class WarChess {
        */
       public Builder clearUndoInfo() {
         if (undoInfoBuilder_ == null) {
-          undoInfo_ = com.zyd.common.proto.client.WarChess.UndoInfo.getDefaultInstance();
+          undoInfo_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
           undoInfoBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
       /**
-       * <code>required .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+       * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
        *
        * <pre>
        *一回合悔棋信息
        * </pre>
        */
-      public com.zyd.common.proto.client.WarChess.UndoInfo.Builder getUndoInfoBuilder() {
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return getUndoInfoFieldBuilder().getBuilder();
+      public Builder removeUndoInfo(int index) {
+        if (undoInfoBuilder_ == null) {
+          ensureUndoInfoIsMutable();
+          undoInfo_.remove(index);
+          onChanged();
+        } else {
+          undoInfoBuilder_.remove(index);
+        }
+        return this;
       }
       /**
-       * <code>required .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+       * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
        *
        * <pre>
        *一回合悔棋信息
        * </pre>
        */
-      public com.zyd.common.proto.client.WarChess.UndoInfoOrBuilder getUndoInfoOrBuilder() {
-        if (undoInfoBuilder_ != null) {
-          return undoInfoBuilder_.getMessageOrBuilder();
-        } else {
-          return undoInfo_;
+      public com.zyd.common.proto.client.WarChess.UndoInfo.Builder getUndoInfoBuilder(
+          int index) {
+        return getUndoInfoFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+       *
+       * <pre>
+       *一回合悔棋信息
+       * </pre>
+       */
+      public com.zyd.common.proto.client.WarChess.UndoInfoOrBuilder getUndoInfoOrBuilder(
+          int index) {
+        if (undoInfoBuilder_ == null) {
+          return undoInfo_.get(index);  } else {
+          return undoInfoBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>required .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+       * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
        *
        * <pre>
        *一回合悔棋信息
        * </pre>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      public java.util.List<? extends com.zyd.common.proto.client.WarChess.UndoInfoOrBuilder> 
+           getUndoInfoOrBuilderList() {
+        if (undoInfoBuilder_ != null) {
+          return undoInfoBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(undoInfo_);
+        }
+      }
+      /**
+       * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+       *
+       * <pre>
+       *一回合悔棋信息
+       * </pre>
+       */
+      public com.zyd.common.proto.client.WarChess.UndoInfo.Builder addUndoInfoBuilder() {
+        return getUndoInfoFieldBuilder().addBuilder(
+            com.zyd.common.proto.client.WarChess.UndoInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+       *
+       * <pre>
+       *一回合悔棋信息
+       * </pre>
+       */
+      public com.zyd.common.proto.client.WarChess.UndoInfo.Builder addUndoInfoBuilder(
+          int index) {
+        return getUndoInfoFieldBuilder().addBuilder(
+            index, com.zyd.common.proto.client.WarChess.UndoInfo.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.zyd.common.proto.client.UndoInfo undoInfo = 1;</code>
+       *
+       * <pre>
+       *一回合悔棋信息
+       * </pre>
+       */
+      public java.util.List<com.zyd.common.proto.client.WarChess.UndoInfo.Builder> 
+           getUndoInfoBuilderList() {
+        return getUndoInfoFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
           com.zyd.common.proto.client.WarChess.UndoInfo, com.zyd.common.proto.client.WarChess.UndoInfo.Builder, com.zyd.common.proto.client.WarChess.UndoInfoOrBuilder> 
           getUndoInfoFieldBuilder() {
         if (undoInfoBuilder_ == null) {
-          undoInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          undoInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.zyd.common.proto.client.WarChess.UndoInfo, com.zyd.common.proto.client.WarChess.UndoInfo.Builder, com.zyd.common.proto.client.WarChess.UndoInfoOrBuilder>(
                   undoInfo_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
                   getParentForChildren(),
                   isClean());
           undoInfo_ = null;
@@ -9053,6 +9264,1076 @@ public final class WarChess {
     }
 
     // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.PlayerUndoInfoPush)
+  }
+
+  public interface PlayerUndoPushOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional int32 type = 1;
+    /**
+     * <code>optional int32 type = 1;</code>
+     *
+     * <pre>
+     *1为悔棋 2为和局
+     * </pre>
+     */
+    boolean hasType();
+    /**
+     * <code>optional int32 type = 1;</code>
+     *
+     * <pre>
+     *1为悔棋 2为和局
+     * </pre>
+     */
+    int getType();
+  }
+  /**
+   * Protobuf type {@code com.zyd.common.proto.client.PlayerUndoPush}
+   *
+   * <pre>
+   *玩家交互请求的推送
+   * </pre>
+   */
+  public static final class PlayerUndoPush extends
+      com.google.protobuf.GeneratedMessage
+      implements PlayerUndoPushOrBuilder {
+    // Use PlayerUndoPush.newBuilder() to construct.
+    private PlayerUndoPush(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PlayerUndoPush(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PlayerUndoPush defaultInstance;
+    public static PlayerUndoPush getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PlayerUndoPush getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PlayerUndoPush(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              type_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerUndoPush_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerUndoPush_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.zyd.common.proto.client.WarChess.PlayerUndoPush.class, com.zyd.common.proto.client.WarChess.PlayerUndoPush.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PlayerUndoPush> PARSER =
+        new com.google.protobuf.AbstractParser<PlayerUndoPush>() {
+      public PlayerUndoPush parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PlayerUndoPush(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PlayerUndoPush> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional int32 type = 1;
+    public static final int TYPE_FIELD_NUMBER = 1;
+    private int type_;
+    /**
+     * <code>optional int32 type = 1;</code>
+     *
+     * <pre>
+     *1为悔棋 2为和局
+     * </pre>
+     */
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 type = 1;</code>
+     *
+     * <pre>
+     *1为悔棋 2为和局
+     * </pre>
+     */
+    public int getType() {
+      return type_;
+    }
+
+    private void initFields() {
+      type_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, type_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, type_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.zyd.common.proto.client.WarChess.PlayerUndoPush parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerUndoPush parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerUndoPush parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerUndoPush parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerUndoPush parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerUndoPush parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerUndoPush parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerUndoPush parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerUndoPush parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerUndoPush parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.zyd.common.proto.client.WarChess.PlayerUndoPush prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.zyd.common.proto.client.PlayerUndoPush}
+     *
+     * <pre>
+     *玩家交互请求的推送
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.zyd.common.proto.client.WarChess.PlayerUndoPushOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerUndoPush_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerUndoPush_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.zyd.common.proto.client.WarChess.PlayerUndoPush.class, com.zyd.common.proto.client.WarChess.PlayerUndoPush.Builder.class);
+      }
+
+      // Construct using com.zyd.common.proto.client.WarChess.PlayerUndoPush.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        type_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerUndoPush_descriptor;
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayerUndoPush getDefaultInstanceForType() {
+        return com.zyd.common.proto.client.WarChess.PlayerUndoPush.getDefaultInstance();
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayerUndoPush build() {
+        com.zyd.common.proto.client.WarChess.PlayerUndoPush result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayerUndoPush buildPartial() {
+        com.zyd.common.proto.client.WarChess.PlayerUndoPush result = new com.zyd.common.proto.client.WarChess.PlayerUndoPush(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.type_ = type_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.zyd.common.proto.client.WarChess.PlayerUndoPush) {
+          return mergeFrom((com.zyd.common.proto.client.WarChess.PlayerUndoPush)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.zyd.common.proto.client.WarChess.PlayerUndoPush other) {
+        if (other == com.zyd.common.proto.client.WarChess.PlayerUndoPush.getDefaultInstance()) return this;
+        if (other.hasType()) {
+          setType(other.getType());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.zyd.common.proto.client.WarChess.PlayerUndoPush parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.zyd.common.proto.client.WarChess.PlayerUndoPush) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional int32 type = 1;
+      private int type_ ;
+      /**
+       * <code>optional int32 type = 1;</code>
+       *
+       * <pre>
+       *1为悔棋 2为和局
+       * </pre>
+       */
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 type = 1;</code>
+       *
+       * <pre>
+       *1为悔棋 2为和局
+       * </pre>
+       */
+      public int getType() {
+        return type_;
+      }
+      /**
+       * <code>optional int32 type = 1;</code>
+       *
+       * <pre>
+       *1为悔棋 2为和局
+       * </pre>
+       */
+      public Builder setType(int value) {
+        bitField0_ |= 0x00000001;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 type = 1;</code>
+       *
+       * <pre>
+       *1为悔棋 2为和局
+       * </pre>
+       */
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        type_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.PlayerUndoPush)
+    }
+
+    static {
+      defaultInstance = new PlayerUndoPush(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.PlayerUndoPush)
+  }
+
+  public interface PlayerAgreePushOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code com.zyd.common.proto.client.PlayerAgreePush}
+   *
+   * <pre>
+   *玩家同意请求的推送
+   * </pre>
+   */
+  public static final class PlayerAgreePush extends
+      com.google.protobuf.GeneratedMessage
+      implements PlayerAgreePushOrBuilder {
+    // Use PlayerAgreePush.newBuilder() to construct.
+    private PlayerAgreePush(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PlayerAgreePush(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PlayerAgreePush defaultInstance;
+    public static PlayerAgreePush getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PlayerAgreePush getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PlayerAgreePush(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerAgreePush_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerAgreePush_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.zyd.common.proto.client.WarChess.PlayerAgreePush.class, com.zyd.common.proto.client.WarChess.PlayerAgreePush.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PlayerAgreePush> PARSER =
+        new com.google.protobuf.AbstractParser<PlayerAgreePush>() {
+      public PlayerAgreePush parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PlayerAgreePush(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PlayerAgreePush> getParserForType() {
+      return PARSER;
+    }
+
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.zyd.common.proto.client.WarChess.PlayerAgreePush parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerAgreePush parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerAgreePush parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerAgreePush parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerAgreePush parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerAgreePush parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerAgreePush parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerAgreePush parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerAgreePush parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerAgreePush parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.zyd.common.proto.client.WarChess.PlayerAgreePush prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.zyd.common.proto.client.PlayerAgreePush}
+     *
+     * <pre>
+     *玩家同意请求的推送
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.zyd.common.proto.client.WarChess.PlayerAgreePushOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerAgreePush_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerAgreePush_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.zyd.common.proto.client.WarChess.PlayerAgreePush.class, com.zyd.common.proto.client.WarChess.PlayerAgreePush.Builder.class);
+      }
+
+      // Construct using com.zyd.common.proto.client.WarChess.PlayerAgreePush.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerAgreePush_descriptor;
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayerAgreePush getDefaultInstanceForType() {
+        return com.zyd.common.proto.client.WarChess.PlayerAgreePush.getDefaultInstance();
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayerAgreePush build() {
+        com.zyd.common.proto.client.WarChess.PlayerAgreePush result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayerAgreePush buildPartial() {
+        com.zyd.common.proto.client.WarChess.PlayerAgreePush result = new com.zyd.common.proto.client.WarChess.PlayerAgreePush(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.zyd.common.proto.client.WarChess.PlayerAgreePush) {
+          return mergeFrom((com.zyd.common.proto.client.WarChess.PlayerAgreePush)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.zyd.common.proto.client.WarChess.PlayerAgreePush other) {
+        if (other == com.zyd.common.proto.client.WarChess.PlayerAgreePush.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.zyd.common.proto.client.WarChess.PlayerAgreePush parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.zyd.common.proto.client.WarChess.PlayerAgreePush) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.PlayerAgreePush)
+    }
+
+    static {
+      defaultInstance = new PlayerAgreePush(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.PlayerAgreePush)
+  }
+
+  public interface PlayerNotAgreePushOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code com.zyd.common.proto.client.PlayerNotAgreePush}
+   *
+   * <pre>
+   *玩家不同意请求的推送
+   * </pre>
+   */
+  public static final class PlayerNotAgreePush extends
+      com.google.protobuf.GeneratedMessage
+      implements PlayerNotAgreePushOrBuilder {
+    // Use PlayerNotAgreePush.newBuilder() to construct.
+    private PlayerNotAgreePush(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PlayerNotAgreePush(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PlayerNotAgreePush defaultInstance;
+    public static PlayerNotAgreePush getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PlayerNotAgreePush getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PlayerNotAgreePush(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerNotAgreePush_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerNotAgreePush_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.zyd.common.proto.client.WarChess.PlayerNotAgreePush.class, com.zyd.common.proto.client.WarChess.PlayerNotAgreePush.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PlayerNotAgreePush> PARSER =
+        new com.google.protobuf.AbstractParser<PlayerNotAgreePush>() {
+      public PlayerNotAgreePush parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PlayerNotAgreePush(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PlayerNotAgreePush> getParserForType() {
+      return PARSER;
+    }
+
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.zyd.common.proto.client.WarChess.PlayerNotAgreePush parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerNotAgreePush parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerNotAgreePush parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerNotAgreePush parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerNotAgreePush parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerNotAgreePush parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerNotAgreePush parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerNotAgreePush parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerNotAgreePush parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerNotAgreePush parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.zyd.common.proto.client.WarChess.PlayerNotAgreePush prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.zyd.common.proto.client.PlayerNotAgreePush}
+     *
+     * <pre>
+     *玩家不同意请求的推送
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.zyd.common.proto.client.WarChess.PlayerNotAgreePushOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerNotAgreePush_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerNotAgreePush_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.zyd.common.proto.client.WarChess.PlayerNotAgreePush.class, com.zyd.common.proto.client.WarChess.PlayerNotAgreePush.Builder.class);
+      }
+
+      // Construct using com.zyd.common.proto.client.WarChess.PlayerNotAgreePush.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerNotAgreePush_descriptor;
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayerNotAgreePush getDefaultInstanceForType() {
+        return com.zyd.common.proto.client.WarChess.PlayerNotAgreePush.getDefaultInstance();
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayerNotAgreePush build() {
+        com.zyd.common.proto.client.WarChess.PlayerNotAgreePush result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayerNotAgreePush buildPartial() {
+        com.zyd.common.proto.client.WarChess.PlayerNotAgreePush result = new com.zyd.common.proto.client.WarChess.PlayerNotAgreePush(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.zyd.common.proto.client.WarChess.PlayerNotAgreePush) {
+          return mergeFrom((com.zyd.common.proto.client.WarChess.PlayerNotAgreePush)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.zyd.common.proto.client.WarChess.PlayerNotAgreePush other) {
+        if (other == com.zyd.common.proto.client.WarChess.PlayerNotAgreePush.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.zyd.common.proto.client.WarChess.PlayerNotAgreePush parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.zyd.common.proto.client.WarChess.PlayerNotAgreePush) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.PlayerNotAgreePush)
+    }
+
+    static {
+      defaultInstance = new PlayerNotAgreePush(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.PlayerNotAgreePush)
   }
 
   public interface UndoInfoOrBuilder
@@ -9107,6 +10388,24 @@ public final class WarChess {
      * </pre>
      */
     int getType();
+
+    // optional int32 userId = 4;
+    /**
+     * <code>optional int32 userId = 4;</code>
+     *
+     * <pre>
+     *操作方ID
+     * </pre>
+     */
+    boolean hasUserId();
+    /**
+     * <code>optional int32 userId = 4;</code>
+     *
+     * <pre>
+     *操作方ID
+     * </pre>
+     */
+    int getUserId();
   }
   /**
    * Protobuf type {@code com.zyd.common.proto.client.UndoInfo}
@@ -9180,6 +10479,11 @@ public final class WarChess {
             case 24: {
               bitField0_ |= 0x00000004;
               type_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              userId_ = input.readInt32();
               break;
             }
           }
@@ -9292,10 +10596,35 @@ public final class WarChess {
       return type_;
     }
 
+    // optional int32 userId = 4;
+    public static final int USERID_FIELD_NUMBER = 4;
+    private int userId_;
+    /**
+     * <code>optional int32 userId = 4;</code>
+     *
+     * <pre>
+     *操作方ID
+     * </pre>
+     */
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 userId = 4;</code>
+     *
+     * <pre>
+     *操作方ID
+     * </pre>
+     */
+    public int getUserId() {
+      return userId_;
+    }
+
     private void initFields() {
       battleMes_ = com.zyd.common.proto.client.WarChess.BattleMes.getDefaultInstance();
       isEat_ = false;
       type_ = 0;
+      userId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -9318,6 +10647,9 @@ public final class WarChess {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, type_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, userId_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -9338,6 +10670,10 @@ public final class WarChess {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, type_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, userId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -9466,6 +10802,8 @@ public final class WarChess {
         bitField0_ = (bitField0_ & ~0x00000002);
         type_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -9510,6 +10848,10 @@ public final class WarChess {
           to_bitField0_ |= 0x00000004;
         }
         result.type_ = type_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.userId_ = userId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -9534,6 +10876,9 @@ public final class WarChess {
         }
         if (other.hasType()) {
           setType(other.getType());
+        }
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -9777,6 +11122,55 @@ public final class WarChess {
         return this;
       }
 
+      // optional int32 userId = 4;
+      private int userId_ ;
+      /**
+       * <code>optional int32 userId = 4;</code>
+       *
+       * <pre>
+       *操作方ID
+       * </pre>
+       */
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 userId = 4;</code>
+       *
+       * <pre>
+       *操作方ID
+       * </pre>
+       */
+      public int getUserId() {
+        return userId_;
+      }
+      /**
+       * <code>optional int32 userId = 4;</code>
+       *
+       * <pre>
+       *操作方ID
+       * </pre>
+       */
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000008;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 userId = 4;</code>
+       *
+       * <pre>
+       *操作方ID
+       * </pre>
+       */
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        userId_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.UndoInfo)
     }
 
@@ -9786,6 +11180,323 @@ public final class WarChess {
     }
 
     // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.UndoInfo)
+  }
+
+  public interface PlayUndoNextPushOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code com.zyd.common.proto.client.PlayUndoNextPush}
+   *
+   * <pre>
+   ** 悔棋可以开始下一轮倒计时了
+   * </pre>
+   */
+  public static final class PlayUndoNextPush extends
+      com.google.protobuf.GeneratedMessage
+      implements PlayUndoNextPushOrBuilder {
+    // Use PlayUndoNextPush.newBuilder() to construct.
+    private PlayUndoNextPush(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PlayUndoNextPush(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PlayUndoNextPush defaultInstance;
+    public static PlayUndoNextPush getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PlayUndoNextPush getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PlayUndoNextPush(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayUndoNextPush_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayUndoNextPush_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.zyd.common.proto.client.WarChess.PlayUndoNextPush.class, com.zyd.common.proto.client.WarChess.PlayUndoNextPush.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PlayUndoNextPush> PARSER =
+        new com.google.protobuf.AbstractParser<PlayUndoNextPush>() {
+      public PlayUndoNextPush parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PlayUndoNextPush(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PlayUndoNextPush> getParserForType() {
+      return PARSER;
+    }
+
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.zyd.common.proto.client.WarChess.PlayUndoNextPush parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayUndoNextPush parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayUndoNextPush parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayUndoNextPush parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayUndoNextPush parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayUndoNextPush parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayUndoNextPush parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayUndoNextPush parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayUndoNextPush parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayUndoNextPush parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.zyd.common.proto.client.WarChess.PlayUndoNextPush prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.zyd.common.proto.client.PlayUndoNextPush}
+     *
+     * <pre>
+     ** 悔棋可以开始下一轮倒计时了
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.zyd.common.proto.client.WarChess.PlayUndoNextPushOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayUndoNextPush_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayUndoNextPush_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.zyd.common.proto.client.WarChess.PlayUndoNextPush.class, com.zyd.common.proto.client.WarChess.PlayUndoNextPush.Builder.class);
+      }
+
+      // Construct using com.zyd.common.proto.client.WarChess.PlayUndoNextPush.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayUndoNextPush_descriptor;
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayUndoNextPush getDefaultInstanceForType() {
+        return com.zyd.common.proto.client.WarChess.PlayUndoNextPush.getDefaultInstance();
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayUndoNextPush build() {
+        com.zyd.common.proto.client.WarChess.PlayUndoNextPush result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayUndoNextPush buildPartial() {
+        com.zyd.common.proto.client.WarChess.PlayUndoNextPush result = new com.zyd.common.proto.client.WarChess.PlayUndoNextPush(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.zyd.common.proto.client.WarChess.PlayUndoNextPush) {
+          return mergeFrom((com.zyd.common.proto.client.WarChess.PlayUndoNextPush)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.zyd.common.proto.client.WarChess.PlayUndoNextPush other) {
+        if (other == com.zyd.common.proto.client.WarChess.PlayUndoNextPush.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.zyd.common.proto.client.WarChess.PlayUndoNextPush parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.zyd.common.proto.client.WarChess.PlayUndoNextPush) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.PlayUndoNextPush)
+    }
+
+    static {
+      defaultInstance = new PlayUndoNextPush(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.PlayUndoNextPush)
   }
 
   public interface PlayNextPushOrBuilder
@@ -15772,10 +17483,30 @@ public final class WarChess {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_zyd_common_proto_client_PlayerUndoInfoPush_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_zyd_common_proto_client_PlayerUndoPush_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_zyd_common_proto_client_PlayerUndoPush_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_zyd_common_proto_client_PlayerAgreePush_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_zyd_common_proto_client_PlayerAgreePush_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_zyd_common_proto_client_PlayerNotAgreePush_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_zyd_common_proto_client_PlayerNotAgreePush_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_zyd_common_proto_client_UndoInfo_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_zyd_common_proto_client_UndoInfo_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_zyd_common_proto_client_PlayUndoNextPush_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_zyd_common_proto_client_PlayUndoNextPush_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_zyd_common_proto_client_PlayNextPush_descriptor;
   private static
@@ -15855,25 +17586,28 @@ public final class WarChess {
       "leExistRequest\"E\n\"CheckPlayerFairBattleE" +
       "xistResponse\022\017\n\007isExist\030\001 \002(\010\022\016\n\006roomId\030" +
       "\002 \001(\003\"M\n\022PlayerUndoInfoPush\0227\n\010undoInfo\030" +
-      "\001 \002(\0132%.com.zyd.common.proto.client.Undo" +
-      "Info\"b\n\010UndoInfo\0229\n\tbattleMes\030\001 \001(\0132&.co" +
-      "m.zyd.common.proto.client.BattleMes\022\r\n\005i" +
-      "sEat\030\002 \001(\010\022\014\n\004type\030\003 \001(\005\"\016\n\014PlayNextPush" +
-      "\"w\n\023ServerBattleMesPush\022\023\n\013currentTime\030\001",
-      " \002(\003\022\020\n\010nextTime\030\002 \002(\003\0229\n\tbattleMes\030\003 \002(" +
-      "\0132&.com.zyd.common.proto.client.BattleMe" +
-      "s\"l\n\017PlayerStartPush\0229\n\tplayerMes\030\001 \003(\0132" +
-      "&.com.zyd.common.proto.client.PlayerMes\022" +
-      "\016\n\006userId\030\003 \001(\005\022\016\n\006roomId\030\004 \001(\003\"\031\n\027Playe" +
-      "rReadyFinishedPush\"m\n\rPlayerEndPush\022\021\n\tw" +
-      "inUserId\030\001 \001(\005\0229\n\tbattleMes\030\002 \003(\0132&.com." +
-      "zyd.common.proto.client.BattleMes\022\016\n\006res" +
-      "ult\030\003 \001(\005\"Y\n\tBattleMes\022\017\n\007PlayNum\030\001 \001(\005\022" +
-      "\014\n\004from\030\002 \001(\005\022\n\n\002to\030\003 \001(\005\022\016\n\006userId\030\004 \001(",
-      "\005\022\021\n\tpromption\030\005 \001(\005\"-\n\tPlayerMes\022\016\n\006use" +
-      "rId\030\001 \002(\005\022\020\n\010userName\030\002 \001(\t\" \n\016OnePlayer" +
-      "Ready\022\016\n\006userId\030\001 \002(\005\" \n\016PlayerNotReady\022" +
-      "\016\n\006userId\030\001 \003(\005"
+      "\001 \003(\0132%.com.zyd.common.proto.client.Undo" +
+      "Info\"\036\n\016PlayerUndoPush\022\014\n\004type\030\001 \001(\005\"\021\n\017" +
+      "PlayerAgreePush\"\024\n\022PlayerNotAgreePush\"r\n" +
+      "\010UndoInfo\0229\n\tbattleMes\030\001 \001(\0132&.com.zyd.c" +
+      "ommon.proto.client.BattleMes\022\r\n\005isEat\030\002 ",
+      "\001(\010\022\014\n\004type\030\003 \001(\005\022\016\n\006userId\030\004 \001(\005\"\022\n\020Pla" +
+      "yUndoNextPush\"\016\n\014PlayNextPush\"w\n\023ServerB" +
+      "attleMesPush\022\023\n\013currentTime\030\001 \002(\003\022\020\n\010nex" +
+      "tTime\030\002 \002(\003\0229\n\tbattleMes\030\003 \002(\0132&.com.zyd" +
+      ".common.proto.client.BattleMes\"l\n\017Player" +
+      "StartPush\0229\n\tplayerMes\030\001 \003(\0132&.com.zyd.c" +
+      "ommon.proto.client.PlayerMes\022\016\n\006userId\030\003" +
+      " \001(\005\022\016\n\006roomId\030\004 \001(\003\"\031\n\027PlayerReadyFinis" +
+      "hedPush\"m\n\rPlayerEndPush\022\021\n\twinUserId\030\001 " +
+      "\001(\005\0229\n\tbattleMes\030\002 \003(\0132&.com.zyd.common.",
+      "proto.client.BattleMes\022\016\n\006result\030\003 \001(\005\"Y" +
+      "\n\tBattleMes\022\017\n\007PlayNum\030\001 \001(\005\022\014\n\004from\030\002 \001" +
+      "(\005\022\n\n\002to\030\003 \001(\005\022\016\n\006userId\030\004 \001(\005\022\021\n\tprompt" +
+      "ion\030\005 \001(\005\"-\n\tPlayerMes\022\016\n\006userId\030\001 \002(\005\022\020" +
+      "\n\010userName\030\002 \001(\t\" \n\016OnePlayerReady\022\016\n\006us" +
+      "erId\030\001 \002(\005\" \n\016PlayerNotReady\022\016\n\006userId\030\001" +
+      " \003(\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -16006,62 +17740,86 @@ public final class WarChess {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerUndoInfoPush_descriptor,
               new java.lang.String[] { "UndoInfo", });
-          internal_static_com_zyd_common_proto_client_UndoInfo_descriptor =
+          internal_static_com_zyd_common_proto_client_PlayerUndoPush_descriptor =
             getDescriptor().getMessageTypes().get(21);
+          internal_static_com_zyd_common_proto_client_PlayerUndoPush_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_zyd_common_proto_client_PlayerUndoPush_descriptor,
+              new java.lang.String[] { "Type", });
+          internal_static_com_zyd_common_proto_client_PlayerAgreePush_descriptor =
+            getDescriptor().getMessageTypes().get(22);
+          internal_static_com_zyd_common_proto_client_PlayerAgreePush_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_zyd_common_proto_client_PlayerAgreePush_descriptor,
+              new java.lang.String[] { });
+          internal_static_com_zyd_common_proto_client_PlayerNotAgreePush_descriptor =
+            getDescriptor().getMessageTypes().get(23);
+          internal_static_com_zyd_common_proto_client_PlayerNotAgreePush_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_zyd_common_proto_client_PlayerNotAgreePush_descriptor,
+              new java.lang.String[] { });
+          internal_static_com_zyd_common_proto_client_UndoInfo_descriptor =
+            getDescriptor().getMessageTypes().get(24);
           internal_static_com_zyd_common_proto_client_UndoInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_UndoInfo_descriptor,
-              new java.lang.String[] { "BattleMes", "IsEat", "Type", });
+              new java.lang.String[] { "BattleMes", "IsEat", "Type", "UserId", });
+          internal_static_com_zyd_common_proto_client_PlayUndoNextPush_descriptor =
+            getDescriptor().getMessageTypes().get(25);
+          internal_static_com_zyd_common_proto_client_PlayUndoNextPush_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_zyd_common_proto_client_PlayUndoNextPush_descriptor,
+              new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_PlayNextPush_descriptor =
-            getDescriptor().getMessageTypes().get(22);
+            getDescriptor().getMessageTypes().get(26);
           internal_static_com_zyd_common_proto_client_PlayNextPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayNextPush_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_ServerBattleMesPush_descriptor =
-            getDescriptor().getMessageTypes().get(23);
+            getDescriptor().getMessageTypes().get(27);
           internal_static_com_zyd_common_proto_client_ServerBattleMesPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_ServerBattleMesPush_descriptor,
               new java.lang.String[] { "CurrentTime", "NextTime", "BattleMes", });
           internal_static_com_zyd_common_proto_client_PlayerStartPush_descriptor =
-            getDescriptor().getMessageTypes().get(24);
+            getDescriptor().getMessageTypes().get(28);
           internal_static_com_zyd_common_proto_client_PlayerStartPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerStartPush_descriptor,
               new java.lang.String[] { "PlayerMes", "UserId", "RoomId", });
           internal_static_com_zyd_common_proto_client_PlayerReadyFinishedPush_descriptor =
-            getDescriptor().getMessageTypes().get(25);
+            getDescriptor().getMessageTypes().get(29);
           internal_static_com_zyd_common_proto_client_PlayerReadyFinishedPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerReadyFinishedPush_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_PlayerEndPush_descriptor =
-            getDescriptor().getMessageTypes().get(26);
+            getDescriptor().getMessageTypes().get(30);
           internal_static_com_zyd_common_proto_client_PlayerEndPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerEndPush_descriptor,
               new java.lang.String[] { "WinUserId", "BattleMes", "Result", });
           internal_static_com_zyd_common_proto_client_BattleMes_descriptor =
-            getDescriptor().getMessageTypes().get(27);
+            getDescriptor().getMessageTypes().get(31);
           internal_static_com_zyd_common_proto_client_BattleMes_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_BattleMes_descriptor,
               new java.lang.String[] { "PlayNum", "From", "To", "UserId", "Promption", });
           internal_static_com_zyd_common_proto_client_PlayerMes_descriptor =
-            getDescriptor().getMessageTypes().get(28);
+            getDescriptor().getMessageTypes().get(32);
           internal_static_com_zyd_common_proto_client_PlayerMes_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerMes_descriptor,
               new java.lang.String[] { "UserId", "UserName", });
           internal_static_com_zyd_common_proto_client_OnePlayerReady_descriptor =
-            getDescriptor().getMessageTypes().get(29);
+            getDescriptor().getMessageTypes().get(33);
           internal_static_com_zyd_common_proto_client_OnePlayerReady_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_OnePlayerReady_descriptor,
               new java.lang.String[] { "UserId", });
           internal_static_com_zyd_common_proto_client_PlayerNotReady_descriptor =
-            getDescriptor().getMessageTypes().get(30);
+            getDescriptor().getMessageTypes().get(34);
           internal_static_com_zyd_common_proto_client_PlayerNotReady_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerNotReady_descriptor,

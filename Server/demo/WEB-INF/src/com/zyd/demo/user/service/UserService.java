@@ -39,6 +39,7 @@ public class UserService extends BaseService {
                 PlayerInfo.Builder playerInfo = PlayerInfo.newBuilder();
                 playerInfo.setUserId(userId);
                 playerInfo.setUserName(userName);
+                playerInfo.setRank(user.getRank());
                 req.setPlayerInfo(playerInfo);
                 String md5String = MD5Util.md5(token + userId+DemoConstants.PRIVATE_KEY); 
                 req.setSign(md5String);

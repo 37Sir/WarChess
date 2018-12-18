@@ -17,17 +17,22 @@ import com.zyd.common.proto.client.WarChess.FairBattleLevelEndRequest;
 import com.zyd.common.proto.client.WarChess.FairBattleLevelEndResponse;
 import com.zyd.common.proto.client.WarChess.PlayerReadyFinishedPush;
 import com.zyd.common.proto.client.WarChess.PlayerStartPush;
+import com.zyd.common.proto.client.WarChess.PlayerUndoInfoPush;
+import com.zyd.common.proto.client.WarChess.PlayerUndoPush;
 import com.zyd.common.proto.client.WarChess.OnePlayerReady;
 import com.zyd.common.proto.client.WarChess.PlayNextPush;
+import com.zyd.common.proto.client.WarChess.PlayUndoNextPush;
 import com.zyd.common.proto.client.WarChess.PlayerBattleMesRequest;
 import com.zyd.common.proto.client.WarChess.PlayerBattleMesResponse;
 import com.zyd.common.proto.client.WarChess.PlayerMes;
+import com.zyd.common.proto.client.WarChess.PlayerNotAgreePush;
 import com.zyd.common.proto.client.WarChess.PlayerNotReady;
 import com.zyd.common.proto.client.WarChess.PlayerPaintingEndResponse;
 import com.zyd.common.proto.client.WarChess.PlayerReadyRequest;
 import com.zyd.common.proto.client.WarChess.PlayerRequireBattleMesAgainRequest;
 import com.zyd.common.proto.client.WarChess.PlayerRequireBattleMesAgainResponse;
 import com.zyd.common.proto.client.WarChess.ServerBattleMesPush;
+import com.zyd.common.proto.client.WarChess.UndoInfo;
 import com.zyd.common.rpc.Packet;
 import com.zyd.demo.common.CommonService;
 import com.zyd.demo.common.enumuration.PushReqestName;
@@ -91,8 +96,12 @@ public class BattleRoom {
 	boolean jiangjunOne = false;
 	//顽家2是否被将军
 	boolean jiangjunTwo = false;
-	//悔棋方ID
+	//请求交互方ID
 	private int undoUserId;
+	//玩家交互状态（1位悔棋 2为和局）
+	private int mutaully = 0;
+	//交互时的剩余时间
+	private int lastTime  = 0;
 	
 	private static final Logger logger = LoggerFactory.getLogger(BattleRoom.class);
 
@@ -392,10 +401,19 @@ public class BattleRoom {
 			if (battleStatus.equals(BattleStatus.fightWaiting)) {
 				dealUserMap.put(userMatchInfo.getUid(), new Object());
 				if (dealUserMap.size() == userMatchInfoList.size()) {
-					dealUserMap.clear();
-					nextTime = System.currentTimeMillis() + BattleConfig.playTime;
-					battleStatus = BattleStatus.fighting;
-					disrupAll(PushReqestName.PlayNextPush, PlayNextPush.newBuilder().build());
+				    if (mutaully == 0) {
+    					dealUserMap.clear();
+    					nextTime = System.currentTimeMillis() + BattleConfig.playTime;
+    					battleStatus = BattleStatus.fighting;
+    					disrupAll(PushReqestName.PlayNextPush, PlayNextPush.newBuilder().build());
+				    } else {
+				         //悔棋动作结束的推送
+				         mutaully = 0;
+	                     dealUserMap.clear();
+	                     nextTime = System.currentTimeMillis() + BattleConfig.playTime;
+	                     battleStatus = BattleStatus.fighting;
+	                     disrupAll(PushReqestName.PlayNextPush, PlayUndoNextPush.newBuilder().build()); 
+				    }
 				}
 			} else if (battleStatus.equals(BattleStatus.waitFinish)) {
                 dealUserMap.put(userMatchInfo.getUid(), new Object());
@@ -566,6 +584,10 @@ public class BattleRoom {
 					disrupAll(PushReqestName.PlayNextPush, PlayNextPush.newBuilder().build());
 				} else if (battleStatus.equals(BattleStatus.waitFinish)) {
 				    battleFinished(winUserId);
+				} else if (battleStatus.equals(BattleStatus.mutually)) {
+				    battleStatus = BattleStatus.fighting;
+				    mutaully = 0;
+                    disrupAll(PushReqestName.PlayNextPush, PlayUndoNextPush.newBuilder().build());
 				}
 			}
 		} catch (Exception e) {
@@ -591,9 +613,149 @@ public class BattleRoom {
 	    battleRoomManager.removeBattleRoom(this);
 	    return;
     }
-	/**玩家的交互请求*/
-    public void onMutually(int type, UserMatchInfo userMatchInfo) {
-      
+	/**玩家的交互请求
+	 * @throws BaseException */
+    public void onMutually(int type, UserMatchInfo userMatchInfo) throws BaseException {
+        //1为悔棋
+        if (type == 1) {
+            if (userMatchInfo.getUid().intValue() == startUserId) {
+                if (currentPlayNum < 2 || currentPlayNum % 2 != 0) {
+                    //不符合悔棋条件
+                    logger.error("PLAYER_CAN_NOT_UNDO_VALUE userId:{}", userMatchInfo.getUid());
+                    throw new BaseException(ErrorCode.PLAYER_CAN_NOT_UNDO_VALUE);
+                }
+                lastTime = (int)(nextTime - System.currentTimeMillis());                
+            } else {
+                if (currentPlayNum < 3 || currentPlayNum % 2 != 1) {
+                    //不符合悔棋条件
+                    logger.error("PLAYER_CAN_NOT_UNDO_VALUE userId:{}", userMatchInfo.getUid());
+                    throw new BaseException(ErrorCode.PLAYER_CAN_NOT_UNDO_VALUE);
+                }
+                lastTime = (int)(nextTime - System.currentTimeMillis());                
+            }
+            battleStatus = BattleStatus.mutually;
+            nextTime = System.currentTimeMillis() + BattleConfig.unDoTime;
+            mutaully = 1;
+            undoUserId = userMatchInfo.getUid();
+            PlayerUndoPush.Builder p = PlayerUndoPush.newBuilder();
+            p.setType(1);
+            disrupOne(PushReqestName.PlayerUndoPush, userMatchInfoList.get(nextActorIndex()), p.build());
+          //2为和局
+        } else if (type == 2) {
+            nextTime = System.currentTimeMillis() + BattleConfig.unDoTime;
+            mutaully = 2;
+            undoUserId = userMatchInfo.getUid();
+            battleStatus = BattleStatus.mutually;
+            //推送玩家和局的请求
+            PlayerUndoPush.Builder p = PlayerUndoPush.newBuilder();
+            p.setType(2);
+            disrupOne(PushReqestName.PlayerUndoPush, userMatchInfoList.get(nextActorIndex()), p.build());
+        }
+    }
+    /**悔棋回复棋盘的方法
+     * my:悔棋方棋子
+     * */
+    public void undoRevent(Map<Integer, String> my , Map<Integer, String> other ,int  current) {
+        BattleMes b = serverBattleMesList.get(current -1);
+        int to = b.getFrom();
+        int from = b.getTo();
+        //是否被吃棋
+        boolean isEat = captureMap.containsKey(current -1);
+        //是否兵升变
+        boolean isChang = b.getPromption() > 0 ? true : false;
+        if (!isEat && !isChang) {
+            other.put(to, userTwo.get(from));
+            other.remove(from);
+        } else if (isEat && !isChang) {
+            other.put(to, userTwo.get(from));
+            other.remove(from);
+            String chessType = captureMap.get(current -1).split("_")[2];
+            my.put(from, chessType);
+        } else if ( !isEat && isChang) {
+            other.put(to, "p");
+            other.remove(from);
+        } else if (isEat && isChang) {
+            other.put(to, "p");
+            other.remove(from);
+            String chessType = captureMap.get(current -1).split("_")[2];
+            my.put(from, chessType);
+        }
+    }
+    
+    /**玩家交互的回复
+     * @throws BaseException */
+    public void onMutuallyFeedback(boolean agree, UserMatchInfo userMatchInfo) throws BaseException {
+        if (mutaully <= 0) {
+            //没有交互信息请求
+        } else if (!agree) {
+            mutaully = 0;
+            nextTime = System.currentTimeMillis() + lastTime;
+            battleStatus = BattleStatus.fighting;
+            PlayerNotAgreePush.Builder p = PlayerNotAgreePush.newBuilder();
+            disrupAll(PushReqestName.PlayerNotAgreePush, p.build());
+            return ;
+        } else {
+            //1:悔棋
+            if (mutaully == 1) {
+                if (undoUserId == startUserId) {
+                    if (currentPlayNum < 2 || currentPlayNum % 2 != 0) {
+                        //不符合悔棋条件
+                        logger.error("PLAYER_CAN_NOT_UNDO_VALUE userId:{}", userMatchInfo.getUid());
+                        throw new BaseException(ErrorCode.PLAYER_CAN_NOT_UNDO_VALUE);
+                    }
+                    battleStatus = BattleStatus.fightWaiting;
+                    PlayerUndoInfoPush.Builder p =buildPlayerUndoInfoPush(userOne, userTwo,userMatchInfo);
+                    disrupAll(PushReqestName.PlayerUndoInfoPush, p.build());
+                    
+                } else {
+                    if (currentPlayNum < 3 || currentPlayNum % 2 != 1) {
+                        //不符合悔棋条件
+                        logger.error("PLAYER_CAN_NOT_UNDO_VALUE userId:{}", userMatchInfo.getUid());
+                        throw new BaseException(ErrorCode.PLAYER_CAN_NOT_UNDO_VALUE);
+                    }
+                    battleStatus = BattleStatus.fightWaiting;
+                    PlayerUndoInfoPush.Builder p =buildPlayerUndoInfoPush(userTwo,userOne,userMatchInfo);
+                    disrupAll(PushReqestName.PlayerUndoInfoPush, p.build());
+                } 
+            } else if (mutaully == 2) {
+                isGiveUp = 5;
+                battleFinished(winUserId);
+            }
+        }
+    }
+    /**构建悔棋信息
+     * my: 悔棋方棋子
+     * */
+    public PlayerUndoInfoPush.Builder buildPlayerUndoInfoPush(Map<Integer, String> my ,Map<Integer, String> other ,UserMatchInfo userMatchInfo) {
+        PlayerUndoInfoPush.Builder playerUndoInfoPush= PlayerUndoInfoPush.newBuilder();
+        undoRevent(my, other, currentPlayNum);
+        UndoInfo.Builder undoInfo = UndoInfo.newBuilder();
+        undoInfo.setIsEat(false);
+        BattleMes b = serverBattleMesList.get(currentPlayNum -1);
+        undoInfo.setBattleMes(b);
+        if (captureMap.containsKey(currentPlayNum-1)) {
+            undoInfo.setIsEat(true);
+            undoInfo.setType(ChessService.shifts.get(captureMap.get(currentPlayNum-1)));
+            undoInfo.setUserId(userMatchInfo.getUid());
+            captureMap.remove(currentPlayNum-1);
+        }
+        playerUndoInfoPush.addUndoInfo(undoInfo);
+        undoRevent(other, my, currentPlayNum-1);
+        UndoInfo.Builder undoInfo1 = UndoInfo.newBuilder();
+        undoInfo1.setIsEat(false);
+        BattleMes b1 = serverBattleMesList.get(currentPlayNum -2);
+        undoInfo1.setBattleMes(b1);
+        if (captureMap.containsKey(currentPlayNum-2)) {
+            undoInfo1.setIsEat(true);
+            undoInfo1.setType(ChessService.shifts.get(captureMap.get(currentPlayNum-2)));
+            undoInfo1.setUserId(undoUserId);
+            captureMap.remove(currentPlayNum-2);
+        }
+        playerUndoInfoPush.addUndoInfo(undoInfo1);
+        serverBattleMesList.remove(currentPlayNum-1);
+        serverBattleMesList.remove(currentPlayNum-2);
+        currentPlayNum = currentPlayNum -2;
+        return playerUndoInfoPush;
     }
     /** 保存战斗桢 */
   	public void saveBattleMes(BattleMes battleMes) {
@@ -696,7 +858,7 @@ public class BattleRoom {
     }
 
     enum BattleStatus {
-  		start, fighting, fightWaiting, waitFinish, finished
+  		start, fighting, fightWaiting, waitFinish, finished,mutually
   	}
 
 

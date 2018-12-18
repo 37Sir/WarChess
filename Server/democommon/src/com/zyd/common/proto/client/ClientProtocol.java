@@ -153,21 +153,33 @@ public final class ClientProtocol {
      */
     PLAYER_NOT_START(10, 401),
     /**
+     * <code>PLAYER_ROOM_NOT_HAVA = 402;</code>
+     */
+    PLAYER_ROOM_NOT_HAVA(11, 402),
+    /**
+     * <code>PLAYER_CAN_NOT_UNDO = 403;</code>
+     *
+     * <pre>
+     *不满足悔棋条件
+     * </pre>
+     */
+    PLAYER_CAN_NOT_UNDO(12, 403),
+    /**
      * <code>DUPLICATE_REQUEST = 700;</code>
      */
-    DUPLICATE_REQUEST(11, 700),
+    DUPLICATE_REQUEST(13, 700),
     /**
      * <code>VERSION_ERROR = 995;</code>
      */
-    VERSION_ERROR(12, 995),
+    VERSION_ERROR(14, 995),
     /**
      * <code>DEVICE_TYPE_NOT_CORRECT = 998;</code>
      */
-    DEVICE_TYPE_NOT_CORRECT(13, 998),
+    DEVICE_TYPE_NOT_CORRECT(15, 998),
     /**
      * <code>NOT_HAVE_LAST_RESPONSE = 99999;</code>
      */
-    NOT_HAVE_LAST_RESPONSE(14, 99999),
+    NOT_HAVE_LAST_RESPONSE(16, 99999),
     /**
      * <code>SERVER_MAINTENACE = 100000;</code>
      *
@@ -175,7 +187,7 @@ public final class ClientProtocol {
      *服务器维护状态
      * </pre>
      */
-    SERVER_MAINTENACE(15, 100000),
+    SERVER_MAINTENACE(17, 100000),
     ;
 
     /**
@@ -227,6 +239,18 @@ public final class ClientProtocol {
      */
     public static final int PLAYER_NOT_START_VALUE = 401;
     /**
+     * <code>PLAYER_ROOM_NOT_HAVA = 402;</code>
+     */
+    public static final int PLAYER_ROOM_NOT_HAVA_VALUE = 402;
+    /**
+     * <code>PLAYER_CAN_NOT_UNDO = 403;</code>
+     *
+     * <pre>
+     *不满足悔棋条件
+     * </pre>
+     */
+    public static final int PLAYER_CAN_NOT_UNDO_VALUE = 403;
+    /**
      * <code>DUPLICATE_REQUEST = 700;</code>
      */
     public static final int DUPLICATE_REQUEST_VALUE = 700;
@@ -267,6 +291,8 @@ public final class ClientProtocol {
         case 301: return ACTIVATION_CODE_ERROR;
         case 400: return PLAYER_NOT_MATCH_SUCCESS;
         case 401: return PLAYER_NOT_START;
+        case 402: return PLAYER_ROOM_NOT_HAVA;
+        case 403: return PLAYER_CAN_NOT_UNDO;
         case 700: return DUPLICATE_REQUEST;
         case 995: return VERSION_ERROR;
         case 998: return DEVICE_TYPE_NOT_CORRECT;
@@ -4547,6 +4573,24 @@ public final class ClientProtocol {
      * <code>optional int32 userId = 2;</code>
      */
     int getUserId();
+
+    // optional int32 rank = 3;
+    /**
+     * <code>optional int32 rank = 3;</code>
+     *
+     * <pre>
+     *玩家分数
+     * </pre>
+     */
+    boolean hasRank();
+    /**
+     * <code>optional int32 rank = 3;</code>
+     *
+     * <pre>
+     *玩家分数
+     * </pre>
+     */
+    int getRank();
   }
   /**
    * Protobuf type {@code com.zyd.common.proto.client.PlayerInfo}
@@ -4607,6 +4651,11 @@ public final class ClientProtocol {
             case 16: {
               bitField0_ |= 0x00000002;
               userId_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              rank_ = input.readInt32();
               break;
             }
           }
@@ -4708,9 +4757,34 @@ public final class ClientProtocol {
       return userId_;
     }
 
+    // optional int32 rank = 3;
+    public static final int RANK_FIELD_NUMBER = 3;
+    private int rank_;
+    /**
+     * <code>optional int32 rank = 3;</code>
+     *
+     * <pre>
+     *玩家分数
+     * </pre>
+     */
+    public boolean hasRank() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 rank = 3;</code>
+     *
+     * <pre>
+     *玩家分数
+     * </pre>
+     */
+    public int getRank() {
+      return rank_;
+    }
+
     private void initFields() {
       userName_ = "";
       userId_ = 0;
+      rank_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4730,6 +4804,9 @@ public final class ClientProtocol {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, userId_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, rank_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -4746,6 +4823,10 @@ public final class ClientProtocol {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, userId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, rank_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4867,6 +4948,8 @@ public final class ClientProtocol {
         bitField0_ = (bitField0_ & ~0x00000001);
         userId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        rank_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -4903,6 +4986,10 @@ public final class ClientProtocol {
           to_bitField0_ |= 0x00000002;
         }
         result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.rank_ = rank_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4926,6 +5013,9 @@ public final class ClientProtocol {
         }
         if (other.hasUserId()) {
           setUserId(other.getUserId());
+        }
+        if (other.hasRank()) {
+          setRank(other.getRank());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5061,6 +5151,55 @@ public final class ClientProtocol {
         return this;
       }
 
+      // optional int32 rank = 3;
+      private int rank_ ;
+      /**
+       * <code>optional int32 rank = 3;</code>
+       *
+       * <pre>
+       *玩家分数
+       * </pre>
+       */
+      public boolean hasRank() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 rank = 3;</code>
+       *
+       * <pre>
+       *玩家分数
+       * </pre>
+       */
+      public int getRank() {
+        return rank_;
+      }
+      /**
+       * <code>optional int32 rank = 3;</code>
+       *
+       * <pre>
+       *玩家分数
+       * </pre>
+       */
+      public Builder setRank(int value) {
+        bitField0_ |= 0x00000004;
+        rank_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 rank = 3;</code>
+       *
+       * <pre>
+       *玩家分数
+       * </pre>
+       */
+      public Builder clearRank() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        rank_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.PlayerInfo)
     }
 
@@ -5125,24 +5264,25 @@ public final class ClientProtocol {
       "\003 \001(\t\" \n\014LoginRequest\022\020\n\010userName\030\001 \001(\t\"" +
       "Z\n\rLoginResponse\022;\n\nplayerInfo\030\001 \001(\0132\'.c" +
       "om.zyd.common.proto.client.PlayerInfo\022\014\n" +
-      "\004sign\030\002 \001(\t\".\n\nPlayerInfo\022\020\n\010userName\030\001 " +
-      "\001(\t\022\016\n\006userId\030\002 \001(\005*-\n\013EDeviceType\022\010\n\004No" +
-      "ne\020\000\022\007\n\003IOS\020\001\022\013\n\007Android\020\002*\227\003\n\tErrorCode" +
-      "\022\020\n\014SERVER_ERROR\020\001\022\023\n\017SHOP_ITEM_WRONG\020\021\022" +
-      "\031\n\025PLAYER_RMB_NOT_ENOUGH\020\025\022\032\n\026PLAYER_GOL" +
-      "D_NOT_ENOUGH\020\026\022\031\n\025PARAMETER_NOT_CORRECT\020",
-      "2\022\031\n\025SYSCONFIG_NOT_CORRECT\0203\022\020\n\014HACKER_E" +
-      "RROR\0207\022\021\n\014NOT_GET_LOCK\020\254\002\022\032\n\025ACTIVATION_" +
-      "CODE_ERROR\020\255\002\022\035\n\030PLAYER_NOT_MATCH_SUCCES" +
-      "S\020\220\003\022\025\n\020PLAYER_NOT_START\020\221\003\022\026\n\021DUPLICATE" +
-      "_REQUEST\020\274\005\022\022\n\rVERSION_ERROR\020\343\007\022\034\n\027DEVIC" +
-      "E_TYPE_NOT_CORRECT\020\346\007\022\034\n\026NOT_HAVE_LAST_R" +
-      "ESPONSE\020\237\215\006\022\027\n\021SERVER_MAINTENACE\020\240\215\006*\247\001\n" +
-      "\014RpcErrorCode\022\024\n\007UNKNOWN\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020I" +
-      "NVALID_PROTOCOL\020\376\377\377\377\377\377\377\377\377\001\022\030\n\013INVALID_AR" +
-      "G\020\375\377\377\377\377\377\377\377\377\001\022\024\n\007TIMEOUT\020\374\377\377\377\377\377\377\377\377\001\022\030\n\013SE",
-      "RVER_BUSY\020\373\377\377\377\377\377\377\377\377\001\022\030\n\013PUSHTIMEOUT\020\372\377\377\377" +
-      "\377\377\377\377\377\001B\002H\001"
+      "\004sign\030\002 \001(\t\"<\n\nPlayerInfo\022\020\n\010userName\030\001 " +
+      "\001(\t\022\016\n\006userId\030\002 \001(\005\022\014\n\004rank\030\003 \001(\005*-\n\013EDe" +
+      "viceType\022\010\n\004None\020\000\022\007\n\003IOS\020\001\022\013\n\007Android\020\002" +
+      "*\314\003\n\tErrorCode\022\020\n\014SERVER_ERROR\020\001\022\023\n\017SHOP" +
+      "_ITEM_WRONG\020\021\022\031\n\025PLAYER_RMB_NOT_ENOUGH\020\025" +
+      "\022\032\n\026PLAYER_GOLD_NOT_ENOUGH\020\026\022\031\n\025PARAMETE",
+      "R_NOT_CORRECT\0202\022\031\n\025SYSCONFIG_NOT_CORRECT" +
+      "\0203\022\020\n\014HACKER_ERROR\0207\022\021\n\014NOT_GET_LOCK\020\254\002\022" +
+      "\032\n\025ACTIVATION_CODE_ERROR\020\255\002\022\035\n\030PLAYER_NO" +
+      "T_MATCH_SUCCESS\020\220\003\022\025\n\020PLAYER_NOT_START\020\221" +
+      "\003\022\031\n\024PLAYER_ROOM_NOT_HAVA\020\222\003\022\030\n\023PLAYER_C" +
+      "AN_NOT_UNDO\020\223\003\022\026\n\021DUPLICATE_REQUEST\020\274\005\022\022" +
+      "\n\rVERSION_ERROR\020\343\007\022\034\n\027DEVICE_TYPE_NOT_CO" +
+      "RRECT\020\346\007\022\034\n\026NOT_HAVE_LAST_RESPONSE\020\237\215\006\022\027" +
+      "\n\021SERVER_MAINTENACE\020\240\215\006*\247\001\n\014RpcErrorCode" +
+      "\022\024\n\007UNKNOWN\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020INVALID_PROTOC",
+      "OL\020\376\377\377\377\377\377\377\377\377\001\022\030\n\013INVALID_ARG\020\375\377\377\377\377\377\377\377\377\001\022" +
+      "\024\n\007TIMEOUT\020\374\377\377\377\377\377\377\377\377\001\022\030\n\013SERVER_BUSY\020\373\377\377" +
+      "\377\377\377\377\377\377\001\022\030\n\013PUSHTIMEOUT\020\372\377\377\377\377\377\377\377\377\001B\002H\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5184,7 +5324,7 @@ public final class ClientProtocol {
           internal_static_com_zyd_common_proto_client_PlayerInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerInfo_descriptor,
-              new java.lang.String[] { "UserName", "UserId", });
+              new java.lang.String[] { "UserName", "UserId", "Rank", });
           return null;
         }
       };

@@ -195,8 +195,9 @@ public class BattleRoomManager extends BaseService {
 		return battleRoom.doRequest(userMatchInfo, request);
 	}
 	
-	/**玩家交互的请求*/
-	public void onMutually(int type ,User user) {
+	/**玩家交互的请求
+	 * @throws BaseException */
+	public void onMutually(int type ,User user) throws BaseException {
 	    BattleRoom battleRoom = null;
 	    String userKey = user.getUserName();
         Long roomId = userToRoomIdMap.get(userKey);
@@ -205,9 +206,32 @@ public class BattleRoomManager extends BaseService {
           battleRoom = battleRoomMap.get(roomId);
         }
         if (battleRoom == null || userMatchInfo == null) {
+            //游戏已经结束
+            logger.error("PLAYER_ROOM_NOT_HAVA userId:{}", userMatchInfo.getUid());
+            throw new BaseException(ErrorCode.PLAYER_ROOM_NOT_HAVA_VALUE);
         }
         battleRoom.onMutually(type,userMatchInfo);
 	}
+	
+	/**玩家交互的请求
+	 * @throws BaseException */
+	public void MutuallyFeedback(User user, boolean agree) throws BaseException {
+        BattleRoom battleRoom = null;
+        String userKey = user.getUserName();
+        Long roomId = userToRoomIdMap.get(userKey);
+        UserMatchInfo userMatchInfo = userMatchInfoMap.get(userKey);
+        if (roomId != null) {
+          battleRoom = battleRoomMap.get(roomId);
+        }
+        if (battleRoom == null || userMatchInfo == null) {
+            //游戏已经结束
+            logger.error("PLAYER_ROOM_NOT_HAVA userId:{}", userMatchInfo.getUid());
+            throw new BaseException(ErrorCode.PLAYER_ROOM_NOT_HAVA_VALUE);
+        }
+        battleRoom.onMutuallyFeedback(agree,userMatchInfo);
+	}
+	
+	
 	/** 初始化方法 */
 	public void init() {
 		onUpdate();
@@ -238,6 +262,7 @@ public class BattleRoomManager extends BaseService {
 		
 		}, 0, SCHEDULED_EXECULATE_INTERVAL_MILLISECOND, TimeUnit.MILLISECONDS);
 	}
+
 
 
 }

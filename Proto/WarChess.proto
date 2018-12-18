@@ -116,12 +116,30 @@ message CheckPlayerFairBattleExistResponse{
 /////////////////////////////////////// push ////////////////////////////////////
 /**玩家悔棋的信息*/
 message PlayerUndoInfoPush {
-	required UndoInfo undoInfo = 1;//一回合悔棋信息
+	repeated UndoInfo undoInfo = 1;//一回合悔棋信息
 }
+//玩家交互请求的推送
+message PlayerUndoPush {
+	optional int32 type = 1; //1为悔棋 2为和局
+}
+//玩家同意请求的推送
+message PlayerAgreePush {
+
+}
+//玩家不同意请求的推送
+message PlayerNotAgreePush {
+
+}
+
 message UndoInfo {
 	optional BattleMes battleMes = 1;
 	optional bool isEat= 2 ; //是否有棋子被吃
 	optional int32  type = 3 ; //被吃棋子类型信息
+	optional int32 userId = 4;//操作方ID
+}
+/** 悔棋可以开始下一轮倒计时了*/
+message PlayUndoNextPush{
+	
 }
 /** 玩家可以开始下一轮倒计时了*/
 message PlayNextPush{

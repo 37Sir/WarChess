@@ -18,6 +18,9 @@
 	<bean id="PlayerMutually" class="com.zyd.demo.round.servlet.PlayerMutually"
 		parent="baseClientServlet">
 	</bean>
+	<bean id="PlayerMutuallyFeedback" class="com.zyd.demo.round.servlet.PlayerMutuallyFeedback"
+		parent="baseClientServlet">
+	</bean>
 	<bean id="PlayerCancelMatch" class="com.zyd.demo.round.servlet.PlayerCancelMatch"
 		parent="baseClientServlet">
 	</bean>
