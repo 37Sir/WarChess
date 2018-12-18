@@ -25,6 +25,1174 @@ namespace com.zyd.common.proto.client {
     
   }
   #region Messages
+  public sealed partial class PlayerMutuallyRequest : pb::GeneratedMessageLite<PlayerMutuallyRequest, PlayerMutuallyRequest.Builder> {
+    private PlayerMutuallyRequest() { }
+    private static readonly PlayerMutuallyRequest defaultInstance = new PlayerMutuallyRequest().MakeReadOnly();
+    private static readonly string[] _playerMutuallyRequestFieldNames = new string[] { "type" };
+    private static readonly uint[] _playerMutuallyRequestFieldTags = new uint[] { 8 };
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyRequest DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override PlayerMutuallyRequest DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override PlayerMutuallyRequest ThisMessage {
+      get { return this; }
+    }
+    
+    #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int TypeFieldNumber = 1;
+    private bool hasType;
+    private int type_;
+    public bool HasType {
+      get { return hasType; }
+    }
+    public int Type {
+      get { return type_; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _playerMutuallyRequestFieldNames;
+      if (hasType) {
+        output.WriteInt32(1, field_names[0], Type);
+      }
+    }
+    
+    private int memoizedSerializedSize = -1;
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        if (hasType) {
+          size += pb::CodedOutputStream.ComputeInt32Size(1, Type);
+        }
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    #region Lite runtime methods
+    public override int GetHashCode() {
+      int hash = GetType().GetHashCode();
+      if (hasType) hash ^= type_.GetHashCode();
+      return hash;
+    }
+    
+    public override bool Equals(object obj) {
+      PlayerMutuallyRequest other = obj as PlayerMutuallyRequest;
+      if (other == null) return false;
+      if (hasType != other.hasType || (hasType && !type_.Equals(other.type_))) return false;
+      return true;
+    }
+    
+    #endregion
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyRequest ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyRequest ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyRequest ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyRequest ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyRequest ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyRequest ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyRequest ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyRequest ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyRequest ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyRequest ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private PlayerMutuallyRequest MakeReadOnly() {
+      return this;
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder(PlayerMutuallyRequest prototype) {
+      return new Builder(prototype);
+    }
+    
+    public sealed partial class Builder : pb::GeneratedBuilderLite<PlayerMutuallyRequest, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(PlayerMutuallyRequest cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private PlayerMutuallyRequest result;
+      
+      private PlayerMutuallyRequest PrepareBuilder() {
+        if (resultIsReadOnly) {
+          PlayerMutuallyRequest original = result;
+          result = new PlayerMutuallyRequest();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override PlayerMutuallyRequest MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override PlayerMutuallyRequest DefaultInstanceForType {
+        get { return global::com.zyd.common.proto.client.PlayerMutuallyRequest.DefaultInstance; }
+      }
+      
+      public override PlayerMutuallyRequest BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessageLite other) {
+        if (other is PlayerMutuallyRequest) {
+          return MergeFrom((PlayerMutuallyRequest) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(PlayerMutuallyRequest other) {
+        if (other == global::com.zyd.common.proto.client.PlayerMutuallyRequest.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasType) {
+          Type = other.Type;
+        }
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_playerMutuallyRequestFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _playerMutuallyRequestFieldTags[field_ordinal];
+            else {
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                return this;
+              }
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasType = input.ReadInt32(ref result.type_);
+              break;
+            }
+          }
+        }
+        
+        return this;
+      }
+      
+      
+      public bool HasType {
+        get { return result.hasType; }
+      }
+      public int Type {
+        get { return result.Type; }
+        set { SetType(value); }
+      }
+      public Builder SetType(int value) {
+        PrepareBuilder();
+        result.hasType = true;
+        result.type_ = value;
+        return this;
+      }
+      public Builder ClearType() {
+        PrepareBuilder();
+        result.hasType = false;
+        result.type_ = 0;
+        return this;
+      }
+    }
+    static PlayerMutuallyRequest() {
+      object.ReferenceEquals(global::com.zyd.common.proto.client.WarChess.Descriptor, null);
+    }
+  }
+  
+  public sealed partial class PlayerMutuallyResponse : pb::GeneratedMessageLite<PlayerMutuallyResponse, PlayerMutuallyResponse.Builder> {
+    private PlayerMutuallyResponse() { }
+    private static readonly PlayerMutuallyResponse defaultInstance = new PlayerMutuallyResponse().MakeReadOnly();
+    private static readonly string[] _playerMutuallyResponseFieldNames = new string[] {  };
+    private static readonly uint[] _playerMutuallyResponseFieldTags = new uint[] {  };
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyResponse DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override PlayerMutuallyResponse DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override PlayerMutuallyResponse ThisMessage {
+      get { return this; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _playerMutuallyResponseFieldNames;
+    }
+    
+    private int memoizedSerializedSize = -1;
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    #region Lite runtime methods
+    public override int GetHashCode() {
+      int hash = GetType().GetHashCode();
+      return hash;
+    }
+    
+    public override bool Equals(object obj) {
+      PlayerMutuallyResponse other = obj as PlayerMutuallyResponse;
+      if (other == null) return false;
+      return true;
+    }
+    
+    #endregion
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyResponse ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyResponse ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyResponse ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyResponse ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyResponse ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyResponse ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyResponse ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyResponse ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyResponse ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyResponse ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private PlayerMutuallyResponse MakeReadOnly() {
+      return this;
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder(PlayerMutuallyResponse prototype) {
+      return new Builder(prototype);
+    }
+    
+    public sealed partial class Builder : pb::GeneratedBuilderLite<PlayerMutuallyResponse, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(PlayerMutuallyResponse cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private PlayerMutuallyResponse result;
+      
+      private PlayerMutuallyResponse PrepareBuilder() {
+        if (resultIsReadOnly) {
+          PlayerMutuallyResponse original = result;
+          result = new PlayerMutuallyResponse();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override PlayerMutuallyResponse MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override PlayerMutuallyResponse DefaultInstanceForType {
+        get { return global::com.zyd.common.proto.client.PlayerMutuallyResponse.DefaultInstance; }
+      }
+      
+      public override PlayerMutuallyResponse BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessageLite other) {
+        if (other is PlayerMutuallyResponse) {
+          return MergeFrom((PlayerMutuallyResponse) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(PlayerMutuallyResponse other) {
+        if (other == global::com.zyd.common.proto.client.PlayerMutuallyResponse.DefaultInstance) return this;
+        PrepareBuilder();
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_playerMutuallyResponseFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _playerMutuallyResponseFieldTags[field_ordinal];
+            else {
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                return this;
+              }
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              break;
+            }
+          }
+        }
+        
+        return this;
+      }
+      
+    }
+    static PlayerMutuallyResponse() {
+      object.ReferenceEquals(global::com.zyd.common.proto.client.WarChess.Descriptor, null);
+    }
+  }
+  
+  public sealed partial class PlayerMutuallyFeedbackRequest : pb::GeneratedMessageLite<PlayerMutuallyFeedbackRequest, PlayerMutuallyFeedbackRequest.Builder> {
+    private PlayerMutuallyFeedbackRequest() { }
+    private static readonly PlayerMutuallyFeedbackRequest defaultInstance = new PlayerMutuallyFeedbackRequest().MakeReadOnly();
+    private static readonly string[] _playerMutuallyFeedbackRequestFieldNames = new string[] { "isAgree" };
+    private static readonly uint[] _playerMutuallyFeedbackRequestFieldTags = new uint[] { 8 };
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackRequest DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override PlayerMutuallyFeedbackRequest DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override PlayerMutuallyFeedbackRequest ThisMessage {
+      get { return this; }
+    }
+    
+    #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int IsAgreeFieldNumber = 1;
+    private bool hasIsAgree;
+    private bool isAgree_;
+    public bool HasIsAgree {
+      get { return hasIsAgree; }
+    }
+    public bool IsAgree {
+      get { return isAgree_; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _playerMutuallyFeedbackRequestFieldNames;
+      if (hasIsAgree) {
+        output.WriteBool(1, field_names[0], IsAgree);
+      }
+    }
+    
+    private int memoizedSerializedSize = -1;
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        if (hasIsAgree) {
+          size += pb::CodedOutputStream.ComputeBoolSize(1, IsAgree);
+        }
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    #region Lite runtime methods
+    public override int GetHashCode() {
+      int hash = GetType().GetHashCode();
+      if (hasIsAgree) hash ^= isAgree_.GetHashCode();
+      return hash;
+    }
+    
+    public override bool Equals(object obj) {
+      PlayerMutuallyFeedbackRequest other = obj as PlayerMutuallyFeedbackRequest;
+      if (other == null) return false;
+      if (hasIsAgree != other.hasIsAgree || (hasIsAgree && !isAgree_.Equals(other.isAgree_))) return false;
+      return true;
+    }
+    
+    #endregion
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackRequest ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackRequest ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackRequest ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackRequest ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackRequest ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackRequest ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackRequest ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackRequest ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackRequest ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackRequest ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private PlayerMutuallyFeedbackRequest MakeReadOnly() {
+      return this;
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder(PlayerMutuallyFeedbackRequest prototype) {
+      return new Builder(prototype);
+    }
+    
+    public sealed partial class Builder : pb::GeneratedBuilderLite<PlayerMutuallyFeedbackRequest, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(PlayerMutuallyFeedbackRequest cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private PlayerMutuallyFeedbackRequest result;
+      
+      private PlayerMutuallyFeedbackRequest PrepareBuilder() {
+        if (resultIsReadOnly) {
+          PlayerMutuallyFeedbackRequest original = result;
+          result = new PlayerMutuallyFeedbackRequest();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override PlayerMutuallyFeedbackRequest MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override PlayerMutuallyFeedbackRequest DefaultInstanceForType {
+        get { return global::com.zyd.common.proto.client.PlayerMutuallyFeedbackRequest.DefaultInstance; }
+      }
+      
+      public override PlayerMutuallyFeedbackRequest BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessageLite other) {
+        if (other is PlayerMutuallyFeedbackRequest) {
+          return MergeFrom((PlayerMutuallyFeedbackRequest) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(PlayerMutuallyFeedbackRequest other) {
+        if (other == global::com.zyd.common.proto.client.PlayerMutuallyFeedbackRequest.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasIsAgree) {
+          IsAgree = other.IsAgree;
+        }
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_playerMutuallyFeedbackRequestFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _playerMutuallyFeedbackRequestFieldTags[field_ordinal];
+            else {
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                return this;
+              }
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasIsAgree = input.ReadBool(ref result.isAgree_);
+              break;
+            }
+          }
+        }
+        
+        return this;
+      }
+      
+      
+      public bool HasIsAgree {
+        get { return result.hasIsAgree; }
+      }
+      public bool IsAgree {
+        get { return result.IsAgree; }
+        set { SetIsAgree(value); }
+      }
+      public Builder SetIsAgree(bool value) {
+        PrepareBuilder();
+        result.hasIsAgree = true;
+        result.isAgree_ = value;
+        return this;
+      }
+      public Builder ClearIsAgree() {
+        PrepareBuilder();
+        result.hasIsAgree = false;
+        result.isAgree_ = false;
+        return this;
+      }
+    }
+    static PlayerMutuallyFeedbackRequest() {
+      object.ReferenceEquals(global::com.zyd.common.proto.client.WarChess.Descriptor, null);
+    }
+  }
+  
+  public sealed partial class PlayerMutuallyFeedbackResponse : pb::GeneratedMessageLite<PlayerMutuallyFeedbackResponse, PlayerMutuallyFeedbackResponse.Builder> {
+    private PlayerMutuallyFeedbackResponse() { }
+    private static readonly PlayerMutuallyFeedbackResponse defaultInstance = new PlayerMutuallyFeedbackResponse().MakeReadOnly();
+    private static readonly string[] _playerMutuallyFeedbackResponseFieldNames = new string[] {  };
+    private static readonly uint[] _playerMutuallyFeedbackResponseFieldTags = new uint[] {  };
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackResponse DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override PlayerMutuallyFeedbackResponse DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override PlayerMutuallyFeedbackResponse ThisMessage {
+      get { return this; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _playerMutuallyFeedbackResponseFieldNames;
+    }
+    
+    private int memoizedSerializedSize = -1;
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    #region Lite runtime methods
+    public override int GetHashCode() {
+      int hash = GetType().GetHashCode();
+      return hash;
+    }
+    
+    public override bool Equals(object obj) {
+      PlayerMutuallyFeedbackResponse other = obj as PlayerMutuallyFeedbackResponse;
+      if (other == null) return false;
+      return true;
+    }
+    
+    #endregion
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackResponse ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackResponse ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackResponse ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackResponse ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackResponse ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackResponse ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackResponse ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackResponse ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackResponse ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerMutuallyFeedbackResponse ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private PlayerMutuallyFeedbackResponse MakeReadOnly() {
+      return this;
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder(PlayerMutuallyFeedbackResponse prototype) {
+      return new Builder(prototype);
+    }
+    
+    public sealed partial class Builder : pb::GeneratedBuilderLite<PlayerMutuallyFeedbackResponse, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(PlayerMutuallyFeedbackResponse cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private PlayerMutuallyFeedbackResponse result;
+      
+      private PlayerMutuallyFeedbackResponse PrepareBuilder() {
+        if (resultIsReadOnly) {
+          PlayerMutuallyFeedbackResponse original = result;
+          result = new PlayerMutuallyFeedbackResponse();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override PlayerMutuallyFeedbackResponse MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override PlayerMutuallyFeedbackResponse DefaultInstanceForType {
+        get { return global::com.zyd.common.proto.client.PlayerMutuallyFeedbackResponse.DefaultInstance; }
+      }
+      
+      public override PlayerMutuallyFeedbackResponse BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessageLite other) {
+        if (other is PlayerMutuallyFeedbackResponse) {
+          return MergeFrom((PlayerMutuallyFeedbackResponse) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(PlayerMutuallyFeedbackResponse other) {
+        if (other == global::com.zyd.common.proto.client.PlayerMutuallyFeedbackResponse.DefaultInstance) return this;
+        PrepareBuilder();
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_playerMutuallyFeedbackResponseFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _playerMutuallyFeedbackResponseFieldTags[field_ordinal];
+            else {
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                return this;
+              }
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              break;
+            }
+          }
+        }
+        
+        return this;
+      }
+      
+    }
+    static PlayerMutuallyFeedbackResponse() {
+      object.ReferenceEquals(global::com.zyd.common.proto.client.WarChess.Descriptor, null);
+    }
+  }
+  
   public sealed partial class PlayerMatchRequest : pb::GeneratedMessageLite<PlayerMatchRequest, PlayerMatchRequest.Builder> {
     private PlayerMatchRequest() { }
     private static readonly PlayerMatchRequest defaultInstance = new PlayerMatchRequest().MakeReadOnly();
@@ -4876,6 +6044,1957 @@ namespace com.zyd.common.proto.client {
       }
     }
     static CheckPlayerFairBattleExistResponse() {
+      object.ReferenceEquals(global::com.zyd.common.proto.client.WarChess.Descriptor, null);
+    }
+  }
+  
+  public sealed partial class PlayerUndoInfoPush : pb::GeneratedMessageLite<PlayerUndoInfoPush, PlayerUndoInfoPush.Builder> {
+    private PlayerUndoInfoPush() { }
+    private static readonly PlayerUndoInfoPush defaultInstance = new PlayerUndoInfoPush().MakeReadOnly();
+    private static readonly string[] _playerUndoInfoPushFieldNames = new string[] { "undoInfo" };
+    private static readonly uint[] _playerUndoInfoPushFieldTags = new uint[] { 10 };
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoInfoPush DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override PlayerUndoInfoPush DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override PlayerUndoInfoPush ThisMessage {
+      get { return this; }
+    }
+    
+    #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int UndoInfoFieldNumber = 1;
+    private pbc::PopsicleList<global::com.zyd.common.proto.client.UndoInfo> undoInfo_ = new pbc::PopsicleList<global::com.zyd.common.proto.client.UndoInfo>();
+    public scg::IList<global::com.zyd.common.proto.client.UndoInfo> UndoInfoList {
+      get { return undoInfo_; }
+    }
+    public int UndoInfoCount {
+      get { return undoInfo_.Count; }
+    }
+    public global::com.zyd.common.proto.client.UndoInfo GetUndoInfo(int index) {
+      return undoInfo_[index];
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _playerUndoInfoPushFieldNames;
+      if (undoInfo_.Count > 0) {
+        output.WriteMessageArray(1, field_names[0], undoInfo_);
+      }
+    }
+    
+    private int memoizedSerializedSize = -1;
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        foreach (global::com.zyd.common.proto.client.UndoInfo element in UndoInfoList) {
+          size += pb::CodedOutputStream.ComputeMessageSize(1, element);
+        }
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    #region Lite runtime methods
+    public override int GetHashCode() {
+      int hash = GetType().GetHashCode();
+      foreach(global::com.zyd.common.proto.client.UndoInfo i in undoInfo_)
+        hash ^= i.GetHashCode();
+      return hash;
+    }
+    
+    public override bool Equals(object obj) {
+      PlayerUndoInfoPush other = obj as PlayerUndoInfoPush;
+      if (other == null) return false;
+      if(undoInfo_.Count != other.undoInfo_.Count) return false;
+      for(int ix=0; ix < undoInfo_.Count; ix++)
+        if(!undoInfo_[ix].Equals(other.undoInfo_[ix])) return false;
+      return true;
+    }
+    
+    #endregion
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoInfoPush ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoInfoPush ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoInfoPush ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoInfoPush ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoInfoPush ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoInfoPush ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoInfoPush ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoInfoPush ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoInfoPush ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoInfoPush ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private PlayerUndoInfoPush MakeReadOnly() {
+      undoInfo_.MakeReadOnly();
+      return this;
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder(PlayerUndoInfoPush prototype) {
+      return new Builder(prototype);
+    }
+    
+    public sealed partial class Builder : pb::GeneratedBuilderLite<PlayerUndoInfoPush, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(PlayerUndoInfoPush cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private PlayerUndoInfoPush result;
+      
+      private PlayerUndoInfoPush PrepareBuilder() {
+        if (resultIsReadOnly) {
+          PlayerUndoInfoPush original = result;
+          result = new PlayerUndoInfoPush();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override PlayerUndoInfoPush MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override PlayerUndoInfoPush DefaultInstanceForType {
+        get { return global::com.zyd.common.proto.client.PlayerUndoInfoPush.DefaultInstance; }
+      }
+      
+      public override PlayerUndoInfoPush BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessageLite other) {
+        if (other is PlayerUndoInfoPush) {
+          return MergeFrom((PlayerUndoInfoPush) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(PlayerUndoInfoPush other) {
+        if (other == global::com.zyd.common.proto.client.PlayerUndoInfoPush.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.undoInfo_.Count != 0) {
+          result.undoInfo_.Add(other.undoInfo_);
+        }
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_playerUndoInfoPushFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _playerUndoInfoPushFieldTags[field_ordinal];
+            else {
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                return this;
+              }
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 10: {
+              input.ReadMessageArray(tag, field_name, result.undoInfo_, global::com.zyd.common.proto.client.UndoInfo.DefaultInstance, extensionRegistry);
+              break;
+            }
+          }
+        }
+        
+        return this;
+      }
+      
+      
+      public pbc::IPopsicleList<global::com.zyd.common.proto.client.UndoInfo> UndoInfoList {
+        get { return PrepareBuilder().undoInfo_; }
+      }
+      public int UndoInfoCount {
+        get { return result.UndoInfoCount; }
+      }
+      public global::com.zyd.common.proto.client.UndoInfo GetUndoInfo(int index) {
+        return result.GetUndoInfo(index);
+      }
+      public Builder SetUndoInfo(int index, global::com.zyd.common.proto.client.UndoInfo value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.undoInfo_[index] = value;
+        return this;
+      }
+      public Builder SetUndoInfo(int index, global::com.zyd.common.proto.client.UndoInfo.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.undoInfo_[index] = builderForValue.Build();
+        return this;
+      }
+      public Builder AddUndoInfo(global::com.zyd.common.proto.client.UndoInfo value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.undoInfo_.Add(value);
+        return this;
+      }
+      public Builder AddUndoInfo(global::com.zyd.common.proto.client.UndoInfo.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.undoInfo_.Add(builderForValue.Build());
+        return this;
+      }
+      public Builder AddRangeUndoInfo(scg::IEnumerable<global::com.zyd.common.proto.client.UndoInfo> values) {
+        PrepareBuilder();
+        result.undoInfo_.Add(values);
+        return this;
+      }
+      public Builder ClearUndoInfo() {
+        PrepareBuilder();
+        result.undoInfo_.Clear();
+        return this;
+      }
+    }
+    static PlayerUndoInfoPush() {
+      object.ReferenceEquals(global::com.zyd.common.proto.client.WarChess.Descriptor, null);
+    }
+  }
+  
+  public sealed partial class PlayerUndoPush : pb::GeneratedMessageLite<PlayerUndoPush, PlayerUndoPush.Builder> {
+    private PlayerUndoPush() { }
+    private static readonly PlayerUndoPush defaultInstance = new PlayerUndoPush().MakeReadOnly();
+    private static readonly string[] _playerUndoPushFieldNames = new string[] { "type" };
+    private static readonly uint[] _playerUndoPushFieldTags = new uint[] { 8 };
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoPush DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override PlayerUndoPush DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override PlayerUndoPush ThisMessage {
+      get { return this; }
+    }
+    
+    #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int TypeFieldNumber = 1;
+    private bool hasType;
+    private int type_;
+    public bool HasType {
+      get { return hasType; }
+    }
+    public int Type {
+      get { return type_; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _playerUndoPushFieldNames;
+      if (hasType) {
+        output.WriteInt32(1, field_names[0], Type);
+      }
+    }
+    
+    private int memoizedSerializedSize = -1;
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        if (hasType) {
+          size += pb::CodedOutputStream.ComputeInt32Size(1, Type);
+        }
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    #region Lite runtime methods
+    public override int GetHashCode() {
+      int hash = GetType().GetHashCode();
+      if (hasType) hash ^= type_.GetHashCode();
+      return hash;
+    }
+    
+    public override bool Equals(object obj) {
+      PlayerUndoPush other = obj as PlayerUndoPush;
+      if (other == null) return false;
+      if (hasType != other.hasType || (hasType && !type_.Equals(other.type_))) return false;
+      return true;
+    }
+    
+    #endregion
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoPush ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoPush ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoPush ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoPush ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoPush ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoPush ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoPush ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoPush ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoPush ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerUndoPush ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private PlayerUndoPush MakeReadOnly() {
+      return this;
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder(PlayerUndoPush prototype) {
+      return new Builder(prototype);
+    }
+    
+    public sealed partial class Builder : pb::GeneratedBuilderLite<PlayerUndoPush, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(PlayerUndoPush cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private PlayerUndoPush result;
+      
+      private PlayerUndoPush PrepareBuilder() {
+        if (resultIsReadOnly) {
+          PlayerUndoPush original = result;
+          result = new PlayerUndoPush();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override PlayerUndoPush MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override PlayerUndoPush DefaultInstanceForType {
+        get { return global::com.zyd.common.proto.client.PlayerUndoPush.DefaultInstance; }
+      }
+      
+      public override PlayerUndoPush BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessageLite other) {
+        if (other is PlayerUndoPush) {
+          return MergeFrom((PlayerUndoPush) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(PlayerUndoPush other) {
+        if (other == global::com.zyd.common.proto.client.PlayerUndoPush.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasType) {
+          Type = other.Type;
+        }
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_playerUndoPushFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _playerUndoPushFieldTags[field_ordinal];
+            else {
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                return this;
+              }
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasType = input.ReadInt32(ref result.type_);
+              break;
+            }
+          }
+        }
+        
+        return this;
+      }
+      
+      
+      public bool HasType {
+        get { return result.hasType; }
+      }
+      public int Type {
+        get { return result.Type; }
+        set { SetType(value); }
+      }
+      public Builder SetType(int value) {
+        PrepareBuilder();
+        result.hasType = true;
+        result.type_ = value;
+        return this;
+      }
+      public Builder ClearType() {
+        PrepareBuilder();
+        result.hasType = false;
+        result.type_ = 0;
+        return this;
+      }
+    }
+    static PlayerUndoPush() {
+      object.ReferenceEquals(global::com.zyd.common.proto.client.WarChess.Descriptor, null);
+    }
+  }
+  
+  public sealed partial class PlayerAgreePush : pb::GeneratedMessageLite<PlayerAgreePush, PlayerAgreePush.Builder> {
+    private PlayerAgreePush() { }
+    private static readonly PlayerAgreePush defaultInstance = new PlayerAgreePush().MakeReadOnly();
+    private static readonly string[] _playerAgreePushFieldNames = new string[] {  };
+    private static readonly uint[] _playerAgreePushFieldTags = new uint[] {  };
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerAgreePush DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override PlayerAgreePush DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override PlayerAgreePush ThisMessage {
+      get { return this; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _playerAgreePushFieldNames;
+    }
+    
+    private int memoizedSerializedSize = -1;
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    #region Lite runtime methods
+    public override int GetHashCode() {
+      int hash = GetType().GetHashCode();
+      return hash;
+    }
+    
+    public override bool Equals(object obj) {
+      PlayerAgreePush other = obj as PlayerAgreePush;
+      if (other == null) return false;
+      return true;
+    }
+    
+    #endregion
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerAgreePush ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerAgreePush ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerAgreePush ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerAgreePush ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerAgreePush ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerAgreePush ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerAgreePush ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerAgreePush ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerAgreePush ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerAgreePush ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private PlayerAgreePush MakeReadOnly() {
+      return this;
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder(PlayerAgreePush prototype) {
+      return new Builder(prototype);
+    }
+    
+    public sealed partial class Builder : pb::GeneratedBuilderLite<PlayerAgreePush, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(PlayerAgreePush cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private PlayerAgreePush result;
+      
+      private PlayerAgreePush PrepareBuilder() {
+        if (resultIsReadOnly) {
+          PlayerAgreePush original = result;
+          result = new PlayerAgreePush();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override PlayerAgreePush MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override PlayerAgreePush DefaultInstanceForType {
+        get { return global::com.zyd.common.proto.client.PlayerAgreePush.DefaultInstance; }
+      }
+      
+      public override PlayerAgreePush BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessageLite other) {
+        if (other is PlayerAgreePush) {
+          return MergeFrom((PlayerAgreePush) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(PlayerAgreePush other) {
+        if (other == global::com.zyd.common.proto.client.PlayerAgreePush.DefaultInstance) return this;
+        PrepareBuilder();
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_playerAgreePushFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _playerAgreePushFieldTags[field_ordinal];
+            else {
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                return this;
+              }
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              break;
+            }
+          }
+        }
+        
+        return this;
+      }
+      
+    }
+    static PlayerAgreePush() {
+      object.ReferenceEquals(global::com.zyd.common.proto.client.WarChess.Descriptor, null);
+    }
+  }
+  
+  public sealed partial class PlayerNotAgreePush : pb::GeneratedMessageLite<PlayerNotAgreePush, PlayerNotAgreePush.Builder> {
+    private PlayerNotAgreePush() { }
+    private static readonly PlayerNotAgreePush defaultInstance = new PlayerNotAgreePush().MakeReadOnly();
+    private static readonly string[] _playerNotAgreePushFieldNames = new string[] {  };
+    private static readonly uint[] _playerNotAgreePushFieldTags = new uint[] {  };
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerNotAgreePush DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override PlayerNotAgreePush DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override PlayerNotAgreePush ThisMessage {
+      get { return this; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _playerNotAgreePushFieldNames;
+    }
+    
+    private int memoizedSerializedSize = -1;
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    #region Lite runtime methods
+    public override int GetHashCode() {
+      int hash = GetType().GetHashCode();
+      return hash;
+    }
+    
+    public override bool Equals(object obj) {
+      PlayerNotAgreePush other = obj as PlayerNotAgreePush;
+      if (other == null) return false;
+      return true;
+    }
+    
+    #endregion
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerNotAgreePush ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerNotAgreePush ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerNotAgreePush ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerNotAgreePush ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerNotAgreePush ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerNotAgreePush ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerNotAgreePush ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerNotAgreePush ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerNotAgreePush ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerNotAgreePush ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private PlayerNotAgreePush MakeReadOnly() {
+      return this;
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder(PlayerNotAgreePush prototype) {
+      return new Builder(prototype);
+    }
+    
+    public sealed partial class Builder : pb::GeneratedBuilderLite<PlayerNotAgreePush, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(PlayerNotAgreePush cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private PlayerNotAgreePush result;
+      
+      private PlayerNotAgreePush PrepareBuilder() {
+        if (resultIsReadOnly) {
+          PlayerNotAgreePush original = result;
+          result = new PlayerNotAgreePush();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override PlayerNotAgreePush MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override PlayerNotAgreePush DefaultInstanceForType {
+        get { return global::com.zyd.common.proto.client.PlayerNotAgreePush.DefaultInstance; }
+      }
+      
+      public override PlayerNotAgreePush BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessageLite other) {
+        if (other is PlayerNotAgreePush) {
+          return MergeFrom((PlayerNotAgreePush) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(PlayerNotAgreePush other) {
+        if (other == global::com.zyd.common.proto.client.PlayerNotAgreePush.DefaultInstance) return this;
+        PrepareBuilder();
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_playerNotAgreePushFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _playerNotAgreePushFieldTags[field_ordinal];
+            else {
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                return this;
+              }
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              break;
+            }
+          }
+        }
+        
+        return this;
+      }
+      
+    }
+    static PlayerNotAgreePush() {
+      object.ReferenceEquals(global::com.zyd.common.proto.client.WarChess.Descriptor, null);
+    }
+  }
+  
+  public sealed partial class UndoInfo : pb::GeneratedMessageLite<UndoInfo, UndoInfo.Builder> {
+    private UndoInfo() { }
+    private static readonly UndoInfo defaultInstance = new UndoInfo().MakeReadOnly();
+    private static readonly string[] _undoInfoFieldNames = new string[] { "battleMes", "isEat", "type", "userId" };
+    private static readonly uint[] _undoInfoFieldTags = new uint[] { 10, 16, 24, 32 };
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static UndoInfo DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override UndoInfo DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override UndoInfo ThisMessage {
+      get { return this; }
+    }
+    
+    #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int BattleMesFieldNumber = 1;
+    private bool hasBattleMes;
+    private global::com.zyd.common.proto.client.BattleMes battleMes_;
+    public bool HasBattleMes {
+      get { return hasBattleMes; }
+    }
+    public global::com.zyd.common.proto.client.BattleMes BattleMes {
+      get { return battleMes_ ?? global::com.zyd.common.proto.client.BattleMes.DefaultInstance; }
+    }
+    
+    #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int IsEatFieldNumber = 2;
+    private bool hasIsEat;
+    private bool isEat_;
+    public bool HasIsEat {
+      get { return hasIsEat; }
+    }
+    public bool IsEat {
+      get { return isEat_; }
+    }
+    
+    #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int TypeFieldNumber = 3;
+    private bool hasType;
+    private int type_;
+    public bool HasType {
+      get { return hasType; }
+    }
+    public int Type {
+      get { return type_; }
+    }
+    
+    #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int UserIdFieldNumber = 4;
+    private bool hasUserId;
+    private int userId_;
+    public bool HasUserId {
+      get { return hasUserId; }
+    }
+    public int UserId {
+      get { return userId_; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _undoInfoFieldNames;
+      if (hasBattleMes) {
+        output.WriteMessage(1, field_names[0], BattleMes);
+      }
+      if (hasIsEat) {
+        output.WriteBool(2, field_names[1], IsEat);
+      }
+      if (hasType) {
+        output.WriteInt32(3, field_names[2], Type);
+      }
+      if (hasUserId) {
+        output.WriteInt32(4, field_names[3], UserId);
+      }
+    }
+    
+    private int memoizedSerializedSize = -1;
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        if (hasBattleMes) {
+          size += pb::CodedOutputStream.ComputeMessageSize(1, BattleMes);
+        }
+        if (hasIsEat) {
+          size += pb::CodedOutputStream.ComputeBoolSize(2, IsEat);
+        }
+        if (hasType) {
+          size += pb::CodedOutputStream.ComputeInt32Size(3, Type);
+        }
+        if (hasUserId) {
+          size += pb::CodedOutputStream.ComputeInt32Size(4, UserId);
+        }
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    #region Lite runtime methods
+    public override int GetHashCode() {
+      int hash = GetType().GetHashCode();
+      if (hasBattleMes) hash ^= battleMes_.GetHashCode();
+      if (hasIsEat) hash ^= isEat_.GetHashCode();
+      if (hasType) hash ^= type_.GetHashCode();
+      if (hasUserId) hash ^= userId_.GetHashCode();
+      return hash;
+    }
+    
+    public override bool Equals(object obj) {
+      UndoInfo other = obj as UndoInfo;
+      if (other == null) return false;
+      if (hasBattleMes != other.hasBattleMes || (hasBattleMes && !battleMes_.Equals(other.battleMes_))) return false;
+      if (hasIsEat != other.hasIsEat || (hasIsEat && !isEat_.Equals(other.isEat_))) return false;
+      if (hasType != other.hasType || (hasType && !type_.Equals(other.type_))) return false;
+      if (hasUserId != other.hasUserId || (hasUserId && !userId_.Equals(other.userId_))) return false;
+      return true;
+    }
+    
+    #endregion
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static UndoInfo ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static UndoInfo ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static UndoInfo ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static UndoInfo ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static UndoInfo ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static UndoInfo ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static UndoInfo ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static UndoInfo ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static UndoInfo ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static UndoInfo ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private UndoInfo MakeReadOnly() {
+      return this;
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder(UndoInfo prototype) {
+      return new Builder(prototype);
+    }
+    
+    public sealed partial class Builder : pb::GeneratedBuilderLite<UndoInfo, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(UndoInfo cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private UndoInfo result;
+      
+      private UndoInfo PrepareBuilder() {
+        if (resultIsReadOnly) {
+          UndoInfo original = result;
+          result = new UndoInfo();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override UndoInfo MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override UndoInfo DefaultInstanceForType {
+        get { return global::com.zyd.common.proto.client.UndoInfo.DefaultInstance; }
+      }
+      
+      public override UndoInfo BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessageLite other) {
+        if (other is UndoInfo) {
+          return MergeFrom((UndoInfo) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(UndoInfo other) {
+        if (other == global::com.zyd.common.proto.client.UndoInfo.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasBattleMes) {
+          MergeBattleMes(other.BattleMes);
+        }
+        if (other.HasIsEat) {
+          IsEat = other.IsEat;
+        }
+        if (other.HasType) {
+          Type = other.Type;
+        }
+        if (other.HasUserId) {
+          UserId = other.UserId;
+        }
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_undoInfoFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _undoInfoFieldTags[field_ordinal];
+            else {
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                return this;
+              }
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 10: {
+              global::com.zyd.common.proto.client.BattleMes.Builder subBuilder = global::com.zyd.common.proto.client.BattleMes.CreateBuilder();
+              if (result.hasBattleMes) {
+                subBuilder.MergeFrom(BattleMes);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              BattleMes = subBuilder.BuildPartial();
+              break;
+            }
+            case 16: {
+              result.hasIsEat = input.ReadBool(ref result.isEat_);
+              break;
+            }
+            case 24: {
+              result.hasType = input.ReadInt32(ref result.type_);
+              break;
+            }
+            case 32: {
+              result.hasUserId = input.ReadInt32(ref result.userId_);
+              break;
+            }
+          }
+        }
+        
+        return this;
+      }
+      
+      
+      public bool HasBattleMes {
+       get { return result.hasBattleMes; }
+      }
+      public global::com.zyd.common.proto.client.BattleMes BattleMes {
+        get { return result.BattleMes; }
+        set { SetBattleMes(value); }
+      }
+      public Builder SetBattleMes(global::com.zyd.common.proto.client.BattleMes value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasBattleMes = true;
+        result.battleMes_ = value;
+        return this;
+      }
+      public Builder SetBattleMes(global::com.zyd.common.proto.client.BattleMes.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasBattleMes = true;
+        result.battleMes_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeBattleMes(global::com.zyd.common.proto.client.BattleMes value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasBattleMes &&
+            result.battleMes_ != global::com.zyd.common.proto.client.BattleMes.DefaultInstance) {
+            result.battleMes_ = global::com.zyd.common.proto.client.BattleMes.CreateBuilder(result.battleMes_).MergeFrom(value).BuildPartial();
+        } else {
+          result.battleMes_ = value;
+        }
+        result.hasBattleMes = true;
+        return this;
+      }
+      public Builder ClearBattleMes() {
+        PrepareBuilder();
+        result.hasBattleMes = false;
+        result.battleMes_ = null;
+        return this;
+      }
+      
+      public bool HasIsEat {
+        get { return result.hasIsEat; }
+      }
+      public bool IsEat {
+        get { return result.IsEat; }
+        set { SetIsEat(value); }
+      }
+      public Builder SetIsEat(bool value) {
+        PrepareBuilder();
+        result.hasIsEat = true;
+        result.isEat_ = value;
+        return this;
+      }
+      public Builder ClearIsEat() {
+        PrepareBuilder();
+        result.hasIsEat = false;
+        result.isEat_ = false;
+        return this;
+      }
+      
+      public bool HasType {
+        get { return result.hasType; }
+      }
+      public int Type {
+        get { return result.Type; }
+        set { SetType(value); }
+      }
+      public Builder SetType(int value) {
+        PrepareBuilder();
+        result.hasType = true;
+        result.type_ = value;
+        return this;
+      }
+      public Builder ClearType() {
+        PrepareBuilder();
+        result.hasType = false;
+        result.type_ = 0;
+        return this;
+      }
+      
+      public bool HasUserId {
+        get { return result.hasUserId; }
+      }
+      public int UserId {
+        get { return result.UserId; }
+        set { SetUserId(value); }
+      }
+      public Builder SetUserId(int value) {
+        PrepareBuilder();
+        result.hasUserId = true;
+        result.userId_ = value;
+        return this;
+      }
+      public Builder ClearUserId() {
+        PrepareBuilder();
+        result.hasUserId = false;
+        result.userId_ = 0;
+        return this;
+      }
+    }
+    static UndoInfo() {
+      object.ReferenceEquals(global::com.zyd.common.proto.client.WarChess.Descriptor, null);
+    }
+  }
+  
+  public sealed partial class PlayUndoNextPush : pb::GeneratedMessageLite<PlayUndoNextPush, PlayUndoNextPush.Builder> {
+    private PlayUndoNextPush() { }
+    private static readonly PlayUndoNextPush defaultInstance = new PlayUndoNextPush().MakeReadOnly();
+    private static readonly string[] _playUndoNextPushFieldNames = new string[] {  };
+    private static readonly uint[] _playUndoNextPushFieldTags = new uint[] {  };
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayUndoNextPush DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override PlayUndoNextPush DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override PlayUndoNextPush ThisMessage {
+      get { return this; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _playUndoNextPushFieldNames;
+    }
+    
+    private int memoizedSerializedSize = -1;
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    #region Lite runtime methods
+    public override int GetHashCode() {
+      int hash = GetType().GetHashCode();
+      return hash;
+    }
+    
+    public override bool Equals(object obj) {
+      PlayUndoNextPush other = obj as PlayUndoNextPush;
+      if (other == null) return false;
+      return true;
+    }
+    
+    #endregion
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayUndoNextPush ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayUndoNextPush ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayUndoNextPush ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayUndoNextPush ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayUndoNextPush ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayUndoNextPush ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayUndoNextPush ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayUndoNextPush ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayUndoNextPush ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayUndoNextPush ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private PlayUndoNextPush MakeReadOnly() {
+      return this;
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder(PlayUndoNextPush prototype) {
+      return new Builder(prototype);
+    }
+    
+    public sealed partial class Builder : pb::GeneratedBuilderLite<PlayUndoNextPush, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(PlayUndoNextPush cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private PlayUndoNextPush result;
+      
+      private PlayUndoNextPush PrepareBuilder() {
+        if (resultIsReadOnly) {
+          PlayUndoNextPush original = result;
+          result = new PlayUndoNextPush();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override PlayUndoNextPush MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override PlayUndoNextPush DefaultInstanceForType {
+        get { return global::com.zyd.common.proto.client.PlayUndoNextPush.DefaultInstance; }
+      }
+      
+      public override PlayUndoNextPush BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessageLite other) {
+        if (other is PlayUndoNextPush) {
+          return MergeFrom((PlayUndoNextPush) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(PlayUndoNextPush other) {
+        if (other == global::com.zyd.common.proto.client.PlayUndoNextPush.DefaultInstance) return this;
+        PrepareBuilder();
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_playUndoNextPushFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _playUndoNextPushFieldTags[field_ordinal];
+            else {
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                return this;
+              }
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              break;
+            }
+          }
+        }
+        
+        return this;
+      }
+      
+    }
+    static PlayUndoNextPush() {
       object.ReferenceEquals(global::com.zyd.common.proto.client.WarChess.Descriptor, null);
     }
   }

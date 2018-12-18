@@ -411,6 +411,23 @@ public class ChessLogic
         return m_board[y][x];
     }
 
+    public int GetPiece(float x, float y)
+    {
+        return m_board[(int)y][(int)x];
+    }
+
+    public void SetPiece(float x, float y, int type)
+    {
+        m_board[(int)y][(int)x] = type;
+    }
+
+    public void Undo(Vector2 from, Vector2 to, int eatType)
+    {
+        var temp = GetPiece(to.x-1, to.y-1);
+        SetPiece(from.x-1, from.y-1, temp);
+        SetPiece(to.x-1, to.y-1, eatType);
+    }
+
     /// <summary>
     /// 可走预判
     /// </summary>

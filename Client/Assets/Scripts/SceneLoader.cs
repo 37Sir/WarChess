@@ -29,6 +29,8 @@ public class SceneLoader
         App.UIManager.RegisterPanel("SGame", "PVPPanel", UILayerType.NormalLayer, false);
         App.UIManager.RegisterPanel("SGame", "TypeSelectPanel", UILayerType.TopLayer, false);
         App.UIManager.RegisterPanel("SGame", "ResultPanel", UILayerType.TopLayer, false);
+        App.UIManager.RegisterPanel("SGame", "MutuallySelectPanel", UILayerType.TopLayer, false);
+        
         App.UIManager.OpenPanel("PVPPanel");
     }
 

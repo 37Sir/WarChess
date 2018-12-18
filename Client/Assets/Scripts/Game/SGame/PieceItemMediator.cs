@@ -28,6 +28,8 @@ public class PieceItemMediator : Mediator
         IList<string> list = new List<string>();
         list.Add(NotificationConstant.OnOtherMove);
         list.Add(NotificationConstant.OnMoveEnd);
+        list.Add(NotificationConstant.OnUndo);
+        list.Add(NotificationConstant.OnTypeSelect);
         return list;
     }
 
@@ -42,6 +44,7 @@ public class PieceItemMediator : Mediator
                 m_viewComponent.DoMove((Vector2)move[0], (Vector2)move[1], (Vector2)move[2]);
                 IsCheck((int)m_viewComponent.selfColor);
                 break;
+
             case NotificationConstant.OnMoveEnd:
                 Vector2[] endMove = (Vector2[])body;
                 var from = endMove[0];
@@ -61,9 +64,50 @@ public class PieceItemMediator : Mediator
                 }
                 IsCheck(1 - (int)m_viewComponent.selfColor);
                 break;
+
+            case NotificationConstant.OnTypeSelect:
+                Vector2[] promoteMove = (Vector2[])body;
+                var profrom = promoteMove[0];
+                var proto = promoteMove[1];
+                var protype = (int)promoteMove[2].x;
+                if (proto.x == m_viewComponent.m_X && proto.y == m_viewComponent.m_Z)
+                {
+                    m_viewComponent.BeAttached();
+                }
+                if (profrom.x == m_viewComponent.m_X && profrom.y == m_viewComponent.m_Z)
+                {
+                    m_viewComponent.SetPiecePos(proto.x, proto.y);
+                    if (protype > 0)
+                    {
+                        m_viewComponent.OnPromoted(protype);
+                    }
+                }
+                IsCheck(1 - (int)m_viewComponent.selfColor);
+                break;
+
             case NotificationConstant.OnGameOver:
                 m_viewComponent.OnGameOver();
                 break;
+
+            //悔棋
+            case NotificationConstant.OnUndo:
+                Vector2[] undoMove = (Vector2[])body;
+                var undoFrom = undoMove[0];
+                var undoTo = undoMove[1];
+                var undoEat = undoMove[2].x;
+                if(m_viewComponent.m_X == undoTo.x && m_viewComponent.m_Z == undoTo.y )
+                {
+                    if(m_viewComponent.isReborn == false)
+                    {
+                        m_viewComponent.OnUndo(undoFrom);
+                    }
+                    else
+                    {
+                        m_viewComponent.isReborn = true;
+                    }
+                }
+                break;
+
             default:
                 break;
         }
@@ -102,6 +146,11 @@ public class PieceItemMediator : Mediator
     public void NotifyMoveEnd(object body)
     {
         SendNotification(NotificationConstant.OnMoveEnd, body);
+    }
+
+    public void NotifyUndoTweenEnd()
+    {
+        SendNotification(NotificationConstant.OnUndoTweenEnd);
     }
 
     private void IsCheck(int color)

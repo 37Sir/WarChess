@@ -14,6 +14,8 @@ public class NotificationConstant
     public const string DoMove = "DoMove";
     public const string EndTurn = "EndTurn";
     public const string PlayerReady = "PlayerReady";
+    public const string PlayerMutually = "PlayerMutually";
+    public const string PlayerMutuallyFeedback = "PlayerMutuallyFeedback";
 
     /// notify respons
     public const string LoginResponse = "LoginResponse";
@@ -31,4 +33,6 @@ public class NotificationConstant
     public const string OnCheck = "OnCheck";
     public const string OnTypeSelect = "OnTypeSelect";
     public const string OnPPromote = "OnPPromote";
+    public const string OnUndo = "OnUndo";
+    public const string OnUndoTweenEnd = "OnUndoTweenEnd";
 }

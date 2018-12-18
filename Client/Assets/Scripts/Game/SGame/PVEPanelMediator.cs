@@ -14,11 +14,6 @@ public class PVEPanelMediator : Mediator
     public List<Piece> selfPieces = new List<Piece>();
     public List<Piece> enemyPieces = new List<Piece>();
 
-    //temp
-    private float m_promoteFromX;
-    private float m_promoteFromY;
-    private Vector2 m_promoteTo;
-
     public PVEPanelMediator(PVEPanel pvpPanel) : base(NAME)
     {
         m_viewComponent = pvpPanel;
@@ -49,10 +44,6 @@ public class PVEPanelMediator : Mediator
         {
             case NotificationConstant.OnDragEnd:
                 m_viewComponent.OnTipsHide();
-                if (body == null) return;
-                object[] bodys = (object[])body;
-                object[] newBody = { (float)bodys[0], (float)bodys[1], (Config.PieceColor)bodys[2], (Vector2)bodys[3], m_viewComponent.roundNum };
-                m_viewComponent.ShowMove(new Vector2((float)bodys[0], (float)bodys[1]), (Vector2)bodys[3], -1);
                 break;
             case NotificationConstant.OnGameOver:
                 m_viewComponent.OnGameOver((Config.PieceColor)body);
@@ -62,14 +53,7 @@ public class PVEPanelMediator : Mediator
                 break;
             case NotificationConstant.OnPPromote:
                 var temp = (object[])body;
-                m_promoteFromX = (float)temp[0];
-                m_promoteFromY = (float)temp[1];
-                m_promoteTo = (Vector2)temp[3];
-                m_viewComponent.OnPPromote();
-                break;
-            case NotificationConstant.OnTypeSelect:
-                int type = (int)body;
-                m_viewComponent.ShowMove(new Vector2(m_promoteFromX, m_promoteFromY), (Vector2)m_promoteTo, type);
+                m_viewComponent.OnPPromote(body);
                 break;
             default:
                 break;
@@ -94,6 +78,11 @@ public class PVEPanelMediator : Mediator
     public void NotifyMoveEnd(object body)
     {
         SendNotification(NotificationConstant.OnMoveEnd, body);
+    }
+
+    public void NotifyUndo(object body)
+    {
+        SendNotification(NotificationConstant.OnUndo, body);
     }
 }
 

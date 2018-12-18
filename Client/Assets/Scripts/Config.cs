@@ -14,6 +14,7 @@ public class Config{
     public static readonly string EffectsRoot = "";
     public static readonly string EffectPacksRoot = "Resources/ArtRes/EffectPacks";
     public static readonly string TweenPacksRoot = "Resources/ArtRes/TweenPacks";
+    public static readonly string TweenPacksLoadRoot = "ArtRes/TweenPacks";
     public static readonly string EffectConfigPath = "";
 
     public static float PieceWidth = 2f;
@@ -74,6 +75,12 @@ public class Config{
         public const string OtherMove = "ServerBattleMesPush";
         public const string PlayNext = "PlayNextPush";
         public const string PlayerEnd = "PlayerEndPush";
+
+        //悔棋相关
+        public const string PlayerUndoPush = "PlayerUndoPush";
+        public const string PlayerUndoInfoPush = "PlayerUndoInfoPush";
+        public const string PlayerNotAgreePush = "PlayerNotAgreePush";
+        public const string PlayUndoNextPush = "PlayUndoNextPush";
     }
 }
 

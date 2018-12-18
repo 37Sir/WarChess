@@ -59,5 +59,22 @@ public class PVPProxy : Proxy
     {
         return m_pvpData.SelfColor;
     }
+
+    public Config.PieceColor GetEnemyColor()
+    {
+        return 1 - m_pvpData.SelfColor;
+    }
+
+    public Config.PieceColor GetColorById(int id)
+    {
+        if(id == m_pvpData.FirstId)
+        {
+            return Config.PieceColor.WHITE;
+        }
+        else
+        {
+            return Config.PieceColor.BLACK;
+        }
+    }
 }
 

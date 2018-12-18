@@ -136,6 +136,15 @@ public class LobbyPanel
             m_matchTimer = null;
         }
     }
+
+    private void StopMatchBird()
+    {
+        if (m_matchBird != null)
+        {
+            App.UIManager.StopCoroutine(m_matchBird);
+            m_matchBird = null;
+        }
+    }
     #endregion
 
     #region Push Callback
@@ -156,6 +165,7 @@ public class LobbyPanel
         }
         m_pvpProxy.SetFirstId(firstHandId);
         StopMatchTimer();
+        StopMatchBird();
         App.Facade.RemoveMediator("LobbyPanelMediator");
         App.NSceneManager.LoadScene("SGame");      
         Debug.Log("On Match Success");

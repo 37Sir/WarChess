@@ -66,11 +66,11 @@ public class TweenPlayer : MonoBehaviour {
     /// </summary>
     /// <param name="packName">动画包的名字</param>
     /// <param name="isAuto">是否自动播放</param>
-    public void SetTweenPack(string packName, bool isAuto = true)
+    public void SetTweenPack(string packName, bool isAuto = true)//todo
     {
         enabled = false;
         m_loadingTweens.Clear();
-        string tweenPackPath = Config.TweenPacksRoot + "/" + packName + ".asset";
+        string tweenPackPath = Config.TweenPacksLoadRoot + "/" + packName;
         App.ResourceManager.LoadResource<TweenPack>(tweenPackPath, (TweenPack tweenPack) =>
         {
             if (tweenPack != null) 
@@ -175,11 +175,11 @@ public class TweenPlayer : MonoBehaviour {
     /// <param name="super"></param>
     /// <param name="call">回调函数</param>
     /// <param name="name">动画片段的名字</param>
-    public void SetClipOnComplete(string name)
+    public void SetClipOnComplete(string name, Tween.TweenClipCompleteDelegate call)
     {
         if (m_tweens.ContainsKey(name))
         {
-            m_tweens[name].SetOnComplete();
+            m_tweens[name].SetOnComplete(call);
         }
     }
 

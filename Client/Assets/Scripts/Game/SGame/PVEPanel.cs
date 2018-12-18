@@ -26,7 +26,13 @@ public class PVEPanel
     private Image m_userImage;
     private Image m_enemyImage;
     private Button m_test;
+    private Button m_Undo;
     private Camera m_worldCamera;
+    private TweenPlayer m_cameraTween;
+
+    private Vector2 m_lastFrom;
+    private Vector2 m_lastTo;
+    private int m_lastEat = -1;
 
     public bool isTurn = true;
     public int roundNum = 0;
@@ -45,13 +51,16 @@ public class PVEPanel
         InitUIBinder(gameObject);
         m_chess.SetActive(false);
         m_ready.onClick.AddListener(OnReadyClick);
-        m_test.onClick.AddListener(OnRoundStart);   }
+        m_test.onClick.AddListener(OnUndoClick);
+        m_Undo.onClick.AddListener(OnRoundStart);
+    }
 
     private void InitUIBinder(GameObject gameObject)
     {
         m_qizi = GameObject.Find("qizi");
         m_chess = m_qizi.gameObject.transform.Find("m_Chess").gameObject;
         m_worldCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        m_cameraTween = m_worldCamera.GetComponent<TweenPlayer>();
         m_selfTimer = gameObject.transform.Find("Container/m_SelfTimer").GetComponent<Text>();
         m_enemyTimer = gameObject.transform.Find("Container/m_EnemyTimer").GetComponent<Text>();
         m_userImage = gameObject.transform.Find("Container/m_SelfIcon").GetComponent<Image>();
@@ -60,6 +69,7 @@ public class PVEPanel
         m_ready = gameObject.transform.Find("Container/m_Ready").gameObject.GetComponent<Button>();
         m_enemyReady = gameObject.transform.Find("Container/m_EnemyReady").gameObject;
         m_test = gameObject.transform.Find("Container/test").GetComponent<Button>();
+        m_Undo = gameObject.transform.Find("Container/m_Undo").GetComponent<Button>();
     }
 
     public void OpenView(object intent)
@@ -68,6 +78,8 @@ public class PVEPanel
         isTurn = true;
         m_modelDrag.isTurn = true;
         m_pveProxy.SetSelfColor(Config.PieceColor.WHITE);
+        m_cameraTween.SetTweenPack("camera_start_white");
+        
         m_userImage.GetComponentInChildren<Text>().text = m_proxy.GetPlayerName();
         m_enemyImage.GetComponentInChildren<Text>().text = m_pveProxy.GetEnemyName();
         InitTimer();
@@ -118,6 +130,7 @@ public class PVEPanel
                             break;
                     }
                     GameObject temp = GameObject.Instantiate(m_chess);
+                    temp.name = x + 1 + "_" + (y + 1);
                     temp.transform.parent = m_qizi.transform;
                     temp.SetActive(true);
                     PieceItem pieceItem = temp.AddComponent<PieceItem>();
@@ -233,27 +246,94 @@ public class PVEPanel
         OnNextPlay();
     }
 
-    public void ShowMove(Vector2 from, Vector2 to, int type)
-    {
-        m_mediator.NotifyMoveEnd(new Vector2[] { from, to, new Vector2(type, 0)});
-        bool isCheck = App.ChessLogic.IsCheck(0);
-        if(isCheck == true)
-        {
-            Debug.Log("被将军了！");
-        }
-        EndCurRound();
-    }
+    //public void ShowMove(Vector2 from, Vector2 to, int type, int eatType)
+    //{
+    //    m_lastFrom = from;
+    //    m_lastTo = to;
+    //    m_lastEat = eatType;
+    //    //m_mediator.NotifyMoveEnd(new Vector2[] { from, to, new Vector2(type, 0)});
+    //    //bool isCheck = App.ChessLogic.IsCheck(0);
+    //    //if(isCheck == true)
+    //    //{
+    //    //    Debug.Log("被将军了！");
+    //    //}
+    //    //EndCurRound();
+    //}
 
 
     ///兵晋升
-    public void OnPPromote()
+    public void OnPPromote(object body)
     {
-        App.UIManager.OpenPanel("TypeSelectPanel");
+        App.UIManager.OpenPanel("TypeSelectPanel", body);
     }
 
     private void OnReadyClick()
     {
         OnGameStart();
+    }
+
+    private void OnUndoClick()
+    {
+        Debug.Log("OnUndoClick");
+        App.ChessLogic.Undo(m_lastFrom, m_lastTo, m_lastEat);
+        if (m_lastEat > -1)
+        {
+            int color = m_lastEat / 10;
+            int type = m_lastEat % 10;
+            string pieceName = "";
+            if (color == (int)Config.PieceColor.BLACK)
+            {
+                pieceName = "Black_";
+            }
+            else
+            {
+                pieceName = "White_";
+            }
+            switch ((Config.PieceType)type)
+            {
+                case Config.PieceType.P:
+                    pieceName = pieceName + "P";
+                    break;
+                case Config.PieceType.N:
+                    pieceName = pieceName + "N";
+                    break;
+                case Config.PieceType.B:
+                    pieceName = pieceName + "B";
+                    break;
+                case Config.PieceType.R:
+                    pieceName = pieceName + "R";
+                    break;
+                case Config.PieceType.Q:
+                    pieceName = pieceName + "Q";
+                    break;
+                case Config.PieceType.K:
+                    pieceName = pieceName + "K";
+                    break;
+            }
+            GameObject temp = GameObject.Instantiate(m_chess);
+            temp.name = m_lastTo.x + "_" + m_lastTo.y;
+            temp.transform.parent = m_qizi.transform;
+            temp.SetActive(true);
+            PieceItem pieceItem = temp.AddComponent<PieceItem>();
+            pieceItem.InitView(temp, new Piece((Config.PieceColor)color, (Config.PieceType)type, (int)m_lastTo.x, (int)m_lastTo.y), true);
+            pieceItem.isReborn = true;
+            App.ObjectPoolManager.RegisteObject(pieceName, "FX/" + pieceName, 0, 30, -1);
+            App.ObjectPoolManager.Instantiate(pieceName, (GameObject obj) =>
+            {
+                if (color == (int)Config.PieceColor.BLACK)
+                {
+                    obj.transform.localRotation = Quaternion.Euler(0, 180, 0);
+                }
+                obj.SetActive(true);
+                obj.transform.parent = temp.transform;
+                obj.transform.localPosition = Vector3.zero;
+                obj.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
+                pieceItem.pieceModel = obj;
+            });
+            
+        }
+        Vector2[] body = new Vector2[] { m_lastFrom, m_lastTo, new Vector2(m_lastEat, 0) };
+        m_mediator.NotifyUndo(body);
     }
 
     #region Private Method
@@ -338,6 +418,12 @@ public class PVEPanel
         int dx = (64 - index) % Config.Board.MaxX - 1;
         int x = Config.Board.MaxX - dx - 1;
         return new Vector2(x, y);
+    }
+
+    private GameObject GetPieceItem(int x, int y)
+    {
+        var item = m_qizi.transform.Find(x + "_" + y).gameObject;
+        return item;
     }
 }
 

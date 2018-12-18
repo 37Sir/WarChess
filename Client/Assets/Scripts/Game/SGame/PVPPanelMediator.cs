@@ -39,7 +39,7 @@ public class PVPPanelMediator : Mediator
         list.Add(NotificationConstant.DoMoveResponse);
         list.Add(NotificationConstant.PlayerReadyResponse);
         list.Add(NotificationConstant.OnPPromote);
-        list.Add(NotificationConstant.OnTypeSelect);
+        list.Add(NotificationConstant.OnUndoTweenEnd);
         return list;
     }
 
@@ -57,7 +57,7 @@ public class PVPPanelMediator : Mediator
                 break;
             case NotificationConstant.DoMoveResponse:
                 object[] move = (object[])body;
-                m_viewComponent.ShowMove((Vector2)move[0], (Vector2)move[1], (int)move[2]);
+                //m_viewComponent.ShowMove((Vector2)move[0], (Vector2)move[1], (int)move[2]);
                 break;
             case NotificationConstant.OnGameOver:
                 //m_viewComponent.OnGameOver((Config.PieceColor)body);
@@ -82,6 +82,10 @@ public class PVPPanelMediator : Mediator
                 int type = (int)body;
                 NotifyDoMove(new object[]{ m_promoteFromX, m_promoteFromY,null, m_promoteTo, m_viewComponent.roundNum, type});
                 break;
+
+            case NotificationConstant.OnUndoTweenEnd:
+                m_viewComponent.OnUndoTweenEnd();
+                break;
             default:
                 break;
         }
@@ -102,6 +106,11 @@ public class PVPPanelMediator : Mediator
         SendNotification(NotificationConstant.PlayerReady);
     }
 
+    public void NotifyRequestUndo()
+    {
+        SendNotification(NotificationConstant.PlayerMutually, 1);
+    }
+
     public void NotifyDoMove(object body)
     {
         SendNotification(NotificationConstant.DoMove, body);
@@ -120,6 +129,11 @@ public class PVPPanelMediator : Mediator
     public void NotifyMoveEnd(object body)
     {
         SendNotification(NotificationConstant.OnMoveEnd, body);
+    }
+
+    public void NotifyUndo(object body)
+    {
+        SendNotification(NotificationConstant.OnUndo, body);
     }
 }
 

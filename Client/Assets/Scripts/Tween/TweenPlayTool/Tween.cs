@@ -52,7 +52,10 @@ public class Tween
     public bool isLast = false;
     public bool isNeedFrom = false;
     public delegate void TweenPackCompleteDelegate();
-    private TweenPackCompleteDelegate tweenPackOnComplete = null;
+    private TweenPackCompleteDelegate m_tweenPackOnComplete = null;
+
+    public delegate void TweenClipCompleteDelegate();
+    private TweenClipCompleteDelegate m_onComplete = null;
     #endregion Public Field
 
     #region Public Method
@@ -188,13 +191,9 @@ public class Tween
     /// </summary>
     /// <param name="super"></param>
     /// <param name="call"></param>
-    public void SetOnComplete()
+    public void SetOnComplete(TweenClipCompleteDelegate onComplete)
     {
-        //if (onComplete != null)
-        //{
-        //    onComplete.Release();
-        //}
-        //onComplete = new TweenLuaCallback(super, call);
+        m_onComplete = onComplete;
     }
 
     /// <summary>
@@ -368,11 +367,16 @@ public class Tween
                     {
                         m_owner.transform.localPosition = m_fromPos;
                     }
-                    m_tweener = m_owner.transform.DOBlendableLocalMoveBy(m_to, m_duration)
+                    m_tweener = m_owner.transform.DOLocalMove(m_to, m_duration)
                         .SetDelay(m_delayTime)
                         .SetEase(m_easeType)
                         .SetLoops(m_loop, m_loopType)
                         .OnComplete(OnComplete);
+                    //m_tweener = m_owner.transform.DOBlendableLocalMoveBy(m_to, m_duration)
+                    //    .SetDelay(m_delayTime)
+                    //    .SetEase(m_easeType)
+                    //    .SetLoops(m_loop, m_loopType)
+                    //    .OnComplete(OnComplete);
                     break;
                 case TweenType.LocalRotation:
                     if (isNeedFrom)
@@ -451,7 +455,7 @@ public class Tween
 
     public void SetTweenPackCompleteDelegate(TweenPackCompleteDelegate tweenPackCompleteDelegate)
     {
-        tweenPackOnComplete = tweenPackCompleteDelegate;
+        m_tweenPackOnComplete = tweenPackCompleteDelegate;
     }
 
     #endregion Public Method
@@ -461,14 +465,14 @@ public class Tween
     /// </summary>
     protected void OnComplete()
     {
-        if(isLast == true)
-        {
-            tweenPackOnComplete();
-        }
-
-        //if (onComplete != null)
+        //if(isLast == true)
         //{
-        //    onComplete.Call();
+        //    tweenPackOnComplete();
         //}
+
+        if (m_onComplete != null)
+        {
+            m_onComplete.Invoke();
+        }
     }
 }

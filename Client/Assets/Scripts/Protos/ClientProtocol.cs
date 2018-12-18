@@ -43,6 +43,8 @@ namespace com.zyd.common.proto.client {
     ACTIVATION_CODE_ERROR = 301,
     PLAYER_NOT_MATCH_SUCCESS = 400,
     PLAYER_NOT_START = 401,
+    PLAYER_ROOM_NOT_HAVA = 402,
+    PLAYER_CAN_NOT_UNDO = 403,
     DUPLICATE_REQUEST = 700,
     VERSION_ERROR = 995,
     DEVICE_TYPE_NOT_CORRECT = 998,
@@ -2247,8 +2249,8 @@ namespace com.zyd.common.proto.client {
   public sealed partial class PlayerInfo : pb::GeneratedMessageLite<PlayerInfo, PlayerInfo.Builder> {
     private PlayerInfo() { }
     private static readonly PlayerInfo defaultInstance = new PlayerInfo().MakeReadOnly();
-    private static readonly string[] _playerInfoFieldNames = new string[] { "userId", "userName" };
-    private static readonly uint[] _playerInfoFieldTags = new uint[] { 16, 10 };
+    private static readonly string[] _playerInfoFieldNames = new string[] { "rank", "userId", "userName" };
+    private static readonly uint[] _playerInfoFieldTags = new uint[] { 24, 16, 10 };
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
@@ -2294,6 +2296,19 @@ namespace com.zyd.common.proto.client {
     }
     
     #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int RankFieldNumber = 3;
+    private bool hasRank;
+    private int rank_;
+    public bool HasRank {
+      get { return hasRank; }
+    }
+    public int Rank {
+      get { return rank_; }
+    }
+    
+    #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
     public override bool IsInitialized {
@@ -2309,10 +2324,13 @@ namespace com.zyd.common.proto.client {
       int size = SerializedSize;
       string[] field_names = _playerInfoFieldNames;
       if (hasUserName) {
-        output.WriteString(1, field_names[1], UserName);
+        output.WriteString(1, field_names[2], UserName);
       }
       if (hasUserId) {
-        output.WriteInt32(2, field_names[0], UserId);
+        output.WriteInt32(2, field_names[1], UserId);
+      }
+      if (hasRank) {
+        output.WriteInt32(3, field_names[0], Rank);
       }
     }
     
@@ -2332,6 +2350,9 @@ namespace com.zyd.common.proto.client {
         if (hasUserId) {
           size += pb::CodedOutputStream.ComputeInt32Size(2, UserId);
         }
+        if (hasRank) {
+          size += pb::CodedOutputStream.ComputeInt32Size(3, Rank);
+        }
         memoizedSerializedSize = size;
         return size;
       }
@@ -2342,6 +2363,7 @@ namespace com.zyd.common.proto.client {
       int hash = GetType().GetHashCode();
       if (hasUserName) hash ^= userName_.GetHashCode();
       if (hasUserId) hash ^= userId_.GetHashCode();
+      if (hasRank) hash ^= rank_.GetHashCode();
       return hash;
     }
     
@@ -2350,6 +2372,7 @@ namespace com.zyd.common.proto.client {
       if (other == null) return false;
       if (hasUserName != other.hasUserName || (hasUserName && !userName_.Equals(other.userName_))) return false;
       if (hasUserId != other.hasUserId || (hasUserId && !userId_.Equals(other.userId_))) return false;
+      if (hasRank != other.hasRank || (hasRank && !rank_.Equals(other.rank_))) return false;
       return true;
     }
     
@@ -2516,6 +2539,9 @@ namespace com.zyd.common.proto.client {
         if (other.HasUserId) {
           UserId = other.UserId;
         }
+        if (other.HasRank) {
+          Rank = other.Rank;
+        }
         return this;
       }
       
@@ -2554,6 +2580,10 @@ namespace com.zyd.common.proto.client {
             }
             case 16: {
               result.hasUserId = input.ReadInt32(ref result.userId_);
+              break;
+            }
+            case 24: {
+              result.hasRank = input.ReadInt32(ref result.rank_);
               break;
             }
           }
@@ -2601,6 +2631,26 @@ namespace com.zyd.common.proto.client {
         PrepareBuilder();
         result.hasUserId = false;
         result.userId_ = 0;
+        return this;
+      }
+      
+      public bool HasRank {
+        get { return result.hasRank; }
+      }
+      public int Rank {
+        get { return result.Rank; }
+        set { SetRank(value); }
+      }
+      public Builder SetRank(int value) {
+        PrepareBuilder();
+        result.hasRank = true;
+        result.rank_ = value;
+        return this;
+      }
+      public Builder ClearRank() {
+        PrepareBuilder();
+        result.hasRank = false;
+        result.rank_ = 0;
         return this;
       }
     }

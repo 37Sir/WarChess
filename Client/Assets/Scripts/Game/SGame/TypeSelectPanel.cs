@@ -18,10 +18,10 @@ public class TypeSelectPanel
 
     private int m_selectType = -1;
 
-    private Text m_SearchTime;
-    private InputField m_ip;
-    private InputField m_port;
-    private InputField m_userName;
+    //temp
+    private float m_promoteFromX;
+    private float m_promoteFromY;
+    private Vector2 m_promoteTo;
 
     private IEnumerator m_matchTimer;   //计时器
 
@@ -59,7 +59,10 @@ public class TypeSelectPanel
 
     public void OpenView(object intent)
     {
-
+        var temp = (object[])intent;
+        m_promoteFromX = (float)temp[0];
+        m_promoteFromY = (float)temp[1];
+        m_promoteTo = (Vector2)temp[3];
     }
 
     public void CloseView()
@@ -73,32 +76,6 @@ public class TypeSelectPanel
     }
 
     #region Private Method
-    private void StartMatchTimer()
-    {
-        if (m_matchTimer == null)
-        {
-            m_matchTimer = _OnMatchTimer();
-            App.UIManager.StartCoroutine(m_matchTimer);
-        }
-    }
-
-    private IEnumerator _OnMatchTimer()
-    {
-        for (int i = 0; i < Config.Game.WaitingFindEnemy; i++)
-        {
-            m_SearchTime.text = "(" + (Config.Game.WaitingFindEnemy - i) + "s)";
-            yield return new WaitForSeconds(1);
-        }
-    }
-
-    private void StopMatchTimer()
-    {
-        if (m_matchTimer != null)
-        {
-            App.UIManager.StopCoroutine(m_matchTimer);
-            m_matchTimer = null;
-        }
-    }
     #endregion
 
     #region Push Callback
@@ -110,7 +87,8 @@ public class TypeSelectPanel
     {
         if(m_selectType != -1)
         {
-            m_mediator.NotifySelectType(m_selectType);
+            Vector2[] body = new Vector2[] {new Vector2(m_promoteFromX, m_promoteFromY), (Vector2)m_promoteTo, new Vector2(m_selectType, 0)};
+            m_mediator.NotifySelectType(body);
             App.UIManager.BackPanel();
         }      
     }
