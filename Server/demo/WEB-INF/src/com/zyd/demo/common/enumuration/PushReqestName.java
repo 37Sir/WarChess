@@ -7,6 +7,8 @@ public enum PushReqestName {
 	PlayerBattleConnectPush("PlayerBattleConnectPush"), 
 	// 玩家可以进行下一帧操作推送
     PlayNextPush("PlayNextPush"),
+    //玩家悔棋结束
+    PlayUndoNextPush("PlayUndoNextPush"),
 	// 匹配开始推送
     PlayerStartPush("PlayerStartPush"),
     // 玩家战斗结束推送

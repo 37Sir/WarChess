@@ -14076,6 +14076,42 @@ public final class WarChess {
      * </pre>
      */
     int getResult();
+
+    // optional int32 winRank = 4;
+    /**
+     * <code>optional int32 winRank = 4;</code>
+     *
+     * <pre>
+     *赢家加的分数
+     * </pre>
+     */
+    boolean hasWinRank();
+    /**
+     * <code>optional int32 winRank = 4;</code>
+     *
+     * <pre>
+     *赢家加的分数
+     * </pre>
+     */
+    int getWinRank();
+
+    // optional int32 loseRank = 5;
+    /**
+     * <code>optional int32 loseRank = 5;</code>
+     *
+     * <pre>
+     *输家输的分数
+     * </pre>
+     */
+    boolean hasLoseRank();
+    /**
+     * <code>optional int32 loseRank = 5;</code>
+     *
+     * <pre>
+     *输家输的分数
+     * </pre>
+     */
+    int getLoseRank();
   }
   /**
    * Protobuf type {@code com.zyd.common.proto.client.PlayerEndPush}
@@ -14148,6 +14184,16 @@ public final class WarChess {
             case 24: {
               bitField0_ |= 0x00000002;
               result_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000004;
+              winRank_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000008;
+              loseRank_ = input.readInt32();
               break;
             }
           }
@@ -14297,10 +14343,60 @@ public final class WarChess {
       return result_;
     }
 
+    // optional int32 winRank = 4;
+    public static final int WINRANK_FIELD_NUMBER = 4;
+    private int winRank_;
+    /**
+     * <code>optional int32 winRank = 4;</code>
+     *
+     * <pre>
+     *赢家加的分数
+     * </pre>
+     */
+    public boolean hasWinRank() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 winRank = 4;</code>
+     *
+     * <pre>
+     *赢家加的分数
+     * </pre>
+     */
+    public int getWinRank() {
+      return winRank_;
+    }
+
+    // optional int32 loseRank = 5;
+    public static final int LOSERANK_FIELD_NUMBER = 5;
+    private int loseRank_;
+    /**
+     * <code>optional int32 loseRank = 5;</code>
+     *
+     * <pre>
+     *输家输的分数
+     * </pre>
+     */
+    public boolean hasLoseRank() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 loseRank = 5;</code>
+     *
+     * <pre>
+     *输家输的分数
+     * </pre>
+     */
+    public int getLoseRank() {
+      return loseRank_;
+    }
+
     private void initFields() {
       winUserId_ = 0;
       battleMes_ = java.util.Collections.emptyList();
       result_ = 0;
+      winRank_ = 0;
+      loseRank_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -14323,6 +14419,12 @@ public final class WarChess {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(3, result_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(4, winRank_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(5, loseRank_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -14343,6 +14445,14 @@ public final class WarChess {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, result_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, winRank_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, loseRank_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -14475,6 +14585,10 @@ public final class WarChess {
         }
         result_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        winRank_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        loseRank_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -14520,6 +14634,14 @@ public final class WarChess {
           to_bitField0_ |= 0x00000002;
         }
         result.result_ = result_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.winRank_ = winRank_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.loseRank_ = loseRank_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -14567,6 +14689,12 @@ public final class WarChess {
         }
         if (other.hasResult()) {
           setResult(other.getResult());
+        }
+        if (other.hasWinRank()) {
+          setWinRank(other.getWinRank());
+        }
+        if (other.hasLoseRank()) {
+          setLoseRank(other.getLoseRank());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -15001,6 +15129,104 @@ public final class WarChess {
       public Builder clearResult() {
         bitField0_ = (bitField0_ & ~0x00000004);
         result_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 winRank = 4;
+      private int winRank_ ;
+      /**
+       * <code>optional int32 winRank = 4;</code>
+       *
+       * <pre>
+       *赢家加的分数
+       * </pre>
+       */
+      public boolean hasWinRank() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 winRank = 4;</code>
+       *
+       * <pre>
+       *赢家加的分数
+       * </pre>
+       */
+      public int getWinRank() {
+        return winRank_;
+      }
+      /**
+       * <code>optional int32 winRank = 4;</code>
+       *
+       * <pre>
+       *赢家加的分数
+       * </pre>
+       */
+      public Builder setWinRank(int value) {
+        bitField0_ |= 0x00000008;
+        winRank_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 winRank = 4;</code>
+       *
+       * <pre>
+       *赢家加的分数
+       * </pre>
+       */
+      public Builder clearWinRank() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        winRank_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 loseRank = 5;
+      private int loseRank_ ;
+      /**
+       * <code>optional int32 loseRank = 5;</code>
+       *
+       * <pre>
+       *输家输的分数
+       * </pre>
+       */
+      public boolean hasLoseRank() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 loseRank = 5;</code>
+       *
+       * <pre>
+       *输家输的分数
+       * </pre>
+       */
+      public int getLoseRank() {
+        return loseRank_;
+      }
+      /**
+       * <code>optional int32 loseRank = 5;</code>
+       *
+       * <pre>
+       *输家输的分数
+       * </pre>
+       */
+      public Builder setLoseRank(int value) {
+        bitField0_ |= 0x00000010;
+        loseRank_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 loseRank = 5;</code>
+       *
+       * <pre>
+       *输家输的分数
+       * </pre>
+       */
+      public Builder clearLoseRank() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        loseRank_ = 0;
         onChanged();
         return this;
       }
@@ -17599,15 +17825,15 @@ public final class WarChess {
       "StartPush\0229\n\tplayerMes\030\001 \003(\0132&.com.zyd.c" +
       "ommon.proto.client.PlayerMes\022\016\n\006userId\030\003" +
       " \001(\005\022\016\n\006roomId\030\004 \001(\003\"\031\n\027PlayerReadyFinis" +
-      "hedPush\"m\n\rPlayerEndPush\022\021\n\twinUserId\030\001 " +
-      "\001(\005\0229\n\tbattleMes\030\002 \003(\0132&.com.zyd.common.",
-      "proto.client.BattleMes\022\016\n\006result\030\003 \001(\005\"Y" +
-      "\n\tBattleMes\022\017\n\007PlayNum\030\001 \001(\005\022\014\n\004from\030\002 \001" +
-      "(\005\022\n\n\002to\030\003 \001(\005\022\016\n\006userId\030\004 \001(\005\022\021\n\tprompt" +
-      "ion\030\005 \001(\005\"-\n\tPlayerMes\022\016\n\006userId\030\001 \002(\005\022\020" +
-      "\n\010userName\030\002 \001(\t\" \n\016OnePlayerReady\022\016\n\006us" +
-      "erId\030\001 \002(\005\" \n\016PlayerNotReady\022\016\n\006userId\030\001" +
-      " \003(\005"
+      "hedPush\"\220\001\n\rPlayerEndPush\022\021\n\twinUserId\030\001" +
+      " \001(\005\0229\n\tbattleMes\030\002 \003(\0132&.com.zyd.common",
+      ".proto.client.BattleMes\022\016\n\006result\030\003 \001(\005\022" +
+      "\017\n\007winRank\030\004 \001(\005\022\020\n\010loseRank\030\005 \001(\005\"Y\n\tBa" +
+      "ttleMes\022\017\n\007PlayNum\030\001 \001(\005\022\014\n\004from\030\002 \001(\005\022\n" +
+      "\n\002to\030\003 \001(\005\022\016\n\006userId\030\004 \001(\005\022\021\n\tpromption\030" +
+      "\005 \001(\005\"-\n\tPlayerMes\022\016\n\006userId\030\001 \002(\005\022\020\n\010us" +
+      "erName\030\002 \001(\t\" \n\016OnePlayerReady\022\016\n\006userId" +
+      "\030\001 \002(\005\" \n\016PlayerNotReady\022\016\n\006userId\030\001 \003(\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -17799,7 +18025,7 @@ public final class WarChess {
           internal_static_com_zyd_common_proto_client_PlayerEndPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerEndPush_descriptor,
-              new java.lang.String[] { "WinUserId", "BattleMes", "Result", });
+              new java.lang.String[] { "WinUserId", "BattleMes", "Result", "WinRank", "LoseRank", });
           internal_static_com_zyd_common_proto_client_BattleMes_descriptor =
             getDescriptor().getMessageTypes().get(31);
           internal_static_com_zyd_common_proto_client_BattleMes_fieldAccessorTable = new
