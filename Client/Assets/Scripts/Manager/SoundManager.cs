@@ -369,6 +369,7 @@ namespace Framework
         ///播放音效 默认位置
         private IEnumerator PlaySoundClip(string clipName, float delayTime)
         {
+            Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!!!!");
             float playedTime = 0;
             while(playedTime < delayTime)
             {

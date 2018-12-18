@@ -52,7 +52,7 @@ public class LoginPanel
     {
         string userName = m_userName.text;
         App.NetworkManager.Token = userName;
-        
+        App.SoundManager.PlaySoundClip(Config.Sound.Click1);
         m_mediator.NotifyLogin(userName);
     }
 

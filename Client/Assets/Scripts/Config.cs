@@ -10,7 +10,7 @@ public class Config{
     public static readonly int RpcTimeout = 10000;                  //rpc请求的超时时间ms
     public static readonly string RpcNamespace = "Com.Violet.Rpc";
     public static readonly string UIBaseDir = "UIRes";
-    public static readonly string SoundsRoot = "";
+    public static readonly string SoundsRoot = "ArtRes/Sounds";
     public static readonly string EffectsRoot = "";
     public static readonly string EffectPacksRoot = "Resources/ArtRes/EffectPacks";
     public static readonly string TweenPacksRoot = "Resources/ArtRes/TweenPacks";
@@ -28,6 +28,10 @@ public class Config{
         public static int WaitingFindEnemy = 45;                    //匹配等待秒数
         public static int WaitingReady = 60;                        //准备等待秒数
         public static int WaitingRound = 60;                        //回合等待秒数
+    }
+
+    public class Sound{
+        public static string Click1 = "bt01";
     }
 
     public enum GameResult
