@@ -412,7 +412,7 @@ public class BattleRoom {
 	                     dealUserMap.clear();
 	                     nextTime = System.currentTimeMillis() + BattleConfig.playTime;
 	                     battleStatus = BattleStatus.fighting;
-	                     disrupAll(PushReqestName.PlayNextPush, PlayUndoNextPush.newBuilder().build()); 
+	                     disrupAll(PushReqestName.PlayUndoNextPush, PlayUndoNextPush.newBuilder().build()); 
 				    }
 				}
 			} else if (battleStatus.equals(BattleStatus.waitFinish)) {
@@ -505,11 +505,17 @@ public class BattleRoom {
 		if (isGiveUp == 0) {
 		    if (u1.getId() == userId) {
 		        u1.setWinCount(u1.getWinCount()+1);
+		        u1.setRank(u1.getRank() + 20);
 		        u2.setLoseCount(u2.getLoseCount()+1);
+		        u2.setRank(u2.getRank() - 20);
 		    } else {
                 u2.setWinCount(u2.getWinCount()+1);
+                u1.setRank(u1.getRank() - 20);
                 u1.setLoseCount(u1.getLoseCount()+1);
+                u2.setRank(u2.getRank() + 20);
 		    }
+		    builder.setWinRank(20);
+		    builder.setLoseRank(20);
 			builder.setResult(0);
 			builder.setWinUserId(userId);
 			// 推送结束信息
@@ -517,18 +523,28 @@ public class BattleRoom {
 		} else if (isGiveUp == 2) {
             if (u1.getId() == userId) {
                 u1.setWinCount(u1.getWinCount()+1);
+                u1.setRank(u1.getRank() + 20);
                 u2.setLoseCount(u2.getLoseCount()+1);
+                u2.setRank(u2.getRank() - 20);
             } else {
                 u2.setWinCount(u2.getWinCount()+1);
+                u1.setRank(u1.getRank() - 20);
                 u1.setLoseCount(u1.getLoseCount()+1);
-            }		  
+                u2.setRank(u2.getRank() + 20);
+            }
             for (UserMatchInfo userMatchInfo : userMatchInfoList) {
-              if (userMatchInfo.getUid().equals(giveUpUserId)) {
-                  builder.setResult(3);
-              } else {
-                  builder.setResult(4);
-              }
-              disrupOne(PushReqestName.PlayerEndPush, userMatchInfo, builder.build());
+                if (userMatchInfo.getUid().equals(giveUpUserId)) {
+                    builder.setWinUserId(winUserId);
+                    builder.setWinRank(20);
+                    builder.setLoseRank(20);
+                    builder.setResult(3);
+                } else {
+                    builder.setWinUserId(winUserId);
+                    builder.setWinRank(20);
+                    builder.setLoseRank(20);
+                    builder.setResult(4);
+                }
+                disrupOne(PushReqestName.PlayerEndPush, userMatchInfo, builder.build());
             }		    
 		} else if (isGiveUp == 3) {
 		    builder.setResult(5);
@@ -575,19 +591,29 @@ public class BattleRoom {
 				    havaPlayerNotReady();
 				} else if (battleStatus.equals(BattleStatus.fighting)) {
   				    giveUpUserId = userMatchInfoList.get(actor).getUid();
+  				    winUserId = userMatchInfoList.get(nextActorIndex()).getUid();
   				    isGiveUp = 2;
 				    battleFinished(userMatchInfoList.get(nextActorIndex()).getUid());
 				} else if (battleStatus.equals(BattleStatus.fightWaiting)) {
-					dealUserMap.clear();
-					nextTime = System.currentTimeMillis() + BattleConfig.playTime;
-					battleStatus = BattleStatus.fighting;
-					disrupAll(PushReqestName.PlayNextPush, PlayNextPush.newBuilder().build());
+				    if (mutaully == 0) {
+    					dealUserMap.clear();
+    					nextTime = System.currentTimeMillis() + BattleConfig.playTime;
+    					battleStatus = BattleStatus.fighting;
+    					disrupAll(PushReqestName.PlayNextPush, PlayNextPush.newBuilder().build());
+				    } else {
+                        dealUserMap.clear();
+                        mutaully = 0 ;
+                        nextTime = System.currentTimeMillis() + lastTime;
+                        battleStatus = BattleStatus.fighting;
+                        disrupAll(PushReqestName.PlayUndoNextPush, PlayUndoNextPush.newBuilder().build());
+				    }
 				} else if (battleStatus.equals(BattleStatus.waitFinish)) {
 				    battleFinished(winUserId);
 				} else if (battleStatus.equals(BattleStatus.mutually)) {
 				    battleStatus = BattleStatus.fighting;
 				    mutaully = 0;
-                    disrupAll(PushReqestName.PlayNextPush, PlayUndoNextPush.newBuilder().build());
+				    nextTime = System.currentTimeMillis() + lastTime;
+                    disrupAll(PushReqestName.PlayerNotAgreePush, PlayerNotAgreePush.newBuilder().build());
 				}
 			}
 		} catch (Exception e) {
@@ -704,7 +730,7 @@ public class BattleRoom {
                         throw new BaseException(ErrorCode.PLAYER_CAN_NOT_UNDO_VALUE);
                     }
                     battleStatus = BattleStatus.fightWaiting;
-                    PlayerUndoInfoPush.Builder p =buildPlayerUndoInfoPush(userOne, userTwo,userMatchInfo);
+                    PlayerUndoInfoPush.Builder p = buildPlayerUndoInfoPush(userOne, userTwo,userMatchInfo);
                     disrupAll(PushReqestName.PlayerUndoInfoPush, p.build());
                     
                 } else {
@@ -714,7 +740,7 @@ public class BattleRoom {
                         throw new BaseException(ErrorCode.PLAYER_CAN_NOT_UNDO_VALUE);
                     }
                     battleStatus = BattleStatus.fightWaiting;
-                    PlayerUndoInfoPush.Builder p =buildPlayerUndoInfoPush(userTwo,userOne,userMatchInfo);
+                    PlayerUndoInfoPush.Builder p = buildPlayerUndoInfoPush(userTwo,userOne,userMatchInfo);
                     disrupAll(PushReqestName.PlayerUndoInfoPush, p.build());
                 } 
             } else if (mutaully == 2) {
@@ -735,7 +761,7 @@ public class BattleRoom {
         undoInfo.setBattleMes(b);
         if (captureMap.containsKey(currentPlayNum-1)) {
             undoInfo.setIsEat(true);
-            undoInfo.setType(ChessService.shifts.get(captureMap.get(currentPlayNum-1)));
+            undoInfo.setType(ChessService.shifts.get(captureMap.get(currentPlayNum-1).split("_")[2]));
             undoInfo.setUserId(userMatchInfo.getUid());
             captureMap.remove(currentPlayNum-1);
         }
@@ -747,7 +773,7 @@ public class BattleRoom {
         undoInfo1.setBattleMes(b1);
         if (captureMap.containsKey(currentPlayNum-2)) {
             undoInfo1.setIsEat(true);
-            undoInfo1.setType(ChessService.shifts.get(captureMap.get(currentPlayNum-2)));
+            undoInfo1.setType(ChessService.shifts.get(captureMap.get(currentPlayNum-2).split("_")[2]));
             undoInfo1.setUserId(undoUserId);
             captureMap.remove(currentPlayNum-2);
         }
