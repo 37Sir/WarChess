@@ -410,7 +410,7 @@ public class BattleRoom {
 				         //悔棋动作结束的推送
 				         mutaully = 0;
 	                     dealUserMap.clear();
-	                     nextTime = System.currentTimeMillis() + BattleConfig.playTime;
+	                     nextTime = System.currentTimeMillis() + lastTime;
 	                     battleStatus = BattleStatus.fighting;
 	                     disrupAll(PushReqestName.PlayUndoNextPush, PlayUndoNextPush.newBuilder().build()); 
 				    }
@@ -690,10 +690,10 @@ public class BattleRoom {
         //是否兵升变
         boolean isChang = b.getPromption() > 0 ? true : false;
         if (!isEat && !isChang) {
-            other.put(to, userTwo.get(from));
+            other.put(to, other.get(from));
             other.remove(from);
         } else if (isEat && !isChang) {
-            other.put(to, userTwo.get(from));
+            other.put(to, other.get(from));
             other.remove(from);
             String chessType = captureMap.get(current -1).split("_")[2];
             my.put(from, chessType);
@@ -730,6 +730,7 @@ public class BattleRoom {
                         throw new BaseException(ErrorCode.PLAYER_CAN_NOT_UNDO_VALUE);
                     }
                     battleStatus = BattleStatus.fightWaiting;
+                    nextTime = System.currentTimeMillis() + BattleConfig.playReadTime;
                     PlayerUndoInfoPush.Builder p = buildPlayerUndoInfoPush(userOne, userTwo,userMatchInfo);
                     disrupAll(PushReqestName.PlayerUndoInfoPush, p.build());
                     
@@ -740,6 +741,7 @@ public class BattleRoom {
                         throw new BaseException(ErrorCode.PLAYER_CAN_NOT_UNDO_VALUE);
                     }
                     battleStatus = BattleStatus.fightWaiting;
+                    nextTime = System.currentTimeMillis() + BattleConfig.playReadTime;
                     PlayerUndoInfoPush.Builder p = buildPlayerUndoInfoPush(userTwo,userOne,userMatchInfo);
                     disrupAll(PushReqestName.PlayerUndoInfoPush, p.build());
                 } 
@@ -758,11 +760,11 @@ public class BattleRoom {
         UndoInfo.Builder undoInfo = UndoInfo.newBuilder();
         undoInfo.setIsEat(false);
         BattleMes b = serverBattleMesList.get(currentPlayNum -1);
+        undoInfo.setUserId(userMatchInfo.getUid());
         undoInfo.setBattleMes(b);
         if (captureMap.containsKey(currentPlayNum-1)) {
             undoInfo.setIsEat(true);
             undoInfo.setType(ChessService.shifts.get(captureMap.get(currentPlayNum-1).split("_")[2]));
-            undoInfo.setUserId(userMatchInfo.getUid());
             captureMap.remove(currentPlayNum-1);
         }
         playerUndoInfoPush.addUndoInfo(undoInfo);
@@ -771,10 +773,10 @@ public class BattleRoom {
         undoInfo1.setIsEat(false);
         BattleMes b1 = serverBattleMesList.get(currentPlayNum -2);
         undoInfo1.setBattleMes(b1);
+        undoInfo1.setUserId(undoUserId);
         if (captureMap.containsKey(currentPlayNum-2)) {
             undoInfo1.setIsEat(true);
             undoInfo1.setType(ChessService.shifts.get(captureMap.get(currentPlayNum-2).split("_")[2]));
-            undoInfo1.setUserId(undoUserId);
             captureMap.remove(currentPlayNum-2);
         }
         playerUndoInfoPush.addUndoInfo(undoInfo1);
