@@ -44,6 +44,10 @@ public class PVEPanelMediator : Mediator
         {
             case NotificationConstant.OnDragEnd:
                 m_viewComponent.OnTipsHide();
+                if (body == null) return;
+                object[] bodys = (object[])body;
+                object[] newBody = { (float)bodys[0], (float)bodys[1], (Config.PieceColor)bodys[2], (Vector2)bodys[3], m_viewComponent.roundNum };
+                m_viewComponent.ShowMove(new Vector2((float)bodys[0], (float)bodys[1]), (Vector2)bodys[3], -1, (int)bodys[4]);
                 break;
             case NotificationConstant.OnGameOver:
                 m_viewComponent.OnGameOver((Config.PieceColor)body);
@@ -52,7 +56,6 @@ public class PVEPanelMediator : Mediator
                 m_viewComponent.OnTipsShow((Vector2)body);
                 break;
             case NotificationConstant.OnPPromote:
-                var temp = (object[])body;
                 m_viewComponent.OnPPromote(body);
                 break;
             default:

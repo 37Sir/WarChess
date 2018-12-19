@@ -20,6 +20,7 @@ public class Main : MonoBehaviour {
         DontDestroyOnLoad(gameObject);  //防止销毁自己
         AddManager();
         App.NetworkManager.Init(true);
+        App.EffectManager.Init();
         App.NSceneManager.LoadScene("SLogin");
     }
 

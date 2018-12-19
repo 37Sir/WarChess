@@ -11,11 +11,12 @@ public class Config{
     public static readonly string RpcNamespace = "Com.Violet.Rpc";
     public static readonly string UIBaseDir = "UIRes";
     public static readonly string SoundsRoot = "ArtRes/Sounds";
-    public static readonly string EffectsRoot = "";
+    public static readonly string EffectsRoot = "ArtRes/Effects";
     public static readonly string EffectPacksRoot = "Resources/ArtRes/EffectPacks";
     public static readonly string TweenPacksRoot = "Resources/ArtRes/TweenPacks";
     public static readonly string TweenPacksLoadRoot = "ArtRes/TweenPacks";
-    public static readonly string EffectConfigPath = "";
+    public static readonly string EffectPacksLoadRoot = "ArtRes/EffectPacks";
+    public static readonly string EffectConfigPath = "Assets/Resources/ArtRes/Effects/EffectConfig.asset";
 
     public static float PieceWidth = 2f;
 
@@ -32,6 +33,14 @@ public class Config{
 
     public class Sound{
         public static string Click1 = "bt01";
+        public static string MatchStart = "match_begin";
+        public static string GameStart = "game_start";
+        public static string GameWin = "game_win";
+        public static string InGameStart = "ingame_start";
+        public static string InGameMain = "ingame_main";
+        public static string DragBegin = "piece_drag_begin";
+        public static string DragSuccess = "piece_drag_success";
+        public static string DragFail = "piece_drag_fail";
     }
 
     public enum GameResult
@@ -67,6 +76,11 @@ public class Config{
         R = 3,
         Q = 4,
         K = 5,
+    }
+
+    public class AttackPos
+    {
+        public static Vector3 B_AttackPoint = new Vector3(-0.5f, 1.8f, -0.3f);
     }
 
     public class PushMessage

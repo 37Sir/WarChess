@@ -54,8 +54,9 @@ public class Tween
     public delegate void TweenPackCompleteDelegate();
     private TweenPackCompleteDelegate m_tweenPackOnComplete = null;
 
-    public delegate void TweenClipCompleteDelegate();
+    public delegate void TweenClipCompleteDelegate(object[] body);
     private TweenClipCompleteDelegate m_onComplete = null;
+    private object[] m_object = null;
     #endregion Public Field
 
     #region Public Method
@@ -191,9 +192,10 @@ public class Tween
     /// </summary>
     /// <param name="super"></param>
     /// <param name="call"></param>
-    public void SetOnComplete(TweenClipCompleteDelegate onComplete)
+    public void SetOnComplete(TweenClipCompleteDelegate onComplete, object[] body)
     {
         m_onComplete = onComplete;
+        m_object = body;
     }
 
     /// <summary>
@@ -472,7 +474,7 @@ public class Tween
 
         if (m_onComplete != null)
         {
-            m_onComplete.Invoke();
+            m_onComplete.Invoke(m_object);
         }
     }
 }

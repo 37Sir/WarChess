@@ -78,11 +78,11 @@ public class PVEPanel
         isTurn = true;
         m_modelDrag.isTurn = true;
         m_pveProxy.SetSelfColor(Config.PieceColor.WHITE);
-        m_cameraTween.SetTweenPack("camera_start_white");
         
         m_userImage.GetComponentInChildren<Text>().text = m_proxy.GetPlayerName();
         m_enemyImage.GetComponentInChildren<Text>().text = m_pveProxy.GetEnemyName();
         InitTimer();
+        App.SoundManager.PlaySoundClip(Config.Sound.InGameStart);
     }
 
     /// <summary>
@@ -195,6 +195,7 @@ public class PVEPanel
     /// </summary>
     private void OnGameStart()
     {
+        App.SoundManager.PlayBacksound(Config.Sound.InGameMain);
         m_ready.gameObject.SetActive(false);
         m_enemyReady.gameObject.SetActive(false);
         m_mediator.InitBoardData();//初始化棋盘数据
@@ -246,19 +247,19 @@ public class PVEPanel
         OnNextPlay();
     }
 
-    //public void ShowMove(Vector2 from, Vector2 to, int type, int eatType)
-    //{
-    //    m_lastFrom = from;
-    //    m_lastTo = to;
-    //    m_lastEat = eatType;
-    //    //m_mediator.NotifyMoveEnd(new Vector2[] { from, to, new Vector2(type, 0)});
-    //    //bool isCheck = App.ChessLogic.IsCheck(0);
-    //    //if(isCheck == true)
-    //    //{
-    //    //    Debug.Log("被将军了！");
-    //    //}
-    //    //EndCurRound();
-    //}
+    /// <summary>
+    /// 记录上一步走了什么
+    /// </summary>
+    /// <param name="from"></param>
+    /// <param name="to"></param>
+    /// <param name="type"></param>
+    /// <param name="eatType"></param>
+    public void ShowMove(Vector2 from, Vector2 to, int type, int eatType)
+    {
+        m_lastFrom = from;
+        m_lastTo = to;
+        m_lastEat = eatType;
+    }
 
 
     ///兵晋升
@@ -269,6 +270,8 @@ public class PVEPanel
 
     private void OnReadyClick()
     {
+        App.SoundManager.PlaySoundClip(Config.Sound.Click1);
+        m_cameraTween.SetTweenPack("camera_start_white");
         OnGameStart();
     }
 

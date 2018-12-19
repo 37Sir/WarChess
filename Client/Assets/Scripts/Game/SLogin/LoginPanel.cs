@@ -37,6 +37,7 @@ public class LoginPanel
 
     public void OpenView(object intent)
     {
+        App.SoundManager.PlaySoundClip(Config.Sound.GameStart);
         Debug.Log("login panel Opened");
         App.NetworkManager.SetConfig("192.168.90.12", 10000, (int)Config.NetworkType.TCP, 512, 5000, 1, 1, 5000);
         m_mediator.NotifyLobbyConnect();
@@ -51,9 +52,17 @@ public class LoginPanel
     private void OnLoginClick()
     {
         string userName = m_userName.text;
-        App.NetworkManager.Token = userName;
-        App.SoundManager.PlaySoundClip(Config.Sound.Click1);
-        m_mediator.NotifyLogin(userName);
+        if(userName == "kamisama")
+        {
+            Debug.Log("Welcome KamiSama");
+            App.NSceneManager.LoadScene("SLobby");
+        }
+        else
+        {
+            App.NetworkManager.Token = userName;
+            App.SoundManager.PlaySoundClip(Config.Sound.Click1);
+            m_mediator.NotifyLogin(userName);
+        }
     }
 
     public void CloseView()

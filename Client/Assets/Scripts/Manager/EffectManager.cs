@@ -219,7 +219,7 @@ namespace Framework
             EffectPlayer effectPlayer = refObject.AddComponent<EffectPlayer>();
             if (effectPlayer)
             {
-                string effectPackPath = Config.EffectPacksRoot + "/" + name + ".asset";
+                string effectPackPath = Config.EffectPacksLoadRoot + "/" + name;
                 App.ResourceManager.LoadResource<EffectPack>(effectPackPath, (EffectPack effectPack) =>
                 {
                     if (effectPack != null)

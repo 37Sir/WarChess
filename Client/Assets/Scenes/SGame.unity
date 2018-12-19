@@ -385,8 +385,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9218943fd3f403249a204fd8e2d0f0b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TweenPack: {fileID: 0}
-  playOnAwake: 0
+  m_TweenPack: {fileID: 11400000, guid: 44b7c78d87140fa48ad91e6b51b8c50d, type: 2}
+  playOnAwake: 1
 --- !u!1 &724468169
 GameObject:
   m_ObjectHideFlags: 0

@@ -179,7 +179,7 @@ public class TweenPlayer : MonoBehaviour {
     {
         if (m_tweens.ContainsKey(name))
         {
-            m_tweens[name].SetOnComplete(call);
+            m_tweens[name].SetOnComplete(call, null);
         }
     }
 

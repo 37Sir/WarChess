@@ -40,6 +40,7 @@ public class PVPPanelMediator : Mediator
         list.Add(NotificationConstant.PlayerReadyResponse);
         list.Add(NotificationConstant.OnPPromote);
         list.Add(NotificationConstant.OnUndoTweenEnd);
+        list.Add(NotificationConstant.OnTypeSelect);
         return list;
     }
 
@@ -57,7 +58,11 @@ public class PVPPanelMediator : Mediator
                 break;
             case NotificationConstant.DoMoveResponse:
                 object[] move = (object[])body;
-                //m_viewComponent.ShowMove((Vector2)move[0], (Vector2)move[1], (int)move[2]);
+                //兵生变动画播放结束
+                if ((int)move[2] > 0)
+                {
+                    NotifyEndTurn();
+                }
                 break;
             case NotificationConstant.OnGameOver:
                 //m_viewComponent.OnGameOver((Config.PieceColor)body);
@@ -76,11 +81,11 @@ public class PVPPanelMediator : Mediator
                 m_promoteFromX = (float)temp[0];
                 m_promoteFromY = (float)temp[1];
                 m_promoteTo = (Vector2)temp[3];
-                m_viewComponent.OnPPromote();
+                m_viewComponent.OnPPromote(body);
                 break;
             case NotificationConstant.OnTypeSelect:
-                int type = (int)body;
-                NotifyDoMove(new object[]{ m_promoteFromX, m_promoteFromY,null, m_promoteTo, m_viewComponent.roundNum, type});
+                var promoteBody = (Vector2[])body;
+                NotifyDoMove(new object[]{ m_promoteFromX, m_promoteFromY,null, m_promoteTo, m_viewComponent.roundNum, (int)promoteBody[2].x});
                 break;
 
             case NotificationConstant.OnUndoTweenEnd:

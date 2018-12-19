@@ -95,15 +95,16 @@ public class PieceItemMediator : Mediator
                 var undoFrom = undoMove[0];
                 var undoTo = undoMove[1];
                 var undoEat = undoMove[2].x;
-                if(m_viewComponent.m_X == undoTo.x && m_viewComponent.m_Z == undoTo.y )
+                var undoColor = undoMove[2].y;
+                if (m_viewComponent.m_X == undoTo.x && m_viewComponent.m_Z == undoTo.y )
                 {
-                    if(m_viewComponent.isReborn == false)
+                    if(m_viewComponent.isReborn == false && undoColor == (int)m_viewComponent.pieceColor )
                     {
                         m_viewComponent.OnUndo(undoFrom);
                     }
                     else
                     {
-                        m_viewComponent.isReborn = true;
+                        m_viewComponent.isReborn = false;
                     }
                 }
                 break;
@@ -151,6 +152,11 @@ public class PieceItemMediator : Mediator
     public void NotifyUndoTweenEnd()
     {
         SendNotification(NotificationConstant.OnUndoTweenEnd);
+    }
+
+    public void NotifyAttackOther()
+    {
+        SendNotification(NotificationConstant.OnAttackOther);
     }
 
     private void IsCheck(int color)

@@ -130,7 +130,7 @@ public class EffectPackInspector : Editor
                 {
                     EffectPack.Attribute attribute = new EffectPack.Attribute();
                     attribute.EffectName = effectName;
-                    attribute.EffectPath = EffectConfig.Instance.EffectPath + "/" + effectName + ".prefab";
+                    attribute.EffectPath = Config.EffectsRoot + "/" + effectName;
                     (targets[j] as EffectPack).Attributes.Add(attribute);
                     EditorUtility.SetDirty(targets[j]);
                 }

@@ -16,6 +16,7 @@ public class NotificationConstant
     public const string PlayerReady = "PlayerReady";
     public const string PlayerMutually = "PlayerMutually";
     public const string PlayerMutuallyFeedback = "PlayerMutuallyFeedback";
+    public const string CancelMatch = "CancelMatch";
 
     /// notify respons
     public const string LoginResponse = "LoginResponse";
@@ -23,6 +24,7 @@ public class NotificationConstant
     public const string DoMoveResponse = "DoMoveResponse";
     public const string EndTurnResponse = "EndTurnResponse";
     public const string PlayerReadyResponse = "PlayerReadyResponse";
+    public const string CancelMatchResponse = "CancelMatchResponse";
 
     /// notify
     public const string OnDragEnd = "OnDragEnd";
@@ -35,4 +37,5 @@ public class NotificationConstant
     public const string OnPPromote = "OnPPromote";
     public const string OnUndo = "OnUndo";
     public const string OnUndoTweenEnd = "OnUndoTweenEnd";
+    public const string OnAttackOther = "OnAttackOther";
 }

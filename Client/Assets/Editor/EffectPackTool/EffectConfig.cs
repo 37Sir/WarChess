@@ -12,7 +12,7 @@ public sealed class EffectConfig : ScriptableObject
     #region Public Field
 
     public string EffectPackPath = "EffectPack";                //保存EffectPack的路径
-    public string EffectPath = "Effect";                        //Effect Prefab保存的路径
+    public string EffectPath = "Effects";                        //Effect Prefab保存的路径
     public string AudioClipPath = "AudioClip";                  //音效资源路径
     public List<string> Anchors = new List<string>();           //anchors列表
     public static readonly string DefaultAnchor = "Root";       //默认的anchor

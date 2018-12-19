@@ -84,7 +84,7 @@ public class Effect
     /// <param name="playbackSpeed">播放速率</param>
     /// <param name="layer">层</param>
     /// <param name="attribute">属性</param>
-    public void Play(GameObject refObject, Vector3 offset, float scale, Quaternion rotation, float playbackSpeed, int layer, EffectPack.Attribute attribute)
+    public void Play(GameObject refObject, Vector3 offset, float scale, Quaternion rotation, Quaternion localRotation, float playbackSpeed, int layer, EffectPack.Attribute attribute)
     {
         m_refObject = refObject;
         m_attribute = attribute;
@@ -99,6 +99,7 @@ public class Effect
             StartParticle();
             SetScale(scale);
             SetEffectRotation(rotation);
+            SetEffectLocalRotation(localRotation);
             SetPlaybackSpeed(playbackSpeed);
         }
     }

@@ -310,7 +310,7 @@ public class EffectPlayer : MonoBehaviour
                             {
                                 m_onStart.Invoke(this);
                             }
-                            m_effectList.Effects[m_playIndex].Play(gameObject, Offset, m_scale, m_rotation, m_playbackSpeed, m_layer, m_effectPack.Attributes[m_playIndex]);
+                            m_effectList.Effects[m_playIndex].Play(gameObject, Offset, m_scale, m_rotation, m_localRotation, m_playbackSpeed, m_layer, m_effectPack.Attributes[m_playIndex]);
                             ++m_playIndex;
                         }
                         else

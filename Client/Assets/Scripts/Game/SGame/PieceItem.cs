@@ -15,26 +15,32 @@ public class PieceItem:MonoBehaviour
     private PVPProxy m_pvpProxy;
     private Vector3 m_beginPos;//初始位置
     public Config.PieceColor selfColor;
+    public Config.PieceColor pieceColor;
     private bool m_isTipsShow = false;
-    private int m_type;//棋子的类型
+    private Config.PieceType m_type;//棋子的类型
     public float m_X;
     public float m_Z;
     public bool isDead = false;
     public bool isPVE = false;
     public bool isReborn = false;
     public GameObject pieceModel;
+    private GameObject m_Attack;
     private TweenPlayer m_TweenPlayer;
     private object[] m_body;
     private Vector2[] m_otherBody;
     private Vector2 m_undoFrom;
+    private Animator m_pieceAnimator;
 
     public void InitView(GameObject gameObject, Piece pieceData, bool pve = false)
     {
         isPVE = pve;
         m_gameObject = gameObject;
         m_gameObject.transform.localRotation = Quaternion.Euler(0, 180, 0);
+        m_Attack = gameObject.transform.Find("m_Attack").gameObject;
         m_pvpProxy = App.Facade.RetrieveProxy("PVPProxy") as PVPProxy;
         selfColor = m_pvpProxy.GetSelfColor();
+        m_type = pieceData.type;
+        pieceColor = pieceData.color;
         InitPieceShow(pieceData);
         m_name = m_X + "_" + m_Z;
         m_mediator = new PieceItemMediator(this, m_name);
@@ -85,6 +91,16 @@ public class PieceItem:MonoBehaviour
         }
     }
 
+    private void InitAttackPoint()
+    {
+        switch (m_type)
+        {
+            case Config.PieceType.B:
+                m_Attack.transform.localPosition = Config.AttackPos.B_AttackPoint;
+                break;
+        }      
+    }
+
     /// <summary>
     /// 被打了
     /// </summary>
@@ -120,6 +136,7 @@ public class PieceItem:MonoBehaviour
     {
         m_beginPos = transform.position;
         m_target.SetActive(true);
+        App.SoundManager.PlaySoundClip(Config.Sound.DragBegin);
     }
 
     /// <summary>
@@ -172,19 +189,20 @@ public class PieceItem:MonoBehaviour
                 var piece = App.ChessLogic.GetPiece((int)to.x - 1, (int)to.y - 1);//移动后的棋子
                 if(piece % 10 == (int)Config.PieceType.P && ((int)to.y == 1 || (int)to.y == 8))
                 {
-                    m_mediator.NotityPPromote(m_body);
-                    ShowMove(to);
+                    PromoteShowMove(to);
                 }
                 else
                 {
                     m_mediator.NotityDragEnd(m_body);
-                    ShowMove(to);
+                    ShowMove(to, tempEat);
+                    App.SoundManager.PlaySoundClip(Config.Sound.DragSuccess);
                 }              
             }
             else
             {
                 SetPiecePos(m_X, m_Z);
                 m_mediator.NotityDragEnd(null);//不能移动
+                App.SoundManager.PlaySoundClip(Config.Sound.DragFail);
             }           
         }
         else
@@ -204,9 +222,146 @@ public class PieceItem:MonoBehaviour
     /// 自己走棋
     /// </summary>
     /// <param name="to"></param>
-    private void ShowMove(Vector2 to, bool isPromote = false)
+    private void ShowMove(Vector2 to, int eatPiece = -1)
     {
-        if(m_TweenPlayer == null)
+        if (m_TweenPlayer == null)
+        {
+            m_TweenPlayer = gameObject.AddComponent<TweenPlayer>();
+        }
+      
+        //有棋子播放攻击表现
+        if (eatPiece > -1)
+        {
+            ShowAttack(to);
+        }
+
+        //没有棋子直接走
+        else
+        {
+            Tween move_pos = m_TweenPlayer.AddClip("move", 2);
+            move_pos.SetTweenType(TweenType.LocalPosition);
+            move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
+            move_pos.SetDuration(1);
+            move_pos.SetOnComplete(OnCompleteMove, null);
+            m_TweenPlayer.StartPlay();
+        }      
+    }
+
+    /// <summary>
+    /// 攻击表现
+    /// </summary>
+    /// <param name="to"></param>
+    private void ShowAttack(Vector2 to)
+    {
+        switch (m_type)
+        {
+            case Config.PieceType.B:
+                OnRemoteAttack("b_attack", to);
+                break;
+            case Config.PieceType.K:
+                OnRemoteAttack("b_attack", to);
+                break;
+            case Config.PieceType.Q:
+                OnRemoteAttack("b_attack", to);
+                break;
+            case Config.PieceType.N:
+                OnRemoteAttack("b_attack", to);
+                break;
+            case Config.PieceType.P:
+                OnRemoteAttack("b_attack", to);
+                break;
+            case Config.PieceType.R:
+                OnRemoteAttack("b_attack", to);
+                break;
+
+        }
+    }
+
+    /// <summary>
+    /// 远程攻击
+    /// </summary>
+    /// <param name="effectName"></param>
+    /// <param name="to"></param>
+    private void OnRemoteAttack(string effectName, Vector2 to)
+    {
+        if(m_pieceAnimator == null)
+        {
+            m_pieceAnimator = pieceModel.GetComponent<Animator>();
+        }
+        m_pieceAnimator.Play("Attack");
+        EffectPlayer effectPlayer = App.EffectManager.LoadEffect(m_Attack, effectName);
+
+        TweenPlayer m_AttackPlayer = m_Attack.AddComponent<TweenPlayer>();
+        Tween attackTween = m_AttackPlayer.AddClip("attack", 1.2f);
+        attackTween.SetTweenType(TweenType.LocalPosition);
+        attackTween.SetDelayTime(0.8f);
+        attackTween.SetOnComplete(OnRemoteAttackComplete, new object[] {to});
+        var dx = -Config.PieceWidth * (to.x - m_X);
+        var dy = -Config.PieceWidth * (to.y - m_Z);
+        attackTween.SetTo(new Vector3(dx, m_Attack.transform.localPosition.y, dy));
+
+        if (pieceColor == Config.PieceColor.WHITE)
+        {
+            var angle = GetAngleByDeltaXY(dx, dy);
+            effectPlayer.LocalRotation = Quaternion.Euler(0, angle, 0);
+        }
+        effectPlayer.enabled = true;
+        m_AttackPlayer.StartPlay();
+    }
+
+    /// <summary>
+    /// 近战攻击
+    /// </summary>
+    private void OnMeleeAttack(string effectName, Vector2 to)
+    {
+        Tween move_pos = m_TweenPlayer.AddClip("move", 1);
+        move_pos.SetTweenType(TweenType.LocalPosition);
+        move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
+        move_pos.SetOnComplete(OnMeleeMoveComplete, new object[] {to, effectName});
+        m_TweenPlayer.StartPlay();
+    }
+
+    private void OnRemoteAttackComplete(object[] args)
+    {
+        InitAttackPoint();
+        var to = (Vector2)args[0];
+        var item = GameObject.Find(to.x + "_" + to.y);
+        item.GetComponent<PieceItem>().BeAttached();
+
+        Tween move_pos = m_TweenPlayer.AddClip("move", 1);
+        move_pos.SetTweenType(TweenType.LocalPosition);
+        move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
+        move_pos.SetOnComplete(OnCompleteMove, null);
+        m_TweenPlayer.StartPlay();
+    }
+
+    /// <summary>
+    /// 近战移动
+    /// </summary>
+    /// <param name="args"></param>
+    private void OnMeleeMoveComplete(object[] args)
+    {
+        if (m_pieceAnimator == null)
+        {
+            m_pieceAnimator = pieceModel.GetComponent<Animator>();
+        }
+        m_pieceAnimator.Play("Attack");
+
+        var to = (Vector2)args[0];
+        Tween move_pos = m_TweenPlayer.AddClip("move", 1);
+        move_pos.SetTweenType(TweenType.LocalPosition);
+        move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
+        move_pos.SetOnComplete(OnCompleteMove, null);
+        m_TweenPlayer.StartPlay();
+    }
+
+    /// <summary>
+    /// 兵生变自己走棋
+    /// </summary>
+    /// <param name="to"></param>
+    private void PromoteShowMove(Vector2 to)
+    {
+        if (m_TweenPlayer == null)
         {
             m_TweenPlayer = gameObject.AddComponent<TweenPlayer>();
         }
@@ -214,13 +369,13 @@ public class PieceItem:MonoBehaviour
         move_pos.SetTweenType(TweenType.LocalPosition);
         move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
         move_pos.SetDuration(1);
-        move_pos.SetOnComplete(OnCompleteMove);
+        move_pos.SetOnComplete(OnProCompleteMove, null);
         m_TweenPlayer.StartPlay();
     }
 
-    private void OnCompleteMove()
+    private void OnCompleteMove(object args)
     {
-        Vector2[] body = new Vector2[] { new Vector2((float)m_body[0], (float)m_body[1]), (Vector2)m_body[3], new Vector2(m_type, 0) };
+        Vector2[] body = new Vector2[] { new Vector2((float)m_body[0], (float)m_body[1]), (Vector2)m_body[3], new Vector2(0, 0) };
         m_mediator.NotifyMoveEnd(body);
         if (isPVE == false)
         {
@@ -228,7 +383,12 @@ public class PieceItem:MonoBehaviour
             Debug.Log("isPVE:OnCompleteMove!");
         }
     }
-     
+
+    private void OnProCompleteMove(object args)
+    {
+        m_mediator.NotityPPromote(m_body);
+    }
+
     private Vector2 GetDirectByDeltaXZ(float px, float pz)
     {
         var angle = (Math.Atan2(pz, px) * 180 / Math.PI + 360 + 22.5) % 360;
@@ -250,6 +410,11 @@ public class PieceItem:MonoBehaviour
         return directs[dId];
     }
 
+    private float GetAngleByDeltaXY(float x, float y)
+    {
+        return (float)(Math.Atan2(x, y) * 180 / Math.PI + 360) % 360;
+    }
+
     /// <summary>
     /// 其他人走棋
     /// </summary>
@@ -268,8 +433,8 @@ public class PieceItem:MonoBehaviour
                 Tween move_pos = m_TweenPlayer.AddClip("move", 2);
                 move_pos.SetTweenType(TweenType.LocalPosition);
                 move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
-                move_pos.SetDuration(2);
-                move_pos.SetOnComplete(OnOtherMoveComplete);
+                move_pos.SetDuration(1);
+                move_pos.SetOnComplete(OnOtherMoveComplete, null);
                 m_TweenPlayer.StartPlay();
                 m_otherBody = new Vector2[] { from, to, type };
                 Debug.Log("正常移动！！ fromx: " + from.x + "fromy" + from.y);
@@ -281,7 +446,7 @@ public class PieceItem:MonoBehaviour
         }
     }
 
-    private void OnOtherMoveComplete()
+    private void OnOtherMoveComplete(object args)
     {
         m_mediator.NotifyMoveEnd(m_otherBody);
         if (isPVE == false)
@@ -298,7 +463,7 @@ public class PieceItem:MonoBehaviour
     {
         App.ChessLogic.PPromoted(new Vector2Int((int)m_X - 1, (int)m_Z - 1), type);
         string pieceName = "";
-        if(selfColor == Config.PieceColor.BLACK)
+        if(pieceColor == Config.PieceColor.BLACK)
         {
             pieceName = "Black_";
         }
@@ -326,6 +491,7 @@ public class PieceItem:MonoBehaviour
         {
             obj.SetActive(true);
             obj.transform.parent = transform;
+            obj.transform.localPosition = Vector3.zero;
             pieceModel = obj;
             m_mediator.pieceData.type = (Config.PieceType)type;
         });       
@@ -342,17 +508,15 @@ public class PieceItem:MonoBehaviour
         move_pos.SetTweenType(TweenType.LocalPosition);
         move_pos.SetTo(new Vector3((from.x - 1) * Config.PieceWidth, 0, (from.y - 1) * Config.PieceWidth));
         move_pos.SetDuration(1);
-        move_pos.SetOnComplete(OnCompleteUndo);
+        move_pos.SetOnComplete(OnCompleteUndo, null);
         m_TweenPlayer.StartPlay();
     }
 
-    public void OnCompleteUndo()
+    public void OnCompleteUndo(object args)
     {
         SetPiecePos(m_undoFrom.x, m_undoFrom.y);
-        Debug.Log("UndoOnComplete!~!!!");
         if(isPVE == false)
         {
-            Debug.Log("NotifyUndoTweenEnd!~!!!");
             m_mediator.NotifyUndoTweenEnd();
         }
     }

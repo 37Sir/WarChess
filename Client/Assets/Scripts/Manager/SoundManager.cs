@@ -216,7 +216,7 @@ namespace Framework
         ///播放音效 默认位置
         public void PlaySoundClip(string abName, string type = "mp3")
         {
-            Get(abName, type, (clip, key) =>
+            Get(abName, (clip, key) =>
             {
                 if (clip == null)
                     return;
@@ -229,7 +229,7 @@ namespace Framework
         ///播放音效 指定位置
         public void PlaySoundClip(string abName, Vector3 point, string type = "mp3")
         {
-            Get(abName, type, (clip, key) =>
+            Get(abName, (clip, key) =>
             {
                 if (clip == null)
                     return;
@@ -252,11 +252,9 @@ namespace Framework
         public void PlayBacksound(string abName, string type = "mp3", bool isLoop = true)
         {
             m_backSoundKey = abName + "." + type;
-            Get(abName, type, (clip, key) =>
+            Get(abName, (clip, key) =>
             {
                 if (clip == null)
-                    return;
-                if (key != m_backSoundKey)
                     return;
                 m_globalAudio.loop = isLoop;
                 m_globalAudio.clip = clip;
@@ -369,7 +367,6 @@ namespace Framework
         ///播放音效 默认位置
         private IEnumerator PlaySoundClip(string clipName, float delayTime)
         {
-            Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!!!!");
             float playedTime = 0;
             while(playedTime < delayTime)
             {

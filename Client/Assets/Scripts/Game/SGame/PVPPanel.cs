@@ -96,20 +96,19 @@ public class PVPPanel
         if(firstId == userId)
         {
             isTurn = true;
-            m_cameraTween.SetTweenPack("camera_start_white");
+            
             m_pvpProxy.SetSelfColor(Config.PieceColor.WHITE);
         }
         else
         {
             isTurn = false;
-
-            m_cameraTween.SetTweenPack("camera_start_black");
             //m_worldCamera.transform.localRotation = Quaternion.Euler(90, 180, 0);
             m_pvpProxy.SetSelfColor(Config.PieceColor.BLACK);
         }
         m_userImage.GetComponentInChildren<Text>().text = m_proxy.GetPlayerName();
         m_enemyImage.GetComponentInChildren<Text>().text = m_pvpProxy.GetEnemyName();
         InitTimer();
+        App.SoundManager.PlaySoundClip(Config.Sound.InGameStart);
     }
 
     /// <summary>
@@ -244,6 +243,7 @@ public class PVPPanel
     /// </summary>
     private void OnGameStart()
     {
+        App.SoundManager.PlayBacksound(Config.Sound.InGameMain);
         m_ready.gameObject.SetActive(false);
         m_enemyReady.gameObject.SetActive(false);
         m_mediator.InitBoardData();//初始化棋盘数据
@@ -321,9 +321,9 @@ public class PVPPanel
     }
 
     ///兵晋升
-    public void OnPPromote()
+    public void OnPPromote(object body)
     {
-        App.UIManager.OpenPanel("TypeSelectPanel");
+        App.UIManager.OpenPanel("TypeSelectPanel", body);
     }
 
     public void EndCurRound()
@@ -338,12 +338,22 @@ public class PVPPanel
 
     private void OnReadyClick()
     {
+        App.SoundManager.PlaySoundClip(Config.Sound.Click1);
+        if(isTurn == true)
+        {
+            m_cameraTween.SetTweenPack("camera_start_white");
+        }
+        else
+        {
+            m_cameraTween.SetTweenPack("camera_start_black");
+        }      
         m_mediator.NotifySelfReady();
     }
 
     private void OnUndoClick()
     {
         Debug.Log("OnUndoClick");
+        App.SoundManager.PlaySoundClip(Config.Sound.Click1);
         m_mediator.NotifyRequestUndo();
     }
 
@@ -399,7 +409,8 @@ public class PVPPanel
 
     public void OnPlayerNotReady(string name, List<byte[]> packet)
     {
-        Debug.Log("On Player Not Ready");
+        App.Facade.RemoveMediator("PVPPanelMediator");
+        App.NSceneManager.LoadScene("SLobby");
     }
 
     public void OnPlayerUndoPush(string name, List<byte[]> packet)
@@ -408,8 +419,7 @@ public class PVPPanel
     }
 
     public void OnPlayerUndoInfoPush(string name, List<byte[]> packet)
-    {
-        
+    {     
         var pushMes = PlayerUndoInfoPush.ParseFrom(packet[0]);
         Debug.Log("同意悔棋"+ pushMes);
         m_undoRoundNum = pushMes.UndoInfoCount;
@@ -426,15 +436,16 @@ public class PVPPanel
             var lastEat = -1;
             var fromPos = IndexToCoor(from);
             var toPos = IndexToCoor(to);
+            var userColor = m_pvpProxy.GetColorById(userId);
             if (isEat == true)
             {
-                var color = 1 - m_pvpProxy.GetColorById(userId);//1-操作人的颜色 = 被吃棋子的颜色
+                var color = 1 - userColor;//1-操作人的颜色 = 被吃棋子的颜色
                 lastEat = (int)color * 10 + eatInfo;
                 PieceReborn(lastEat, toPos);
             }
             App.ChessLogic.Undo(fromPos, toPos, lastEat);
            
-            Vector2[] body = new Vector2[] { fromPos, toPos, new Vector2(lastEat, 0) };
+            Vector2[] body = new Vector2[] { fromPos, toPos, new Vector2(lastEat, (int)userColor) };
             m_mediator.NotifyUndo(body);
             roundNum--;
         }
@@ -484,7 +495,7 @@ public class PVPPanel
         temp.transform.parent = m_qizi.transform;
         temp.SetActive(true);
         PieceItem pieceItem = temp.AddComponent<PieceItem>();
-        pieceItem.InitView(temp, new Piece((Config.PieceColor)color, (Config.PieceType)type, (int)to.x, (int)to.y), true);
+        pieceItem.InitView(temp, new Piece((Config.PieceColor)color, (Config.PieceType)type, (int)to.x, (int)to.y), false);
         pieceItem.isReborn = true;
         App.ObjectPoolManager.RegisteObject(pieceName, "FX/" + pieceName, 0, 30, -1);
         App.ObjectPoolManager.Instantiate(pieceName, (GameObject obj) =>

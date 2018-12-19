@@ -60,6 +60,7 @@ public class ResultPanel
                 m_LoseState.SetActive(false);
             }
         }
+        App.SoundManager.PlaySoundClip(Config.Sound.GameWin);
     }
 
     public void CloseView()

@@ -48,6 +48,7 @@ public class LobbyPanel
         m_PVE.onClick.AddListener(OnPVEClick);
         m_cancel.onClick.AddListener(OnCancelClick);
         App.Facade.RegisterCommand(NotificationConstant.Match, () => new MatchCommand());
+        App.Facade.RegisterCommand(NotificationConstant.CancelMatch, () => new CancelMatchCommand());
         App.NetworkManager.RegisterPushCall(Config.PushMessage.MatchSuccess, OnMatchSuccess);
     }
 
@@ -88,6 +89,7 @@ public class LobbyPanel
         m_Searching.SetActive(true);
         StartMatchTimer();
         StartMatchBird();
+        App.SoundManager.PlaySoundClip(Config.Sound.MatchStart);
     }
 
     #region Private Method
@@ -175,11 +177,13 @@ public class LobbyPanel
     #region OnClick
     private void OnPVPClick()
     {
+        App.SoundManager.PlaySoundClip(Config.Sound.Click1);
         m_mediator.NotifyBeginMatch();
     }
 
     private void OnPVEClick()
     {
+        App.SoundManager.PlaySoundClip(Config.Sound.Click1);
         App.Facade.RemoveMediator("LobbyPanelMediator");
         App.NSceneManager.LoadScene("SGame01");
     }
@@ -189,6 +193,7 @@ public class LobbyPanel
         m_Searching.SetActive(false);
         m_Select.SetActive(true);
         StopMatchTimer();
+        m_mediator.NotifyCancelMatch();
     }
     #endregion 
 }
