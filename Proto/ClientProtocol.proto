@@ -82,5 +82,19 @@ message PlayerInfo {
 	optional int32 rank = 3; //玩家分数
 }
 
+//排行榜请求
+message PlayerRankListRequest{
+
+}
+
+//排行版返回
+message PlayerRankListResponse {
+	repeated RankInfo rankInfo = 1;//排行版信息
+}
+
+message RankInfo {
+	optional int32 rank = 1; //rank分数
+	optional string name = 2; //玩家姓名
+}
 
 

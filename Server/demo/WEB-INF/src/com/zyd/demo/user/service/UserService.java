@@ -1,9 +1,12 @@
 package com.zyd.demo.user.service;
 
 import java.util.Date;
+import java.util.List;
 import com.zyd.common.proto.client.ClientProtocol.ErrorCode;
 import com.zyd.common.proto.client.ClientProtocol.LoginResponse;
 import com.zyd.common.proto.client.ClientProtocol.PlayerInfo;
+import com.zyd.common.proto.client.ClientProtocol.PlayerRankListResponse;
+import com.zyd.common.proto.client.ClientProtocol.RankInfo;
 import com.zyd.common.unti.MD5Util;
 import com.zyd.demo.common.BaseService;
 import com.zyd.demo.common.enumuration.TableName;
@@ -72,5 +75,22 @@ public class UserService extends BaseService {
         String cacheKey = CacheKeyUtil.getCacheKey(TableName.USER.getTableName(), user.getId().toString(), user.getId());
         cacheJDBCHandler.setCacheEncodeWithDB(cacheKey, TableName.USER.getTableName(), user);
     }
+    
+    public List<User> getRankList(){
+        return cacheJDBCHandler.getRankList();
+    }
 
+    public PlayerRankListResponse.Builder buildPlayerRankListResponse() {
+        PlayerRankListResponse.Builder res = PlayerRankListResponse.newBuilder();
+        List<User> rankList = getRankList();
+        for (int i = 0; i< rankList.size() ; i++) {
+            User u = rankList.get(i);
+            RankInfo.Builder rankInfo = RankInfo.newBuilder();
+            rankInfo.setName(u.getUserName());
+            rankInfo.setRank(u.getRank());
+            rankInfo.setRanking(i+1);
+            res.addRankInfo(rankInfo);
+        }
+        return res;
+    }
 }

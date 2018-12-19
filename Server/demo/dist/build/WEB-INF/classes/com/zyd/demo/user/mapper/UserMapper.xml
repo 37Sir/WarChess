@@ -26,6 +26,12 @@
     from user
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByRank" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from user
+    order by rank desc limit 10
+  </select>
   <select id="selectByName" resultType="java.lang.Integer" parameterType="java.lang.String" >
     select 
     id

@@ -10394,7 +10394,7 @@ public final class WarChess {
      * <code>optional int32 userId = 4;</code>
      *
      * <pre>
-     *操作方ID
+     *操作方ID	
      * </pre>
      */
     boolean hasUserId();
@@ -10402,7 +10402,7 @@ public final class WarChess {
      * <code>optional int32 userId = 4;</code>
      *
      * <pre>
-     *操作方ID
+     *操作方ID	
      * </pre>
      */
     int getUserId();
@@ -10603,7 +10603,7 @@ public final class WarChess {
      * <code>optional int32 userId = 4;</code>
      *
      * <pre>
-     *操作方ID
+     *操作方ID	
      * </pre>
      */
     public boolean hasUserId() {
@@ -10613,7 +10613,7 @@ public final class WarChess {
      * <code>optional int32 userId = 4;</code>
      *
      * <pre>
-     *操作方ID
+     *操作方ID	
      * </pre>
      */
     public int getUserId() {
@@ -11128,7 +11128,7 @@ public final class WarChess {
        * <code>optional int32 userId = 4;</code>
        *
        * <pre>
-       *操作方ID
+       *操作方ID	
        * </pre>
        */
       public boolean hasUserId() {
@@ -11138,7 +11138,7 @@ public final class WarChess {
        * <code>optional int32 userId = 4;</code>
        *
        * <pre>
-       *操作方ID
+       *操作方ID	
        * </pre>
        */
       public int getUserId() {
@@ -11148,7 +11148,7 @@ public final class WarChess {
        * <code>optional int32 userId = 4;</code>
        *
        * <pre>
-       *操作方ID
+       *操作方ID	
        * </pre>
        */
       public Builder setUserId(int value) {
@@ -11161,7 +11161,7 @@ public final class WarChess {
        * <code>optional int32 userId = 4;</code>
        *
        * <pre>
-       *操作方ID
+       *操作方ID	
        * </pre>
        */
       public Builder clearUserId() {

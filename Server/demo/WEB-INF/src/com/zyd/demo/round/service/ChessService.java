@@ -217,7 +217,7 @@ public class ChessService extends BaseService {
            second = 6;
        }
        if (!myChess.containsKey(from)) return false;
-       if (myChess.get(from) == "p") {
+       if ( "p".equals(myChess.get(from))) {
            int pIndex = getSquares(from)+pawn_offsets.get(us).get(0);
            if (!OtherUserChess.containsKey(getIndex(pIndex)) && !myChess.containsKey(getIndex(pIndex))) {
                if (getRank(from) == second) {

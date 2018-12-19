@@ -2,6 +2,7 @@ package com.zyd.demo.common.memcached;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 import org.slf4j.Logger;
@@ -225,6 +226,14 @@ public class MemcachedHandler {
         }
         return mapResult;
     }
+    
+    //排行版信息
+    public List<User> getRankList (){
+        return mapperHelper.getUserMapper().selectByRank();
+    }
+    
+    
+    
     /**
      * 对象转byte
      * @param obj
