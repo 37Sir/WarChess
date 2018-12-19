@@ -502,46 +502,30 @@ public class BattleRoom {
 		//正常结束
 		User u1 = commonService.getUserById(startUserId);
 		User u2 = commonService.getUserById(afterUserId);
+		//处理玩家连胜场数
+		doPlayerWinning(u1,u2);
 		if (isGiveUp == 0) {
-		    if (u1.getId() == userId) {
-		        u1.setWinCount(u1.getWinCount()+1);
-		        u1.setRank(u1.getRank() + 20);
-		        u2.setLoseCount(u2.getLoseCount()+1);
-		        u2.setRank(u2.getRank() - 20);
-		    } else {
-                u2.setWinCount(u2.getWinCount()+1);
-                u1.setRank(u1.getRank() - 20);
-                u1.setLoseCount(u1.getLoseCount()+1);
-                u2.setRank(u2.getRank() + 20);
-		    }
-		    builder.setWinRank(20);
-		    builder.setLoseRank(20);
+		    String rank = doPlayerRank(u1,u2);
+		    String[] s = rank.split("_");
+		    builder.setWinRank(Integer.parseInt(s[0]));
+		    builder.setLoseRank(Integer.parseInt(s[1]));
 			builder.setResult(0);
 			builder.setWinUserId(userId);
 			// 推送结束信息
 			disrupAll(PushReqestName.PlayerEndPush, builder.build());
 		} else if (isGiveUp == 2) {
-            if (u1.getId() == userId) {
-                u1.setWinCount(u1.getWinCount()+1);
-                u1.setRank(u1.getRank() + 20);
-                u2.setLoseCount(u2.getLoseCount()+1);
-                u2.setRank(u2.getRank() - 20);
-            } else {
-                u2.setWinCount(u2.getWinCount()+1);
-                u1.setRank(u1.getRank() - 20);
-                u1.setLoseCount(u1.getLoseCount()+1);
-                u2.setRank(u2.getRank() + 20);
-            }
+            String rank = doPlayerRank(u1,u2);
+            String[] s = rank.split("_");
             for (UserMatchInfo userMatchInfo : userMatchInfoList) {
                 if (userMatchInfo.getUid().equals(giveUpUserId)) {
                     builder.setWinUserId(winUserId);
-                    builder.setWinRank(20);
-                    builder.setLoseRank(20);
+                    builder.setWinRank(Integer.parseInt(s[0]));
+                    builder.setLoseRank(Integer.parseInt(s[1]));
                     builder.setResult(3);
                 } else {
                     builder.setWinUserId(winUserId);
-                    builder.setWinRank(20);
-                    builder.setLoseRank(20);
+                    builder.setWinRank(Integer.parseInt(s[0]));
+                    builder.setLoseRank(Integer.parseInt(s[1]));
                     builder.setResult(4);
                 }
                 disrupOne(PushReqestName.PlayerEndPush, userMatchInfo, builder.build());
@@ -558,6 +542,8 @@ public class BattleRoom {
 		    u1.setDrawCount(u1.getDrawCount()+1);
 		    u2.setDrawCount(u2.getDrawCount()+1);
             builder.setResult(7);
+            builder.setWinRank(0);
+            builder.setLoseRank(0);
             disrupAll(PushReqestName.PlayerEndPush, builder.build());		  
 		} else {
 			for (UserMatchInfo userMatchInfo : userMatchInfoList) {
@@ -576,8 +562,76 @@ public class BattleRoom {
 		battleRoomManager.removeBattleRoom(this);
 		return;
 	}
-
-	/** 更新方法,如果玩家操作超时 */
+	
+	//处理连胜连输局数
+	private void doPlayerWinning(User u1, User u2) {
+	    if (isGiveUp == 4 || isGiveUp ==5  ) {
+	        u1.setWinningCount(0);
+	        u2.setLosingCount(0);
+	    } else if (isGiveUp == 3){
+	        //不处理
+	    } else if (winUserId != 0) {
+	        if (u1.getId() == winUserId) {
+	            u1.setWinningCount(u1.getWinningCount()+1);
+	            u1.setLosingCount(0);
+	            u2.setWinningCount(0);
+	            u2.setLosingCount(u2.getLosingCount() + 1);
+	        } else {
+                u2.setWinningCount(u1.getWinningCount()+1);
+                u2.setLosingCount(0);
+                u1.setWinningCount(0);
+                u1.setLosingCount(u2.getLosingCount() + 1);	          
+	        }
+	    }
+    }
+	
+	/**处理玩家加分减分*/
+	public String doPlayerRank(User u1 ,User u2 ) {
+	    int add =0;
+	    int reduce = 0;
+	    if (isGiveUp == 0) {
+	        //基础分10分
+	        int adddRank = 10;
+	        //小于50回合加5分
+	        if (currentPlayNum <= 50) {
+	            adddRank += 5;
+	        }
+	        if (u1.getId() == winUserId) {
+                u1.setWinCount(u1.getWinCount()+1);
+                u1.setRank(u1.getRank() + adddRank + u1.getWinningCount());
+                u2.setLoseCount(u2.getLoseCount()+1);
+                u2.setRank(u2.getRank() - adddRank - u2.getLosingCount());
+                add = adddRank + u1.getWinningCount();
+                reduce = adddRank + u2.getLosingCount();
+	        } else {
+                u2.setWinCount(u1.getWinCount()+1);
+                u2.setRank(u2.getRank() + adddRank + u2.getWinningCount());
+                u1.setLoseCount(u1.getLoseCount()+1);
+                u1.setRank(u1.getRank() - adddRank - u1.getLosingCount());
+                add = adddRank + u2.getWinningCount();
+                reduce = adddRank + u1.getLosingCount();
+	        }
+	    } else if (isGiveUp == 2 ) {
+	        //不操作判负并扣20分
+            if (u1.getId() == winUserId) {
+                u1.setWinCount(u1.getWinCount()+1);
+                u1.setRank(u1.getRank() + 10 + u1.getWinningCount());
+                u2.setLoseCount(u2.getLoseCount()+1);
+                u2.setRank(u2.getRank() - 20 - u2.getLosingCount());
+                add = 10 + u1.getWinningCount();
+                reduce = 20 + u2.getLosingCount();
+            } else {
+                u2.setWinCount(u1.getWinCount()+1);
+                u2.setRank(u2.getRank() + 10 + u2.getWinningCount());
+                u1.setLoseCount(u1.getLoseCount()+1);
+                u1.setRank(u1.getRank() - 20 - u1.getLosingCount());
+                add = 10 + u2.getWinningCount();
+                reduce = 20 + u1.getLosingCount();
+            }	        
+	    }
+	    return String.valueOf(add)+"_" +String.valueOf(reduce);
+	}
+  /** 更新方法,如果玩家操作超时 */
 	public void onUpdate() {
 		if (nextTime > System.currentTimeMillis()) {
 			return;

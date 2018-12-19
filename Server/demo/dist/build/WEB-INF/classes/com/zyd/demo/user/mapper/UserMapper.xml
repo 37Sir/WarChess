@@ -11,13 +11,15 @@
       <arg column="win_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="lose_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="draw_count" jdbcType="INTEGER" javaType="java.lang.Integer" />      
+      <arg column="winning_count" jdbcType="INTEGER" javaType="java.lang.Integer" />      
+      <arg column="losing_count" jdbcType="INTEGER" javaType="java.lang.Integer" />      
       <arg column="last_login_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />      
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_name, rank, gold, diamond, win_count, lose_count, draw_count,last_login_time, update_time, 
+    id, user_name, rank, gold, diamond, win_count, lose_count, draw_count,winning_count,losing_count,last_login_time, update_time, 
     create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -43,11 +45,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into user (user_name, rank, gold, 
-      diamond, win_count, lose_count,draw_count, 
+      diamond, win_count, lose_count,draw_count,winning_count,losing_count, 
       last_login_time,update_time, create_time)
     values (#{userName,jdbcType=VARCHAR}, #{rank,jdbcType=INTEGER}, #{gold,jdbcType=INTEGER}, 
       #{diamond,jdbcType=INTEGER}, #{winCount,jdbcType=INTEGER}, #{loseCount,jdbcType=INTEGER}, #{drawCount,jdbcType=INTEGER},
-      #{lastLoginTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+      #{winningCount,jdbcType=INTEGER},#{losingCount,jdbcType=INTEGER},#{lastLoginTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.zyd.demo.user.pojo.User" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
@@ -75,6 +77,12 @@
       </if>
       <if test="drawCount != null" >
         draw_count,
+      </if>
+      <if test="winningCount != null" >
+        winning_count,
+      </if>
+      <if test="losingCount != null" >
+        losing_count,
       </if>
       <if test="lastLoginTime != null" >
         last_login_time,
@@ -107,6 +115,12 @@
       </if>
       <if test="drawCount != null" >
         #{drawCount,jdbcType=INTEGER},
+      </if>
+      <if test="winningCount != null" >
+        #{winningCount,jdbcType=INTEGER},
+      </if>
+      <if test="losingCount != null" >
+        #{losingCount,jdbcType=INTEGER},
       </if>
       <if test="lastLoginTime != null" >
         #{lastLoginTime,jdbcType=TIMESTAMP},
@@ -143,6 +157,12 @@
       <if test="drawCount != null" >
         draw_count = #{drawCount,jdbcType=INTEGER},
       </if>
+      <if test="winningCount != null" >
+        winning_count = #{winningCount,jdbcType=INTEGER},
+      </if>
+      <if test="losingCount != null" >
+        losing_count = #{losingCount,jdbcType=INTEGER},
+      </if>
       <if test="lastLoginTime != null" >
         last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
       </if>
@@ -164,6 +184,8 @@
       win_count = #{winCount,jdbcType=INTEGER},
       lose_count = #{loseCount,jdbcType=INTEGER},
       draw_count = #{drawCount,jdbcType=INTEGER},
+      winning_count = #{winningCount,jdbcType=INTEGER},
+      losing_count = #{losingCount,jdbcType=INTEGER},
       last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       create_time = #{createTime,jdbcType=TIMESTAMP}

@@ -29,7 +29,7 @@ public class UserService extends BaseService {
         Integer  userId = getUserByName(userName);
         User user = null;
         if (userId == null) {
-            user = buildNewUser(null,userName,1000,0,0,0,0,0,new Date(),new Date(), new Date());
+            user = buildNewUser(null,userName,1000,0,0,0,0,0,0,0,new Date(),new Date(), new Date());
         } else {
             user = getUserById(userId);
         }
@@ -43,6 +43,11 @@ public class UserService extends BaseService {
                 playerInfo.setUserId(userId);
                 playerInfo.setUserName(userName);
                 playerInfo.setRank(user.getRank());
+                playerInfo.setLosing(user.getLosingCount());
+                playerInfo.setWinning(user.getWinningCount());
+                playerInfo.setWinCount(user.getWinCount());
+                playerInfo.setLoseCount(user.getLoseCount());
+                playerInfo.setDraw(user.getDrawCount());
                 req.setPlayerInfo(playerInfo);
                 String md5String = MD5Util.md5(token + userId+DemoConstants.PRIVATE_KEY); 
                 req.setSign(md5String);
@@ -61,8 +66,8 @@ public class UserService extends BaseService {
     }
 
     private User buildNewUser(Integer id, String userName,int rank, int gold, int diamond, int winCount, int loseCount, 
-        int drawCount ,Date lastLoginTime,Date updateTime, Date createTime) {
-        User user = new User(id,userName,rank,gold,diamond,winCount,loseCount,drawCount,lastLoginTime,updateTime,createTime);
+        int drawCount , int winningCount, int losingCount ,Date lastLoginTime,Date updateTime, Date createTime) {
+        User user = new User(id,userName,rank,gold,diamond,winCount,loseCount,drawCount,winningCount,losingCount,lastLoginTime,updateTime,createTime);
         cacheJDBCHandler.create(TableName.USER.getTableName(), user, user);
         return user;
     }

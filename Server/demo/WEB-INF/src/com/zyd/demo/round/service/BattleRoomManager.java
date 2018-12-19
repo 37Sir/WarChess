@@ -70,7 +70,6 @@ public class BattleRoomManager extends BaseService {
 	public void addNewBattleRoom(BattleRoom battleRoom) {
 		try {
 			Long roomId = nosqlService.getNoSql().incr("FIRE_BATTLE_ROOM_INCR");
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + roomId);
 			battleRoom.roomId = roomId;
 			battleRoomMap.put(roomId, battleRoom);
 			for (UserMatchInfo userMatchInfo : battleRoom.getUserMatchInfoList()) {

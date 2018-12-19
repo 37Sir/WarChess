@@ -80,6 +80,11 @@ message PlayerInfo {
 	optional string userName = 1; 
 	optional int32 userId = 2;
 	optional int32 rank = 3; //玩家分数
+	optional int32 winning = 4 ; //玩家连胜场数
+	optional int32 losing = 5; //玩家连输场数
+	optional int32 winCount = 6 ; //玩家胜利场数
+	optional int32 loseCount = 7; //玩家输的场数
+	optional int32 draw = 8 ; //玩家和局场数
 }
 
 //排行榜请求
@@ -95,6 +100,7 @@ message PlayerRankListResponse {
 message RankInfo {
 	optional int32 rank = 1; //rank分数
 	optional string name = 2; //玩家姓名
+	optional int32 ranking = 3 ; //排行名次
 }
 
 
