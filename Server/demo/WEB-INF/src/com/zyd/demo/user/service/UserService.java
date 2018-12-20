@@ -134,18 +134,18 @@ public class UserService extends BaseService {
         return res;
     }
     public Builder buildGetPlayerRankResopnse(User user) {
-      GetPlayerRankResopnse.Builder res = GetPlayerRankResopnse.newBuilder();
-      res.setRank(getUserRank(user));
-      return res;
+        GetPlayerRankResopnse.Builder res = GetPlayerRankResopnse.newBuilder();
+        res.setRank(getUserRank(user));
+        return res;
     }
     public GetPlayerInfoResponse.Builder buildGetPlayerInfoResponse(
         User user) throws Exception {
-      GetPlayerInfoResponse.Builder  res  = GetPlayerInfoResponse.newBuilder();
-      PlayerInfo.Builder playerInfo = buildeplayerInfo(user);      
-      playerInfo.setFirstWin(getFitstWin());
-      int r = getUserRank(user);
-      playerInfo.setUserRank(r);
-      res.setPlayerInfo(playerInfo);
-      return res;
+        GetPlayerInfoResponse.Builder  res  = GetPlayerInfoResponse.newBuilder();
+        PlayerInfo.Builder playerInfo = buildeplayerInfo(user);      
+        playerInfo.setFirstWin(getFitstWin());
+        int r = getUserRank(user);
+        playerInfo.setUserRank(r);
+        res.setPlayerInfo(playerInfo);
+        return res;
     }
 }

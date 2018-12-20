@@ -12729,7 +12729,7 @@ public final class WarChess {
    * Protobuf type {@code com.zyd.common.proto.client.PlayerStartPush}
    *
    * <pre>
-   ** 匹配完成,玩家进入匹配房间推送 
+   ** 匹配完成,玩家进入准备的推送 
    * </pre>
    */
   public static final class PlayerStartPush extends
@@ -13080,7 +13080,7 @@ public final class WarChess {
      * Protobuf type {@code com.zyd.common.proto.client.PlayerStartPush}
      *
      * <pre>
-     ** 匹配完成,玩家进入匹配房间推送 
+     ** 匹配完成,玩家进入准备的推送 
      * </pre>
      */
     public static final class Builder extends
@@ -16165,6 +16165,42 @@ public final class WarChess {
      */
     com.google.protobuf.ByteString
         getUserNameBytes();
+
+    // optional bool isWinning = 3;
+    /**
+     * <code>optional bool isWinning = 3;</code>
+     *
+     * <pre>
+     *true:连胜 false : 连跪
+     * </pre>
+     */
+    boolean hasIsWinning();
+    /**
+     * <code>optional bool isWinning = 3;</code>
+     *
+     * <pre>
+     *true:连胜 false : 连跪
+     * </pre>
+     */
+    boolean getIsWinning();
+
+    // optional int32 count = 4;
+    /**
+     * <code>optional int32 count = 4;</code>
+     *
+     * <pre>
+     *玩家连胜或者连负次数
+     * </pre>
+     */
+    boolean hasCount();
+    /**
+     * <code>optional int32 count = 4;</code>
+     *
+     * <pre>
+     *玩家连胜或者连负次数
+     * </pre>
+     */
+    int getCount();
   }
   /**
    * Protobuf type {@code com.zyd.common.proto.client.PlayerMes}
@@ -16229,6 +16265,16 @@ public final class WarChess {
             case 18: {
               bitField0_ |= 0x00000002;
               userName_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              isWinning_ = input.readBool();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              count_ = input.readInt32();
               break;
             }
           }
@@ -16338,9 +16384,59 @@ public final class WarChess {
       }
     }
 
+    // optional bool isWinning = 3;
+    public static final int ISWINNING_FIELD_NUMBER = 3;
+    private boolean isWinning_;
+    /**
+     * <code>optional bool isWinning = 3;</code>
+     *
+     * <pre>
+     *true:连胜 false : 连跪
+     * </pre>
+     */
+    public boolean hasIsWinning() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional bool isWinning = 3;</code>
+     *
+     * <pre>
+     *true:连胜 false : 连跪
+     * </pre>
+     */
+    public boolean getIsWinning() {
+      return isWinning_;
+    }
+
+    // optional int32 count = 4;
+    public static final int COUNT_FIELD_NUMBER = 4;
+    private int count_;
+    /**
+     * <code>optional int32 count = 4;</code>
+     *
+     * <pre>
+     *玩家连胜或者连负次数
+     * </pre>
+     */
+    public boolean hasCount() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional int32 count = 4;</code>
+     *
+     * <pre>
+     *玩家连胜或者连负次数
+     * </pre>
+     */
+    public int getCount() {
+      return count_;
+    }
+
     private void initFields() {
       userId_ = 0;
       userName_ = "";
+      isWinning_ = false;
+      count_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -16364,6 +16460,12 @@ public final class WarChess {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getUserNameBytes());
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBool(3, isWinning_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, count_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -16380,6 +16482,14 @@ public final class WarChess {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, getUserNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, isWinning_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, count_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -16505,6 +16615,10 @@ public final class WarChess {
         bitField0_ = (bitField0_ & ~0x00000001);
         userName_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
+        isWinning_ = false;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        count_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
@@ -16541,6 +16655,14 @@ public final class WarChess {
           to_bitField0_ |= 0x00000002;
         }
         result.userName_ = userName_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.isWinning_ = isWinning_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.count_ = count_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -16564,6 +16686,12 @@ public final class WarChess {
           bitField0_ |= 0x00000002;
           userName_ = other.userName_;
           onChanged();
+        }
+        if (other.hasIsWinning()) {
+          setIsWinning(other.getIsWinning());
+        }
+        if (other.hasCount()) {
+          setCount(other.getCount());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -16715,6 +16843,104 @@ public final class WarChess {
   }
   bitField0_ |= 0x00000002;
         userName_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional bool isWinning = 3;
+      private boolean isWinning_ ;
+      /**
+       * <code>optional bool isWinning = 3;</code>
+       *
+       * <pre>
+       *true:连胜 false : 连跪
+       * </pre>
+       */
+      public boolean hasIsWinning() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional bool isWinning = 3;</code>
+       *
+       * <pre>
+       *true:连胜 false : 连跪
+       * </pre>
+       */
+      public boolean getIsWinning() {
+        return isWinning_;
+      }
+      /**
+       * <code>optional bool isWinning = 3;</code>
+       *
+       * <pre>
+       *true:连胜 false : 连跪
+       * </pre>
+       */
+      public Builder setIsWinning(boolean value) {
+        bitField0_ |= 0x00000004;
+        isWinning_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool isWinning = 3;</code>
+       *
+       * <pre>
+       *true:连胜 false : 连跪
+       * </pre>
+       */
+      public Builder clearIsWinning() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        isWinning_ = false;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 count = 4;
+      private int count_ ;
+      /**
+       * <code>optional int32 count = 4;</code>
+       *
+       * <pre>
+       *玩家连胜或者连负次数
+       * </pre>
+       */
+      public boolean hasCount() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional int32 count = 4;</code>
+       *
+       * <pre>
+       *玩家连胜或者连负次数
+       * </pre>
+       */
+      public int getCount() {
+        return count_;
+      }
+      /**
+       * <code>optional int32 count = 4;</code>
+       *
+       * <pre>
+       *玩家连胜或者连负次数
+       * </pre>
+       */
+      public Builder setCount(int value) {
+        bitField0_ |= 0x00000008;
+        count_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 count = 4;</code>
+       *
+       * <pre>
+       *玩家连胜或者连负次数
+       * </pre>
+       */
+      public Builder clearCount() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        count_ = 0;
         onChanged();
         return this;
       }
@@ -17831,9 +18057,10 @@ public final class WarChess {
       "\017\n\007winRank\030\004 \001(\005\022\020\n\010loseRank\030\005 \001(\005\"Y\n\tBa" +
       "ttleMes\022\017\n\007PlayNum\030\001 \001(\005\022\014\n\004from\030\002 \001(\005\022\n" +
       "\n\002to\030\003 \001(\005\022\016\n\006userId\030\004 \001(\005\022\021\n\tpromption\030" +
-      "\005 \001(\005\"-\n\tPlayerMes\022\016\n\006userId\030\001 \002(\005\022\020\n\010us" +
-      "erName\030\002 \001(\t\" \n\016OnePlayerReady\022\016\n\006userId" +
-      "\030\001 \002(\005\" \n\016PlayerNotReady\022\016\n\006userId\030\001 \003(\005"
+      "\005 \001(\005\"O\n\tPlayerMes\022\016\n\006userId\030\001 \002(\005\022\020\n\010us" +
+      "erName\030\002 \001(\t\022\021\n\tisWinning\030\003 \001(\010\022\r\n\005count" +
+      "\030\004 \001(\005\" \n\016OnePlayerReady\022\016\n\006userId\030\001 \002(\005" +
+      "\" \n\016PlayerNotReady\022\016\n\006userId\030\001 \003(\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -18037,7 +18264,7 @@ public final class WarChess {
           internal_static_com_zyd_common_proto_client_PlayerMes_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerMes_descriptor,
-              new java.lang.String[] { "UserId", "UserName", });
+              new java.lang.String[] { "UserId", "UserName", "IsWinning", "Count", });
           internal_static_com_zyd_common_proto_client_OnePlayerReady_descriptor =
             getDescriptor().getMessageTypes().get(33);
           internal_static_com_zyd_common_proto_client_OnePlayerReady_fieldAccessorTable = new

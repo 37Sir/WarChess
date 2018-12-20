@@ -157,7 +157,7 @@ message ServerBattleMesPush{
 }
 
 
-/** 匹配完成,玩家进入匹配房间推送 */
+/** 匹配完成,玩家进入准备的推送 */
 message PlayerStartPush{
 	/** 游戏玩家信息*/
 	repeated PlayerMes playerMes = 1;
@@ -199,10 +199,10 @@ message BattleMes{
 /** 游戏玩家信息*/
 message PlayerMes{
 	/** 玩家id*/
-	required int32 userId = 1;
-	
+	required int32 userId = 1;	
 	optional string userName = 2;
-
+	optional bool isWinning = 3; //true:连胜 false : 连跪
+	optional int32 count = 4 ; //玩家连胜或者连负次数
 }
 
 message OnePlayerReady {

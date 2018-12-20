@@ -39,6 +39,7 @@ import com.zyd.demo.common.enumuration.PushReqestName;
 import com.zyd.demo.common.exception.BaseException;
 import com.zyd.demo.round.pojo.UserMatchInfo;
 import com.zyd.demo.user.pojo.User;
+import com.zyd.demo.user.service.UserService;
 
 
 // 对战房间
@@ -122,6 +123,14 @@ public class BattleRoom {
 			PlayerMes.Builder playerBuilder = PlayerMes.newBuilder();
 			playerBuilder.setUserId(userMatchInfo.getUid());
 			playerBuilder.setUserName(userMatchInfo.getToken());
+			User u = commonService.getUserById(userMatchInfo.getUid());
+			if (u.getLosingCount() > 0) {
+			    playerBuilder.setIsWinning(false);
+			    playerBuilder.setCount(u.getLosingCount());
+			} else {
+                playerBuilder.setIsWinning(true);
+                playerBuilder.setCount(u.getWinningCount());			    
+			}
 			builder.addPlayerMes(playerBuilder);
 		}
 		builder.setUserId(startUserId);
