@@ -4,6 +4,9 @@ import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import com.zyd.common.proto.client.ClientProtocol.ErrorCode;
+import com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse;
+import com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse;
+import com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse.Builder;
 import com.zyd.common.proto.client.ClientProtocol.LoginResponse;
 import com.zyd.common.proto.client.ClientProtocol.PlayerInfo;
 import com.zyd.common.proto.client.ClientProtocol.PlayerRankListResponse;
@@ -41,7 +44,10 @@ public class UserService extends BaseService {
             try {
                 user.setLastLoginTime(new Date());
                 PlayerInfo.Builder playerInfo = buildeplayerInfo(user);
+                 
                 playerInfo.setFirstWin(getFitstWin());
+                int r = getUserRank(user);
+                playerInfo.setUserRank(r);
                 req.setPlayerInfo(playerInfo);
                 String md5String = MD5Util.md5(token + userId+DemoConstants.PRIVATE_KEY); 
                 req.setSign(md5String);
@@ -56,6 +62,11 @@ public class UserService extends BaseService {
     /**计算先手胜率
      * @throws Exception */
     public double getFitstWin() throws Exception {
+        if (!nosqlService.getNoSql().exists("FIRST_WIN_COUNT")
+            || !nosqlService.getNoSql().exists("FIRST_LOSE_COUNT")) {
+            commonService.insertFirstLoseCount();
+            commonService.insertFirstWinCount();
+        }
         Long win = commonService.getFirstWinCount();
         Long lose = commonService.getFirstLoseCount();
         DecimalFormat df = new DecimalFormat("#.00");
@@ -75,6 +86,7 @@ public class UserService extends BaseService {
         playerInfo.setWinCount(user.getWinCount());
         playerInfo.setLoseCount(user.getLoseCount());
         playerInfo.setDraw(user.getDrawCount());
+        playerInfo.setAllCount(user.getWinCount() + user.getLoseCount() + user.getDrawCount() );
         return playerInfo;
     }
     public User getUserById(Integer userId) {
@@ -101,8 +113,12 @@ public class UserService extends BaseService {
     public List<User> getRankList(){
         return cacheJDBCHandler.getRankList();
     }
-
-    public PlayerRankListResponse.Builder buildPlayerRankListResponse() {
+    //玩家排名
+    public int getUserRank(User user) {
+      return cacheJDBCHandler.getUserRankList(user);
+    }
+    
+    public PlayerRankListResponse.Builder buildPlayerRankListResponse(User user) {
         PlayerRankListResponse.Builder res = PlayerRankListResponse.newBuilder();
         List<User> rankList = getRankList();
         for (int i = 0; i< rankList.size() ; i++) {
@@ -113,6 +129,23 @@ public class UserService extends BaseService {
             rankInfo.setRanking(i+1);
             res.addRankInfo(rankInfo);
         }
+        res.setRank(user.getRank());
+        res.setUserRank(getUserRank(user));
         return res;
+    }
+    public Builder buildGetPlayerRankResopnse(User user) {
+      GetPlayerRankResopnse.Builder res = GetPlayerRankResopnse.newBuilder();
+      res.setRank(getUserRank(user));
+      return res;
+    }
+    public GetPlayerInfoResponse.Builder buildGetPlayerInfoResponse(
+        User user) throws Exception {
+      GetPlayerInfoResponse.Builder  res  = GetPlayerInfoResponse.newBuilder();
+      PlayerInfo.Builder playerInfo = buildeplayerInfo(user);      
+      playerInfo.setFirstWin(getFitstWin());
+      int r = getUserRank(user);
+      playerInfo.setUserRank(r);
+      res.setPlayerInfo(playerInfo);
+      return res;
     }
 }
