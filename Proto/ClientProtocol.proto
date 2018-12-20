@@ -85,6 +85,7 @@ message PlayerInfo {
 	optional int32 winCount = 6 ; //玩家胜利场数
 	optional int32 loseCount = 7; //玩家输的场数
 	optional int32 draw = 8 ; //玩家和局场数
+	optional double firstWin = 9 ; //玩家先手胜率
 }
 
 //排行榜请求

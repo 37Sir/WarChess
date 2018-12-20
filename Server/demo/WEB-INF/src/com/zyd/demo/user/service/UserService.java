@@ -1,5 +1,6 @@
 package com.zyd.demo.user.service;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import com.zyd.common.proto.client.ClientProtocol.ErrorCode;
@@ -19,7 +20,7 @@ import com.zyd.demo.user.pojo.User;
 public class UserService extends BaseService {
 
     @SuppressWarnings("unused")
-    public LoginResponse.Builder login(String userName,String token) throws BaseException {
+    public LoginResponse.Builder login(String userName,String token) throws Exception {
         LoginResponse.Builder req = LoginResponse.newBuilder();
         //验证用户名的合法性
         if (userName == null || "".equals(userName) || userName.length() > DemoConstants.USER_NICK_NAME_MAX_LENGTH) {
@@ -39,15 +40,8 @@ public class UserService extends BaseService {
         if (ConfigurationUtil.infoLock.tryLock(String.valueOf(userId))) {
             try {
                 user.setLastLoginTime(new Date());
-                PlayerInfo.Builder playerInfo = PlayerInfo.newBuilder();
-                playerInfo.setUserId(userId);
-                playerInfo.setUserName(userName);
-                playerInfo.setRank(user.getRank());
-                playerInfo.setLosing(user.getLosingCount());
-                playerInfo.setWinning(user.getWinningCount());
-                playerInfo.setWinCount(user.getWinCount());
-                playerInfo.setLoseCount(user.getLoseCount());
-                playerInfo.setDraw(user.getDrawCount());
+                PlayerInfo.Builder playerInfo = buildeplayerInfo(user);
+                playerInfo.setFirstWin(getFitstWin());
                 req.setPlayerInfo(playerInfo);
                 String md5String = MD5Util.md5(token + userId+DemoConstants.PRIVATE_KEY); 
                 req.setSign(md5String);
@@ -59,7 +53,30 @@ public class UserService extends BaseService {
         
         return req;
     }
-
+    /**计算先手胜率
+     * @throws Exception */
+    public double getFitstWin() throws Exception {
+        Long win = commonService.getFirstWinCount();
+        Long lose = commonService.getFirstLoseCount();
+        DecimalFormat df = new DecimalFormat("#.00");
+        double d = (double)win / (win +  lose);
+        String s = df.format(d*100);
+        return Double.parseDouble(s);
+    }
+    
+    /**构建玩家返回信息*/
+    public PlayerInfo.Builder buildeplayerInfo(User user){
+        PlayerInfo.Builder playerInfo = PlayerInfo.newBuilder();
+        playerInfo.setUserId(user.getId());
+        playerInfo.setUserName(user.getUserName());
+        playerInfo.setRank(user.getRank());
+        playerInfo.setLosing(user.getLosingCount());
+        playerInfo.setWinning(user.getWinningCount());
+        playerInfo.setWinCount(user.getWinCount());
+        playerInfo.setLoseCount(user.getLoseCount());
+        playerInfo.setDraw(user.getDrawCount());
+        return playerInfo;
+    }
     public User getUserById(Integer userId) {
         User result = cacheJDBCHandler.getDataByCacheNoSplit(TableName.USER.getTableName(), userId, User.class);
         return result;

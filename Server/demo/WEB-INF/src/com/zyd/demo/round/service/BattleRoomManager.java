@@ -213,8 +213,8 @@ public class BattleRoomManager extends BaseService {
 	}
 	
 	/**玩家交互的请求
-	 * @throws BaseException */
-	public void MutuallyFeedback(User user, boolean agree) throws BaseException {
+	 * @throws Exception */
+	public void MutuallyFeedback(User user, boolean agree) throws Exception {
         BattleRoom battleRoom = null;
         String userKey = user.getUserName();
         Long roomId = userToRoomIdMap.get(userKey);

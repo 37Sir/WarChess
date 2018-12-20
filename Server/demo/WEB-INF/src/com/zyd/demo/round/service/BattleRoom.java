@@ -492,8 +492,9 @@ public class BattleRoom {
 		return null;
 	}
 
-	/** 战斗结束 */
-	public void battleFinished(int userId) {
+	/** 战斗结束 
+	 * @throws Exception */
+	public void battleFinished(int userId) throws Exception {
 		PlayerEndPush.Builder builder = PlayerEndPush.newBuilder();
 		// 所有的桢信息
 //		for (BattleMes battleMes : serverBattleMesList) {
@@ -555,6 +556,8 @@ public class BattleRoom {
 				disrupOne(PushReqestName.PlayerEndPush, userMatchInfo, builder.build());
 			}
 		}
+		//计算先手胜负
+		calculateSenteWin();
         commonService.updateUser(u1);
         commonService.updateUser(u2);
 		battleStatus = BattleStatus.finished;
@@ -563,7 +566,17 @@ public class BattleRoom {
 		return;
 	}
 	
-	//处理连胜连输局数
+	private void calculateSenteWin() throws Exception {
+	    if (winUserId != 0) {
+	        if (winUserId == startUserId) {
+	            commonService.insertFirstWinCount(); 
+	        } else {
+	            commonService.insertFirstLoseCount();
+	        }
+	    }
+    }
+
+  /**处理连胜连输局数*/
 	private void doPlayerWinning(User u1, User u2) {
 	    if (isGiveUp == 4 || isGiveUp ==5  ) {
 	        u1.setWinningCount(0);
@@ -763,8 +776,8 @@ public class BattleRoom {
     }
     
     /**玩家交互的回复
-     * @throws BaseException */
-    public void onMutuallyFeedback(boolean agree, UserMatchInfo userMatchInfo) throws BaseException {
+     * @throws Exception */
+    public void onMutuallyFeedback(boolean agree, UserMatchInfo userMatchInfo) throws Exception {
         if (mutaully <= 0) {
             //没有交互信息请求
         } else if (!agree) {

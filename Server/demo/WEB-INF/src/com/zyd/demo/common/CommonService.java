@@ -44,4 +44,17 @@ public class CommonService extends BaseService {
 	public void updateUser(User u) {
 	    userService.updateUser(u);
 	}
+	
+	public Long insertFirstWinCount() throws Exception {
+	    return   nosqlService.getNoSql().incr("FIRST_WIN_COUNT");
+	}
+    public Long insertFirstLoseCount() throws Exception {
+        return   nosqlService.getNoSql().incr("FIRST_LOSE_COUNT");
+    }
+    public Long getFirstWinCount() throws Exception {
+        return Long.parseLong(nosqlService.getNoSql().get("FIRST_WIN_COUNT"));        
+    }
+    public Long getFirstLoseCount() throws Exception {
+      return Long.parseLong(nosqlService.getNoSql().get("FIRST_LOSE_COUNT"));        
+    }    
 }

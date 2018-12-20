@@ -4,7 +4,7 @@
     </description>
 
 	<property name="src" location="src" />
-	<property name="common" location="../common" />
+	<property name="common" location="../democommon" />
 	<property name="dist" location="dist" />
 	<property name="conf" location="conf" />
 	<property name="scripts" location="scripts" />

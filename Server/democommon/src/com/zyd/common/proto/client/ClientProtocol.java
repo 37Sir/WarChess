@@ -4681,6 +4681,24 @@ public final class ClientProtocol {
      * </pre>
      */
     int getDraw();
+
+    // optional double firstWin = 9;
+    /**
+     * <code>optional double firstWin = 9;</code>
+     *
+     * <pre>
+     *玩家先手胜率
+     * </pre>
+     */
+    boolean hasFirstWin();
+    /**
+     * <code>optional double firstWin = 9;</code>
+     *
+     * <pre>
+     *玩家先手胜率
+     * </pre>
+     */
+    double getFirstWin();
   }
   /**
    * Protobuf type {@code com.zyd.common.proto.client.PlayerInfo}
@@ -4771,6 +4789,11 @@ public final class ClientProtocol {
             case 64: {
               bitField0_ |= 0x00000080;
               draw_ = input.readInt32();
+              break;
+            }
+            case 73: {
+              bitField0_ |= 0x00000100;
+              firstWin_ = input.readDouble();
               break;
             }
           }
@@ -5016,6 +5039,30 @@ public final class ClientProtocol {
       return draw_;
     }
 
+    // optional double firstWin = 9;
+    public static final int FIRSTWIN_FIELD_NUMBER = 9;
+    private double firstWin_;
+    /**
+     * <code>optional double firstWin = 9;</code>
+     *
+     * <pre>
+     *玩家先手胜率
+     * </pre>
+     */
+    public boolean hasFirstWin() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional double firstWin = 9;</code>
+     *
+     * <pre>
+     *玩家先手胜率
+     * </pre>
+     */
+    public double getFirstWin() {
+      return firstWin_;
+    }
+
     private void initFields() {
       userName_ = "";
       userId_ = 0;
@@ -5025,6 +5072,7 @@ public final class ClientProtocol {
       winCount_ = 0;
       loseCount_ = 0;
       draw_ = 0;
+      firstWin_ = 0D;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5061,6 +5109,9 @@ public final class ClientProtocol {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeInt32(8, draw_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeDouble(9, firstWin_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -5102,6 +5153,10 @@ public final class ClientProtocol {
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(8, draw_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(9, firstWin_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5235,6 +5290,8 @@ public final class ClientProtocol {
         bitField0_ = (bitField0_ & ~0x00000040);
         draw_ = 0;
         bitField0_ = (bitField0_ & ~0x00000080);
+        firstWin_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -5295,6 +5352,10 @@ public final class ClientProtocol {
           to_bitField0_ |= 0x00000080;
         }
         result.draw_ = draw_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.firstWin_ = firstWin_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5336,6 +5397,9 @@ public final class ClientProtocol {
         }
         if (other.hasDraw()) {
           setDraw(other.getDraw());
+        }
+        if (other.hasFirstWin()) {
+          setFirstWin(other.getFirstWin());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5761,6 +5825,55 @@ public final class ClientProtocol {
       public Builder clearDraw() {
         bitField0_ = (bitField0_ & ~0x00000080);
         draw_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional double firstWin = 9;
+      private double firstWin_ ;
+      /**
+       * <code>optional double firstWin = 9;</code>
+       *
+       * <pre>
+       *玩家先手胜率
+       * </pre>
+       */
+      public boolean hasFirstWin() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional double firstWin = 9;</code>
+       *
+       * <pre>
+       *玩家先手胜率
+       * </pre>
+       */
+      public double getFirstWin() {
+        return firstWin_;
+      }
+      /**
+       * <code>optional double firstWin = 9;</code>
+       *
+       * <pre>
+       *玩家先手胜率
+       * </pre>
+       */
+      public Builder setFirstWin(double value) {
+        bitField0_ |= 0x00000100;
+        firstWin_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double firstWin = 9;</code>
+       *
+       * <pre>
+       *玩家先手胜率
+       * </pre>
+       */
+      public Builder clearFirstWin() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        firstWin_ = 0D;
         onChanged();
         return this;
       }
@@ -7700,32 +7813,32 @@ public final class ClientProtocol {
       "\003 \001(\t\" \n\014LoginRequest\022\020\n\010userName\030\001 \001(\t\"" +
       "Z\n\rLoginResponse\022;\n\nplayerInfo\030\001 \001(\0132\'.c" +
       "om.zyd.common.proto.client.PlayerInfo\022\014\n" +
-      "\004sign\030\002 \001(\t\"\220\001\n\nPlayerInfo\022\020\n\010userName\030\001" +
+      "\004sign\030\002 \001(\t\"\242\001\n\nPlayerInfo\022\020\n\010userName\030\001" +
       " \001(\t\022\016\n\006userId\030\002 \001(\005\022\014\n\004rank\030\003 \001(\005\022\017\n\007wi" +
       "nning\030\004 \001(\005\022\016\n\006losing\030\005 \001(\005\022\020\n\010winCount\030" +
-      "\006 \001(\005\022\021\n\tloseCount\030\007 \001(\005\022\014\n\004draw\030\010 \001(\005\"\027" +
-      "\n\025PlayerRankListRequest\"Q\n\026PlayerRankLis" +
-      "tResponse\0227\n\010rankInfo\030\001 \003(\0132%.com.zyd.co",
-      "mmon.proto.client.RankInfo\"7\n\010RankInfo\022\014" +
-      "\n\004rank\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007ranking\030\003 " +
-      "\001(\005*-\n\013EDeviceType\022\010\n\004None\020\000\022\007\n\003IOS\020\001\022\013\n" +
-      "\007Android\020\002*\314\003\n\tErrorCode\022\020\n\014SERVER_ERROR" +
-      "\020\001\022\023\n\017SHOP_ITEM_WRONG\020\021\022\031\n\025PLAYER_RMB_NO" +
-      "T_ENOUGH\020\025\022\032\n\026PLAYER_GOLD_NOT_ENOUGH\020\026\022\031" +
-      "\n\025PARAMETER_NOT_CORRECT\0202\022\031\n\025SYSCONFIG_N" +
-      "OT_CORRECT\0203\022\020\n\014HACKER_ERROR\0207\022\021\n\014NOT_GE" +
-      "T_LOCK\020\254\002\022\032\n\025ACTIVATION_CODE_ERROR\020\255\002\022\035\n" +
-      "\030PLAYER_NOT_MATCH_SUCCESS\020\220\003\022\025\n\020PLAYER_N",
-      "OT_START\020\221\003\022\031\n\024PLAYER_ROOM_NOT_HAVA\020\222\003\022\030" +
-      "\n\023PLAYER_CAN_NOT_UNDO\020\223\003\022\026\n\021DUPLICATE_RE" +
-      "QUEST\020\274\005\022\022\n\rVERSION_ERROR\020\343\007\022\034\n\027DEVICE_T" +
-      "YPE_NOT_CORRECT\020\346\007\022\034\n\026NOT_HAVE_LAST_RESP" +
-      "ONSE\020\237\215\006\022\027\n\021SERVER_MAINTENACE\020\240\215\006*\247\001\n\014Rp" +
-      "cErrorCode\022\024\n\007UNKNOWN\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020INVA" +
-      "LID_PROTOCOL\020\376\377\377\377\377\377\377\377\377\001\022\030\n\013INVALID_ARG\020\375" +
-      "\377\377\377\377\377\377\377\377\001\022\024\n\007TIMEOUT\020\374\377\377\377\377\377\377\377\377\001\022\030\n\013SERVE" +
-      "R_BUSY\020\373\377\377\377\377\377\377\377\377\001\022\030\n\013PUSHTIMEOUT\020\372\377\377\377\377\377\377" +
-      "\377\377\001B\002H\001"
+      "\006 \001(\005\022\021\n\tloseCount\030\007 \001(\005\022\014\n\004draw\030\010 \001(\005\022\020" +
+      "\n\010firstWin\030\t \001(\001\"\027\n\025PlayerRankListReques" +
+      "t\"Q\n\026PlayerRankListResponse\0227\n\010rankInfo\030",
+      "\001 \003(\0132%.com.zyd.common.proto.client.Rank" +
+      "Info\"7\n\010RankInfo\022\014\n\004rank\030\001 \001(\005\022\014\n\004name\030\002" +
+      " \001(\t\022\017\n\007ranking\030\003 \001(\005*-\n\013EDeviceType\022\010\n\004" +
+      "None\020\000\022\007\n\003IOS\020\001\022\013\n\007Android\020\002*\314\003\n\tErrorCo" +
+      "de\022\020\n\014SERVER_ERROR\020\001\022\023\n\017SHOP_ITEM_WRONG\020" +
+      "\021\022\031\n\025PLAYER_RMB_NOT_ENOUGH\020\025\022\032\n\026PLAYER_G" +
+      "OLD_NOT_ENOUGH\020\026\022\031\n\025PARAMETER_NOT_CORREC" +
+      "T\0202\022\031\n\025SYSCONFIG_NOT_CORRECT\0203\022\020\n\014HACKER" +
+      "_ERROR\0207\022\021\n\014NOT_GET_LOCK\020\254\002\022\032\n\025ACTIVATIO" +
+      "N_CODE_ERROR\020\255\002\022\035\n\030PLAYER_NOT_MATCH_SUCC",
+      "ESS\020\220\003\022\025\n\020PLAYER_NOT_START\020\221\003\022\031\n\024PLAYER_" +
+      "ROOM_NOT_HAVA\020\222\003\022\030\n\023PLAYER_CAN_NOT_UNDO\020" +
+      "\223\003\022\026\n\021DUPLICATE_REQUEST\020\274\005\022\022\n\rVERSION_ER" +
+      "ROR\020\343\007\022\034\n\027DEVICE_TYPE_NOT_CORRECT\020\346\007\022\034\n\026" +
+      "NOT_HAVE_LAST_RESPONSE\020\237\215\006\022\027\n\021SERVER_MAI" +
+      "NTENACE\020\240\215\006*\247\001\n\014RpcErrorCode\022\024\n\007UNKNOWN\020" +
+      "\377\377\377\377\377\377\377\377\377\001\022\035\n\020INVALID_PROTOCOL\020\376\377\377\377\377\377\377\377\377" +
+      "\001\022\030\n\013INVALID_ARG\020\375\377\377\377\377\377\377\377\377\001\022\024\n\007TIMEOUT\020\374" +
+      "\377\377\377\377\377\377\377\377\001\022\030\n\013SERVER_BUSY\020\373\377\377\377\377\377\377\377\377\001\022\030\n\013P" +
+      "USHTIMEOUT\020\372\377\377\377\377\377\377\377\377\001B\002H\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7767,7 +7880,7 @@ public final class ClientProtocol {
           internal_static_com_zyd_common_proto_client_PlayerInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerInfo_descriptor,
-              new java.lang.String[] { "UserName", "UserId", "Rank", "Winning", "Losing", "WinCount", "LoseCount", "Draw", });
+              new java.lang.String[] { "UserName", "UserId", "Rank", "Winning", "Losing", "WinCount", "LoseCount", "Draw", "FirstWin", });
           internal_static_com_zyd_common_proto_client_PlayerRankListRequest_descriptor =
             getDescriptor().getMessageTypes().get(6);
           internal_static_com_zyd_common_proto_client_PlayerRankListRequest_fieldAccessorTable = new
