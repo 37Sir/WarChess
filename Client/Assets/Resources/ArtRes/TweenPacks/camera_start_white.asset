@@ -15,7 +15,7 @@ MonoBehaviour:
   Attributes:
   - TweenName: rotate_start
     TweenType: 2
-    EaseType: 1
+    EaseType: 7
     To: {x: 50, y: 0, z: 0}
     Color: {r: 1, g: 1, b: 1, a: 1}
     Fade: 1
@@ -30,7 +30,7 @@ MonoBehaviour:
     isNeedFrom: 0
   - TweenName: move_start
     TweenType: 9
-    EaseType: 1
+    EaseType: 7
     To: {x: 0, y: 37, z: -23}
     Color: {r: 1, g: 1, b: 1, a: 1}
     Fade: 1

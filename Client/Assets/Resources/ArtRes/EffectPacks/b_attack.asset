@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a16b8b12f738ab94d8a0fbc786b5736c, type: 3}
   m_Name: b_attack
   m_EditorClassIdentifier: 
-  LifeTime: 2
+  LifeTime: 5
   IsLoop: 0
   IsFadeOut: 0
   IsPlaySync: 0

@@ -35,7 +35,14 @@ public class LoginCommand : SimpleCommand
         var playerInfo = response.PlayerInfo;
         var userName = playerInfo.UserName;
         var userId = playerInfo.UserId;
-        m_userProxy.SetPlayerInfo(userName, userId);
+        var rank = playerInfo.Rank;
+        var winning = playerInfo.Winning;
+        var losing = playerInfo.Losing;
+        var winCount = playerInfo.WinCount;
+        var loseCount = playerInfo.LoseCount;
+        var draw = playerInfo.Draw;
+
+        m_userProxy.SetPlayerInfo(userName, userId, rank, winning, losing, winCount, loseCount, draw);
         App.NetworkManager.UserId = userId;
         Debug.Log("Login Success ! UserName: " + userName + " UserId: " + userId);
 

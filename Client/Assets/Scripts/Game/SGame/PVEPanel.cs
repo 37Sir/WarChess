@@ -28,6 +28,7 @@ public class PVEPanel
     private Button m_test;
     private Button m_Undo;
     private Camera m_worldCamera;
+    private GameObject m_gameStartLogo;
     private TweenPlayer m_cameraTween;
 
     private Vector2 m_lastFrom;
@@ -70,6 +71,7 @@ public class PVEPanel
         m_enemyReady = gameObject.transform.Find("Container/m_EnemyReady").gameObject;
         m_test = gameObject.transform.Find("Container/test").GetComponent<Button>();
         m_Undo = gameObject.transform.Find("Container/m_Undo").GetComponent<Button>();
+        m_gameStartLogo = gameObject.transform.Find("Container/m_GameBegin").gameObject;
     }
 
     public void OpenView(object intent)
@@ -196,7 +198,6 @@ public class PVEPanel
     private void OnGameStart()
     {
         App.SoundManager.PlayBacksound(Config.Sound.InGameMain);
-        m_ready.gameObject.SetActive(false);
         m_enemyReady.gameObject.SetActive(false);
         m_mediator.InitBoardData();//初始化棋盘数据
         InitChessBoard();          //初始化棋盘表现
@@ -213,11 +214,11 @@ public class PVEPanel
         StopRoundTimer();
         if (loseColor == selfColor)
         {
-            App.UIManager.OpenPanel("ResultPanel", Config.GameResult.LOSE);
+            App.UIManager.OpenPanel("ResultPanel", new object[] {Config.GameResult.LOSE, "-100"});
         }
         else
         {
-            App.UIManager.OpenPanel("ResultPanel", Config.GameResult.WIN);
+            App.UIManager.OpenPanel("ResultPanel", new object[] { Config.GameResult.WIN, "+100" });
         }      
     }
 
@@ -271,7 +272,15 @@ public class PVEPanel
     private void OnReadyClick()
     {
         App.SoundManager.PlaySoundClip(Config.Sound.Click1);
-        m_cameraTween.SetTweenPack("camera_start_white");
+        m_ready.gameObject.SetActive(false);
+        m_cameraTween.SetTweenPackSync("camera_start_white");      
+        var clip = m_cameraTween.GetClipTween("move_start");
+        clip.SetOnComplete(OnCameratweenComplete, null);      
+    }
+
+    private void OnCameratweenComplete(object[] args)
+    {
+        m_gameStartLogo.SetActive(true);
         OnGameStart();
     }
 

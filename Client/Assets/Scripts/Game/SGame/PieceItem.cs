@@ -194,7 +194,8 @@ public class PieceItem:MonoBehaviour
                 else
                 {
                     m_mediator.NotityDragEnd(m_body);
-                    ShowMove(to, tempEat);
+                    object[] args = new object[] { new Vector2(m_X, m_Z), to, new Vector2(-1, tempEat) };//0:from, 1:to, 2.x:兵生变类型 -1为没有， 2.y:吃棋信息
+                    ShowMove(args);
                     App.SoundManager.PlaySoundClip(Config.Sound.DragSuccess);
                 }              
             }
@@ -222,8 +223,12 @@ public class PieceItem:MonoBehaviour
     /// 自己走棋
     /// </summary>
     /// <param name="to"></param>
-    private void ShowMove(Vector2 to, int eatPiece = -1)
+    private void ShowMove(object[] args)
     {
+        var eatPiece = ((Vector2)args[2]).y;
+        var to = (Vector2)args[1];
+        var from = (Vector2)args[0];
+
         if (m_TweenPlayer == null)
         {
             m_TweenPlayer = gameObject.AddComponent<TweenPlayer>();
@@ -232,7 +237,7 @@ public class PieceItem:MonoBehaviour
         //有棋子播放攻击表现
         if (eatPiece > -1)
         {
-            ShowAttack(to);
+            ShowAttack(args);
         }
 
         //没有棋子直接走
@@ -241,8 +246,9 @@ public class PieceItem:MonoBehaviour
             Tween move_pos = m_TweenPlayer.AddClip("move", 2);
             move_pos.SetTweenType(TweenType.LocalPosition);
             move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
-            move_pos.SetDuration(1);
-            move_pos.SetOnComplete(OnCompleteMove, null);
+            var steps = CalMoveSteps(from, to);
+            move_pos.SetDuration(steps * 0.5f);
+            move_pos.SetOnComplete(OnCompleteMove, args);
             m_TweenPlayer.StartPlay();
         }      
     }
@@ -251,27 +257,30 @@ public class PieceItem:MonoBehaviour
     /// 攻击表现
     /// </summary>
     /// <param name="to"></param>
-    private void ShowAttack(Vector2 to)
+    private void ShowAttack(object[] args)
     {
+        var from = (Vector2)args[0];
+        var to = (Vector2)args[1];
+
         switch (m_type)
         {
             case Config.PieceType.B:
-                OnRemoteAttack("b_attack", to);
+                OnRemoteAttack("b_attack", args);
                 break;
             case Config.PieceType.K:
-                OnRemoteAttack("b_attack", to);
+                OnMeleeAttack("b_attack", from, args);
                 break;
             case Config.PieceType.Q:
-                OnRemoteAttack("b_attack", to);
+                OnRemoteAttack("b_attack", args);
                 break;
             case Config.PieceType.N:
-                OnRemoteAttack("b_attack", to);
+                OnMeleeAttack("b_attack", from, args);
                 break;
             case Config.PieceType.P:
-                OnRemoteAttack("b_attack", to);
+                OnMeleeAttack("b_attack", from, args);
                 break;
             case Config.PieceType.R:
-                OnRemoteAttack("b_attack", to);
+                OnRemoteAttack("b_attack", args);
                 break;
 
         }
@@ -282,20 +291,23 @@ public class PieceItem:MonoBehaviour
     /// </summary>
     /// <param name="effectName"></param>
     /// <param name="to"></param>
-    private void OnRemoteAttack(string effectName, Vector2 to)
+    private void OnRemoteAttack(string effectName, object[] args)
     {
+        var to = (Vector2)args[1];
+        var from = (Vector2)args[0];
         if(m_pieceAnimator == null)
         {
             m_pieceAnimator = pieceModel.GetComponent<Animator>();
         }
         m_pieceAnimator.Play("Attack");
         EffectPlayer effectPlayer = App.EffectManager.LoadEffect(m_Attack, effectName);
-
+        effectPlayer.IsOnce = true;
         TweenPlayer m_AttackPlayer = m_Attack.AddComponent<TweenPlayer>();
-        Tween attackTween = m_AttackPlayer.AddClip("attack", 1.2f);
+        var steps = CalMoveSteps(from, to);
+        Tween attackTween = m_AttackPlayer.AddClip("attack", steps * 0.2f);
         attackTween.SetTweenType(TweenType.LocalPosition);
         attackTween.SetDelayTime(0.8f);
-        attackTween.SetOnComplete(OnRemoteAttackComplete, new object[] {to});
+        attackTween.SetOnComplete(OnRemoteAttackComplete, args);
         var dx = -Config.PieceWidth * (to.x - m_X);
         var dy = -Config.PieceWidth * (to.y - m_Z);
         attackTween.SetTo(new Vector3(dx, m_Attack.transform.localPosition.y, dy));
@@ -312,31 +324,39 @@ public class PieceItem:MonoBehaviour
     /// <summary>
     /// 近战攻击
     /// </summary>
-    private void OnMeleeAttack(string effectName, Vector2 to)
+    private void OnMeleeAttack(string effectName, Vector2 attackPoint, object[] args)
     {
-        Tween move_pos = m_TweenPlayer.AddClip("move", 1);
+        var from = (Vector2)args[0];
+        var to = (Vector2)args[1];
+        var steps = CalMoveSteps(from, to);
+        Tween move_pos = m_TweenPlayer.AddClip("move", steps * 0.5f);
         move_pos.SetTweenType(TweenType.LocalPosition);
-        move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
-        move_pos.SetOnComplete(OnMeleeMoveComplete, new object[] {to, effectName});
+        move_pos.SetTo(new Vector3((attackPoint.x - 1) * Config.PieceWidth, 0, (attackPoint.y - 1) * Config.PieceWidth));
+        move_pos.SetOnComplete(OnMeleeMoveComplete, args);
         m_TweenPlayer.StartPlay();
     }
 
     private void OnRemoteAttackComplete(object[] args)
     {
+        m_Attack.GetComponent<EffectPlayer>().enabled = false;
         InitAttackPoint();
-        var to = (Vector2)args[0];
+        var to = (Vector2)args[1];
+        var from = (Vector2)args[0];
         var item = GameObject.Find(to.x + "_" + to.y);
         item.GetComponent<PieceItem>().BeAttached();
-
+        
         Tween move_pos = m_TweenPlayer.AddClip("move", 1);
+        move_pos.SetDelayTime(0.5f);
+        var steps = CalMoveSteps(from, to);
+        move_pos.SetDuration(steps * 0.6f);
         move_pos.SetTweenType(TweenType.LocalPosition);
         move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
-        move_pos.SetOnComplete(OnCompleteMove, null);
+        move_pos.SetOnComplete(OnCompleteMove, args);
         m_TweenPlayer.StartPlay();
     }
 
     /// <summary>
-    /// 近战移动
+    /// 近战走到攻击点
     /// </summary>
     /// <param name="args"></param>
     private void OnMeleeMoveComplete(object[] args)
@@ -346,12 +366,11 @@ public class PieceItem:MonoBehaviour
             m_pieceAnimator = pieceModel.GetComponent<Animator>();
         }
         m_pieceAnimator.Play("Attack");
-
-        var to = (Vector2)args[0];
+        var to = (Vector2)args[1];
         Tween move_pos = m_TweenPlayer.AddClip("move", 1);
         move_pos.SetTweenType(TweenType.LocalPosition);
         move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
-        move_pos.SetOnComplete(OnCompleteMove, null);
+        move_pos.SetOnComplete(OnCompleteMove, args);
         m_TweenPlayer.StartPlay();
     }
 
@@ -375,7 +394,8 @@ public class PieceItem:MonoBehaviour
 
     private void OnCompleteMove(object args)
     {
-        Vector2[] body = new Vector2[] { new Vector2((float)m_body[0], (float)m_body[1]), (Vector2)m_body[3], new Vector2(0, 0) };
+        var temp = (object[])args;
+        Vector2[] body = new Vector2[] { (Vector2)temp[0], (Vector2)temp[1], (Vector2)temp[2] };
         m_mediator.NotifyMoveEnd(body);
         if (isPVE == false)
         {
@@ -424,20 +444,35 @@ public class PieceItem:MonoBehaviour
     {
         if(from.x == m_X && from.y == m_Z)
         {
+            var targetPiece = App.ChessLogic.GetPiece(to.x - 1, to.y - 1);//目标位置棋子
             if (App.ChessLogic.DoMove(new Vector2(from.x - 1, from.y - 1), new Vector2(to.x - 1, to.y - 1)))
             {
                 if (m_TweenPlayer == null)
                 {
                     m_TweenPlayer = gameObject.AddComponent<TweenPlayer>();
                 }
-                Tween move_pos = m_TweenPlayer.AddClip("move", 2);
-                move_pos.SetTweenType(TweenType.LocalPosition);
-                move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
-                move_pos.SetDuration(1);
-                move_pos.SetOnComplete(OnOtherMoveComplete, null);
-                m_TweenPlayer.StartPlay();
-                m_otherBody = new Vector2[] { from, to, type };
-                Debug.Log("正常移动！！ fromx: " + from.x + "fromy" + from.y);
+
+                var args = new object[] { from, to, new Vector2(type.x, targetPiece) };
+                //攻击表现
+                if(targetPiece > -1)
+                {
+                    ShowAttack(args);
+                }
+
+                //正常走棋
+                else
+                {
+                    
+                    Tween move_pos = m_TweenPlayer.AddClip("move", 2);
+                    move_pos.SetTweenType(TweenType.LocalPosition);
+                    move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
+                    var steps = CalMoveSteps(from, to);
+                    move_pos.SetDuration(steps * 0.5f);
+                    move_pos.SetOnComplete(OnOtherMoveComplete, null);
+                    m_TweenPlayer.StartPlay();
+                    m_otherBody = new Vector2[] { from, to, type };
+                    Debug.Log("正常移动！！ fromx: " + from.x + "fromy" + from.y);
+                }
             }
             else
             {
@@ -452,6 +487,17 @@ public class PieceItem:MonoBehaviour
         if (isPVE == false)
         {
             m_mediator.NotifyEndTurn();
+        }
+    }
+
+    private float CalMoveSteps(Vector2 from, Vector2 to)
+    {
+        var stepX = Math.Abs(from.x - to.x);
+        var stepY = Math.Abs(from.y - to.y);
+        if (stepX > stepY) return stepX;
+        else
+        {
+            return stepY;
         }
     }
 

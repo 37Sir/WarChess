@@ -27,6 +27,7 @@ public class PVPPanel
     private Image m_enemyImage;
     private Button m_test;
     private Camera m_worldCamera;
+    private GameObject m_gameStartLogo;
     private TweenPlayer m_cameraTween;
     private Button m_Undo;
 
@@ -87,6 +88,7 @@ public class PVPPanel
         m_enemyReady = gameObject.transform.Find("Container/m_EnemyReady").gameObject;
         m_test = gameObject.transform.Find("Container/test").GetComponent<Button>();
         m_Undo = gameObject.transform.Find("Container/m_Undo").GetComponent<Button>();
+        m_gameStartLogo = gameObject.transform.Find("Container/m_GameBegin").gameObject;
     }
 
     public void OpenView(object intent)
@@ -102,7 +104,6 @@ public class PVPPanel
         else
         {
             isTurn = false;
-            //m_worldCamera.transform.localRotation = Quaternion.Euler(90, 180, 0);
             m_pvpProxy.SetSelfColor(Config.PieceColor.BLACK);
         }
         m_userImage.GetComponentInChildren<Text>().text = m_proxy.GetPlayerName();
@@ -260,20 +261,23 @@ public class PVPPanel
         var pushMes = PlayerEndPush.ParseFrom(packet[0]);
         var winId = pushMes.WinUserId;
         var result = pushMes.Result;
+        var winScore = pushMes.WinRank;
+        var loseScore = pushMes.LoseRank;
         Debug.Log("GameOver!!");
+        App.SoundManager.StopBackSound();
         if(result >= 6)
         {
-            App.UIManager.OpenPanel("ResultPanel", Config.GameResult.DRAW);
+            App.UIManager.OpenPanel("ResultPanel", new object[] { Config.GameResult.DRAW, "0" });
         }
         else
         {
             if (winId == m_proxy.GetPlayerId())
             {
-                App.UIManager.OpenPanel("ResultPanel", Config.GameResult.WIN);
+                App.UIManager.OpenPanel("ResultPanel", new object[] { Config.GameResult.WIN, "+" + winScore });
             }
             else
             {
-                App.UIManager.OpenPanel("ResultPanel", Config.GameResult.LOSE);
+                App.UIManager.OpenPanel("ResultPanel", new object[] { Config.GameResult.LOSE, "-" + loseScore });
             }
         }
         StopRoundTimer();
@@ -336,20 +340,17 @@ public class PVPPanel
         m_ready.gameObject.SetActive(false);
     }
 
+    #region OnClick Method
+
     private void OnReadyClick()
     {
-        App.SoundManager.PlaySoundClip(Config.Sound.Click1);
-        if(isTurn == true)
-        {
-            m_cameraTween.SetTweenPack("camera_start_white");
-        }
-        else
-        {
-            m_cameraTween.SetTweenPack("camera_start_black");
-        }      
+        App.SoundManager.PlaySoundClip(Config.Sound.Click1);    
         m_mediator.NotifySelfReady();
     }
 
+    /// <summary>
+    /// 点击悔棋按钮
+    /// </summary>
     private void OnUndoClick()
     {
         Debug.Log("OnUndoClick");
@@ -357,7 +358,9 @@ public class PVPPanel
         m_mediator.NotifyRequestUndo();
     }
 
-    #region Private Method
+    #endregion
+
+    #region Coroutine Method
     private void StartRoundTimer()
     {
         if (m_roundTimer == null)
@@ -405,8 +408,10 @@ public class PVPPanel
             m_roundTimer = null;
         }
     }
+
     #endregion
 
+    #region Push Listener
     public void OnPlayerNotReady(string name, List<byte[]> packet)
     {
         App.Facade.RemoveMediator("PVPPanelMediator");
@@ -450,6 +455,57 @@ public class PVPPanel
             roundNum--;
         }
     }
+
+
+    public void OnPlayerNotAgreePush(string name, List<byte[]> packet)
+    {
+        Debug.Log("对方不同意悔棋!!");
+    }
+
+    public void OnPlayUndoNextPush(string name, List<byte[]> packet)
+    {
+        Debug.Log("Push:On PLayerUndoNext");
+    }
+
+    public void OnOnePlayerReady(string name, List<byte[]> packet)
+    {
+        m_enemyReady.SetActive(true);
+    }
+
+    public void OnReadyFinish(string name, List<byte[]> packet)
+    {
+        if (isTurn == true)
+        {
+            m_cameraTween.SetTweenPackSync("camera_start_white");
+        }
+        else
+        {
+            m_cameraTween.SetTweenPackSync("camera_start_black");
+        }
+        var clip = m_cameraTween.GetClipTween("move_start");
+        clip.SetOnComplete(OnCameratweenComplete, null);
+        Debug.Log("Push:On Ready Finish");
+    }
+
+    private void OnCameratweenComplete(object[] args)
+    {
+        m_gameStartLogo.SetActive(true);
+        OnGameStart();
+    }
+
+    public void OnNextPlay(string name, List<byte[]> packet)
+    {
+        Debug.Log("Push:OnNextPlayPush");
+        if (isTurn == true)
+        {
+            EndCurRound();
+        }
+        else
+        {
+            OnRoundStart();
+        }
+    }
+    #endregion
 
     /// <summary>
     /// 棋子复活
@@ -512,53 +568,27 @@ public class PVPPanel
         });
     }
 
-    public void OnPlayerNotAgreePush(string name, List<byte[]> packet)
-    {
-        Debug.Log("对方不同意悔棋!!");
-    }  
 
-    public void OnPlayerAgreePush(string name, List<byte[]> packet)
-    {
-        Debug.Log("Push:On Player Agree");
-    }
-
-    public void OnPlayUndoNextPush(string name, List<byte[]> packet)
-    {
-        Debug.Log("Push:On PLayerUndoNext");
-    }
-
-    public void OnOnePlayerReady(string name, List<byte[]> packet)
-    {
-        m_enemyReady.SetActive(true);
-    }
-
-    public void OnReadyFinish(string name, List<byte[]> packet)
-    {
-        OnGameStart();
-        Debug.Log("Push:On Ready Finish");
-    }
-
-    public void OnNextPlay(string name, List<byte[]> packet)
-    {
-        Debug.Log("Push:OnNextPlayPush");
-        if (isTurn == true)
-        {
-            EndCurRound();
-        }
-        else
-        {
-            OnRoundStart();
-        }
-    }
 
     public void CloseView()
     {
 
     }
 
+    private void RemovePush()
+    {
+        App.NetworkManager.RemovePushCall(Config.PushMessage.OtherMove);
+        App.NetworkManager.RemovePushCall(Config.PushMessage.OnePlayerReady);
+        App.NetworkManager.RemovePushCall(Config.PushMessage.PlayerNotReady);
+        App.NetworkManager.RemovePushCall(Config.PushMessage.PlayerReadyFinish);
+        App.NetworkManager.RemovePushCall(Config.PushMessage.PlayNext);
+        App.NetworkManager.RemovePushCall(Config.PushMessage.PlayerEnd);
+    }
+
     public void DestroyView()
     {
         App.Facade.RemoveMediator(m_mediator.MediatorName);
+        RemovePush();
     }
 
     ///index转坐标 且棋盘翻转

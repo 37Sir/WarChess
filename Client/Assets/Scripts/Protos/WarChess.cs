@@ -9423,8 +9423,8 @@ namespace com.zyd.common.proto.client {
   public sealed partial class PlayerEndPush : pb::GeneratedMessageLite<PlayerEndPush, PlayerEndPush.Builder> {
     private PlayerEndPush() { }
     private static readonly PlayerEndPush defaultInstance = new PlayerEndPush().MakeReadOnly();
-    private static readonly string[] _playerEndPushFieldNames = new string[] { "battleMes", "result", "winUserId" };
-    private static readonly uint[] _playerEndPushFieldTags = new uint[] { 18, 24, 8 };
+    private static readonly string[] _playerEndPushFieldNames = new string[] { "battleMes", "loseRank", "result", "winRank", "winUserId" };
+    private static readonly uint[] _playerEndPushFieldTags = new uint[] { 18, 40, 24, 32, 8 };
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
@@ -9485,6 +9485,32 @@ namespace com.zyd.common.proto.client {
     }
     
     #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int WinRankFieldNumber = 4;
+    private bool hasWinRank;
+    private int winRank_;
+    public bool HasWinRank {
+      get { return hasWinRank; }
+    }
+    public int WinRank {
+      get { return winRank_; }
+    }
+    
+    #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int LoseRankFieldNumber = 5;
+    private bool hasLoseRank;
+    private int loseRank_;
+    public bool HasLoseRank {
+      get { return hasLoseRank; }
+    }
+    public int LoseRank {
+      get { return loseRank_; }
+    }
+    
+    #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
     public override bool IsInitialized {
@@ -9500,13 +9526,19 @@ namespace com.zyd.common.proto.client {
       int size = SerializedSize;
       string[] field_names = _playerEndPushFieldNames;
       if (hasWinUserId) {
-        output.WriteInt32(1, field_names[2], WinUserId);
+        output.WriteInt32(1, field_names[4], WinUserId);
       }
       if (battleMes_.Count > 0) {
         output.WriteMessageArray(2, field_names[0], battleMes_);
       }
       if (hasResult) {
-        output.WriteInt32(3, field_names[1], Result);
+        output.WriteInt32(3, field_names[2], Result);
+      }
+      if (hasWinRank) {
+        output.WriteInt32(4, field_names[3], WinRank);
+      }
+      if (hasLoseRank) {
+        output.WriteInt32(5, field_names[1], LoseRank);
       }
     }
     
@@ -9529,6 +9561,12 @@ namespace com.zyd.common.proto.client {
         if (hasResult) {
           size += pb::CodedOutputStream.ComputeInt32Size(3, Result);
         }
+        if (hasWinRank) {
+          size += pb::CodedOutputStream.ComputeInt32Size(4, WinRank);
+        }
+        if (hasLoseRank) {
+          size += pb::CodedOutputStream.ComputeInt32Size(5, LoseRank);
+        }
         memoizedSerializedSize = size;
         return size;
       }
@@ -9541,6 +9579,8 @@ namespace com.zyd.common.proto.client {
       foreach(global::com.zyd.common.proto.client.BattleMes i in battleMes_)
         hash ^= i.GetHashCode();
       if (hasResult) hash ^= result_.GetHashCode();
+      if (hasWinRank) hash ^= winRank_.GetHashCode();
+      if (hasLoseRank) hash ^= loseRank_.GetHashCode();
       return hash;
     }
     
@@ -9552,6 +9592,8 @@ namespace com.zyd.common.proto.client {
       for(int ix=0; ix < battleMes_.Count; ix++)
         if(!battleMes_[ix].Equals(other.battleMes_[ix])) return false;
       if (hasResult != other.hasResult || (hasResult && !result_.Equals(other.result_))) return false;
+      if (hasWinRank != other.hasWinRank || (hasWinRank && !winRank_.Equals(other.winRank_))) return false;
+      if (hasLoseRank != other.hasLoseRank || (hasLoseRank && !loseRank_.Equals(other.loseRank_))) return false;
       return true;
     }
     
@@ -9722,6 +9764,12 @@ namespace com.zyd.common.proto.client {
         if (other.HasResult) {
           Result = other.Result;
         }
+        if (other.HasWinRank) {
+          WinRank = other.WinRank;
+        }
+        if (other.HasLoseRank) {
+          LoseRank = other.LoseRank;
+        }
         return this;
       }
       
@@ -9764,6 +9812,14 @@ namespace com.zyd.common.proto.client {
             }
             case 24: {
               result.hasResult = input.ReadInt32(ref result.result_);
+              break;
+            }
+            case 32: {
+              result.hasWinRank = input.ReadInt32(ref result.winRank_);
+              break;
+            }
+            case 40: {
+              result.hasLoseRank = input.ReadInt32(ref result.loseRank_);
               break;
             }
           }
@@ -9854,6 +9910,46 @@ namespace com.zyd.common.proto.client {
         PrepareBuilder();
         result.hasResult = false;
         result.result_ = 0;
+        return this;
+      }
+      
+      public bool HasWinRank {
+        get { return result.hasWinRank; }
+      }
+      public int WinRank {
+        get { return result.WinRank; }
+        set { SetWinRank(value); }
+      }
+      public Builder SetWinRank(int value) {
+        PrepareBuilder();
+        result.hasWinRank = true;
+        result.winRank_ = value;
+        return this;
+      }
+      public Builder ClearWinRank() {
+        PrepareBuilder();
+        result.hasWinRank = false;
+        result.winRank_ = 0;
+        return this;
+      }
+      
+      public bool HasLoseRank {
+        get { return result.hasLoseRank; }
+      }
+      public int LoseRank {
+        get { return result.LoseRank; }
+        set { SetLoseRank(value); }
+      }
+      public Builder SetLoseRank(int value) {
+        PrepareBuilder();
+        result.hasLoseRank = true;
+        result.loseRank_ = value;
+        return this;
+      }
+      public Builder ClearLoseRank() {
+        PrepareBuilder();
+        result.hasLoseRank = false;
+        result.loseRank_ = 0;
         return this;
       }
     }

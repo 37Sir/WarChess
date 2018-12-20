@@ -86,6 +86,26 @@ public class TweenPlayer : MonoBehaviour {
     }
 
     /// <summary>
+    /// 设置动画包
+    /// </summary>
+    /// <param name="packName">动画包的名字</param>
+    /// <param name="isAuto">是否自动播放</param>
+    public TweenPack SetTweenPackSync(string packName, bool isAuto = true)//todo
+    {
+        enabled = false;
+        m_loadingTweens.Clear();
+        string tweenPackPath = Config.TweenPacksLoadRoot + "/" + packName;
+        var tweenPack = Resources.Load<TweenPack>(tweenPackPath);
+        m_TweenPack = tweenPack;
+        foreach (TweenPack.Attribute attribute in m_TweenPack.Attributes)
+        {
+            PrePlay(attribute);
+        }
+        enabled = isAuto;
+        return tweenPack;
+    }
+
+    /// <summary>
     /// 获取动画片段
     /// </summary>
     /// <param name="clipName">片段的名字</param>

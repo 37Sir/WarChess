@@ -202,6 +202,14 @@ namespace Framework
             }
         }
 
+        public void RemovePushCall(string name)
+        {
+            if (m_pushCallMap.ContainsKey("#" + name))
+            {
+                m_pushCallMap.Remove("#" + name);
+            }
+        }
+
         #endregion Public Method
 
         #region Private Method

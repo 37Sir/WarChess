@@ -1,4 +1,5 @@
-﻿using PureMVC.Patterns.Proxy;
+﻿using com.zyd.common.proto.client;
+using PureMVC.Patterns.Proxy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ public class PVPProxy : Proxy
 {
     public new static string NAME = "PVPProxy";
     private PVPPackage m_pvpData;
+
 
     public PVPProxy() : base(NAME)
     {
@@ -76,5 +78,28 @@ public class PVPProxy : Proxy
             return Config.PieceColor.BLACK;
         }
     }
+
+    public List<RankList> GetRankListData()
+    {
+        return m_pvpData.RankListData;
+    }
+
+    public void SetRankListData(PlayerRankListResponse data)
+    {
+        List<RankList> temp = new List<RankList>();
+        var count = data.RankInfoCount;
+        for(int i = 0; i < count; i++)
+        {
+            var rankData = data.GetRankInfo(i);
+            RankList rankInfo = new RankList();
+            rankInfo.index = rankData.Ranking;
+            rankInfo.userName = rankData.Name;
+            rankInfo.rank = rankData.Rank;
+
+            temp.Add(rankInfo);
+        }
+        m_pvpData.RankListData = temp;
+    }
+
 }
 

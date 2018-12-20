@@ -116,7 +116,10 @@ public class LobbyPanel
     {
         for(int i = 0; i < Config.Game.WaitingFindEnemy; i++)
         {
-            m_SearchTime.text = "(" + (Config.Game.WaitingFindEnemy - i) + "s)";
+            if (m_SearchTime != null)
+            {
+                m_SearchTime.text = "(" + (Config.Game.WaitingFindEnemy - i) + "s)";
+            }
             yield return new WaitForSeconds(1);
         }
     }
@@ -125,7 +128,10 @@ public class LobbyPanel
     {
         for (int i = 0; i < Config.Game.WaitingFindEnemy * 2; i++)
         {
-            m_bird.sprite = Resources.Load<Sprite>("ArtRes/Common/c1logo" + (i % 2 + 1).ToString());
+            if (m_bird != null)
+            {
+                m_bird.sprite = Resources.Load<Sprite>("ArtRes/Common/c1logo" + (i % 2 + 1).ToString());
+            }
             yield return new WaitForSeconds(0.5f);
         }
     }

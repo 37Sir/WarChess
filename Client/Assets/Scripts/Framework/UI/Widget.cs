@@ -16,6 +16,7 @@ namespace Framework
             base.InitView(args);
             Assembly assembly = Assembly.GetExecutingAssembly();
             m_object = assembly.CreateInstance(viewName);
+            m_objectType = Type.GetType(viewName);
             if (gameObject.activeSelf)
             {
                 StartCoroutine(OnInitView(args));

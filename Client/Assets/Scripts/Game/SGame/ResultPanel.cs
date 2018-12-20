@@ -14,6 +14,8 @@ public class ResultPanel
     private GameObject m_WinState;
     private GameObject m_LoseState;
     private GameObject m_DrawState;
+    private GameObject m_Reward;
+    private Text m_RewardNum;
 
     private GameObject m_object;
     private ResultPanelMediator m_mediator;
@@ -30,17 +32,20 @@ public class ResultPanel
 
     private void InitUIBinder(GameObject gameObject)
     {
-        m_Back = gameObject.transform.Find("Container/m_Back").GetComponent<Button>();
         m_WinState = gameObject.transform.Find("Container/m_ResultState/m_WinState").gameObject;
         m_LoseState = gameObject.transform.Find("Container/m_ResultState/m_LoseState").gameObject;
         m_DrawState = gameObject.transform.Find("Container/m_ResultState/m_DrawState").gameObject;
+        m_Reward = gameObject.transform.Find("Container/m_Reward").gameObject;
+        m_Back = m_Reward.transform.Find("m_Back").GetComponent<Button>();
+        m_RewardNum = m_Reward.transform.Find("m_Num").GetComponent<Text>();
     }
 
     public void OpenView(object intent)
-    {
+    {    
         if (intent != null)
         {
-            var state = (Config.GameResult)intent;
+            var temp = (object[])intent;
+            var state = (Config.GameResult)temp[0];
             if(state == Config.GameResult.LOSE)
             {
                 m_WinState.SetActive(false);
@@ -59,6 +64,7 @@ public class ResultPanel
                 m_DrawState.SetActive(false);
                 m_LoseState.SetActive(false);
             }
+            m_RewardNum.text = (string)temp[1];
         }
         App.SoundManager.PlaySoundClip(Config.Sound.GameWin);
     }

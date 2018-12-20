@@ -20,6 +20,11 @@ public class SceneLoader
     {
         App.UIManager.BindUIControl();
         App.UIManager.RegisterPanel("SLobby", "LobbyPanel", UILayerType.NormalLayer, false);
+        App.UIManager.RegisterPanel("SLobby", "UserInfoPanel", UILayerType.TopLayer, false);
+        App.UIManager.RegisterPanel("SLobby", "RankListPanel", UILayerType.TopLayer, false);
+        App.UIManager.RegisterPanel("SLobby", "UserSimpleInfoPanel", UILayerType.TopLayer, false);
+
+        App.UIManager.OpenPanel("UserSimpleInfoPanel");
         App.UIManager.OpenPanel("LobbyPanel");
     }
 

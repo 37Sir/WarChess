@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+public class RankList
+{
+    public string userName;
+    public int rank;
+    public int index;
+}
+
 public sealed class PVPPackage
 {
     private int m_userId;
@@ -13,6 +20,20 @@ public sealed class PVPPackage
 
     private int m_firstId;
     private Config.PieceColor m_selfColor;
+
+    private List<RankList> m_rankListData;
+
+    public List<RankList> RankListData
+    {
+        get
+        {
+            return m_rankListData;
+        }
+        set
+        {
+            m_rankListData = value;
+        }
+    }
 
     public int FirstId
     {
