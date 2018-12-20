@@ -107,7 +107,24 @@ public class Redis implements NoSql {
               logger.debug("{}\t decr use:\t{}\tms", key, System.currentTimeMillis() - logStartTime);
           }
       }  
-      
+      @Override
+      public boolean exists(String key) throws Exception {
+          logStartTime = System.currentTimeMillis();
+          Jedis jedis = null;
+          try {
+              jedis = pool.getResource();
+              return jedis.exists(key);
+          } catch (Exception e) {
+              logger.error("redis error: " + e);
+              pool.returnBrokenResource(jedis);
+              throw e;
+          }finally{
+              if(null != jedis){
+                  pool.returnResource(jedis);
+              }
+              logger.info("{}\t exists use:\t{}\tms",key,System.currentTimeMillis()-logStartTime);
+          }
+      }
       @Override
       public void shutdown() {
           logStartTime = System.currentTimeMillis();

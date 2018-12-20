@@ -58,7 +58,7 @@
 		<tstamp prefix="buildtime" >    
 			<format property="TimeSign" pattern="yyyyMMddHHmmss" />    
 		</tstamp>  
-		<tar destfile="${dist}/gateway_${buildtime.TimeSign}.tar" basedir="${dist}"/>
+		<tar destfile="${dist}/demogetway_${buildtime.TimeSign}.tar" basedir="${dist}"/>
 	</target>
 	<target name="version" description="Record build information">
 		<exec executable="svnversion" outputproperty="svnversion" />

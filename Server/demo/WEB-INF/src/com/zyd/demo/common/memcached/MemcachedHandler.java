@@ -233,7 +233,10 @@ public class MemcachedHandler {
     }
     
     
-    
+    //玩家排行信息
+    public int getUserRankList (User u){
+        return mapperHelper.getUserMapper().selectByUserRank(u);
+    } 
     /**
      * 对象转byte
      * @param obj

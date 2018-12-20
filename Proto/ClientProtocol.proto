@@ -86,6 +86,8 @@ message PlayerInfo {
 	optional int32 loseCount = 7; //玩家输的场数
 	optional int32 draw = 8 ; //玩家和局场数
 	optional double firstWin = 9 ; //玩家先手胜率
+	optional int32 userRank = 10 ; //玩家排行
+	optional int32 allCount = 11; //玩家总局数
 }
 
 //排行榜请求
@@ -96,6 +98,8 @@ message PlayerRankListRequest{
 //排行版返回
 message PlayerRankListResponse {
 	repeated RankInfo rankInfo = 1;//排行版信息
+	optional int32 rank = 2; //玩家自己的rank分
+	optional int32 userRank = 3; //玩家自己排名
 }
 
 message RankInfo {
@@ -104,4 +108,16 @@ message RankInfo {
 	optional int32 ranking = 3 ; //排行名次
 }
 
+//获取玩家数据请求
+message GetPlayerInfoRequest{
+}
+message GetPlayerInfoResponse{
+	optional PlayerInfo playerInfo = 1;
+}
+//获取玩家排名
+message GetPlayerRankRequest{
 
+}
+message GetPlayerRankResopnse{
+	optional int32 rank = 1; 
+}

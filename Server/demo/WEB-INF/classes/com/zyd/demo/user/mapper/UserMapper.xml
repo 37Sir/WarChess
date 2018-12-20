@@ -34,6 +34,22 @@
     from user
     order by rank desc limit 10
   </select>
+  <select id="selectByUserRank" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+  SELECT rownum from 
+	(SELECT
+	obj.id,obj.rank,@rownum := @rownum + 1 AS rownum
+	FROM
+		(
+		SELECT
+		id,rank
+		FROM
+		`user`
+		ORDER BY rank DESC
+		) AS obj,
+	(SELECT @rownum := 0) r
+	)
+	as ww WHERE id = #{id,jdbcType=INTEGER}
+  </select>
   <select id="selectByName" resultType="java.lang.Integer" parameterType="java.lang.String" >
     select 
     id

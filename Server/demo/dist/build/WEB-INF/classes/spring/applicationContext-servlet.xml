@@ -33,6 +33,12 @@
 	<bean id="PlayerBattleMes" class="com.zyd.demo.round.servlet.PlayerBattleMes"
 		parent="baseClientServlet">
 	</bean>
+	<bean id="GetPlayerRank" class="com.zyd.demo.user.servlet.GetPlayerRank"
+		parent="baseClientServlet">
+	</bean>
+	<bean id="GetPlayerInfo" class="com.zyd.demo.user.servlet.GetPlayerInfo"
+		parent="baseClientServlet">
+	</bean>
 	<!-- user -->
 	<bean id="test" class="com.zyd.demo.round.servlet.test"
 		parent="baseClientServlet">

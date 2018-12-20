@@ -4699,6 +4699,42 @@ public final class ClientProtocol {
      * </pre>
      */
     double getFirstWin();
+
+    // optional int32 userRank = 10;
+    /**
+     * <code>optional int32 userRank = 10;</code>
+     *
+     * <pre>
+     *玩家排行
+     * </pre>
+     */
+    boolean hasUserRank();
+    /**
+     * <code>optional int32 userRank = 10;</code>
+     *
+     * <pre>
+     *玩家排行
+     * </pre>
+     */
+    int getUserRank();
+
+    // optional int32 allCount = 11;
+    /**
+     * <code>optional int32 allCount = 11;</code>
+     *
+     * <pre>
+     *玩家总局数
+     * </pre>
+     */
+    boolean hasAllCount();
+    /**
+     * <code>optional int32 allCount = 11;</code>
+     *
+     * <pre>
+     *玩家总局数
+     * </pre>
+     */
+    int getAllCount();
   }
   /**
    * Protobuf type {@code com.zyd.common.proto.client.PlayerInfo}
@@ -4794,6 +4830,16 @@ public final class ClientProtocol {
             case 73: {
               bitField0_ |= 0x00000100;
               firstWin_ = input.readDouble();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000200;
+              userRank_ = input.readInt32();
+              break;
+            }
+            case 88: {
+              bitField0_ |= 0x00000400;
+              allCount_ = input.readInt32();
               break;
             }
           }
@@ -5063,6 +5109,54 @@ public final class ClientProtocol {
       return firstWin_;
     }
 
+    // optional int32 userRank = 10;
+    public static final int USERRANK_FIELD_NUMBER = 10;
+    private int userRank_;
+    /**
+     * <code>optional int32 userRank = 10;</code>
+     *
+     * <pre>
+     *玩家排行
+     * </pre>
+     */
+    public boolean hasUserRank() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional int32 userRank = 10;</code>
+     *
+     * <pre>
+     *玩家排行
+     * </pre>
+     */
+    public int getUserRank() {
+      return userRank_;
+    }
+
+    // optional int32 allCount = 11;
+    public static final int ALLCOUNT_FIELD_NUMBER = 11;
+    private int allCount_;
+    /**
+     * <code>optional int32 allCount = 11;</code>
+     *
+     * <pre>
+     *玩家总局数
+     * </pre>
+     */
+    public boolean hasAllCount() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional int32 allCount = 11;</code>
+     *
+     * <pre>
+     *玩家总局数
+     * </pre>
+     */
+    public int getAllCount() {
+      return allCount_;
+    }
+
     private void initFields() {
       userName_ = "";
       userId_ = 0;
@@ -5073,6 +5167,8 @@ public final class ClientProtocol {
       loseCount_ = 0;
       draw_ = 0;
       firstWin_ = 0D;
+      userRank_ = 0;
+      allCount_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5112,6 +5208,12 @@ public final class ClientProtocol {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeDouble(9, firstWin_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(10, userRank_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeInt32(11, allCount_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -5157,6 +5259,14 @@ public final class ClientProtocol {
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeDoubleSize(9, firstWin_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, userRank_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(11, allCount_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5292,6 +5402,10 @@ public final class ClientProtocol {
         bitField0_ = (bitField0_ & ~0x00000080);
         firstWin_ = 0D;
         bitField0_ = (bitField0_ & ~0x00000100);
+        userRank_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        allCount_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
 
@@ -5356,6 +5470,14 @@ public final class ClientProtocol {
           to_bitField0_ |= 0x00000100;
         }
         result.firstWin_ = firstWin_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.userRank_ = userRank_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.allCount_ = allCount_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5400,6 +5522,12 @@ public final class ClientProtocol {
         }
         if (other.hasFirstWin()) {
           setFirstWin(other.getFirstWin());
+        }
+        if (other.hasUserRank()) {
+          setUserRank(other.getUserRank());
+        }
+        if (other.hasAllCount()) {
+          setAllCount(other.getAllCount());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5878,6 +6006,104 @@ public final class ClientProtocol {
         return this;
       }
 
+      // optional int32 userRank = 10;
+      private int userRank_ ;
+      /**
+       * <code>optional int32 userRank = 10;</code>
+       *
+       * <pre>
+       *玩家排行
+       * </pre>
+       */
+      public boolean hasUserRank() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional int32 userRank = 10;</code>
+       *
+       * <pre>
+       *玩家排行
+       * </pre>
+       */
+      public int getUserRank() {
+        return userRank_;
+      }
+      /**
+       * <code>optional int32 userRank = 10;</code>
+       *
+       * <pre>
+       *玩家排行
+       * </pre>
+       */
+      public Builder setUserRank(int value) {
+        bitField0_ |= 0x00000200;
+        userRank_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 userRank = 10;</code>
+       *
+       * <pre>
+       *玩家排行
+       * </pre>
+       */
+      public Builder clearUserRank() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        userRank_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 allCount = 11;
+      private int allCount_ ;
+      /**
+       * <code>optional int32 allCount = 11;</code>
+       *
+       * <pre>
+       *玩家总局数
+       * </pre>
+       */
+      public boolean hasAllCount() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional int32 allCount = 11;</code>
+       *
+       * <pre>
+       *玩家总局数
+       * </pre>
+       */
+      public int getAllCount() {
+        return allCount_;
+      }
+      /**
+       * <code>optional int32 allCount = 11;</code>
+       *
+       * <pre>
+       *玩家总局数
+       * </pre>
+       */
+      public Builder setAllCount(int value) {
+        bitField0_ |= 0x00000400;
+        allCount_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 allCount = 11;</code>
+       *
+       * <pre>
+       *玩家总局数
+       * </pre>
+       */
+      public Builder clearAllCount() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        allCount_ = 0;
+        onChanged();
+        return this;
+      }
+
       // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.PlayerInfo)
     }
 
@@ -6253,6 +6479,42 @@ public final class ClientProtocol {
      */
     com.zyd.common.proto.client.ClientProtocol.RankInfoOrBuilder getRankInfoOrBuilder(
         int index);
+
+    // optional int32 rank = 2;
+    /**
+     * <code>optional int32 rank = 2;</code>
+     *
+     * <pre>
+     *玩家自己的rank分
+     * </pre>
+     */
+    boolean hasRank();
+    /**
+     * <code>optional int32 rank = 2;</code>
+     *
+     * <pre>
+     *玩家自己的rank分
+     * </pre>
+     */
+    int getRank();
+
+    // optional int32 userRank = 3;
+    /**
+     * <code>optional int32 userRank = 3;</code>
+     *
+     * <pre>
+     *玩家自己排名
+     * </pre>
+     */
+    boolean hasUserRank();
+    /**
+     * <code>optional int32 userRank = 3;</code>
+     *
+     * <pre>
+     *玩家自己排名
+     * </pre>
+     */
+    int getUserRank();
   }
   /**
    * Protobuf type {@code com.zyd.common.proto.client.PlayerRankListResponse}
@@ -6317,6 +6579,16 @@ public final class ClientProtocol {
               rankInfo_.add(input.readMessage(com.zyd.common.proto.client.ClientProtocol.RankInfo.PARSER, extensionRegistry));
               break;
             }
+            case 16: {
+              bitField0_ |= 0x00000001;
+              rank_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000002;
+              userRank_ = input.readInt32();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -6359,6 +6631,7 @@ public final class ClientProtocol {
       return PARSER;
     }
 
+    private int bitField0_;
     // repeated .com.zyd.common.proto.client.RankInfo rankInfo = 1;
     public static final int RANKINFO_FIELD_NUMBER = 1;
     private java.util.List<com.zyd.common.proto.client.ClientProtocol.RankInfo> rankInfo_;
@@ -6415,8 +6688,58 @@ public final class ClientProtocol {
       return rankInfo_.get(index);
     }
 
+    // optional int32 rank = 2;
+    public static final int RANK_FIELD_NUMBER = 2;
+    private int rank_;
+    /**
+     * <code>optional int32 rank = 2;</code>
+     *
+     * <pre>
+     *玩家自己的rank分
+     * </pre>
+     */
+    public boolean hasRank() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 rank = 2;</code>
+     *
+     * <pre>
+     *玩家自己的rank分
+     * </pre>
+     */
+    public int getRank() {
+      return rank_;
+    }
+
+    // optional int32 userRank = 3;
+    public static final int USERRANK_FIELD_NUMBER = 3;
+    private int userRank_;
+    /**
+     * <code>optional int32 userRank = 3;</code>
+     *
+     * <pre>
+     *玩家自己排名
+     * </pre>
+     */
+    public boolean hasUserRank() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 userRank = 3;</code>
+     *
+     * <pre>
+     *玩家自己排名
+     * </pre>
+     */
+    public int getUserRank() {
+      return userRank_;
+    }
+
     private void initFields() {
       rankInfo_ = java.util.Collections.emptyList();
+      rank_ = 0;
+      userRank_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6433,6 +6756,12 @@ public final class ClientProtocol {
       for (int i = 0; i < rankInfo_.size(); i++) {
         output.writeMessage(1, rankInfo_.get(i));
       }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(2, rank_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(3, userRank_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -6445,6 +6774,14 @@ public final class ClientProtocol {
       for (int i = 0; i < rankInfo_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, rankInfo_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, rank_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, userRank_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6573,6 +6910,10 @@ public final class ClientProtocol {
         } else {
           rankInfoBuilder_.clear();
         }
+        rank_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userRank_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -6600,6 +6941,7 @@ public final class ClientProtocol {
       public com.zyd.common.proto.client.ClientProtocol.PlayerRankListResponse buildPartial() {
         com.zyd.common.proto.client.ClientProtocol.PlayerRankListResponse result = new com.zyd.common.proto.client.ClientProtocol.PlayerRankListResponse(this);
         int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
         if (rankInfoBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
             rankInfo_ = java.util.Collections.unmodifiableList(rankInfo_);
@@ -6609,6 +6951,15 @@ public final class ClientProtocol {
         } else {
           result.rankInfo_ = rankInfoBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.rank_ = rank_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.userRank_ = userRank_;
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -6649,6 +7000,12 @@ public final class ClientProtocol {
               rankInfoBuilder_.addAllMessages(other.rankInfo_);
             }
           }
+        }
+        if (other.hasRank()) {
+          setRank(other.getRank());
+        }
+        if (other.hasUserRank()) {
+          setUserRank(other.getUserRank());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6987,6 +7344,104 @@ public final class ClientProtocol {
           rankInfo_ = null;
         }
         return rankInfoBuilder_;
+      }
+
+      // optional int32 rank = 2;
+      private int rank_ ;
+      /**
+       * <code>optional int32 rank = 2;</code>
+       *
+       * <pre>
+       *玩家自己的rank分
+       * </pre>
+       */
+      public boolean hasRank() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 rank = 2;</code>
+       *
+       * <pre>
+       *玩家自己的rank分
+       * </pre>
+       */
+      public int getRank() {
+        return rank_;
+      }
+      /**
+       * <code>optional int32 rank = 2;</code>
+       *
+       * <pre>
+       *玩家自己的rank分
+       * </pre>
+       */
+      public Builder setRank(int value) {
+        bitField0_ |= 0x00000002;
+        rank_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 rank = 2;</code>
+       *
+       * <pre>
+       *玩家自己的rank分
+       * </pre>
+       */
+      public Builder clearRank() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        rank_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 userRank = 3;
+      private int userRank_ ;
+      /**
+       * <code>optional int32 userRank = 3;</code>
+       *
+       * <pre>
+       *玩家自己排名
+       * </pre>
+       */
+      public boolean hasUserRank() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 userRank = 3;</code>
+       *
+       * <pre>
+       *玩家自己排名
+       * </pre>
+       */
+      public int getUserRank() {
+        return userRank_;
+      }
+      /**
+       * <code>optional int32 userRank = 3;</code>
+       *
+       * <pre>
+       *玩家自己排名
+       * </pre>
+       */
+      public Builder setUserRank(int value) {
+        bitField0_ |= 0x00000004;
+        userRank_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 userRank = 3;</code>
+       *
+       * <pre>
+       *玩家自己排名
+       * </pre>
+       */
+      public Builder clearUserRank() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        userRank_ = 0;
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.PlayerRankListResponse)
@@ -7745,6 +8200,1543 @@ public final class ClientProtocol {
     // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.RankInfo)
   }
 
+  public interface GetPlayerInfoRequestOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code com.zyd.common.proto.client.GetPlayerInfoRequest}
+   *
+   * <pre>
+   *获取玩家数据请求
+   * </pre>
+   */
+  public static final class GetPlayerInfoRequest extends
+      com.google.protobuf.GeneratedMessage
+      implements GetPlayerInfoRequestOrBuilder {
+    // Use GetPlayerInfoRequest.newBuilder() to construct.
+    private GetPlayerInfoRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private GetPlayerInfoRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final GetPlayerInfoRequest defaultInstance;
+    public static GetPlayerInfoRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public GetPlayerInfoRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private GetPlayerInfoRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerInfoRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerInfoRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest.class, com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<GetPlayerInfoRequest> PARSER =
+        new com.google.protobuf.AbstractParser<GetPlayerInfoRequest>() {
+      public GetPlayerInfoRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new GetPlayerInfoRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GetPlayerInfoRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.zyd.common.proto.client.GetPlayerInfoRequest}
+     *
+     * <pre>
+     *获取玩家数据请求
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerInfoRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerInfoRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest.class, com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest.Builder.class);
+      }
+
+      // Construct using com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerInfoRequest_descriptor;
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest getDefaultInstanceForType() {
+        return com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest.getDefaultInstance();
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest build() {
+        com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest buildPartial() {
+        com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest result = new com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest) {
+          return mergeFrom((com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest other) {
+        if (other == com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.GetPlayerInfoRequest)
+    }
+
+    static {
+      defaultInstance = new GetPlayerInfoRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.GetPlayerInfoRequest)
+  }
+
+  public interface GetPlayerInfoResponseOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;
+    /**
+     * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+     */
+    boolean hasPlayerInfo();
+    /**
+     * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+     */
+    com.zyd.common.proto.client.ClientProtocol.PlayerInfo getPlayerInfo();
+    /**
+     * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+     */
+    com.zyd.common.proto.client.ClientProtocol.PlayerInfoOrBuilder getPlayerInfoOrBuilder();
+  }
+  /**
+   * Protobuf type {@code com.zyd.common.proto.client.GetPlayerInfoResponse}
+   */
+  public static final class GetPlayerInfoResponse extends
+      com.google.protobuf.GeneratedMessage
+      implements GetPlayerInfoResponseOrBuilder {
+    // Use GetPlayerInfoResponse.newBuilder() to construct.
+    private GetPlayerInfoResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private GetPlayerInfoResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final GetPlayerInfoResponse defaultInstance;
+    public static GetPlayerInfoResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public GetPlayerInfoResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private GetPlayerInfoResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.zyd.common.proto.client.ClientProtocol.PlayerInfo.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = playerInfo_.toBuilder();
+              }
+              playerInfo_ = input.readMessage(com.zyd.common.proto.client.ClientProtocol.PlayerInfo.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(playerInfo_);
+                playerInfo_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerInfoResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerInfoResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse.class, com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<GetPlayerInfoResponse> PARSER =
+        new com.google.protobuf.AbstractParser<GetPlayerInfoResponse>() {
+      public GetPlayerInfoResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new GetPlayerInfoResponse(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GetPlayerInfoResponse> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;
+    public static final int PLAYERINFO_FIELD_NUMBER = 1;
+    private com.zyd.common.proto.client.ClientProtocol.PlayerInfo playerInfo_;
+    /**
+     * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+     */
+    public boolean hasPlayerInfo() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+     */
+    public com.zyd.common.proto.client.ClientProtocol.PlayerInfo getPlayerInfo() {
+      return playerInfo_;
+    }
+    /**
+     * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+     */
+    public com.zyd.common.proto.client.ClientProtocol.PlayerInfoOrBuilder getPlayerInfoOrBuilder() {
+      return playerInfo_;
+    }
+
+    private void initFields() {
+      playerInfo_ = com.zyd.common.proto.client.ClientProtocol.PlayerInfo.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, playerInfo_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, playerInfo_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.zyd.common.proto.client.GetPlayerInfoResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerInfoResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerInfoResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse.class, com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse.Builder.class);
+      }
+
+      // Construct using com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getPlayerInfoFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (playerInfoBuilder_ == null) {
+          playerInfo_ = com.zyd.common.proto.client.ClientProtocol.PlayerInfo.getDefaultInstance();
+        } else {
+          playerInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerInfoResponse_descriptor;
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse getDefaultInstanceForType() {
+        return com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse.getDefaultInstance();
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse build() {
+        com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse buildPartial() {
+        com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse result = new com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (playerInfoBuilder_ == null) {
+          result.playerInfo_ = playerInfo_;
+        } else {
+          result.playerInfo_ = playerInfoBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse) {
+          return mergeFrom((com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse other) {
+        if (other == com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse.getDefaultInstance()) return this;
+        if (other.hasPlayerInfo()) {
+          mergePlayerInfo(other.getPlayerInfo());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.zyd.common.proto.client.ClientProtocol.GetPlayerInfoResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;
+      private com.zyd.common.proto.client.ClientProtocol.PlayerInfo playerInfo_ = com.zyd.common.proto.client.ClientProtocol.PlayerInfo.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.zyd.common.proto.client.ClientProtocol.PlayerInfo, com.zyd.common.proto.client.ClientProtocol.PlayerInfo.Builder, com.zyd.common.proto.client.ClientProtocol.PlayerInfoOrBuilder> playerInfoBuilder_;
+      /**
+       * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+       */
+      public boolean hasPlayerInfo() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+       */
+      public com.zyd.common.proto.client.ClientProtocol.PlayerInfo getPlayerInfo() {
+        if (playerInfoBuilder_ == null) {
+          return playerInfo_;
+        } else {
+          return playerInfoBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+       */
+      public Builder setPlayerInfo(com.zyd.common.proto.client.ClientProtocol.PlayerInfo value) {
+        if (playerInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          playerInfo_ = value;
+          onChanged();
+        } else {
+          playerInfoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+       */
+      public Builder setPlayerInfo(
+          com.zyd.common.proto.client.ClientProtocol.PlayerInfo.Builder builderForValue) {
+        if (playerInfoBuilder_ == null) {
+          playerInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          playerInfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+       */
+      public Builder mergePlayerInfo(com.zyd.common.proto.client.ClientProtocol.PlayerInfo value) {
+        if (playerInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              playerInfo_ != com.zyd.common.proto.client.ClientProtocol.PlayerInfo.getDefaultInstance()) {
+            playerInfo_ =
+              com.zyd.common.proto.client.ClientProtocol.PlayerInfo.newBuilder(playerInfo_).mergeFrom(value).buildPartial();
+          } else {
+            playerInfo_ = value;
+          }
+          onChanged();
+        } else {
+          playerInfoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      /**
+       * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+       */
+      public Builder clearPlayerInfo() {
+        if (playerInfoBuilder_ == null) {
+          playerInfo_ = com.zyd.common.proto.client.ClientProtocol.PlayerInfo.getDefaultInstance();
+          onChanged();
+        } else {
+          playerInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      /**
+       * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+       */
+      public com.zyd.common.proto.client.ClientProtocol.PlayerInfo.Builder getPlayerInfoBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getPlayerInfoFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+       */
+      public com.zyd.common.proto.client.ClientProtocol.PlayerInfoOrBuilder getPlayerInfoOrBuilder() {
+        if (playerInfoBuilder_ != null) {
+          return playerInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return playerInfo_;
+        }
+      }
+      /**
+       * <code>optional .com.zyd.common.proto.client.PlayerInfo playerInfo = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.zyd.common.proto.client.ClientProtocol.PlayerInfo, com.zyd.common.proto.client.ClientProtocol.PlayerInfo.Builder, com.zyd.common.proto.client.ClientProtocol.PlayerInfoOrBuilder> 
+          getPlayerInfoFieldBuilder() {
+        if (playerInfoBuilder_ == null) {
+          playerInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.zyd.common.proto.client.ClientProtocol.PlayerInfo, com.zyd.common.proto.client.ClientProtocol.PlayerInfo.Builder, com.zyd.common.proto.client.ClientProtocol.PlayerInfoOrBuilder>(
+                  playerInfo_,
+                  getParentForChildren(),
+                  isClean());
+          playerInfo_ = null;
+        }
+        return playerInfoBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.GetPlayerInfoResponse)
+    }
+
+    static {
+      defaultInstance = new GetPlayerInfoResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.GetPlayerInfoResponse)
+  }
+
+  public interface GetPlayerRankRequestOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code com.zyd.common.proto.client.GetPlayerRankRequest}
+   *
+   * <pre>
+   *获取玩家排名
+   * </pre>
+   */
+  public static final class GetPlayerRankRequest extends
+      com.google.protobuf.GeneratedMessage
+      implements GetPlayerRankRequestOrBuilder {
+    // Use GetPlayerRankRequest.newBuilder() to construct.
+    private GetPlayerRankRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private GetPlayerRankRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final GetPlayerRankRequest defaultInstance;
+    public static GetPlayerRankRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public GetPlayerRankRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private GetPlayerRankRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerRankRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerRankRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest.class, com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<GetPlayerRankRequest> PARSER =
+        new com.google.protobuf.AbstractParser<GetPlayerRankRequest>() {
+      public GetPlayerRankRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new GetPlayerRankRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GetPlayerRankRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.zyd.common.proto.client.GetPlayerRankRequest}
+     *
+     * <pre>
+     *获取玩家排名
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerRankRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerRankRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest.class, com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest.Builder.class);
+      }
+
+      // Construct using com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerRankRequest_descriptor;
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest getDefaultInstanceForType() {
+        return com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest.getDefaultInstance();
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest build() {
+        com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest buildPartial() {
+        com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest result = new com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest) {
+          return mergeFrom((com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest other) {
+        if (other == com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.zyd.common.proto.client.ClientProtocol.GetPlayerRankRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.GetPlayerRankRequest)
+    }
+
+    static {
+      defaultInstance = new GetPlayerRankRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.GetPlayerRankRequest)
+  }
+
+  public interface GetPlayerRankResopnseOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional int32 rank = 1;
+    /**
+     * <code>optional int32 rank = 1;</code>
+     */
+    boolean hasRank();
+    /**
+     * <code>optional int32 rank = 1;</code>
+     */
+    int getRank();
+  }
+  /**
+   * Protobuf type {@code com.zyd.common.proto.client.GetPlayerRankResopnse}
+   */
+  public static final class GetPlayerRankResopnse extends
+      com.google.protobuf.GeneratedMessage
+      implements GetPlayerRankResopnseOrBuilder {
+    // Use GetPlayerRankResopnse.newBuilder() to construct.
+    private GetPlayerRankResopnse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private GetPlayerRankResopnse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final GetPlayerRankResopnse defaultInstance;
+    public static GetPlayerRankResopnse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public GetPlayerRankResopnse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private GetPlayerRankResopnse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              rank_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerRankResopnse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerRankResopnse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse.class, com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<GetPlayerRankResopnse> PARSER =
+        new com.google.protobuf.AbstractParser<GetPlayerRankResopnse>() {
+      public GetPlayerRankResopnse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new GetPlayerRankResopnse(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GetPlayerRankResopnse> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional int32 rank = 1;
+    public static final int RANK_FIELD_NUMBER = 1;
+    private int rank_;
+    /**
+     * <code>optional int32 rank = 1;</code>
+     */
+    public boolean hasRank() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 rank = 1;</code>
+     */
+    public int getRank() {
+      return rank_;
+    }
+
+    private void initFields() {
+      rank_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, rank_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, rank_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.zyd.common.proto.client.GetPlayerRankResopnse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerRankResopnse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerRankResopnse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse.class, com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse.Builder.class);
+      }
+
+      // Construct using com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        rank_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_GetPlayerRankResopnse_descriptor;
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse getDefaultInstanceForType() {
+        return com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse.getDefaultInstance();
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse build() {
+        com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse buildPartial() {
+        com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse result = new com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.rank_ = rank_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse) {
+          return mergeFrom((com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse other) {
+        if (other == com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse.getDefaultInstance()) return this;
+        if (other.hasRank()) {
+          setRank(other.getRank());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional int32 rank = 1;
+      private int rank_ ;
+      /**
+       * <code>optional int32 rank = 1;</code>
+       */
+      public boolean hasRank() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 rank = 1;</code>
+       */
+      public int getRank() {
+        return rank_;
+      }
+      /**
+       * <code>optional int32 rank = 1;</code>
+       */
+      public Builder setRank(int value) {
+        bitField0_ |= 0x00000001;
+        rank_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 rank = 1;</code>
+       */
+      public Builder clearRank() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        rank_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.GetPlayerRankResopnse)
+    }
+
+    static {
+      defaultInstance = new GetPlayerRankResopnse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.GetPlayerRankResopnse)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_zyd_common_proto_client_MessageHeaderRequest_descriptor;
   private static
@@ -7790,6 +9782,26 @@ public final class ClientProtocol {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_zyd_common_proto_client_RankInfo_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_zyd_common_proto_client_GetPlayerInfoRequest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_zyd_common_proto_client_GetPlayerInfoRequest_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_zyd_common_proto_client_GetPlayerInfoResponse_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_zyd_common_proto_client_GetPlayerInfoResponse_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_zyd_common_proto_client_GetPlayerRankRequest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_zyd_common_proto_client_GetPlayerRankRequest_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_zyd_common_proto_client_GetPlayerRankResopnse_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_zyd_common_proto_client_GetPlayerRankResopnse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -7813,32 +9825,38 @@ public final class ClientProtocol {
       "\003 \001(\t\" \n\014LoginRequest\022\020\n\010userName\030\001 \001(\t\"" +
       "Z\n\rLoginResponse\022;\n\nplayerInfo\030\001 \001(\0132\'.c" +
       "om.zyd.common.proto.client.PlayerInfo\022\014\n" +
-      "\004sign\030\002 \001(\t\"\242\001\n\nPlayerInfo\022\020\n\010userName\030\001" +
+      "\004sign\030\002 \001(\t\"\306\001\n\nPlayerInfo\022\020\n\010userName\030\001" +
       " \001(\t\022\016\n\006userId\030\002 \001(\005\022\014\n\004rank\030\003 \001(\005\022\017\n\007wi" +
       "nning\030\004 \001(\005\022\016\n\006losing\030\005 \001(\005\022\020\n\010winCount\030" +
       "\006 \001(\005\022\021\n\tloseCount\030\007 \001(\005\022\014\n\004draw\030\010 \001(\005\022\020" +
-      "\n\010firstWin\030\t \001(\001\"\027\n\025PlayerRankListReques" +
-      "t\"Q\n\026PlayerRankListResponse\0227\n\010rankInfo\030",
-      "\001 \003(\0132%.com.zyd.common.proto.client.Rank" +
-      "Info\"7\n\010RankInfo\022\014\n\004rank\030\001 \001(\005\022\014\n\004name\030\002" +
-      " \001(\t\022\017\n\007ranking\030\003 \001(\005*-\n\013EDeviceType\022\010\n\004" +
-      "None\020\000\022\007\n\003IOS\020\001\022\013\n\007Android\020\002*\314\003\n\tErrorCo" +
-      "de\022\020\n\014SERVER_ERROR\020\001\022\023\n\017SHOP_ITEM_WRONG\020" +
-      "\021\022\031\n\025PLAYER_RMB_NOT_ENOUGH\020\025\022\032\n\026PLAYER_G" +
-      "OLD_NOT_ENOUGH\020\026\022\031\n\025PARAMETER_NOT_CORREC" +
-      "T\0202\022\031\n\025SYSCONFIG_NOT_CORRECT\0203\022\020\n\014HACKER" +
-      "_ERROR\0207\022\021\n\014NOT_GET_LOCK\020\254\002\022\032\n\025ACTIVATIO" +
-      "N_CODE_ERROR\020\255\002\022\035\n\030PLAYER_NOT_MATCH_SUCC",
-      "ESS\020\220\003\022\025\n\020PLAYER_NOT_START\020\221\003\022\031\n\024PLAYER_" +
-      "ROOM_NOT_HAVA\020\222\003\022\030\n\023PLAYER_CAN_NOT_UNDO\020" +
-      "\223\003\022\026\n\021DUPLICATE_REQUEST\020\274\005\022\022\n\rVERSION_ER" +
-      "ROR\020\343\007\022\034\n\027DEVICE_TYPE_NOT_CORRECT\020\346\007\022\034\n\026" +
-      "NOT_HAVE_LAST_RESPONSE\020\237\215\006\022\027\n\021SERVER_MAI" +
-      "NTENACE\020\240\215\006*\247\001\n\014RpcErrorCode\022\024\n\007UNKNOWN\020" +
-      "\377\377\377\377\377\377\377\377\377\001\022\035\n\020INVALID_PROTOCOL\020\376\377\377\377\377\377\377\377\377" +
-      "\001\022\030\n\013INVALID_ARG\020\375\377\377\377\377\377\377\377\377\001\022\024\n\007TIMEOUT\020\374" +
-      "\377\377\377\377\377\377\377\377\001\022\030\n\013SERVER_BUSY\020\373\377\377\377\377\377\377\377\377\001\022\030\n\013P" +
-      "USHTIMEOUT\020\372\377\377\377\377\377\377\377\377\001B\002H\001"
+      "\n\010firstWin\030\t \001(\001\022\020\n\010userRank\030\n \001(\005\022\020\n\010al" +
+      "lCount\030\013 \001(\005\"\027\n\025PlayerRankListRequest\"q\n",
+      "\026PlayerRankListResponse\0227\n\010rankInfo\030\001 \003(" +
+      "\0132%.com.zyd.common.proto.client.RankInfo" +
+      "\022\014\n\004rank\030\002 \001(\005\022\020\n\010userRank\030\003 \001(\005\"7\n\010Rank" +
+      "Info\022\014\n\004rank\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007rank" +
+      "ing\030\003 \001(\005\"\026\n\024GetPlayerInfoRequest\"T\n\025Get" +
+      "PlayerInfoResponse\022;\n\nplayerInfo\030\001 \001(\0132\'" +
+      ".com.zyd.common.proto.client.PlayerInfo\"" +
+      "\026\n\024GetPlayerRankRequest\"%\n\025GetPlayerRank" +
+      "Resopnse\022\014\n\004rank\030\001 \001(\005*-\n\013EDeviceType\022\010\n" +
+      "\004None\020\000\022\007\n\003IOS\020\001\022\013\n\007Android\020\002*\314\003\n\tErrorC",
+      "ode\022\020\n\014SERVER_ERROR\020\001\022\023\n\017SHOP_ITEM_WRONG" +
+      "\020\021\022\031\n\025PLAYER_RMB_NOT_ENOUGH\020\025\022\032\n\026PLAYER_" +
+      "GOLD_NOT_ENOUGH\020\026\022\031\n\025PARAMETER_NOT_CORRE" +
+      "CT\0202\022\031\n\025SYSCONFIG_NOT_CORRECT\0203\022\020\n\014HACKE" +
+      "R_ERROR\0207\022\021\n\014NOT_GET_LOCK\020\254\002\022\032\n\025ACTIVATI" +
+      "ON_CODE_ERROR\020\255\002\022\035\n\030PLAYER_NOT_MATCH_SUC" +
+      "CESS\020\220\003\022\025\n\020PLAYER_NOT_START\020\221\003\022\031\n\024PLAYER" +
+      "_ROOM_NOT_HAVA\020\222\003\022\030\n\023PLAYER_CAN_NOT_UNDO" +
+      "\020\223\003\022\026\n\021DUPLICATE_REQUEST\020\274\005\022\022\n\rVERSION_E" +
+      "RROR\020\343\007\022\034\n\027DEVICE_TYPE_NOT_CORRECT\020\346\007\022\034\n",
+      "\026NOT_HAVE_LAST_RESPONSE\020\237\215\006\022\027\n\021SERVER_MA" +
+      "INTENACE\020\240\215\006*\247\001\n\014RpcErrorCode\022\024\n\007UNKNOWN" +
+      "\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020INVALID_PROTOCOL\020\376\377\377\377\377\377\377\377" +
+      "\377\001\022\030\n\013INVALID_ARG\020\375\377\377\377\377\377\377\377\377\001\022\024\n\007TIMEOUT\020" +
+      "\374\377\377\377\377\377\377\377\377\001\022\030\n\013SERVER_BUSY\020\373\377\377\377\377\377\377\377\377\001\022\030\n\013" +
+      "PUSHTIMEOUT\020\372\377\377\377\377\377\377\377\377\001B\002H\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7880,7 +9898,7 @@ public final class ClientProtocol {
           internal_static_com_zyd_common_proto_client_PlayerInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerInfo_descriptor,
-              new java.lang.String[] { "UserName", "UserId", "Rank", "Winning", "Losing", "WinCount", "LoseCount", "Draw", "FirstWin", });
+              new java.lang.String[] { "UserName", "UserId", "Rank", "Winning", "Losing", "WinCount", "LoseCount", "Draw", "FirstWin", "UserRank", "AllCount", });
           internal_static_com_zyd_common_proto_client_PlayerRankListRequest_descriptor =
             getDescriptor().getMessageTypes().get(6);
           internal_static_com_zyd_common_proto_client_PlayerRankListRequest_fieldAccessorTable = new
@@ -7892,13 +9910,37 @@ public final class ClientProtocol {
           internal_static_com_zyd_common_proto_client_PlayerRankListResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerRankListResponse_descriptor,
-              new java.lang.String[] { "RankInfo", });
+              new java.lang.String[] { "RankInfo", "Rank", "UserRank", });
           internal_static_com_zyd_common_proto_client_RankInfo_descriptor =
             getDescriptor().getMessageTypes().get(8);
           internal_static_com_zyd_common_proto_client_RankInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_RankInfo_descriptor,
               new java.lang.String[] { "Rank", "Name", "Ranking", });
+          internal_static_com_zyd_common_proto_client_GetPlayerInfoRequest_descriptor =
+            getDescriptor().getMessageTypes().get(9);
+          internal_static_com_zyd_common_proto_client_GetPlayerInfoRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_zyd_common_proto_client_GetPlayerInfoRequest_descriptor,
+              new java.lang.String[] { });
+          internal_static_com_zyd_common_proto_client_GetPlayerInfoResponse_descriptor =
+            getDescriptor().getMessageTypes().get(10);
+          internal_static_com_zyd_common_proto_client_GetPlayerInfoResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_zyd_common_proto_client_GetPlayerInfoResponse_descriptor,
+              new java.lang.String[] { "PlayerInfo", });
+          internal_static_com_zyd_common_proto_client_GetPlayerRankRequest_descriptor =
+            getDescriptor().getMessageTypes().get(11);
+          internal_static_com_zyd_common_proto_client_GetPlayerRankRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_zyd_common_proto_client_GetPlayerRankRequest_descriptor,
+              new java.lang.String[] { });
+          internal_static_com_zyd_common_proto_client_GetPlayerRankResopnse_descriptor =
+            getDescriptor().getMessageTypes().get(12);
+          internal_static_com_zyd_common_proto_client_GetPlayerRankResopnse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_zyd_common_proto_client_GetPlayerRankResopnse_descriptor,
+              new java.lang.String[] { "Rank", });
           return null;
         }
       };

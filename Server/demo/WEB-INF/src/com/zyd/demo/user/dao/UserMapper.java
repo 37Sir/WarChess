@@ -17,4 +17,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
     
     List<User> selectByRank();
+    
+    int selectByUserRank(User record);
 }
