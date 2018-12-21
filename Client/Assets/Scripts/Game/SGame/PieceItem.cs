@@ -98,6 +98,21 @@ public class PieceItem:MonoBehaviour
             case Config.PieceType.B:
                 m_Attack.transform.localPosition = Config.AttackPos.B_AttackPoint;
                 break;
+            case Config.PieceType.R:
+                m_Attack.transform.localPosition = Config.AttackPos.R_AttackPoint;
+                break;
+            case Config.PieceType.Q:
+                m_Attack.transform.localPosition = Config.AttackPos.Q_AttackPoint;
+                break;
+            case Config.PieceType.P:
+                m_Attack.transform.localPosition = Config.AttackPos.P_AttackPoint;
+                break;
+            case Config.PieceType.K:
+                m_Attack.transform.localPosition = Config.AttackPos.K_AttackPoint;
+                break;
+            case Config.PieceType.N:
+                m_Attack.transform.localPosition = Config.AttackPos.N_AttackPoint;
+                break;
         }      
     }
 
@@ -106,6 +121,10 @@ public class PieceItem:MonoBehaviour
     /// </summary>
     public void BeAttached()
     {
+        App.SoundManager.PlaySoundClip(Config.Sound.BMagicAttack);
+        var effectPlayer = App.EffectManager.LoadEffect(m_gameObject, "normal_dead");
+        effectPlayer.IsOnce = true;
+        effectPlayer.enabled = true;
         App.ObjectPoolManager.Release("m_target", m_target);
         if (m_mediator.pieceData.type == Config.PieceType.K)
         {
@@ -113,15 +132,15 @@ public class PieceItem:MonoBehaviour
             m_mediator.NotityGameOver(loseColor);
         }
         isDead = true;
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         OnDestroy();
     }
 
     private void OnDestroy()
     {
         App.Facade.RemoveMediator(m_mediator.MediatorName);
-        Destroy(gameObject);
-        Destroy(this);
+        Destroy(gameObject, 1);
+        Destroy(this, 1);
     }
 
     public void OnGameOver()
@@ -268,16 +287,19 @@ public class PieceItem:MonoBehaviour
                 OnRemoteAttack("b_attack", args);
                 break;
             case Config.PieceType.K:
-                OnMeleeAttack("b_attack", from, args);
+                var KPoint = new Vector2((from.x + to.x) / 2, (from.y + to.y) / 2);
+                OnMeleeAttack("b_attack", KPoint, args);
                 break;
             case Config.PieceType.Q:
                 OnRemoteAttack("b_attack", args);
                 break;
             case Config.PieceType.N:
-                OnMeleeAttack("b_attack", from, args);
+                var NPoint = new Vector2((from.x + to.x) / 2, (from.y + to.y) / 2);
+                OnMeleeAttack("b_attack", NPoint, args);
                 break;
             case Config.PieceType.P:
-                OnMeleeAttack("b_attack", from, args);
+                var PPoint = new Vector2((from.x + to.x) / 2, (from.y + to.y) / 2);
+                OnMeleeAttack("b_attack", PPoint, args);
                 break;
             case Config.PieceType.R:
                 OnRemoteAttack("b_attack", args);
@@ -300,14 +322,19 @@ public class PieceItem:MonoBehaviour
             m_pieceAnimator = pieceModel.GetComponent<Animator>();
         }
         m_pieceAnimator.Play("Attack");
+
         EffectPlayer effectPlayer = App.EffectManager.LoadEffect(m_Attack, effectName);
         effectPlayer.IsOnce = true;
+
         TweenPlayer m_AttackPlayer = m_Attack.AddComponent<TweenPlayer>();
         var steps = CalMoveSteps(from, to);
         Tween attackTween = m_AttackPlayer.AddClip("attack", steps * 0.2f);
         attackTween.SetTweenType(TweenType.LocalPosition);
         attackTween.SetDelayTime(0.8f);
         attackTween.SetOnComplete(OnRemoteAttackComplete, args);
+
+        App.SoundManager.PlaySoundClip(Config.Sound.MagicAttack, 0.6f);
+
         var dx = -Config.PieceWidth * (to.x - m_X);
         var dy = -Config.PieceWidth * (to.y - m_Z);
         attackTween.SetTo(new Vector3(dx, m_Attack.transform.localPosition.y, dy));
@@ -366,8 +393,10 @@ public class PieceItem:MonoBehaviour
             m_pieceAnimator = pieceModel.GetComponent<Animator>();
         }
         m_pieceAnimator.Play("Attack");
+        App.SoundManager.PlaySoundClip(Config.Sound.PhysAttack, 0.3f);
         var to = (Vector2)args[1];
-        Tween move_pos = m_TweenPlayer.AddClip("move", 1);
+        Tween move_pos = m_TweenPlayer.AddClip("move", 0.5f);
+        move_pos.SetDelayTime(1);
         move_pos.SetTweenType(TweenType.LocalPosition);
         move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
         move_pos.SetOnComplete(OnCompleteMove, args);

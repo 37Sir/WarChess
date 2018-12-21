@@ -58,6 +58,9 @@ public class PVEPanelMediator : Mediator
             case NotificationConstant.OnPPromote:
                 m_viewComponent.OnPPromote(body);
                 break;
+            case NotificationConstant.OnTypeSelect:
+                m_viewComponent.isPause = false;
+                break;
             default:
                 break;
         }

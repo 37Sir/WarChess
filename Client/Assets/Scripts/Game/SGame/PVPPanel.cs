@@ -34,6 +34,7 @@ public class PVPPanel
     private Button m_Undo;
 
     public bool isTurn = true;
+    public bool isPause = false;
     public int roundNum = 0;
     private int m_undoCompleteNum = 0;
     private int m_undoRoundNum = 0;
@@ -193,12 +194,12 @@ public class PVPPanel
         var moves =App.ChessLogic.GenerateMoves(new Vector2(from.x - 1, from.y - 1));
         foreach(Vector2 to in moves)
         {
-            App.ObjectPoolManager.RegisteObject("m_TipGreen", "FX/m_TipGreen", 0, 30, -1);
-            App.ObjectPoolManager.Instantiate("m_TipGreen", (GameObject obj) =>
+            App.ObjectPoolManager.RegisteObject("biankuang_green", "FX/biankuang_green", 0, 30, -1);
+            App.ObjectPoolManager.Instantiate("biankuang_green", (GameObject obj) =>
             {
                 obj.SetActive(true);
                 obj.transform.parent = m_qizi.transform;
-                obj.transform.localPosition = new Vector3(to.x * Config.PieceWidth, 0.5f, to.y * Config.PieceWidth);
+                obj.transform.localPosition = new Vector3(to.x * Config.PieceWidth, 3, to.y * Config.PieceWidth);
                 obj.transform.localScale = new Vector3(15, 15, 1);
                 m_tips.Add(obj);
             });
@@ -222,7 +223,7 @@ public class PVPPanel
     {
         foreach(GameObject obj in m_tips)
         {
-            App.ObjectPoolManager.Release("m_TipGreen", obj);
+            App.ObjectPoolManager.Release("biankuang_green", obj);
         }
         m_tips.Clear();
     }
@@ -344,6 +345,13 @@ public class PVPPanel
         m_ready.gameObject.SetActive(false);
     }
 
+    public void OnMutuallyResponse()
+    {
+        App.UIManager.OpenPanel("WaitingPanel", "等待对方选择...");
+        m_modelDrag.isTurn = false;
+        isPause = true;
+    }
+
     #region OnClick Method
 
     private void OnReadyClick()
@@ -391,6 +399,10 @@ public class PVPPanel
         }
         for (int i = 0; i < Config.Game.WaitingRound; i++)
         {
+            while (isPause)
+            {
+                yield return new WaitForSeconds(1);
+            }
             timer.text = (Config.Game.WaitingRound - i) + "s";
             yield return new WaitForSeconds(1);
         }
@@ -418,19 +430,24 @@ public class PVPPanel
     #region Push Listener
     public void OnPlayerNotReady(string name, List<byte[]> packet)
     {
-        App.Facade.RemoveMediator("PVPPanelMediator");
-        App.NSceneManager.LoadScene("SLobby");
+        App.UIManager.OpenPanel("TipsPanel", new object[]{ "对局取消！", "有玩家没准备，对局取消！"});
     }
 
     public void OnPlayerUndoPush(string name, List<byte[]> packet)
     {
+        isPause = true;
         App.UIManager.OpenPanel("MutuallySelectPanel");
     }
 
     public void OnPlayerUndoInfoPush(string name, List<byte[]> packet)
-    {     
+    {
+        if (isTurn)
+        {
+            m_modelDrag.isTurn = true;
+            App.UIManager.ClosePanel("WaitingPanel");
+            App.UIManager.OpenPanel("MessagePanel", "同意悔棋!!");       
+        }
         var pushMes = PlayerUndoInfoPush.ParseFrom(packet[0]);
-        Debug.Log("同意悔棋"+ pushMes);
         m_undoRoundNum = pushMes.UndoInfoCount;
         for(int i = 0; i < m_undoRoundNum; i++)
         {
@@ -463,11 +480,18 @@ public class PVPPanel
 
     public void OnPlayerNotAgreePush(string name, List<byte[]> packet)
     {
-        Debug.Log("对方不同意悔棋!!");
+        if (isTurn)
+        {
+            isPause = false;
+            m_modelDrag.isTurn = isTurn;
+            App.UIManager.ClosePanel("WaitingPanel");
+            App.UIManager.OpenPanel("MessagePanel", "对方不同意悔棋!!");
+        }
     }
 
     public void OnPlayUndoNextPush(string name, List<byte[]> packet)
     {
+        isPause = false;
         Debug.Log("Push:On PLayerUndoNext");
     }
 

@@ -226,6 +226,25 @@ namespace Framework
             });
         }
 
+        ///播放音效 默认位置
+        public void PlaySoundClip(string abName, float delay, string type = "mp3")
+        {
+            Get(abName, (clip, key) =>
+            {
+                if (clip == null)
+                    return;
+                if (Camera.main == null)
+                    return;
+                StartCoroutine(StartPlayClip(delay, clip, Camera.main.transform.position));
+            });
+        }
+
+        IEnumerator StartPlayClip(float delay, AudioClip clip, Vector3 pos)
+        {
+            yield return new WaitForSeconds(delay);
+            AudioSource.PlayClipAtPoint(clip, pos);
+        }
+
         ///播放音效 指定位置
         public void PlaySoundClip(string abName, Vector3 point, string type = "mp3")
         {

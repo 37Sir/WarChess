@@ -37,10 +37,14 @@ public class LobbyPanel
         m_object = gameObject;
         InitUIBinder(gameObject);
         m_mediator = new LobbyPanelMediator(this);
-        m_pvpProxy = new PVPProxy();
+        m_pvpProxy = App.Facade.RetrieveProxy("PVPProxy") as PVPProxy;
+        if (m_pvpProxy == null)
+        {
+            m_pvpProxy = new PVPProxy();
+            App.Facade.RegisterProxy(m_pvpProxy);
+        }
         m_pveProxy = new PVEProxy();
         App.Facade.RegisterMediator(m_mediator);
-        App.Facade.RegisterProxy(m_pvpProxy);
         App.Facade.RegisterProxy(m_pveProxy);
         m_proxy = App.Facade.RetrieveProxy("UserDataProxy") as UserDataProxy;
 

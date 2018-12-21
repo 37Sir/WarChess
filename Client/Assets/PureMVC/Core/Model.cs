@@ -53,7 +53,7 @@ namespace PureMVC.Core
         {
             IProxy proxy = null;
             if (proxyMap.ContainsKey(proxyName))
-                proxy.OnRemove();
+                proxyMap[proxyName].OnRemove();
 
             return proxy;
         }

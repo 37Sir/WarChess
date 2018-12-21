@@ -39,25 +39,5 @@ public class UserInfoPanelMediator : Mediator
                 break;
         }
     }
-
-    public void NotifyLevelUp()
-    {
-        SendNotification(NotificationConstant.LevelUp);
-    }
-
-    public void NotifyLobbyConnect()
-    {
-        SendNotification(NotificationConstant.LobbyConnect);
-    }
-
-    public void NotifyBeginMatch()
-    {
-        SendNotification(NotificationConstant.Match);
-    }
-
-    public void NotifyCancelMatch()
-    {
-        SendNotification(NotificationConstant.CancelMatch);
-    }
 }
 

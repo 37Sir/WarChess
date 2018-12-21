@@ -14,6 +14,8 @@ public class SceneLoader
         App.UIManager.BindUIControl();
         App.UIManager.RegisterPanel("SLogin", "LoginPanel", UILayerType.NormalLayer, false);
         App.UIManager.OpenPanel("LoginPanel");
+
+        App.UIManager.RegisterPanel("SCommon", "MessagePanel", UILayerType.TopLayer, false);
     }
 
     public static void SLobby()
@@ -23,6 +25,8 @@ public class SceneLoader
         App.UIManager.RegisterPanel("SLobby", "UserInfoPanel", UILayerType.TopLayer, false);
         App.UIManager.RegisterPanel("SLobby", "RankListPanel", UILayerType.TopLayer, false);
         App.UIManager.RegisterPanel("SLobby", "UserSimpleInfoPanel", UILayerType.TopLayer, false);
+
+        App.UIManager.RegisterPanel("SCommon", "TipsPanel", UILayerType.TopLayer, false);
 
         App.UIManager.OpenPanel("UserSimpleInfoPanel");
         App.UIManager.OpenPanel("LobbyPanel");
@@ -35,7 +39,11 @@ public class SceneLoader
         App.UIManager.RegisterPanel("SGame", "TypeSelectPanel", UILayerType.TopLayer, false);
         App.UIManager.RegisterPanel("SGame", "ResultPanel", UILayerType.TopLayer, false);
         App.UIManager.RegisterPanel("SGame", "MutuallySelectPanel", UILayerType.TopLayer, false);
-        
+
+        App.UIManager.RegisterPanel("SCommon", "MessagePanel", UILayerType.TopLayer, false);
+        App.UIManager.RegisterPanel("SCommon", "TipsPanel", UILayerType.TopLayer, false);
+        App.UIManager.RegisterPanel("SCommon", "WaitingPanel", UILayerType.TopLayer, false);
+
         App.UIManager.OpenPanel("PVPPanel");
     }
 

@@ -36,6 +36,7 @@ public class PVEPanel
     private int m_lastEat = -1;
 
     public bool isTurn = true;
+    public bool isPause = false;
     public int roundNum = 0;
     public Config.PieceColor selfColor = Config.PieceColor.WHITE;//自己的颜色
     private IEnumerator m_roundTimer;   //计时器
@@ -165,12 +166,12 @@ public class PVEPanel
         var moves = App.ChessLogic.GenerateMoves(new Vector2(from.x - 1, from.y - 1));
         foreach (Vector2 to in moves)
         {
-            App.ObjectPoolManager.RegisteObject("m_TipGreen", "FX/m_TipGreen", 0, 30, -1);
-            App.ObjectPoolManager.Instantiate("m_TipGreen", (GameObject obj) =>
+            App.ObjectPoolManager.RegisteObject("biankuang_green", "FX/biankuang_green", 0, 30, -1);
+            App.ObjectPoolManager.Instantiate("biankuang_green", (GameObject obj) =>
             {
                 obj.SetActive(true);
                 obj.transform.parent = m_qizi.transform;
-                obj.transform.localPosition = new Vector3(to.x * Config.PieceWidth, 0.5f, to.y * Config.PieceWidth);
+                obj.transform.localPosition = new Vector3(to.x * Config.PieceWidth, 3, to.y * Config.PieceWidth);
                 obj.transform.localScale = new Vector3(15, 15, 1);
                 m_tips.Add(obj);
             });
@@ -181,7 +182,7 @@ public class PVEPanel
     {
         foreach (GameObject obj in m_tips)
         {
-            App.ObjectPoolManager.Release("m_TipGreen", obj);
+            App.ObjectPoolManager.Release("biankuang_green", obj);
         }
         m_tips.Clear();
     }
@@ -266,6 +267,7 @@ public class PVEPanel
     ///兵晋升
     public void OnPPromote(object body)
     {
+        isPause = true;
         App.UIManager.OpenPanel("TypeSelectPanel", body);
     }
 
@@ -375,6 +377,10 @@ public class PVEPanel
         }
         for (int i = 0; i < Config.Game.WaitingRound; i++)
         {
+            while (isPause)
+            {
+                yield return new WaitForSeconds(1);
+            }
             if (timer != null)
             {
                 timer.text = (Config.Game.WaitingRound - i) + "s";

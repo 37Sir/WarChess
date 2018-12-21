@@ -37,10 +37,13 @@ public class Config{
         public static string GameStart = "game_start";
         public static string GameWin = "game_win";
         public static string InGameStart = "ingame_start";
-        public static string InGameMain = "ingame_main";
+        public static string InGameMain = "ingame_long";
         public static string DragBegin = "piece_drag_begin";
         public static string DragSuccess = "piece_drag_success";
         public static string DragFail = "piece_drag_fail";
+        public static string MagicAttack = "magic_attack";
+        public static string BMagicAttack = "magic_battack";
+        public static string PhysAttack = "phy_attack";
     }
 
     public enum GameResult
@@ -81,6 +84,11 @@ public class Config{
     public class AttackPos
     {
         public static Vector3 B_AttackPoint = new Vector3(-0.5f, 1.8f, -0.3f);
+        public static Vector3 N_AttackPoint = new Vector3(-0.5f, 1.8f, -0.3f);
+        public static Vector3 P_AttackPoint = new Vector3(-0.5f, 1.8f, -0.3f);
+        public static Vector3 Q_AttackPoint = new Vector3(-0.5f, 1.8f, -0.3f);
+        public static Vector3 R_AttackPoint = new Vector3(-0.5f, 1.8f, -0.3f);
+        public static Vector3 K_AttackPoint = new Vector3(-0.5f, 1.8f, -0.3f);
     }
 
     public class PushMessage

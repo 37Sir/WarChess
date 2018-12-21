@@ -41,6 +41,7 @@ public class PVPPanelMediator : Mediator
         list.Add(NotificationConstant.OnPPromote);
         list.Add(NotificationConstant.OnUndoTweenEnd);
         list.Add(NotificationConstant.OnTypeSelect);
+        list.Add(NotificationConstant.PlayerMutuallyResponse);
         return list;
     }
 
@@ -90,6 +91,9 @@ public class PVPPanelMediator : Mediator
 
             case NotificationConstant.OnUndoTweenEnd:
                 m_viewComponent.OnUndoTweenEnd();
+                break;
+            case NotificationConstant.PlayerMutuallyResponse:
+                m_viewComponent.OnMutuallyResponse();
                 break;
             default:
                 break;
