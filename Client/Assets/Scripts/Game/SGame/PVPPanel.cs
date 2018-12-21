@@ -23,6 +23,8 @@ public class PVPPanel
     private GameObject m_enemyReady;
     private Text m_selfTimer;
     private Text m_enemyTimer;
+    private GameObject m_selfTimerObj;
+    private GameObject m_enemyTimerObj;
     private Image m_userImage;
     private Image m_enemyImage;
     private Button m_test;
@@ -79,8 +81,10 @@ public class PVPPanel
         m_piece = m_qizi.gameObject.transform.Find("m_Chess").gameObject;
         m_worldCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         m_cameraTween = m_worldCamera.GetComponent<TweenPlayer>();
-        m_selfTimer = gameObject.transform.Find("Container/m_SelfTimer").GetComponent<Text>();
-        m_enemyTimer = gameObject.transform.Find("Container/m_EnemyTimer").GetComponent<Text>();
+        m_selfTimerObj = gameObject.transform.Find("Container/m_SelfTimer").gameObject;
+        m_selfTimer = m_selfTimerObj.transform.Find("Text").GetComponent<Text>();
+        m_enemyTimerObj = gameObject.transform.Find("Container/m_EnemyTimer").gameObject;
+        m_enemyTimer = m_enemyTimerObj.transform.Find("Text").GetComponent<Text>();
         m_userImage = gameObject.transform.Find("Container/m_SelfIcon").GetComponent<Image>();
         m_enemyImage = gameObject.transform.Find("Container/m_EnemyIcon").GetComponent<Image>();
         m_modelDrag = GameObject.Find("board").GetComponent<ModelDrag>();
@@ -235,8 +239,8 @@ public class PVPPanel
 
     private void InitTimer()
     {
-        m_selfTimer.gameObject.SetActive(false);
-        m_enemyTimer.gameObject.SetActive(false);
+        m_selfTimerObj.SetActive(false);
+        m_enemyTimerObj.SetActive(false);
     }
 
     /// <summary>
@@ -375,14 +379,14 @@ public class PVPPanel
         Text timer;
         if(isTurn == true)
         {
-            m_selfTimer.gameObject.SetActive(true);
-            m_enemyTimer.gameObject.SetActive(false);
+            m_selfTimerObj.SetActive(true);
+            m_enemyTimerObj.SetActive(false);
             timer = m_selfTimer;
         }
         else
         {
-            m_selfTimer.gameObject.SetActive(false);
-            m_enemyTimer.gameObject.SetActive(true);
+            m_selfTimerObj.SetActive(false);
+            m_enemyTimerObj.SetActive(true);
             timer = m_enemyTimer;
         }
         for (int i = 0; i < Config.Game.WaitingRound; i++)

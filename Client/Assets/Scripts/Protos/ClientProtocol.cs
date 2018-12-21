@@ -2249,8 +2249,8 @@ namespace com.zyd.common.proto.client {
   public sealed partial class PlayerInfo : pb::GeneratedMessageLite<PlayerInfo, PlayerInfo.Builder> {
     private PlayerInfo() { }
     private static readonly PlayerInfo defaultInstance = new PlayerInfo().MakeReadOnly();
-    private static readonly string[] _playerInfoFieldNames = new string[] { "draw", "loseCount", "losing", "rank", "userId", "userName", "winCount", "winning" };
-    private static readonly uint[] _playerInfoFieldTags = new uint[] { 64, 56, 40, 24, 16, 10, 48, 32 };
+    private static readonly string[] _playerInfoFieldNames = new string[] { "allCount", "draw", "firstWin", "loseCount", "losing", "rank", "userId", "userName", "userRank", "winCount", "winning" };
+    private static readonly uint[] _playerInfoFieldTags = new uint[] { 88, 64, 73, 56, 40, 24, 16, 10, 80, 48, 32 };
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
@@ -2374,6 +2374,45 @@ namespace com.zyd.common.proto.client {
     }
     
     #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int FirstWinFieldNumber = 9;
+    private bool hasFirstWin;
+    private double firstWin_;
+    public bool HasFirstWin {
+      get { return hasFirstWin; }
+    }
+    public double FirstWin {
+      get { return firstWin_; }
+    }
+    
+    #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int UserRankFieldNumber = 10;
+    private bool hasUserRank;
+    private int userRank_;
+    public bool HasUserRank {
+      get { return hasUserRank; }
+    }
+    public int UserRank {
+      get { return userRank_; }
+    }
+    
+    #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int AllCountFieldNumber = 11;
+    private bool hasAllCount;
+    private int allCount_;
+    public bool HasAllCount {
+      get { return hasAllCount; }
+    }
+    public int AllCount {
+      get { return allCount_; }
+    }
+    
+    #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
     public override bool IsInitialized {
@@ -2389,28 +2428,37 @@ namespace com.zyd.common.proto.client {
       int size = SerializedSize;
       string[] field_names = _playerInfoFieldNames;
       if (hasUserName) {
-        output.WriteString(1, field_names[5], UserName);
+        output.WriteString(1, field_names[7], UserName);
       }
       if (hasUserId) {
-        output.WriteInt32(2, field_names[4], UserId);
+        output.WriteInt32(2, field_names[6], UserId);
       }
       if (hasRank) {
-        output.WriteInt32(3, field_names[3], Rank);
+        output.WriteInt32(3, field_names[5], Rank);
       }
       if (hasWinning) {
-        output.WriteInt32(4, field_names[7], Winning);
+        output.WriteInt32(4, field_names[10], Winning);
       }
       if (hasLosing) {
-        output.WriteInt32(5, field_names[2], Losing);
+        output.WriteInt32(5, field_names[4], Losing);
       }
       if (hasWinCount) {
-        output.WriteInt32(6, field_names[6], WinCount);
+        output.WriteInt32(6, field_names[9], WinCount);
       }
       if (hasLoseCount) {
-        output.WriteInt32(7, field_names[1], LoseCount);
+        output.WriteInt32(7, field_names[3], LoseCount);
       }
       if (hasDraw) {
-        output.WriteInt32(8, field_names[0], Draw);
+        output.WriteInt32(8, field_names[1], Draw);
+      }
+      if (hasFirstWin) {
+        output.WriteDouble(9, field_names[2], FirstWin);
+      }
+      if (hasUserRank) {
+        output.WriteInt32(10, field_names[8], UserRank);
+      }
+      if (hasAllCount) {
+        output.WriteInt32(11, field_names[0], AllCount);
       }
     }
     
@@ -2448,6 +2496,15 @@ namespace com.zyd.common.proto.client {
         if (hasDraw) {
           size += pb::CodedOutputStream.ComputeInt32Size(8, Draw);
         }
+        if (hasFirstWin) {
+          size += pb::CodedOutputStream.ComputeDoubleSize(9, FirstWin);
+        }
+        if (hasUserRank) {
+          size += pb::CodedOutputStream.ComputeInt32Size(10, UserRank);
+        }
+        if (hasAllCount) {
+          size += pb::CodedOutputStream.ComputeInt32Size(11, AllCount);
+        }
         memoizedSerializedSize = size;
         return size;
       }
@@ -2464,6 +2521,9 @@ namespace com.zyd.common.proto.client {
       if (hasWinCount) hash ^= winCount_.GetHashCode();
       if (hasLoseCount) hash ^= loseCount_.GetHashCode();
       if (hasDraw) hash ^= draw_.GetHashCode();
+      if (hasFirstWin) hash ^= firstWin_.GetHashCode();
+      if (hasUserRank) hash ^= userRank_.GetHashCode();
+      if (hasAllCount) hash ^= allCount_.GetHashCode();
       return hash;
     }
     
@@ -2478,6 +2538,9 @@ namespace com.zyd.common.proto.client {
       if (hasWinCount != other.hasWinCount || (hasWinCount && !winCount_.Equals(other.winCount_))) return false;
       if (hasLoseCount != other.hasLoseCount || (hasLoseCount && !loseCount_.Equals(other.loseCount_))) return false;
       if (hasDraw != other.hasDraw || (hasDraw && !draw_.Equals(other.draw_))) return false;
+      if (hasFirstWin != other.hasFirstWin || (hasFirstWin && !firstWin_.Equals(other.firstWin_))) return false;
+      if (hasUserRank != other.hasUserRank || (hasUserRank && !userRank_.Equals(other.userRank_))) return false;
+      if (hasAllCount != other.hasAllCount || (hasAllCount && !allCount_.Equals(other.allCount_))) return false;
       return true;
     }
     
@@ -2662,6 +2725,15 @@ namespace com.zyd.common.proto.client {
         if (other.HasDraw) {
           Draw = other.Draw;
         }
+        if (other.HasFirstWin) {
+          FirstWin = other.FirstWin;
+        }
+        if (other.HasUserRank) {
+          UserRank = other.UserRank;
+        }
+        if (other.HasAllCount) {
+          AllCount = other.AllCount;
+        }
         return this;
       }
       
@@ -2724,6 +2796,18 @@ namespace com.zyd.common.proto.client {
             }
             case 64: {
               result.hasDraw = input.ReadInt32(ref result.draw_);
+              break;
+            }
+            case 73: {
+              result.hasFirstWin = input.ReadDouble(ref result.firstWin_);
+              break;
+            }
+            case 80: {
+              result.hasUserRank = input.ReadInt32(ref result.userRank_);
+              break;
+            }
+            case 88: {
+              result.hasAllCount = input.ReadInt32(ref result.allCount_);
               break;
             }
           }
@@ -2891,6 +2975,66 @@ namespace com.zyd.common.proto.client {
         PrepareBuilder();
         result.hasDraw = false;
         result.draw_ = 0;
+        return this;
+      }
+      
+      public bool HasFirstWin {
+        get { return result.hasFirstWin; }
+      }
+      public double FirstWin {
+        get { return result.FirstWin; }
+        set { SetFirstWin(value); }
+      }
+      public Builder SetFirstWin(double value) {
+        PrepareBuilder();
+        result.hasFirstWin = true;
+        result.firstWin_ = value;
+        return this;
+      }
+      public Builder ClearFirstWin() {
+        PrepareBuilder();
+        result.hasFirstWin = false;
+        result.firstWin_ = 0D;
+        return this;
+      }
+      
+      public bool HasUserRank {
+        get { return result.hasUserRank; }
+      }
+      public int UserRank {
+        get { return result.UserRank; }
+        set { SetUserRank(value); }
+      }
+      public Builder SetUserRank(int value) {
+        PrepareBuilder();
+        result.hasUserRank = true;
+        result.userRank_ = value;
+        return this;
+      }
+      public Builder ClearUserRank() {
+        PrepareBuilder();
+        result.hasUserRank = false;
+        result.userRank_ = 0;
+        return this;
+      }
+      
+      public bool HasAllCount {
+        get { return result.hasAllCount; }
+      }
+      public int AllCount {
+        get { return result.AllCount; }
+        set { SetAllCount(value); }
+      }
+      public Builder SetAllCount(int value) {
+        PrepareBuilder();
+        result.hasAllCount = true;
+        result.allCount_ = value;
+        return this;
+      }
+      public Builder ClearAllCount() {
+        PrepareBuilder();
+        result.hasAllCount = false;
+        result.allCount_ = 0;
         return this;
       }
     }
@@ -3170,8 +3314,8 @@ namespace com.zyd.common.proto.client {
   public sealed partial class PlayerRankListResponse : pb::GeneratedMessageLite<PlayerRankListResponse, PlayerRankListResponse.Builder> {
     private PlayerRankListResponse() { }
     private static readonly PlayerRankListResponse defaultInstance = new PlayerRankListResponse().MakeReadOnly();
-    private static readonly string[] _playerRankListResponseFieldNames = new string[] { "rankInfo" };
-    private static readonly uint[] _playerRankListResponseFieldTags = new uint[] { 10 };
+    private static readonly string[] _playerRankListResponseFieldNames = new string[] { "rank", "rankInfo", "userRank" };
+    private static readonly uint[] _playerRankListResponseFieldTags = new uint[] { 16, 10, 24 };
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
@@ -3206,6 +3350,32 @@ namespace com.zyd.common.proto.client {
     }
     
     #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int RankFieldNumber = 2;
+    private bool hasRank;
+    private int rank_;
+    public bool HasRank {
+      get { return hasRank; }
+    }
+    public int Rank {
+      get { return rank_; }
+    }
+    
+    #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int UserRankFieldNumber = 3;
+    private bool hasUserRank;
+    private int userRank_;
+    public bool HasUserRank {
+      get { return hasUserRank; }
+    }
+    public int UserRank {
+      get { return userRank_; }
+    }
+    
+    #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
     public override bool IsInitialized {
@@ -3221,7 +3391,13 @@ namespace com.zyd.common.proto.client {
       int size = SerializedSize;
       string[] field_names = _playerRankListResponseFieldNames;
       if (rankInfo_.Count > 0) {
-        output.WriteMessageArray(1, field_names[0], rankInfo_);
+        output.WriteMessageArray(1, field_names[1], rankInfo_);
+      }
+      if (hasRank) {
+        output.WriteInt32(2, field_names[0], Rank);
+      }
+      if (hasUserRank) {
+        output.WriteInt32(3, field_names[2], UserRank);
       }
     }
     
@@ -3238,6 +3414,12 @@ namespace com.zyd.common.proto.client {
         foreach (global::com.zyd.common.proto.client.RankInfo element in RankInfoList) {
           size += pb::CodedOutputStream.ComputeMessageSize(1, element);
         }
+        if (hasRank) {
+          size += pb::CodedOutputStream.ComputeInt32Size(2, Rank);
+        }
+        if (hasUserRank) {
+          size += pb::CodedOutputStream.ComputeInt32Size(3, UserRank);
+        }
         memoizedSerializedSize = size;
         return size;
       }
@@ -3248,6 +3430,8 @@ namespace com.zyd.common.proto.client {
       int hash = GetType().GetHashCode();
       foreach(global::com.zyd.common.proto.client.RankInfo i in rankInfo_)
         hash ^= i.GetHashCode();
+      if (hasRank) hash ^= rank_.GetHashCode();
+      if (hasUserRank) hash ^= userRank_.GetHashCode();
       return hash;
     }
     
@@ -3257,6 +3441,8 @@ namespace com.zyd.common.proto.client {
       if(rankInfo_.Count != other.rankInfo_.Count) return false;
       for(int ix=0; ix < rankInfo_.Count; ix++)
         if(!rankInfo_[ix].Equals(other.rankInfo_[ix])) return false;
+      if (hasRank != other.hasRank || (hasRank && !rank_.Equals(other.rank_))) return false;
+      if (hasUserRank != other.hasUserRank || (hasUserRank && !userRank_.Equals(other.userRank_))) return false;
       return true;
     }
     
@@ -3421,6 +3607,12 @@ namespace com.zyd.common.proto.client {
         if (other.rankInfo_.Count != 0) {
           result.rankInfo_.Add(other.rankInfo_);
         }
+        if (other.HasRank) {
+          Rank = other.Rank;
+        }
+        if (other.HasUserRank) {
+          UserRank = other.UserRank;
+        }
         return this;
       }
       
@@ -3455,6 +3647,14 @@ namespace com.zyd.common.proto.client {
             }
             case 10: {
               input.ReadMessageArray(tag, field_name, result.rankInfo_, global::com.zyd.common.proto.client.RankInfo.DefaultInstance, extensionRegistry);
+              break;
+            }
+            case 16: {
+              result.hasRank = input.ReadInt32(ref result.rank_);
+              break;
+            }
+            case 24: {
+              result.hasUserRank = input.ReadInt32(ref result.userRank_);
               break;
             }
           }
@@ -3505,6 +3705,46 @@ namespace com.zyd.common.proto.client {
       public Builder ClearRankInfo() {
         PrepareBuilder();
         result.rankInfo_.Clear();
+        return this;
+      }
+      
+      public bool HasRank {
+        get { return result.hasRank; }
+      }
+      public int Rank {
+        get { return result.Rank; }
+        set { SetRank(value); }
+      }
+      public Builder SetRank(int value) {
+        PrepareBuilder();
+        result.hasRank = true;
+        result.rank_ = value;
+        return this;
+      }
+      public Builder ClearRank() {
+        PrepareBuilder();
+        result.hasRank = false;
+        result.rank_ = 0;
+        return this;
+      }
+      
+      public bool HasUserRank {
+        get { return result.hasUserRank; }
+      }
+      public int UserRank {
+        get { return result.UserRank; }
+        set { SetUserRank(value); }
+      }
+      public Builder SetUserRank(int value) {
+        PrepareBuilder();
+        result.hasUserRank = true;
+        result.userRank_ = value;
+        return this;
+      }
+      public Builder ClearUserRank() {
+        PrepareBuilder();
+        result.hasUserRank = false;
+        result.userRank_ = 0;
         return this;
       }
     }
@@ -3922,6 +4162,1199 @@ namespace com.zyd.common.proto.client {
       }
     }
     static RankInfo() {
+      object.ReferenceEquals(global::com.zyd.common.proto.client.ClientProtocol.Descriptor, null);
+    }
+  }
+  
+  public sealed partial class GetPlayerInfoRequest : pb::GeneratedMessageLite<GetPlayerInfoRequest, GetPlayerInfoRequest.Builder> {
+    private GetPlayerInfoRequest() { }
+    private static readonly GetPlayerInfoRequest defaultInstance = new GetPlayerInfoRequest().MakeReadOnly();
+    private static readonly string[] _getPlayerInfoRequestFieldNames = new string[] {  };
+    private static readonly uint[] _getPlayerInfoRequestFieldTags = new uint[] {  };
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoRequest DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override GetPlayerInfoRequest DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override GetPlayerInfoRequest ThisMessage {
+      get { return this; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _getPlayerInfoRequestFieldNames;
+    }
+    
+    private int memoizedSerializedSize = -1;
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    #region Lite runtime methods
+    public override int GetHashCode() {
+      int hash = GetType().GetHashCode();
+      return hash;
+    }
+    
+    public override bool Equals(object obj) {
+      GetPlayerInfoRequest other = obj as GetPlayerInfoRequest;
+      if (other == null) return false;
+      return true;
+    }
+    
+    #endregion
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoRequest ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoRequest ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoRequest ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoRequest ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoRequest ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoRequest ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoRequest ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoRequest ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoRequest ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoRequest ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private GetPlayerInfoRequest MakeReadOnly() {
+      return this;
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder(GetPlayerInfoRequest prototype) {
+      return new Builder(prototype);
+    }
+    
+    public sealed partial class Builder : pb::GeneratedBuilderLite<GetPlayerInfoRequest, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(GetPlayerInfoRequest cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private GetPlayerInfoRequest result;
+      
+      private GetPlayerInfoRequest PrepareBuilder() {
+        if (resultIsReadOnly) {
+          GetPlayerInfoRequest original = result;
+          result = new GetPlayerInfoRequest();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override GetPlayerInfoRequest MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override GetPlayerInfoRequest DefaultInstanceForType {
+        get { return global::com.zyd.common.proto.client.GetPlayerInfoRequest.DefaultInstance; }
+      }
+      
+      public override GetPlayerInfoRequest BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessageLite other) {
+        if (other is GetPlayerInfoRequest) {
+          return MergeFrom((GetPlayerInfoRequest) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(GetPlayerInfoRequest other) {
+        if (other == global::com.zyd.common.proto.client.GetPlayerInfoRequest.DefaultInstance) return this;
+        PrepareBuilder();
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_getPlayerInfoRequestFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _getPlayerInfoRequestFieldTags[field_ordinal];
+            else {
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                return this;
+              }
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              break;
+            }
+          }
+        }
+        
+        return this;
+      }
+      
+    }
+    static GetPlayerInfoRequest() {
+      object.ReferenceEquals(global::com.zyd.common.proto.client.ClientProtocol.Descriptor, null);
+    }
+  }
+  
+  public sealed partial class GetPlayerInfoResponse : pb::GeneratedMessageLite<GetPlayerInfoResponse, GetPlayerInfoResponse.Builder> {
+    private GetPlayerInfoResponse() { }
+    private static readonly GetPlayerInfoResponse defaultInstance = new GetPlayerInfoResponse().MakeReadOnly();
+    private static readonly string[] _getPlayerInfoResponseFieldNames = new string[] { "playerInfo" };
+    private static readonly uint[] _getPlayerInfoResponseFieldTags = new uint[] { 10 };
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoResponse DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override GetPlayerInfoResponse DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override GetPlayerInfoResponse ThisMessage {
+      get { return this; }
+    }
+    
+    #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int PlayerInfoFieldNumber = 1;
+    private bool hasPlayerInfo;
+    private global::com.zyd.common.proto.client.PlayerInfo playerInfo_;
+    public bool HasPlayerInfo {
+      get { return hasPlayerInfo; }
+    }
+    public global::com.zyd.common.proto.client.PlayerInfo PlayerInfo {
+      get { return playerInfo_ ?? global::com.zyd.common.proto.client.PlayerInfo.DefaultInstance; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _getPlayerInfoResponseFieldNames;
+      if (hasPlayerInfo) {
+        output.WriteMessage(1, field_names[0], PlayerInfo);
+      }
+    }
+    
+    private int memoizedSerializedSize = -1;
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        if (hasPlayerInfo) {
+          size += pb::CodedOutputStream.ComputeMessageSize(1, PlayerInfo);
+        }
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    #region Lite runtime methods
+    public override int GetHashCode() {
+      int hash = GetType().GetHashCode();
+      if (hasPlayerInfo) hash ^= playerInfo_.GetHashCode();
+      return hash;
+    }
+    
+    public override bool Equals(object obj) {
+      GetPlayerInfoResponse other = obj as GetPlayerInfoResponse;
+      if (other == null) return false;
+      if (hasPlayerInfo != other.hasPlayerInfo || (hasPlayerInfo && !playerInfo_.Equals(other.playerInfo_))) return false;
+      return true;
+    }
+    
+    #endregion
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoResponse ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoResponse ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoResponse ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoResponse ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoResponse ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoResponse ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoResponse ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoResponse ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoResponse ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerInfoResponse ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private GetPlayerInfoResponse MakeReadOnly() {
+      return this;
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder(GetPlayerInfoResponse prototype) {
+      return new Builder(prototype);
+    }
+    
+    public sealed partial class Builder : pb::GeneratedBuilderLite<GetPlayerInfoResponse, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(GetPlayerInfoResponse cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private GetPlayerInfoResponse result;
+      
+      private GetPlayerInfoResponse PrepareBuilder() {
+        if (resultIsReadOnly) {
+          GetPlayerInfoResponse original = result;
+          result = new GetPlayerInfoResponse();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override GetPlayerInfoResponse MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override GetPlayerInfoResponse DefaultInstanceForType {
+        get { return global::com.zyd.common.proto.client.GetPlayerInfoResponse.DefaultInstance; }
+      }
+      
+      public override GetPlayerInfoResponse BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessageLite other) {
+        if (other is GetPlayerInfoResponse) {
+          return MergeFrom((GetPlayerInfoResponse) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(GetPlayerInfoResponse other) {
+        if (other == global::com.zyd.common.proto.client.GetPlayerInfoResponse.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasPlayerInfo) {
+          MergePlayerInfo(other.PlayerInfo);
+        }
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_getPlayerInfoResponseFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _getPlayerInfoResponseFieldTags[field_ordinal];
+            else {
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                return this;
+              }
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 10: {
+              global::com.zyd.common.proto.client.PlayerInfo.Builder subBuilder = global::com.zyd.common.proto.client.PlayerInfo.CreateBuilder();
+              if (result.hasPlayerInfo) {
+                subBuilder.MergeFrom(PlayerInfo);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              PlayerInfo = subBuilder.BuildPartial();
+              break;
+            }
+          }
+        }
+        
+        return this;
+      }
+      
+      
+      public bool HasPlayerInfo {
+       get { return result.hasPlayerInfo; }
+      }
+      public global::com.zyd.common.proto.client.PlayerInfo PlayerInfo {
+        get { return result.PlayerInfo; }
+        set { SetPlayerInfo(value); }
+      }
+      public Builder SetPlayerInfo(global::com.zyd.common.proto.client.PlayerInfo value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasPlayerInfo = true;
+        result.playerInfo_ = value;
+        return this;
+      }
+      public Builder SetPlayerInfo(global::com.zyd.common.proto.client.PlayerInfo.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasPlayerInfo = true;
+        result.playerInfo_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergePlayerInfo(global::com.zyd.common.proto.client.PlayerInfo value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasPlayerInfo &&
+            result.playerInfo_ != global::com.zyd.common.proto.client.PlayerInfo.DefaultInstance) {
+            result.playerInfo_ = global::com.zyd.common.proto.client.PlayerInfo.CreateBuilder(result.playerInfo_).MergeFrom(value).BuildPartial();
+        } else {
+          result.playerInfo_ = value;
+        }
+        result.hasPlayerInfo = true;
+        return this;
+      }
+      public Builder ClearPlayerInfo() {
+        PrepareBuilder();
+        result.hasPlayerInfo = false;
+        result.playerInfo_ = null;
+        return this;
+      }
+    }
+    static GetPlayerInfoResponse() {
+      object.ReferenceEquals(global::com.zyd.common.proto.client.ClientProtocol.Descriptor, null);
+    }
+  }
+  
+  public sealed partial class GetPlayerRankRequest : pb::GeneratedMessageLite<GetPlayerRankRequest, GetPlayerRankRequest.Builder> {
+    private GetPlayerRankRequest() { }
+    private static readonly GetPlayerRankRequest defaultInstance = new GetPlayerRankRequest().MakeReadOnly();
+    private static readonly string[] _getPlayerRankRequestFieldNames = new string[] {  };
+    private static readonly uint[] _getPlayerRankRequestFieldTags = new uint[] {  };
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankRequest DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override GetPlayerRankRequest DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override GetPlayerRankRequest ThisMessage {
+      get { return this; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _getPlayerRankRequestFieldNames;
+    }
+    
+    private int memoizedSerializedSize = -1;
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    #region Lite runtime methods
+    public override int GetHashCode() {
+      int hash = GetType().GetHashCode();
+      return hash;
+    }
+    
+    public override bool Equals(object obj) {
+      GetPlayerRankRequest other = obj as GetPlayerRankRequest;
+      if (other == null) return false;
+      return true;
+    }
+    
+    #endregion
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankRequest ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankRequest ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankRequest ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankRequest ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankRequest ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankRequest ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankRequest ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankRequest ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankRequest ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankRequest ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private GetPlayerRankRequest MakeReadOnly() {
+      return this;
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder(GetPlayerRankRequest prototype) {
+      return new Builder(prototype);
+    }
+    
+    public sealed partial class Builder : pb::GeneratedBuilderLite<GetPlayerRankRequest, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(GetPlayerRankRequest cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private GetPlayerRankRequest result;
+      
+      private GetPlayerRankRequest PrepareBuilder() {
+        if (resultIsReadOnly) {
+          GetPlayerRankRequest original = result;
+          result = new GetPlayerRankRequest();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override GetPlayerRankRequest MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override GetPlayerRankRequest DefaultInstanceForType {
+        get { return global::com.zyd.common.proto.client.GetPlayerRankRequest.DefaultInstance; }
+      }
+      
+      public override GetPlayerRankRequest BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessageLite other) {
+        if (other is GetPlayerRankRequest) {
+          return MergeFrom((GetPlayerRankRequest) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(GetPlayerRankRequest other) {
+        if (other == global::com.zyd.common.proto.client.GetPlayerRankRequest.DefaultInstance) return this;
+        PrepareBuilder();
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_getPlayerRankRequestFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _getPlayerRankRequestFieldTags[field_ordinal];
+            else {
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                return this;
+              }
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              break;
+            }
+          }
+        }
+        
+        return this;
+      }
+      
+    }
+    static GetPlayerRankRequest() {
+      object.ReferenceEquals(global::com.zyd.common.proto.client.ClientProtocol.Descriptor, null);
+    }
+  }
+  
+  public sealed partial class GetPlayerRankResopnse : pb::GeneratedMessageLite<GetPlayerRankResopnse, GetPlayerRankResopnse.Builder> {
+    private GetPlayerRankResopnse() { }
+    private static readonly GetPlayerRankResopnse defaultInstance = new GetPlayerRankResopnse().MakeReadOnly();
+    private static readonly string[] _getPlayerRankResopnseFieldNames = new string[] { "rank" };
+    private static readonly uint[] _getPlayerRankResopnseFieldTags = new uint[] { 8 };
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankResopnse DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override GetPlayerRankResopnse DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override GetPlayerRankResopnse ThisMessage {
+      get { return this; }
+    }
+    
+    #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int RankFieldNumber = 1;
+    private bool hasRank;
+    private int rank_;
+    public bool HasRank {
+      get { return hasRank; }
+    }
+    public int Rank {
+      get { return rank_; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _getPlayerRankResopnseFieldNames;
+      if (hasRank) {
+        output.WriteInt32(1, field_names[0], Rank);
+      }
+    }
+    
+    private int memoizedSerializedSize = -1;
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        if (hasRank) {
+          size += pb::CodedOutputStream.ComputeInt32Size(1, Rank);
+        }
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    #region Lite runtime methods
+    public override int GetHashCode() {
+      int hash = GetType().GetHashCode();
+      if (hasRank) hash ^= rank_.GetHashCode();
+      return hash;
+    }
+    
+    public override bool Equals(object obj) {
+      GetPlayerRankResopnse other = obj as GetPlayerRankResopnse;
+      if (other == null) return false;
+      if (hasRank != other.hasRank || (hasRank && !rank_.Equals(other.rank_))) return false;
+      return true;
+    }
+    
+    #endregion
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankResopnse ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankResopnse ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankResopnse ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankResopnse ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankResopnse ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankResopnse ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankResopnse ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankResopnse ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankResopnse ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static GetPlayerRankResopnse ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private GetPlayerRankResopnse MakeReadOnly() {
+      return this;
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder(GetPlayerRankResopnse prototype) {
+      return new Builder(prototype);
+    }
+    
+    public sealed partial class Builder : pb::GeneratedBuilderLite<GetPlayerRankResopnse, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(GetPlayerRankResopnse cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private GetPlayerRankResopnse result;
+      
+      private GetPlayerRankResopnse PrepareBuilder() {
+        if (resultIsReadOnly) {
+          GetPlayerRankResopnse original = result;
+          result = new GetPlayerRankResopnse();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override GetPlayerRankResopnse MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override GetPlayerRankResopnse DefaultInstanceForType {
+        get { return global::com.zyd.common.proto.client.GetPlayerRankResopnse.DefaultInstance; }
+      }
+      
+      public override GetPlayerRankResopnse BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessageLite other) {
+        if (other is GetPlayerRankResopnse) {
+          return MergeFrom((GetPlayerRankResopnse) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(GetPlayerRankResopnse other) {
+        if (other == global::com.zyd.common.proto.client.GetPlayerRankResopnse.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasRank) {
+          Rank = other.Rank;
+        }
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_getPlayerRankResopnseFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _getPlayerRankResopnseFieldTags[field_ordinal];
+            else {
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                return this;
+              }
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              result.hasRank = input.ReadInt32(ref result.rank_);
+              break;
+            }
+          }
+        }
+        
+        return this;
+      }
+      
+      
+      public bool HasRank {
+        get { return result.hasRank; }
+      }
+      public int Rank {
+        get { return result.Rank; }
+        set { SetRank(value); }
+      }
+      public Builder SetRank(int value) {
+        PrepareBuilder();
+        result.hasRank = true;
+        result.rank_ = value;
+        return this;
+      }
+      public Builder ClearRank() {
+        PrepareBuilder();
+        result.hasRank = false;
+        result.rank_ = 0;
+        return this;
+      }
+    }
+    static GetPlayerRankResopnse() {
       object.ReferenceEquals(global::com.zyd.common.proto.client.ClientProtocol.Descriptor, null);
     }
   }

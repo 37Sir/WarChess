@@ -66,7 +66,17 @@ public class RankListPanel
     public void OpenView(object intent)
     {
         m_SelfName.text = m_proxy.GetPlayerName();
-        m_SelfIndex.text = m_proxy.GetPlayerRank().ToString();
+        var index = m_proxy.GetPlayerIndex();
+        if (index > 10)
+        {
+            m_SelfIndex.text = "未上榜";
+            m_SelfIndex.fontSize = 22;
+        }
+        else
+        {
+            m_SelfIndex.text = index.ToString();
+            m_SelfIndex.fontSize = 55;
+        }
         m_SelfScore.text = m_proxy.GetPlayerRank().ToString();
         m_Cell.SetActive(false);
         m_mediator.NotifyShowRankList();

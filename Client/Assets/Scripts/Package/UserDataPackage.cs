@@ -14,6 +14,7 @@ public sealed class UserDataPackage
     private int m_winCount;
     private int m_loseCount;
     private int m_draw;
+    private int m_index;
 
     public int UserId
     {
@@ -120,6 +121,18 @@ public sealed class UserDataPackage
         set
         {
             m_draw = value;
+        }
+    }
+
+    public int Index
+    {
+        get
+        {
+            return m_index;
+        }
+        set
+        {
+            m_index = value;
         }
     }
 }

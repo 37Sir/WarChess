@@ -61,6 +61,7 @@ public class UserInfoPanel
         var draw = m_proxy.GetPlayerDraw();
         m_WinCount.text = win.ToString();
         m_TotalCount.text = (draw + win + lose).ToString();
+        m_UserIndex.text = m_proxy.GetPlayerIndex().ToString();
     }
 
     public void CloseView()

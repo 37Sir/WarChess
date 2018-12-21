@@ -20,7 +20,7 @@ public class UserDataProxy:Proxy
         Debug.Log("User Data Proxy Registed");
     }
 
-    public void SetPlayerInfo(string userName, int userId, int rank, int winning, int losing, int winCount, int loseCount, int draw)
+    public void SetPlayerInfo(string userName, int userId, int rank, int winning, int losing, int winCount, int loseCount, int draw, int index)
     {
         m_userData.UserName = userName;
         m_userData.UserId = userId;
@@ -30,6 +30,7 @@ public class UserDataProxy:Proxy
         m_userData.WinCount = winCount;
         m_userData.LoseCount = loseCount;
         m_userData.Draw = draw;
+        m_userData.Index = index;
 
         m_userData.Gold = 9999;
     }
@@ -47,6 +48,11 @@ public class UserDataProxy:Proxy
     public int GetPlayerRank()
     {
         return m_userData.Rank;
+    }
+
+    public void SetPlayerRank(int rank)
+    {
+        m_userData.Rank = rank;
     }
 
     public int GetPlayerWinning()
@@ -72,6 +78,16 @@ public class UserDataProxy:Proxy
     public int GetPlayerDraw()
     {
         return m_userData.Draw;
+    }
+
+    public int GetPlayerIndex()
+    {
+        return m_userData.Index;
+    }
+
+    public void SetPlayerIndex(int index)
+    {
+        m_userData.Index = index;
     }
 }
 

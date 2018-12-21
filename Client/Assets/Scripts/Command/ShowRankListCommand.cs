@@ -17,6 +17,7 @@ public class ShowRankListCommand : SimpleCommand
     {
         Request();
         m_pvpProxy = Facade.RetrieveProxy("PVPProxy") as PVPProxy;
+        m_userProxy = Facade.RetrieveProxy("UserDataProxy") as UserDataProxy;
     }
 
     private void Request()
@@ -29,6 +30,8 @@ public class ShowRankListCommand : SimpleCommand
     private void Response(int error, List<byte[]> btData)
     {
         var data = PlayerRankListResponse.ParseFrom(btData[0]);
+        m_userProxy.SetPlayerIndex(data.UserRank);
+        m_userProxy.SetPlayerRank(data.Rank);
         m_pvpProxy.SetRankListData(data);
         SendNotification(NotificationConstant.RankListResponse);
     }

@@ -10469,8 +10469,8 @@ namespace com.zyd.common.proto.client {
   public sealed partial class PlayerMes : pb::GeneratedMessageLite<PlayerMes, PlayerMes.Builder> {
     private PlayerMes() { }
     private static readonly PlayerMes defaultInstance = new PlayerMes().MakeReadOnly();
-    private static readonly string[] _playerMesFieldNames = new string[] { "userId", "userName" };
-    private static readonly uint[] _playerMesFieldTags = new uint[] { 8, 18 };
+    private static readonly string[] _playerMesFieldNames = new string[] { "count", "isWinning", "userId", "userName" };
+    private static readonly uint[] _playerMesFieldTags = new uint[] { 32, 24, 8, 18 };
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
@@ -10516,6 +10516,32 @@ namespace com.zyd.common.proto.client {
     }
     
     #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int IsWinningFieldNumber = 3;
+    private bool hasIsWinning;
+    private bool isWinning_;
+    public bool HasIsWinning {
+      get { return hasIsWinning; }
+    }
+    public bool IsWinning {
+      get { return isWinning_; }
+    }
+    
+    #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int CountFieldNumber = 4;
+    private bool hasCount;
+    private int count_;
+    public bool HasCount {
+      get { return hasCount; }
+    }
+    public int Count {
+      get { return count_; }
+    }
+    
+    #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
     public override bool IsInitialized {
@@ -10532,10 +10558,16 @@ namespace com.zyd.common.proto.client {
       int size = SerializedSize;
       string[] field_names = _playerMesFieldNames;
       if (hasUserId) {
-        output.WriteInt32(1, field_names[0], UserId);
+        output.WriteInt32(1, field_names[2], UserId);
       }
       if (hasUserName) {
-        output.WriteString(2, field_names[1], UserName);
+        output.WriteString(2, field_names[3], UserName);
+      }
+      if (hasIsWinning) {
+        output.WriteBool(3, field_names[1], IsWinning);
+      }
+      if (hasCount) {
+        output.WriteInt32(4, field_names[0], Count);
       }
     }
     
@@ -10555,6 +10587,12 @@ namespace com.zyd.common.proto.client {
         if (hasUserName) {
           size += pb::CodedOutputStream.ComputeStringSize(2, UserName);
         }
+        if (hasIsWinning) {
+          size += pb::CodedOutputStream.ComputeBoolSize(3, IsWinning);
+        }
+        if (hasCount) {
+          size += pb::CodedOutputStream.ComputeInt32Size(4, Count);
+        }
         memoizedSerializedSize = size;
         return size;
       }
@@ -10565,6 +10603,8 @@ namespace com.zyd.common.proto.client {
       int hash = GetType().GetHashCode();
       if (hasUserId) hash ^= userId_.GetHashCode();
       if (hasUserName) hash ^= userName_.GetHashCode();
+      if (hasIsWinning) hash ^= isWinning_.GetHashCode();
+      if (hasCount) hash ^= count_.GetHashCode();
       return hash;
     }
     
@@ -10573,6 +10613,8 @@ namespace com.zyd.common.proto.client {
       if (other == null) return false;
       if (hasUserId != other.hasUserId || (hasUserId && !userId_.Equals(other.userId_))) return false;
       if (hasUserName != other.hasUserName || (hasUserName && !userName_.Equals(other.userName_))) return false;
+      if (hasIsWinning != other.hasIsWinning || (hasIsWinning && !isWinning_.Equals(other.isWinning_))) return false;
+      if (hasCount != other.hasCount || (hasCount && !count_.Equals(other.count_))) return false;
       return true;
     }
     
@@ -10739,6 +10781,12 @@ namespace com.zyd.common.proto.client {
         if (other.HasUserName) {
           UserName = other.UserName;
         }
+        if (other.HasIsWinning) {
+          IsWinning = other.IsWinning;
+        }
+        if (other.HasCount) {
+          Count = other.Count;
+        }
         return this;
       }
       
@@ -10777,6 +10825,14 @@ namespace com.zyd.common.proto.client {
             }
             case 18: {
               result.hasUserName = input.ReadString(ref result.userName_);
+              break;
+            }
+            case 24: {
+              result.hasIsWinning = input.ReadBool(ref result.isWinning_);
+              break;
+            }
+            case 32: {
+              result.hasCount = input.ReadInt32(ref result.count_);
               break;
             }
           }
@@ -10824,6 +10880,46 @@ namespace com.zyd.common.proto.client {
         PrepareBuilder();
         result.hasUserName = false;
         result.userName_ = "";
+        return this;
+      }
+      
+      public bool HasIsWinning {
+        get { return result.hasIsWinning; }
+      }
+      public bool IsWinning {
+        get { return result.IsWinning; }
+        set { SetIsWinning(value); }
+      }
+      public Builder SetIsWinning(bool value) {
+        PrepareBuilder();
+        result.hasIsWinning = true;
+        result.isWinning_ = value;
+        return this;
+      }
+      public Builder ClearIsWinning() {
+        PrepareBuilder();
+        result.hasIsWinning = false;
+        result.isWinning_ = false;
+        return this;
+      }
+      
+      public bool HasCount {
+        get { return result.hasCount; }
+      }
+      public int Count {
+        get { return result.Count; }
+        set { SetCount(value); }
+      }
+      public Builder SetCount(int value) {
+        PrepareBuilder();
+        result.hasCount = true;
+        result.count_ = value;
+        return this;
+      }
+      public Builder ClearCount() {
+        PrepareBuilder();
+        result.hasCount = false;
+        result.count_ = 0;
         return this;
       }
     }

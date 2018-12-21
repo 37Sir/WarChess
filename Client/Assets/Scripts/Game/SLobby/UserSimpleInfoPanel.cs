@@ -16,6 +16,7 @@ public class UserSimpleInfoPanel
     private Text m_UserRank;
     private Text m_UserName;
     private Image m_UserIcon;
+    private Text m_Index;
 
     private GameObject m_object;
     private UserSimpleInfoPanelMediator m_mediator;
@@ -42,12 +43,22 @@ public class UserSimpleInfoPanel
         m_RankButton = gameObject.transform.Find("RankList").GetComponent<Button>();
         m_UserRank = gameObject.transform.Find("RankList/RankImage/m_Rank").GetComponent<Text>();
         m_UserName = gameObject.transform.Find("m_UserInfoWidget/m_UserName").GetComponent<Text>();
+        m_Index = gameObject.transform.Find("RankList/m_Index").GetComponent<Text>();
     }
 
     public void OpenView(object intent)
     {
         m_UserName.text = m_proxy.GetPlayerName();
         m_UserRank.text = m_proxy.GetPlayerRank().ToString();
+        var index = m_proxy.GetPlayerIndex();
+        if (index > 10)
+        {
+            m_Index.text = "未上榜";
+        }
+        else
+        {
+            m_Index.text = "第"+index+"名";
+        }       
     }
 
     public void CloseView()
