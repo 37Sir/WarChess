@@ -39,6 +39,7 @@ public class PVEPanel
     public bool isPause = false;
     public int roundNum = 0;
     public Config.PieceColor selfColor = Config.PieceColor.WHITE;//自己的颜色
+    public Config.PieceColor AIColor = Config.PieceColor.BLACK;//AI的颜色
     private IEnumerator m_roundTimer;   //计时器
     private List<GameObject> m_tips = new List<GameObject>();
     private ModelDrag m_modelDrag;
@@ -228,9 +229,21 @@ public class PVEPanel
     /// </summary>
     private void OnRoundStart()
     {
-        StopRoundTimer();
-        isTurn = true;
-        StartRoundTimer();
+        //自己的回合
+        if (isTurn == true)
+        {
+            StopRoundTimer();
+            StartRoundTimer();
+        }
+        //AI的回合
+        else
+        {
+            Move move = App.ChessAI.GetSimpleNextMove((int)AIColor);
+            Debug.Log("move from" + move.From+" to"+ move.To);
+            var item = GameObject.Find((move.From.x + 1) + "_" + (move.From.y + 1));
+            item.GetComponent<PieceItem>().AIMove(move);
+        }
+
     }
 
     /// <summary>
@@ -238,15 +251,30 @@ public class PVEPanel
     /// </summary>
     private void OnRoundEnd()
     {
-        isTurn = false;
+        if(isTurn == true)
+        {
+            m_selfTimer.gameObject.SetActive(false);
+            m_enemyTimer.gameObject.SetActive(true);
+            isTurn = false;
+        }
+        else
+        {
+            m_selfTimer.gameObject.SetActive(true);
+            m_enemyTimer.gameObject.SetActive(false);
+            isTurn = true;
+        }      
         roundNum++;
         Debug.Log("=======RoundEnd======== num: " + roundNum);
     }
 
+
+    /// <summary>
+    /// 结束当前回合
+    /// </summary>
     public void EndCurRound()
     {
         OnRoundEnd();
-        OnNextPlay();
+        OnRoundStart();
     }
 
     /// <summary>
@@ -406,18 +434,6 @@ public class PVEPanel
         }
     }
     #endregion
-
-    public void OnNextPlay()
-    {
-        if (isTurn == true)
-        {
-            EndCurRound();
-        }
-        else
-        {
-            OnRoundStart();
-        }
-    }
 
     public void CloseView()
     {

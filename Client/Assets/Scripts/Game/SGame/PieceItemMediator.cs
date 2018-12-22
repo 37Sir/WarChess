@@ -144,6 +144,11 @@ public class PieceItemMediator : Mediator
         SendNotification(NotificationConstant.EndTurn);
     }
 
+    public void NotifyPVEEndTurn()
+    {
+        SendNotification(NotificationConstant.PVEEndTurn);
+    }
+
     public void NotifyMoveEnd(object body)
     {
         SendNotification(NotificationConstant.OnMoveEnd, body);

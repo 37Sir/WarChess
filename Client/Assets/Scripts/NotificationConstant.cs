@@ -42,4 +42,5 @@ public class NotificationConstant
     public const string OnUndoTweenEnd = "OnUndoTweenEnd";
     public const string OnAttackOther = "OnAttackOther";
     public const string UpdateRankList = "UpdateRankList";
+    public const string PVEEndTurn = "PVEEndTurn";
 }

@@ -34,6 +34,7 @@ public class PVEPanelMediator : Mediator
         list.Add(NotificationConstant.PlayerReadyResponse);
         list.Add(NotificationConstant.OnPPromote);
         list.Add(NotificationConstant.OnTypeSelect);
+        list.Add(NotificationConstant.PVEEndTurn);
         return list;
     }
 
@@ -60,6 +61,9 @@ public class PVEPanelMediator : Mediator
                 break;
             case NotificationConstant.OnTypeSelect:
                 m_viewComponent.isPause = false;
+                break;
+            case NotificationConstant.PVEEndTurn:
+                m_viewComponent.EndCurRound();
                 break;
             default:
                 break;

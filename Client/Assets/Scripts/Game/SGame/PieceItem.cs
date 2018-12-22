@@ -239,6 +239,22 @@ public class PieceItem:MonoBehaviour
     }
 
     /// <summary>
+    /// AI走棋
+    /// </summary>
+    /// <param name="move"></param>
+    public void AIMove(Move move)
+    {
+        var posMove = new Move(new Vector2(move.From.x + 1, move.From.y + 1), new Vector2(move.To.x + 1, move.To.y + 1));
+        var tempEat = App.ChessLogic.GetPiece(move.To.x, move.To.y);
+        if (App.ChessLogic.DoMove(move.From, move.To))
+        {
+            Debug.Log("Move success!");
+            object[] args = new object[] { posMove.From, posMove.To, new Vector2(-1, tempEat) };//0:from, 1:to, 2.x:兵生变类型 -1为没有， 2.y:吃棋信息
+            ShowMove(args);
+        }
+    }
+
+    /// <summary>
     /// 自己走棋
     /// </summary>
     /// <param name="to"></param>
@@ -254,7 +270,7 @@ public class PieceItem:MonoBehaviour
         }
       
         //有棋子播放攻击表现
-        if (eatPiece > -1)
+        if (eatPiece >= 0)
         {
             ShowAttack(args);
         }
@@ -430,6 +446,10 @@ public class PieceItem:MonoBehaviour
         {
             m_mediator.NotifyEndTurn();
             Debug.Log("isPVE:OnCompleteMove!");
+        }
+        else
+        {
+            m_mediator.NotifyPVEEndTurn();
         }
     }
 
