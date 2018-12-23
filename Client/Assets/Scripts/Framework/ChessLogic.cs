@@ -424,6 +424,21 @@ namespace Framework
             m_board[(int)y][(int)x] = type;
         }
 
+        public int GetPieceValue(int selfColor, Vector2 piecePos)
+        {
+            var piece = GetPiece(piecePos.x, piecePos.y);
+            var pieceColor = piece / 10;
+            int value = Config.PieceValue[piece % 10];
+            if(pieceColor == selfColor)
+            {
+                return value;
+            }
+            else
+            {
+                return -value;
+            }
+        }
+
         public void Undo(Vector2 from, Vector2 to, int eatType)
         {
             var temp = GetPiece(to.x - 1, to.y - 1);
@@ -506,7 +521,7 @@ namespace Framework
             return false;
         }
 
-        private int[,] CopyBoard()
+        public int[,] CopyBoard()
         {
             int[,] arr = new int[Config.Board.MaxY, Config.Board.MaxY];
             for (int y = 0; y < Config.Board.MaxY; y++)

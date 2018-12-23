@@ -24,6 +24,8 @@ public class Config{
     public static float MoveDistance = 0.7f * PieceWidth;//中层边界
     public static float TipsDistance = 0.3f * PieceWidth;//内层边界
 
+    public static int[] PieceValue = { 10, 30, 30, 50, 90, 900 };//子力
+
     public class Game
     {
         public static int WaitingFindEnemy = 45;                    //匹配等待秒数

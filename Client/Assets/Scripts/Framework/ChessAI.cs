@@ -16,9 +16,79 @@ namespace Framework
         public Move GetSimpleNextMove(int color)
         {
             var moves = App.ChessLogic.GetAllMoves(color);
-            System.Random ran = new System.Random();
-            int key = ran.Next(1, moves.Count);
-            return moves[key];
+            int maxIndex = 0;
+            int maxValue = 0;
+            int tempIndex = 0;
+            foreach(var move in moves)
+            {
+                var tempValue = CalValueAfterMove(move);
+                if(tempValue > maxValue)
+                {
+                    maxValue = tempValue;
+                    maxIndex = tempIndex;
+                }
+                else if(tempValue == maxValue)
+                {
+                    System.Random ran = new System.Random();
+                    int key = ran.Next(0, 10);
+                    if (key > 5)
+                    {
+                        maxValue = tempValue;
+                        maxIndex = tempIndex;
+                    }
+                }
+                tempIndex++;
+            }
+            //System.Random ran = new System.Random();
+            //int key = ran.Next(1, moves.Count);
+            return moves[maxIndex];
+        }
+
+        private int CalValueAfterMove(Move move)
+        {
+            int[,] tempBoard = App.ChessLogic.CopyBoard();
+            var fromY = (int)move.From.y;
+            var fromX = (int)move.From.x;
+            var piece = tempBoard[fromY, fromX];
+
+            var toY = (int)move.To.y;
+            var toX = (int)move.To.x;
+
+            var selfColor = piece / 10;
+            tempBoard[fromY, fromX] = -1;
+            tempBoard[toY, toX] = piece;
+
+            var totalValue = CalBoardValue(selfColor, tempBoard);
+
+            return totalValue;
+        }
+
+        /// <summary>
+        /// 评估盘面局势
+        /// </summary>
+        /// <returns></returns>
+        private int CalBoardValue(int selfColor, int[,] board)
+        {
+            int totalValue = 0;
+            for (int y = 0; y < Config.Board.MaxY; y++)
+            {
+                for (int x = 0; x < Config.Board.MaxX; x++)
+                {
+                    var piece = board[y,x];
+                    if (piece == -1) continue;
+                    var pieceColor = piece / 10;
+                    int value = Config.PieceValue[piece % 10];
+                    if (pieceColor == selfColor)
+                    {
+                        totalValue += value;
+                    }
+                    else
+                    {
+                        totalValue -= value;
+                    }
+                }
+            }
+            return totalValue;
         }
     }
 
