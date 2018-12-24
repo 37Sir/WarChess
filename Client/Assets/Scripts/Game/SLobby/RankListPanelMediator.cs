@@ -37,6 +37,7 @@ public class RankListPanelMediator : Mediator
         {
             case NotificationConstant.RankListResponse:
                 m_viewComponent.UpdateRankList();
+                m_viewComponent.UpdateRank();
                 break;
             default:
                 break;

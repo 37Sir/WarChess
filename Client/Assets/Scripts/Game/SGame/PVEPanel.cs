@@ -142,16 +142,15 @@ public class PVEPanel
 
                     App.ObjectPoolManager.RegisteObject(pieceName, "FX/" + pieceName, 0, 30, -1);
                     App.ObjectPoolManager.Instantiate(pieceName, (GameObject obj) => {
-                        if(color == (int)Config.PieceColor.BLACK)
+                        obj.transform.parent = temp.transform;
+                        if (selfColor == Config.PieceColor.WHITE)
                         {
                             obj.transform.localRotation = Quaternion.Euler(0, 180, 0);
                         }
-                        obj.SetActive(true);
-                        obj.transform.parent = temp.transform;
                         obj.transform.localPosition = Vector3.zero;
                         obj.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
                         pieceItem.pieceModel = obj;
-
+                        obj.SetActive(true);
                     });                                   
                 }
             }
@@ -303,7 +302,7 @@ public class PVEPanel
     {
         App.SoundManager.PlaySoundClip(Config.Sound.Click1);
         m_ready.gameObject.SetActive(false);
-        m_cameraTween.SetTweenPackSync("camera_start_white");      
+        m_cameraTween.SetTweenPackSync("camera_start_white01");      
         var clip = m_cameraTween.GetClipTween("move_start");
         clip.SetOnComplete(OnCameratweenComplete, null);      
     }

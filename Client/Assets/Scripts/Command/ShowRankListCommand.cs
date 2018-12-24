@@ -33,6 +33,7 @@ public class ShowRankListCommand : SimpleCommand
         m_userProxy.SetPlayerIndex(data.UserRank);
         m_userProxy.SetPlayerRank(data.Rank);
         m_pvpProxy.SetRankListData(data);
+        SendNotification(NotificationConstant.RankUpdate, new object[] {data.Rank, data.UserRank});
         SendNotification(NotificationConstant.RankListResponse);
     }
 }

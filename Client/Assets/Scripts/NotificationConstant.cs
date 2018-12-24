@@ -43,4 +43,5 @@ public class NotificationConstant
     public const string OnAttackOther = "OnAttackOther";
     public const string UpdateRankList = "UpdateRankList";
     public const string PVEEndTurn = "PVEEndTurn";
+    public const string RankUpdate = "RankUpdate";
 }

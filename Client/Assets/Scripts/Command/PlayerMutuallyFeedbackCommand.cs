@@ -21,6 +21,7 @@ public class PlayerMutuallyFeedbackCommand : SimpleCommand
 
     private void Request(bool result)
     {
+        Debug.Log("PlayerMutuallyFeedbackCommand!");
         PlayerMutuallyFeedbackRequest.Builder request = PlayerMutuallyFeedbackRequest.CreateBuilder();
         request.SetIsAgree(result);
         var bytes = request.Build().ToByteArray();

@@ -12,7 +12,11 @@ public class LobbyPanel
 {
     private Button m_PVP;
     private Button m_PVE;
+    private Button m_Easy;
+    private Button m_Normal;
+    private Button m_Hard;
     private Button m_cancel;
+    private GameObject m_Mode;
     private GameObject m_Select;
     private GameObject m_Searching;
     private Text m_SearchTime;
@@ -50,6 +54,9 @@ public class LobbyPanel
 
         m_PVP.onClick.AddListener(OnPVPClick);
         m_PVE.onClick.AddListener(OnPVEClick);
+        m_Easy.onClick.AddListener(OnEasyClick);
+        m_Hard.onClick.AddListener(OnHardClick);
+        m_Normal.onClick.AddListener(OnNormalClick);
         m_cancel.onClick.AddListener(OnCancelClick);
         App.Facade.RegisterCommand(NotificationConstant.Match, () => new MatchCommand());
         App.Facade.RegisterCommand(NotificationConstant.CancelMatch, () => new CancelMatchCommand());
@@ -60,13 +67,16 @@ public class LobbyPanel
     {
         m_bird = gameObject.transform.Find("m_Bird").GetComponent<Image>();
         m_birdTween = m_bird.GetComponent<TweenPlayer>();
+        m_Mode = gameObject.transform.Find("m_Mode").gameObject;
         m_Select = gameObject.transform.Find("m_Select").gameObject;
         m_Searching = gameObject.transform.Find("m_Searching").gameObject;
         m_PVE = gameObject.transform.Find("m_Select/m_PVE").gameObject.GetComponent<Button>();
         m_PVP = gameObject.transform.Find("m_Select/m_PVP").gameObject.GetComponent<Button>();
         m_cancel = gameObject.transform.Find("m_Searching/m_CancelBtn").gameObject.GetComponent<Button>();
         m_SearchTime = gameObject.transform.Find("m_Searching/m_SearchContainer/m_SearchTime").gameObject.GetComponent<Text>();
-
+        m_Easy = gameObject.transform.Find("m_Mode/m_Easy").gameObject.GetComponent<Button>();
+        m_Normal = gameObject.transform.Find("m_Mode/m_Normal").gameObject.GetComponent<Button>();
+        m_Hard = gameObject.transform.Find("m_Mode/m_Hard").gameObject.GetComponent<Button>();
     }
 
     public void OpenView(object intent)
@@ -193,9 +203,9 @@ public class LobbyPanel
 
     private void OnPVEClick()
     {
+        m_Select.SetActive(false);
+        m_Mode.SetActive(true);
         App.SoundManager.PlaySoundClip(Config.Sound.Click1);
-        App.Facade.RemoveMediator("LobbyPanelMediator");
-        App.NSceneManager.LoadScene("SGame01");
     }
 
     private void OnCancelClick()
@@ -204,6 +214,25 @@ public class LobbyPanel
         m_Select.SetActive(true);
         StopMatchTimer();
         m_mediator.NotifyCancelMatch();
+    }
+
+    private void OnEasyClick()
+    {
+        App.SoundManager.PlaySoundClip(Config.Sound.Click1);
+        App.Facade.RemoveMediator("LobbyPanelMediator");
+        App.NSceneManager.LoadScene("SGame01");
+    }
+
+    private void OnNormalClick()
+    {
+        App.SoundManager.PlaySoundClip(Config.Sound.Click1);
+        App.UIManager.OpenPanel("TipsPanel", new object[] { "提示", "暂未开放" });
+    }
+
+    private void OnHardClick()
+    {
+        App.SoundManager.PlaySoundClip(Config.Sound.Click1);
+        App.UIManager.OpenPanel("TipsPanel", new object[] { "提示", "暂未开放" });
     }
     #endregion 
 }

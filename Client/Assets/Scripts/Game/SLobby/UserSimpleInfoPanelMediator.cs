@@ -24,16 +24,18 @@ public class UserSimpleInfoPanelMediator : Mediator
     public override IList<string> ListNotificationInterests()
     {
         IList<string> list = new List<string>();
-        list.Add(NotificationConstant.MatchResponse);
+        list.Add(NotificationConstant.RankUpdate);
         return list;
     }
 
     public override void HandleNotification(INotification notification)
     {
+        object body = notification.Body;
         switch (notification.Name)
         {
-            case NotificationConstant.LevelUp:
-                Debug.Log("Level Up!!");
+            case NotificationConstant.RankUpdate:
+                var args = (object[])body;
+                m_viewComponent.UpdateRank((int)args[0], (int)args[1]);
                 break;
             default:
                 break;

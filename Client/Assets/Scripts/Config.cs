@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Config{
     //网络层配置
-    public static string ServerHost = "192.168.90.12";
+    public static string ServerHost = "192.168.80.81";
     public static int ServerHostPort = 10000;
 
     public static readonly int RpcTimeout = 10000;                  //rpc请求的超时时间ms
@@ -29,6 +29,7 @@ public class Config{
     public class Game
     {
         public static int WaitingFindEnemy = 45;                    //匹配等待秒数
+        public static int WaitingMutuallySelect = 30;               //选择等待秒数
         public static int WaitingReady = 60;                        //准备等待秒数
         public static int WaitingRound = 60;                        //回合等待秒数
     }

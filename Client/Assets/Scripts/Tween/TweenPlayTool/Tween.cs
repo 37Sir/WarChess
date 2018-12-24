@@ -385,11 +385,16 @@ public class Tween
                     {
                         m_owner.transform.localRotation = Quaternion.Euler(m_fromPos);
                     }
-                    m_tweener = m_owner.transform.DOBlendableLocalRotateBy(m_to, m_duration, RotateMode.FastBeyond360)
+                    m_tweener = m_owner.transform.DOLocalRotate(m_to, m_duration, RotateMode.FastBeyond360)
                         .SetDelay(m_delayTime)
                         .SetEase(m_easeType)
                         .SetLoops(m_loop, m_loopType)
                         .OnComplete(OnComplete);
+                    //m_tweener = m_owner.transform.DOBlendableLocalRotateBy(m_to, m_duration, RotateMode.FastBeyond360)
+                    //    .SetDelay(m_delayTime)
+                    //    .SetEase(m_easeType)
+                    //    .SetLoops(m_loop, m_loopType)
+                    //    .OnComplete(OnComplete);
                     break;
                 case TweenType.BlendableScale:
                     if (isNeedFrom)

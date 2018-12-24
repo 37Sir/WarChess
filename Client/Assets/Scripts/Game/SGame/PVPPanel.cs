@@ -103,14 +103,14 @@ public class PVPPanel
         if(firstId == userId)
         {
             isTurn = true;
-            
-            m_pvpProxy.SetSelfColor(Config.PieceColor.WHITE);
+            selfColor = Config.PieceColor.WHITE;        
         }
         else
         {
             isTurn = false;
-            m_pvpProxy.SetSelfColor(Config.PieceColor.BLACK);
+            selfColor = Config.PieceColor.BLACK;
         }
+        m_pvpProxy.SetSelfColor(selfColor);
         m_userImage.GetComponentInChildren<Text>().text = m_proxy.GetPlayerName();
         m_enemyImage.GetComponentInChildren<Text>().text = m_pvpProxy.GetEnemyName();
         InitTimer();
@@ -170,7 +170,7 @@ public class PVPPanel
                     App.ObjectPoolManager.RegisteObject(pieceName, "FX/" + pieceName, 0, 30, -1);
                     App.ObjectPoolManager.Instantiate(pieceName, (GameObject obj) =>
                     {
-                        if (color == (int)Config.PieceColor.BLACK)
+                        if (selfColor == Config.PieceColor.WHITE)
                         {
                             obj.transform.localRotation = Quaternion.Euler(0, 180, 0);
                         }
@@ -347,9 +347,9 @@ public class PVPPanel
 
     public void OnMutuallyResponse()
     {
-        App.UIManager.OpenPanel("WaitingPanel", "等待对方选择...");
         m_modelDrag.isTurn = false;
         isPause = true;
+        App.UIManager.OpenPanel("WaitingPanel", "等待对方选择...");
     }
 
     #region OnClick Method
@@ -367,7 +367,14 @@ public class PVPPanel
     {
         Debug.Log("OnUndoClick");
         App.SoundManager.PlaySoundClip(Config.Sound.Click1);
-        m_mediator.NotifyRequestUndo();
+        if(roundNum > 1)
+        {
+            m_mediator.NotifyRequestUndo();
+        }
+        else
+        {
+            App.UIManager.OpenPanel("MessagePanel", "无法悔棋！");
+        }
     }
 
     #endregion
@@ -399,21 +406,21 @@ public class PVPPanel
         }
         for (int i = 0; i < Config.Game.WaitingRound; i++)
         {
-            while (isPause)
+            while (isPause == true)
             {
                 yield return new WaitForSeconds(1);
             }
             timer.text = (Config.Game.WaitingRound - i) + "s";
             yield return new WaitForSeconds(1);
         }
-        if (isTurn)
-        {
-            EndCurRound();
-        }
-        else
-        {
-            OnRoundStart();            
-        }
+        //if (isTurn)
+        //{
+        //    EndCurRound();
+        //}
+        //else
+        //{
+        //    OnRoundStart();            
+        //}
     }
 
     private void StopRoundTimer()
@@ -441,7 +448,8 @@ public class PVPPanel
 
     public void OnPlayerUndoInfoPush(string name, List<byte[]> packet)
     {
-        if (isTurn)
+        Debug.Log("Push:OnPlayerUndoInfoPush");
+        if (isTurn == true)
         {
             m_modelDrag.isTurn = true;
             App.UIManager.ClosePanel("WaitingPanel");
@@ -480,9 +488,10 @@ public class PVPPanel
 
     public void OnPlayerNotAgreePush(string name, List<byte[]> packet)
     {
-        if (isTurn)
-        {
-            isPause = false;
+        Debug.Log("Push:OnPlayerNotAgreePush");
+        isPause = false;
+        if (isTurn == true)
+        {           
             m_modelDrag.isTurn = isTurn;
             App.UIManager.ClosePanel("WaitingPanel");
             App.UIManager.OpenPanel("MessagePanel", "对方不同意悔棋!!");
@@ -611,6 +620,11 @@ public class PVPPanel
         App.NetworkManager.RemovePushCall(Config.PushMessage.PlayerReadyFinish);
         App.NetworkManager.RemovePushCall(Config.PushMessage.PlayNext);
         App.NetworkManager.RemovePushCall(Config.PushMessage.PlayerEnd);
+
+        App.NetworkManager.RemovePushCall(Config.PushMessage.PlayerNotAgreePush);
+        App.NetworkManager.RemovePushCall(Config.PushMessage.PlayerUndoInfoPush);
+        App.NetworkManager.RemovePushCall(Config.PushMessage.PlayerUndoPush);
+        App.NetworkManager.RemovePushCall(Config.PushMessage.PlayUndoNextPush);
     }
 
     public void DestroyView()

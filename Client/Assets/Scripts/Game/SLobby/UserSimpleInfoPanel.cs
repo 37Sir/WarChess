@@ -61,6 +61,19 @@ public class UserSimpleInfoPanel
         }       
     }
 
+    public void UpdateRank(int rank, int index)
+    {
+        m_UserRank.text = rank.ToString();
+        if (index > 10)
+        {
+            m_Index.text = "未上榜";
+        }
+        else
+        {
+            m_Index.text = "第" + index + "名";
+        }
+    }
+
     public void CloseView()
     {
 

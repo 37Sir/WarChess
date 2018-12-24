@@ -86,6 +86,7 @@ public class PVPProxy : Proxy
 
     public void SetRankListData(PlayerRankListResponse data)
     {
+        
         List<RankList> temp = new List<RankList>();
         var count = data.RankInfoCount;
         for(int i = 0; i < count; i++)

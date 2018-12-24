@@ -26,6 +26,7 @@ public class PieceItem:MonoBehaviour
     public GameObject pieceModel;
     private GameObject m_Attack;
     private TweenPlayer m_TweenPlayer;
+    private TweenPlayer m_ModelTween;
     private object[] m_body;
     private Vector2[] m_otherBody;
     private Vector2 m_undoFrom;
@@ -35,7 +36,7 @@ public class PieceItem:MonoBehaviour
     {
         isPVE = pve;
         m_gameObject = gameObject;
-        m_gameObject.transform.localRotation = Quaternion.Euler(0, 180, 0);
+        //m_gameObject.transform.localRotation = Quaternion.Euler(0, 180, 0);
         m_Attack = gameObject.transform.Find("m_Attack").gameObject;
         m_pvpProxy = App.Facade.RetrieveProxy("PVPProxy") as PVPProxy;
         selfColor = m_pvpProxy.GetSelfColor();
@@ -264,28 +265,83 @@ public class PieceItem:MonoBehaviour
         var to = (Vector2)args[1];
         var from = (Vector2)args[0];
 
+        var dx = to.x - from.x;
+        var dy = to.y - from.y;
+        var angle = GetAngleByDeltaXY(dx, dy);
+        var localAngle = (angle) % 360;
+
         if (m_TweenPlayer == null)
         {
             m_TweenPlayer = gameObject.AddComponent<TweenPlayer>();
         }
-      
+
+        if (m_ModelTween == null)
+        {
+            m_ModelTween = pieceModel.AddComponent<TweenPlayer>();
+        }
+
         //有棋子播放攻击表现
         if (eatPiece >= 0)
         {
-            ShowAttack(args);
+            Tween rotate_start = m_ModelTween.AddClip("rotate_start", 1);
+            rotate_start.SetTweenType(TweenType.LocalRotation);
+            rotate_start.SetTo(new Vector3(0, localAngle, 0));
+            rotate_start.SetOnComplete(ShowAttack, args);
+            m_ModelTween.StartPlay();
         }
 
         //没有棋子直接走
         else
         {
-            Tween move_pos = m_TweenPlayer.AddClip("move", 2);
-            move_pos.SetTweenType(TweenType.LocalPosition);
-            move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
-            var steps = CalMoveSteps(from, to);
-            move_pos.SetDuration(steps * 0.5f);
-            move_pos.SetOnComplete(OnCompleteMove, args);
-            m_TweenPlayer.StartPlay();
-        }      
+            Debug.Log("localAngel==============" + localAngle);
+            Tween rotate_start = m_ModelTween.AddClip("rotate_start", 1);
+            rotate_start.SetTweenType(TweenType.LocalRotation);
+            rotate_start.SetTo(new Vector3(0, localAngle, 0));
+            rotate_start.SetOnComplete(OnRotate1Complete, args);
+            m_ModelTween.StartPlay();
+        }
+    }
+
+    /// <summary>
+    /// 开始走 转过去的回调
+    /// </summary>
+    /// <param name="args"></param>
+    private void OnRotate1Complete(object args)
+    {
+        var temp = (object[])args;
+        var to = (Vector2)temp[1];
+        var from = (Vector2)temp[0];
+        Tween move_pos = m_TweenPlayer.AddClip("move", 2);
+        move_pos.SetTweenType(TweenType.LocalPosition);
+        move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
+        var steps = CalMoveSteps(from, to);
+        move_pos.SetDuration(steps * 0.5f);
+        move_pos.SetOnComplete(OnRotate2, temp);
+        m_TweenPlayer.StartPlay();
+    }
+
+    /// <summary>
+    /// 走完了 转回来
+    /// </summary>
+    /// <param name="args"></param>
+    private void OnRotate2(object args)
+    {
+        var temp = (object[])args;
+        var to = (Vector2)temp[1];
+        var from = (Vector2)temp[0];
+        Tween rotate_start = m_ModelTween.AddClip("rotate_start", 1);
+        rotate_start.SetTweenType(TweenType.LocalRotation);
+        if(selfColor == Config.PieceColor.BLACK)
+        {
+            rotate_start.SetTo(new Vector3(0, 0, 0));
+        }
+        else
+        {
+            rotate_start.SetTo(new Vector3(0, 180, 0));
+        }
+        
+        rotate_start.SetOnComplete(OnCompleteMove, temp);
+        m_ModelTween.StartPlay();
     }
 
     /// <summary>
@@ -351,15 +407,14 @@ public class PieceItem:MonoBehaviour
 
         App.SoundManager.PlaySoundClip(Config.Sound.MagicAttack, 0.6f);
 
-        var dx = -Config.PieceWidth * (to.x - m_X);
-        var dy = -Config.PieceWidth * (to.y - m_Z);
+        var dx = Config.PieceWidth * (to.x - m_X);
+        var dy = Config.PieceWidth * (to.y - m_Z);
         attackTween.SetTo(new Vector3(dx, m_Attack.transform.localPosition.y, dy));
 
-        if (pieceColor == Config.PieceColor.WHITE)
-        {
-            var angle = GetAngleByDeltaXY(dx, dy);
-            effectPlayer.LocalRotation = Quaternion.Euler(0, angle, 0);
-        }
+        //if (pieceColor == Config.PieceColor.WHITE)
+        //{
+        //    effectPlayer.LocalRotation = Quaternion.Euler(0, 180, 0);
+        //}
         effectPlayer.enabled = true;
         m_AttackPlayer.StartPlay();
     }
@@ -394,7 +449,7 @@ public class PieceItem:MonoBehaviour
         move_pos.SetDuration(steps * 0.6f);
         move_pos.SetTweenType(TweenType.LocalPosition);
         move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
-        move_pos.SetOnComplete(OnCompleteMove, args);
+        move_pos.SetOnComplete(OnRotate2, args);
         m_TweenPlayer.StartPlay();
     }
 
@@ -415,7 +470,7 @@ public class PieceItem:MonoBehaviour
         move_pos.SetDelayTime(1);
         move_pos.SetTweenType(TweenType.LocalPosition);
         move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
-        move_pos.SetOnComplete(OnCompleteMove, args);
+        move_pos.SetOnComplete(OnRotate2, args);
         m_TweenPlayer.StartPlay();
     }
 
@@ -491,7 +546,12 @@ public class PieceItem:MonoBehaviour
     /// <param name="to"></param>
     public void DoMove(Vector2 from, Vector2 to, Vector2 type)
     {
-        if(from.x == m_X && from.y == m_Z)
+        var dx = to.x - from.x;
+        var dy = to.y - from.y;
+        var angle = GetAngleByDeltaXY(dx, dy);
+        var localAngle = (angle) % 360;
+
+        if (from.x == m_X && from.y == m_Z)
         {
             var targetPiece = App.ChessLogic.GetPiece(to.x - 1, to.y - 1);//目标位置棋子
             if (App.ChessLogic.DoMove(new Vector2(from.x - 1, from.y - 1), new Vector2(to.x - 1, to.y - 1)))
@@ -499,6 +559,11 @@ public class PieceItem:MonoBehaviour
                 if (m_TweenPlayer == null)
                 {
                     m_TweenPlayer = gameObject.AddComponent<TweenPlayer>();
+                }
+
+                if (m_ModelTween == null)
+                {
+                    m_ModelTween = pieceModel.AddComponent<TweenPlayer>();
                 }
 
                 var args = new object[] { from, to, new Vector2(type.x, targetPiece) };
@@ -511,16 +576,11 @@ public class PieceItem:MonoBehaviour
                 //正常走棋
                 else
                 {
-                    
-                    Tween move_pos = m_TweenPlayer.AddClip("move", 2);
-                    move_pos.SetTweenType(TweenType.LocalPosition);
-                    move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
-                    var steps = CalMoveSteps(from, to);
-                    move_pos.SetDuration(steps * 0.5f);
-                    move_pos.SetOnComplete(OnOtherMoveComplete, null);
-                    m_TweenPlayer.StartPlay();
-                    m_otherBody = new Vector2[] { from, to, type };
-                    Debug.Log("正常移动！！ fromx: " + from.x + "fromy" + from.y);
+                    Tween rotate_start = m_ModelTween.AddClip("rotate_start", 1);
+                    rotate_start.SetTweenType(TweenType.LocalRotation);
+                    rotate_start.SetTo(new Vector3(0, localAngle, 0));
+                    rotate_start.SetOnComplete(OnOtherRotate1Complete, args);
+                    m_ModelTween.StartPlay();
                 }
             }
             else
@@ -528,6 +588,46 @@ public class PieceItem:MonoBehaviour
                 Debug.Log("非法移动！！ On Other");
             }
         }
+    }
+
+    private void OnOtherRotate1Complete(object args)
+    {
+        var temp = (object[])args;
+        var from = (Vector2)temp[0];
+        var to = (Vector2)temp[1];
+        var type = ((Vector2)temp[2]);
+        Tween move_pos = m_TweenPlayer.AddClip("move", 2);
+        move_pos.SetTweenType(TweenType.LocalPosition);
+        move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
+        var steps = CalMoveSteps(from, to);
+        move_pos.SetDuration(steps * 0.5f);
+        move_pos.SetOnComplete(OnOtherRotate2, temp);
+        m_TweenPlayer.StartPlay();
+        m_otherBody = new Vector2[] { from, to, type };
+        Debug.Log("正常移动！！ fromx: " + from.x + "fromy" + from.y);
+    }
+
+    /// <summary>
+    /// 走完了 转回来
+    /// </summary>
+    /// <param name="args"></param>
+    private void OnOtherRotate2(object args)
+    {
+        var temp = (object[])args;
+        var to = (Vector2)temp[1];
+        var from = (Vector2)temp[0];
+        Tween rotate_start = m_ModelTween.AddClip("rotate_start", 1);
+        rotate_start.SetTweenType(TweenType.LocalRotation);
+        if (selfColor == Config.PieceColor.BLACK)
+        {
+            rotate_start.SetTo(new Vector3(0, 0, 0));
+        }
+        else
+        {
+            rotate_start.SetTo(new Vector3(0, 180, 0));
+        }
+        rotate_start.SetOnComplete(OnOtherMoveComplete, temp);
+        m_ModelTween.StartPlay();
     }
 
     private void OnOtherMoveComplete(object args)

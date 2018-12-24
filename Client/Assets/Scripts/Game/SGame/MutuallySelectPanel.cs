@@ -16,12 +16,12 @@ public class MutuallySelectPanel
 
     private bool m_select = false;
 
-    private Text m_SearchTime;
+    private Text m_SelectTime;
     private InputField m_ip;
     private InputField m_port;
     private InputField m_userName;
 
-    private IEnumerator m_matchTimer;   //计时器
+    private IEnumerator m_selectTimer;   //计时器
 
     private GameObject m_object;
     private MutuallySelectPanelMediator m_mediator;
@@ -35,11 +35,9 @@ public class MutuallySelectPanel
         m_BottomButton.onClick.AddListener(OnConfirmClick);
         m_agree.onClick.AddListener(OnAgreeClick);
         m_disagree.onClick.AddListener(OnDisagreeClick);
-
+        
         m_object = gameObject;
         m_mediator = new MutuallySelectPanelMediator(this);
-        m_pvpProxy = new PVPProxy();
-        m_pveProxy = new PVEProxy();
         App.Facade.RegisterMediator(m_mediator);
         m_proxy = App.Facade.RetrieveProxy("UserDataProxy") as UserDataProxy;
     }
@@ -49,11 +47,12 @@ public class MutuallySelectPanel
         m_BottomButton = gameObject.transform.Find("ContentContainer/m_Bottom/m_BottomBtn").gameObject.GetComponent<Button>();
         m_agree = gameObject.transform.Find("ContentContainer/SelectInfoContainer/m_agree").gameObject.GetComponent<Button>();
         m_disagree = gameObject.transform.Find("ContentContainer/SelectInfoContainer/m_disagree").gameObject.GetComponent<Button>();
+        m_SelectTime = gameObject.transform.Find("ContentContainer/m_Timer").GetComponent<Text>();
     }
 
     public void OpenView(object intent)
     {
-
+        StartSelectTimer();
     }
 
     public void CloseView()
@@ -63,34 +62,36 @@ public class MutuallySelectPanel
 
     public void DestroyView()
     {
+        m_BottomButton.onClick.RemoveAllListeners();
         App.Facade.RemoveMediator(m_mediator.MediatorName);
     }
 
     #region Private Method
-    private void StartMatchTimer()
+    private void StartSelectTimer()
     {
-        if (m_matchTimer == null)
+        if (m_selectTimer == null)
         {
-            m_matchTimer = _OnMatchTimer();
-            App.UIManager.StartCoroutine(m_matchTimer);
+            m_selectTimer = _OnSelectTimer();
+            App.UIManager.StartCoroutine(m_selectTimer);
         }
     }
 
-    private IEnumerator _OnMatchTimer()
+    private IEnumerator _OnSelectTimer()
     {
-        for (int i = 0; i < Config.Game.WaitingFindEnemy; i++)
+        for (int i = 0; i < Config.Game.WaitingMutuallySelect; i++)
         {
-            m_SearchTime.text = "(" + (Config.Game.WaitingFindEnemy - i) + "s)";
+            m_SelectTime.text = "(" + (Config.Game.WaitingMutuallySelect - i) + "s)";
             yield return new WaitForSeconds(1);
         }
+        App.UIManager.BackPanel();
     }
 
-    private void StopMatchTimer()
+    private void StopSelectTimer()
     {
-        if (m_matchTimer != null)
+        if (m_selectTimer != null)
         {
-            App.UIManager.StopCoroutine(m_matchTimer);
-            m_matchTimer = null;
+            App.UIManager.StopCoroutine(m_selectTimer);
+            m_selectTimer = null;
         }
     }
     #endregion
@@ -105,7 +106,8 @@ public class MutuallySelectPanel
         if (m_select != null)
         {
             m_mediator.NotifySelect(m_select);
-            App.UIManager.BackPanel();
+            StopSelectTimer();
+            App.UIManager.ClosePanel(m_object.name);
         }
     }
 
