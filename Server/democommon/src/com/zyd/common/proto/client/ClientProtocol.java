@@ -9347,12 +9347,38 @@ public final class ClientProtocol {
     // optional int32 rank = 1;
     /**
      * <code>optional int32 rank = 1;</code>
+     *
+     * <pre>
+     *排名
+     * </pre>
      */
     boolean hasRank();
     /**
      * <code>optional int32 rank = 1;</code>
+     *
+     * <pre>
+     *排名
+     * </pre>
      */
     int getRank();
+
+    // optional int32 ranking = 2;
+    /**
+     * <code>optional int32 ranking = 2;</code>
+     *
+     * <pre>
+     *分数
+     * </pre>
+     */
+    boolean hasRanking();
+    /**
+     * <code>optional int32 ranking = 2;</code>
+     *
+     * <pre>
+     *分数
+     * </pre>
+     */
+    int getRanking();
   }
   /**
    * Protobuf type {@code com.zyd.common.proto.client.GetPlayerRankResopnse}
@@ -9410,6 +9436,11 @@ public final class ClientProtocol {
               rank_ = input.readInt32();
               break;
             }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              ranking_ = input.readInt32();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -9455,19 +9486,52 @@ public final class ClientProtocol {
     private int rank_;
     /**
      * <code>optional int32 rank = 1;</code>
+     *
+     * <pre>
+     *排名
+     * </pre>
      */
     public boolean hasRank() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <code>optional int32 rank = 1;</code>
+     *
+     * <pre>
+     *排名
+     * </pre>
      */
     public int getRank() {
       return rank_;
     }
 
+    // optional int32 ranking = 2;
+    public static final int RANKING_FIELD_NUMBER = 2;
+    private int ranking_;
+    /**
+     * <code>optional int32 ranking = 2;</code>
+     *
+     * <pre>
+     *分数
+     * </pre>
+     */
+    public boolean hasRanking() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 ranking = 2;</code>
+     *
+     * <pre>
+     *分数
+     * </pre>
+     */
+    public int getRanking() {
+      return ranking_;
+    }
+
     private void initFields() {
       rank_ = 0;
+      ranking_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -9484,6 +9548,9 @@ public final class ClientProtocol {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt32(1, rank_);
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, ranking_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -9496,6 +9563,10 @@ public final class ClientProtocol {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, rank_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, ranking_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -9615,6 +9686,8 @@ public final class ClientProtocol {
         super.clear();
         rank_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
+        ranking_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -9647,6 +9720,10 @@ public final class ClientProtocol {
           to_bitField0_ |= 0x00000001;
         }
         result.rank_ = rank_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.ranking_ = ranking_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -9665,6 +9742,9 @@ public final class ClientProtocol {
         if (other == com.zyd.common.proto.client.ClientProtocol.GetPlayerRankResopnse.getDefaultInstance()) return this;
         if (other.hasRank()) {
           setRank(other.getRank());
+        }
+        if (other.hasRanking()) {
+          setRanking(other.getRanking());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -9697,18 +9777,30 @@ public final class ClientProtocol {
       private int rank_ ;
       /**
        * <code>optional int32 rank = 1;</code>
+       *
+       * <pre>
+       *排名
+       * </pre>
        */
       public boolean hasRank() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
        * <code>optional int32 rank = 1;</code>
+       *
+       * <pre>
+       *排名
+       * </pre>
        */
       public int getRank() {
         return rank_;
       }
       /**
        * <code>optional int32 rank = 1;</code>
+       *
+       * <pre>
+       *排名
+       * </pre>
        */
       public Builder setRank(int value) {
         bitField0_ |= 0x00000001;
@@ -9718,10 +9810,63 @@ public final class ClientProtocol {
       }
       /**
        * <code>optional int32 rank = 1;</code>
+       *
+       * <pre>
+       *排名
+       * </pre>
        */
       public Builder clearRank() {
         bitField0_ = (bitField0_ & ~0x00000001);
         rank_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 ranking = 2;
+      private int ranking_ ;
+      /**
+       * <code>optional int32 ranking = 2;</code>
+       *
+       * <pre>
+       *分数
+       * </pre>
+       */
+      public boolean hasRanking() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 ranking = 2;</code>
+       *
+       * <pre>
+       *分数
+       * </pre>
+       */
+      public int getRanking() {
+        return ranking_;
+      }
+      /**
+       * <code>optional int32 ranking = 2;</code>
+       *
+       * <pre>
+       *分数
+       * </pre>
+       */
+      public Builder setRanking(int value) {
+        bitField0_ |= 0x00000002;
+        ranking_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 ranking = 2;</code>
+       *
+       * <pre>
+       *分数
+       * </pre>
+       */
+      public Builder clearRanking() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        ranking_ = 0;
         onChanged();
         return this;
       }
@@ -9838,25 +9983,26 @@ public final class ClientProtocol {
       "ing\030\003 \001(\005\"\026\n\024GetPlayerInfoRequest\"T\n\025Get" +
       "PlayerInfoResponse\022;\n\nplayerInfo\030\001 \001(\0132\'" +
       ".com.zyd.common.proto.client.PlayerInfo\"" +
-      "\026\n\024GetPlayerRankRequest\"%\n\025GetPlayerRank" +
-      "Resopnse\022\014\n\004rank\030\001 \001(\005*-\n\013EDeviceType\022\010\n" +
-      "\004None\020\000\022\007\n\003IOS\020\001\022\013\n\007Android\020\002*\314\003\n\tErrorC",
-      "ode\022\020\n\014SERVER_ERROR\020\001\022\023\n\017SHOP_ITEM_WRONG" +
-      "\020\021\022\031\n\025PLAYER_RMB_NOT_ENOUGH\020\025\022\032\n\026PLAYER_" +
-      "GOLD_NOT_ENOUGH\020\026\022\031\n\025PARAMETER_NOT_CORRE" +
-      "CT\0202\022\031\n\025SYSCONFIG_NOT_CORRECT\0203\022\020\n\014HACKE" +
-      "R_ERROR\0207\022\021\n\014NOT_GET_LOCK\020\254\002\022\032\n\025ACTIVATI" +
-      "ON_CODE_ERROR\020\255\002\022\035\n\030PLAYER_NOT_MATCH_SUC" +
-      "CESS\020\220\003\022\025\n\020PLAYER_NOT_START\020\221\003\022\031\n\024PLAYER" +
-      "_ROOM_NOT_HAVA\020\222\003\022\030\n\023PLAYER_CAN_NOT_UNDO" +
-      "\020\223\003\022\026\n\021DUPLICATE_REQUEST\020\274\005\022\022\n\rVERSION_E" +
-      "RROR\020\343\007\022\034\n\027DEVICE_TYPE_NOT_CORRECT\020\346\007\022\034\n",
-      "\026NOT_HAVE_LAST_RESPONSE\020\237\215\006\022\027\n\021SERVER_MA" +
-      "INTENACE\020\240\215\006*\247\001\n\014RpcErrorCode\022\024\n\007UNKNOWN" +
-      "\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020INVALID_PROTOCOL\020\376\377\377\377\377\377\377\377" +
-      "\377\001\022\030\n\013INVALID_ARG\020\375\377\377\377\377\377\377\377\377\001\022\024\n\007TIMEOUT\020" +
-      "\374\377\377\377\377\377\377\377\377\001\022\030\n\013SERVER_BUSY\020\373\377\377\377\377\377\377\377\377\001\022\030\n\013" +
-      "PUSHTIMEOUT\020\372\377\377\377\377\377\377\377\377\001B\002H\001"
+      "\026\n\024GetPlayerRankRequest\"6\n\025GetPlayerRank" +
+      "Resopnse\022\014\n\004rank\030\001 \001(\005\022\017\n\007ranking\030\002 \001(\005*" +
+      "-\n\013EDeviceType\022\010\n\004None\020\000\022\007\n\003IOS\020\001\022\013\n\007And",
+      "roid\020\002*\314\003\n\tErrorCode\022\020\n\014SERVER_ERROR\020\001\022\023" +
+      "\n\017SHOP_ITEM_WRONG\020\021\022\031\n\025PLAYER_RMB_NOT_EN" +
+      "OUGH\020\025\022\032\n\026PLAYER_GOLD_NOT_ENOUGH\020\026\022\031\n\025PA" +
+      "RAMETER_NOT_CORRECT\0202\022\031\n\025SYSCONFIG_NOT_C" +
+      "ORRECT\0203\022\020\n\014HACKER_ERROR\0207\022\021\n\014NOT_GET_LO" +
+      "CK\020\254\002\022\032\n\025ACTIVATION_CODE_ERROR\020\255\002\022\035\n\030PLA" +
+      "YER_NOT_MATCH_SUCCESS\020\220\003\022\025\n\020PLAYER_NOT_S" +
+      "TART\020\221\003\022\031\n\024PLAYER_ROOM_NOT_HAVA\020\222\003\022\030\n\023PL" +
+      "AYER_CAN_NOT_UNDO\020\223\003\022\026\n\021DUPLICATE_REQUES" +
+      "T\020\274\005\022\022\n\rVERSION_ERROR\020\343\007\022\034\n\027DEVICE_TYPE_",
+      "NOT_CORRECT\020\346\007\022\034\n\026NOT_HAVE_LAST_RESPONSE" +
+      "\020\237\215\006\022\027\n\021SERVER_MAINTENACE\020\240\215\006*\247\001\n\014RpcErr" +
+      "orCode\022\024\n\007UNKNOWN\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020INVALID_" +
+      "PROTOCOL\020\376\377\377\377\377\377\377\377\377\001\022\030\n\013INVALID_ARG\020\375\377\377\377\377" +
+      "\377\377\377\377\001\022\024\n\007TIMEOUT\020\374\377\377\377\377\377\377\377\377\001\022\030\n\013SERVER_BU" +
+      "SY\020\373\377\377\377\377\377\377\377\377\001\022\030\n\013PUSHTIMEOUT\020\372\377\377\377\377\377\377\377\377\001B" +
+      "\002H\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9940,7 +10086,7 @@ public final class ClientProtocol {
           internal_static_com_zyd_common_proto_client_GetPlayerRankResopnse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_GetPlayerRankResopnse_descriptor,
-              new java.lang.String[] { "Rank", });
+              new java.lang.String[] { "Rank", "Ranking", });
           return null;
         }
       };

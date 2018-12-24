@@ -1486,6 +1486,24 @@ public final class WarChess {
 
   public interface PlayerMatchRequestOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
+
+    // optional int32 type = 1;
+    /**
+     * <code>optional int32 type = 1;</code>
+     *
+     * <pre>
+     *0普通匹配 1天谴匹配 
+     * </pre>
+     */
+    boolean hasType();
+    /**
+     * <code>optional int32 type = 1;</code>
+     *
+     * <pre>
+     *0普通匹配 1天谴匹配 
+     * </pre>
+     */
+    int getType();
   }
   /**
    * Protobuf type {@code com.zyd.common.proto.client.PlayerMatchRequest}
@@ -1524,6 +1542,7 @@ public final class WarChess {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       initFields();
+      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -1539,6 +1558,11 @@ public final class WarChess {
                                      extensionRegistry, tag)) {
                 done = true;
               }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              type_ = input.readInt32();
               break;
             }
           }
@@ -1580,7 +1604,33 @@ public final class WarChess {
       return PARSER;
     }
 
+    private int bitField0_;
+    // optional int32 type = 1;
+    public static final int TYPE_FIELD_NUMBER = 1;
+    private int type_;
+    /**
+     * <code>optional int32 type = 1;</code>
+     *
+     * <pre>
+     *0普通匹配 1天谴匹配 
+     * </pre>
+     */
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 type = 1;</code>
+     *
+     * <pre>
+     *0普通匹配 1天谴匹配 
+     * </pre>
+     */
+    public int getType() {
+      return type_;
+    }
+
     private void initFields() {
+      type_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1594,6 +1644,9 @@ public final class WarChess {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, type_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1603,6 +1656,10 @@ public final class WarChess {
       if (size != -1) return size;
 
       size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, type_);
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -1723,6 +1780,8 @@ public final class WarChess {
 
       public Builder clear() {
         super.clear();
+        type_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
@@ -1749,6 +1808,13 @@ public final class WarChess {
 
       public com.zyd.common.proto.client.WarChess.PlayerMatchRequest buildPartial() {
         com.zyd.common.proto.client.WarChess.PlayerMatchRequest result = new com.zyd.common.proto.client.WarChess.PlayerMatchRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.type_ = type_;
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -1764,6 +1830,9 @@ public final class WarChess {
 
       public Builder mergeFrom(com.zyd.common.proto.client.WarChess.PlayerMatchRequest other) {
         if (other == com.zyd.common.proto.client.WarChess.PlayerMatchRequest.getDefaultInstance()) return this;
+        if (other.hasType()) {
+          setType(other.getType());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1787,6 +1856,56 @@ public final class WarChess {
             mergeFrom(parsedMessage);
           }
         }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional int32 type = 1;
+      private int type_ ;
+      /**
+       * <code>optional int32 type = 1;</code>
+       *
+       * <pre>
+       *0普通匹配 1天谴匹配 
+       * </pre>
+       */
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 type = 1;</code>
+       *
+       * <pre>
+       *0普通匹配 1天谴匹配 
+       * </pre>
+       */
+      public int getType() {
+        return type_;
+      }
+      /**
+       * <code>optional int32 type = 1;</code>
+       *
+       * <pre>
+       *0普通匹配 1天谴匹配 
+       * </pre>
+       */
+      public Builder setType(int value) {
+        bitField0_ |= 0x00000001;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 type = 1;</code>
+       *
+       * <pre>
+       *0普通匹配 1天谴匹配 
+       * </pre>
+       */
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        type_ = 0;
+        onChanged();
         return this;
       }
 
@@ -18017,50 +18136,51 @@ public final class WarChess {
       "lient\"%\n\025PlayerMutuallyRequest\022\014\n\004type\030\001" +
       " \001(\005\"\030\n\026PlayerMutuallyResponse\"0\n\035Player" +
       "MutuallyFeedbackRequest\022\017\n\007isAgree\030\001 \001(\010" +
-      "\" \n\036PlayerMutuallyFeedbackResponse\"\024\n\022Pl" +
-      "ayerMatchRequest\"\025\n\023PlayerMatchResponse\"" +
-      "\032\n\030PlayerCancelMatchRequest\"\033\n\031PlayerCan" +
-      "celMatchResponse\"S\n\026PlayerBattleMesReque" +
-      "st\0229\n\tbattleMes\030\002 \001(\0132&.com.zyd.common.p" +
-      "roto.client.BattleMes\"5\n\027PlayerBattleMes",
-      "Response\022\013\n\003res\030\001 \002(\010\022\r\n\005error\030\002 \001(\t\"-\n\031" +
-      "FairBattleLevelEndRequest\022\020\n\010isGiveUp\030\002 " +
-      "\001(\010\"\034\n\032FairBattleLevelEndResponse\"\024\n\022Pla" +
-      "yerReadyRequest\"\025\n\023PlayerReadyResponse\"\032" +
-      "\n\030PlayerPaintingEndRequest\"\033\n\031PlayerPain" +
-      "tingEndResponse\"J\n\"PlayerRequireBattleMe" +
-      "sAgainRequest\022\024\n\014startPlayNum\030\001 \002(\005\022\016\n\006r" +
-      "oomId\030\002 \001(\003\"\243\001\n#PlayerRequireBattleMesAg" +
-      "ainResponse\022A\n\013playerSatrt\030\001 \001(\0132,.com.z" +
-      "yd.common.proto.client.PlayerStartPush\0229",
-      "\n\tbattleMes\030\002 \003(\0132&.com.zyd.common.proto" +
-      ".client.BattleMes\"#\n!CheckPlayerFairBatt" +
-      "leExistRequest\"E\n\"CheckPlayerFairBattleE" +
-      "xistResponse\022\017\n\007isExist\030\001 \002(\010\022\016\n\006roomId\030" +
-      "\002 \001(\003\"M\n\022PlayerUndoInfoPush\0227\n\010undoInfo\030" +
-      "\001 \003(\0132%.com.zyd.common.proto.client.Undo" +
-      "Info\"\036\n\016PlayerUndoPush\022\014\n\004type\030\001 \001(\005\"\021\n\017" +
-      "PlayerAgreePush\"\024\n\022PlayerNotAgreePush\"r\n" +
-      "\010UndoInfo\0229\n\tbattleMes\030\001 \001(\0132&.com.zyd.c" +
-      "ommon.proto.client.BattleMes\022\r\n\005isEat\030\002 ",
-      "\001(\010\022\014\n\004type\030\003 \001(\005\022\016\n\006userId\030\004 \001(\005\"\022\n\020Pla" +
-      "yUndoNextPush\"\016\n\014PlayNextPush\"w\n\023ServerB" +
-      "attleMesPush\022\023\n\013currentTime\030\001 \002(\003\022\020\n\010nex" +
-      "tTime\030\002 \002(\003\0229\n\tbattleMes\030\003 \002(\0132&.com.zyd" +
-      ".common.proto.client.BattleMes\"l\n\017Player" +
-      "StartPush\0229\n\tplayerMes\030\001 \003(\0132&.com.zyd.c" +
-      "ommon.proto.client.PlayerMes\022\016\n\006userId\030\003" +
-      " \001(\005\022\016\n\006roomId\030\004 \001(\003\"\031\n\027PlayerReadyFinis" +
-      "hedPush\"\220\001\n\rPlayerEndPush\022\021\n\twinUserId\030\001" +
-      " \001(\005\0229\n\tbattleMes\030\002 \003(\0132&.com.zyd.common",
-      ".proto.client.BattleMes\022\016\n\006result\030\003 \001(\005\022" +
-      "\017\n\007winRank\030\004 \001(\005\022\020\n\010loseRank\030\005 \001(\005\"Y\n\tBa" +
-      "ttleMes\022\017\n\007PlayNum\030\001 \001(\005\022\014\n\004from\030\002 \001(\005\022\n" +
-      "\n\002to\030\003 \001(\005\022\016\n\006userId\030\004 \001(\005\022\021\n\tpromption\030" +
-      "\005 \001(\005\"O\n\tPlayerMes\022\016\n\006userId\030\001 \002(\005\022\020\n\010us" +
-      "erName\030\002 \001(\t\022\021\n\tisWinning\030\003 \001(\010\022\r\n\005count" +
-      "\030\004 \001(\005\" \n\016OnePlayerReady\022\016\n\006userId\030\001 \002(\005" +
-      "\" \n\016PlayerNotReady\022\016\n\006userId\030\001 \003(\005"
+      "\" \n\036PlayerMutuallyFeedbackResponse\"\"\n\022Pl" +
+      "ayerMatchRequest\022\014\n\004type\030\001 \001(\005\"\025\n\023Player" +
+      "MatchResponse\"\032\n\030PlayerCancelMatchReques" +
+      "t\"\033\n\031PlayerCancelMatchResponse\"S\n\026Player" +
+      "BattleMesRequest\0229\n\tbattleMes\030\002 \001(\0132&.co" +
+      "m.zyd.common.proto.client.BattleMes\"5\n\027P",
+      "layerBattleMesResponse\022\013\n\003res\030\001 \002(\010\022\r\n\005e" +
+      "rror\030\002 \001(\t\"-\n\031FairBattleLevelEndRequest\022" +
+      "\020\n\010isGiveUp\030\002 \001(\010\"\034\n\032FairBattleLevelEndR" +
+      "esponse\"\024\n\022PlayerReadyRequest\"\025\n\023PlayerR" +
+      "eadyResponse\"\032\n\030PlayerPaintingEndRequest" +
+      "\"\033\n\031PlayerPaintingEndResponse\"J\n\"PlayerR" +
+      "equireBattleMesAgainRequest\022\024\n\014startPlay" +
+      "Num\030\001 \002(\005\022\016\n\006roomId\030\002 \001(\003\"\243\001\n#PlayerRequ" +
+      "ireBattleMesAgainResponse\022A\n\013playerSatrt" +
+      "\030\001 \001(\0132,.com.zyd.common.proto.client.Pla",
+      "yerStartPush\0229\n\tbattleMes\030\002 \003(\0132&.com.zy" +
+      "d.common.proto.client.BattleMes\"#\n!Check" +
+      "PlayerFairBattleExistRequest\"E\n\"CheckPla" +
+      "yerFairBattleExistResponse\022\017\n\007isExist\030\001 " +
+      "\002(\010\022\016\n\006roomId\030\002 \001(\003\"M\n\022PlayerUndoInfoPus" +
+      "h\0227\n\010undoInfo\030\001 \003(\0132%.com.zyd.common.pro" +
+      "to.client.UndoInfo\"\036\n\016PlayerUndoPush\022\014\n\004" +
+      "type\030\001 \001(\005\"\021\n\017PlayerAgreePush\"\024\n\022PlayerN" +
+      "otAgreePush\"r\n\010UndoInfo\0229\n\tbattleMes\030\001 \001" +
+      "(\0132&.com.zyd.common.proto.client.BattleM",
+      "es\022\r\n\005isEat\030\002 \001(\010\022\014\n\004type\030\003 \001(\005\022\016\n\006userI" +
+      "d\030\004 \001(\005\"\022\n\020PlayUndoNextPush\"\016\n\014PlayNextP" +
+      "ush\"w\n\023ServerBattleMesPush\022\023\n\013currentTim" +
+      "e\030\001 \002(\003\022\020\n\010nextTime\030\002 \002(\003\0229\n\tbattleMes\030\003" +
+      " \002(\0132&.com.zyd.common.proto.client.Battl" +
+      "eMes\"l\n\017PlayerStartPush\0229\n\tplayerMes\030\001 \003" +
+      "(\0132&.com.zyd.common.proto.client.PlayerM" +
+      "es\022\016\n\006userId\030\003 \001(\005\022\016\n\006roomId\030\004 \001(\003\"\031\n\027Pl" +
+      "ayerReadyFinishedPush\"\220\001\n\rPlayerEndPush\022" +
+      "\021\n\twinUserId\030\001 \001(\005\0229\n\tbattleMes\030\002 \003(\0132&.",
+      "com.zyd.common.proto.client.BattleMes\022\016\n" +
+      "\006result\030\003 \001(\005\022\017\n\007winRank\030\004 \001(\005\022\020\n\010loseRa" +
+      "nk\030\005 \001(\005\"Y\n\tBattleMes\022\017\n\007PlayNum\030\001 \001(\005\022\014" +
+      "\n\004from\030\002 \001(\005\022\n\n\002to\030\003 \001(\005\022\016\n\006userId\030\004 \001(\005" +
+      "\022\021\n\tpromption\030\005 \001(\005\"O\n\tPlayerMes\022\016\n\006user" +
+      "Id\030\001 \002(\005\022\020\n\010userName\030\002 \001(\t\022\021\n\tisWinning\030" +
+      "\003 \001(\010\022\r\n\005count\030\004 \001(\005\" \n\016OnePlayerReady\022\016" +
+      "\n\006userId\030\001 \002(\005\" \n\016PlayerNotReady\022\016\n\006user" +
+      "Id\030\001 \003(\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -18096,7 +18216,7 @@ public final class WarChess {
           internal_static_com_zyd_common_proto_client_PlayerMatchRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerMatchRequest_descriptor,
-              new java.lang.String[] { });
+              new java.lang.String[] { "Type", });
           internal_static_com_zyd_common_proto_client_PlayerMatchResponse_descriptor =
             getDescriptor().getMessageTypes().get(5);
           internal_static_com_zyd_common_proto_client_PlayerMatchResponse_fieldAccessorTable = new

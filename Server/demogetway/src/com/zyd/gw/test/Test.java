@@ -43,11 +43,13 @@ public class Test {
         
       });
       try {
-        Channel ch = bootstrap.connect("127.0.0.1",10000).sync().channel();
+        Channel ch = bootstrap.connect("192.168.80.81",10000).sync().channel();
         MessageHeaderRequest.Builder req = MessageHeaderRequest.newBuilder();
         MessageHeaderInfo.Builder mes = MessageHeaderInfo.newBuilder();
         PlayerReadyRequest.Builder mes1 = PlayerReadyRequest.newBuilder(); 
         PlayerMatchRequest.Builder mes2 = PlayerMatchRequest.newBuilder();
+        LoginRequest.Builder lo = LoginRequest.newBuilder();
+        lo.setUserName("ZYD");
         mes.setUserId(1);
         mes.setUserToken("login");
         req.setUserInfo(mes);
@@ -55,7 +57,7 @@ public class Test {
           Scanner sc  = new Scanner(System.in);
           String s = sc.nextLine();
           req.setName(s);
-          ch.writeAndFlush(new Packet(req,mes2));
+          ch.writeAndFlush(new Packet(req,lo));
         }
       } catch (InterruptedException e) {
         // TODO Auto-generated catch block

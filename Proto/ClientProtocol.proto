@@ -119,5 +119,6 @@ message GetPlayerRankRequest{
 
 }
 message GetPlayerRankResopnse{
-	optional int32 rank = 1; 
+	optional int32 rank = 1; //排名
+	optional int32 ranking = 2 ; //分数
 }

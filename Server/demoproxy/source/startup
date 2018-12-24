@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+##############################################################################
+##
+##  proxy start up script for UN*X
+##
+##############################################################################
+
+nohup java -Xms${XMSSIZE} -Xmx${XMXSIZE} -XX:MaxPermSize=${MAXPERM}  -cp .:lib/common.jar:lib/javassist-3.18.1-GA.jar:lib/msgpack-0.6.8.jar:lib/fluent-logger-0.3.1.jar:lib/commons-cli-1.2.jar:lib/jcl-over-slf4j-1.7.5.jar:lib/logback-access-1.0.13.jar:lib/logback-classic-1.0.13.jar:lib/logback-core-1.0.13.jar:lib/spring-aop-4.0.0.RELEASE.jar:lib/spring-beans-4.0.0.RELEASE.jar:lib/spring-context-4.0.0.RELEASE.jar:lib/spring-core-4.0.0.RELEASE.jar:lib/spring-expression-4.0.0.RELEASE.jar:lib/protobuf-java-format-1.2.jar:lib/netty-all-4.0.13.Final.jar:lib/protobuf-java-2.5.0.jar:lib/slf4j-api-1.7.5.jar:lib/gson-2.3.1.jar:lib/httpclient-4.3.6.jar:lib/httpclient-cache-4.3.6.jar:lib/httpcore-4.3.3.jar:lib/httpmime-4.3.6.jar com.zyd.proxy.ProxyServer > mt.out 2>&1 &

@@ -1,0 +1,78 @@
+<project name="login" default="dist" basedir=".">
+	<description>
+    	proxy Service
+    </description>
+
+	<property name="src" location="src" />
+	<property name="common" location="../democommon" />
+	<property name="dist" location="dist" />
+	<property name="conf" location="conf" />
+	<property name="source" location="source" />
+	<property name="lib" location="lib" />
+	
+	<target name="init">
+		<mkdir dir="${common}/build/classes" />
+		<mkdir dir="${dist}" />
+		<mkdir dir="${dist}/conf" />
+		<mkdir dir="${dist}/lib" />
+		<mkdir dir="${dist}/log" />
+	</target>
+
+	<target name="compile" depends="init,version" description="compile the source">
+		<javac srcdir="${common}/src" destdir="${common}/build/classes" debug="true" encoding="UTF-8" includeAntRuntime="false">
+			<classpath>
+				<fileset dir="${common}/lib">
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+		<jar jarfile="${dist}/lib/common.jar" basedir="${common}/build/classes" />
+		<copy todir="${dist}/lib">
+			<fileset dir="${common}/lib">
+				<include name="*.jar" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="dist" depends="clean,compile" description="generate the distribution">
+		<javac srcdir="${src}" destdir="${dist}" debug="true" encoding="UTF-8" includeAntRuntime="false">
+			<classpath>
+				<fileset dir="${dist}/lib">
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+
+		<copy todir="${dist}/conf">
+			<fileset dir="${conf}">
+				<exclude name="application*.properties"/>
+				<include name="**" />
+			</fileset>
+		</copy>
+		<copy tofile="${dist}/conf/application.properties" file="${conf}/application.properties"> 
+		</copy>
+		<copy todir="${dist}">
+			<fileset dir="${source}">
+				<include name="**" />
+			</fileset>
+			<fileset dir="${src}">
+				<include name="*.xml" />
+			</fileset>
+		</copy>
+		<tstamp prefix="buildtime" >    
+			<format property="TimeSign" pattern="yyyyMMddHHmmss" />    
+		</tstamp>  
+		<tar destfile="${dist}/proxy_${buildtime.TimeSign}.tar" basedir="${dist}"/>
+	</target>
+	<target name="version" description="Record build information">
+		
+		<propertyfile file="${dist}/build.info">
+			<entry default="${svnversion}" key="build.version"/>
+			<entry default="now" key="build.time" pattern="yyyy-MM-dd HH.mm.ss" type="date" />
+		</propertyfile>
+	</target>
+	<target name="clean" description="clean up">
+		<delete dir="${common}/${build}/classes" />
+		<delete dir="${dist}" />
+	</target>
+</project>

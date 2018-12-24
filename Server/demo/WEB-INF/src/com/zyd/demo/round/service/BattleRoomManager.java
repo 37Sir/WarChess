@@ -13,7 +13,6 @@ import com.zyd.common.proto.client.WarChess.FairBattleLevelEndRequest;
 import com.zyd.common.proto.client.WarChess.FairBattleLevelEndResponse;
 import com.zyd.common.proto.client.WarChess.PlayerBattleMesRequest;
 import com.zyd.common.proto.client.WarChess.PlayerBattleMesResponse;
-import com.zyd.common.proto.client.WarChess.PlayerPaintingEndRequest;
 import com.zyd.common.proto.client.WarChess.PlayerPaintingEndResponse;
 import com.zyd.common.proto.client.WarChess.PlayerReadyRequest;
 import com.zyd.common.proto.client.WarChess.PlayerRequireBattleMesAgainRequest;
@@ -39,32 +38,6 @@ public class BattleRoomManager extends BaseService {
 	// 定时器,启动线程进行房间玩家操作时间更新
 	private ScheduledExecutorService updateTask = Executors.newSingleThreadScheduledExecutor();
 
-	/** 玩家掉线 */
-	public void playerDisConnect(String token) {
-		UserMatchInfo userMatchInfo = userMatchInfoMap.get(token);
-		if (userMatchInfo != null) {
-			userMatchInfo.setConnect(false);
-		}
-	}
-
-	/** 玩家重连 */
-	public void playerConnect( String clientIp,String token) {
-		String userKey = token;
-		UserMatchInfo userMatchInfo = userMatchInfoMap.get(userKey);
-		Long roomId = userToRoomIdMap.get(userKey);
-		BattleRoom battleRoom = null;
-		if(roomId!=null){
-			battleRoom = battleRoomMap.get(roomId);
-		}
-		
-		if (userMatchInfo != null && battleRoom !=null) {
-			System.out.println("重新设置token : " + token);
-			//重新设置token
-			userMatchInfo.setToken(token);
-			userMatchInfo.setConnect(true);
-			userMatchInfo.setClientIp(clientIp);
-		}
-	}
 
 	/** 添加一个新的房间到对应关系中 */
 	public void addNewBattleRoom(BattleRoom battleRoom) {

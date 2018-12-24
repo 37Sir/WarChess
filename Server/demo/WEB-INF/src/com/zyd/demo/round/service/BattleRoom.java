@@ -39,11 +39,14 @@ import com.zyd.demo.common.enumuration.PushReqestName;
 import com.zyd.demo.common.exception.BaseException;
 import com.zyd.demo.round.pojo.UserMatchInfo;
 import com.zyd.demo.user.pojo.User;
-import com.zyd.demo.user.service.UserService;
 
 
 // 对战房间
 public class BattleRoom {
+    //房间类型 0：普通 1 天谴
+    public int type = 0;
+    //下一次天谴的回合
+    public int nextCurse = 0;
 	// 战斗房间的id
 	public long roomId;
 	// 对战成员
@@ -115,10 +118,9 @@ public class BattleRoom {
 		Collections.shuffle(userMatchInfoList);
 		startUserId = userMatchInfoList.get(actor).getUid();
 		afterUserId = userMatchInfoList.get(actor+1).getUid();
-		// 推送信息
 		PlayerStartPush.Builder builder = PlayerStartPush.newBuilder();
 
-		// 玩家信息
+		// 构建匹配成功的玩家信息
 		for (UserMatchInfo userMatchInfo : userMatchInfoList) {
 			PlayerMes.Builder playerBuilder = PlayerMes.newBuilder();
 			playerBuilder.setUserId(userMatchInfo.getUid());
@@ -135,6 +137,7 @@ public class BattleRoom {
 		}
 		builder.setUserId(startUserId);
 		builder.setRoomId(roomId);
+		//信息的推送
 		disrupAll(PushReqestName.PlayerStartPush, builder.build());
 	}
 
@@ -666,10 +669,12 @@ public class BattleRoom {
 				    //有玩家长时间未准备，则退出此次匹配
 				    havaPlayerNotReady();
 				} else if (battleStatus.equals(BattleStatus.fighting)) {
-  				    giveUpUserId = userMatchInfoList.get(actor).getUid();
-  				    winUserId = userMatchInfoList.get(nextActorIndex()).getUid();
-  				    isGiveUp = 2;
-				    battleFinished(userMatchInfoList.get(nextActorIndex()).getUid());
+				    if(type == 0) {
+    				    giveUpUserId = userMatchInfoList.get(actor).getUid();
+    				    winUserId = userMatchInfoList.get(nextActorIndex()).getUid();
+    				    isGiveUp = 2;
+    				    battleFinished(userMatchInfoList.get(nextActorIndex()).getUid());
+				    }
 				} else if (battleStatus.equals(BattleStatus.fightWaiting)) {
 				    if (mutaully == 0) {
     					dealUserMap.clear();

@@ -82,8 +82,8 @@
 		<tstamp prefix="buildtime" >    
 			<format property="TimeSign" pattern="yyyyMMddHHmmss" />    
 		</tstamp>  
-		<tar destfile="${dist}/kp_${buildtime.TimeSign}.tar" basedir="${dist}/build"/>
-		<war destfile="${dist}/kp.war" basedir="${dist}/build" needxmlfile="false"/>
+		<tar destfile="${dist}/demo_${buildtime.TimeSign}.tar" basedir="${dist}/build"/>
+		<war destfile="${dist}/demo.war" basedir="${dist}/build" needxmlfile="false"/>
 	</target>
    
  	<target name="isTrue" if="cn_condition">

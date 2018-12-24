@@ -16,12 +16,25 @@
     </layout>
   </appender>
   <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>log/gameproxy.log</file>
+    <file>${catalina.base}/logs/demo.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>log/gameproxy.%d{yyyy-MM-dd}.log</fileNamePattern>
+      <fileNamePattern>${catalina.base}/logs/demo.%d{yyyy-MM-dd}.log</fileNamePattern>
     </rollingPolicy>
     <encoder>
       <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n</pattern>
+       <outputPatternAsPresentationHeader>false</outputPatternAsPresentationHeader>
+    </encoder>
+  </appender>
+  <appender name="exception" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>ERROR</level>
+    </filter>
+    <file>${catalina.base}/logs/demo_error.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+    	<fileNamePattern>${catalina.base}/logs/demo_error.%d{yyyy-MM-dd}.log</fileNamePattern>
+    </rollingPolicy> 
+    <encoder>
+      <pattern>%-4relative, %d [%thread]|-%-5level %logger{35} - %msg%n</pattern>
        <outputPatternAsPresentationHeader>false</outputPatternAsPresentationHeader>
     </encoder>
   </appender>
@@ -32,6 +45,7 @@
 <!--=============================  Root Logger ==============================-->
   <root level="INFO">
     <appender-ref ref="file"/>
+    <appender-ref ref="exception"/>
     <appender-ref ref="stdout"/>
   </root>
 </configuration>

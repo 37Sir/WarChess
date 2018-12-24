@@ -29,10 +29,14 @@ public class Redis implements NoSql {
       long logStartTime = System.currentTimeMillis();
       
       public void init(){//this method should be called in spring
-            pool = new JedisPool(cfg, host, port, ConfigurationUtil.REDIS_TIME_OUT);
-//            pool = new JedisPool(cfg, host, port, ConfigurationUtil.REDIS_TIME_OUT,password);
-            logger.info("launch jedis " + host + ":" + port + "password :" + password);        
-            logger.info("jedis init successfully");
+          if(ConfigurationUtil.IS_OVER_SEA){
+              pool = new JedisPool(cfg, host, port, ConfigurationUtil.REDIS_TIME_OUT);
+              logger.info("launch jedis " + host + ":" + port);
+          } else {
+              pool = new JedisPool(cfg, host, port, ConfigurationUtil.REDIS_TIME_OUT,password);
+              logger.info("launch jedis " + host + ":" + port + "password :" + password);        
+          }
+          logger.info("jedis init successfully");
     }
 
       @Override

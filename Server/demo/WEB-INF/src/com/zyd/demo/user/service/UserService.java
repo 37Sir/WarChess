@@ -136,6 +136,7 @@ public class UserService extends BaseService {
     public Builder buildGetPlayerRankResopnse(User user) {
         GetPlayerRankResopnse.Builder res = GetPlayerRankResopnse.newBuilder();
         res.setRank(getUserRank(user));
+        res.setRanking(user.getRank());
         return res;
     }
     public GetPlayerInfoResponse.Builder buildGetPlayerInfoResponse(

@@ -76,12 +76,6 @@ public class MatchService extends BaseService {
 							continue;
 						}
 						// 将两个人的数据在匹配队列中删除
-						// 如果两个人的ip相同 测试使用
-//						if (value.getClientIp().equals(matchValue.getClientIp())) {
-//
-//							continue;
-//							// TODO 判断匹配规则
-//						}
                         match.remove(key);
                         match.remove(matchKey);
 						// 进入匹配

@@ -34,7 +34,8 @@ public class ConfigurationUtil {
       }
 
     }
-                
+    
+    public static final Boolean IS_OVER_SEA = config.getBoolean("is_over_sea");           
     public static final int REDIS_TIME_OUT = config.getInt("redis_read_time_out", 20000);
     public static final int LOGIN_TASK=config.getInt("app.login_task");
     public static final int ROOM_GAME_TASK=config.getInt("app.room_game_task");
