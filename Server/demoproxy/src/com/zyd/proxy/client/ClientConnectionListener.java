@@ -56,7 +56,6 @@ public class ClientConnectionListener {
     }
     protected void onChannelConnected(SocketChannel ch) {
         num_clients.incrementAndGet();
-        System.out.println("ch"+ch);
         final ClientConnectionHandler conn = new ClientConnectionHandler(ch);
         // remember this connection to manage it later.
         ch.closeFuture().addListener(new GenericFutureListener<ChannelFuture>() {

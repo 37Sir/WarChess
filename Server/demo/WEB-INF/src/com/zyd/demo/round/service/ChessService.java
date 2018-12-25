@@ -60,6 +60,7 @@ public class ChessService extends BaseService {
     static List<Integer> r = new ArrayList<Integer>();
     static  List<Integer> q = new ArrayList<Integer>();
     static List<Integer> k = new ArrayList<Integer>();
+    static List<Integer> p = new ArrayList<Integer>();
     //各棋子的初始化值
     static HashMap<String, Integer> shifts = new HashMap<String, Integer>();
     //初始化
@@ -117,7 +118,11 @@ public class ChessService extends BaseService {
         k.add(15);
         k.add(-1);
         piece_offsets.put("k", k);
-      
+        p.add(-16);
+        p.add(1);
+        p.add(16);
+        p.add(-1);
+        piece_offsets.put("p", p);
 
     }
 
@@ -351,6 +356,35 @@ public class ChessService extends BaseService {
        }
        return type;
    }
+   
+   /**
+          * 新模式判断某个棋子是否会被攻击
+    *OtherUserChess:敌方棋子
+    */
+   public static boolean CheckStoneMove(int from ,int to ,Map<Integer, String> OtherUserChess,Map<Integer, String>  myChess){
+     int square = getSquares(to);
+     int value = getSquares(from);
+     int difference = value - square;
+     int index = difference + 119;
+     if ((attacks[index] & (1 << shifts.get(myChess.get(from)))) >0) {
+         /* 棋子是国王和马和兵不会被阻挡 */
+         if (myChess.get(from) == "n" || myChess.get(from) == "k" || myChess.get(from) == "p") return true;    
+         int offset = rays[index];
+         int  j = value + offset;
+         boolean blocked = false;
+         
+         while (j != square) {
+           int key =getIndex(j);
+           if (OtherUserChess.containsKey(key) || myChess.containsKey(key)) {
+             blocked = true;
+             break;
+           }
+           j += offset;
+         }           
+         if (!blocked) return true;
+     }
+     return false;
+ }
      //测试有无棋可以走的方法
    public static void main(String[] args) {
      //玩家1棋子index——type

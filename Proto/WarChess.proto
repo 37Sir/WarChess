@@ -18,6 +18,7 @@ message PlayerMutuallyFeedbackResponse{
 }
 // 匹配玩家请求
 message PlayerMatchRequest{
+	optional int32 type = 1; //0普通匹配 1天谴匹配 
 }
 
 // 匹配玩家请求返回

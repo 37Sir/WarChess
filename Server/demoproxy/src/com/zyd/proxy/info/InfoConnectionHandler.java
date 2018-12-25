@@ -101,6 +101,7 @@ public class InfoConnectionHandler extends RpcMessageHandler{
            if (lastReceiveRPCTime != 0L) {
                if ((System.currentTimeMillis()-lastReceiveRPCTime) > Constants.SERVER_HEART_BEAT_SECONDS*1000l && ctx.channel().isActive()) {
                    logger.error("No rpc call received from info server {}, in {} seconds, close channel.",getChannel().remoteAddress().toString(),Constants.SERVER_HEART_BEAT_SECONDS);
+                   System.out.println("No rpc call received from info server");
                    ctx.close();
                }
            }

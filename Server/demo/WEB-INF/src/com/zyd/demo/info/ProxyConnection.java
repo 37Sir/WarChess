@@ -115,7 +115,7 @@ public class ProxyConnection {
                 connected = true;
                 ProxyPushUtil.proxyhandler = handler;
             } catch (Exception e) {
-                logger.info("ProxyConnection: " + e.getMessage(),e);
+                logger.info("ProxyConnection----------------------------: " + e.getMessage(),e);
                 connected = false;
             }
         }
@@ -249,7 +249,7 @@ public class ProxyConnection {
       }
 
       private void logHeardMessage(String operName, int operId, Packet args){
-//        logger.debug("{}",new StringBuilder().append("request in.name:").append(operName).append(",request_ID:").append(operId).append(" \nMessageHeaderInfo: \n").append(args.parseProtobuf(ClientProtocol.MessageHeaderInfo.PARSER, 0)).toString());
+//          logger.debug("{}",new StringBuilder().append("request in.name:").append(operName).append(",request_ID:").append(operId).append(" \nMessageHeaderInfo: \n").append(args.parseProtobuf(ClientProtocol.MessageHeaderInfo.PARSER, 0)).toString());
       }
       
       @Override

@@ -82,13 +82,10 @@ public class ClientConnectionHandler extends SimpleChannelInboundHandler<Packet>
             logger.info("responseRpc####"+last_rpc);
             MessageHeaderResponse.Builder header = MessageHeaderResponse.newBuilder();
             header.setError(error);
-            header.setRequestToken(last_rpc);
+//            header.setRequestToken(last_rpc);
             lastReceiveRPCTime = System.currentTimeMillis();
             int size = rets.buffers.size();
             logger.info("channelToken:{}-------------ClientResponseRpc: error={} size={}" ,channelToken, error,size);
-    //        for(int i=0;i<size;i++){
-    //            rets.buffers.set(i, Unpooled.wrappedBuffer(DesUtil.encrypt(rets.buffers.get(i).array(), ConfigurationUtil.pwd.substring(0, 8),ConfigurationUtil.pwd.substring(ConfigurationUtil.pwd.length()-8))));
-    //        }
             channel.writeAndFlush(new Packet(header, rets));
         }else{
           
@@ -102,9 +99,6 @@ public class ClientConnectionHandler extends SimpleChannelInboundHandler<Packet>
             
             int size = rets.buffers.size();
             logger.info("channelToken:{}-------------ClientResponseRpc: error={} size={}" ,channelToken, error,size);
-    //        for(int i=0;i<size;i++){
-    //            rets.buffers.set(i, Unpooled.wrappedBuffer(DesUtil.encrypt(rets.buffers.get(i).array(), ConfigurationUtil.pwd.substring(0, 8),ConfigurationUtil.pwd.substring(ConfigurationUtil.pwd.length()-8))));
-    //        }
             channel.writeAndFlush(new Packet(header, rets));
         }
     }
@@ -134,6 +128,7 @@ public class ClientConnectionHandler extends SimpleChannelInboundHandler<Packet>
                      if (lastReceiveRPCTime != 0L) {
                          if ((System.currentTimeMillis()-lastReceiveRPCTime) > 9*1000l && ctx.channel().isActive()) {
                              logger.error("channelToken:{} No rpc call received from client {} in {} seconds, close channel.{} {}",channelToken,getChannel().remoteAddress().toString(),3,user_info_.getUserToken(),last_rpc);
+                             System.out.println("心跳连接关闭");
                              ctx.close();
                          }
                      }

@@ -67,7 +67,7 @@ public class InfoConnectionListener {
         ch.closeFuture().addListener(new GenericFutureListener<ChannelFuture>() {
           @Override
           public void operationComplete(ChannelFuture future) throws Exception {
-//              logger.error("Info server disconnected: " + future.channel().remoteAddress());
+              logger.error("Info server disconnected: " + future.channel().remoteAddress());
               connections.remove(conn);
               conn.onConnectionClosed();
           }
