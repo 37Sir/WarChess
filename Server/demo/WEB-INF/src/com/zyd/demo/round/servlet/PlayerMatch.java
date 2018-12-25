@@ -29,11 +29,11 @@ public class PlayerMatch extends BaseClientServlet{
     @Override
     public Packet service(Packet paramValues, Integer deviceType,User user) throws Exception {
         MessageHeaderInfo cui = paramValues.parseProtobuf(MessageHeaderInfo.PARSER, 0);
-        
+        PlayerMatchRequest req = paramValues.parseProtobuf(PlayerMatchRequest.PARSER, 1);
         UserMatchInfo userMatchInfo = new UserMatchInfo();
         userMatchInfo.setUid(cui.getUserId());
         userMatchInfo.setToken(cui.getUserToken());
-        matchService.addWaitUser(userMatchInfo);
+        matchService.addWaitUser(userMatchInfo,req.getType(),user);
         
         return new Packet(PlayerMatchResponse.newBuilder());
     }

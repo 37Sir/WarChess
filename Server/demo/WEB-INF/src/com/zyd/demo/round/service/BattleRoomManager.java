@@ -20,6 +20,7 @@ import com.zyd.common.proto.client.WarChess.PlayerRequireBattleMesAgainResponse;
 import com.zyd.demo.common.BaseService;
 import com.zyd.demo.common.exception.BaseException;
 import com.zyd.demo.round.pojo.UserMatchInfo;
+import com.zyd.demo.stone.service.ChessRoom;
 import com.zyd.demo.user.pojo.User;
 
 
@@ -29,10 +30,16 @@ public class BattleRoomManager extends BaseService {
 	private static final Logger logger = LoggerFactory.getLogger(BattleRoomManager.class);
 	// 房间id与房间的映射
 	private Map<Long, BattleRoom> battleRoomMap = new ConcurrentHashMap<>();
+    // 房间id与新模式房间的映射
+    private Map<Long, ChessRoom> chessRoomMap = new ConcurrentHashMap<>();	
 	// 用户key对应房间的id
 	private Map<String, Long> userToRoomIdMap = new ConcurrentHashMap<>();
 	// 用户key对应的用户信息
 	private Map<String, UserMatchInfo> userMatchInfoMap = new ConcurrentHashMap<>();
+    // 新模式用户key对应房间的id
+    private Map<String, Long> userToRoomIdMap0 = new ConcurrentHashMap<>();
+    // 新模式用户key对应的用户信息
+    private Map<String, User> userMatchInfoMap0 = new ConcurrentHashMap<>();
 	// 房间更新时长
 	private static final int SCHEDULED_EXECULATE_INTERVAL_MILLISECOND = 200;
 	// 定时器,启动线程进行房间玩家操作时间更新
@@ -56,7 +63,23 @@ public class BattleRoomManager extends BaseService {
 		}
 		
 	}
-
+    /** 添加一个新模式的房间到对应关系中 */
+    public void addNewChessRoom(ChessRoom chessRoom) {
+        try {
+            Long roomId = nosqlService.getNoSql().incr("CHESS_ROOM_INCR");
+            chessRoom.roomId = roomId;
+            chessRoomMap.put(roomId, chessRoom);
+            for (User user : chessRoom.getUserMatchInfoList()) {
+                String userKey = user.getUserName();
+                userToRoomIdMap0.put(userKey, roomId);
+                userMatchInfoMap0.put(userKey, user);
+            }
+            chessRoom.start();
+        } catch (Exception e) {
+            logger.error("can not get the room id"+e);
+        }
+        
+    }
 	/** 移除一个战斗房间 */
 	public void removeBattleRoom(BattleRoom battleRoom) {
 		battleRoomMap.remove(battleRoom.roomId);
@@ -78,7 +101,26 @@ public class BattleRoomManager extends BaseService {
 			removeBattleRoom(battleRoom);
 		}
 	}
-
+    /** 通过用户,移除一个新模式房间 */
+    public void removeChessRoom(String token) {
+        Long roomId = userToRoomIdMap0.get(token);
+        if (roomId == null) {
+            return;
+        }
+        ChessRoom chessRoom = chessRoomMap.get(roomId);
+        if (chessRoom != null) {
+            removeChessRoom(chessRoom);
+        }
+    }
+    /** 移除一个新模式战斗房间 */
+    public void removeChessRoom(ChessRoom chessRoom) {
+        battleRoomMap.remove(chessRoom.roomId);
+        for (User user : chessRoom.getUserMatchInfoList()) {
+            String userKey = user.getUserName();
+            userToRoomIdMap0.remove(userKey);
+            userMatchInfoMap0.remove(userKey);
+        }
+    }
 	/** 战斗请求发送 */
 	public PlayerBattleMesResponse onRequest(String token, PlayerBattleMesRequest battleMesRequest) {
 		String userKey = token;
@@ -108,21 +150,36 @@ public class BattleRoomManager extends BaseService {
 		}
 	}
 
-	/** 准备请求 
+	/** 准备请求 0为普通 1为新模式
 	 * @throws BaseException */
-	public void onRequest(String token ,PlayerReadyRequest battleMesRequest) throws BaseException {
-		BattleRoom battleRoom = null;
-		String userKey = token;
-		Long roomId = userToRoomIdMap.get(userKey);
-		UserMatchInfo userMatchInfo = userMatchInfoMap.get(userKey);
-		if (roomId != null) {
-			battleRoom = battleRoomMap.get(roomId);
-		}
-		if (battleRoom == null || userMatchInfo == null) {
-            logger.warn("PLAYER_NOT_MATCH_SUCCESS userName:{}",token);
-            throw new BaseException(ErrorCode.PLAYER_NOT_MATCH_SUCCESS_VALUE); 
-		}
-		battleRoom.doRequest(userMatchInfo, battleMesRequest);
+	public void onRequest(String token ,PlayerReadyRequest request) throws BaseException {
+	    int type = request.getType(); 
+	    if(type == 0) {
+    		BattleRoom battleRoom = null;
+    		String userKey = token;
+    		Long roomId = userToRoomIdMap.get(userKey);
+    		UserMatchInfo userMatchInfo = userMatchInfoMap.get(userKey);
+    		if (roomId != null) {
+    			battleRoom = battleRoomMap.get(roomId);
+    		}
+    		if (battleRoom == null || userMatchInfo == null) {
+                logger.warn("PLAYER_NOT_MATCH_SUCCESS userName:{}",token);
+                throw new BaseException(ErrorCode.PLAYER_NOT_MATCH_SUCCESS_VALUE); 
+    		}
+    		battleRoom.doRequest(userMatchInfo, request);
+	    } else {
+	        ChessRoom chessRoom = null;
+	        String userKey = token;
+	        Long roomId = userToRoomIdMap0.get(userKey);
+	        User user  = userMatchInfoMap0.get(userKey);
+            if (roomId != null) {
+                chessRoom = chessRoomMap.get(roomId);
+            }
+            if (chessRoom == null || user == null) {
+                logger.warn("PLAYER_NOT_MATCH_SUCCESS userName:{}",token);
+                throw new BaseException(ErrorCode.PLAYER_NOT_MATCH_SUCCESS_VALUE); 
+            }	         
+	    }
 	}
 	
 	/** 得到战斗房间*/

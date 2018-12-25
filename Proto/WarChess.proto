@@ -18,7 +18,7 @@ message PlayerMutuallyFeedbackResponse{
 }
 // 匹配玩家请求
 message PlayerMatchRequest{
-	optional int32 type = 1; //0普通匹配 1天谴匹配 
+	optional int32 type = 1; //0普通匹配 1新模式匹配 
 }
 
 // 匹配玩家请求返回
@@ -64,6 +64,7 @@ message FairBattleLevelEndResponse{
 
 /** 玩家进入游戏后准备完成请求 */
 message PlayerReadyRequest{
+	optional int32 type =1; //0为普通准备，1为新模式
 	
 }
 
