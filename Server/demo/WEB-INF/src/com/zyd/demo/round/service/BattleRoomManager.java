@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import com.zyd.common.proto.client.ClientProtocol.ErrorCode;
 import com.zyd.common.proto.client.WarChess.FairBattleLevelEndRequest;
 import com.zyd.common.proto.client.WarChess.FairBattleLevelEndResponse;
+import com.zyd.common.proto.client.WarChess.PlayerActiveRequest;
 import com.zyd.common.proto.client.WarChess.PlayerBattleMesRequest;
 import com.zyd.common.proto.client.WarChess.PlayerBattleMesResponse;
 import com.zyd.common.proto.client.WarChess.PlayerPaintingEndResponse;
@@ -138,7 +139,22 @@ public class BattleRoomManager extends BaseService {
 		}
 		return battleRoom.doRequest(userMatchInfo, battleMesRequest);
 	}
-
+    /** 新模式战斗请求发送 
+     * @throws BaseException */
+    public void onRequest(String token, PlayerActiveRequest playerActiveRequest) throws BaseException {
+        String userKey = token;
+        ChessRoom chessRoom = null;
+        Long roomId = userToRoomIdMap0.get(userKey);
+        User user = userMatchInfoMap0.get(userKey);
+        if (roomId != null) {
+            chessRoom = chessRoomMap.get(roomId);
+        }
+        if (chessRoom == null || user == null) {
+            logger.warn("PLAYER_GAME_OVER userName:{}",token);
+            throw new BaseException(ErrorCode.PLAYER_GAME_OVER_VALUE); 
+        }
+        chessRoom.doRequest(user, playerActiveRequest);
+    }
 	/** 战斗信息请求 */
 	public PlayerRequireBattleMesAgainResponse onRequest(long roomId, PlayerRequireBattleMesAgainRequest request) {
 		BattleRoom battleRoom = battleRoomMap.get(roomId);
@@ -178,7 +194,8 @@ public class BattleRoomManager extends BaseService {
             if (chessRoom == null || user == null) {
                 logger.warn("PLAYER_NOT_MATCH_SUCCESS userName:{}",token);
                 throw new BaseException(ErrorCode.PLAYER_NOT_MATCH_SUCCESS_VALUE); 
-            }	         
+            }
+            chessRoom.doRequest(user, request);
 	    }
 	}
 	
@@ -194,21 +211,51 @@ public class BattleRoomManager extends BaseService {
 	}
 
 
-	/** 战斗完成请求 */
-	public PlayerPaintingEndResponse onRequest(String token) {
-		BattleRoom battleRoom = null;
-		String userKey = token;
-		Long roomId = userToRoomIdMap.get(userKey);
-		UserMatchInfo userMatchInfo = userMatchInfoMap.get(userKey);
-		if (roomId != null) {
-			battleRoom = battleRoomMap.get(roomId);
-		}
-		if (battleRoom == null || userMatchInfo == null) {
-			return null;
-		}
-		return battleRoom.doRequest(userMatchInfo);
+	/** 动画完成请求 
+	 * @throws BaseException */
+	public PlayerPaintingEndResponse onRequest(String token,int type) throws BaseException {
+	    String userKey = token;
+	    if (type == 0) {
+    		BattleRoom battleRoom = null;
+    		Long roomId = userToRoomIdMap.get(userKey);
+    		UserMatchInfo userMatchInfo = userMatchInfoMap.get(userKey);
+    		if (roomId != null) {
+    			battleRoom = battleRoomMap.get(roomId);
+    		}
+    		if (battleRoom == null || userMatchInfo == null) {
+                logger.warn("PLAYER_NOT_MATCH_SUCCESS userName:{}",token);
+                throw new BaseException(ErrorCode.PLAYER_NOT_MATCH_SUCCESS_VALUE); 
+    		}
+    		return battleRoom.doRequest(userMatchInfo);
+	    } else {
+	        ChessRoom chessRoom = null;
+	        Long roomId = userToRoomIdMap0.get(userKey);
+	        User user = userMatchInfoMap0.get(userKey);
+	        if (roomId != null) {
+	          chessRoom = chessRoomMap.get(roomId);
+	        }
+	        if (chessRoom == null || user == null) {
+	            logger.warn("PLAYER_NOT_MATCH_SUCCESS userName:{}",token);
+                throw new BaseException(ErrorCode.PLAYER_NOT_MATCH_SUCCESS_VALUE); 
+	        }
+	        return chessRoom.doRequest(user);
+	    }
 	}
-
+	//主动结束回合
+	public void endRound(User user) throws BaseException {
+	    String userKey = user.getUserName();
+  	    ChessRoom chessRoom = null;
+        Long roomId = userToRoomIdMap0.get(userKey);
+        User u = userMatchInfoMap0.get(userKey);
+        if (roomId != null) {
+          chessRoom = chessRoomMap.get(roomId);
+        }
+        if (chessRoom == null || u == null) {
+            logger.warn("PLAYER_NOT_MATCH_SUCCESS userName:{}",userKey);
+            throw new BaseException(ErrorCode.PLAYER_NOT_MATCH_SUCCESS_VALUE); 
+        }
+        chessRoom.endRound(u);
+	}
 	/** 战斗结束请求 */
 	public FairBattleLevelEndResponse onRequest(String token, FairBattleLevelEndRequest request) {
 		BattleRoom battleRoom = null;
@@ -285,13 +332,20 @@ public class BattleRoomManager extends BaseService {
 						battleRoom.onUpdate();
 					}
 				}
+                for (Entry<Long, ChessRoom> entry : chessRoomMap.entrySet()) {
+                    ChessRoom chessRoom = entry.getValue();
+                    if (chessRoom.canRemove) {
+                        removeChessRoom(chessRoom);
+                    } else {
+                        // 更新
+                        chessRoom.onUpdate();
+                    }
+                }				
 			}catch(Exception e){
 				logger.error("", e);
 			}
 		
 		}, 0, SCHEDULED_EXECULATE_INTERVAL_MILLISECOND, TimeUnit.MILLISECONDS);
 	}
-
-
 
 }

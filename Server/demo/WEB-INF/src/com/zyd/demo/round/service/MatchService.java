@@ -200,12 +200,19 @@ public class MatchService extends BaseService {
 	}
 
 	// 移除玩家匹配队列
-	public void removeWaitUser(String token, Integer userId) {
-		String userKey = token;
-		// 待加入信息
-		cancelPlayer.put(userKey, userId);
-		// 移除即将删除的玩家队列
-		addPlayer.remove(userKey);
+	public void removeWaitUser(String token, Integer userId ,int type) {
+	    String userKey = token;
+	    if (type == 0) {
+    		// 待加入信息
+    		cancelPlayer.put(userKey, userId);
+    		// 移除即将删除的玩家队列
+    		addPlayer.remove(userKey);
+	    } else {
+            // 待加入信息
+            cancelPlayer0.put(userKey, userId);
+            // 移除即将删除的玩家队列
+            addPlayer0.remove(userKey);	        
+	    }
 	}
     // 移除新模式玩家匹配队列
     public void removeWaitUser0(String token, Integer userId) {

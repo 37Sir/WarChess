@@ -39,6 +39,12 @@
 	<bean id="GetPlayerInfo" class="com.zyd.demo.user.servlet.GetPlayerInfo"
 		parent="baseClientServlet">
 	</bean>
+	<bean id="PlayerInitiativeEnd" class="com.zyd.demo.stone.servlet.PlayerInitiativeEnd"
+		parent="baseClientServlet">
+	</bean>
+	<bean id="PlayerActive" class="com.zyd.demo.stone.servlet.PlayerActive"
+		parent="baseClientServlet">
+	</bean>
 	<!-- user -->
 	<bean id="test" class="com.zyd.demo.round.servlet.test"
 		parent="baseClientServlet">

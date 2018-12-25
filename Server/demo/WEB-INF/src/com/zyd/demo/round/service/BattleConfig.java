@@ -13,4 +13,6 @@ public class BattleConfig {
 	public static int unDoTime = 30 * 1000;
 	/**天谴回合数*/
 	public static int curse = 3;
+	/**新模式操作时间1*/
+	public static int chessTime = 120 * 1000;
 }

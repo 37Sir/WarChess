@@ -165,21 +165,93 @@ public final class ClientProtocol {
      */
     PLAYER_CAN_NOT_UNDO(12, 403),
     /**
+     * <code>PLAYER_GAME_OVER = 404;</code>
+     *
+     * <pre>
+     *比赛已经结束
+     * </pre>
+     */
+    PLAYER_GAME_OVER(13, 404),
+    /**
+     * <code>PLAYER_INDEX_HAVA_CHESS = 405;</code>
+     *
+     * <pre>
+     *目标位置有棋子
+     * </pre>
+     */
+    PLAYER_INDEX_HAVA_CHESS(14, 405),
+    /**
+     * <code>PLYER_INDEX_CANT_CALL = 406;</code>
+     *
+     * <pre>
+     *此位置不是召唤位置
+     * </pre>
+     */
+    PLYER_INDEX_CANT_CALL(15, 406),
+    /**
+     * <code>PLAYER_INDEX_CANT_MOVE = 407;</code>
+     *
+     * <pre>
+     *此位置移动不到
+     * </pre>
+     */
+    PLAYER_INDEX_CANT_MOVE(16, 407),
+    /**
+     * <code>PLAYER_CALL_NOT_ENOUGH_MP = 408;</code>
+     *
+     * <pre>
+     *召唤的能量不足
+     * </pre>
+     */
+    PLAYER_CALL_NOT_ENOUGH_MP(17, 408),
+    /**
+     * <code>PLAYER_CALL_NOT_YOUR_ACTIVE = 409;</code>
+     *
+     * <pre>
+     *不是该玩家回合
+     * </pre>
+     */
+    PLAYER_CALL_NOT_YOUR_ACTIVE(18, 409),
+    /**
+     * <code>PLAYER_INDEX_NOT_HAVA_CHESS = 410;</code>
+     *
+     * <pre>
+     *操作位置上么有棋子
+     * </pre>
+     */
+    PLAYER_INDEX_NOT_HAVA_CHESS(19, 410),
+    /**
+     * <code>PLAYER_INDEX_CAT_NOT_MOVE = 411;</code>
+     *
+     * <pre>
+     *该棋子不能移动
+     * </pre>
+     */
+    PLAYER_INDEX_CAT_NOT_MOVE(20, 411),
+    /**
+     * <code>PLAYER_ROOM_NOT_FINGHTING = 412;</code>
+     *
+     * <pre>
+     *不是战斗中状态
+     * </pre>
+     */
+    PLAYER_ROOM_NOT_FINGHTING(21, 412),
+    /**
      * <code>DUPLICATE_REQUEST = 700;</code>
      */
-    DUPLICATE_REQUEST(13, 700),
+    DUPLICATE_REQUEST(22, 700),
     /**
      * <code>VERSION_ERROR = 995;</code>
      */
-    VERSION_ERROR(14, 995),
+    VERSION_ERROR(23, 995),
     /**
      * <code>DEVICE_TYPE_NOT_CORRECT = 998;</code>
      */
-    DEVICE_TYPE_NOT_CORRECT(15, 998),
+    DEVICE_TYPE_NOT_CORRECT(24, 998),
     /**
      * <code>NOT_HAVE_LAST_RESPONSE = 99999;</code>
      */
-    NOT_HAVE_LAST_RESPONSE(16, 99999),
+    NOT_HAVE_LAST_RESPONSE(25, 99999),
     /**
      * <code>SERVER_MAINTENACE = 100000;</code>
      *
@@ -187,7 +259,7 @@ public final class ClientProtocol {
      *服务器维护状态
      * </pre>
      */
-    SERVER_MAINTENACE(17, 100000),
+    SERVER_MAINTENACE(26, 100000),
     ;
 
     /**
@@ -251,6 +323,78 @@ public final class ClientProtocol {
      */
     public static final int PLAYER_CAN_NOT_UNDO_VALUE = 403;
     /**
+     * <code>PLAYER_GAME_OVER = 404;</code>
+     *
+     * <pre>
+     *比赛已经结束
+     * </pre>
+     */
+    public static final int PLAYER_GAME_OVER_VALUE = 404;
+    /**
+     * <code>PLAYER_INDEX_HAVA_CHESS = 405;</code>
+     *
+     * <pre>
+     *目标位置有棋子
+     * </pre>
+     */
+    public static final int PLAYER_INDEX_HAVA_CHESS_VALUE = 405;
+    /**
+     * <code>PLYER_INDEX_CANT_CALL = 406;</code>
+     *
+     * <pre>
+     *此位置不是召唤位置
+     * </pre>
+     */
+    public static final int PLYER_INDEX_CANT_CALL_VALUE = 406;
+    /**
+     * <code>PLAYER_INDEX_CANT_MOVE = 407;</code>
+     *
+     * <pre>
+     *此位置移动不到
+     * </pre>
+     */
+    public static final int PLAYER_INDEX_CANT_MOVE_VALUE = 407;
+    /**
+     * <code>PLAYER_CALL_NOT_ENOUGH_MP = 408;</code>
+     *
+     * <pre>
+     *召唤的能量不足
+     * </pre>
+     */
+    public static final int PLAYER_CALL_NOT_ENOUGH_MP_VALUE = 408;
+    /**
+     * <code>PLAYER_CALL_NOT_YOUR_ACTIVE = 409;</code>
+     *
+     * <pre>
+     *不是该玩家回合
+     * </pre>
+     */
+    public static final int PLAYER_CALL_NOT_YOUR_ACTIVE_VALUE = 409;
+    /**
+     * <code>PLAYER_INDEX_NOT_HAVA_CHESS = 410;</code>
+     *
+     * <pre>
+     *操作位置上么有棋子
+     * </pre>
+     */
+    public static final int PLAYER_INDEX_NOT_HAVA_CHESS_VALUE = 410;
+    /**
+     * <code>PLAYER_INDEX_CAT_NOT_MOVE = 411;</code>
+     *
+     * <pre>
+     *该棋子不能移动
+     * </pre>
+     */
+    public static final int PLAYER_INDEX_CAT_NOT_MOVE_VALUE = 411;
+    /**
+     * <code>PLAYER_ROOM_NOT_FINGHTING = 412;</code>
+     *
+     * <pre>
+     *不是战斗中状态
+     * </pre>
+     */
+    public static final int PLAYER_ROOM_NOT_FINGHTING_VALUE = 412;
+    /**
      * <code>DUPLICATE_REQUEST = 700;</code>
      */
     public static final int DUPLICATE_REQUEST_VALUE = 700;
@@ -293,6 +437,15 @@ public final class ClientProtocol {
         case 401: return PLAYER_NOT_START;
         case 402: return PLAYER_ROOM_NOT_HAVA;
         case 403: return PLAYER_CAN_NOT_UNDO;
+        case 404: return PLAYER_GAME_OVER;
+        case 405: return PLAYER_INDEX_HAVA_CHESS;
+        case 406: return PLYER_INDEX_CANT_CALL;
+        case 407: return PLAYER_INDEX_CANT_MOVE;
+        case 408: return PLAYER_CALL_NOT_ENOUGH_MP;
+        case 409: return PLAYER_CALL_NOT_YOUR_ACTIVE;
+        case 410: return PLAYER_INDEX_NOT_HAVA_CHESS;
+        case 411: return PLAYER_INDEX_CAT_NOT_MOVE;
+        case 412: return PLAYER_ROOM_NOT_FINGHTING;
         case 700: return DUPLICATE_REQUEST;
         case 995: return VERSION_ERROR;
         case 998: return DEVICE_TYPE_NOT_CORRECT;
@@ -9986,7 +10139,7 @@ public final class ClientProtocol {
       "\026\n\024GetPlayerRankRequest\"6\n\025GetPlayerRank" +
       "Resopnse\022\014\n\004rank\030\001 \001(\005\022\017\n\007ranking\030\002 \001(\005*" +
       "-\n\013EDeviceType\022\010\n\004None\020\000\022\007\n\003IOS\020\001\022\013\n\007And",
-      "roid\020\002*\314\003\n\tErrorCode\022\020\n\014SERVER_ERROR\020\001\022\023" +
+      "roid\020\002*\336\005\n\tErrorCode\022\020\n\014SERVER_ERROR\020\001\022\023" +
       "\n\017SHOP_ITEM_WRONG\020\021\022\031\n\025PLAYER_RMB_NOT_EN" +
       "OUGH\020\025\022\032\n\026PLAYER_GOLD_NOT_ENOUGH\020\026\022\031\n\025PA" +
       "RAMETER_NOT_CORRECT\0202\022\031\n\025SYSCONFIG_NOT_C" +
@@ -9994,15 +10147,21 @@ public final class ClientProtocol {
       "CK\020\254\002\022\032\n\025ACTIVATION_CODE_ERROR\020\255\002\022\035\n\030PLA" +
       "YER_NOT_MATCH_SUCCESS\020\220\003\022\025\n\020PLAYER_NOT_S" +
       "TART\020\221\003\022\031\n\024PLAYER_ROOM_NOT_HAVA\020\222\003\022\030\n\023PL" +
-      "AYER_CAN_NOT_UNDO\020\223\003\022\026\n\021DUPLICATE_REQUES" +
-      "T\020\274\005\022\022\n\rVERSION_ERROR\020\343\007\022\034\n\027DEVICE_TYPE_",
-      "NOT_CORRECT\020\346\007\022\034\n\026NOT_HAVE_LAST_RESPONSE" +
-      "\020\237\215\006\022\027\n\021SERVER_MAINTENACE\020\240\215\006*\247\001\n\014RpcErr" +
-      "orCode\022\024\n\007UNKNOWN\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020INVALID_" +
-      "PROTOCOL\020\376\377\377\377\377\377\377\377\377\001\022\030\n\013INVALID_ARG\020\375\377\377\377\377" +
-      "\377\377\377\377\001\022\024\n\007TIMEOUT\020\374\377\377\377\377\377\377\377\377\001\022\030\n\013SERVER_BU" +
-      "SY\020\373\377\377\377\377\377\377\377\377\001\022\030\n\013PUSHTIMEOUT\020\372\377\377\377\377\377\377\377\377\001B" +
-      "\002H\001"
+      "AYER_CAN_NOT_UNDO\020\223\003\022\025\n\020PLAYER_GAME_OVER" +
+      "\020\224\003\022\034\n\027PLAYER_INDEX_HAVA_CHESS\020\225\003\022\032\n\025PLY",
+      "ER_INDEX_CANT_CALL\020\226\003\022\033\n\026PLAYER_INDEX_CA" +
+      "NT_MOVE\020\227\003\022\036\n\031PLAYER_CALL_NOT_ENOUGH_MP\020" +
+      "\230\003\022 \n\033PLAYER_CALL_NOT_YOUR_ACTIVE\020\231\003\022 \n\033" +
+      "PLAYER_INDEX_NOT_HAVA_CHESS\020\232\003\022\036\n\031PLAYER" +
+      "_INDEX_CAT_NOT_MOVE\020\233\003\022\036\n\031PLAYER_ROOM_NO" +
+      "T_FINGHTING\020\234\003\022\026\n\021DUPLICATE_REQUEST\020\274\005\022\022" +
+      "\n\rVERSION_ERROR\020\343\007\022\034\n\027DEVICE_TYPE_NOT_CO" +
+      "RRECT\020\346\007\022\034\n\026NOT_HAVE_LAST_RESPONSE\020\237\215\006\022\027" +
+      "\n\021SERVER_MAINTENACE\020\240\215\006*\247\001\n\014RpcErrorCode" +
+      "\022\024\n\007UNKNOWN\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020INVALID_PROTOC",
+      "OL\020\376\377\377\377\377\377\377\377\377\001\022\030\n\013INVALID_ARG\020\375\377\377\377\377\377\377\377\377\001\022" +
+      "\024\n\007TIMEOUT\020\374\377\377\377\377\377\377\377\377\001\022\030\n\013SERVER_BUSY\020\373\377\377" +
+      "\377\377\377\377\377\377\001\022\030\n\013PUSHTIMEOUT\020\372\377\377\377\377\377\377\377\377\001B\002H\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

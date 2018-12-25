@@ -26,8 +26,10 @@ public class PlayerCancelMatch extends BaseClientServlet{
     }
 
     @Override
-    public Packet service(Packet paramValues, Integer deviceType,User user) throws Exception {      
-        matchService.removeWaitUser(user.getUserName(), user.getId());
+    public Packet service(Packet paramValues, Integer deviceType,User user) throws Exception {
+        PlayerCancelMatchRequest req = paramValues.parseProtobuf(PlayerCancelMatchRequest.PARSER, 1);
+        int type = req.getType();
+        matchService.removeWaitUser(user.getUserName(), user.getId(),type);
         return new Packet(PlayerCancelMatchResponse.newBuilder());
     }    
     

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.zyd.common.proto.client.WarChess.BattleMes;
 import com.zyd.demo.common.BaseService;
 /**
  * 判断规则的类
@@ -61,10 +62,16 @@ public class ChessService extends BaseService {
     static  List<Integer> q = new ArrayList<Integer>();
     static List<Integer> k = new ArrayList<Integer>();
     static List<Integer> p = new ArrayList<Integer>();
+    public static Map<String, Integer> cost = new HashMap<>();
     //各棋子的初始化值
     static HashMap<String, Integer> shifts = new HashMap<String, Integer>();
     //初始化
     static {
+        cost.put("p", 2);
+        cost.put("n", 3);
+        cost.put("b", 5);
+        cost.put("r", 6);
+        cost.put("q", 10);
         shifts.put("p", 0);  
         shifts.put("n", 1); 
         shifts.put("b", 2); 
@@ -387,43 +394,43 @@ public class ChessService extends BaseService {
  }
      //测试有无棋可以走的方法
    public static void main(String[] args) {
-     //玩家1棋子index——type
-     Map<Integer, String> userOne = new HashMap<>();
-     //玩家2棋子index——type
-     Map<Integer, String> userTwo = new HashMap<>();
-     for (int i = 1; i <= 6; i++) {
-       if (i==1) {
-           for (int y = 9; y<=16; y++ ) {
-               userTwo.put(y, "p");
-               userOne.put(y+40, "p");
-           }
-       } else if (i==2) {
-           userTwo.put(1, "r");
-           userTwo.put(8, "r");
-           userOne.put(57, "r");
-           userOne.put(64, "r");
-       } else if (i == 3 ) {
-           userTwo.put(2, "n");
-           userTwo.put(7, "n");
-           userOne.put(58, "n");
-           userOne.put(63, "n");               
-       } else if (i == 4) {
-           userTwo.put(3, "b");
-           userTwo.put(6, "b");
-           userOne.put(59, "b");
-           userOne.put(62, "b");               
-       } else if (i == 5) {
-           userTwo.put(4, "q");
-           userOne.put(60, "q");               
-       } else if (i == 6) {
-           userTwo.put(5, "k");
-           userOne.put(61, "k");               
-       }
-   }
-     long time = System.currentTimeMillis();
-      ChessService s = new ChessService();
-      List<String> list =s.generate_moves(userTwo, userOne, 61, false);
-      System.out.println(s.checkMove(52, 36, userTwo, userOne, false));
-      System.out.println(System.currentTimeMillis() - time);
+//     //玩家1棋子index——type
+//     Map<Integer, String> userOne = new HashMap<>();
+//     //玩家2棋子index——type
+//     Map<Integer, String> userTwo = new HashMap<>();
+//     for (int i = 1; i <= 6; i++) {
+//       if (i==1) {
+//           for (int y = 9; y<=16; y++ ) {
+//               userTwo.put(y, "p");
+//               userOne.put(y+40, "p");
+//           }
+//       } else if (i==2) {
+//           userTwo.put(1, "r");
+//           userTwo.put(8, "r");
+//           userOne.put(57, "r");
+//           userOne.put(64, "r");
+//       } else if (i == 3 ) {
+//           userTwo.put(2, "n");
+//           userTwo.put(7, "n");
+//           userOne.put(58, "n");
+//           userOne.put(63, "n");               
+//       } else if (i == 4) {
+//           userTwo.put(3, "b");
+//           userTwo.put(6, "b");
+//           userOne.put(59, "b");
+//           userOne.put(62, "b");               
+//       } else if (i == 5) {
+//           userTwo.put(4, "q");
+//           userOne.put(60, "q");               
+//       } else if (i == 6) {
+//           userTwo.put(5, "k");
+//           userOne.put(61, "k");               
+//       }
+//   }
+//     long time = System.currentTimeMillis();
+//      ChessService s = new ChessService();
+//      List<String> list =s.generate_moves(userTwo, userOne, 61, false);
+//      System.out.println(s.checkMove(52, 36, userTwo, userOne, false));
+//      System.out.println(System.currentTimeMillis() - time);
    }
 }

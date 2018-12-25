@@ -27,7 +27,9 @@ public class PlayerPaintingEnd extends BaseClientServlet {
 
     @Override
     public Packet service(Packet paramValues, Integer deviceType, User user) throws Exception {
-        PlayerPaintingEndResponse res = battleRoomManager.onRequest(user.getUserName());
+        PlayerPaintingEndRequest req = paramValues.parseProtobuf(PlayerPaintingEndRequest.PARSER, 1);
+        int type = req.getType();
+        PlayerPaintingEndResponse res = battleRoomManager.onRequest(user.getUserName(),type);
         return new Packet(res);
     }
         

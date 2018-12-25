@@ -1,6 +1,12 @@
 package com.zyd.demo.common.enumuration;
 
 public enum PushReqestName {
+    //新模式玩家可以执行转场动画的push
+    PlayerCanPaintingPush("PlayerCanPaintingPush"),
+    //新模式玩家可以执行下一棋子的push
+    PlayerCanNextPush("PlayerCanNextPush"),
+    //新模式信息推送
+    NewServerBattleMesPush("NewServerBattleMesPush"),
     // 信息推送
     ServerBattleMesPush("ServerBattleMesPush"),
 	// 玩家重连,玩家的战斗

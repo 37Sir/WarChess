@@ -6,6 +6,9 @@ message PlayerActiveRequest {
 	optional ActiveInfo activeInfo= 1; //玩家行动信息
 
 }
+message PlayerActiveResponse {
+
+}
 //玩家行动信息
 message ActiveInfo {
 	optional bool isCall = 1; //是否是召唤，false是移动
@@ -58,6 +61,7 @@ message PlayerMatchResponse{
 }
 // 取消匹配请求
 message PlayerCancelMatchRequest{
+	optional int32 type = 1; //0为普通准备，1为新模式
 
 }
 
@@ -108,8 +112,7 @@ message PlayerReadyResponse{
 
 /** 玩家走棋图像渲染完成的请求*/
 message PlayerPaintingEndRequest{
-	optional int32 type = 1; //0为普通模式 1为新模式
-	
+	optional int32 type = 1; //0为普通模式 1为新模式	
 }
 
 /** 玩家走棋图像渲染完成的返回*/
@@ -148,6 +151,14 @@ message CheckPlayerFairBattleExistResponse{
 
 
 /////////////////////////////////////// push ////////////////////////////////////
+/**新模式玩家可以执行转场动画push*/
+message PlayerCanPaintingPush{
+	
+}
+/**新模式玩家能执行下一个棋子移动的push*/
+message PlayerCanNextPush{
+
+}
 /**新模式玩家行动信息推送*/
 message NewServerBattleMesPush {
 	optional ActiveInfo activeInfo = 1;
