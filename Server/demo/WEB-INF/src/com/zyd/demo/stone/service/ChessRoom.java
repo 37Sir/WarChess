@@ -25,7 +25,6 @@ import com.zyd.demo.common.exception.BaseException;
 import com.zyd.demo.round.pojo.UserMatchInfo;
 import com.zyd.demo.round.service.BattleConfig;
 import com.zyd.demo.round.service.BattleRoomManager;
-import com.zyd.demo.round.service.BattleRoom.BattleStatus;
 import com.zyd.demo.user.pojo.User;
 
 public class ChessRoom {
