@@ -151,6 +151,10 @@ message CheckPlayerFairBattleExistResponse{
 
 
 /////////////////////////////////////// push ////////////////////////////////////
+/**新模式开局动画播放完毕*/
+message PlayerPaintingOverPush{
+
+}
 /**新模式玩家可以执行转场动画push*/
 message PlayerCanPaintingPush{
 	
