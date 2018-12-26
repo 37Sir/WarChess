@@ -449,6 +449,15 @@ public class PVP02Panel
         ShowTransAnimation(true);
     }
 
+    public void SetCanNext(bool isCan)
+    {
+        if (isTurn == true)
+        {
+            canNext = isCan;
+            m_modelDrag.isTurn = isCan;
+        }
+    }
+
     /// <summary>
     /// 召唤
     /// </summary>
@@ -498,6 +507,7 @@ public class PVP02Panel
         if (isTurn == true)
         {
             canNext = false;
+            m_modelDrag.isTurn = canNext;
         }
         App.ObjectPoolManager.RegisteObject(pieceName, "FX/" + pieceName, 0, 30, -1);
         App.ObjectPoolManager.Instantiate(pieceName, (GameObject obj) =>
@@ -776,6 +786,7 @@ public class PVP02Panel
     {
         Debug.Log("Push: OnCanNextPush!!!");
         canNext = true;
+        m_modelDrag.isTurn = canNext;
     }
 
     private void OnOtherEndTurnPush(string name, List<byte[]> packet)
