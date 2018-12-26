@@ -59,6 +59,11 @@ public class LobbyPanelMediator : Mediator
         SendNotification(NotificationConstant.Match);
     }
 
+    public void Notify02BeginMatch()
+    {
+        SendNotification(NotificationConstant.Match, 1);
+    }
+
     public void NotifyCancelMatch()
     {
         SendNotification(NotificationConstant.CancelMatch);

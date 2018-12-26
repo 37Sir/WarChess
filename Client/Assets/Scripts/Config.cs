@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Config{
     //网络层配置
-    public static string ServerHost = "192.168.80.81";
+    public static string ServerHost = "192.168.90.12";
     public static int ServerHostPort = 10000;
 
     public static readonly int RpcTimeout = 10000;                  //rpc请求的超时时间ms
@@ -25,6 +25,7 @@ public class Config{
     public static float TipsDistance = 0.3f * PieceWidth;//内层边界
 
     public static int[] PieceValue = { 10, 30, 30, 50, 90, 900 };//子力
+    public static int[] PieceCost = { 1, 3, 5, 6, 10 };//耗费
 
     public class Game
     {
@@ -32,6 +33,12 @@ public class Config{
         public static int WaitingMutuallySelect = 30;               //选择等待秒数
         public static int WaitingReady = 60;                        //准备等待秒数
         public static int WaitingRound = 60;                        //回合等待秒数
+    }
+
+    public class GameMode
+    {
+        public static int PVP = 0;
+        public static int PVP02 = 1;
     }
 
     public class Sound{
@@ -110,6 +117,12 @@ public class Config{
         public const string PlayerUndoInfoPush = "PlayerUndoInfoPush";
         public const string PlayerNotAgreePush = "PlayerNotAgreePush";
         public const string PlayUndoNextPush = "PlayUndoNextPush";
+
+
+        //新模式
+        public const string NewServerBattleMesPush = "NewServerBattleMesPush";
+        public const string PlayerCanNextPush = "PlayerCanNextPush";
+        public const string PlayerCanPaintingPush = "PlayerCanPaintingPush";
     }
 }
 

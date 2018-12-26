@@ -14,13 +14,21 @@ public class PlayerReadyCommand : SimpleCommand
 
     public override void Execute(INotification notification)
     {
-        Debug.Log("PlayerReadyCommand Execute!");
-        Request();
+        object body = notification.Body;
+        if(body != null)
+        {
+            Request((int)body);
+        }
+        else
+        {
+            Request(0);
+        }
     }
 
-    private void Request()
+    private void Request(int type)
     {
         PlayerReadyRequest.Builder request = PlayerReadyRequest.CreateBuilder();
+        request.SetType(type);
         var bytes = request.Build().ToByteArray();
         App.NetworkManager.Request("PlayerReady", bytes, Response);
     }

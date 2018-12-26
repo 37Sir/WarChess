@@ -14,13 +14,17 @@ public class EndTurnCommand : SimpleCommand
 
     public override void Execute(INotification notification)
     {
+        int type = 0;
+        object body = notification.Body;
+        if (body != null) type = (int)body;
         Debug.Log("EndTurnCommand Execute!");
-        Request();
+        Request(type);
     }
 
-    private void Request()
+    private void Request(int type)
     {
         PlayerPaintingEndRequest.Builder request = PlayerPaintingEndRequest.CreateBuilder();
+        request.SetType(type);
         var bytes = request.Build().ToByteArray();
         App.NetworkManager.Request("PlayerPaintingEnd", bytes, Response);
     }

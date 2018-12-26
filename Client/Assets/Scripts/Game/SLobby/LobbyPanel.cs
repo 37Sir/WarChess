@@ -12,6 +12,8 @@ public class LobbyPanel
 {
     private Button m_PVP;
     private Button m_PVE;
+    private Button m_PVP02;
+    private Button m_PVP02Local;
     private Button m_Easy;
     private Button m_Normal;
     private Button m_Hard;
@@ -29,10 +31,13 @@ public class LobbyPanel
     private IEnumerator m_matchTimer;   //计时器
     private IEnumerator m_matchBird;    //飞鸟
 
+    private int m_GameMode = -1;
+
     private GameObject m_object;
     private LobbyPanelMediator m_mediator;
     private UserDataProxy m_proxy;//todo
     private PVPProxy m_pvpProxy;
+    private PVP02Proxy m_pvp02Proxy;
     private PVEProxy m_pveProxy;
 
     public void InitView(GameObject gameObject)
@@ -47,6 +52,12 @@ public class LobbyPanel
             m_pvpProxy = new PVPProxy();
             App.Facade.RegisterProxy(m_pvpProxy);
         }
+        m_pvp02Proxy = App.Facade.RetrieveProxy("PVP02Proxy") as PVP02Proxy;
+        if (m_pvp02Proxy == null)
+        {
+            m_pvp02Proxy = new PVP02Proxy();
+            App.Facade.RegisterProxy(m_pvp02Proxy);
+        }
         m_pveProxy = new PVEProxy();
         App.Facade.RegisterMediator(m_mediator);
         App.Facade.RegisterProxy(m_pveProxy);
@@ -54,6 +65,8 @@ public class LobbyPanel
 
         m_PVP.onClick.AddListener(OnPVPClick);
         m_PVE.onClick.AddListener(OnPVEClick);
+        m_PVP02.onClick.AddListener(OnPVP02Click);
+        m_PVP02Local.onClick.AddListener(OnPVP02LocalClick);
         m_Easy.onClick.AddListener(OnEasyClick);
         m_Hard.onClick.AddListener(OnHardClick);
         m_Normal.onClick.AddListener(OnNormalClick);
@@ -72,6 +85,8 @@ public class LobbyPanel
         m_Searching = gameObject.transform.Find("m_Searching").gameObject;
         m_PVE = gameObject.transform.Find("m_Select/m_PVE").gameObject.GetComponent<Button>();
         m_PVP = gameObject.transform.Find("m_Select/m_PVP").gameObject.GetComponent<Button>();
+        m_PVP02 = gameObject.transform.Find("m_Select/m_PVP02").gameObject.GetComponent<Button>();
+        m_PVP02Local = gameObject.transform.Find("m_Select/m_PVP02Test").gameObject.GetComponent<Button>();
         m_cancel = gameObject.transform.Find("m_Searching/m_CancelBtn").gameObject.GetComponent<Button>();
         m_SearchTime = gameObject.transform.Find("m_Searching/m_SearchContainer/m_SearchTime").gameObject.GetComponent<Text>();
         m_Easy = gameObject.transform.Find("m_Mode/m_Easy").gameObject.GetComponent<Button>();
@@ -177,39 +192,87 @@ public class LobbyPanel
         var playerMes1 = push.GetPlayerMes(0);
         var playerMes2 = push.GetPlayerMes(1);
         var firstHandId = push.UserId;
-        if(playerMes1.UserId == selfId)
+
+        StopMatchTimer();
+        StopMatchBird();
+        if(m_GameMode == Config.GameMode.PVP)
         {
-            m_pvpProxy.SetEnemyName(playerMes2.UserName);
+            if (playerMes1.UserId == selfId)
+            {
+                m_pvpProxy.SetEnemyName(playerMes2.UserName);
+            }
+            else
+            {
+                m_pvpProxy.SetEnemyName(playerMes1.UserName);
+            }
+            m_pvpProxy.SetFirstId(firstHandId);
+            App.NSceneManager.LoadScene("SGame");
         }
         else
         {
-            m_pvpProxy.SetEnemyName(playerMes1.UserName);
+            if (playerMes1.UserId == selfId)
+            {
+                m_pvp02Proxy.SetEnemyName(playerMes2.UserName);
+            }
+            else
+            {
+                m_pvp02Proxy.SetEnemyName(playerMes1.UserName);
+            }
+            m_pvp02Proxy.SetFirstId(firstHandId);
+            m_pvp02Proxy.SetTestMode(false);
+            App.NSceneManager.LoadScene("SGame02");
         }
-        m_pvpProxy.SetFirstId(firstHandId);
-        StopMatchTimer();
-        StopMatchBird();
-        App.Facade.RemoveMediator("LobbyPanelMediator");
-        App.NSceneManager.LoadScene("SGame");      
+             
         Debug.Log("On Match Success");
     }
     #endregion
 
     #region OnClick
+    /// <summary>
+    /// 排位赛
+    /// </summary>
     private void OnPVPClick()
     {
+        m_GameMode = Config.GameMode.PVP;
         App.SoundManager.PlaySoundClip(Config.Sound.Click1);
         m_mediator.NotifyBeginMatch();
     }
 
+    /// <summary>
+    /// 人机对战
+    /// </summary>
     private void OnPVEClick()
-    {
+    {      
         m_Select.SetActive(false);
         m_Mode.SetActive(true);
         App.SoundManager.PlaySoundClip(Config.Sound.Click1);
     }
 
+    /// <summary>
+    /// 新模式
+    /// </summary>
+    private void OnPVP02Click()
+    {
+        m_GameMode = Config.GameMode.PVP02;
+        m_pvp02Proxy.SetTestMode(false);
+        App.SoundManager.PlaySoundClip(Config.Sound.Click1);
+        m_mediator.Notify02BeginMatch();
+    }
+
+    /// <summary>
+    /// 新模式本地版
+    /// </summary>
+    private void OnPVP02LocalClick()
+    {
+        App.SoundManager.PlaySoundClip(Config.Sound.Click1);
+        App.NSceneManager.LoadScene("SGame02");
+        m_pvp02Proxy.SetTestMode(true);
+        //m_mediator.Notify02BeginMatch();
+    }
+
     private void OnCancelClick()
     {
+        m_GameMode = -1;
         m_Searching.SetActive(false);
         m_Select.SetActive(true);
         StopMatchTimer();

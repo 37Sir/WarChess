@@ -11,6 +11,7 @@ public class NotificationConstant
     public const string LobbyConnect = "LobbyConnect";
     public const string Login = "Login";
     public const string Match = "Match";
+    public const string Match02 = "Match02";
     public const string DoMove = "DoMove";
     public const string EndTurn = "EndTurn";
     public const string PlayerReady = "PlayerReady";
@@ -18,6 +19,8 @@ public class NotificationConstant
     public const string PlayerMutuallyFeedback = "PlayerMutuallyFeedback";
     public const string CancelMatch = "CancelMatch";
     public const string ShowRankList = "ShowRankList";
+    public const string NewEndTurn = "NewEndTurn";
+    public const string PlayerActive = "PlayerActive";
 
     /// notify respons
     public const string LoginResponse = "LoginResponse";
@@ -28,6 +31,7 @@ public class NotificationConstant
     public const string CancelMatchResponse = "CancelMatchResponse";
     public const string RankListResponse = "RankListResponse";
     public const string PlayerMutuallyResponse = "PlayerMutuallyResponse";
+    public const string PlayerInitiativeResponse = "PlayerInitiativeResponse";
 
     /// notify
     public const string OnDragEnd = "OnDragEnd";
@@ -44,4 +48,5 @@ public class NotificationConstant
     public const string UpdateRankList = "UpdateRankList";
     public const string PVEEndTurn = "PVEEndTurn";
     public const string RankUpdate = "RankUpdate";
+    public const string RoundBegin = "RoundBegin";
 }

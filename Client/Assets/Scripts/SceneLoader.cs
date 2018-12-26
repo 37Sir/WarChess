@@ -55,4 +55,17 @@ public class SceneLoader
         App.UIManager.RegisterPanel("SGame", "ResultPanel", UILayerType.TopLayer, false);
         App.UIManager.OpenPanel("PVEPanel");
     }
+
+    public static void SGame02()
+    {
+        App.UIManager.BindUIControl();
+        App.UIManager.RegisterPanel("SGame", "PVP02Panel", UILayerType.NormalLayer, false);
+        App.UIManager.RegisterPanel("SGame", "TypeSelectPanel", UILayerType.TopLayer, false);
+        App.UIManager.RegisterPanel("SGame", "ResultPanel", UILayerType.TopLayer, false);
+
+        App.UIManager.RegisterPanel("SCommon", "MessagePanel", UILayerType.TopLayer, false);
+        App.UIManager.RegisterPanel("SCommon", "TipsPanel", UILayerType.TopLayer, false);
+        App.UIManager.RegisterPanel("SCommon", "WaitingPanel", UILayerType.TopLayer, false);
+        App.UIManager.OpenPanel("PVP02Panel");
+    }
 }

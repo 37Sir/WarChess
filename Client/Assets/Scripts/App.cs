@@ -12,6 +12,7 @@ namespace Framework
         static App m_instance;
         static Facade m_facade;
         static ChessLogic m_chessLogic;
+        static ChessLogic02 m_chessLogic02;
         static ChessAI m_chessAI;
         static GameObject m_GameGlobal;
         static Dictionary<string, object> m_Managers = new Dictionary<string, object>();
@@ -59,6 +60,15 @@ namespace Framework
             {
                 if (m_chessLogic == null) m_chessLogic = new ChessLogic();
                 return m_chessLogic;
+            }
+        }
+
+        public static ChessLogic02 ChessLogic02
+        {
+            get
+            {
+                if (m_chessLogic02 == null) m_chessLogic02 = new ChessLogic02();
+                return m_chessLogic02;
             }
         }
 

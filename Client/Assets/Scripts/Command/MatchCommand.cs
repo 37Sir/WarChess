@@ -14,14 +14,21 @@ public class MatchCommand : SimpleCommand
 
     public override void Execute(INotification notification)
     {
+        var type = 0;
+        var body = notification.Body;
+        if (body != null)
+        {
+            type = (int)body;
+        }
         Debug.Log("MatchCommand Execute!");
-        Request();
+        Request(type);
     }
 
-    private void Request()
+    private void Request(int type)
     {     
         PlayerMatchRequest.Builder request = PlayerMatchRequest.CreateBuilder();
-        var bytes = request.Build().ToByteArray();
+        request.SetType(type);
+        var bytes = request.Build().ToByteArray();       
         App.NetworkManager.Request("PlayerMatch", bytes, Response);
     }
 
