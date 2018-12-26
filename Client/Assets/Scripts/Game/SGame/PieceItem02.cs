@@ -1,4 +1,5 @@
-﻿using Framework;
+﻿using com.zyd.common.proto.client;
+using Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ public class PieceItem02 : MonoBehaviour
     private PieceItem02Mediator m_mediator;
     private string m_name;
     private PVP02Proxy m_pvpProxy;
+    private UserDataProxy m_UserProxy;
     private Vector3 m_beginPos;//初始位置
     public Config.PieceColor selfColor;
     public Config.PieceColor pieceColor;
@@ -39,6 +41,7 @@ public class PieceItem02 : MonoBehaviour
         m_gameObject = gameObject;
         //m_gameObject.transform.localRotation = Quaternion.Euler(0, 180, 0);
         m_Attack = gameObject.transform.Find("m_Attack").gameObject;
+        m_UserProxy = App.Facade.RetrieveProxy("UserDataProxy") as UserDataProxy;
         m_pvpProxy = App.Facade.RetrieveProxy("PVP02Proxy") as PVP02Proxy;
         selfColor = m_pvpProxy.GetSelfColor();
         m_type = pieceData.type;
@@ -219,12 +222,22 @@ public class PieceItem02 : MonoBehaviour
         Vector2 to = new Vector2(m_X + xblock * dir.x, m_Z + zblock * dir.y);
         if (d >= Config.MoveDistance)//todo 不能直接套用
         {
-            var tempEat = App.ChessLogic.GetPiece(to.x - 1, to.y - 1);
+            var tempEat = App.ChessLogic02.GetPiece(to.x - 1, to.y - 1);
             m_body = new object[] { m_X, m_Z, m_mediator.pieceData.color, to, tempEat };
-            if (App.ChessLogic.DoMove(new Vector2(m_X - 1, m_Z - 1), new Vector2(to.x - 1, to.y - 1)))
+            if (App.ChessLogic02.DoMove(new Vector2(m_X - 1, m_Z - 1), new Vector2(to.x - 1, to.y - 1)))
             {
-                var piece = App.ChessLogic.GetPiece((int)to.x - 1, (int)to.y - 1);//移动后的棋子
-                m_mediator.NotityDragEnd(m_body);
+                var piece = App.ChessLogic02.GetPiece((int)to.x - 1, (int)to.y - 1);//移动后的棋子
+                var indexFrom = CoorToIndex((int)m_X, (int)m_Z);
+                var indexTo = CoorToIndex((int)to.x, (int)to.y);
+
+                ActiveInfo.Builder activeInfo = ActiveInfo.CreateBuilder();
+                MoveInfo.Builder moveInfo = MoveInfo.CreateBuilder();
+                moveInfo.SetFrom(indexFrom);
+                moveInfo.SetTo(indexTo);
+                moveInfo.SetUserId(m_UserProxy.GetPlayerId());
+                activeInfo.SetIsCall(false);
+                activeInfo.SetMoveInfo(moveInfo);
+                m_mediator.NotityDragEnd(activeInfo);
                 object[] args = new object[] { new Vector2(m_X, m_Z), to, new Vector2(-1, tempEat) };//0:from, 1:to, 2.x:兵生变类型 -1为没有， 2.y:吃棋信息
                 ShowMove(args);
                 App.SoundManager.PlaySoundClip(Config.Sound.DragSuccess);
@@ -510,7 +523,7 @@ public class PieceItem02 : MonoBehaviour
         m_mediator.NotifyMoveEnd(body);
         if (isPVE == false)
         {
-            m_mediator.NotifyEndTurn();
+            m_mediator.NotifyEndTurn(1);
             Debug.Log("isPVE:OnCompleteMove!");
         }
         else
@@ -646,7 +659,7 @@ public class PieceItem02 : MonoBehaviour
         m_mediator.NotifyMoveEnd(m_otherBody);
         if (isPVE == false)
         {
-            m_mediator.NotifyEndTurn();
+            m_mediator.NotifyEndTurn(1);
         }
     }
 
@@ -725,5 +738,12 @@ public class PieceItem02 : MonoBehaviour
         {
             m_mediator.NotifyUndoTweenEnd();
         }
+    }
+
+    ///坐标转index 且棋盘翻转
+    private int CoorToIndex(int x, int y)
+    {
+        int index = 65 - (y * Config.Board.MaxX - x + 1);
+        return index;
     }
 }

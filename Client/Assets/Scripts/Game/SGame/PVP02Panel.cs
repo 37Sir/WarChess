@@ -721,8 +721,15 @@ public class PVP02Panel
         //移动
         else
         {
-
+            var moveInfo = pushMes.ActiveInfo.MoveInfo;
+            var fromIndex = moveInfo.From;
+            var toIndex = moveInfo.To;
+            var color = m_pvpProxy.GetEnemyColor();
+            var from = IndexToCoor(fromIndex);
+            var to = IndexToCoor(toIndex);
+            m_mediator.NotifyOtherMove(new Vector2[] { from, to, new Vector2(-1, 0) });//todo response
         }
+        Debug.Log("Push====: OtherActive!!!!");
         roundNum++;
     }
 

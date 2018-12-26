@@ -125,8 +125,9 @@ public class PieceItem02Mediator : Mediator
         this.pieceData = pieceData;
     }
 
-    public void NotityDragEnd(object[] body)
+    public void NotityDragEnd(object body)
     {
+        SendNotification(NotificationConstant.PlayerActive, body);
         App.Facade.SendNotification(NotificationConstant.OnDragEnd, body);
     }
 
@@ -145,9 +146,9 @@ public class PieceItem02Mediator : Mediator
         App.Facade.SendNotification(NotificationConstant.OnTipsShow, body);
     }
 
-    public void NotifyEndTurn()
+    public void NotifyEndTurn(int type)
     {
-        SendNotification(NotificationConstant.EndTurn);
+        SendNotification(NotificationConstant.EndTurn, type);
     }
 
     public void NotifyPVEEndTurn()

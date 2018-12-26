@@ -53,13 +53,6 @@ public class PVP02PanelMediator : Mediator
         object body = notification.Body;
         switch (notification.Name)
         {
-            case NotificationConstant.OnDragEnd:
-                m_viewComponent.OnTipsHide();
-                if (body == null) return;
-                object[] bodys = (object[])body;
-                object[] newBody = { (float)bodys[0], (float)bodys[1], (Config.PieceColor)bodys[2], (Vector2)bodys[3], m_viewComponent.roundNum, -1 };
-                NotifyDoMove(newBody);
-                break;
             case NotificationConstant.OnGameOver:
                 //m_viewComponent.OnGameOver((Config.PieceColor)body);
                 break;
@@ -78,10 +71,6 @@ public class PVP02PanelMediator : Mediator
                 m_promoteFromY = (float)temp[1];
                 m_promoteTo = (Vector2)temp[3];
                 m_viewComponent.OnPPromote(body);
-                break;
-            case NotificationConstant.OnTypeSelect:
-                var promoteBody = (Vector2[])body;
-                NotifyDoMove(new object[] { m_promoteFromX, m_promoteFromY, null, m_promoteTo, m_viewComponent.roundNum, (int)promoteBody[2].x });
                 break;
             case NotificationConstant.NewEndTurnResponse:
                 m_viewComponent.EndCurRound();
@@ -109,11 +98,6 @@ public class PVP02PanelMediator : Mediator
     public void NotifyRequestUndo()
     {
         SendNotification(NotificationConstant.PlayerMutually, 1);
-    }
-
-    public void NotifyDoMove(object body)
-    {
-        SendNotification(NotificationConstant.DoMove, body);
     }
 
     public void NotifyOtherMove(object body)
