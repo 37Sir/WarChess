@@ -498,7 +498,10 @@ public class PVP02Panel
         PieceItem02 pieceItem = temp.AddComponent<PieceItem02>();
         pieceItem.InitView(temp, new Piece((Config.PieceColor)color, (Config.PieceType)type, (int)point.x, (int)point.y), false);
         pieceItem.canMove = false;
-        canNext = false;
+        if (isTurn == true)
+        {
+            canNext = false;
+        }
         App.ObjectPoolManager.RegisteObject(pieceName, "FX/" + pieceName, 0, 30, -1);
         App.ObjectPoolManager.Instantiate(pieceName, (GameObject obj) =>
         {
@@ -573,7 +576,7 @@ public class PVP02Panel
             var z = (pointZ - offsetZ) / 2;
             var point = new Vector2(x, z);
 
-            if(App.ChessLogic02.DoSummon(point, m_selectType) && canNext == true)
+            if(canNext == true && App.ChessLogic02.DoSummon(point, m_selectType))
             {
                 Debug.Log("召唤成功");
                 var type = m_selectType % 10;
@@ -602,27 +605,42 @@ public class PVP02Panel
 
     private void OnPClick()
     {
-        OnPieceTypeSelect(0);
+        if(isTurn == true)
+        {
+            OnPieceTypeSelect(0);
+        }   
     }
 
     private void OnNClick()
     {
-        OnPieceTypeSelect(1);
+        if (isTurn == true)
+        {
+            OnPieceTypeSelect(1);
+        }
     }
 
     private void OnBClick()
     {
-        OnPieceTypeSelect(2);
+        if (isTurn == true)
+        {
+            OnPieceTypeSelect(2);
+        }
     }
 
     private void OnRClick()
     {
-        OnPieceTypeSelect(3);
+        if (isTurn == true)
+        {
+            OnPieceTypeSelect(3);
+        }
     }
 
     private void OnQClick()
     {
-        OnPieceTypeSelect(4);
+        if (isTurn == true)
+        {
+            OnPieceTypeSelect(4);
+        }
     }
 
     /// <summary>
@@ -817,6 +835,11 @@ public class PVP02Panel
         OnGameStart();
     }
 
+    /// <summary>
+    /// 可以召唤下一个棋子
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="packet"></param>
     private void OnCanNextPush(string name, List<byte[]> packet)
     {
         Debug.Log("Push: OnCanNextPush!!!");
@@ -829,6 +852,11 @@ public class PVP02Panel
         ShowTransAnimation(false);
     }
 
+    /// <summary>
+    /// 开局动画播完 可以进行回合了
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="packet"></param>
     private void OnRoundStartPush(string name, List<byte[]> packet)
     {
         Debug.Log("Push: OnRoundStartPush!!!");
@@ -838,7 +866,7 @@ public class PVP02Panel
         }
         else
         {
-            OnRoundStart();
+            OnRoundEnd();
         }
     }
 
