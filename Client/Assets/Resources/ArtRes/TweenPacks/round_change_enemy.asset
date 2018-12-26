@@ -60,7 +60,7 @@ MonoBehaviour:
     isNeedFrom: 1
   - TweenName: move_top
     TweenType: 6
-    EaseType: 12
+    EaseType: 11
     To: {x: 0, y: 0, z: 0}
     Color: {r: 1, g: 1, b: 1, a: 1}
     Fade: 1
