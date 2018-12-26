@@ -350,7 +350,7 @@ public class PVP02Panel
     /// <param name="from"></param>
     public void OnTipsShow(Vector2 from)
     {
-        var moves = App.ChessLogic.GenerateMoves(new Vector2(from.x - 1, from.y - 1));
+        var moves = App.ChessLogic02.GenerateMoves(new Vector2(from.x - 1, from.y - 1));
         foreach (Vector2 to in moves)
         {
             App.ObjectPoolManager.RegisteObject("biankuang_green", "FX/biankuang_green", 0, 30, -1);

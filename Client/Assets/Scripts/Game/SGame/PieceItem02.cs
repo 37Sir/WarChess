@@ -220,7 +220,7 @@ public class PieceItem02 : MonoBehaviour
         int zblock = (int)Math.Round(dz / Config.PieceWidth, 0);
         var dir = GetDirectByDeltaXZ(px, pz);
         Vector2 to = new Vector2(m_X + xblock * dir.x, m_Z + zblock * dir.y);
-        if (d >= Config.MoveDistance)//todo 不能直接套用
+        if (d >= Config.MoveDistance && to.x <= 8 && to.x >= 1 && to.y >= 1 && to.y <= 8)//todo 不能直接套用
         {
             var tempEat = App.ChessLogic02.GetPiece(to.x - 1, to.y - 1);
             m_body = new object[] { m_X, m_Z, m_mediator.pieceData.color, to, tempEat };
