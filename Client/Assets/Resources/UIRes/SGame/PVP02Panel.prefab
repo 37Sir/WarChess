@@ -3661,7 +3661,6 @@ GameObject:
   - component: {fileID: 6650403636635584418}
   - component: {fileID: 6662370109577598726}
   - component: {fileID: 1562620858}
-  - component: {fileID: 6806269106181063722}
   m_Layer: 5
   m_Name: m_EnemyRound
   m_TagString: Untagged
@@ -3719,20 +3718,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TweenPack: {fileID: 11400000, guid: 3835c5d906b6c364eb1fc00c94f73016, type: 2}
   playOnAwake: 0
---- !u!114 &6806269106181063722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6868257461117866842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9218943fd3f403249a204fd8e2d0f0b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TweenPack: {fileID: 11400000, guid: 3835c5d906b6c364eb1fc00c94f73016, type: 2}
-  playOnAwake: 1
 --- !u!1 &6868304732223995556
 GameObject:
   m_ObjectHideFlags: 0

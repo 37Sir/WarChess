@@ -185,7 +185,7 @@ public class PVP02Panel
         m_mediator.Energy = 1;
         if (isTurn)
         {
-            OnRoundStart();
+            ShowTransAnimation(false);
         }
     }
 
@@ -330,7 +330,7 @@ public class PVP02Panel
         }
         else
         {
-            var tweenPlayer = m_RoundChange.transform.Find("m_SelfRound").GetComponent<TweenPlayer>();
+            var tweenPlayer = m_RoundChange.transform.Find("m_MyselfRound").GetComponent<TweenPlayer>();
             var tween = tweenPlayer.GetClipTween("move_bottom");
             tween.SetOnComplete(OnTransAniComplete, new object[] { isEnd });
             tweenPlayer.enabled = true;
