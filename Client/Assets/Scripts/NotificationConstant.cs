@@ -32,6 +32,7 @@ public class NotificationConstant
     public const string RankListResponse = "RankListResponse";
     public const string PlayerMutuallyResponse = "PlayerMutuallyResponse";
     public const string NewEndTurnResponse = "NewEndTurnResponse";
+    public const string PlayerActiveResponse = "PlayerActiveResponse";
 
     /// notify
     public const string OnDragEnd = "OnDragEnd";

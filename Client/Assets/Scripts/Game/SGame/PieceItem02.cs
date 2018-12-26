@@ -25,7 +25,7 @@ public class PieceItem02 : MonoBehaviour
     public bool isDead = false;
     public bool isPVE = false;
     public bool isReborn = false;
-    public bool canMove = false;
+    public bool canMove = false;//棋子一回合只能移动一次
     public GameObject pieceModel;
     private GameObject m_Attack;
     private TweenPlayer m_TweenPlayer;
