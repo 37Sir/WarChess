@@ -17,6 +17,7 @@ public class PlayerActiveCommand : SimpleCommand
 
     public override void Execute(INotification notification)
     {
+        Debug.Log("PlayerActiveCommandExecute!!!");
         object body = notification.Body;
         if (body != null)
         {

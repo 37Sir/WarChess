@@ -521,8 +521,16 @@ public class PVP02Panel
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
             pieceItem.pieceModel = obj;
-            m_mediator.NotifyEndTurn(1);
+
+            App.UIManager.StartCoroutine(_SendPaintEnd());
+            
         });
+    }
+
+    private IEnumerator _SendPaintEnd()
+    {
+        yield return new WaitForSeconds(1);
+        m_mediator.NotifyEndTurn(1);
     }
 
     #region Response Method
