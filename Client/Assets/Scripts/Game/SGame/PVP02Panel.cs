@@ -605,27 +605,42 @@ public class PVP02Panel
 
     private void OnPClick()
     {
-        OnPieceTypeSelect(0);
+        if(isTurn == true)
+        {
+            OnPieceTypeSelect(0);
+        }   
     }
 
     private void OnNClick()
     {
-        OnPieceTypeSelect(1);
+        if (isTurn == true)
+        {
+            OnPieceTypeSelect(1);
+        }
     }
 
     private void OnBClick()
     {
-        OnPieceTypeSelect(2);
+        if (isTurn == true)
+        {
+            OnPieceTypeSelect(2);
+        }
     }
 
     private void OnRClick()
     {
-        OnPieceTypeSelect(3);
+        if (isTurn == true)
+        {
+            OnPieceTypeSelect(3);
+        }
     }
 
     private void OnQClick()
     {
-        OnPieceTypeSelect(4);
+        if (isTurn == true)
+        {
+            OnPieceTypeSelect(4);
+        }
     }
 
     #endregion
@@ -803,6 +818,11 @@ public class PVP02Panel
         OnGameStart();
     }
 
+    /// <summary>
+    /// 可以召唤下一个棋子
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="packet"></param>
     private void OnCanNextPush(string name, List<byte[]> packet)
     {
         Debug.Log("Push: OnCanNextPush!!!");
@@ -815,6 +835,11 @@ public class PVP02Panel
         ShowTransAnimation(false);
     }
 
+    /// <summary>
+    /// 开局动画播完 可以进行回合了
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="packet"></param>
     private void OnRoundStartPush(string name, List<byte[]> packet)
     {
         Debug.Log("Push: OnRoundStartPush!!!");
