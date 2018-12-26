@@ -90,11 +90,6 @@ public class PVP02Panel
         App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayNext, OnNextPlay);
         App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerEnd, OnGameOver);
         
-        App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerUndoPush, OnPlayerUndoPush);
-        App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerUndoInfoPush, OnPlayerUndoInfoPush);
-        App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerNotAgreePush, OnPlayerNotAgreePush);
-        App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayUndoNextPush, OnPlayUndoNextPush);
-
         App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerCanNextPush, OnCanNextPush);
         App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerCanPaintingPush, OnOtherEndTurnPush);
         App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerPaintingOverPush, OnRoundStartPush);       
@@ -330,20 +325,22 @@ public class PVP02Panel
         {
             var tweenPlayer = m_RoundChange.transform.Find("m_EnemyRound").GetComponent<TweenPlayer>();
             var tween = tweenPlayer.GetClipTween("move_top");
-            tween.SetOnComplete(OnTransAniComplete, new object[] { isEnd });
+            tween.SetOnComplete(OnTransAniComplete, new object[] { tweenPlayer });
             tweenPlayer.enabled = true;
         }
         else
         {
             var tweenPlayer = m_RoundChange.transform.Find("m_MyselfRound").GetComponent<TweenPlayer>();
             var tween = tweenPlayer.GetClipTween("move_bottom");
-            tween.SetOnComplete(OnTransAniComplete, new object[] { isEnd });
+            tween.SetOnComplete(OnTransAniComplete, new object[] { tweenPlayer });
             tweenPlayer.enabled = true;
         }
     }
 
     private void OnTransAniComplete(object[] args)
     {
+        var tweenPlayer = (TweenPlayer)args[0];
+        tweenPlayer.enabled = false;
         m_mediator.NotifyEndTurn(1);
     }
 
@@ -706,51 +703,6 @@ public class PVP02Panel
         App.UIManager.OpenPanel("TipsPanel", new object[] { "对局取消！", "有玩家没准备，对局取消！" });
     }
 
-    public void OnPlayerUndoPush(string name, List<byte[]> packet)
-    {
-        isPause = true;
-        App.UIManager.OpenPanel("MutuallySelectPanel");
-    }
-
-    public void OnPlayerUndoInfoPush(string name, List<byte[]> packet)
-    {
-        Debug.Log("Push:OnPlayerUndoInfoPush");
-        if (isTurn == true)
-        {
-            m_modelDrag.isTurn = true;
-            App.UIManager.ClosePanel("WaitingPanel");
-            App.UIManager.OpenPanel("MessagePanel", "同意悔棋!!");
-        }
-        var pushMes = PlayerUndoInfoPush.ParseFrom(packet[0]);
-        m_undoRoundNum = pushMes.UndoInfoCount;
-        for (int i = 0; i < m_undoRoundNum; i++)
-        {
-            var undoInfo = pushMes.GetUndoInfo(i);
-            var battleMes = undoInfo.BattleMes;
-            var isEat = undoInfo.IsEat;
-            var eatInfo = undoInfo.Type;
-            var userId = undoInfo.UserId;
-            var from = battleMes.From;
-            var to = battleMes.To;
-
-            var lastEat = -1;
-            var fromPos = IndexToCoor(from);
-            var toPos = IndexToCoor(to);
-            var userColor = m_pvpProxy.GetColorById(userId);
-            if (isEat == true)
-            {
-                var color = 1 - userColor;//1-操作人的颜色 = 被吃棋子的颜色
-                lastEat = (int)color * 10 + eatInfo;
-                PieceReborn(lastEat, toPos);
-            }
-            App.ChessLogic.Undo(fromPos, toPos, lastEat);
-
-            Vector2[] body = new Vector2[] { fromPos, toPos, new Vector2(lastEat, (int)userColor) };
-            m_mediator.NotifyUndo(body);
-            roundNum--;
-        }
-    }
-
     private void ShowOtherActive(string name, List<byte[]> packet)
     {
         var pushMes = NewServerBattleMesPush.ParseFrom(packet[0]);
@@ -772,24 +724,6 @@ public class PVP02Panel
 
         }
         roundNum++;
-    }
-
-    public void OnPlayerNotAgreePush(string name, List<byte[]> packet)
-    {
-        Debug.Log("Push:OnPlayerNotAgreePush");
-        isPause = false;
-        if (isTurn == true)
-        {
-            m_modelDrag.isTurn = isTurn;
-            App.UIManager.ClosePanel("WaitingPanel");
-            App.UIManager.OpenPanel("MessagePanel", "对方不同意悔棋!!");
-        }
-    }
-
-    public void OnPlayUndoNextPush(string name, List<byte[]> packet)
-    {
-        isPause = false;
-        Debug.Log("Push:On PLayerUndoNext");
     }
 
     public void OnOnePlayerReady(string name, List<byte[]> packet)

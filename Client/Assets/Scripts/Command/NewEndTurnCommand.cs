@@ -27,6 +27,6 @@ public class NewEndTurnCommand : SimpleCommand
 
     private void Response(int error, List<byte[]> btData)
     {
-
+        SendNotification(NotificationConstant.NewEndTurnResponse);
     }
 }
