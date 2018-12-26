@@ -825,11 +825,13 @@ public class PVP02Panel
 
     private void OnOtherEndTurnPush(string name, List<byte[]> packet)
     {
+        Debug.Log("Push: OtherEndTurnPush!!!");
         ShowTransAnimation(false);
     }
 
     private void OnRoundStartPush(string name, List<byte[]> packet)
     {
+        Debug.Log("Push: OnRoundStartPush!!!");
         if (isTurn == true)
         {
             OnRoundStart();
@@ -845,7 +847,7 @@ public class PVP02Panel
         Debug.Log("Push:OnNextPlayPush");
         if (isTurn == true)
         {
-            EndCurRound();
+            OnRoundEnd();
         }
         else
         {
@@ -932,7 +934,7 @@ public class PVP02Panel
 
         App.NetworkManager.RemovePushCall(Config.PushMessage.PlayerCanNextPush);
         App.NetworkManager.RemovePushCall(Config.PushMessage.NewServerBattleMesPush);
-        
+        App.NetworkManager.RemovePushCall(Config.PushMessage.PlayerPaintingOverPush);
     }
 
     ///index转坐标 且棋盘翻转
