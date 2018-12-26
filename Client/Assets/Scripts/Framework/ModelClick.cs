@@ -46,7 +46,7 @@ public class ModelClick : MonoBehaviour
                     Debug.DrawLine(ray.origin, hitInfo.point);
                     var worldPos = hitInfo.point;
                     var localPos = m_qizi.transform.InverseTransformPoint(worldPos);
-                    OnModelClick(localPos);
+                    OnModelClick(new Vector3(localPos.x + 1, localPos.y + 1, localPos.z + 1));
                 }            
             }
         }

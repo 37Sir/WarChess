@@ -244,14 +244,7 @@ namespace Framework
                 //如果是王或者马 不必判断阻挡
                 if (fromType == (int)Config.PieceType.N || fromType == (int)Config.PieceType.K)
                 {
-                    if (IsCheckPre(fromColor, from, to) == false)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    return true;
                 }
 
                 //判断阻挡
@@ -271,10 +264,7 @@ namespace Framework
                 }
                 if (!blocked)
                 {
-                    if (IsCheckPre(fromColor, from, to) == false)
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
             return false;

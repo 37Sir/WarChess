@@ -32,6 +32,7 @@ public class PVPPanel
     private GameObject m_gameStartLogo;
     private TweenPlayer m_cameraTween;
     private Button m_Undo;
+    private GameObject m_sunLight;
 
     public bool isTurn = true;
     public bool isPause = false;
@@ -94,6 +95,7 @@ public class PVPPanel
         m_test = gameObject.transform.Find("Container/test").GetComponent<Button>();
         m_Undo = gameObject.transform.Find("Container/m_Undo").GetComponent<Button>();
         m_gameStartLogo = gameObject.transform.Find("Container/m_GameBegin").gameObject;
+        m_sunLight = GameObject.Find("Directional Light");
     }
 
     public void OpenView(object intent)
@@ -115,6 +117,8 @@ public class PVPPanel
         m_enemyImage.GetComponentInChildren<Text>().text = m_pvpProxy.GetEnemyName();
         InitTimer();
         App.SoundManager.PlaySoundClip(Config.Sound.InGameStart);
+        var fixedK = App.EffectManager.ScreenFixedK;
+        m_worldCamera.fieldOfView = m_worldCamera.fieldOfView * fixedK;
     }
 
     /// <summary>

@@ -39,6 +39,7 @@ public class PVP02Panel
     private GameObject m_gameStartLogo;
     private TweenPlayer m_cameraTween;
     private GameObject m_RoundChange;
+    private GameObject m_sunLight;
 
     public bool isTurn = true;
     public bool canNext = true;
@@ -65,6 +66,7 @@ public class PVP02Panel
         m_proxy = App.Facade.RetrieveProxy("UserDataProxy") as UserDataProxy;
         m_pvpProxy = App.Facade.RetrieveProxy("PVP02Proxy") as PVP02Proxy;
         InitUIBinder(gameObject);
+        m_sunLight.transform.localRotation = Quaternion.Euler(130, -30, 0);
         m_modelClick.pvp02Panel = this;
 
         m_piece.SetActive(false);
@@ -120,6 +122,7 @@ public class PVP02Panel
         m_enemyReady = gameObject.transform.Find("Container/m_EnemyReady").gameObject;
         m_gameStartLogo = gameObject.transform.Find("Container/m_GameBegin").gameObject;
         m_RoundChange = gameObject.transform.Find("Container/m_RoundChange").gameObject;
+        m_sunLight = GameObject.Find("Directional Light");
     }
 
     public void OpenView(object intent)
@@ -151,6 +154,8 @@ public class PVP02Panel
         m_enemyImage.GetComponentInChildren<Text>().text = m_pvpProxy.GetEnemyName();
         InitTimer();
         App.SoundManager.PlaySoundClip(Config.Sound.InGameStart);
+        var fixedK = App.EffectManager.ScreenFixedK;
+        m_worldCamera.fieldOfView = m_worldCamera.fieldOfView * fixedK;
     }
 
     public void CloseView()
@@ -792,9 +797,11 @@ public class PVP02Panel
     /// <param name="packet"></param>
     private void OnCanNextPush(string name, List<byte[]> packet)
     {
-        Debug.Log("Push: OnCanNextPush!!!");
-        canNext = true;
-        m_modelDrag.isTurn = canNext;
+        if (isTurn == true)
+        {
+            canNext = true;
+            m_modelDrag.isTurn = canNext;
+        }
     }
 
     private void OnOtherEndTurnPush(string name, List<byte[]> packet)
