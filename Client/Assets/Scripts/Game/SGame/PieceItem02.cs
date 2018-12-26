@@ -25,7 +25,7 @@ public class PieceItem02 : MonoBehaviour
     public bool isDead = false;
     public bool isPVE = false;
     public bool isReborn = false;
-    public bool canMove = false;
+    public bool canMove = false;//棋子一回合只能移动一次
     public GameObject pieceModel;
     private GameObject m_Attack;
     private TweenPlayer m_TweenPlayer;
@@ -269,8 +269,8 @@ public class PieceItem02 : MonoBehaviour
     public void AIMove(Move move)
     {
         var posMove = new Move(new Vector2(move.From.x + 1, move.From.y + 1), new Vector2(move.To.x + 1, move.To.y + 1));
-        var tempEat = App.ChessLogic.GetPiece(move.To.x, move.To.y);
-        if (App.ChessLogic.DoMove(move.From, move.To))
+        var tempEat = App.ChessLogic02.GetPiece(move.To.x, move.To.y);
+        if (App.ChessLogic02.DoMove(move.From, move.To))
         {
             Debug.Log("Move success!");
             object[] args = new object[] { posMove.From, posMove.To, new Vector2(-1, tempEat) };//0:from, 1:to, 2.x:兵生变类型 -1为没有， 2.y:吃棋信息
@@ -577,8 +577,8 @@ public class PieceItem02 : MonoBehaviour
 
         if (from.x == m_X && from.y == m_Z)
         {
-            var targetPiece = App.ChessLogic.GetPiece(to.x - 1, to.y - 1);//目标位置棋子
-            if (App.ChessLogic.DoMove(new Vector2(from.x - 1, from.y - 1), new Vector2(to.x - 1, to.y - 1)))
+            var targetPiece = App.ChessLogic02.GetPiece(to.x - 1, to.y - 1);//目标位置棋子
+            if (App.ChessLogic02.DoMove(new Vector2(from.x - 1, from.y - 1), new Vector2(to.x - 1, to.y - 1)))
             {
                 if (m_TweenPlayer == null)
                 {
@@ -680,7 +680,7 @@ public class PieceItem02 : MonoBehaviour
     /// <param name="type"></param>
     public void OnPromoted(int type)
     {
-        App.ChessLogic.PPromoted(new Vector2Int((int)m_X - 1, (int)m_Z - 1), type);
+        App.ChessLogic02.PPromoted(new Vector2Int((int)m_X - 1, (int)m_Z - 1), type);
         string pieceName = "";
         if (pieceColor == Config.PieceColor.BLACK)
         {

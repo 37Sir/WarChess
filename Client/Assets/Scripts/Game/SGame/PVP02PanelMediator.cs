@@ -44,6 +44,7 @@ public class PVP02PanelMediator : Mediator
         list.Add(NotificationConstant.OnPPromote);
         list.Add(NotificationConstant.OnTypeSelect);
         list.Add(NotificationConstant.NewEndTurnResponse);
+        list.Add(NotificationConstant.PlayerActiveResponse);
         
         return list;
     }
@@ -77,6 +78,9 @@ public class PVP02PanelMediator : Mediator
                 break;
             case NotificationConstant.NewEndTurnResponse:
                 m_viewComponent.EndCurRound();
+                break;
+            case NotificationConstant.PlayerActiveResponse:
+                m_viewComponent.SetCanNext(false);
                 break;
             default:
                 break;

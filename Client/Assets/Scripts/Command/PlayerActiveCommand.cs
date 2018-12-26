@@ -34,12 +34,7 @@ public class PlayerActiveCommand : SimpleCommand
 
     private void Response(int error, List<byte[]> btData)
     {
-        //var response = PlayerBattleMesResponse.ParseFrom(btData[0]);
-        //var canMove = response.Res;
-        //var errorCode = response.Error;
-        //Debug.Log("Move Response: " + canMove + " errorCode " + errorCode);
-
-        //SendNotification(NotificationConstant.DoMoveResponse, new object[] { m_from, m_to, m_type });
+        SendNotification(NotificationConstant.PlayerActiveResponse);
     }
 
     ///坐标转index 且棋盘翻转

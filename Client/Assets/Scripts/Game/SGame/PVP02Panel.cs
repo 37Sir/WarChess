@@ -498,6 +498,7 @@ public class PVP02Panel
         if (isTurn == true)
         {
             canNext = false;
+            m_modelDrag.isTurn = canNext;
         }
         App.ObjectPoolManager.RegisteObject(pieceName, "FX/" + pieceName, 0, 30, -1);
         App.ObjectPoolManager.Instantiate(pieceName, (GameObject obj) =>
@@ -712,11 +713,19 @@ public class PVP02Panel
         {
             var callInfo = pushMes.ActiveInfo.CallInfo;
             var index = callInfo.Index;
-            var type = callInfo.Type;
-            var userId = callInfo.UserId;
+            var point = IndexToCoor(index);
             var otherColor = 1 - (int)selfColor;
+            var type = callInfo.Type + otherColor * 10;
+            var userId = callInfo.UserId;
 
-            OnSummon(otherColor * 10 + type, IndexToCoor(index));
+            if (canNext == true && App.ChessLogic02.DoSummon(new Vector2(point.x - 1, point.y - 1), type))
+            {
+                OnSummon(type, point);
+            }
+            else
+            {
+                Debug.Log("非法召唤！！");
+            }
         }
         //移动
         else
@@ -767,7 +776,20 @@ public class PVP02Panel
     private void OnCanNextPush(string name, List<byte[]> packet)
     {
         Debug.Log("Push: OnCanNextPush!!!");
-        canNext = true;
+        if(isTurn == true)
+        {
+            canNext = true;
+            m_modelDrag.isTurn = canNext;
+        }
+    }
+
+    public void SetCanNext(bool isCan)
+    {
+        if (isTurn == true)
+        {
+            canNext = isCan;
+            m_modelDrag.isTurn = isCan;
+        }
     }
 
     private void OnOtherEndTurnPush(string name, List<byte[]> packet)
