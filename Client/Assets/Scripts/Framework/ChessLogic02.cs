@@ -227,112 +227,53 @@ namespace Framework
             toType = toType % 10;
             fromType = fromType % 10;
             if (toColor == fromColor) return false;//todo如果王车易位 需要修改
-            if (fromType == (int)Config.PieceType.P)//todo 小兵直走
+            if (fromType == (int)Config.PieceType.P)//todo 小兵直走(新模式 上下左右走)
             {
-                if (toType < 0)
+                if(GetPiecesTotalDistance(from, to) == 1)
                 {
-                    if (difference < 0)
-                    {
-                        if (GetPiece((int)from.x, (int)from.y + 1) == -1 && fromColor == (int)Config.PieceColor.WHITE && from.x == to.x)
-                        {
-                            //小兵第一次移动可以走两步 之后只有一步
-                            int step = 1;
-                            if (from.y == 1)
-                            {
-                                step = 2;
-                            }
-                            if (Math.Abs(from.y - to.y) > step) return false;
-                            if (GetPiece(toX, toY) >= 0) return false;
-                            if (IsCheckPre(fromColor, from, to) == false)
-                            {
-                                return true;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (GetPiece((int)from.x, (int)from.y - 1) == -1 && fromColor == (int)Config.PieceColor.BLACK && from.x == to.x)
-                        {
-                            //小兵第一次移动可以走两步 之后只有一步
-                            int step = 1;
-                            if (from.y == 6)
-                            {
-                                step = 2;
-                            }
-                            if (Math.Abs(from.y - to.y) > step) return false;
-                            if (GetPiece(toX, toY) >= 0) return false;
-                            if (IsCheckPre(fromColor, from, to) == false)
-                            {
-                                return true;
-                            }
-                        }
-                    }
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
 
             if ((ATTACKS[index] & (1 << SHIFTS[fromType])) != 0)
             {
-                //判断是否小兵往回走 *小兵直走斜吃
-                if (fromType == (int)Config.PieceType.P)
+                //如果是王或者马 不必判断阻挡
+                if (fromType == (int)Config.PieceType.N || fromType == (int)Config.PieceType.K)
                 {
-                    if (toType < 0 || toColor == fromColor) return false;
-                    if (difference < 0)
+                    if (IsCheckPre(fromColor, from, to) == false)
                     {
-                        if (fromColor == (int)Config.PieceColor.WHITE)
-                        {
-                            if (IsCheckPre(fromColor, from, to) == false)
-                            {
-                                return true;
-                            }
-                        }
+                        return true;
                     }
                     else
                     {
-                        if (fromColor == (int)Config.PieceColor.BLACK)
-                        {
-                            if (IsCheckPre(fromColor, from, to) == false)
-                            {
-                                return true;
-                            }
-                        }
+                        return false;
                     }
                 }
-                else
-                {
-                    //如果是王或者马 不必判断阻挡
-                    if (fromType == (int)Config.PieceType.N || fromType == (int)Config.PieceType.K)
-                    {
-                        if (IsCheckPre(fromColor, from, to) == false)
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    }
 
-                    //判断阻挡
-                    int offset = RAYS[index];
-                    int j = toSquare + offset;
-                    bool blocked = false;
-                    while (j != fromSquare)
+                //判断阻挡
+                int offset = RAYS[index];
+                int j = toSquare + offset;
+                bool blocked = false;
+                while (j != fromSquare)
+                {
+                    int y = 7 - j / 16;
+                    int x = j % 16;
+                    if (GetPiece(x, y) >= 0)
                     {
-                        int y = 7 - j / 16;
-                        int x = j % 16;
-                        if (GetPiece(x, y) >= 0)
-                        {
-                            blocked = true;
-                            break;
-                        }
-                        j += offset;
+                        blocked = true;
+                        break;
                     }
-                    if (!blocked)
+                    j += offset;
+                }
+                if (!blocked)
+                {
+                    if (IsCheckPre(fromColor, from, to) == false)
                     {
-                        if (IsCheckPre(fromColor, from, to) == false)
-                        {
-                            return true;
-                        }
+                        return true;
                     }
                 }
             }
@@ -614,6 +555,14 @@ namespace Framework
             {
                 return dy;
             }
+        }
+
+        private int GetPiecesTotalDistance(Vector2 from, Vector2 to)
+        {
+            int dx = (int)Math.Abs(from.x - to.x);
+            int dy = (int)Math.Abs(from.y - to.y);
+
+            return dx + dy;
         }
     }
 }

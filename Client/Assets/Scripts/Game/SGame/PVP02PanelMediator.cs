@@ -53,6 +53,9 @@ public class PVP02PanelMediator : Mediator
         object body = notification.Body;
         switch (notification.Name)
         {
+            case NotificationConstant.OnDragEnd:
+                m_viewComponent.OnTipsHide();
+                break;
             case NotificationConstant.OnGameOver:
                 //m_viewComponent.OnGameOver((Config.PieceColor)body);
                 break;
