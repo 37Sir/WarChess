@@ -43,7 +43,7 @@ public class PVP02PanelMediator : Mediator
         list.Add(NotificationConstant.PlayerReadyResponse);
         list.Add(NotificationConstant.OnPPromote);
         list.Add(NotificationConstant.OnTypeSelect);
-        list.Add(NotificationConstant.PlayerInitiativeResponse);
+        list.Add(NotificationConstant.NewEndTurnResponse);
         
         return list;
     }
@@ -83,7 +83,7 @@ public class PVP02PanelMediator : Mediator
                 var promoteBody = (Vector2[])body;
                 NotifyDoMove(new object[] { m_promoteFromX, m_promoteFromY, null, m_promoteTo, m_viewComponent.roundNum, (int)promoteBody[2].x });
                 break;
-            case NotificationConstant.PlayerInitiativeResponse:
+            case NotificationConstant.NewEndTurnResponse:
                 m_viewComponent.EndCurRound();
                 break;
             default:

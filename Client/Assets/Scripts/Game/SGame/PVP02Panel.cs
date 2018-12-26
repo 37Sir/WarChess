@@ -498,7 +498,10 @@ public class PVP02Panel
         PieceItem02 pieceItem = temp.AddComponent<PieceItem02>();
         pieceItem.InitView(temp, new Piece((Config.PieceColor)color, (Config.PieceType)type, (int)point.x, (int)point.y), false);
         pieceItem.canMove = false;
-        canNext = false;
+        if (isTurn == true)
+        {
+            canNext = false;
+        }
         App.ObjectPoolManager.RegisteObject(pieceName, "FX/" + pieceName, 0, 30, -1);
         App.ObjectPoolManager.Instantiate(pieceName, (GameObject obj) =>
         {
@@ -573,7 +576,7 @@ public class PVP02Panel
             var z = (pointZ - offsetZ) / 2;
             var point = new Vector2(x, z);
 
-            if(App.ChessLogic02.DoSummon(point, m_selectType) && canNext == true)
+            if(canNext == true && App.ChessLogic02.DoSummon(point, m_selectType))
             {
                 Debug.Log("召唤成功");
                 var type = m_selectType % 10;
@@ -623,23 +626,6 @@ public class PVP02Panel
     private void OnQClick()
     {
         OnPieceTypeSelect(4);
-    }
-
-    /// <summary>
-    /// 点击悔棋按钮
-    /// </summary>
-    private void OnUndoClick()
-    {
-        Debug.Log("OnUndoClick");
-        App.SoundManager.PlaySoundClip(Config.Sound.Click1);
-        if (roundNum > 1)
-        {
-            m_mediator.NotifyRequestUndo();
-        }
-        else
-        {
-            App.UIManager.OpenPanel("MessagePanel", "无法悔棋！");
-        }
     }
 
     #endregion
@@ -838,7 +824,7 @@ public class PVP02Panel
         }
         else
         {
-            OnRoundStart();
+            OnRoundEnd();
         }
     }
 
