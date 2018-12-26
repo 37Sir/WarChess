@@ -96,7 +96,8 @@ public class PVP02Panel
         App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayUndoNextPush, OnPlayUndoNextPush);
 
         App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerCanNextPush, OnCanNextPush);
-        App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerCanPaintingPush, OnOtherEndTurnPush);       
+        App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerCanPaintingPush, OnOtherEndTurnPush);
+        App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerPaintingOverPush, OnRoundStartPush);       
     }
 
     private void InitUIBinder(GameObject gameObject)
@@ -186,6 +187,10 @@ public class PVP02Panel
         if (isTurn)
         {
             ShowTransAnimation(false);
+        }
+        else
+        {
+            ShowTransAnimation(true);
         }
     }
 
@@ -340,15 +345,6 @@ public class PVP02Panel
     private void OnTransAniComplete(object[] args)
     {
         m_mediator.NotifyEndTurn(1);
-        var isEnd = (bool)args[0];
-        if(isEnd == true)
-        {
-            OnRoundEnd();
-        }
-        else
-        {
-            OnRoundStart();
-        }
     }
 
     /// <summary>
@@ -830,6 +826,18 @@ public class PVP02Panel
     private void OnOtherEndTurnPush(string name, List<byte[]> packet)
     {
         ShowTransAnimation(false);
+    }
+
+    private void OnRoundStartPush(string name, List<byte[]> packet)
+    {
+        if (isTurn == true)
+        {
+            OnRoundStart();
+        }
+        else
+        {
+            OnRoundStart();
+        }
     }
 
     public void OnNextPlay(string name, List<byte[]> packet)

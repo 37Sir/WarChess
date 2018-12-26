@@ -123,6 +123,7 @@ public class Config{
         public const string NewServerBattleMesPush = "NewServerBattleMesPush";
         public const string PlayerCanNextPush = "PlayerCanNextPush";
         public const string PlayerCanPaintingPush = "PlayerCanPaintingPush";
+        public const string PlayerPaintingOverPush = "PlayerPaintingOverPush";
     }
 }
 
