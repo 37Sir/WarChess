@@ -66,7 +66,6 @@ public class PVP02Panel
         m_proxy = App.Facade.RetrieveProxy("UserDataProxy") as UserDataProxy;
         m_pvpProxy = App.Facade.RetrieveProxy("PVP02Proxy") as PVP02Proxy;
         InitUIBinder(gameObject);
-        m_sunLight.transform.localRotation = Quaternion.Euler(130, -30, 0);
         m_modelClick.pvp02Panel = this;
 
         m_piece.SetActive(false);
@@ -147,6 +146,7 @@ public class PVP02Panel
             {
                 isTurn = false;
                 selfColor = Config.PieceColor.BLACK;
+                m_sunLight.transform.localRotation = Quaternion.Euler(145, -30, 0);
             }
         }
         m_pvpProxy.SetSelfColor(selfColor);
@@ -797,6 +797,7 @@ public class PVP02Panel
     /// <param name="packet"></param>
     private void OnCanNextPush(string name, List<byte[]> packet)
     {
+        Debug.Log("Push: OtherEndTurnPush!!!");
         if (isTurn == true)
         {
             canNext = true;
@@ -921,6 +922,7 @@ public class PVP02Panel
         App.NetworkManager.RemovePushCall(Config.PushMessage.PlayerCanNextPush);
         App.NetworkManager.RemovePushCall(Config.PushMessage.NewServerBattleMesPush);
         App.NetworkManager.RemovePushCall(Config.PushMessage.PlayerPaintingOverPush);
+        App.NetworkManager.RemovePushCall(Config.PushMessage.PlayerCanPaintingPush);
     }
 
     ///index转坐标 且棋盘翻转
