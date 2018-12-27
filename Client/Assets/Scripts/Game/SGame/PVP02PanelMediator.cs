@@ -69,13 +69,6 @@ public class PVP02PanelMediator : Mediator
             case NotificationConstant.OnCheck:
                 m_viewComponent.OnCheck((int)body);
                 break;
-            case NotificationConstant.OnPPromote:
-                var temp = (object[])body;
-                m_promoteFromX = (float)temp[0];
-                m_promoteFromY = (float)temp[1];
-                m_promoteTo = (Vector2)temp[3];
-                m_viewComponent.OnPPromote(body);
-                break;
             case NotificationConstant.NewEndTurnResponse:
                 m_viewComponent.EndCurRound();
                 break;

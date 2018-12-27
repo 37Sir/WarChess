@@ -82,6 +82,17 @@ namespace Framework
         }
 
         /// <summary>
+        /// 屏幕适配高度
+        /// </summary>
+        public static float ScreenFixedHeight
+        {
+            get
+            {
+                return ((float)Screen.height / (float)Screen.width * (float)UIManager.DefaultScreenWidth - (float)UIManager.DefaultScreenHeight) * 0.5f;
+            }
+        }
+
+        /// <summary>
         /// 添加管理器
         /// </summary>
         public void AddManager(string typeName, object obj)

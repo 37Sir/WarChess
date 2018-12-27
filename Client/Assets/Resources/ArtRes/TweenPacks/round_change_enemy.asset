@@ -53,14 +53,14 @@ MonoBehaviour:
     FromPos: {x: 1, y: 1, z: 1}
     FromColor: {r: 1, g: 1, b: 1, a: 1}
     FromFade: 1
-    Duration: 1
-    DelayTime: 2
+    Duration: 0.6
+    DelayTime: 1.5
     Loop: 0
     LoopType: 0
     isNeedFrom: 1
   - TweenName: move_top
     TweenType: 6
-    EaseType: 11
+    EaseType: 21
     To: {x: 0, y: 0, z: 0}
     Color: {r: 1, g: 1, b: 1, a: 1}
     Fade: 1
@@ -68,8 +68,8 @@ MonoBehaviour:
     FromPos: {x: 0, y: 0, z: 0}
     FromColor: {r: 1, g: 1, b: 1, a: 1}
     FromFade: 1
-    Duration: 1
-    DelayTime: 2
+    Duration: 0.6
+    DelayTime: 1.5
     Loop: 0
     LoopType: 0
     isNeedFrom: 0

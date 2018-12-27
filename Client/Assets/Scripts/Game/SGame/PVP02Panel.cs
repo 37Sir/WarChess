@@ -24,6 +24,7 @@ public class PVP02Panel
     private Button m_B;
     private Button m_R;
     private Button m_Q;
+    private Toggle m_BottomToggle;
 
     private GameObject m_piece;//棋子
     private GameObject m_qizi;//棋子的父物体
@@ -36,10 +37,11 @@ public class PVP02Panel
     private Image m_userImage;
     private Image m_enemyImage;
     private Camera m_worldCamera;
-    private GameObject m_gameStartLogo;
     private TweenPlayer m_cameraTween;
     private GameObject m_RoundChange;
     private GameObject m_sunLight;
+    private Text m_EnergyText;
+    private GameObject m_EnergyContainer;
 
     public bool isTurn = true;
     public bool canNext = true;
@@ -48,12 +50,12 @@ public class PVP02Panel
     
     public int roundNum = 0;
     private int m_selectType = -1;
-    private int m_undoCompleteNum = 0;
-    private int m_undoRoundNum = 0;
     public Config.PieceColor selfColor = Config.PieceColor.WHITE;//自己的颜色
     private IEnumerator m_roundTimer;   //计时器
     private List<GameObject> m_tips = new List<GameObject>();//走棋提示
     private List<GameObject> m_summonTips = new List<GameObject>();//召唤提示
+    private List<GameObject> m_tempEnergy = new List<GameObject>();//能量
+    private List<GameObject> m_EnergyEffectBoxes = new List<GameObject>();//能量高亮特效
     private ModelDrag02 m_modelDrag;
     private ModelClick m_modelClick;
 
@@ -76,6 +78,7 @@ public class PVP02Panel
         m_B.onClick.AddListener(OnBClick);
         m_Q.onClick.AddListener(OnQClick);
         m_EndTurn.onClick.AddListener(OnEndTurnClick);
+        m_BottomToggle.onValueChanged.AddListener(OnBottomToggleClick);
 
         App.Facade.RegisterCommand(NotificationConstant.NewEndTurn, () => new NewEndTurnCommand());
         App.Facade.RegisterCommand(NotificationConstant.PlayerReady, () => new PlayerReadyCommand());
@@ -112,20 +115,26 @@ public class PVP02Panel
         m_modelClick = GameObject.Find("board").GetComponent<ModelClick>();
         m_ready = gameObject.transform.Find("Container/m_Ready").gameObject.GetComponent<Button>();
         m_Bottom = gameObject.transform.Find("Container/m_Bottom").gameObject;
-        m_EndTurn = m_Bottom.transform.Find("m_EndTurn").GetComponent<Button>();
+        m_BottomToggle = m_Bottom.GetComponent<Toggle>();
+        m_EnergyContainer = m_Bottom.transform.Find("m_PowerContent/m_Energy").gameObject;
+        m_EnergyText = m_Bottom.transform.Find("m_PowerContent/m_EnergyWidget/m_EnergyText").GetComponent<Text>();
+
+        m_EndTurn = gameObject.transform.Find("Container/m_EndTurn").GetComponent<Button>();
         m_P = gameObject.transform.Find("Container/m_Bottom/m_CardLineup/Scroll View/Viewport/Content/m_P").gameObject.GetComponent<Button>();
         m_N = gameObject.transform.Find("Container/m_Bottom/m_CardLineup/Scroll View/Viewport/Content/m_N").gameObject.GetComponent<Button>();
         m_B = gameObject.transform.Find("Container/m_Bottom/m_CardLineup/Scroll View/Viewport/Content/m_B").gameObject.GetComponent<Button>();
         m_R = gameObject.transform.Find("Container/m_Bottom/m_CardLineup/Scroll View/Viewport/Content/m_R").gameObject.GetComponent<Button>();
         m_Q = gameObject.transform.Find("Container/m_Bottom/m_CardLineup/Scroll View/Viewport/Content/m_Q").gameObject.GetComponent<Button>();
         m_enemyReady = gameObject.transform.Find("Container/m_EnemyReady").gameObject;
-        m_gameStartLogo = gameObject.transform.Find("Container/m_GameBegin").gameObject;
         m_RoundChange = gameObject.transform.Find("Container/m_RoundChange").gameObject;
         m_sunLight = GameObject.Find("Directional Light");
     }
 
     public void OpenView(object intent)
     {
+        var rect = m_Bottom.GetComponent<RectTransform>();
+        rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, rect.anchoredPosition.y - App.ScreenFixedHeight);
+        m_EnergyText.text = "0/0";
         int firstId = m_pvpProxy.GetFirstId();
         int userId = m_proxy.GetPlayerId();
         //test
@@ -227,14 +236,33 @@ public class PVP02Panel
     private void OnRoundStart()
     {
         StopRoundTimer();
-        m_mediator.NotifyRoundBegin(selfColor);
-        m_mediator.MaxEnergy++;
+        m_mediator.NotifyRoundBegin(selfColor);       
+        if(m_mediator.MaxEnergy < 10)
+        {
+            m_mediator.MaxEnergy++;
+        }
         m_mediator.Energy = m_mediator.MaxEnergy;
+        ShowEnergyChange(m_mediator.MaxEnergy);
+        m_EnergyText.text = m_mediator.Energy + "/" + m_mediator.MaxEnergy;
         isTurn = true;
         canNext = true;
         m_modelDrag.isTurn = isTurn;
         m_EndTurn.gameObject.SetActive(true);
         StartRoundTimer();
+    }
+
+    private void ShowEnergyChange(int maxEnergy)
+    {
+        m_tempEnergy.Clear();
+        for (int i = 0; i < maxEnergy; i++)
+        {
+            var name = (i + 1).ToString();
+            var energyObj = m_EnergyContainer.transform.Find(name).gameObject;
+            energyObj.SetActive(true);
+            var maskObj = energyObj.transform.Find("Mask").gameObject;
+            maskObj.SetActive(false);
+            m_tempEnergy.Add(energyObj);
+        }
     }
 
     /// <summary>
@@ -399,14 +427,42 @@ public class PVP02Panel
         m_summonTips.Clear();
     }
 
+    public void OnEnergyEffectHide()
+    {
+        foreach (GameObject obj in m_EnergyEffectBoxes)
+        {
+            obj.SetActive(false);
+        }
+        m_EnergyEffectBoxes.Clear();        
+    }
+
+    private void CardSelectReset()
+    {
+        m_P.transform.Find("m_Border").gameObject.SetActive(false);
+        m_N.transform.Find("m_Border").gameObject.SetActive(false);
+        m_B.transform.Find("m_Border").gameObject.SetActive(false);
+        m_R.transform.Find("m_Border").gameObject.SetActive(false);
+        m_Q.transform.Find("m_Border").gameObject.SetActive(false);
+    }
+
     public void OnPieceTypeSelect(int type)
     {
-        if(Config.PieceCost[type] > m_mediator.Energy)
+        m_selectType = -1;
+        OnSummonTipsHide();
+        OnEnergyEffectHide();
+        if (Config.PieceCost[type] > m_mediator.Energy)
         {
             App.UIManager.OpenPanel("MessagePanel", "能量不足！");
         }
         else
         {
+            for(int i = 1; i <= Config.PieceCost[type]; i++)
+            {
+                var boxObj = m_tempEnergy[m_mediator.Energy - i].transform.Find("EffectBox").gameObject;
+                boxObj.SetActive(true);
+                m_EnergyEffectBoxes.Add(boxObj);
+            }
+            
             OnSummonTipsShow();
             m_selectType = type + (int)selfColor * 10;
         }
@@ -443,14 +499,10 @@ public class PVP02Panel
         }
     }
 
-    ///兵晋升
-    public void OnPPromote(object body)
-    {
-        App.UIManager.OpenPanel("TypeSelectPanel", body);
-    }
-
     public void EndCurRound()
     {
+        m_modelDrag.isTurn = false;
+        m_EndTurn.gameObject.SetActive(false);
         ShowTransAnimation(true);
     }
 
@@ -526,15 +578,26 @@ public class PVP02Panel
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
             pieceItem.pieceModel = obj;
-
-            App.UIManager.StartCoroutine(_SendPaintEnd());
+            var effectPlayer = App.EffectManager.LoadEffect(obj, "summon_normal");
+            effectPlayer.enabled = true;
+            effectPlayer.IsOnce = true;
+            App.UIManager.StartCoroutine(_SendPaintEnd(newType));
             
         });
     }
 
-    private IEnumerator _SendPaintEnd()
+    private IEnumerator _SendPaintEnd(int type)
     {
         yield return new WaitForSeconds(1);
+        if(isTurn == true)
+        {
+            var cost = Config.PieceCost[type];
+            for (int i = 1; i <= cost; i++)
+            {
+                var maskObj = m_tempEnergy[m_mediator.Energy + cost - i].transform.Find("Mask").gameObject;
+                maskObj.SetActive(true);
+            }
+        }
         m_mediator.NotifyEndTurn(1);
     }
 
@@ -573,7 +636,10 @@ public class PVP02Panel
 
     private void OnEndTurnClick()
     {
-        if(m_isTest == false)
+        CardSelectReset();
+        OnEnergyEffectHide();
+        OnSummonTipsHide();
+        if (m_isTest == false)
         {
             m_mediator.NotifyNewEndTurn();
         }
@@ -581,6 +647,18 @@ public class PVP02Panel
         {
             EndCurRound();
             OnRoundStart();
+        }
+    }
+
+    private void OnBottomToggleClick(bool isOn)
+    {
+        if(isOn == true)
+        {
+            m_Bottom.GetComponent<TweenPlayer>().PlayOne("move_in");
+        }
+        else
+        {
+            m_Bottom.GetComponent<TweenPlayer>().PlayOne("move_out");
         }
     }
 
@@ -620,6 +698,7 @@ public class PVP02Panel
             }
             m_selectType = -1;
             OnSummonTipsHide();
+            OnEnergyEffectHide();
         }
     }
 
@@ -627,6 +706,11 @@ public class PVP02Panel
     {
         if(isTurn == true)
         {
+            m_P.transform.Find("m_Border").gameObject.SetActive(true);
+            m_N.transform.Find("m_Border").gameObject.SetActive(false);
+            m_B.transform.Find("m_Border").gameObject.SetActive(false);
+            m_R.transform.Find("m_Border").gameObject.SetActive(false);
+            m_Q.transform.Find("m_Border").gameObject.SetActive(false);
             OnPieceTypeSelect(0);
         }   
     }
@@ -635,6 +719,11 @@ public class PVP02Panel
     {
         if (isTurn == true)
         {
+            m_P.transform.Find("m_Border").gameObject.SetActive(false);
+            m_N.transform.Find("m_Border").gameObject.SetActive(true);
+            m_B.transform.Find("m_Border").gameObject.SetActive(false);
+            m_R.transform.Find("m_Border").gameObject.SetActive(false);
+            m_Q.transform.Find("m_Border").gameObject.SetActive(false);
             OnPieceTypeSelect(1);
         }
     }
@@ -643,6 +732,11 @@ public class PVP02Panel
     {
         if (isTurn == true)
         {
+            m_P.transform.Find("m_Border").gameObject.SetActive(false);
+            m_N.transform.Find("m_Border").gameObject.SetActive(false);
+            m_B.transform.Find("m_Border").gameObject.SetActive(true);
+            m_R.transform.Find("m_Border").gameObject.SetActive(false);
+            m_Q.transform.Find("m_Border").gameObject.SetActive(false);
             OnPieceTypeSelect(2);
         }
     }
@@ -651,6 +745,11 @@ public class PVP02Panel
     {
         if (isTurn == true)
         {
+            m_P.transform.Find("m_Border").gameObject.SetActive(false);
+            m_N.transform.Find("m_Border").gameObject.SetActive(false);
+            m_B.transform.Find("m_Border").gameObject.SetActive(false);
+            m_R.transform.Find("m_Border").gameObject.SetActive(true);
+            m_Q.transform.Find("m_Border").gameObject.SetActive(false);
             OnPieceTypeSelect(3);
         }
     }
@@ -659,6 +758,11 @@ public class PVP02Panel
     {
         if (isTurn == true)
         {
+            m_P.transform.Find("m_Border").gameObject.SetActive(false);
+            m_N.transform.Find("m_Border").gameObject.SetActive(false);
+            m_B.transform.Find("m_Border").gameObject.SetActive(false);
+            m_R.transform.Find("m_Border").gameObject.SetActive(false);
+            m_Q.transform.Find("m_Border").gameObject.SetActive(true);
             OnPieceTypeSelect(4);
         }
     }
@@ -786,7 +890,6 @@ public class PVP02Panel
 
     private void OnCameratweenComplete(object[] args)
     {
-        m_gameStartLogo.SetActive(true);
         OnGameStart();
     }
 
