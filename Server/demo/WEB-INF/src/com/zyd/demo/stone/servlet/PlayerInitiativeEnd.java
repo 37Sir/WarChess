@@ -15,13 +15,13 @@ public class PlayerInitiativeEnd extends BaseClientServlet {
   
     @Override
     public void logRequest(MessageHeaderInfo cui, Packet paramValues) {
-        logger.info("logRequest PlayerPaintingEndRequest {}, {}", TextFormat.printToUnicodeString(cui),
+        logger.info("logRequest PlayerInitiativeEnd {}, {}", TextFormat.printToUnicodeString(cui),
             TextFormat.printToUnicodeString(paramValues.parseProtobuf(PlayerInitiativeEndRequest.PARSER, 1)) );
     }
   
     @Override
     public void logResponse(Packet returnParam) {
-        logger.info("logResponse PlayerPaintingEndResponse {}",
+        logger.info("logResponse PlayerInitiativeEnd {}",
             TextFormat.printToUnicodeString(returnParam.parseProtobuf(PlayerInitiativeEndResponse.PARSER, 0)));  
     }
   

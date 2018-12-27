@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import javax.swing.plaf.synth.SynthStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.google.protobuf.MessageLite;
@@ -25,6 +26,7 @@ import com.zyd.common.proto.client.WarChess.PlayerEndPush;
 import com.zyd.common.proto.client.WarChess.PlayerMes;
 import com.zyd.common.proto.client.WarChess.PlayerNotReady;
 import com.zyd.common.proto.client.WarChess.PlayerPaintingEndResponse;
+import com.zyd.common.proto.client.WarChess.PlayerPaintingOverPush;
 import com.zyd.common.proto.client.WarChess.PlayerReadyFinishedPush;
 import com.zyd.common.proto.client.WarChess.PlayerReadyRequest;
 import com.zyd.common.proto.client.WarChess.PlayerStartPush;
@@ -94,7 +96,10 @@ public class ChessRoom {
     //玩家1王的位置
     int kingOne = 57;
     //玩家2王的位置
-    int kingTwo = 8;    
+    int kingTwo = 8;
+    //玩家连续无操作次数
+    Map<Integer, Integer> notActive = new HashMap<>();
+    
     private static final Logger logger = LoggerFactory.getLogger(ChessRoom.class);
     /** 匹配成功 */
     public void start() {
@@ -125,11 +130,13 @@ public class ChessRoom {
         lock.lock();
         try {
             ActiveInfo actInfo = playerActiveRequest.getActiveInfo();
+            //获得自己的棋子
             Map<Integer, String> my = getMyChess(user);
+            //获得他人的棋子
             Map<Integer, String> other = getOtherChess(user);
             int myKing = getMyChessKing(user);
             int otherKing = getOtherKing(user);
-            if (battleStatus.equals(BattleStatus.fighting)) {
+            if (!battleStatus.equals(BattleStatus.fighting)) {
                 logger.warn("PLAYER_ROOM_NOT_FINGHTING userName:{}",user.getUserName());
                 throw new BaseException(ErrorCode.PLAYER_ROOM_NOT_FINGHTING_VALUE); 
             }
@@ -153,6 +160,9 @@ public class ChessRoom {
                 }
                 lastMp -= ChessService.cost.get(ChessService.getShiftsType(type));
                 userNow.put(index, ChessService.getShiftsType(type));
+                my.put(index, ChessService.getShiftsType(type) );
+                battleStatus = BattleStatus.fightWaiting;
+                waitTime = System.currentTimeMillis() + BattleConfig.playReadTime;  
                 NewServerBattleMesPush.Builder  build = NewServerBattleMesPush.newBuilder();
                 build.setActiveInfo(actInfo);
                 disrupOne(PushReqestName.NewServerBattleMesPush, userMatchInfoList.get(nextActorIndex()), build.build());
@@ -166,6 +176,10 @@ public class ChessRoom {
                 if (my.containsKey(to)) {
                     logger.warn("PLAYER_INDEX_HAVA_CHESS userName:{}",user.getUserName());
                     throw new BaseException(ErrorCode.PLAYER_INDEX_HAVA_CHESS_VALUE);                      
+                }
+                if (myKing == to) {
+                    logger.warn("PLAYER_CAN_NOT_MOVE_MY_KING_INDEX userName:{}",user.getUserName());
+                    throw new BaseException(ErrorCode.PLAYER_CAN_NOT_MOVE_MY_KING_INDEX_VALUE);  
                 }
                 //是否可以达到位置
                 if (!ChessService.CheckStoneMove(from, to, other, my)) {
@@ -187,6 +201,7 @@ public class ChessRoom {
                     my.put(to, my.get(from));
                     my.remove(from); 
                 }
+                notActive.put(user.getId(), 0);
                 NewServerBattleMesPush.Builder  build = NewServerBattleMesPush.newBuilder();
                 build.setActiveInfo(actInfo);
                 if (to == otherKing) {
@@ -194,6 +209,7 @@ public class ChessRoom {
                     nextTime = System.currentTimeMillis() + BattleConfig.playReadTime;
                     battleStatus = BattleStatus.waitFinish;
                 } else {
+                    System.out.println("------------------fightWaiting------------------");
                     battleStatus = BattleStatus.fightWaiting;
                     waitTime = System.currentTimeMillis() + BattleConfig.playReadTime;                  
                 }
@@ -211,8 +227,12 @@ public class ChessRoom {
     public void endRound(User user) {
         lock.lock();
         try {
+            currentPlayNum += 1;
+            System.out.println("剩余蓝--------------------------------------"+lastMp);
             if (user.getId() == afterUserId) {
-                mp += mpAdd;
+                if (mp < 10) {
+                    mp += mpAdd;
+                }
             }
             lastMp = mp;
             userNow.clear();
@@ -220,7 +240,8 @@ public class ChessRoom {
             actor = nextActorIndex();
             battleStatus = BattleStatus.roundWaiting;
             nextTime = System.currentTimeMillis() + BattleConfig.playReadTime;
-            disrupAll(PushReqestName.PlayerCanPaintingPush, PlayerCanPaintingPush.newBuilder().build());                                    
+            disrupOne(PushReqestName.PlayerCanPaintingPush, userMatchInfoList.get(actor), PlayerCanPaintingPush.newBuilder().build());
+//            disrupAll(PushReqestName.PlayerCanPaintingPush, PlayerCanPaintingPush.newBuilder().build());                                    
         } catch (Exception e) {
           e.printStackTrace();
           logger.error("", e);
@@ -292,32 +313,54 @@ public class ChessRoom {
                 if (battleStatus.equals(BattleStatus.start)) {
                     //有玩家长时间未准备，则退出此次匹配
                     havaPlayerNotReady();
+                  //玩家不主动结束回合超时处理
                 } else if (battleStatus.equals(BattleStatus.fighting)) {
-                    actor = nextActorIndex();
-                    battleStatus = BattleStatus.roundWaiting;
-                    nextTime = BattleConfig.playReadTime;
-                    if (userMatchInfoList.get(actor).getId() == afterUserId) {
-                        mp += mpAdd;
+                    int userId = userMatchInfoList.get(actor).getId();
+                    if (userNow.size() == 0 && userHavaMove.size() == 0) {
+                        notActive.put(userId, notActive.get(userId)+1);
+                    } else {
+                        notActive.put(userId, 0);
                     }
-                    lastMp = mp;
-                    userNow.clear();
-                    userHavaMove.clear();
-                    actor = nextActorIndex();
-                    battleStatus = BattleStatus.roundWaiting;
-                    nextTime = System.currentTimeMillis() + BattleConfig.playReadTime;
-                    disrupAll(PushReqestName.PlayerCanPaintingPush, PlayerCanPaintingPush.newBuilder().build());                    
+                    if (notActive.get(userId) >= 3) {
+                        isGiveUp = 2;
+                        winUserId =  userMatchInfoList.get(nextActorIndex()).getId();
+                        battleStatus = BattleStatus.finished;
+                        battleFinished(winUserId);
+                    } else {
+                        currentPlayNum += 1;
+                        actor = nextActorIndex();
+                        nextTime = BattleConfig.playReadTime;
+                        if (userMatchInfoList.get(actor).getId() == afterUserId) {
+                            if (mp < 10) {
+                                mp += mpAdd;
+                            }
+                        }
+                        lastMp = mp;
+                        userNow.clear();
+                        userHavaMove.clear();
+                        actor = nextActorIndex();
+                        battleStatus = BattleStatus.roundWaiting;
+                        nextTime = System.currentTimeMillis() + BattleConfig.playReadTime;
+                        disrupAll(PushReqestName.PlayerCanPaintingPush, PlayerCanPaintingPush.newBuilder().build());
+                    }
                 } else if (battleStatus.equals(BattleStatus.roundWaiting)) {
                     battleStatus = BattleStatus.fighting;
-                    nextTime = BattleConfig.chessTime;
+                    nextTime = System.currentTimeMillis() + BattleConfig.chessTime;
                     disrupAll(PushReqestName.PlayNextPush, PlayNextPush.newBuilder().build()); 
                 } else if (battleStatus.equals(BattleStatus.waitFinish)) {
                     battleFinished(winUserId);
+                } else if (battleStatus.equals(BattleStatus.starting)) {
+                    System.out.println("开局超时--------------------------------------------------------------------------");
+                    battleStatus = BattleStatus.fighting;
+                    nextTime = System.currentTimeMillis() + BattleConfig.chessTime;
+                    disrupAll(PushReqestName.PlayerPaintingOverPush, PlayerPaintingOverPush.newBuilder().build());
                 }
             }
             if (battleStatus.equals(BattleStatus.fightWaiting)) {
                 if (System.currentTimeMillis() > waitTime) {
                     dealUserMap.clear();
                     battleStatus = BattleStatus.fighting;
+                    System.out.println("------------------" + "下一走棋");
                     disrupOne(PushReqestName.PlayerCanNextPush, userMatchInfoList.get(actor), PlayerCanNextPush.newBuilder().build());
                 } 
             }
@@ -332,9 +375,13 @@ public class ChessRoom {
      * @throws Exception */
     public void battleFinished(int userId) throws Exception {
         PlayerEndPush.Builder builder = PlayerEndPush.newBuilder();
-
-        builder.setResult(0);
-        builder.setWinUserId(userId);
+        if(isGiveUp != 2) {
+            builder.setResult(0);
+            builder.setWinUserId(userId);
+        } else {
+            builder.setResult(2);
+            builder.setWinUserId(userId);
+        }
         // 推送结束信息
         disrupAll(PushReqestName.PlayerEndPush, builder.build());        
         battleStatus = BattleStatus.finished;
@@ -382,10 +429,10 @@ public class ChessRoom {
              
              // 把所有人准备并且遍历所有玩家,如果所有玩家都准备发送准备完成推送
              if (dealUserMap.size() == userMatchInfoList.size()) {
-                 battleStatus = BattleStatus.fighting;
+                 battleStatus = BattleStatus.starting;
                  dealUserMap.clear();
                  initChess();
-                 nextTime = System.currentTimeMillis() + BattleConfig.chessTime;
+                 nextTime = System.currentTimeMillis() + BattleConfig.playReadTime;
                  disrupAll(PushReqestName.PlayerReadyFinishedPush,
                          PlayerReadyFinishedPush.newBuilder().build());
              }
@@ -400,22 +447,37 @@ public class ChessRoom {
      public PlayerPaintingEndResponse doRequest(User user) {
          lock.lock();
          try {
+             System.out.println(battleStatus+"-----------------------------");
              if (battleStatus.equals(BattleStatus.fightWaiting)) {
                  dealUserMap.put(user.getId(), new Object());
                  if (dealUserMap.size() == userMatchInfoList.size()) {
                      dealUserMap.clear();
                      battleStatus = BattleStatus.fighting;
-                     disrupOne(PushReqestName.PlayerCanNextPush, userMatchInfoList.get(actor), PlayerCanNextPush.newBuilder().build());
+                     disrupAll(PushReqestName.PlayerCanNextPush, PlayerCanNextPush.newBuilder().build());
+//                     disrupOne(PushReqestName.PlayerCanNextPush, userMatchInfoList.get(actor), PlayerCanNextPush.newBuilder().build());
                  }
              } else if (battleStatus.equals(BattleStatus.roundWaiting)) {
                  dealUserMap.put(user.getId(), new Object());
                  if (dealUserMap.size() == userMatchInfoList.size()) {
                      battleStatus = BattleStatus.fighting;
+                     dealUserMap.clear();
                      nextTime = System.currentTimeMillis() + BattleConfig.chessTime;
                      disrupAll(PushReqestName.PlayNextPush, PlayNextPush.newBuilder().build());
                  }               
              } else if (battleStatus.equals(BattleStatus.waitFinish)) {
-                 battleFinished(winUserId);
+                 dealUserMap.put(user.getId(), new Object());
+                 if (dealUserMap.size() == userMatchInfoList.size()) {
+                     dealUserMap.clear();
+                     battleFinished(winUserId);
+                 } 
+             } else if (battleStatus.equals(BattleStatus.starting)) {
+                 dealUserMap.put(user.getId(), new Object());
+                 if (dealUserMap.size() == userMatchInfoList.size()) {
+                     dealUserMap.clear();
+                     battleStatus = BattleStatus.fighting;
+                     nextTime = System.currentTimeMillis() + BattleConfig.chessTime;
+                     disrupAll(PushReqestName.PlayerPaintingOverPush, PlayerPaintingOverPush.newBuilder().build());
+                 }  
              }
          } catch (Exception e) {
              logger.error("", e);
@@ -434,6 +496,9 @@ public class ChessRoom {
         userTwoCan.put(7, "7");
         userTwoCan.put(15, "15");
         userTwoCan.put(16, "16");
+        //玩家连续不操作次数
+        notActive.put(startUserId, 0);
+        notActive.put(afterUserId, 0);
         
     }
 
@@ -476,7 +541,7 @@ public class ChessRoom {
     }
     //房间状态
     enum BattleStatus {
-        start, fighting, fightWaiting, roundWaiting,waitFinish, finished
+        start, starting,fighting, fightWaiting, roundWaiting,waitFinish, finished
     }
 
 }

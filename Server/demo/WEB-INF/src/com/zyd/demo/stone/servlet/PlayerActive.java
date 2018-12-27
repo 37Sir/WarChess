@@ -16,13 +16,13 @@ public class PlayerActive extends BaseClientServlet {
 
   @Override
   public void logRequest(MessageHeaderInfo cui, Packet paramValues) {
-      logger.info("logRequest PlayerPaintingEndRequest {}, {}", TextFormat.printToUnicodeString(cui),
+      logger.info("logRequest PlayerActive {}, {}", TextFormat.printToUnicodeString(cui),
           TextFormat.printToUnicodeString(paramValues.parseProtobuf(PlayerActiveRequest.PARSER, 1)) );
   }
 
   @Override
   public void logResponse(Packet returnParam) {
-      logger.info("logResponse PlayerPaintingEndResponse {}",
+      logger.info("logResponse PlayerActive {}",
           TextFormat.printToUnicodeString(returnParam.parseProtobuf(PlayerActiveResponse.PARSER, 0)));  
   }
 

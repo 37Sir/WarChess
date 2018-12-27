@@ -237,21 +237,29 @@ public final class ClientProtocol {
      */
     PLAYER_ROOM_NOT_FINGHTING(21, 412),
     /**
+     * <code>PLAYER_CAN_NOT_MOVE_MY_KING_INDEX = 413;</code>
+     *
+     * <pre>
+     *不能移动到己方国王的位置
+     * </pre>
+     */
+    PLAYER_CAN_NOT_MOVE_MY_KING_INDEX(22, 413),
+    /**
      * <code>DUPLICATE_REQUEST = 700;</code>
      */
-    DUPLICATE_REQUEST(22, 700),
+    DUPLICATE_REQUEST(23, 700),
     /**
      * <code>VERSION_ERROR = 995;</code>
      */
-    VERSION_ERROR(23, 995),
+    VERSION_ERROR(24, 995),
     /**
      * <code>DEVICE_TYPE_NOT_CORRECT = 998;</code>
      */
-    DEVICE_TYPE_NOT_CORRECT(24, 998),
+    DEVICE_TYPE_NOT_CORRECT(25, 998),
     /**
      * <code>NOT_HAVE_LAST_RESPONSE = 99999;</code>
      */
-    NOT_HAVE_LAST_RESPONSE(25, 99999),
+    NOT_HAVE_LAST_RESPONSE(26, 99999),
     /**
      * <code>SERVER_MAINTENACE = 100000;</code>
      *
@@ -259,7 +267,7 @@ public final class ClientProtocol {
      *服务器维护状态
      * </pre>
      */
-    SERVER_MAINTENACE(26, 100000),
+    SERVER_MAINTENACE(27, 100000),
     ;
 
     /**
@@ -395,6 +403,14 @@ public final class ClientProtocol {
      */
     public static final int PLAYER_ROOM_NOT_FINGHTING_VALUE = 412;
     /**
+     * <code>PLAYER_CAN_NOT_MOVE_MY_KING_INDEX = 413;</code>
+     *
+     * <pre>
+     *不能移动到己方国王的位置
+     * </pre>
+     */
+    public static final int PLAYER_CAN_NOT_MOVE_MY_KING_INDEX_VALUE = 413;
+    /**
      * <code>DUPLICATE_REQUEST = 700;</code>
      */
     public static final int DUPLICATE_REQUEST_VALUE = 700;
@@ -446,6 +462,7 @@ public final class ClientProtocol {
         case 410: return PLAYER_INDEX_NOT_HAVA_CHESS;
         case 411: return PLAYER_INDEX_CAT_NOT_MOVE;
         case 412: return PLAYER_ROOM_NOT_FINGHTING;
+        case 413: return PLAYER_CAN_NOT_MOVE_MY_KING_INDEX;
         case 700: return DUPLICATE_REQUEST;
         case 995: return VERSION_ERROR;
         case 998: return DEVICE_TYPE_NOT_CORRECT;
@@ -10139,7 +10156,7 @@ public final class ClientProtocol {
       "\026\n\024GetPlayerRankRequest\"6\n\025GetPlayerRank" +
       "Resopnse\022\014\n\004rank\030\001 \001(\005\022\017\n\007ranking\030\002 \001(\005*" +
       "-\n\013EDeviceType\022\010\n\004None\020\000\022\007\n\003IOS\020\001\022\013\n\007And",
-      "roid\020\002*\336\005\n\tErrorCode\022\020\n\014SERVER_ERROR\020\001\022\023" +
+      "roid\020\002*\206\006\n\tErrorCode\022\020\n\014SERVER_ERROR\020\001\022\023" +
       "\n\017SHOP_ITEM_WRONG\020\021\022\031\n\025PLAYER_RMB_NOT_EN" +
       "OUGH\020\025\022\032\n\026PLAYER_GOLD_NOT_ENOUGH\020\026\022\031\n\025PA" +
       "RAMETER_NOT_CORRECT\0202\022\031\n\025SYSCONFIG_NOT_C" +
@@ -10154,11 +10171,12 @@ public final class ClientProtocol {
       "\230\003\022 \n\033PLAYER_CALL_NOT_YOUR_ACTIVE\020\231\003\022 \n\033" +
       "PLAYER_INDEX_NOT_HAVA_CHESS\020\232\003\022\036\n\031PLAYER" +
       "_INDEX_CAT_NOT_MOVE\020\233\003\022\036\n\031PLAYER_ROOM_NO" +
-      "T_FINGHTING\020\234\003\022\026\n\021DUPLICATE_REQUEST\020\274\005\022\022" +
+      "T_FINGHTING\020\234\003\022&\n!PLAYER_CAN_NOT_MOVE_MY" +
+      "_KING_INDEX\020\235\003\022\026\n\021DUPLICATE_REQUEST\020\274\005\022\022" +
       "\n\rVERSION_ERROR\020\343\007\022\034\n\027DEVICE_TYPE_NOT_CO" +
       "RRECT\020\346\007\022\034\n\026NOT_HAVE_LAST_RESPONSE\020\237\215\006\022\027" +
-      "\n\021SERVER_MAINTENACE\020\240\215\006*\247\001\n\014RpcErrorCode" +
-      "\022\024\n\007UNKNOWN\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020INVALID_PROTOC",
+      "\n\021SERVER_MAINTENACE\020\240\215\006*\247\001\n\014RpcErrorCode",
+      "\022\024\n\007UNKNOWN\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020INVALID_PROTOC" +
       "OL\020\376\377\377\377\377\377\377\377\377\001\022\030\n\013INVALID_ARG\020\375\377\377\377\377\377\377\377\377\001\022" +
       "\024\n\007TIMEOUT\020\374\377\377\377\377\377\377\377\377\001\022\030\n\013SERVER_BUSY\020\373\377\377" +
       "\377\377\377\377\377\377\001\022\030\n\013PUSHTIMEOUT\020\372\377\377\377\377\377\377\377\377\001B\002H\001"

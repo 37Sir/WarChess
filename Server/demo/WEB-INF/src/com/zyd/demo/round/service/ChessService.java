@@ -67,7 +67,7 @@ public class ChessService extends BaseService {
     static HashMap<String, Integer> shifts = new HashMap<String, Integer>();
     //初始化
     static {
-        cost.put("p", 2);
+        cost.put("p", 1);
         cost.put("n", 3);
         cost.put("b", 5);
         cost.put("r", 6);
@@ -389,6 +389,8 @@ public class ChessService extends BaseService {
            j += offset;
          }           
          if (!blocked) return true;
+     } else if ("p".equals(myChess.get(from))) {
+         if (difference == 16 || difference ==-16 || difference ==1 || difference ==-1) return true;
      }
      return false;
  }

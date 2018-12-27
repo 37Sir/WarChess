@@ -68,13 +68,17 @@ public class BattleRoomManager extends BaseService {
     public void addNewChessRoom(ChessRoom chessRoom) {
         try {
             Long roomId = nosqlService.getNoSql().incr("CHESS_ROOM_INCR");
+            logger.warn( "-----------------新模式房间号----------------- roomid {}", roomId);
+//            System.out.println("-----------------新模式房间号-----------------" + roomId);
             chessRoom.roomId = roomId;
             chessRoomMap.put(roomId, chessRoom);
             for (User user : chessRoom.getUserMatchInfoList()) {
                 String userKey = user.getUserName();
+                System.out.println("------------添加------------" + userKey);
                 userToRoomIdMap0.put(userKey, roomId);
                 userMatchInfoMap0.put(userKey, user);
             }
+            logger.warn("---------匹配------------ size:{} --{}--{}",userToRoomIdMap0.size(),userMatchInfoMap0.size(),chessRoomMap.size());
             chessRoom.start();
         } catch (Exception e) {
             logger.error("can not get the room id"+e);
@@ -115,7 +119,7 @@ public class BattleRoomManager extends BaseService {
     }
     /** 移除一个新模式战斗房间 */
     public void removeChessRoom(ChessRoom chessRoom) {
-        battleRoomMap.remove(chessRoom.roomId);
+        chessRoomMap.remove(chessRoom.roomId);
         for (User user : chessRoom.getUserMatchInfoList()) {
             String userKey = user.getUserName();
             userToRoomIdMap0.remove(userKey);
@@ -191,6 +195,8 @@ public class BattleRoomManager extends BaseService {
             if (roomId != null) {
                 chessRoom = chessRoomMap.get(roomId);
             }
+            System.out.println("准备--------------------------------------------------------" +userToRoomIdMap0.size() );
+            System.out.println(chessRoom + "-----" + user + "------" + roomId + userKey);
             if (chessRoom == null || user == null) {
                 logger.warn("PLAYER_NOT_MATCH_SUCCESS userName:{}",token);
                 throw new BaseException(ErrorCode.PLAYER_NOT_MATCH_SUCCESS_VALUE); 

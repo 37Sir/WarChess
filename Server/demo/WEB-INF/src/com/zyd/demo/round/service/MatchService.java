@@ -143,8 +143,8 @@ public class MatchService extends BaseService {
                             continue;
                         }
                         // 将两个人的数据在匹配队列中删除
-                        match.remove(key);
-                        match.remove(matchKey);
+                        match0.remove(key);
+                        match0.remove(matchKey);
                         // 进入匹配
                         System.out.println("匹配成功");
                         doMatch0(value, matchValue);

@@ -57,7 +57,7 @@ message PlayerMatchRequest{
 
 // 匹配玩家请求返回
 message PlayerMatchResponse{
-	
+	optional int32 type = 1; //0为普通模式 1为新模式
 }
 // 取消匹配请求
 message PlayerCancelMatchRequest{

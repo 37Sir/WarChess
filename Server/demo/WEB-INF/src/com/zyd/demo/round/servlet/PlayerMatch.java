@@ -34,8 +34,9 @@ public class PlayerMatch extends BaseClientServlet{
         userMatchInfo.setUid(cui.getUserId());
         userMatchInfo.setToken(cui.getUserToken());
         matchService.addWaitUser(userMatchInfo,req.getType(),user);
-        
-        return new Packet(PlayerMatchResponse.newBuilder());
+        PlayerMatchResponse.Builder res = PlayerMatchResponse.newBuilder();
+        res.setType(req.getType());
+        return new Packet(res);
     }
     
     
