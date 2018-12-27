@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import com.zyd.common.proto.client.ClientProtocol.MessageHeaderInfo;
 import com.zyd.common.proto.client.ClientProtocol.MessageHeaderRequest;
 import com.zyd.common.proto.client.ClientProtocol.MessageHeaderResponse;
+import com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest;
 import com.zyd.common.rpc.Packet;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
@@ -38,6 +39,7 @@ public class ClientConnectionHandler extends SimpleChannelInboundHandler<Packet>
       String token = user_info_.getUserToken();
       logger.warn("Client disconnected: {} channelToken:{}" , channel.remoteAddress(),channelToken);
       ClientConnectPushUtil.clientConnectionHandlerMap.remove(token);
+
     }
     
     public void responseRpcAgain(int error, Packet rets) {
@@ -106,7 +108,13 @@ public class ClientConnectionHandler extends SimpleChannelInboundHandler<Packet>
         logger.debug("channelToken:{} InfoRequestRpc: {},\n args={}\n",channelToken, name, args.buffers.size());
         ClientRpcDispatcher.getInstance().addClientRequest(this, name, args);
     }
-    
+    protected void onRequestRpc0(String name){
+        logger.debug("channelToken:{} ",channelToken);
+        if (user_info_.getUserId() != 0) {
+            PlayerDownRequest.Builder req = PlayerDownRequest.newBuilder();
+            ClientRpcDispatcher.getInstance().addClientRequest(this, name,new Packet(user_info_,req));
+        }
+    } 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt)
             throws Exception {

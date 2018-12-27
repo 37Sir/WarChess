@@ -17,13 +17,13 @@ public class GetPlayerInfo extends BaseClientServlet {
     
     @Override
     public void logRequest(MessageHeaderInfo cui, Packet paramValues) {
-        logger.info("logRequest PlayerMutuallyFeedback {}, {}", TextFormat.printToUnicodeString(cui),
+        logger.info("logRequest GetPlayerInfo {}, {}", TextFormat.printToUnicodeString(cui),
             TextFormat.printToUnicodeString(paramValues.parseProtobuf(GetPlayerInfoRequest.PARSER, 1)) );
     }
     
     @Override
     public void logResponse(Packet returnParam) {
-        logger.info("logResponse PlayerMutuallyFeedback {}",
+        logger.info("logResponse GetPlayerInfo {}",
             TextFormat.printToUnicodeString(returnParam.parseProtobuf(GetPlayerInfoResponse.PARSER, 0)));  
     }
   

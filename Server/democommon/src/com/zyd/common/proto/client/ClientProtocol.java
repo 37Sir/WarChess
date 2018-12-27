@@ -10052,6 +10052,632 @@ public final class ClientProtocol {
     // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.GetPlayerRankResopnse)
   }
 
+  public interface PlayerDownRequestOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code com.zyd.common.proto.client.PlayerDownRequest}
+   *
+   * <pre>
+   *玩家掉线
+   * </pre>
+   */
+  public static final class PlayerDownRequest extends
+      com.google.protobuf.GeneratedMessage
+      implements PlayerDownRequestOrBuilder {
+    // Use PlayerDownRequest.newBuilder() to construct.
+    private PlayerDownRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PlayerDownRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PlayerDownRequest defaultInstance;
+    public static PlayerDownRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PlayerDownRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PlayerDownRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_PlayerDownRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_PlayerDownRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest.class, com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PlayerDownRequest> PARSER =
+        new com.google.protobuf.AbstractParser<PlayerDownRequest>() {
+      public PlayerDownRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PlayerDownRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PlayerDownRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.zyd.common.proto.client.PlayerDownRequest}
+     *
+     * <pre>
+     *玩家掉线
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.zyd.common.proto.client.ClientProtocol.PlayerDownRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_PlayerDownRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_PlayerDownRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest.class, com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest.Builder.class);
+      }
+
+      // Construct using com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_PlayerDownRequest_descriptor;
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest getDefaultInstanceForType() {
+        return com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest.getDefaultInstance();
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest build() {
+        com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest buildPartial() {
+        com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest result = new com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest) {
+          return mergeFrom((com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest other) {
+        if (other == com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.zyd.common.proto.client.ClientProtocol.PlayerDownRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.PlayerDownRequest)
+    }
+
+    static {
+      defaultInstance = new PlayerDownRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.PlayerDownRequest)
+  }
+
+  public interface PlayerDownResopnseOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code com.zyd.common.proto.client.PlayerDownResopnse}
+   */
+  public static final class PlayerDownResopnse extends
+      com.google.protobuf.GeneratedMessage
+      implements PlayerDownResopnseOrBuilder {
+    // Use PlayerDownResopnse.newBuilder() to construct.
+    private PlayerDownResopnse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PlayerDownResopnse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PlayerDownResopnse defaultInstance;
+    public static PlayerDownResopnse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PlayerDownResopnse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PlayerDownResopnse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_PlayerDownResopnse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_PlayerDownResopnse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse.class, com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PlayerDownResopnse> PARSER =
+        new com.google.protobuf.AbstractParser<PlayerDownResopnse>() {
+      public PlayerDownResopnse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PlayerDownResopnse(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PlayerDownResopnse> getParserForType() {
+      return PARSER;
+    }
+
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.zyd.common.proto.client.PlayerDownResopnse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_PlayerDownResopnse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_PlayerDownResopnse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse.class, com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse.Builder.class);
+      }
+
+      // Construct using com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.zyd.common.proto.client.ClientProtocol.internal_static_com_zyd_common_proto_client_PlayerDownResopnse_descriptor;
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse getDefaultInstanceForType() {
+        return com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse.getDefaultInstance();
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse build() {
+        com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse buildPartial() {
+        com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse result = new com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse) {
+          return mergeFrom((com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse other) {
+        if (other == com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.zyd.common.proto.client.ClientProtocol.PlayerDownResopnse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.PlayerDownResopnse)
+    }
+
+    static {
+      defaultInstance = new PlayerDownResopnse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.PlayerDownResopnse)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_zyd_common_proto_client_MessageHeaderRequest_descriptor;
   private static
@@ -10117,6 +10743,16 @@ public final class ClientProtocol {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_zyd_common_proto_client_GetPlayerRankResopnse_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_zyd_common_proto_client_PlayerDownRequest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_zyd_common_proto_client_PlayerDownRequest_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_zyd_common_proto_client_PlayerDownResopnse_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_zyd_common_proto_client_PlayerDownResopnse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -10154,32 +10790,33 @@ public final class ClientProtocol {
       "PlayerInfoResponse\022;\n\nplayerInfo\030\001 \001(\0132\'" +
       ".com.zyd.common.proto.client.PlayerInfo\"" +
       "\026\n\024GetPlayerRankRequest\"6\n\025GetPlayerRank" +
-      "Resopnse\022\014\n\004rank\030\001 \001(\005\022\017\n\007ranking\030\002 \001(\005*" +
-      "-\n\013EDeviceType\022\010\n\004None\020\000\022\007\n\003IOS\020\001\022\013\n\007And",
-      "roid\020\002*\206\006\n\tErrorCode\022\020\n\014SERVER_ERROR\020\001\022\023" +
-      "\n\017SHOP_ITEM_WRONG\020\021\022\031\n\025PLAYER_RMB_NOT_EN" +
-      "OUGH\020\025\022\032\n\026PLAYER_GOLD_NOT_ENOUGH\020\026\022\031\n\025PA" +
-      "RAMETER_NOT_CORRECT\0202\022\031\n\025SYSCONFIG_NOT_C" +
-      "ORRECT\0203\022\020\n\014HACKER_ERROR\0207\022\021\n\014NOT_GET_LO" +
-      "CK\020\254\002\022\032\n\025ACTIVATION_CODE_ERROR\020\255\002\022\035\n\030PLA" +
-      "YER_NOT_MATCH_SUCCESS\020\220\003\022\025\n\020PLAYER_NOT_S" +
-      "TART\020\221\003\022\031\n\024PLAYER_ROOM_NOT_HAVA\020\222\003\022\030\n\023PL" +
-      "AYER_CAN_NOT_UNDO\020\223\003\022\025\n\020PLAYER_GAME_OVER" +
-      "\020\224\003\022\034\n\027PLAYER_INDEX_HAVA_CHESS\020\225\003\022\032\n\025PLY",
-      "ER_INDEX_CANT_CALL\020\226\003\022\033\n\026PLAYER_INDEX_CA" +
-      "NT_MOVE\020\227\003\022\036\n\031PLAYER_CALL_NOT_ENOUGH_MP\020" +
-      "\230\003\022 \n\033PLAYER_CALL_NOT_YOUR_ACTIVE\020\231\003\022 \n\033" +
-      "PLAYER_INDEX_NOT_HAVA_CHESS\020\232\003\022\036\n\031PLAYER" +
-      "_INDEX_CAT_NOT_MOVE\020\233\003\022\036\n\031PLAYER_ROOM_NO" +
-      "T_FINGHTING\020\234\003\022&\n!PLAYER_CAN_NOT_MOVE_MY" +
-      "_KING_INDEX\020\235\003\022\026\n\021DUPLICATE_REQUEST\020\274\005\022\022" +
-      "\n\rVERSION_ERROR\020\343\007\022\034\n\027DEVICE_TYPE_NOT_CO" +
-      "RRECT\020\346\007\022\034\n\026NOT_HAVE_LAST_RESPONSE\020\237\215\006\022\027" +
-      "\n\021SERVER_MAINTENACE\020\240\215\006*\247\001\n\014RpcErrorCode",
-      "\022\024\n\007UNKNOWN\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020INVALID_PROTOC" +
-      "OL\020\376\377\377\377\377\377\377\377\377\001\022\030\n\013INVALID_ARG\020\375\377\377\377\377\377\377\377\377\001\022" +
-      "\024\n\007TIMEOUT\020\374\377\377\377\377\377\377\377\377\001\022\030\n\013SERVER_BUSY\020\373\377\377" +
-      "\377\377\377\377\377\377\001\022\030\n\013PUSHTIMEOUT\020\372\377\377\377\377\377\377\377\377\001B\002H\001"
+      "Resopnse\022\014\n\004rank\030\001 \001(\005\022\017\n\007ranking\030\002 \001(\005\"" +
+      "\023\n\021PlayerDownRequest\"\024\n\022PlayerDownResopn",
+      "se*-\n\013EDeviceType\022\010\n\004None\020\000\022\007\n\003IOS\020\001\022\013\n\007" +
+      "Android\020\002*\206\006\n\tErrorCode\022\020\n\014SERVER_ERROR\020" +
+      "\001\022\023\n\017SHOP_ITEM_WRONG\020\021\022\031\n\025PLAYER_RMB_NOT" +
+      "_ENOUGH\020\025\022\032\n\026PLAYER_GOLD_NOT_ENOUGH\020\026\022\031\n" +
+      "\025PARAMETER_NOT_CORRECT\0202\022\031\n\025SYSCONFIG_NO" +
+      "T_CORRECT\0203\022\020\n\014HACKER_ERROR\0207\022\021\n\014NOT_GET" +
+      "_LOCK\020\254\002\022\032\n\025ACTIVATION_CODE_ERROR\020\255\002\022\035\n\030" +
+      "PLAYER_NOT_MATCH_SUCCESS\020\220\003\022\025\n\020PLAYER_NO" +
+      "T_START\020\221\003\022\031\n\024PLAYER_ROOM_NOT_HAVA\020\222\003\022\030\n" +
+      "\023PLAYER_CAN_NOT_UNDO\020\223\003\022\025\n\020PLAYER_GAME_O",
+      "VER\020\224\003\022\034\n\027PLAYER_INDEX_HAVA_CHESS\020\225\003\022\032\n\025" +
+      "PLYER_INDEX_CANT_CALL\020\226\003\022\033\n\026PLAYER_INDEX" +
+      "_CANT_MOVE\020\227\003\022\036\n\031PLAYER_CALL_NOT_ENOUGH_" +
+      "MP\020\230\003\022 \n\033PLAYER_CALL_NOT_YOUR_ACTIVE\020\231\003\022" +
+      " \n\033PLAYER_INDEX_NOT_HAVA_CHESS\020\232\003\022\036\n\031PLA" +
+      "YER_INDEX_CAT_NOT_MOVE\020\233\003\022\036\n\031PLAYER_ROOM" +
+      "_NOT_FINGHTING\020\234\003\022&\n!PLAYER_CAN_NOT_MOVE" +
+      "_MY_KING_INDEX\020\235\003\022\026\n\021DUPLICATE_REQUEST\020\274" +
+      "\005\022\022\n\rVERSION_ERROR\020\343\007\022\034\n\027DEVICE_TYPE_NOT" +
+      "_CORRECT\020\346\007\022\034\n\026NOT_HAVE_LAST_RESPONSE\020\237\215",
+      "\006\022\027\n\021SERVER_MAINTENACE\020\240\215\006*\247\001\n\014RpcErrorC" +
+      "ode\022\024\n\007UNKNOWN\020\377\377\377\377\377\377\377\377\377\001\022\035\n\020INVALID_PRO" +
+      "TOCOL\020\376\377\377\377\377\377\377\377\377\001\022\030\n\013INVALID_ARG\020\375\377\377\377\377\377\377\377" +
+      "\377\001\022\024\n\007TIMEOUT\020\374\377\377\377\377\377\377\377\377\001\022\030\n\013SERVER_BUSY\020" +
+      "\373\377\377\377\377\377\377\377\377\001\022\030\n\013PUSHTIMEOUT\020\372\377\377\377\377\377\377\377\377\001B\002H\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10264,6 +10901,18 @@ public final class ClientProtocol {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_GetPlayerRankResopnse_descriptor,
               new java.lang.String[] { "Rank", "Ranking", });
+          internal_static_com_zyd_common_proto_client_PlayerDownRequest_descriptor =
+            getDescriptor().getMessageTypes().get(13);
+          internal_static_com_zyd_common_proto_client_PlayerDownRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_zyd_common_proto_client_PlayerDownRequest_descriptor,
+              new java.lang.String[] { });
+          internal_static_com_zyd_common_proto_client_PlayerDownResopnse_descriptor =
+            getDescriptor().getMessageTypes().get(14);
+          internal_static_com_zyd_common_proto_client_PlayerDownResopnse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_zyd_common_proto_client_PlayerDownResopnse_descriptor,
+              new java.lang.String[] { });
           return null;
         }
       };

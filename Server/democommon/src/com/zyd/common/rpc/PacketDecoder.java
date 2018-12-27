@@ -5,6 +5,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
 import io.netty.handler.codec.CorruptedFrameException;
+import io.netty.util.ReferenceCountUtil;
 
 public class PacketDecoder extends ByteToMessageDecoder {
 
@@ -49,9 +50,11 @@ public class PacketDecoder extends ByteToMessageDecoder {
           }
           decoding.buffers.add(in.readBytes(length - 1));
       }
-      else { 
+      else {
           out.add(decoding);
+          ReferenceCountUtil.release(decoding.buffers);
           decoding = new Packet();
+          ReferenceCountUtil.release(out);
       }
   }
 

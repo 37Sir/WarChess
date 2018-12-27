@@ -303,7 +303,7 @@ public class BattleRoomManager extends BaseService {
         Long roomId = userToRoomIdMap.get(userKey);
         UserMatchInfo userMatchInfo = userMatchInfoMap.get(userKey);
         if (roomId != null) {
-          battleRoom = battleRoomMap.get(roomId);
+            battleRoom = battleRoomMap.get(roomId);
         }
         if (battleRoom == null || userMatchInfo == null) {
             //游戏已经结束
@@ -312,8 +312,21 @@ public class BattleRoomManager extends BaseService {
         }
         battleRoom.onMutuallyFeedback(agree,userMatchInfo);
 	}
-	
-	
+	//玩家掉线
+	public void down(User user) throws Exception {
+	    if(userToRoomIdMap.containsKey(user.getUserName())) {
+	        Long roomId = userToRoomIdMap.get(user.getUserName());
+	        BattleRoom battleRoom = battleRoomMap.get(roomId);
+	        UserMatchInfo userMatchInfo = userMatchInfoMap.get(user.getUserName());
+	        battleRoom.down(userMatchInfo);
+	    } else if(userToRoomIdMap0.containsKey(user.getUserName())) {
+            Long roomId = userToRoomIdMap0.get(user.getUserName());
+            ChessRoom chessRoom = chessRoomMap.get(roomId);
+            User u = userMatchInfoMap0.get(user.getUserName());
+            chessRoom.down(u);
+	    } 
+	}
+
 	/** 初始化方法 */
 	public void init() {
 		onUpdate();
