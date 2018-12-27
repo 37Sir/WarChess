@@ -62,6 +62,7 @@ public class ClientConnectionListener {
             @Override
             public void operationComplete(ChannelFuture future) throws Exception {
                 num_clients.decrementAndGet();
+                conn.onRequestRpc0("PlayerDown");
                 conn.onConnectionClosed();
                 
             }

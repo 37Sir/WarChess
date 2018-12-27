@@ -24,6 +24,9 @@
 	<bean id="PlayerRankList" class="com.zyd.demo.user.servlet.PlayerRankList"
 		parent="baseClientServlet">
 	</bean>
+	<bean id="PlayerDown" class="com.zyd.demo.user.servlet.PlayerDown"
+		parent="baseClientServlet">
+	</bean>
 	<bean id="PlayerCancelMatch" class="com.zyd.demo.round.servlet.PlayerCancelMatch"
 		parent="baseClientServlet">
 	</bean>

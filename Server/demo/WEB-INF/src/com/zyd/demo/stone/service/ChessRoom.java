@@ -7,19 +7,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import javax.swing.plaf.synth.SynthStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.google.protobuf.MessageLite;
 import com.zyd.common.proto.client.ClientProtocol.ErrorCode;
 import com.zyd.common.proto.client.WarChess.ActiveInfo;
-import com.zyd.common.proto.client.WarChess.BattleMes;
 import com.zyd.common.proto.client.WarChess.NewServerBattleMesPush;
 import com.zyd.common.proto.client.WarChess.OnePlayerReady;
 import com.zyd.common.proto.client.WarChess.PlayNextPush;
 import com.zyd.common.proto.client.WarChess.PlayerActiveRequest;
-import com.zyd.common.proto.client.WarChess.PlayerBattleMesRequest;
-import com.zyd.common.proto.client.WarChess.PlayerBattleMesResponse;
 import com.zyd.common.proto.client.WarChess.PlayerCanNextPush;
 import com.zyd.common.proto.client.WarChess.PlayerCanPaintingPush;
 import com.zyd.common.proto.client.WarChess.PlayerEndPush;
@@ -30,12 +26,10 @@ import com.zyd.common.proto.client.WarChess.PlayerPaintingOverPush;
 import com.zyd.common.proto.client.WarChess.PlayerReadyFinishedPush;
 import com.zyd.common.proto.client.WarChess.PlayerReadyRequest;
 import com.zyd.common.proto.client.WarChess.PlayerStartPush;
-import com.zyd.common.proto.client.WarChess.ServerBattleMesPush;
 import com.zyd.common.rpc.Packet;
 import com.zyd.demo.common.CommonService;
 import com.zyd.demo.common.enumuration.PushReqestName;
 import com.zyd.demo.common.exception.BaseException;
-import com.zyd.demo.round.pojo.UserMatchInfo;
 import com.zyd.demo.round.service.BattleConfig;
 import com.zyd.demo.round.service.BattleRoomManager;
 import com.zyd.demo.round.service.ChessService;
@@ -99,6 +93,10 @@ public class ChessRoom {
     int kingTwo = 8;
     //玩家连续无操作次数
     Map<Integer, Integer> notActive = new HashMap<>();
+    //是否有玩家行动正在执行
+    private boolean isActive = false;
+    //是否有回合结束正在等待
+    private boolean isEnd = false;
     
     private static final Logger logger = LoggerFactory.getLogger(ChessRoom.class);
     /** 匹配成功 */
@@ -209,7 +207,6 @@ public class ChessRoom {
                     nextTime = System.currentTimeMillis() + BattleConfig.playReadTime;
                     battleStatus = BattleStatus.waitFinish;
                 } else {
-                    System.out.println("------------------fightWaiting------------------");
                     battleStatus = BattleStatus.fightWaiting;
                     waitTime = System.currentTimeMillis() + BattleConfig.playReadTime;                  
                 }
@@ -227,6 +224,10 @@ public class ChessRoom {
     public void endRound(User user) {
         lock.lock();
         try {
+            if (userMatchInfoList.get(actor).getId() != user.getId()) {
+                logger.warn("PLAYER_CALL_NOT_YOUR_ACTIVE userName:{}",user.getUserName());
+                throw new BaseException(ErrorCode.PLAYER_CALL_NOT_YOUR_ACTIVE_VALUE);               
+            }
             currentPlayNum += 1;
             System.out.println("剩余蓝--------------------------------------"+lastMp);
             if (user.getId() == afterUserId) {
@@ -234,6 +235,7 @@ public class ChessRoom {
                     mp += mpAdd;
                 }
             }
+            dealUserMap.clear();
             lastMp = mp;
             userNow.clear();
             userHavaMove.clear();
@@ -454,7 +456,7 @@ public class ChessRoom {
                      dealUserMap.clear();
                      battleStatus = BattleStatus.fighting;
                      disrupAll(PushReqestName.PlayerCanNextPush, PlayerCanNextPush.newBuilder().build());
-//                     disrupOne(PushReqestName.PlayerCanNextPush, userMatchInfoList.get(actor), PlayerCanNextPush.newBuilder().build());
+//                   disrupOne(PushReqestName.PlayerCanNextPush, userMatchInfoList.get(actor), PlayerCanNextPush.newBuilder().build());
                  }
              } else if (battleStatus.equals(BattleStatus.roundWaiting)) {
                  dealUserMap.put(user.getId(), new Object());
@@ -542,6 +544,14 @@ public class ChessRoom {
     //房间状态
     enum BattleStatus {
         start, starting,fighting, fightWaiting, roundWaiting,waitFinish, finished
+    }
+    public void down(User u) throws Exception {
+        if (u.getId().intValue() == startUserId) {
+            winUserId = afterUserId;
+        } else {
+            winUserId = startUserId;
+        }
+        battleFinished(winUserId);
     }
 
 }

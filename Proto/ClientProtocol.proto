@@ -132,3 +132,10 @@ message GetPlayerRankResopnse{
 	optional int32 rank = 1; //排名
 	optional int32 ranking = 2 ; //分数
 }
+//玩家掉线
+message PlayerDownRequest {
+
+}
+message PlayerDownResopnse {
+
+}

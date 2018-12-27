@@ -970,6 +970,15 @@ public class BattleRoom {
   		start, fighting, fightWaiting, waitFinish, finished,mutually
   	}
 
+    public void down(UserMatchInfo userMatchInfo) throws Exception {
+        if (userMatchInfo.getUid().intValue() == startUserId) {
+            winUserId = afterUserId;
+        } else {
+            winUserId = startUserId;
+        }
+        battleFinished(winUserId);
+    }
+
 
     
     
