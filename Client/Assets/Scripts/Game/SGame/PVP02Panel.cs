@@ -391,7 +391,7 @@ public class PVP02Panel
                     temp.transform.parent = m_qizi.transform;
                     temp.SetActive(true);
                     PieceItem02 pieceItem = temp.AddComponent<PieceItem02>();
-                    pieceItem.InitView(temp, new Piece((Config.PieceColor)color, (Config.PieceType)type, x + 1, y + 1), false);
+                    pieceItem.InitView(temp, new Piece((Config.PieceColor)color, (Config.PieceType)type, x + 1, y + 1), roundNum, false);
 
                     App.ObjectPoolManager.RegisteObject(pieceName, "FX/" + pieceName, 0, 30, -1);
                     App.ObjectPoolManager.Instantiate(pieceName, (GameObject obj) =>
@@ -621,7 +621,7 @@ public class PVP02Panel
         temp.transform.parent = m_qizi.transform;
         temp.SetActive(true);
         PieceItem02 pieceItem = temp.AddComponent<PieceItem02>();
-        pieceItem.InitView(temp, new Piece((Config.PieceColor)color, (Config.PieceType)newType, (int)point.x, (int)point.y), false);
+        pieceItem.InitView(temp, new Piece((Config.PieceColor)color, (Config.PieceType)newType, (int)point.x, (int)point.y), roundNum, false);
         pieceItem.canMove = false;
         if (isTurn == true)
         {

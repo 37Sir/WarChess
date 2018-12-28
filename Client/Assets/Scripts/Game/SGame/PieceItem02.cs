@@ -22,6 +22,7 @@ public class PieceItem02 : MonoBehaviour
     private Config.PieceType m_type;//棋子的类型
     public float m_X;
     public float m_Z;
+    public int m_roundNum;//注册mediator唯一标识
     public bool isDead = false;
     public bool isPVE = false;
     public bool isReborn = false;
@@ -35,10 +36,11 @@ public class PieceItem02 : MonoBehaviour
     private Vector2 m_undoFrom;
     private Animator m_pieceAnimator;
 
-    public void InitView(GameObject gameObject, Piece pieceData, bool pve = false)
+    public void InitView(GameObject gameObject, Piece pieceData, int roundNum, bool pve = false)
     {
         isPVE = pve;
         m_gameObject = gameObject;
+        m_roundNum = roundNum;
         //m_gameObject.transform.localRotation = Quaternion.Euler(0, 180, 0);
         m_Attack = gameObject.transform.Find("m_Attack").gameObject;
         m_UserProxy = App.Facade.RetrieveProxy("UserDataProxy") as UserDataProxy;
@@ -47,7 +49,7 @@ public class PieceItem02 : MonoBehaviour
         m_type = pieceData.type;
         pieceColor = pieceData.color;
         InitPieceShow(pieceData);
-        m_name = m_X + "_" + m_Z;
+        m_name = m_X + "_" + m_Z + "_" + m_roundNum;
         m_mediator = new PieceItem02Mediator(this, m_name);
         App.Facade.RegisterMediator(m_mediator);
         m_mediator.InitPieceData(pieceData);
@@ -126,6 +128,7 @@ public class PieceItem02 : MonoBehaviour
     /// </summary>
     public void BeAttached()
     {
+        Debug.Log("！！！！！！！！！！！！！！！！！！！！被吃了");
         App.SoundManager.PlaySoundClip(Config.Sound.BMagicAttack);
         var effectPlayer = App.EffectManager.LoadEffect(m_gameObject, "normal_dead");
         effectPlayer.IsOnce = true;
@@ -514,11 +517,6 @@ public class PieceItem02 : MonoBehaviour
         }
     }
 
-    private void OnProCompleteMove(object args)
-    {
-        m_mediator.NotityPPromote(m_body);
-    }
-
     private Vector2 GetDirectByDeltaXZ(float px, float pz)
     {
         var angle = (Math.Atan2(pz, px) * 180 / Math.PI + 360 + 22.5) % 360;
@@ -654,72 +652,6 @@ public class PieceItem02 : MonoBehaviour
         else
         {
             return stepY;
-        }
-    }
-
-    /// <summary>
-    /// 兵生变
-    /// </summary>
-    /// <param name="type"></param>
-    public void OnPromoted(int type)
-    {
-        App.ChessLogic02.PPromoted(new Vector2Int((int)m_X - 1, (int)m_Z - 1), type);
-        string pieceName = "";
-        if (pieceColor == Config.PieceColor.BLACK)
-        {
-            pieceName = "Black_";
-        }
-        else
-        {
-            pieceName = "White_";
-        }
-        switch ((Config.PieceType)type)
-        {
-            case Config.PieceType.N:
-                pieceName = pieceName + "N";
-                break;
-            case Config.PieceType.B:
-                pieceName = pieceName + "B";
-                break;
-            case Config.PieceType.R:
-                pieceName = pieceName + "R";
-                break;
-            case Config.PieceType.Q:
-                pieceName = pieceName + "Q";
-                break;
-        }
-        Destroy(pieceModel);
-        App.ObjectPoolManager.Instantiate(pieceName, (GameObject obj) =>
-        {
-            obj.SetActive(true);
-            obj.transform.parent = transform;
-            obj.transform.localPosition = Vector3.zero;
-            pieceModel = obj;
-            m_mediator.pieceData.type = (Config.PieceType)type;
-        });
-    }
-
-    public void OnUndo(Vector2 from)
-    {
-        m_undoFrom = from;
-        if (m_TweenPlayer == null)
-        {
-            m_TweenPlayer = gameObject.AddComponent<TweenPlayer>();
-        }
-        Tween move_pos = m_TweenPlayer.AddClip("undo", 2);
-        move_pos.SetTweenType(TweenType.LocalPosition);
-        move_pos.SetTo(new Vector3((from.x - 1) * Config.PieceWidth, 0, (from.y - 1) * Config.PieceWidth));
-        move_pos.SetDuration(1);
-        move_pos.SetOnComplete(OnCompleteUndo, null);
-        m_TweenPlayer.StartPlay();
-    }
-
-    public void OnCompleteUndo(object args)
-    {
-        SetPiecePos(m_undoFrom.x, m_undoFrom.y);
-        if (isPVE == false)
-        {
-            m_mediator.NotifyUndoTweenEnd();
         }
     }
 
