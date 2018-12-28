@@ -3943,8 +3943,8 @@ namespace com.zyd.common.proto.client {
   public sealed partial class PlayerMatchResponse : pb::GeneratedMessageLite<PlayerMatchResponse, PlayerMatchResponse.Builder> {
     private PlayerMatchResponse() { }
     private static readonly PlayerMatchResponse defaultInstance = new PlayerMatchResponse().MakeReadOnly();
-    private static readonly string[] _playerMatchResponseFieldNames = new string[] {  };
-    private static readonly uint[] _playerMatchResponseFieldTags = new uint[] {  };
+    private static readonly string[] _playerMatchResponseFieldNames = new string[] { "type" };
+    private static readonly uint[] _playerMatchResponseFieldTags = new uint[] { 8 };
     #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
@@ -3964,6 +3964,19 @@ namespace com.zyd.common.proto.client {
     }
     
     #if UNITY_EDITOR
+    [pb.FieldNumber]
+    #endif//
+    public const int TypeFieldNumber = 1;
+    private bool hasType;
+    private int type_;
+    public bool HasType {
+      get { return hasType; }
+    }
+    public int Type {
+      get { return type_; }
+    }
+    
+    #if UNITY_EDITOR
      [pb.FieldNumber] 
      #endif//
     public override bool IsInitialized {
@@ -3978,6 +3991,9 @@ namespace com.zyd.common.proto.client {
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
       string[] field_names = _playerMatchResponseFieldNames;
+      if (hasType) {
+        output.WriteInt32(1, field_names[0], Type);
+      }
     }
     
     private int memoizedSerializedSize = -1;
@@ -3990,6 +4006,9 @@ namespace com.zyd.common.proto.client {
         if (size != -1) return size;
         
         size = 0;
+        if (hasType) {
+          size += pb::CodedOutputStream.ComputeInt32Size(1, Type);
+        }
         memoizedSerializedSize = size;
         return size;
       }
@@ -3998,12 +4017,14 @@ namespace com.zyd.common.proto.client {
     #region Lite runtime methods
     public override int GetHashCode() {
       int hash = GetType().GetHashCode();
+      if (hasType) hash ^= type_.GetHashCode();
       return hash;
     }
     
     public override bool Equals(object obj) {
       PlayerMatchResponse other = obj as PlayerMatchResponse;
       if (other == null) return false;
+      if (hasType != other.hasType || (hasType && !type_.Equals(other.type_))) return false;
       return true;
     }
     
@@ -4164,6 +4185,9 @@ namespace com.zyd.common.proto.client {
       public override Builder MergeFrom(PlayerMatchResponse other) {
         if (other == global::com.zyd.common.proto.client.PlayerMatchResponse.DefaultInstance) return this;
         PrepareBuilder();
+        if (other.HasType) {
+          Type = other.Type;
+        }
         return this;
       }
       
@@ -4196,12 +4220,36 @@ namespace com.zyd.common.proto.client {
               ParseUnknownField(input, extensionRegistry, tag, field_name);
               break;
             }
+            case 8: {
+              result.hasType = input.ReadInt32(ref result.type_);
+              break;
+            }
           }
         }
         
         return this;
       }
       
+      
+      public bool HasType {
+        get { return result.hasType; }
+      }
+      public int Type {
+        get { return result.Type; }
+        set { SetType(value); }
+      }
+      public Builder SetType(int value) {
+        PrepareBuilder();
+        result.hasType = true;
+        result.type_ = value;
+        return this;
+      }
+      public Builder ClearType() {
+        PrepareBuilder();
+        result.hasType = false;
+        result.type_ = 0;
+        return this;
+      }
     }
     static PlayerMatchResponse() {
       object.ReferenceEquals(global::com.zyd.common.proto.client.WarChess.Descriptor, null);
@@ -8667,6 +8715,274 @@ namespace com.zyd.common.proto.client {
       }
     }
     static CheckPlayerFairBattleExistResponse() {
+      object.ReferenceEquals(global::com.zyd.common.proto.client.WarChess.Descriptor, null);
+    }
+  }
+  
+  public sealed partial class PlayerPaintingOverPush : pb::GeneratedMessageLite<PlayerPaintingOverPush, PlayerPaintingOverPush.Builder> {
+    private PlayerPaintingOverPush() { }
+    private static readonly PlayerPaintingOverPush defaultInstance = new PlayerPaintingOverPush().MakeReadOnly();
+    private static readonly string[] _playerPaintingOverPushFieldNames = new string[] {  };
+    private static readonly uint[] _playerPaintingOverPushFieldTags = new uint[] {  };
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerPaintingOverPush DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override PlayerPaintingOverPush DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override PlayerPaintingOverPush ThisMessage {
+      get { return this; }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override bool IsInitialized {
+      get {
+        return true;
+      }
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _playerPaintingOverPushFieldNames;
+    }
+    
+    private int memoizedSerializedSize = -1;
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    #region Lite runtime methods
+    public override int GetHashCode() {
+      int hash = GetType().GetHashCode();
+      return hash;
+    }
+    
+    public override bool Equals(object obj) {
+      PlayerPaintingOverPush other = obj as PlayerPaintingOverPush;
+      if (other == null) return false;
+      return true;
+    }
+    
+    #endregion
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerPaintingOverPush ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerPaintingOverPush ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerPaintingOverPush ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerPaintingOverPush ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerPaintingOverPush ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerPaintingOverPush ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerPaintingOverPush ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerPaintingOverPush ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerPaintingOverPush ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static PlayerPaintingOverPush ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private PlayerPaintingOverPush MakeReadOnly() {
+      return this;
+    }
+    
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    #if UNITY_EDITOR
+     [pb.FieldNumber] 
+     #endif//
+    public static Builder CreateBuilder(PlayerPaintingOverPush prototype) {
+      return new Builder(prototype);
+    }
+    
+    public sealed partial class Builder : pb::GeneratedBuilderLite<PlayerPaintingOverPush, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(PlayerPaintingOverPush cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private PlayerPaintingOverPush result;
+      
+      private PlayerPaintingOverPush PrepareBuilder() {
+        if (resultIsReadOnly) {
+          PlayerPaintingOverPush original = result;
+          result = new PlayerPaintingOverPush();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override PlayerPaintingOverPush MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override PlayerPaintingOverPush DefaultInstanceForType {
+        get { return global::com.zyd.common.proto.client.PlayerPaintingOverPush.DefaultInstance; }
+      }
+      
+      public override PlayerPaintingOverPush BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessageLite other) {
+        if (other is PlayerPaintingOverPush) {
+          return MergeFrom((PlayerPaintingOverPush) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(PlayerPaintingOverPush other) {
+        if (other == global::com.zyd.common.proto.client.PlayerPaintingOverPush.DefaultInstance) return this;
+        PrepareBuilder();
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_playerPaintingOverPushFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _playerPaintingOverPushFieldTags[field_ordinal];
+            else {
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                return this;
+              }
+              ParseUnknownField(input, extensionRegistry, tag, field_name);
+              break;
+            }
+          }
+        }
+        
+        return this;
+      }
+      
+    }
+    static PlayerPaintingOverPush() {
       object.ReferenceEquals(global::com.zyd.common.proto.client.WarChess.Descriptor, null);
     }
   }

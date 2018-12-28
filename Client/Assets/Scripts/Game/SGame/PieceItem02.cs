@@ -497,24 +497,6 @@ public class PieceItem02 : MonoBehaviour
         m_TweenPlayer.StartPlay();
     }
 
-    /// <summary>
-    /// 兵生变自己走棋
-    /// </summary>
-    /// <param name="to"></param>
-    private void PromoteShowMove(Vector2 to)
-    {
-        if (m_TweenPlayer == null)
-        {
-            m_TweenPlayer = gameObject.AddComponent<TweenPlayer>();
-        }
-        Tween move_pos = m_TweenPlayer.AddClip("move", 2);
-        move_pos.SetTweenType(TweenType.LocalPosition);
-        move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
-        move_pos.SetDuration(1);
-        move_pos.SetOnComplete(OnProCompleteMove, null);
-        m_TweenPlayer.StartPlay();
-    }
-
     private void OnCompleteMove(object args)
     {
         var temp = (object[])args;
@@ -570,13 +552,13 @@ public class PieceItem02 : MonoBehaviour
     /// <param name="to"></param>
     public void DoMove(Vector2 from, Vector2 to, Vector2 type)
     {
-        var dx = to.x - from.x;
-        var dy = to.y - from.y;
-        var angle = GetAngleByDeltaXY(dx, dy);
-        var localAngle = (angle) % 360;
-
+        Debug.Log("from== " + from + "  to== " + to + "////// m_X== " + m_X + " m_Y== " + m_Z);
         if (from.x == m_X && from.y == m_Z)
         {
+            var dx = to.x - from.x;
+            var dy = to.y - from.y;
+            var angle = GetAngleByDeltaXY(dx, dy);
+            var localAngle = (angle) % 360;
             var targetPiece = App.ChessLogic02.GetPiece(to.x - 1, to.y - 1);//目标位置棋子
             if (App.ChessLogic02.DoMove(new Vector2(from.x - 1, from.y - 1), new Vector2(to.x - 1, to.y - 1)))
             {
@@ -609,6 +591,7 @@ public class PieceItem02 : MonoBehaviour
             }
             else
             {
+                App.UIManager.OpenPanel("MessagePanel", "非法移动！from == " + from + "to == "+to + "type "+type);
                 Debug.Log("非法移动！！ On Other");
             }
         }

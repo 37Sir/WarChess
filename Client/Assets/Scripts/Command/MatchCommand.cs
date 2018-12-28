@@ -34,6 +34,8 @@ public class MatchCommand : SimpleCommand
 
     private void Response(int error, List<byte[]> btData)
     {
-        SendNotification(NotificationConstant.MatchResponse);
+        var response = PlayerMatchResponse.ParseFrom(btData[0]);
+        var type = response.Type;
+        SendNotification(NotificationConstant.MatchResponse, type);
     }
 }

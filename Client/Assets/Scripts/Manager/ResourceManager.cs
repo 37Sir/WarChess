@@ -20,6 +20,11 @@ namespace Framework
             LoadResource<GameObject>(assetPath, func);
         }
 
+        //public void LoadSprite(string assetPath, Action<GameObject> func)
+        //{
+        //    Resources.LoadAsync(assetPath, typeof(UObject));
+        //}
+
         public void LoadResource<T>(string assetPath, Action<T> func) where T : UObject
         {
             if (m_LoadedUObjects.ContainsKey(assetPath))

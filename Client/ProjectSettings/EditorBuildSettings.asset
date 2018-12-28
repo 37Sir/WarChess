@@ -16,5 +16,11 @@ EditorBuildSettings:
     guid: d98b2055092881b45a07969e5a104e0c
   - enabled: 1
     path: Assets/Scenes/SGame.unity
-    guid: 309b37ef6caa44844b4b3bb8dc5f6a8f
+    guid: 0f692dfdf1e1bdb429cb45c99dcdbfb3
+  - enabled: 1
+    path: Assets/Scenes/SGame01.unity
+    guid: 13cd766161da85f4e832bce47b047dbc
+  - enabled: 1
+    path: Assets/Scenes/SGame02.unity
+    guid: f5f3e0bbc4c2ace4b9ce73c6bcc9eb2c
   m_configObjects: {}

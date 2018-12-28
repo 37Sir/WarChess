@@ -26,6 +26,8 @@ public class PVP02Panel
     private Button m_Q;
     private Toggle m_BottomToggle;
 
+    private Animator m_BlackAnimal;
+    private Animator m_WhiteAnimal;
     private GameObject m_piece;//棋子
     private GameObject m_qizi;//棋子的父物体
     private GameObject m_enemyReady;
@@ -47,6 +49,7 @@ public class PVP02Panel
     public bool canNext = true;
     public bool isPause = false;
     private bool m_isTest = false;
+    private bool m_needSendEndTurn = false;
     
     public int roundNum = 0;
     private int m_selectType = -1;
@@ -128,10 +131,15 @@ public class PVP02Panel
         m_enemyReady = gameObject.transform.Find("Container/m_EnemyReady").gameObject;
         m_RoundChange = gameObject.transform.Find("Container/m_RoundChange").gameObject;
         m_sunLight = GameObject.Find("Directional Light");
+        m_BlackAnimal = GameObject.Find("m_Rabbit").GetComponent<Animator>();
+        m_WhiteAnimal = GameObject.Find("m_Cat").GetComponent<Animator>();
     }
 
     public void OpenView(object intent)
     {
+        isPause = false;
+        canNext = true;
+        m_needSendEndTurn = false;
         var rect = m_Bottom.GetComponent<RectTransform>();
         rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, rect.anchoredPosition.y - App.ScreenFixedHeight);
         m_EnergyText.text = "0/0";
@@ -150,12 +158,48 @@ public class PVP02Panel
             {
                 isTurn = true;
                 selfColor = Config.PieceColor.WHITE;
+                App.ResourceManager.LoadResource<UnityEngine.Object>("ArtRes/Icon/CatBt", (UnityEngine.Object obj) =>
+                {
+                    if (obj != null)
+                    {
+                        var texture = obj as Texture2D;
+                        var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                        m_userImage.sprite = sprite;
+                    }
+                });
+                App.ResourceManager.LoadResource<UnityEngine.Object>("ArtRes/Icon/BunnyBt", (UnityEngine.Object obj) =>
+                {
+                    if (obj != null)
+                    {
+                        var texture = obj as Texture2D;
+                        var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                        m_enemyImage.sprite = sprite;
+                    }
+                });
             }
             else
             {
+                m_sunLight.transform.localRotation = Quaternion.Euler(145, -30, 0);
                 isTurn = false;
                 selfColor = Config.PieceColor.BLACK;
-                m_sunLight.transform.localRotation = Quaternion.Euler(145, -30, 0);
+                App.ResourceManager.LoadResource<UnityEngine.Object>("ArtRes/Icon/CatBt", (UnityEngine.Object obj) =>
+                {
+                    if (obj != null)
+                    {
+                        var texture = obj as Texture2D;
+                        var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                        m_enemyImage.sprite = sprite;
+                    }
+                });
+                App.ResourceManager.LoadResource<UnityEngine.Object>("ArtRes/Icon/BunnyBt", (UnityEngine.Object obj) =>
+                {
+                    if (obj != null)
+                    {
+                        var texture = obj as Texture2D;
+                        var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                        m_userImage.sprite = sprite;
+                    }
+                });
             }
         }
         m_pvpProxy.SetSelfColor(selfColor);
@@ -249,6 +293,25 @@ public class PVP02Panel
         m_modelDrag.isTurn = isTurn;
         m_EndTurn.gameObject.SetActive(true);
         StartRoundTimer();
+    }
+
+    /// <summary>
+    /// 停掉回合中的一些表现
+    /// </summary>
+    private void StopRoundShow()
+    {
+        m_selfTimerObj.SetActive(false);
+        m_enemyTimerObj.SetActive(false);
+        m_modelDrag.isTurn = false;
+        m_EndTurn.gameObject.SetActive(false);
+        CardSelectReset();
+        OnEnergyEffectHide();
+        OnSummonTipsHide();
+        var selfRound = m_RoundChange.transform.Find("m_MyselfRound").GetComponent<CanvasGroup>();
+        selfRound.alpha = 0;
+
+        var enemyRound = m_RoundChange.transform.Find("m_EnemyRound").GetComponent<CanvasGroup>();
+        enemyRound.alpha = 0;
     }
 
     private void ShowEnergyChange(int maxEnergy)
@@ -456,6 +519,7 @@ public class PVP02Panel
         }
         else
         {
+            App.SoundManager.PlaySoundClip(Config.Sound.SummonCardClick);
             for(int i = 1; i <= Config.PieceCost[type]; i++)
             {
                 var boxObj = m_tempEnergy[m_mediator.Energy - i].transform.Find("EffectBox").gameObject;
@@ -501,8 +565,6 @@ public class PVP02Panel
 
     public void EndCurRound()
     {
-        m_modelDrag.isTurn = false;
-        m_EndTurn.gameObject.SetActive(false);
         ShowTransAnimation(true);
     }
 
@@ -559,7 +621,7 @@ public class PVP02Panel
         temp.transform.parent = m_qizi.transform;
         temp.SetActive(true);
         PieceItem02 pieceItem = temp.AddComponent<PieceItem02>();
-        pieceItem.InitView(temp, new Piece((Config.PieceColor)color, (Config.PieceType)type, (int)point.x, (int)point.y), false);
+        pieceItem.InitView(temp, new Piece((Config.PieceColor)color, (Config.PieceType)newType, (int)point.x, (int)point.y), false);
         pieceItem.canMove = false;
         if (isTurn == true)
         {
@@ -581,6 +643,7 @@ public class PVP02Panel
             var effectPlayer = App.EffectManager.LoadEffect(obj, "summon_normal");
             effectPlayer.enabled = true;
             effectPlayer.IsOnce = true;
+            App.SoundManager.PlaySoundClip(Config.Sound.SummonSuccess);
             App.UIManager.StartCoroutine(_SendPaintEnd(newType));
             
         });
@@ -596,6 +659,7 @@ public class PVP02Panel
             {
                 var maskObj = m_tempEnergy[m_mediator.Energy + cost - i].transform.Find("Mask").gameObject;
                 maskObj.SetActive(true);
+                m_EnergyText.text = m_mediator.Energy + "/" + m_mediator.MaxEnergy;
             }
         }
         m_mediator.NotifyEndTurn(1);
@@ -636,12 +700,19 @@ public class PVP02Panel
 
     private void OnEndTurnClick()
     {
-        CardSelectReset();
-        OnEnergyEffectHide();
-        OnSummonTipsHide();
+        StopRoundShow();
         if (m_isTest == false)
         {
-            m_mediator.NotifyNewEndTurn();
+            if(canNext == true)
+            {
+                m_needSendEndTurn = false;
+                m_mediator.NotifyNewEndTurn();
+                App.SoundManager.PlaySoundClip(Config.Sound.RoundSwitch);
+            }
+            else
+            {
+                m_needSendEndTurn = true;
+            }            
         }
         else
         {
@@ -794,23 +865,16 @@ public class PVP02Panel
             m_enemyTimerObj.SetActive(true);
             timer = m_enemyTimer;
         }
-        for (int i = 0; i < Config.Game.WaitingRound; i++)
+        for (int i = 0; i < Config.Game.NewWaitingRound; i++)
         {
             while (isPause == true)
             {
                 yield return new WaitForSeconds(1);
             }
-            timer.text = (Config.Game.WaitingRound - i) + "s";
+            timer.text = (Config.Game.NewWaitingRound - i) + "s";
             yield return new WaitForSeconds(1);
         }
-        //if (isTurn)
-        //{
-        //    EndCurRound();
-        //}
-        //else
-        //{
-        //    OnRoundStart();            
-        //}
+        StopRoundShow();
     }
 
     private void StopRoundTimer()
@@ -850,6 +914,7 @@ public class PVP02Panel
             }
             else
             {
+                App.UIManager.OpenPanel("MessagePanel", "非法召唤！canNext == " + canNext);
                 Debug.Log("非法召唤！！");
             }
         }
@@ -900,18 +965,26 @@ public class PVP02Panel
     /// <param name="packet"></param>
     private void OnCanNextPush(string name, List<byte[]> packet)
     {
-        Debug.Log("Push: OtherEndTurnPush!!!");
+        Debug.Log("Push: CanNextPiecePush!!!");
         if (isTurn == true)
         {
             canNext = true;
             m_modelDrag.isTurn = canNext;
+            if (m_needSendEndTurn == true)
+            {
+                m_mediator.NotifyNewEndTurn();
+                App.SoundManager.PlaySoundClip(Config.Sound.RoundSwitch);
+                m_needSendEndTurn = false;
+            }
         }
     }
 
     private void OnOtherEndTurnPush(string name, List<byte[]> packet)
     {
         Debug.Log("Push: OtherEndTurnPush!!!");
-        ShowTransAnimation(false);
+        App.SoundManager.PlaySoundClip(Config.Sound.RoundSwitch);
+        StopRoundShow();
+        ShowTransAnimation(isTurn);
     }
 
     /// <summary>

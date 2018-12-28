@@ -31,13 +31,14 @@ public class LobbyPanelMediator : Mediator
 
     public override void HandleNotification(INotification notification)
     {
+        var body = notification.Body;
         switch (notification.Name)
         {
             case NotificationConstant.LevelUp:
                 Debug.Log("Level Up!!");
                 break;
             case NotificationConstant.MatchResponse:
-                m_viewComponent.OnResponseMatch();
+                m_viewComponent.OnResponseMatch((int)body);
                 break;
             default:
                 break;

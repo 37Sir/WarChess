@@ -20,6 +20,7 @@ public enum TweenType
     LocalRotation = 10,
     LocalScale = 11,
     UIText = 12,
+    BlendablePosition = 13,
 }
 
 

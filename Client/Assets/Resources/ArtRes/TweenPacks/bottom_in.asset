@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Attributes:
   - TweenName: move_in
-    TweenType: 6
+    TweenType: 13
     EaseType: 21
-    To: {x: 0, y: 220, z: 0}
+    To: {x: 0, y: 135, z: 0}
     Color: {r: 1, g: 1, b: 1, a: 1}
     Fade: 1
     ToText: 
@@ -29,9 +29,9 @@ MonoBehaviour:
     LoopType: 0
     isNeedFrom: 0
   - TweenName: move_out
-    TweenType: 6
+    TweenType: 13
     EaseType: 21
-    To: {x: 0, y: 85, z: 0}
+    To: {x: 0, y: -135, z: 0}
     Color: {r: 1, g: 1, b: 1, a: 1}
     Fade: 1
     ToText: 

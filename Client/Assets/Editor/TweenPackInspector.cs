@@ -135,6 +135,9 @@ public class TweenPackInspector : Editor
                         case TweenType.UIText:
                             attribute.TweenName = "UIText Tween";
                             break;
+                        case TweenType.BlendablePosition:
+                            attribute.TweenName = "BlendablePosition Tween";
+                            break;
                     }
                     (targets[j] as TweenPack).Attributes.Add(attribute);
                     EditorUtility.SetDirty(targets[j]);
@@ -236,6 +239,9 @@ public class TweenPackInspector : Editor
                 break;
             case TweenType.UIText:
                 attribute.ToText = EditorGUILayout.TextField("To Text", attribute.ToText);
+                break;
+            case TweenType.BlendablePosition:
+                attribute.To = EditorGUILayout.Vector3Field("Add", attribute.To);
                 break;
         }
         

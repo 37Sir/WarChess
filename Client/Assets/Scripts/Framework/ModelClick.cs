@@ -39,15 +39,24 @@ public class ModelClick : MonoBehaviour
             RaycastHit hitInfo;
             if (Input.GetMouseButtonDown(0))//点击
             {
-                LayerMask mask = 1 << LayerMask.NameToLayer("Board");
-                if (Physics.Raycast(ray, out hitInfo, 100, mask.value))
-                {                   
+                LayerMask mask1 = 1 << LayerMask.NameToLayer("Board");
+                LayerMask mask2 = 1 << LayerMask.NameToLayer("Animal");
+                if (Physics.Raycast(ray, out hitInfo, 100, mask1.value))
+                {
                     //划出射线，只有在scene视图中才能看到
                     Debug.DrawLine(ray.origin, hitInfo.point);
                     var worldPos = hitInfo.point;
                     var localPos = m_qizi.transform.InverseTransformPoint(worldPos);
                     OnModelClick(new Vector3(localPos.x + 1, localPos.y + 1, localPos.z + 1));
-                }            
+                }
+                else if (Physics.Raycast(ray, out hitInfo, 100, mask2.value))
+                {
+                    //划出射线，只有在scene视图中才能看到
+                    Debug.DrawLine(ray.origin, hitInfo.point);
+                    var worldPos = hitInfo.point;
+                    var localPos = m_qizi.transform.InverseTransformPoint(worldPos);
+                    OnAnimalClick(hitInfo);
+                }
             }
         }
     }
@@ -58,5 +67,12 @@ public class ModelClick : MonoBehaviour
         {
             pvp02Panel.OnModelClick(clickPoint);
         }
+    }
+
+    private void OnAnimalClick(RaycastHit hitInfo)
+    {
+        var animalObj = hitInfo.collider.gameObject;
+        var animator = animalObj.GetComponent<Animator>();
+        animator.Play("Victory");
     }
 }

@@ -33,6 +33,7 @@ public class Config{
         public static int WaitingMutuallySelect = 30;               //选择等待秒数
         public static int WaitingReady = 60;                        //准备等待秒数
         public static int WaitingRound = 60;                        //回合等待秒数
+        public static int NewWaitingRound = 120;                    //新模式回合等待秒数
     }
 
     public class GameMode
@@ -54,6 +55,10 @@ public class Config{
         public static string MagicAttack = "magic_attack";
         public static string BMagicAttack = "magic_battack";
         public static string PhysAttack = "phy_attack";
+        public static string SummonCardClick = "summon_card_click";
+        public static string SummonSuccess = "summon_success";
+        public static string RoundSwitch = "round_switch";
+        public static string GameFail = "game_fail";
     }
 
     public enum GameResult

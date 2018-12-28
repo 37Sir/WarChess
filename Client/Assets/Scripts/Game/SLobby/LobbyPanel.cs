@@ -106,14 +106,22 @@ public class LobbyPanel
 
     public void DestroyView()
     {
+        RemovePush();
         App.Facade.RemoveMediator(m_mediator.MediatorName);
+
+    }
+
+    private void RemovePush()
+    {
+        App.NetworkManager.RemovePushCall(Config.PushMessage.MatchSuccess);
     }
 
     /// <summary>
     /// 开始匹配
     /// </summary>
-    public void OnResponseMatch()
+    public void OnResponseMatch(int type)
     {
+        m_GameMode = type;
         m_Select.SetActive(false);
         m_Searching.SetActive(true);
         StartMatchTimer();

@@ -61,7 +61,7 @@ MonoBehaviour:
   - TweenName: move_bottom
     TweenType: 6
     EaseType: 21
-    To: {x: 0, y: 145, z: 0}
+    To: {x: 0, y: 95, z: 0}
     Color: {r: 1, g: 1, b: 1, a: 1}
     Fade: 1
     ToText: 
