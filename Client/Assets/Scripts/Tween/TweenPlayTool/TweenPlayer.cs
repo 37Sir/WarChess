@@ -116,6 +116,33 @@ public class TweenPlayer : MonoBehaviour {
         {
             return m_loadingTweens[clipName];
         }
+        else
+        {
+            for (int i = 0; i < m_TweenPack.Attributes.Count; i++)
+            {
+                if(m_TweenPack.Attributes[i].TweenName == clipName)
+                {
+                    var attribute = m_TweenPack.Attributes[i];
+                    Tween tween = new Tween();
+                    tween.Owner = gameObject;
+                    tween.isNeedFrom = attribute.isNeedFrom;
+                    tween.SetTweenType(attribute.TweenType);
+                    tween.SetEaseType(attribute.EaseType);
+                    tween.SetTo(attribute.To);
+                    tween.SetColor(attribute.Color);
+                    tween.SetFade(attribute.Fade);
+                    tween.SetToText(attribute.ToText);
+                    tween.SetDuration(attribute.Duration);
+                    tween.SetDelayTime(attribute.DelayTime);
+                    tween.SetLoop(attribute.Loop);
+                    tween.SetLoopType(attribute.LoopType);
+                    tween.SetPosFrom(attribute.FromPos);
+                    tween.SetColorFrom(attribute.FromColor);
+                    tween.SetFadeFrom(attribute.FromFade);
+                    return tween; 
+                }
+            }
+        }
         return null;
     }
 
@@ -200,6 +227,20 @@ public class TweenPlayer : MonoBehaviour {
         if (m_tweens.ContainsKey(name))
         {
             m_tweens[name].SetOnComplete(call, null);
+        }
+    }
+
+    /// <summary>
+    /// 设置动画片段播完回调
+    /// </summary>
+    /// <param name="super"></param>
+    /// <param name="call">回调函数</param>
+    /// <param name="name">动画片段的名字</param>
+    public void SetClipOnComplete(string name, Tween.TweenClipCompleteDelegate call, object[] args)
+    {
+        if (m_tweens.ContainsKey(name))
+        {
+            m_tweens[name].SetOnComplete(call, args);
         }
     }
 

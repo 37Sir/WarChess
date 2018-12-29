@@ -32,7 +32,7 @@ public class PVPPanel
     private GameObject m_gameStartLogo;
     private TweenPlayer m_cameraTween;
     private Button m_Undo;
-    private GameObject m_sunLight;
+    private GameObject m_globalLight;
 
     public bool isTurn = true;
     public bool isPause = false;
@@ -95,7 +95,7 @@ public class PVPPanel
         m_test = gameObject.transform.Find("Container/test").GetComponent<Button>();
         m_Undo = gameObject.transform.Find("Container/m_Undo").GetComponent<Button>();
         m_gameStartLogo = gameObject.transform.Find("Container/m_GameBegin").gameObject;
-        m_sunLight = GameObject.Find("Directional Light");
+        m_globalLight = GameObject.Find("GlobalLight");
     }
 
     public void OpenView(object intent)
@@ -111,6 +111,7 @@ public class PVPPanel
         {
             isTurn = false;
             selfColor = Config.PieceColor.BLACK;
+            m_globalLight.transform.localRotation = Quaternion.Euler(145, 30, 0);
         }
         m_pvpProxy.SetSelfColor(selfColor);
         m_userImage.GetComponentInChildren<Text>().text = m_proxy.GetPlayerName();

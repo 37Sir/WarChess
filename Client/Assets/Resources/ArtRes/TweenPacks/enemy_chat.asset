@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 753a4717826de21489448603b701bcc8, type: 3}
+  m_Name: enemy_chat
+  m_EditorClassIdentifier: 
+  Attributes:
+  - TweenName: chat_show
+    TweenType: 8
+    EaseType: 1
+    To: {x: 0, y: 0, z: 0}
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Fade: 1
+    ToText: 
+    FromPos: {x: 0, y: 0, z: 0}
+    FromColor: {r: 1, g: 1, b: 1, a: 1}
+    FromFade: 1
+    Duration: 0.5
+    DelayTime: 0
+    Loop: 0
+    LoopType: 0
+    isNeedFrom: 0
+  - TweenName: chat_hide
+    TweenType: 8
+    EaseType: 1
+    To: {x: 0, y: 0, z: 0}
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Fade: 0
+    ToText: 
+    FromPos: {x: 0, y: 0, z: 0}
+    FromColor: {r: 1, g: 1, b: 1, a: 1}
+    FromFade: 1
+    Duration: 0.5
+    DelayTime: 1.5
+    Loop: 0
+    LoopType: 0
+    isNeedFrom: 0

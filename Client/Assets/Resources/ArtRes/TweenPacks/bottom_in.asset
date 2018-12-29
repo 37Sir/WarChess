@@ -43,3 +43,33 @@ MonoBehaviour:
     Loop: 0
     LoopType: 0
     isNeedFrom: 0
+  - TweenName: move_show
+    TweenType: 13
+    EaseType: 12
+    To: {x: 0, y: 80, z: 0}
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Fade: 1
+    ToText: 
+    FromPos: {x: 0, y: 0, z: 0}
+    FromColor: {r: 1, g: 1, b: 1, a: 1}
+    FromFade: 1
+    Duration: 0.5
+    DelayTime: 0
+    Loop: 0
+    LoopType: 0
+    isNeedFrom: 0
+  - TweenName: move_hide
+    TweenType: 6
+    EaseType: 21
+    To: {x: 0, y: 0, z: 0}
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Fade: 1
+    ToText: 
+    FromPos: {x: 0, y: 0, z: 0}
+    FromColor: {r: 1, g: 1, b: 1, a: 1}
+    FromFade: 1
+    Duration: 0.5
+    DelayTime: 0
+    Loop: 0
+    LoopType: 0
+    isNeedFrom: 0

@@ -24,6 +24,11 @@ public class PVP02Panel
     private Button m_B;
     private Button m_R;
     private Button m_Q;
+    private Button m_Item1;
+    private Button m_Item2;
+    private Button m_Item3;
+    private Button m_Item4;
+    private Button m_SelectCloce;
     private Toggle m_BottomToggle;
 
     private Animator m_BlackAnimal;
@@ -44,6 +49,9 @@ public class PVP02Panel
     private GameObject m_sunLight;
     private Text m_EnergyText;
     private GameObject m_EnergyContainer;
+    private GameObject m_EnemyEnergy;
+    private Button m_SelfSay;
+    private GameObject m_EnemySay;
 
     public bool isTurn = true;
     public bool canNext = true;
@@ -80,6 +88,12 @@ public class PVP02Panel
         m_R.onClick.AddListener(OnRClick);
         m_B.onClick.AddListener(OnBClick);
         m_Q.onClick.AddListener(OnQClick);
+        m_SelectCloce.onClick.AddListener(OnSelectCloseClick);
+        m_Item1.onClick.AddListener(OnItem1Click);
+        m_Item2.onClick.AddListener(OnItem2Click);
+        m_Item3.onClick.AddListener(OnItem3Click);
+        m_Item4.onClick.AddListener(OnItem4Click);
+        m_SelfSay.onClick.AddListener(OnSayClick);
         m_EndTurn.onClick.AddListener(OnEndTurnClick);
         m_BottomToggle.onValueChanged.AddListener(OnBottomToggleClick);
 
@@ -89,6 +103,7 @@ public class PVP02Panel
         App.Facade.RegisterCommand(NotificationConstant.EndTurn, () => new EndTurnCommand());
         App.Facade.RegisterCommand(NotificationConstant.PlayerMutually, () => new PlayerMutuallyCommand());
         App.Facade.RegisterCommand(NotificationConstant.PlayerMutuallyFeedback, () => new PlayerMutuallyFeedbackCommand());
+        App.Facade.RegisterCommand(NotificationConstant.PlayerChat, () => new PlayerChatCommand());
 
         App.NetworkManager.RegisterPushCall(Config.PushMessage.NewServerBattleMesPush, ShowOtherActive);
         App.NetworkManager.RegisterPushCall(Config.PushMessage.OnePlayerReady, OnOnePlayerReady);
@@ -99,7 +114,9 @@ public class PVP02Panel
         
         App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerCanNextPush, OnCanNextPush);
         App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerCanPaintingPush, OnOtherEndTurnPush);
-        App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerPaintingOverPush, OnRoundStartPush);       
+        App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerPaintingOverPush, OnRoundStartPush);
+
+        App.NetworkManager.RegisterPushCall(Config.PushMessage.PlayerChatPush, OnPlayerChatPush);
     }
 
     private void InitUIBinder(GameObject gameObject)
@@ -133,6 +150,14 @@ public class PVP02Panel
         m_sunLight = GameObject.Find("Directional Light");
         m_BlackAnimal = GameObject.Find("m_Rabbit").GetComponent<Animator>();
         m_WhiteAnimal = GameObject.Find("m_Cat").GetComponent<Animator>();
+        m_EnemyEnergy = gameObject.transform.Find("Container/m_EnergyWidget").gameObject;
+        m_SelfSay = gameObject.transform.Find("Container/m_SelfSay").GetComponent<Button>();
+        m_EnemySay = gameObject.transform.Find("Container/m_EnemySay").gameObject;
+        m_SelectCloce = m_SelfSay.transform.Find("Select/m_SelectClose").GetComponent<Button>();
+        m_Item1 = m_SelfSay.transform.Find("Select/Item1").GetComponent<Button>();
+        m_Item2 = m_SelfSay.transform.Find("Select/Item2").GetComponent<Button>();
+        m_Item3 = m_SelfSay.transform.Find("Select/Item3").GetComponent<Button>();
+        m_Item4 = m_SelfSay.transform.Find("Select/Item4").GetComponent<Button>();
     }
 
     public void OpenView(object intent)
@@ -203,8 +228,8 @@ public class PVP02Panel
             }
         }
         m_pvpProxy.SetSelfColor(selfColor);
-        m_userImage.GetComponentInChildren<Text>().text = m_proxy.GetPlayerName();
-        m_enemyImage.GetComponentInChildren<Text>().text = m_pvpProxy.GetEnemyName();
+        //m_userImage.GetComponentInChildren<Text>().text = m_proxy.GetPlayerName();
+        //m_enemyImage.GetComponentInChildren<Text>().text = m_pvpProxy.GetEnemyName();
         InitTimer();
         App.SoundManager.PlaySoundClip(Config.Sound.InGameStart);
         var fixedK = App.EffectManager.ScreenFixedK;
@@ -279,6 +304,7 @@ public class PVP02Panel
     /// </summary>
     private void OnRoundStart()
     {
+        m_Bottom.GetComponent<TweenPlayer>().PlayOne("move_show");
         StopRoundTimer();
         m_mediator.NotifyRoundBegin(selfColor);       
         if(m_mediator.MaxEnergy < 10)
@@ -300,6 +326,11 @@ public class PVP02Panel
     /// </summary>
     private void StopRoundShow()
     {
+        m_BottomToggle.isOn = false;
+        var tweenPlayer = m_Bottom.GetComponent<TweenPlayer>();       
+        var tween = tweenPlayer.GetClipTween("move_hide");
+        tween.SetTo(new Vector3(0, -App.ScreenFixedHeight + 3, 0));
+        tween.Play();
         m_selfTimerObj.SetActive(false);
         m_enemyTimerObj.SetActive(false);
         m_modelDrag.isTurn = false;
@@ -338,8 +369,17 @@ public class PVP02Panel
         m_EndTurn.gameObject.SetActive(false);
         StopRoundTimer();
         StartRoundTimer();
+        m_mediator.E_MaxEnergy = m_mediator.MaxEnergy;
+        if(selfColor == Config.PieceColor.BLACK)
+        {
+            m_mediator.E_MaxEnergy++;
+        }
+        m_mediator.E_Energy = m_mediator.E_MaxEnergy;
         roundNum++;
         Debug.Log("=======RoundEnd======== num: " + roundNum);
+        m_EnemyEnergy.SetActive(true);
+        var text = m_EnemyEnergy.transform.Find("m_EnergyText").GetComponent<Text>();
+        text.text = m_mediator.E_Energy + "/" + m_mediator.E_MaxEnergy;
     }
     #endregion
 
@@ -438,6 +478,10 @@ public class PVP02Panel
         var tweenPlayer = (TweenPlayer)args[0];
         tweenPlayer.enabled = false;
         m_mediator.NotifyEndTurn(1);
+        if(m_isTest == true)
+        {
+            OnRoundStart();        
+        }
     }
 
     /// <summary>
@@ -574,6 +618,34 @@ public class PVP02Panel
         {
             canNext = isCan;
             m_modelDrag.isTurn = isCan;
+        }
+    }
+
+    private void OnTweenCompleteCommon(object[] args)
+    {
+        var tweemPlayer = (TweenPlayer)args[0];
+        tweemPlayer.enabled = false;
+    }
+
+    private void OnChatShow(int index)
+    {
+        var tweenPlayer = m_EnemySay.GetComponent<TweenPlayer>();
+        tweenPlayer.enabled = true;
+        tweenPlayer.SetClipOnComplete("chat_hide", OnTweenCompleteCommon, new object[] { tweenPlayer });     
+        switch (index)
+        {
+            case 1:
+                m_EnemySay.transform.Find("Text").GetComponent<Text>().text = "祝你好运！";
+                break;
+            case 2:
+                m_EnemySay.transform.Find("Text").GetComponent<Text>().text = "打的不错！";
+                break;
+            case 3:
+                m_EnemySay.transform.Find("Text").GetComponent<Text>().text = "抱歉";
+                break;
+            case 4:
+                m_EnemySay.transform.Find("Text").GetComponent<Text>().text = "......";
+                break;
         }
     }
 
@@ -716,8 +788,7 @@ public class PVP02Panel
         }
         else
         {
-            EndCurRound();
-            OnRoundStart();
+            ShowTransAnimation(true);
         }
     }
 
@@ -838,6 +909,44 @@ public class PVP02Panel
         }
     }
 
+    private void OnSayClick()
+    {
+        m_SelfSay.transform.Find("Select").gameObject.SetActive(true);
+    }
+
+    private void OnSelectCloseClick()
+    {
+        m_SelfSay.transform.Find("Select").gameObject.SetActive(false);
+    }
+
+    private void OnItem1Click()
+    {
+        Debug.Log("1");
+        m_SelfSay.transform.Find("Select").gameObject.SetActive(false);
+        m_mediator.NotifyPlayerChat(1);
+    }
+
+    private void OnItem2Click()
+    {
+        Debug.Log("2");
+        m_SelfSay.transform.Find("Select").gameObject.SetActive(false);
+        m_mediator.NotifyPlayerChat(2);
+    }
+
+    private void OnItem3Click()
+    {
+        Debug.Log("3");
+        m_SelfSay.transform.Find("Select").gameObject.SetActive(false);
+        m_mediator.NotifyPlayerChat(3);
+    }
+
+    private void OnItem4Click()
+    {
+        Debug.Log("4");
+        m_SelfSay.transform.Find("Select").gameObject.SetActive(false);
+        m_mediator.NotifyPlayerChat(4);
+    }
+
     #endregion
 
     #region Coroutine Method
@@ -907,9 +1016,12 @@ public class PVP02Panel
             var otherColor = 1 - (int)selfColor;
             var type = callInfo.Type  + otherColor * 10;
             var userId = callInfo.UserId;
-            
+
             if (canNext == true && App.ChessLogic02.DoSummon(new Vector2(point.x - 1, point.y - 1), type))
             {
+                m_mediator.E_Energy -= Config.PieceCost[callInfo.Type];
+                var text = m_EnemyEnergy.transform.Find("m_EnergyText").GetComponent<Text>();
+                text.text = m_mediator.E_Energy + "/" + m_mediator.E_MaxEnergy;
                 OnSummon(type, point);
             }
             else
@@ -981,6 +1093,7 @@ public class PVP02Panel
 
     private void OnOtherEndTurnPush(string name, List<byte[]> packet)
     {
+        m_EnemyEnergy.SetActive(false);
         Debug.Log("Push: OtherEndTurnPush!!!");
         App.SoundManager.PlaySoundClip(Config.Sound.RoundSwitch);
         StopRoundShow();
@@ -1005,6 +1118,24 @@ public class PVP02Panel
         }
     }
 
+    /// <summary>
+    /// 快捷发言
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="packet"></param>
+    private void OnPlayerChatPush(string name, List<byte[]> packet)
+    {
+        var pushMes = PlayerChatPush.ParseFrom(packet[0]);
+        var index = pushMes.Number;
+        OnChatShow(index);
+        Debug.Log("push index" + index);
+    }
+
+    /// <summary>
+    /// 双方回合切换动画都播完
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="packet"></param>
     public void OnNextPlay(string name, List<byte[]> packet)
     {
         Debug.Log("Push:OnNextPlayPush");
@@ -1099,6 +1230,8 @@ public class PVP02Panel
         App.NetworkManager.RemovePushCall(Config.PushMessage.NewServerBattleMesPush);
         App.NetworkManager.RemovePushCall(Config.PushMessage.PlayerPaintingOverPush);
         App.NetworkManager.RemovePushCall(Config.PushMessage.PlayerCanPaintingPush);
+
+        App.NetworkManager.RemovePushCall(Config.PushMessage.PlayerChatPush);
     }
 
     ///index转坐标 且棋盘翻转

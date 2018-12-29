@@ -17,6 +17,9 @@ public class PVP02PanelMediator : Mediator
     public int Energy = 0;//能量
     public int MaxEnergy = 0;//能量上限
 
+    public int E_Energy = 0;//敌人能量
+    public int E_MaxEnergy = 0;//敌人能量上限
+
     //temp
     private float m_promoteFromX;
     private float m_promoteFromY;
@@ -133,6 +136,11 @@ public class PVP02PanelMediator : Mediator
     public void NotifyPlayerActive(object body)
     {
         SendNotification(NotificationConstant.PlayerActive, body);
+    }
+
+    public void NotifyPlayerChat(object body)
+    {
+        SendNotification(NotificationConstant.PlayerChat, body);
     }
 }
 

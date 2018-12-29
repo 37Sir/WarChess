@@ -129,6 +129,9 @@ public class Config{
         public const string PlayerCanNextPush = "PlayerCanNextPush";
         public const string PlayerCanPaintingPush = "PlayerCanPaintingPush";
         public const string PlayerPaintingOverPush = "PlayerPaintingOverPush";
+
+        //聊天相关
+        public const string PlayerChatPush = "PlayerChatPush";
     }
 }
 

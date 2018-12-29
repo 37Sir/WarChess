@@ -21,6 +21,7 @@ public class NotificationConstant
     public const string ShowRankList = "ShowRankList";
     public const string NewEndTurn = "NewEndTurn";
     public const string PlayerActive = "PlayerActive";
+    public const string PlayerChat = "PlayerChat";
 
     /// notify respons
     public const string LoginResponse = "LoginResponse";
@@ -33,6 +34,7 @@ public class NotificationConstant
     public const string PlayerMutuallyResponse = "PlayerMutuallyResponse";
     public const string NewEndTurnResponse = "NewEndTurnResponse";
     public const string PlayerActiveResponse = "PlayerActiveResponse";
+    public const string PlayerChatResponse = "PlayerChatResponse";
 
     /// notify
     public const string OnDragEnd = "OnDragEnd";
