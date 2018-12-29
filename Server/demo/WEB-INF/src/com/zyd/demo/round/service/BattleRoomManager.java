@@ -221,6 +221,7 @@ public class BattleRoomManager extends BaseService {
 	 * @throws BaseException */
 	public PlayerPaintingEndResponse onRequest(String token,int type) throws BaseException {
 	    String userKey = token;
+	     //0为普通模式 1为新模式
 	    if (type == 0) {
     		BattleRoom battleRoom = null;
     		Long roomId = userToRoomIdMap.get(userKey);

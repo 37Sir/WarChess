@@ -107,7 +107,6 @@ public class ClientRpcDispatcher {
                 final InfoConnectionHandler conn = InfoConnectionListener.getInstance().getMostIdleConnection(job.getQueueId());
                 
                 if (conn == null) {
-                    System.out.println("conn == null===========================================++++++++++");
                     rpcQueue.numNotHaveIdleConn ++ ;
                     if(tag==0){
                         logger.warn("Not Have Idle InfoConn in ClientRpcDispatcher,{} times in last second.queueId:{},requestName:{}",
