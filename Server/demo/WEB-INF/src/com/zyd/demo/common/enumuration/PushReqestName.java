@@ -1,6 +1,8 @@
 package com.zyd.demo.common.enumuration;
 
 public enum PushReqestName {
+    //游戏内顽疾快捷聊天的推送
+    PlayerChatPush("PlayerChatPush"),
     //新模式玩家开局动画播放完毕
     PlayerPaintingOverPush("PlayerPaintingOverPush"),
     //新模式玩家可以执行转场动画的push

@@ -8,6 +8,761 @@ public final class WarChess {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
+  public interface PlayerChatRequestOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional int32 number = 1;
+    /**
+     * <code>optional int32 number = 1;</code>
+     *
+     * <pre>
+     *玩家快捷聊天对应的语句编号
+     * </pre>
+     */
+    boolean hasNumber();
+    /**
+     * <code>optional int32 number = 1;</code>
+     *
+     * <pre>
+     *玩家快捷聊天对应的语句编号
+     * </pre>
+     */
+    int getNumber();
+  }
+  /**
+   * Protobuf type {@code com.zyd.common.proto.client.PlayerChatRequest}
+   *
+   * <pre>
+   *&#47;//////////////////////////////////// request ////////////////////////////////////
+   *玩家快捷聊天请求
+   * </pre>
+   */
+  public static final class PlayerChatRequest extends
+      com.google.protobuf.GeneratedMessage
+      implements PlayerChatRequestOrBuilder {
+    // Use PlayerChatRequest.newBuilder() to construct.
+    private PlayerChatRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PlayerChatRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PlayerChatRequest defaultInstance;
+    public static PlayerChatRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PlayerChatRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PlayerChatRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              number_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerChatRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerChatRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.zyd.common.proto.client.WarChess.PlayerChatRequest.class, com.zyd.common.proto.client.WarChess.PlayerChatRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PlayerChatRequest> PARSER =
+        new com.google.protobuf.AbstractParser<PlayerChatRequest>() {
+      public PlayerChatRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PlayerChatRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PlayerChatRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional int32 number = 1;
+    public static final int NUMBER_FIELD_NUMBER = 1;
+    private int number_;
+    /**
+     * <code>optional int32 number = 1;</code>
+     *
+     * <pre>
+     *玩家快捷聊天对应的语句编号
+     * </pre>
+     */
+    public boolean hasNumber() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 number = 1;</code>
+     *
+     * <pre>
+     *玩家快捷聊天对应的语句编号
+     * </pre>
+     */
+    public int getNumber() {
+      return number_;
+    }
+
+    private void initFields() {
+      number_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, number_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, number_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.zyd.common.proto.client.WarChess.PlayerChatRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.zyd.common.proto.client.WarChess.PlayerChatRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.zyd.common.proto.client.PlayerChatRequest}
+     *
+     * <pre>
+     *&#47;//////////////////////////////////// request ////////////////////////////////////
+     *玩家快捷聊天请求
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.zyd.common.proto.client.WarChess.PlayerChatRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerChatRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerChatRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.zyd.common.proto.client.WarChess.PlayerChatRequest.class, com.zyd.common.proto.client.WarChess.PlayerChatRequest.Builder.class);
+      }
+
+      // Construct using com.zyd.common.proto.client.WarChess.PlayerChatRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        number_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerChatRequest_descriptor;
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayerChatRequest getDefaultInstanceForType() {
+        return com.zyd.common.proto.client.WarChess.PlayerChatRequest.getDefaultInstance();
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayerChatRequest build() {
+        com.zyd.common.proto.client.WarChess.PlayerChatRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayerChatRequest buildPartial() {
+        com.zyd.common.proto.client.WarChess.PlayerChatRequest result = new com.zyd.common.proto.client.WarChess.PlayerChatRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.number_ = number_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.zyd.common.proto.client.WarChess.PlayerChatRequest) {
+          return mergeFrom((com.zyd.common.proto.client.WarChess.PlayerChatRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.zyd.common.proto.client.WarChess.PlayerChatRequest other) {
+        if (other == com.zyd.common.proto.client.WarChess.PlayerChatRequest.getDefaultInstance()) return this;
+        if (other.hasNumber()) {
+          setNumber(other.getNumber());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.zyd.common.proto.client.WarChess.PlayerChatRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.zyd.common.proto.client.WarChess.PlayerChatRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional int32 number = 1;
+      private int number_ ;
+      /**
+       * <code>optional int32 number = 1;</code>
+       *
+       * <pre>
+       *玩家快捷聊天对应的语句编号
+       * </pre>
+       */
+      public boolean hasNumber() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 number = 1;</code>
+       *
+       * <pre>
+       *玩家快捷聊天对应的语句编号
+       * </pre>
+       */
+      public int getNumber() {
+        return number_;
+      }
+      /**
+       * <code>optional int32 number = 1;</code>
+       *
+       * <pre>
+       *玩家快捷聊天对应的语句编号
+       * </pre>
+       */
+      public Builder setNumber(int value) {
+        bitField0_ |= 0x00000001;
+        number_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 number = 1;</code>
+       *
+       * <pre>
+       *玩家快捷聊天对应的语句编号
+       * </pre>
+       */
+      public Builder clearNumber() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        number_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.PlayerChatRequest)
+    }
+
+    static {
+      defaultInstance = new PlayerChatRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.PlayerChatRequest)
+  }
+
+  public interface PlayerChatResponseOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code com.zyd.common.proto.client.PlayerChatResponse}
+   *
+   * <pre>
+   *玩家快捷聊天返回
+   * </pre>
+   */
+  public static final class PlayerChatResponse extends
+      com.google.protobuf.GeneratedMessage
+      implements PlayerChatResponseOrBuilder {
+    // Use PlayerChatResponse.newBuilder() to construct.
+    private PlayerChatResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PlayerChatResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PlayerChatResponse defaultInstance;
+    public static PlayerChatResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PlayerChatResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PlayerChatResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerChatResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerChatResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.zyd.common.proto.client.WarChess.PlayerChatResponse.class, com.zyd.common.proto.client.WarChess.PlayerChatResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PlayerChatResponse> PARSER =
+        new com.google.protobuf.AbstractParser<PlayerChatResponse>() {
+      public PlayerChatResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PlayerChatResponse(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PlayerChatResponse> getParserForType() {
+      return PARSER;
+    }
+
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.zyd.common.proto.client.WarChess.PlayerChatResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.zyd.common.proto.client.WarChess.PlayerChatResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.zyd.common.proto.client.PlayerChatResponse}
+     *
+     * <pre>
+     *玩家快捷聊天返回
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.zyd.common.proto.client.WarChess.PlayerChatResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerChatResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerChatResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.zyd.common.proto.client.WarChess.PlayerChatResponse.class, com.zyd.common.proto.client.WarChess.PlayerChatResponse.Builder.class);
+      }
+
+      // Construct using com.zyd.common.proto.client.WarChess.PlayerChatResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerChatResponse_descriptor;
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayerChatResponse getDefaultInstanceForType() {
+        return com.zyd.common.proto.client.WarChess.PlayerChatResponse.getDefaultInstance();
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayerChatResponse build() {
+        com.zyd.common.proto.client.WarChess.PlayerChatResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayerChatResponse buildPartial() {
+        com.zyd.common.proto.client.WarChess.PlayerChatResponse result = new com.zyd.common.proto.client.WarChess.PlayerChatResponse(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.zyd.common.proto.client.WarChess.PlayerChatResponse) {
+          return mergeFrom((com.zyd.common.proto.client.WarChess.PlayerChatResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.zyd.common.proto.client.WarChess.PlayerChatResponse other) {
+        if (other == com.zyd.common.proto.client.WarChess.PlayerChatResponse.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.zyd.common.proto.client.WarChess.PlayerChatResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.zyd.common.proto.client.WarChess.PlayerChatResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.PlayerChatResponse)
+    }
+
+    static {
+      defaultInstance = new PlayerChatResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.PlayerChatResponse)
+  }
+
   public interface PlayerActiveRequestOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
@@ -41,7 +796,6 @@ public final class WarChess {
    * Protobuf type {@code com.zyd.common.proto.client.PlayerActiveRequest}
    *
    * <pre>
-   *&#47;//////////////////////////////////// request ////////////////////////////////////
    *新模式玩家行动的请求
    * </pre>
    */
@@ -293,7 +1047,6 @@ public final class WarChess {
      * Protobuf type {@code com.zyd.common.proto.client.PlayerActiveRequest}
      *
      * <pre>
-     *&#47;//////////////////////////////////// request ////////////////////////////////////
      *新模式玩家行动的请求
      * </pre>
      */
@@ -12785,6 +13538,410 @@ public final class WarChess {
     // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.CheckPlayerFairBattleExistResponse)
   }
 
+  public interface PlayerChatPushOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // optional int32 number = 1;
+    /**
+     * <code>optional int32 number = 1;</code>
+     */
+    boolean hasNumber();
+    /**
+     * <code>optional int32 number = 1;</code>
+     */
+    int getNumber();
+  }
+  /**
+   * Protobuf type {@code com.zyd.common.proto.client.PlayerChatPush}
+   *
+   * <pre>
+   **玩家快捷聊天推送
+   * </pre>
+   */
+  public static final class PlayerChatPush extends
+      com.google.protobuf.GeneratedMessage
+      implements PlayerChatPushOrBuilder {
+    // Use PlayerChatPush.newBuilder() to construct.
+    private PlayerChatPush(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PlayerChatPush(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PlayerChatPush defaultInstance;
+    public static PlayerChatPush getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PlayerChatPush getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PlayerChatPush(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              number_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerChatPush_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerChatPush_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.zyd.common.proto.client.WarChess.PlayerChatPush.class, com.zyd.common.proto.client.WarChess.PlayerChatPush.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PlayerChatPush> PARSER =
+        new com.google.protobuf.AbstractParser<PlayerChatPush>() {
+      public PlayerChatPush parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PlayerChatPush(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PlayerChatPush> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // optional int32 number = 1;
+    public static final int NUMBER_FIELD_NUMBER = 1;
+    private int number_;
+    /**
+     * <code>optional int32 number = 1;</code>
+     */
+    public boolean hasNumber() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional int32 number = 1;</code>
+     */
+    public int getNumber() {
+      return number_;
+    }
+
+    private void initFields() {
+      number_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, number_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, number_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.zyd.common.proto.client.WarChess.PlayerChatPush parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatPush parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatPush parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatPush parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatPush parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatPush parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatPush parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatPush parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatPush parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.zyd.common.proto.client.WarChess.PlayerChatPush parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.zyd.common.proto.client.WarChess.PlayerChatPush prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.zyd.common.proto.client.PlayerChatPush}
+     *
+     * <pre>
+     **玩家快捷聊天推送
+     * </pre>
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.zyd.common.proto.client.WarChess.PlayerChatPushOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerChatPush_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerChatPush_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.zyd.common.proto.client.WarChess.PlayerChatPush.class, com.zyd.common.proto.client.WarChess.PlayerChatPush.Builder.class);
+      }
+
+      // Construct using com.zyd.common.proto.client.WarChess.PlayerChatPush.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        number_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.zyd.common.proto.client.WarChess.internal_static_com_zyd_common_proto_client_PlayerChatPush_descriptor;
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayerChatPush getDefaultInstanceForType() {
+        return com.zyd.common.proto.client.WarChess.PlayerChatPush.getDefaultInstance();
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayerChatPush build() {
+        com.zyd.common.proto.client.WarChess.PlayerChatPush result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.zyd.common.proto.client.WarChess.PlayerChatPush buildPartial() {
+        com.zyd.common.proto.client.WarChess.PlayerChatPush result = new com.zyd.common.proto.client.WarChess.PlayerChatPush(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.number_ = number_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.zyd.common.proto.client.WarChess.PlayerChatPush) {
+          return mergeFrom((com.zyd.common.proto.client.WarChess.PlayerChatPush)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.zyd.common.proto.client.WarChess.PlayerChatPush other) {
+        if (other == com.zyd.common.proto.client.WarChess.PlayerChatPush.getDefaultInstance()) return this;
+        if (other.hasNumber()) {
+          setNumber(other.getNumber());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.zyd.common.proto.client.WarChess.PlayerChatPush parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.zyd.common.proto.client.WarChess.PlayerChatPush) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // optional int32 number = 1;
+      private int number_ ;
+      /**
+       * <code>optional int32 number = 1;</code>
+       */
+      public boolean hasNumber() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional int32 number = 1;</code>
+       */
+      public int getNumber() {
+        return number_;
+      }
+      /**
+       * <code>optional int32 number = 1;</code>
+       */
+      public Builder setNumber(int value) {
+        bitField0_ |= 0x00000001;
+        number_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 number = 1;</code>
+       */
+      public Builder clearNumber() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        number_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.zyd.common.proto.client.PlayerChatPush)
+    }
+
+    static {
+      defaultInstance = new PlayerChatPush(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.zyd.common.proto.client.PlayerChatPush)
+  }
+
   public interface PlayerPaintingOverPushOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
   }
@@ -23609,6 +24766,16 @@ public final class WarChess {
   }
 
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_zyd_common_proto_client_PlayerChatRequest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_zyd_common_proto_client_PlayerChatRequest_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_zyd_common_proto_client_PlayerChatResponse_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_zyd_common_proto_client_PlayerChatResponse_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_zyd_common_proto_client_PlayerActiveRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -23744,6 +24911,11 @@ public final class WarChess {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_zyd_common_proto_client_CheckPlayerFairBattleExistResponse_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_zyd_common_proto_client_PlayerChatPush_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_zyd_common_proto_client_PlayerChatPush_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_zyd_common_proto_client_PlayerPaintingOverPush_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -23848,348 +25020,368 @@ public final class WarChess {
   static {
     java.lang.String[] descriptorData = {
       "\n\016WarChess.proto\022\033com.zyd.common.proto.c" +
-      "lient\"R\n\023PlayerActiveRequest\022;\n\nactiveIn" +
-      "fo\030\001 \001(\0132\'.com.zyd.common.proto.client.A" +
-      "ctiveInfo\"\026\n\024PlayerActiveResponse\"\216\001\n\nAc" +
-      "tiveInfo\022\016\n\006isCall\030\001 \001(\010\0227\n\010moveInfo\030\002 \001" +
-      "(\0132%.com.zyd.common.proto.client.MoveInf" +
-      "o\0227\n\010callInfo\030\003 \001(\0132%.com.zyd.common.pro" +
-      "to.client.CallInfo\"4\n\010MoveInfo\022\014\n\004from\030\001" +
-      " \001(\005\022\n\n\002to\030\002 \001(\005\022\016\n\006userId\030\003 \001(\005\"7\n\010Call" +
-      "Info\022\r\n\005index\030\001 \001(\005\022\014\n\004type\030\002 \001(\005\022\016\n\006use",
-      "rId\030\003 \001(\005\"\034\n\032PlayerInitiativeEndRequest\"" +
-      "\035\n\033PlayerInitiativeEndResponse\"%\n\025Player" +
-      "MutuallyRequest\022\014\n\004type\030\001 \001(\005\"\030\n\026PlayerM" +
-      "utuallyResponse\"0\n\035PlayerMutuallyFeedbac" +
-      "kRequest\022\017\n\007isAgree\030\001 \001(\010\" \n\036PlayerMutua" +
-      "llyFeedbackResponse\"\"\n\022PlayerMatchReques" +
-      "t\022\014\n\004type\030\001 \001(\005\"#\n\023PlayerMatchResponse\022\014" +
-      "\n\004type\030\001 \001(\005\"(\n\030PlayerCancelMatchRequest" +
-      "\022\014\n\004type\030\001 \001(\005\"\033\n\031PlayerCancelMatchRespo" +
-      "nse\"S\n\026PlayerBattleMesRequest\0229\n\tbattleM",
-      "es\030\002 \001(\0132&.com.zyd.common.proto.client.B" +
-      "attleMes\"5\n\027PlayerBattleMesResponse\022\013\n\003r" +
-      "es\030\001 \002(\010\022\r\n\005error\030\002 \001(\t\"-\n\031FairBattleLev" +
-      "elEndRequest\022\020\n\010isGiveUp\030\002 \001(\010\"\034\n\032FairBa" +
-      "ttleLevelEndResponse\"\"\n\022PlayerReadyReque" +
-      "st\022\014\n\004type\030\001 \001(\005\"\025\n\023PlayerReadyResponse\"" +
-      "(\n\030PlayerPaintingEndRequest\022\014\n\004type\030\001 \001(" +
-      "\005\"\033\n\031PlayerPaintingEndResponse\"J\n\"Player" +
-      "RequireBattleMesAgainRequest\022\024\n\014startPla" +
-      "yNum\030\001 \002(\005\022\016\n\006roomId\030\002 \001(\003\"\243\001\n#PlayerReq",
-      "uireBattleMesAgainResponse\022A\n\013playerSatr" +
-      "t\030\001 \001(\0132,.com.zyd.common.proto.client.Pl" +
-      "ayerStartPush\0229\n\tbattleMes\030\002 \003(\0132&.com.z" +
-      "yd.common.proto.client.BattleMes\"#\n!Chec" +
-      "kPlayerFairBattleExistRequest\"E\n\"CheckPl" +
-      "ayerFairBattleExistResponse\022\017\n\007isExist\030\001" +
-      " \002(\010\022\016\n\006roomId\030\002 \001(\003\"\030\n\026PlayerPaintingOv" +
-      "erPush\"\027\n\025PlayerCanPaintingPush\"\023\n\021Playe" +
-      "rCanNextPush\"U\n\026NewServerBattleMesPush\022;" +
-      "\n\nactiveInfo\030\001 \001(\0132\'.com.zyd.common.prot",
-      "o.client.ActiveInfo\"M\n\022PlayerUndoInfoPus" +
-      "h\0227\n\010undoInfo\030\001 \003(\0132%.com.zyd.common.pro" +
-      "to.client.UndoInfo\"\036\n\016PlayerUndoPush\022\014\n\004" +
-      "type\030\001 \001(\005\"\021\n\017PlayerAgreePush\"\024\n\022PlayerN" +
-      "otAgreePush\"r\n\010UndoInfo\0229\n\tbattleMes\030\001 \001" +
-      "(\0132&.com.zyd.common.proto.client.BattleM" +
-      "es\022\r\n\005isEat\030\002 \001(\010\022\014\n\004type\030\003 \001(\005\022\016\n\006userI" +
-      "d\030\004 \001(\005\"\022\n\020PlayUndoNextPush\"\016\n\014PlayNextP" +
-      "ush\"w\n\023ServerBattleMesPush\022\023\n\013currentTim" +
-      "e\030\001 \002(\003\022\020\n\010nextTime\030\002 \002(\003\0229\n\tbattleMes\030\003",
-      " \002(\0132&.com.zyd.common.proto.client.Battl" +
-      "eMes\"l\n\017PlayerStartPush\0229\n\tplayerMes\030\001 \003" +
-      "(\0132&.com.zyd.common.proto.client.PlayerM" +
-      "es\022\016\n\006userId\030\003 \001(\005\022\016\n\006roomId\030\004 \001(\003\"\031\n\027Pl" +
-      "ayerReadyFinishedPush\"\220\001\n\rPlayerEndPush\022" +
-      "\021\n\twinUserId\030\001 \001(\005\0229\n\tbattleMes\030\002 \003(\0132&." +
-      "com.zyd.common.proto.client.BattleMes\022\016\n" +
-      "\006result\030\003 \001(\005\022\017\n\007winRank\030\004 \001(\005\022\020\n\010loseRa" +
-      "nk\030\005 \001(\005\"Y\n\tBattleMes\022\017\n\007PlayNum\030\001 \001(\005\022\014" +
-      "\n\004from\030\002 \001(\005\022\n\n\002to\030\003 \001(\005\022\016\n\006userId\030\004 \001(\005",
-      "\022\021\n\tpromption\030\005 \001(\005\"O\n\tPlayerMes\022\016\n\006user" +
-      "Id\030\001 \002(\005\022\020\n\010userName\030\002 \001(\t\022\021\n\tisWinning\030" +
-      "\003 \001(\010\022\r\n\005count\030\004 \001(\005\" \n\016OnePlayerReady\022\016" +
-      "\n\006userId\030\001 \002(\005\" \n\016PlayerNotReady\022\016\n\006user" +
-      "Id\030\001 \003(\005"
+      "lient\"#\n\021PlayerChatRequest\022\016\n\006number\030\001 \001" +
+      "(\005\"\024\n\022PlayerChatResponse\"R\n\023PlayerActive" +
+      "Request\022;\n\nactiveInfo\030\001 \001(\0132\'.com.zyd.co" +
+      "mmon.proto.client.ActiveInfo\"\026\n\024PlayerAc" +
+      "tiveResponse\"\216\001\n\nActiveInfo\022\016\n\006isCall\030\001 " +
+      "\001(\010\0227\n\010moveInfo\030\002 \001(\0132%.com.zyd.common.p" +
+      "roto.client.MoveInfo\0227\n\010callInfo\030\003 \001(\0132%" +
+      ".com.zyd.common.proto.client.CallInfo\"4\n" +
+      "\010MoveInfo\022\014\n\004from\030\001 \001(\005\022\n\n\002to\030\002 \001(\005\022\016\n\006u",
+      "serId\030\003 \001(\005\"7\n\010CallInfo\022\r\n\005index\030\001 \001(\005\022\014" +
+      "\n\004type\030\002 \001(\005\022\016\n\006userId\030\003 \001(\005\"\034\n\032PlayerIn" +
+      "itiativeEndRequest\"\035\n\033PlayerInitiativeEn" +
+      "dResponse\"%\n\025PlayerMutuallyRequest\022\014\n\004ty" +
+      "pe\030\001 \001(\005\"\030\n\026PlayerMutuallyResponse\"0\n\035Pl" +
+      "ayerMutuallyFeedbackRequest\022\017\n\007isAgree\030\001" +
+      " \001(\010\" \n\036PlayerMutuallyFeedbackResponse\"\"" +
+      "\n\022PlayerMatchRequest\022\014\n\004type\030\001 \001(\005\"#\n\023Pl" +
+      "ayerMatchResponse\022\014\n\004type\030\001 \001(\005\"(\n\030Playe" +
+      "rCancelMatchRequest\022\014\n\004type\030\001 \001(\005\"\033\n\031Pla",
+      "yerCancelMatchResponse\"S\n\026PlayerBattleMe" +
+      "sRequest\0229\n\tbattleMes\030\002 \001(\0132&.com.zyd.co" +
+      "mmon.proto.client.BattleMes\"5\n\027PlayerBat" +
+      "tleMesResponse\022\013\n\003res\030\001 \002(\010\022\r\n\005error\030\002 \001" +
+      "(\t\"-\n\031FairBattleLevelEndRequest\022\020\n\010isGiv" +
+      "eUp\030\002 \001(\010\"\034\n\032FairBattleLevelEndResponse\"" +
+      "\"\n\022PlayerReadyRequest\022\014\n\004type\030\001 \001(\005\"\025\n\023P" +
+      "layerReadyResponse\"(\n\030PlayerPaintingEndR" +
+      "equest\022\014\n\004type\030\001 \001(\005\"\033\n\031PlayerPaintingEn" +
+      "dResponse\"J\n\"PlayerRequireBattleMesAgain",
+      "Request\022\024\n\014startPlayNum\030\001 \002(\005\022\016\n\006roomId\030" +
+      "\002 \001(\003\"\243\001\n#PlayerRequireBattleMesAgainRes" +
+      "ponse\022A\n\013playerSatrt\030\001 \001(\0132,.com.zyd.com" +
+      "mon.proto.client.PlayerStartPush\0229\n\tbatt" +
+      "leMes\030\002 \003(\0132&.com.zyd.common.proto.clien" +
+      "t.BattleMes\"#\n!CheckPlayerFairBattleExis" +
+      "tRequest\"E\n\"CheckPlayerFairBattleExistRe" +
+      "sponse\022\017\n\007isExist\030\001 \002(\010\022\016\n\006roomId\030\002 \001(\003\"" +
+      " \n\016PlayerChatPush\022\016\n\006number\030\001 \001(\005\"\030\n\026Pla" +
+      "yerPaintingOverPush\"\027\n\025PlayerCanPainting",
+      "Push\"\023\n\021PlayerCanNextPush\"U\n\026NewServerBa" +
+      "ttleMesPush\022;\n\nactiveInfo\030\001 \001(\0132\'.com.zy" +
+      "d.common.proto.client.ActiveInfo\"M\n\022Play" +
+      "erUndoInfoPush\0227\n\010undoInfo\030\001 \003(\0132%.com.z" +
+      "yd.common.proto.client.UndoInfo\"\036\n\016Playe" +
+      "rUndoPush\022\014\n\004type\030\001 \001(\005\"\021\n\017PlayerAgreePu" +
+      "sh\"\024\n\022PlayerNotAgreePush\"r\n\010UndoInfo\0229\n\t" +
+      "battleMes\030\001 \001(\0132&.com.zyd.common.proto.c" +
+      "lient.BattleMes\022\r\n\005isEat\030\002 \001(\010\022\014\n\004type\030\003" +
+      " \001(\005\022\016\n\006userId\030\004 \001(\005\"\022\n\020PlayUndoNextPush",
+      "\"\016\n\014PlayNextPush\"w\n\023ServerBattleMesPush\022" +
+      "\023\n\013currentTime\030\001 \002(\003\022\020\n\010nextTime\030\002 \002(\003\0229" +
+      "\n\tbattleMes\030\003 \002(\0132&.com.zyd.common.proto" +
+      ".client.BattleMes\"l\n\017PlayerStartPush\0229\n\t" +
+      "playerMes\030\001 \003(\0132&.com.zyd.common.proto.c" +
+      "lient.PlayerMes\022\016\n\006userId\030\003 \001(\005\022\016\n\006roomI" +
+      "d\030\004 \001(\003\"\031\n\027PlayerReadyFinishedPush\"\220\001\n\rP" +
+      "layerEndPush\022\021\n\twinUserId\030\001 \001(\005\0229\n\tbattl" +
+      "eMes\030\002 \003(\0132&.com.zyd.common.proto.client" +
+      ".BattleMes\022\016\n\006result\030\003 \001(\005\022\017\n\007winRank\030\004 ",
+      "\001(\005\022\020\n\010loseRank\030\005 \001(\005\"Y\n\tBattleMes\022\017\n\007Pl" +
+      "ayNum\030\001 \001(\005\022\014\n\004from\030\002 \001(\005\022\n\n\002to\030\003 \001(\005\022\016\n" +
+      "\006userId\030\004 \001(\005\022\021\n\tpromption\030\005 \001(\005\"O\n\tPlay" +
+      "erMes\022\016\n\006userId\030\001 \002(\005\022\020\n\010userName\030\002 \001(\t\022" +
+      "\021\n\tisWinning\030\003 \001(\010\022\r\n\005count\030\004 \001(\005\" \n\016One" +
+      "PlayerReady\022\016\n\006userId\030\001 \002(\005\" \n\016PlayerNot" +
+      "Ready\022\016\n\006userId\030\001 \003(\005"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
             com.google.protobuf.Descriptors.FileDescriptor root) {
           descriptor = root;
-          internal_static_com_zyd_common_proto_client_PlayerActiveRequest_descriptor =
+          internal_static_com_zyd_common_proto_client_PlayerChatRequest_descriptor =
             getDescriptor().getMessageTypes().get(0);
+          internal_static_com_zyd_common_proto_client_PlayerChatRequest_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_zyd_common_proto_client_PlayerChatRequest_descriptor,
+              new java.lang.String[] { "Number", });
+          internal_static_com_zyd_common_proto_client_PlayerChatResponse_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_zyd_common_proto_client_PlayerChatResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_zyd_common_proto_client_PlayerChatResponse_descriptor,
+              new java.lang.String[] { });
+          internal_static_com_zyd_common_proto_client_PlayerActiveRequest_descriptor =
+            getDescriptor().getMessageTypes().get(2);
           internal_static_com_zyd_common_proto_client_PlayerActiveRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerActiveRequest_descriptor,
               new java.lang.String[] { "ActiveInfo", });
           internal_static_com_zyd_common_proto_client_PlayerActiveResponse_descriptor =
-            getDescriptor().getMessageTypes().get(1);
+            getDescriptor().getMessageTypes().get(3);
           internal_static_com_zyd_common_proto_client_PlayerActiveResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerActiveResponse_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_ActiveInfo_descriptor =
-            getDescriptor().getMessageTypes().get(2);
+            getDescriptor().getMessageTypes().get(4);
           internal_static_com_zyd_common_proto_client_ActiveInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_ActiveInfo_descriptor,
               new java.lang.String[] { "IsCall", "MoveInfo", "CallInfo", });
           internal_static_com_zyd_common_proto_client_MoveInfo_descriptor =
-            getDescriptor().getMessageTypes().get(3);
+            getDescriptor().getMessageTypes().get(5);
           internal_static_com_zyd_common_proto_client_MoveInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_MoveInfo_descriptor,
               new java.lang.String[] { "From", "To", "UserId", });
           internal_static_com_zyd_common_proto_client_CallInfo_descriptor =
-            getDescriptor().getMessageTypes().get(4);
+            getDescriptor().getMessageTypes().get(6);
           internal_static_com_zyd_common_proto_client_CallInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_CallInfo_descriptor,
               new java.lang.String[] { "Index", "Type", "UserId", });
           internal_static_com_zyd_common_proto_client_PlayerInitiativeEndRequest_descriptor =
-            getDescriptor().getMessageTypes().get(5);
+            getDescriptor().getMessageTypes().get(7);
           internal_static_com_zyd_common_proto_client_PlayerInitiativeEndRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerInitiativeEndRequest_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_PlayerInitiativeEndResponse_descriptor =
-            getDescriptor().getMessageTypes().get(6);
+            getDescriptor().getMessageTypes().get(8);
           internal_static_com_zyd_common_proto_client_PlayerInitiativeEndResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerInitiativeEndResponse_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_PlayerMutuallyRequest_descriptor =
-            getDescriptor().getMessageTypes().get(7);
+            getDescriptor().getMessageTypes().get(9);
           internal_static_com_zyd_common_proto_client_PlayerMutuallyRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerMutuallyRequest_descriptor,
               new java.lang.String[] { "Type", });
           internal_static_com_zyd_common_proto_client_PlayerMutuallyResponse_descriptor =
-            getDescriptor().getMessageTypes().get(8);
+            getDescriptor().getMessageTypes().get(10);
           internal_static_com_zyd_common_proto_client_PlayerMutuallyResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerMutuallyResponse_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_PlayerMutuallyFeedbackRequest_descriptor =
-            getDescriptor().getMessageTypes().get(9);
+            getDescriptor().getMessageTypes().get(11);
           internal_static_com_zyd_common_proto_client_PlayerMutuallyFeedbackRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerMutuallyFeedbackRequest_descriptor,
               new java.lang.String[] { "IsAgree", });
           internal_static_com_zyd_common_proto_client_PlayerMutuallyFeedbackResponse_descriptor =
-            getDescriptor().getMessageTypes().get(10);
+            getDescriptor().getMessageTypes().get(12);
           internal_static_com_zyd_common_proto_client_PlayerMutuallyFeedbackResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerMutuallyFeedbackResponse_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_PlayerMatchRequest_descriptor =
-            getDescriptor().getMessageTypes().get(11);
+            getDescriptor().getMessageTypes().get(13);
           internal_static_com_zyd_common_proto_client_PlayerMatchRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerMatchRequest_descriptor,
               new java.lang.String[] { "Type", });
           internal_static_com_zyd_common_proto_client_PlayerMatchResponse_descriptor =
-            getDescriptor().getMessageTypes().get(12);
+            getDescriptor().getMessageTypes().get(14);
           internal_static_com_zyd_common_proto_client_PlayerMatchResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerMatchResponse_descriptor,
               new java.lang.String[] { "Type", });
           internal_static_com_zyd_common_proto_client_PlayerCancelMatchRequest_descriptor =
-            getDescriptor().getMessageTypes().get(13);
+            getDescriptor().getMessageTypes().get(15);
           internal_static_com_zyd_common_proto_client_PlayerCancelMatchRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerCancelMatchRequest_descriptor,
               new java.lang.String[] { "Type", });
           internal_static_com_zyd_common_proto_client_PlayerCancelMatchResponse_descriptor =
-            getDescriptor().getMessageTypes().get(14);
+            getDescriptor().getMessageTypes().get(16);
           internal_static_com_zyd_common_proto_client_PlayerCancelMatchResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerCancelMatchResponse_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_PlayerBattleMesRequest_descriptor =
-            getDescriptor().getMessageTypes().get(15);
+            getDescriptor().getMessageTypes().get(17);
           internal_static_com_zyd_common_proto_client_PlayerBattleMesRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerBattleMesRequest_descriptor,
               new java.lang.String[] { "BattleMes", });
           internal_static_com_zyd_common_proto_client_PlayerBattleMesResponse_descriptor =
-            getDescriptor().getMessageTypes().get(16);
+            getDescriptor().getMessageTypes().get(18);
           internal_static_com_zyd_common_proto_client_PlayerBattleMesResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerBattleMesResponse_descriptor,
               new java.lang.String[] { "Res", "Error", });
           internal_static_com_zyd_common_proto_client_FairBattleLevelEndRequest_descriptor =
-            getDescriptor().getMessageTypes().get(17);
+            getDescriptor().getMessageTypes().get(19);
           internal_static_com_zyd_common_proto_client_FairBattleLevelEndRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_FairBattleLevelEndRequest_descriptor,
               new java.lang.String[] { "IsGiveUp", });
           internal_static_com_zyd_common_proto_client_FairBattleLevelEndResponse_descriptor =
-            getDescriptor().getMessageTypes().get(18);
+            getDescriptor().getMessageTypes().get(20);
           internal_static_com_zyd_common_proto_client_FairBattleLevelEndResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_FairBattleLevelEndResponse_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_PlayerReadyRequest_descriptor =
-            getDescriptor().getMessageTypes().get(19);
+            getDescriptor().getMessageTypes().get(21);
           internal_static_com_zyd_common_proto_client_PlayerReadyRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerReadyRequest_descriptor,
               new java.lang.String[] { "Type", });
           internal_static_com_zyd_common_proto_client_PlayerReadyResponse_descriptor =
-            getDescriptor().getMessageTypes().get(20);
+            getDescriptor().getMessageTypes().get(22);
           internal_static_com_zyd_common_proto_client_PlayerReadyResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerReadyResponse_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_PlayerPaintingEndRequest_descriptor =
-            getDescriptor().getMessageTypes().get(21);
+            getDescriptor().getMessageTypes().get(23);
           internal_static_com_zyd_common_proto_client_PlayerPaintingEndRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerPaintingEndRequest_descriptor,
               new java.lang.String[] { "Type", });
           internal_static_com_zyd_common_proto_client_PlayerPaintingEndResponse_descriptor =
-            getDescriptor().getMessageTypes().get(22);
+            getDescriptor().getMessageTypes().get(24);
           internal_static_com_zyd_common_proto_client_PlayerPaintingEndResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerPaintingEndResponse_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_PlayerRequireBattleMesAgainRequest_descriptor =
-            getDescriptor().getMessageTypes().get(23);
+            getDescriptor().getMessageTypes().get(25);
           internal_static_com_zyd_common_proto_client_PlayerRequireBattleMesAgainRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerRequireBattleMesAgainRequest_descriptor,
               new java.lang.String[] { "StartPlayNum", "RoomId", });
           internal_static_com_zyd_common_proto_client_PlayerRequireBattleMesAgainResponse_descriptor =
-            getDescriptor().getMessageTypes().get(24);
+            getDescriptor().getMessageTypes().get(26);
           internal_static_com_zyd_common_proto_client_PlayerRequireBattleMesAgainResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerRequireBattleMesAgainResponse_descriptor,
               new java.lang.String[] { "PlayerSatrt", "BattleMes", });
           internal_static_com_zyd_common_proto_client_CheckPlayerFairBattleExistRequest_descriptor =
-            getDescriptor().getMessageTypes().get(25);
+            getDescriptor().getMessageTypes().get(27);
           internal_static_com_zyd_common_proto_client_CheckPlayerFairBattleExistRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_CheckPlayerFairBattleExistRequest_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_CheckPlayerFairBattleExistResponse_descriptor =
-            getDescriptor().getMessageTypes().get(26);
+            getDescriptor().getMessageTypes().get(28);
           internal_static_com_zyd_common_proto_client_CheckPlayerFairBattleExistResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_CheckPlayerFairBattleExistResponse_descriptor,
               new java.lang.String[] { "IsExist", "RoomId", });
+          internal_static_com_zyd_common_proto_client_PlayerChatPush_descriptor =
+            getDescriptor().getMessageTypes().get(29);
+          internal_static_com_zyd_common_proto_client_PlayerChatPush_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_zyd_common_proto_client_PlayerChatPush_descriptor,
+              new java.lang.String[] { "Number", });
           internal_static_com_zyd_common_proto_client_PlayerPaintingOverPush_descriptor =
-            getDescriptor().getMessageTypes().get(27);
+            getDescriptor().getMessageTypes().get(30);
           internal_static_com_zyd_common_proto_client_PlayerPaintingOverPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerPaintingOverPush_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_PlayerCanPaintingPush_descriptor =
-            getDescriptor().getMessageTypes().get(28);
+            getDescriptor().getMessageTypes().get(31);
           internal_static_com_zyd_common_proto_client_PlayerCanPaintingPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerCanPaintingPush_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_PlayerCanNextPush_descriptor =
-            getDescriptor().getMessageTypes().get(29);
+            getDescriptor().getMessageTypes().get(32);
           internal_static_com_zyd_common_proto_client_PlayerCanNextPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerCanNextPush_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_NewServerBattleMesPush_descriptor =
-            getDescriptor().getMessageTypes().get(30);
+            getDescriptor().getMessageTypes().get(33);
           internal_static_com_zyd_common_proto_client_NewServerBattleMesPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_NewServerBattleMesPush_descriptor,
               new java.lang.String[] { "ActiveInfo", });
           internal_static_com_zyd_common_proto_client_PlayerUndoInfoPush_descriptor =
-            getDescriptor().getMessageTypes().get(31);
+            getDescriptor().getMessageTypes().get(34);
           internal_static_com_zyd_common_proto_client_PlayerUndoInfoPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerUndoInfoPush_descriptor,
               new java.lang.String[] { "UndoInfo", });
           internal_static_com_zyd_common_proto_client_PlayerUndoPush_descriptor =
-            getDescriptor().getMessageTypes().get(32);
+            getDescriptor().getMessageTypes().get(35);
           internal_static_com_zyd_common_proto_client_PlayerUndoPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerUndoPush_descriptor,
               new java.lang.String[] { "Type", });
           internal_static_com_zyd_common_proto_client_PlayerAgreePush_descriptor =
-            getDescriptor().getMessageTypes().get(33);
+            getDescriptor().getMessageTypes().get(36);
           internal_static_com_zyd_common_proto_client_PlayerAgreePush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerAgreePush_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_PlayerNotAgreePush_descriptor =
-            getDescriptor().getMessageTypes().get(34);
+            getDescriptor().getMessageTypes().get(37);
           internal_static_com_zyd_common_proto_client_PlayerNotAgreePush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerNotAgreePush_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_UndoInfo_descriptor =
-            getDescriptor().getMessageTypes().get(35);
+            getDescriptor().getMessageTypes().get(38);
           internal_static_com_zyd_common_proto_client_UndoInfo_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_UndoInfo_descriptor,
               new java.lang.String[] { "BattleMes", "IsEat", "Type", "UserId", });
           internal_static_com_zyd_common_proto_client_PlayUndoNextPush_descriptor =
-            getDescriptor().getMessageTypes().get(36);
+            getDescriptor().getMessageTypes().get(39);
           internal_static_com_zyd_common_proto_client_PlayUndoNextPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayUndoNextPush_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_PlayNextPush_descriptor =
-            getDescriptor().getMessageTypes().get(37);
+            getDescriptor().getMessageTypes().get(40);
           internal_static_com_zyd_common_proto_client_PlayNextPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayNextPush_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_ServerBattleMesPush_descriptor =
-            getDescriptor().getMessageTypes().get(38);
+            getDescriptor().getMessageTypes().get(41);
           internal_static_com_zyd_common_proto_client_ServerBattleMesPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_ServerBattleMesPush_descriptor,
               new java.lang.String[] { "CurrentTime", "NextTime", "BattleMes", });
           internal_static_com_zyd_common_proto_client_PlayerStartPush_descriptor =
-            getDescriptor().getMessageTypes().get(39);
+            getDescriptor().getMessageTypes().get(42);
           internal_static_com_zyd_common_proto_client_PlayerStartPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerStartPush_descriptor,
               new java.lang.String[] { "PlayerMes", "UserId", "RoomId", });
           internal_static_com_zyd_common_proto_client_PlayerReadyFinishedPush_descriptor =
-            getDescriptor().getMessageTypes().get(40);
+            getDescriptor().getMessageTypes().get(43);
           internal_static_com_zyd_common_proto_client_PlayerReadyFinishedPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerReadyFinishedPush_descriptor,
               new java.lang.String[] { });
           internal_static_com_zyd_common_proto_client_PlayerEndPush_descriptor =
-            getDescriptor().getMessageTypes().get(41);
+            getDescriptor().getMessageTypes().get(44);
           internal_static_com_zyd_common_proto_client_PlayerEndPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerEndPush_descriptor,
               new java.lang.String[] { "WinUserId", "BattleMes", "Result", "WinRank", "LoseRank", });
           internal_static_com_zyd_common_proto_client_BattleMes_descriptor =
-            getDescriptor().getMessageTypes().get(42);
+            getDescriptor().getMessageTypes().get(45);
           internal_static_com_zyd_common_proto_client_BattleMes_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_BattleMes_descriptor,
               new java.lang.String[] { "PlayNum", "From", "To", "UserId", "Promption", });
           internal_static_com_zyd_common_proto_client_PlayerMes_descriptor =
-            getDescriptor().getMessageTypes().get(43);
+            getDescriptor().getMessageTypes().get(46);
           internal_static_com_zyd_common_proto_client_PlayerMes_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerMes_descriptor,
               new java.lang.String[] { "UserId", "UserName", "IsWinning", "Count", });
           internal_static_com_zyd_common_proto_client_OnePlayerReady_descriptor =
-            getDescriptor().getMessageTypes().get(44);
+            getDescriptor().getMessageTypes().get(47);
           internal_static_com_zyd_common_proto_client_OnePlayerReady_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_OnePlayerReady_descriptor,
               new java.lang.String[] { "UserId", });
           internal_static_com_zyd_common_proto_client_PlayerNotReady_descriptor =
-            getDescriptor().getMessageTypes().get(45);
+            getDescriptor().getMessageTypes().get(48);
           internal_static_com_zyd_common_proto_client_PlayerNotReady_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_zyd_common_proto_client_PlayerNotReady_descriptor,

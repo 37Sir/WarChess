@@ -18,6 +18,7 @@ import com.zyd.common.proto.client.WarChess.PlayNextPush;
 import com.zyd.common.proto.client.WarChess.PlayerActiveRequest;
 import com.zyd.common.proto.client.WarChess.PlayerCanNextPush;
 import com.zyd.common.proto.client.WarChess.PlayerCanPaintingPush;
+import com.zyd.common.proto.client.WarChess.PlayerChatPush;
 import com.zyd.common.proto.client.WarChess.PlayerEndPush;
 import com.zyd.common.proto.client.WarChess.PlayerMes;
 import com.zyd.common.proto.client.WarChess.PlayerNotReady;
@@ -544,6 +545,7 @@ public class ChessRoom {
     enum BattleStatus {
         start, starting,fighting, fightWaiting, roundWaiting,waitFinish, finished
     }
+    //玩家掉线
     public void down(User u) throws Exception {
         if (u.getId().intValue() == startUserId) {
             winUserId = afterUserId;
@@ -551,6 +553,18 @@ public class ChessRoom {
             winUserId = startUserId;
         }
         battleFinished(winUserId);
+    }
+    //玩家游戏内快捷聊天
+    public void onChat(User u, int number) {
+        PlayerChatPush.Builder res = PlayerChatPush.newBuilder();
+        res.setNumber(number);
+        User user = null;
+        if (u.getId() == userMatchInfoList.get(actor).getId()) {
+            user = userMatchInfoList.get(nextActorIndex());
+        } else {
+            user = userMatchInfoList.get(actor);
+        }
+        if (user != null)  disrupOne(PushReqestName.PlayerChatPush, user, res.build());
     }
 
 }

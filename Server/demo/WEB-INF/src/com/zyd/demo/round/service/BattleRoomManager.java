@@ -327,7 +327,20 @@ public class BattleRoomManager extends BaseService {
             chessRoom.down(u);
 	    } 
 	}
-
+	//游戏内玩家快捷聊天
+	public void onChat(String userName, int number) {
+        if(userToRoomIdMap.containsKey(userName)) {
+            Long roomId = userToRoomIdMap.get(userName);
+            BattleRoom battleRoom = battleRoomMap.get(roomId);
+            UserMatchInfo userMatchInfo = userMatchInfoMap.get(userName);
+            battleRoom.onChat(userMatchInfo,number);
+        } else if(userToRoomIdMap0.containsKey(userName)) {
+            Long roomId = userToRoomIdMap0.get(userName);
+            ChessRoom chessRoom = chessRoomMap.get(roomId);
+            User u = userMatchInfoMap0.get(userName);
+            chessRoom.onChat(u,number);
+        }
+	}
 	/** 初始化方法 */
 	public void init() {
 		onUpdate();
@@ -367,5 +380,6 @@ public class BattleRoomManager extends BaseService {
 		
 		}, 0, SCHEDULED_EXECULATE_INTERVAL_MILLISECOND, TimeUnit.MILLISECONDS);
 	}
+
 
 }

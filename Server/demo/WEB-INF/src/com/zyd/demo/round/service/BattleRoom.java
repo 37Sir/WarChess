@@ -24,6 +24,7 @@ import com.zyd.common.proto.client.WarChess.PlayNextPush;
 import com.zyd.common.proto.client.WarChess.PlayUndoNextPush;
 import com.zyd.common.proto.client.WarChess.PlayerBattleMesRequest;
 import com.zyd.common.proto.client.WarChess.PlayerBattleMesResponse;
+import com.zyd.common.proto.client.WarChess.PlayerChatPush;
 import com.zyd.common.proto.client.WarChess.PlayerMes;
 import com.zyd.common.proto.client.WarChess.PlayerNotAgreePush;
 import com.zyd.common.proto.client.WarChess.PlayerNotReady;
@@ -977,6 +978,18 @@ public class BattleRoom {
             winUserId = startUserId;
         }
         battleFinished(winUserId);
+    }
+
+    public void onChat(UserMatchInfo userMatchInfo, int number) {
+        PlayerChatPush.Builder res = PlayerChatPush.newBuilder();
+        res.setNumber(number);
+        UserMatchInfo user = null;
+        if (userMatchInfoList.get(actor).getUid() == userMatchInfo.getUid()) {
+            user = userMatchInfoList.get(nextActorIndex());
+        } else {
+            user = userMatchInfoList.get(actor);
+        }
+        if (user != null)  disrupOne(PushReqestName.PlayerChatPush, user, res.build());
     }
 
 
