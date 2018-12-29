@@ -1,6 +1,13 @@
 package com.zyd.common.proto.client;
 
 /////////////////////////////////////// request ////////////////////////////////////
+//玩家快捷聊天请求
+message PlayerChatRequest{
+	optional int32 number = 1; //玩家快捷聊天对应的语句编号
+}
+//玩家快捷聊天返回
+message PlayerChatResponse{
+}
 //新模式玩家行动的请求
 message PlayerActiveRequest {
 	optional ActiveInfo activeInfo= 1; //玩家行动信息
@@ -151,6 +158,10 @@ message CheckPlayerFairBattleExistResponse{
 
 
 /////////////////////////////////////// push ////////////////////////////////////
+/**玩家快捷聊天推送*/
+message PlayerChatPush{
+	optional int32 number = 1;
+}
 /**新模式开局动画播放完毕*/
 message PlayerPaintingOverPush{
 
