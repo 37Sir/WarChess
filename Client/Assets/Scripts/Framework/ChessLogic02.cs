@@ -326,6 +326,31 @@ namespace Framework
         }
 
         /// <summary>
+        /// 可移动位置
+        /// </summary>
+        /// <returns></returns>
+        public List<Move> NewGenerateMoves(Vector2 from)
+        {
+            List<Move> moves = new List<Move>();
+            for (int y = 0; y < Config.Board.MaxY; y++)
+            {
+                for (int x = 0; x < Config.Board.MaxX; x++)
+                {
+                    Vector2 to = new Vector2();
+                    to.x = x;
+                    to.y = y;
+                    if (CanMove(from, to))
+                    {
+                        Move move = new Move(from, to);
+                        move.Distance = GetPiecesTotalDistance(from, to);
+                        moves.Add(move);
+                    }
+                }
+            }
+            return moves;
+        }
+
+        /// <summary>
         /// 兵晋升
         /// </summary>
         public void PPromoted(Vector2Int pos, int type)

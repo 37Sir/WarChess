@@ -16,6 +16,7 @@ public class Tween
 
     private GameObject m_owner;                         //该动画对应的物体
     private Tweener m_tweener;                          //该动画对应的Tweener
+    private List<Tweener> m_tweeners = new List<Tweener>();
     private float m_duration;                           //持续时间
 
     private Vector3 m_to = Vector3.zero;                //目标位置、目标大小、目标旋转
@@ -267,17 +268,21 @@ public class Tween
                     }                
                     break;
                 case TweenType.Color:
-                    foreach (Material material in m_owner.GetComponent<Renderer>().materials)
+                    foreach (var renderer in m_owner.GetComponentsInChildren<Renderer>())
                     {
-                        if (isNeedFrom)
+                        foreach(var material in renderer.materials)
                         {
-                            material.color = m_fromColor;
+                            if (isNeedFrom)
+                            {
+                                material.color = m_fromColor;
+                            }
+                            var tweener = material.DOColor(m_color, m_duration)
+                                    .SetDelay(m_delayTime)
+                                    .SetEase(m_easeType)
+                                    .SetLoops(m_loop, m_loopType)
+                                    .OnComplete(OnComplete);
+                            m_tweeners.Add(tweener);
                         }
-                        material.DOColor(m_color, m_duration)
-                                .SetDelay(m_delayTime)
-                                .SetEase(m_easeType)
-                                .SetLoops(m_loop, m_loopType)
-                                .OnComplete(OnComplete);
                     }
                     break;
                 case TweenType.UIColor:
@@ -458,6 +463,11 @@ public class Tween
             m_tweener.Kill();
             m_tweener = null;
         }
+        foreach(var tweener in m_tweeners)
+        {
+            tweener.Kill();
+        }
+        m_tweeners.Clear();
     }
 
     /// <summary>

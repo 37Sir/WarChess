@@ -20,6 +20,8 @@ public class PVP02PanelMediator : Mediator
     public int E_Energy = 0;//敌人能量
     public int E_MaxEnergy = 0;//敌人能量上限
 
+    public int CurPieceNum = 0;//当前棋子数目
+
     //temp
     private float m_promoteFromX;
     private float m_promoteFromY;
@@ -48,7 +50,9 @@ public class PVP02PanelMediator : Mediator
         list.Add(NotificationConstant.OnTypeSelect);
         list.Add(NotificationConstant.NewEndTurnResponse);
         list.Add(NotificationConstant.PlayerActiveResponse);
-        
+        list.Add(NotificationConstant.ShowTips);
+        list.Add(NotificationConstant.ShowRedTips);
+        list.Add(NotificationConstant.SomeoneDead);
         return list;
     }
 
@@ -77,6 +81,28 @@ public class PVP02PanelMediator : Mediator
                 break;
             case NotificationConstant.PlayerActiveResponse:
                 m_viewComponent.SetCanNext(false);
+                break;
+            case NotificationConstant.ShowTips:
+                Vector2 clickPoint = (Vector2)body;
+                if(m_viewComponent.canNext == true)
+                {
+                    m_viewComponent.OnTipsShow(clickPoint);
+                }
+                else
+                {
+                    m_viewComponent.OnTipsShow(clickPoint, true);
+                }
+                
+                break;
+            case NotificationConstant.ShowRedTips:
+                Vector2 redPoint = (Vector2)body;
+                m_viewComponent.OnTipsShow(redPoint, true);
+                break;
+            case NotificationConstant.SomeoneDead:
+                if(m_viewComponent.isTurn == false)
+                {
+                    CurPieceNum--;
+                }
                 break;
             default:
                 break;
@@ -142,5 +168,20 @@ public class PVP02PanelMediator : Mediator
     {
         SendNotification(NotificationConstant.PlayerChat, body);
     }
+
+    public void NotifyPieceClick(object body)
+    {
+        SendNotification(NotificationConstant.PieceClick, body);
+    }
+
+    public void NotifyPieceAnimatorStop()
+    {
+        SendNotification(NotificationConstant.PieceAnimatorStop);
+    }
+
+    public void NotifyRoundEnd()
+    {
+        SendNotification(NotificationConstant.RoundEnd);
+    } 
 }
 

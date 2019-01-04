@@ -329,6 +329,7 @@ public class PieceItem:MonoBehaviour
         var temp = (object[])args;
         var to = (Vector2)temp[1];
         var from = (Vector2)temp[0];
+
         Tween rotate_start = m_ModelTween.AddClip("rotate_start", 1);
         rotate_start.SetTweenType(TweenType.LocalRotation);
         if(selfColor == Config.PieceColor.BLACK)
@@ -340,6 +341,33 @@ public class PieceItem:MonoBehaviour
             rotate_start.SetTo(new Vector3(0, 180, 0));
         }
         
+        rotate_start.SetOnComplete(OnCompleteMove, temp);
+        m_ModelTween.StartPlay();
+    }
+
+    /// <summary>
+    /// 走完了 转回来
+    /// </summary>
+    /// <param name="args"></param>
+    private void OnAttackRotate2(object args)
+    {
+        var temp = (object[])args;
+        var to = (Vector2)temp[1];
+        var from = (Vector2)temp[0];
+
+        var item = GameObject.Find(to.x + "_" + to.y);
+        item.GetComponent<PieceItem>().BeAttached();
+        Tween rotate_start = m_ModelTween.AddClip("rotate_start", 1);
+        rotate_start.SetTweenType(TweenType.LocalRotation);
+        if (selfColor == Config.PieceColor.BLACK)
+        {
+            rotate_start.SetTo(new Vector3(0, 0, 0));
+        }
+        else
+        {
+            rotate_start.SetTo(new Vector3(0, 180, 0));
+        }
+
         rotate_start.SetOnComplete(OnCompleteMove, temp);
         m_ModelTween.StartPlay();
     }
@@ -470,7 +498,7 @@ public class PieceItem:MonoBehaviour
         move_pos.SetDelayTime(1);
         move_pos.SetTweenType(TweenType.LocalPosition);
         move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
-        move_pos.SetOnComplete(OnRotate2, args);
+        move_pos.SetOnComplete(OnAttackRotate2, args);
         m_TweenPlayer.StartPlay();
     }
 

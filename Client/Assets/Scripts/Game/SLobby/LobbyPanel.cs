@@ -58,9 +58,15 @@ public class LobbyPanel
             m_pvp02Proxy = new PVP02Proxy();
             App.Facade.RegisterProxy(m_pvp02Proxy);
         }
-        m_pveProxy = new PVEProxy();
-        App.Facade.RegisterMediator(m_mediator);
-        App.Facade.RegisterProxy(m_pveProxy);
+
+        m_pveProxy = App.Facade.RetrieveProxy("PVEProxy") as PVEProxy;
+        if (m_pveProxy == null)
+        {
+            m_pveProxy = new PVEProxy();
+            App.Facade.RegisterProxy(m_pveProxy);
+        }
+        
+        App.Facade.RegisterMediator(m_mediator);       
         m_proxy = App.Facade.RetrieveProxy("UserDataProxy") as UserDataProxy;
 
         m_PVP.onClick.AddListener(OnPVPClick);
@@ -159,6 +165,7 @@ public class LobbyPanel
             }
             yield return new WaitForSeconds(1);
         }
+        OnCancelClick();
     }
 
     private IEnumerator _OnMatchBird()
@@ -189,6 +196,7 @@ public class LobbyPanel
             App.UIManager.StopCoroutine(m_matchBird);
             m_matchBird = null;
         }
+        m_birdTween.enabled = false;
     }
     #endregion
 
@@ -284,11 +292,13 @@ public class LobbyPanel
         m_Searching.SetActive(false);
         m_Select.SetActive(true);
         StopMatchTimer();
+        StopMatchBird();
         m_mediator.NotifyCancelMatch();
     }
 
     private void OnEasyClick()
     {
+        m_pveProxy.SetMode(0);
         App.SoundManager.PlaySoundClip(Config.Sound.Click1);
         App.Facade.RemoveMediator("LobbyPanelMediator");
         App.NSceneManager.LoadScene("SGame01");
@@ -296,13 +306,19 @@ public class LobbyPanel
 
     private void OnNormalClick()
     {
+        m_pveProxy.SetMode(1);
         App.SoundManager.PlaySoundClip(Config.Sound.Click1);
-        App.UIManager.OpenPanel("TipsPanel", new object[] { "提示", "暂未开放" });
+        App.Facade.RemoveMediator("LobbyPanelMediator");
+        App.NSceneManager.LoadScene("SGame01");
+        //App.UIManager.OpenPanel("TipsPanel", new object[] { "提示", "暂未开放" });
     }
 
     private void OnHardClick()
     {
+        m_pveProxy.SetMode(2);
         App.SoundManager.PlaySoundClip(Config.Sound.Click1);
+        //App.Facade.RemoveMediator("LobbyPanelMediator");
+        //App.NSceneManager.LoadScene("SGame01");
         App.UIManager.OpenPanel("TipsPanel", new object[] { "提示", "暂未开放" });
     }
     #endregion 

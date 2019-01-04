@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Config{
     //网络层配置
-    public static string ServerHost = "192.168.90.12";
+    public static string ServerHost = "192.168.80.81";
     public static int ServerHostPort = 10000;
 
     public static readonly int RpcTimeout = 10000;                  //rpc请求的超时时间ms
@@ -19,6 +19,8 @@ public class Config{
     public static readonly string EffectConfigPath = "Assets/Resources/ArtRes/Effects/EffectConfig.asset";
 
     public static float PieceWidth = 2f;
+
+    public static int MaxPieceNum = 6;//召唤棋子上限
 
     public static float MoveDistanceCross = 1.3f * PieceWidth;//没用
     public static float MoveDistance = 0.7f * PieceWidth;//中层边界

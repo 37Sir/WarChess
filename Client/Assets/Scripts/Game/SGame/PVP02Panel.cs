@@ -63,6 +63,7 @@ public class PVP02Panel
     private int m_selectType = -1;
     public Config.PieceColor selfColor = Config.PieceColor.WHITE;//自己的颜色
     private IEnumerator m_roundTimer;   //计时器
+    private IEnumerator m_tipsCoroutine;
     private List<GameObject> m_tips = new List<GameObject>();//走棋提示
     private List<GameObject> m_summonTips = new List<GameObject>();//召唤提示
     private List<GameObject> m_tempEnergy = new List<GameObject>();//能量
@@ -262,6 +263,7 @@ public class PVP02Panel
         InitChessBoard();          //初始化棋盘表现
         roundNum = 1;
         m_mediator.Energy = 1;
+        m_mediator.CurPieceNum = 0;
         if (isTurn)
         {
             ShowTransAnimation(false);
@@ -279,6 +281,16 @@ public class PVP02Panel
         var result = pushMes.Result;
         var winScore = pushMes.WinRank;
         var loseScore = pushMes.LoseRank;
+        if(winId == m_pvpProxy.GetFirstId())
+        {
+            m_BlackAnimal.Play("Die");
+            m_WhiteAnimal.Play("Jump");
+        }
+        else
+        {
+            m_BlackAnimal.Play("Jump");
+            m_WhiteAnimal.Play("Die");
+        }
         Debug.Log("GameOver!!");
         App.SoundManager.StopBackSound();
         if (result >= 6)
@@ -326,6 +338,7 @@ public class PVP02Panel
     /// </summary>
     private void StopRoundShow()
     {
+        m_mediator.NotifyRoundEnd();
         m_BottomToggle.isOn = false;
         var tweenPlayer = m_Bottom.GetComponent<TweenPlayer>();       
         var tween = tweenPlayer.GetClipTween("move_hide");
@@ -488,20 +501,47 @@ public class PVP02Panel
     /// 提示
     /// </summary>
     /// <param name="from"></param>
-    public void OnTipsShow(Vector2 from)
+    public void OnTipsShow(Vector2 from, bool isBlue = false)
     {
-        var moves = App.ChessLogic02.GenerateMoves(new Vector2(from.x - 1, from.y - 1));
-        foreach (Vector2 to in moves)
+        var moves = App.ChessLogic02.NewGenerateMoves(new Vector2(from.x - 1, from.y - 1));
+        moves = moves.OrderBy(v => v.Distance).ToList();
+        string colorName = "green";
+        if(isBlue == true)
         {
-            App.ObjectPoolManager.RegisteObject("biankuang_green", "FX/biankuang_green", 0, 30, -1);
-            App.ObjectPoolManager.Instantiate("biankuang_green", (GameObject obj) =>
+            colorName = "blue";
+        }
+        if(m_tipsCoroutine == null)
+        {
+            m_tipsCoroutine = _OnTipsShow(moves, colorName);
+            App.UIManager.StartCoroutine(m_tipsCoroutine);
+        }        
+    }
+
+    /// <summary>
+    /// 提示
+    /// </summary>
+    /// <param name="from"></param>
+    public IEnumerator _OnTipsShow(List<Move> moves, string colorName)
+    {
+        int distance = moves[0].Distance;
+        foreach (Move move in moves)
+        {
+            App.ObjectPoolManager.RegisteObject("biankuang_" + colorName, "FX/biankuang_" + colorName, 0, 30, -1);
+            App.ObjectPoolManager.Instantiate("biankuang_"+ colorName, (GameObject obj) =>
             {
                 obj.SetActive(true);
                 obj.transform.parent = m_qizi.transform;
-                obj.transform.localPosition = new Vector3(to.x * Config.PieceWidth, 3, to.y * Config.PieceWidth);
+                obj.transform.localPosition = new Vector3(move.To.x * Config.PieceWidth, 3, move.To.y * Config.PieceWidth);
                 obj.transform.localScale = new Vector3(15, 15, 1);
                 m_tips.Add(obj);
+                var tweenPlayer = obj.transform.Find("box_01/light1").GetComponent<TweenPlayer>();
+                tweenPlayer.enabled = true;
             });
+            if (move.Distance > distance)
+            {
+                distance = move.Distance;
+                yield return new WaitForSeconds(0.05f);
+            }
         }
     }
 
@@ -561,6 +601,10 @@ public class PVP02Panel
         {
             App.UIManager.OpenPanel("MessagePanel", "能量不足！");
         }
+        else if(m_mediator.CurPieceNum >= Config.MaxPieceNum)
+        {
+            App.UIManager.OpenPanel("MessagePanel", "最多只能存在" + Config.MaxPieceNum + "个棋子！");
+        }
         else
         {
             App.SoundManager.PlaySoundClip(Config.Sound.SummonCardClick);
@@ -578,11 +622,21 @@ public class PVP02Panel
 
     public void OnTipsHide()
     {
+        if(m_tipsCoroutine!= null)
+        {
+            App.UIManager.StopCoroutine(m_tipsCoroutine);
+            m_tipsCoroutine = null;
+        }
         foreach (GameObject obj in m_tips)
         {
-            App.ObjectPoolManager.Release("biankuang_green", obj);
+            App.ObjectPoolManager.Release(obj.name, obj);
         }
         m_tips.Clear();
+    }
+
+    public void OnPieceAnimatorStop()
+    {
+        m_mediator.NotifyPieceAnimatorStop();
     }
 
     private void InitTimer()
@@ -733,6 +787,8 @@ public class PVP02Panel
                 maskObj.SetActive(true);
                 m_EnergyText.text = m_mediator.Energy + "/" + m_mediator.MaxEnergy;
             }
+            m_mediator.CurPieceNum++;
+            Debug.Log("SomeOne is Dead, current piece num is :" + m_mediator.CurPieceNum);
         }
         m_mediator.NotifyEndTurn(1);
     }
@@ -842,6 +898,23 @@ public class PVP02Panel
             OnSummonTipsHide();
             OnEnergyEffectHide();
         }
+        else
+        {
+            var pointX = clickPoint.x;
+            var pointZ = clickPoint.z;
+            var offsetX = pointX % 2;
+            var offsetZ = pointZ % 2;
+            var x = (pointX - offsetX) / 2;
+            var z = (pointZ - offsetZ) / 2;
+            var point = new Vector2(x + 1, z + 1);
+
+            m_mediator.NotifyPieceClick(point);
+        }
+    }
+
+    public void OnClickCancel()
+    {
+        OnTipsHide();
     }
 
     private void OnPClick()
@@ -1250,4 +1323,3 @@ public class PVP02Panel
         return index;
     }
 }
-

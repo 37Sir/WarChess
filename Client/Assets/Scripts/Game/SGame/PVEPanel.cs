@@ -21,26 +21,26 @@ public class PVEPanel
     private GameObject m_qizi;//棋子的父物体
     private GameObject m_chess;//棋子
     private GameObject m_enemyReady;
-    private Text m_selfTimer;
-    private Text m_enemyTimer;
+
     private Image m_userImage;
     private Image m_enemyImage;
     private Button m_test;
     private Button m_Undo;
     private Camera m_worldCamera;
-    private GameObject m_gameStartLogo;
+    private Animator m_animal;
+
     private TweenPlayer m_cameraTween;
 
     private Vector2 m_lastFrom;
     private Vector2 m_lastTo;
     private int m_lastEat = -1;
+    private int m_mode = 0;
 
     public bool isTurn = true;
     public bool isPause = false;
     public int roundNum = 0;
     public Config.PieceColor selfColor = Config.PieceColor.WHITE;//自己的颜色
-    public Config.PieceColor AIColor = Config.PieceColor.BLACK;//AI的颜色
-    private IEnumerator m_roundTimer;   //计时器
+    public Config.PieceColor AIColor = Config.PieceColor.BLACK;  //AI的颜色
     private List<GameObject> m_tips = new List<GameObject>();
     private ModelDrag m_modelDrag;
 
@@ -64,8 +64,6 @@ public class PVEPanel
         m_chess = m_qizi.gameObject.transform.Find("m_Chess").gameObject;
         m_worldCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         m_cameraTween = m_worldCamera.GetComponent<TweenPlayer>();
-        m_selfTimer = gameObject.transform.Find("Container/m_SelfTimer").GetComponent<Text>();
-        m_enemyTimer = gameObject.transform.Find("Container/m_EnemyTimer").GetComponent<Text>();
         m_userImage = gameObject.transform.Find("Container/m_SelfIcon").GetComponent<Image>();
         m_enemyImage = gameObject.transform.Find("Container/m_EnemyIcon").GetComponent<Image>();
         m_modelDrag = GameObject.Find("board").GetComponent<ModelDrag>();
@@ -73,23 +71,24 @@ public class PVEPanel
         m_enemyReady = gameObject.transform.Find("Container/m_EnemyReady").gameObject;
         m_test = gameObject.transform.Find("Container/test").GetComponent<Button>();
         m_Undo = gameObject.transform.Find("Container/m_Undo").GetComponent<Button>();
-        m_gameStartLogo = gameObject.transform.Find("Container/m_GameBegin").gameObject;
+        m_animal = GameObject.Find("Animal").GetComponent<Animator>();
     }
 
     public void OpenView(object intent)
     {
         int userId = m_proxy.GetPlayerId();
         isTurn = true;
-        m_modelDrag.isTurn = true;
         m_pveProxy.SetSelfColor(Config.PieceColor.WHITE);
-        
+        m_mode = m_pveProxy.GetMode();
         m_userImage.GetComponentInChildren<Text>().text = m_proxy.GetPlayerName();
         m_enemyImage.GetComponentInChildren<Text>().text = m_pveProxy.GetEnemyName();
-        InitTimer();
+
         App.SoundManager.PlaySoundClip(Config.Sound.InGameStart);
+        var fixedK = App.EffectManager.ScreenFixedK;
+        m_worldCamera.fieldOfView = m_worldCamera.fieldOfView * fixedK;
     }
 
-    /// <summary>
+    /// <summary> 
     /// 初始化棋盘
     /// </summary>
     private void InitChessBoard()
@@ -187,12 +186,6 @@ public class PVEPanel
         m_tips.Clear();
     }
 
-    private void InitTimer()
-    {
-        m_selfTimer.gameObject.SetActive(false);
-        m_enemyTimer.gameObject.SetActive(false);
-    }
-
     /// <summary>
     /// 对局开始
     /// </summary>
@@ -212,7 +205,6 @@ public class PVEPanel
     public void OnGameOver(Config.PieceColor loseColor)
     {
         Debug.Log("GameOver!!");
-        StopRoundTimer();
         if (loseColor == selfColor)
         {
             App.UIManager.OpenPanel("ResultPanel", new object[] {Config.GameResult.LOSE, "-100"});
@@ -231,18 +223,34 @@ public class PVEPanel
         //自己的回合
         if (isTurn == true)
         {
-            StopRoundTimer();
-            StartRoundTimer();
+            isTurn = true;
+            m_modelDrag.isTurn = true;
         }
         //AI的回合
         else
         {
-            Move move = App.ChessAI.GetSimpleNextMove((int)AIColor);
-            Debug.Log("move from" + move.From+" to"+ move.To);
-            var item = GameObject.Find((move.From.x + 1) + "_" + (move.From.y + 1));
-            item.GetComponent<PieceItem>().AIMove(move);
+            switch (m_mode)
+            {
+                case 0:
+                    Move simpleMove = App.ChessAI.GetSimpleNextMove((int)AIColor);
+                    Debug.Log("move from" + simpleMove.From + " to" + simpleMove.To);
+                    var simpleItem = GameObject.Find((simpleMove.From.x + 1) + "_" + (simpleMove.From.y + 1));
+                    simpleItem.GetComponent<PieceItem>().AIMove(simpleMove);
+                    break;
+                case 1:
+                    Move normalMove = App.ChessAI.GetNormalNextMove((int)AIColor);
+                    Debug.Log("move from" + normalMove.From + " to" + normalMove.To);
+                    var normalItem = GameObject.Find((normalMove.From.x + 1) + "_" + (normalMove.From.y + 1));
+                    normalItem.GetComponent<PieceItem>().AIMove(normalMove);
+                    break;
+                case 2:
+                    Move hardMove = App.ChessAI.GetHardNextMove((int)AIColor);
+                    Debug.Log("move from" + hardMove.From + " to" + hardMove.To);
+                    var hardItem = GameObject.Find((hardMove.From.x + 1) + "_" + (hardMove.From.y + 1));
+                    hardItem.GetComponent<PieceItem>().AIMove(hardMove);
+                    break;
+            }
         }
-
     }
 
     /// <summary>
@@ -252,15 +260,13 @@ public class PVEPanel
     {
         if(isTurn == true)
         {
-            m_selfTimer.gameObject.SetActive(false);
-            m_enemyTimer.gameObject.SetActive(true);
             isTurn = false;
+            m_modelDrag.isTurn = false;
         }
         else
         {
-            m_selfTimer.gameObject.SetActive(true);
-            m_enemyTimer.gameObject.SetActive(false);
             isTurn = true;
+            m_modelDrag.isTurn = true;
         }      
         roundNum++;
         Debug.Log("=======RoundEnd======== num: " + roundNum);
@@ -288,6 +294,7 @@ public class PVEPanel
         m_lastFrom = from;
         m_lastTo = to;
         m_lastEat = eatType;
+        m_modelDrag.isTurn = false;
     }
 
 
@@ -309,7 +316,6 @@ public class PVEPanel
 
     private void OnCameratweenComplete(object[] args)
     {
-        m_gameStartLogo.SetActive(true);
         OnGameStart();
     }
 
@@ -378,60 +384,7 @@ public class PVEPanel
     }
 
     #region Private Method
-    private void StartRoundTimer()
-    {
-        if (m_roundTimer == null)
-        {
-            m_roundTimer = _OnTimer();
-            App.UIManager.StartCoroutine(m_roundTimer);
-        }
-    }
 
-    private IEnumerator _OnTimer()
-    {
-        Text timer;
-        if (isTurn == true)
-        {
-            m_selfTimer.gameObject.SetActive(true);
-            m_enemyTimer.gameObject.SetActive(false);
-            timer = m_selfTimer;
-        }
-        else
-        {
-            m_selfTimer.gameObject.SetActive(false);
-            m_enemyTimer.gameObject.SetActive(true);
-            timer = m_enemyTimer;
-        }
-        for (int i = 0; i < Config.Game.WaitingRound; i++)
-        {
-            while (isPause)
-            {
-                yield return new WaitForSeconds(1);
-            }
-            if (timer != null)
-            {
-                timer.text = (Config.Game.WaitingRound - i) + "s";
-            }          
-            yield return new WaitForSeconds(1);
-        }
-        if (isTurn)
-        {
-            EndCurRound();
-        }
-        else
-        {
-            OnRoundStart();
-        }
-    }
-
-    private void StopRoundTimer()
-    {
-        if (m_roundTimer != null)
-        {
-            App.UIManager.StopCoroutine(m_roundTimer);
-            m_roundTimer = null;
-        }
-    }
     #endregion
 
     public void CloseView()

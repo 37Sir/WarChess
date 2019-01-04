@@ -191,6 +191,132 @@ namespace Framework
         }
 
         /// <summary>
+        /// 可走预判
+        /// </summary>
+        /// <returns></returns>
+        private bool CanMove(Vector2 from, Vector2 to, int[,] temp)
+        {
+            int fromX = (int)from.x;
+            int fromY = (int)from.y;
+            int fromType = temp[fromY, fromX];
+            int fromColor;
+            int fromSquare = SQUARES[fromY][fromX];
+
+            int toX = (int)to.x;
+            int toY = (int)to.y;
+            int toType = temp[toY, toX];
+            int toColor;
+            int toSquare = SQUARES[toY][toX];
+
+            if (fromType < 0)
+            {
+                return false;
+            }
+            fromColor = fromType / 10;
+
+            if (toType < 0)
+            {
+                toColor = -1;
+            }
+            else
+            {
+                toColor = toType / 10;
+            }
+            int difference = toSquare - fromSquare;
+            int index = difference + 119;
+            toType = toType % 10;
+            fromType = fromType % 10;
+            if (toColor == fromColor) return false;//todo如果王车易位 需要修改
+            if (fromType == (int)Config.PieceType.P)//todo 小兵直走
+            {
+                if (toType < 0)
+                {
+                    if (difference < 0)
+                    {
+                        if (GetPiece((int)from.x, (int)from.y + 1) == -1 && fromColor == (int)Config.PieceColor.WHITE && from.x == to.x)
+                        {
+                            //小兵第一次移动可以走两步 之后只有一步
+                            int step = 1;
+                            if (from.y == 1)
+                            {
+                                step = 2;
+                            }
+                            if (Math.Abs(from.y - to.y) > step) return false;
+                            if (GetPiece(toX, toY) >= 0) return false;
+                            if (IsCheckPre(fromColor, from, to) == false)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (GetPiece((int)from.x, (int)from.y - 1) == -1 && fromColor == (int)Config.PieceColor.BLACK && from.x == to.x)
+                        {
+                            //小兵第一次移动可以走两步 之后只有一步
+                            int step = 1;
+                            if (from.y == 6)
+                            {
+                                step = 2;
+                            }
+                            if (Math.Abs(from.y - to.y) > step) return false;
+                            if (GetPiece(toX, toY) >= 0) return false;
+                            if (IsCheckPre(fromColor, from, to) == false)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            if ((ATTACKS[index] & (1 << SHIFTS[fromType])) != 0)
+            {
+                //判断是否小兵往回走 *小兵直走斜吃
+                if (fromType == (int)Config.PieceType.P)
+                {
+                    if (toType < 0 || toColor == fromColor) return false;
+                    if (difference < 0)
+                    {
+                        if (fromColor == (int)Config.PieceColor.WHITE)
+                        {
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        if (fromColor == (int)Config.PieceColor.BLACK)
+                        {
+                            return true;
+                        }
+                    }
+                }
+                else
+                {
+                    //如果是王或者马 不必判断阻挡
+                    if (fromType == (int)Config.PieceType.N || fromType == (int)Config.PieceType.K) return true;
+
+                    //判断阻挡
+                    int offset = RAYS[index];
+                    int j = toSquare + offset;
+                    bool blocked = false;
+                    while (j != fromSquare)
+                    {
+                        int y = 7 - j / 16;
+                        int x = j % 16;
+                        if (temp[y, x] >= 0)
+                        {
+                            blocked = true;
+                            break;
+                        }
+                        j += offset;
+                    }
+                    if (!blocked) return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
         /// 目标位置是否可走
         /// </summary>
         /// <returns></returns>
@@ -395,6 +521,29 @@ namespace Framework
         }
 
         /// <summary>
+        /// 可移动位置
+        /// </summary>
+        /// <returns></returns>
+        public List<Vector2> GenerateMoves(Vector2 from, int[,] board)
+        {
+            List<Vector2> moves = new List<Vector2>();
+            Vector2 to = new Vector2();
+            for (int y = 0; y < Config.Board.MaxY; y++)
+            {
+                for (int x = 0; x < Config.Board.MaxX; x++)
+                {
+                    to.x = x;
+                    to.y = y;
+                    if (CanMove(from, to, board))
+                    {
+                        moves.Add(to);
+                    }
+                }
+            }
+            return moves;
+        }
+
+        /// <summary>
         /// 兵晋升
         /// </summary>
         public void PPromoted(Vector2Int pos, int type)
@@ -550,6 +699,34 @@ namespace Framework
                     if (pieceColor != color) continue;
                     var from = new Vector2(x, y);
                     var moves = GenerateMoves(from);//某个棋子可移动的位置集合
+                    foreach (var move in moves)
+                    {
+                        Move temp = new Move(from, move);
+                        allMoves.Add(temp);
+                    }
+                }
+            }
+            return allMoves;
+        }
+
+        /// <summary>
+        /// 得到传入盘面的可移动位置
+        /// </summary>
+        /// <param name="board"></param>
+        /// <param name="color"></param>
+        /// <returns></returns>
+        public List<Move> GetBoardAllMoves(int[,] board, int color)
+        {
+            List<Move> allMoves = new List<Move>();
+            for (int y = 0; y < Config.Board.MaxY; y++)
+            {
+                for (int x = 0; x < Config.Board.MaxX; x++)
+                {
+                    var piece = board[y, x];
+                    var pieceColor = piece / 10;
+                    if (pieceColor != color) continue;
+                    var from = new Vector2(x, y);
+                    var moves = GenerateMoves(from, board);//某个棋子可移动的位置集合
                     foreach (var move in moves)
                     {
                         Move temp = new Move(from, move);

@@ -9,10 +9,12 @@ public class PVEProxy : Proxy
 {
     public new static string NAME = "PVEProxy";
     private PVPPackage m_pvpData;
+    private PVEPackage m_pveData;
 
     public PVEProxy() : base(NAME)
     {
         m_pvpData = new PVPPackage();
+        m_pveData = new PVEPackage();
     }
 
     public override void OnRegister()
@@ -58,6 +60,16 @@ public class PVEProxy : Proxy
     public Config.PieceColor GetSelfColor()
     {
         return m_pvpData.SelfColor;
+    }
+
+    public int GetMode()
+    {
+        return m_pveData.PVEMode;
+    }
+
+    public void SetMode(int mode)
+    {
+        m_pveData.PVEMode = mode;
     }
 }
 

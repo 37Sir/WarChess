@@ -52,4 +52,10 @@ public class NotificationConstant
     public const string PVEEndTurn = "PVEEndTurn";
     public const string RankUpdate = "RankUpdate";
     public const string RoundBegin = "RoundBegin";
+    public const string RoundEnd = "RoundEnd";
+    public const string PieceClick = "PieceClick";
+    public const string ShowTips = "ShowTips";
+    public const string ShowRedTips = "ShowRedTips";
+    public const string PieceAnimatorStop = "PieceAnimatorStop";
+    public const string SomeoneDead = "SomeoneDead";
 }

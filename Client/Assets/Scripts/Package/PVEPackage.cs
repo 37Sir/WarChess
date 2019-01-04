@@ -10,6 +10,7 @@ public sealed class PVEPackage
     private int m_gold;
     private string m_userName;
     private string m_enemyName;
+    private int m_PVEMode = 0;//0：简单， 1：中等， 2：困难
 
     private int m_firstId;
     private Config.PieceColor m_selfColor;
@@ -98,6 +99,16 @@ public sealed class PVEPackage
         }
     }
 
-
+    public int PVEMode
+    {
+        get
+        {
+            return m_PVEMode;
+        }
+        set
+        {
+            m_PVEMode = value;
+        }
+    }
 }
 

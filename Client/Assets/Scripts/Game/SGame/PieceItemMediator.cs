@@ -30,6 +30,7 @@ public class PieceItemMediator : Mediator
         list.Add(NotificationConstant.OnMoveEnd);
         list.Add(NotificationConstant.OnUndo);
         list.Add(NotificationConstant.OnTypeSelect);
+        list.Add(NotificationConstant.PieceClick);
         return list;
     }
 
@@ -106,6 +107,13 @@ public class PieceItemMediator : Mediator
                     {
                         m_viewComponent.isReborn = false;
                     }
+                }
+                break;
+            case NotificationConstant.PieceClick:
+                Vector2 clickPoint = (Vector2)body;
+                if(m_viewComponent.m_X == clickPoint.x && m_viewComponent.m_Z == clickPoint.y)
+                {
+                    Debug.Log("Click Piece Success!!!");
                 }
                 break;
 

@@ -13,7 +13,7 @@ public class ModelClick : MonoBehaviour
     private Vector3 screenSpace;
     private Vector3 offset;
     public bool isTurn = false;
-    private bool isDrage = false;
+    private bool isClick = false;
     public PVP02Panel pvp02Panel;
 
     private GameObject m_qizi;
@@ -43,6 +43,7 @@ public class ModelClick : MonoBehaviour
                 LayerMask mask2 = 1 << LayerMask.NameToLayer("Animal");
                 if (Physics.Raycast(ray, out hitInfo, 100, mask1.value))
                 {
+                    isClick = true;
                     //划出射线，只有在scene视图中才能看到
                     Debug.DrawLine(ray.origin, hitInfo.point);
                     var worldPos = hitInfo.point;
@@ -58,6 +59,19 @@ public class ModelClick : MonoBehaviour
                     OnAnimalClick(hitInfo);
                 }
             }
+            else if (Input.GetMouseButtonUp(0) && isClick == true)
+            {
+                OnClickCancel();
+            }
+        }
+    }
+
+    private void OnClickCancel()
+    {
+        if (pvp02Panel != null)
+        {
+            pvp02Panel.OnTipsHide();
+            pvp02Panel.OnPieceAnimatorStop();
         }
     }
 

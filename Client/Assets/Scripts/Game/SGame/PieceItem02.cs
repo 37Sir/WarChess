@@ -128,7 +128,6 @@ public class PieceItem02 : MonoBehaviour
     /// </summary>
     public void BeAttached()
     {
-        Debug.Log("！！！！！！！！！！！！！！！！！！！！被吃了");
         App.SoundManager.PlaySoundClip(Config.Sound.BMagicAttack);
         var effectPlayer = App.EffectManager.LoadEffect(m_gameObject, "normal_dead");
         effectPlayer.IsOnce = true;
@@ -140,7 +139,7 @@ public class PieceItem02 : MonoBehaviour
             m_mediator.NotityGameOver(loseColor);
         }
         isDead = true;
-        //gameObject.SetActive(false);
+        m_mediator.NotifySomeoneDead();
         OnDestroy();
     }
 
@@ -159,6 +158,10 @@ public class PieceItem02 : MonoBehaviour
     public void OnRoundBegin()
     {
         canMove = true;
+        if(m_type != Config.PieceType.K && selfColor == pieceColor)
+        {
+            pieceModel.GetComponent<TweenPlayer>().enabled = true;
+        }
     }
 
     /// <summary>
@@ -166,7 +169,7 @@ public class PieceItem02 : MonoBehaviour
     /// </summary>
     public void OnDragBegin()
     {
-        if(canMove == true)
+        if(canMove == true && m_type!= Config.PieceType.K)
         {
             m_beginPos = transform.position;
             m_target.SetActive(true);
@@ -184,7 +187,7 @@ public class PieceItem02 : MonoBehaviour
     /// <param name="currentPosition"></param>
     public void OnDrag(Vector3 currentPosition)
     {
-        if(canMove == true)
+        if(canMove == true && m_type != Config.PieceType.K)
         {
             float tempZ = 0;
             if (selfColor == Config.PieceColor.WHITE)
@@ -212,7 +215,7 @@ public class PieceItem02 : MonoBehaviour
     /// </summary>
     public void OnDragEnd()
     {
-        if (canMove == false) return;
+        if (canMove == false || m_type == Config.PieceType.K) return;
         m_isTipsShow = false;
         var px = m_target.transform.position.x - m_beginPos.x;
         var pz = m_target.transform.position.z - m_beginPos.z;
@@ -243,6 +246,7 @@ public class PieceItem02 : MonoBehaviour
                 m_mediator.NotityDragEnd(activeInfo);
                 object[] args = new object[] { new Vector2(m_X, m_Z), to, new Vector2(-1, tempEat) };//0:from, 1:to, 2.x:兵生变类型 -1为没有， 2.y:吃棋信息
                 ShowMove(args);
+                StopFlash();
                 App.SoundManager.PlaySoundClip(Config.Sound.DragSuccess);
             }
             else
@@ -660,5 +664,53 @@ public class PieceItem02 : MonoBehaviour
     {
         int index = 65 - (y * Config.Board.MaxX - x + 1);
         return index;
+    }
+
+    public void StopIdle()
+    {
+        if (m_pieceAnimator == null)
+        {
+            m_pieceAnimator = pieceModel.GetComponent<Animator>();
+        }
+        m_pieceAnimator.Play("New State");
+    }
+
+    public void StopFlash()
+    {
+        if(m_type != Config.PieceType.K)
+        {
+            pieceModel.GetComponent<TweenPlayer>().enabled = false;
+        }
+        foreach (var renderer in pieceModel.GetComponentsInChildren<Renderer>())
+        {
+            foreach (var material in renderer.materials)
+            {
+                material.color = Color.white;
+            }
+        }
+    }
+
+    public void OnPieceClick(Vector2 point)
+    {
+        if(selfColor == pieceColor)
+        {
+            if (canMove == true)
+            {
+                m_mediator.NotifyShowTips(point);
+                if (m_pieceAnimator == null)
+                {
+                    m_pieceAnimator = pieceModel.GetComponent<Animator>();
+                }
+                m_pieceAnimator.Play("Idle_1");
+            }
+            else
+            {
+                m_mediator.NotifyShowRedTips(point);
+            }
+        }
+        else
+        {
+            m_mediator.NotifyShowRedTips(point);
+        }
     }
 }

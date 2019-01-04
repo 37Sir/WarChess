@@ -30,6 +30,9 @@ public class PieceItem02Mediator : Mediator
         list.Add(NotificationConstant.OnMoveEnd);
         list.Add(NotificationConstant.OnTypeSelect);
         list.Add(NotificationConstant.RoundBegin);
+        list.Add(NotificationConstant.PieceClick);
+        list.Add(NotificationConstant.PieceAnimatorStop);
+        list.Add(NotificationConstant.RoundEnd);
         return list;
     }
 
@@ -69,7 +72,19 @@ public class PieceItem02Mediator : Mediator
                     m_viewComponent.OnRoundBegin();
                 }        
                 break;
-
+            case NotificationConstant.PieceClick:
+                Vector2 clickPoint = (Vector2)body;
+                if (m_viewComponent.m_X == clickPoint.x && m_viewComponent.m_Z == clickPoint.y)
+                {
+                    m_viewComponent.OnPieceClick(clickPoint);
+                }
+                break;
+            case NotificationConstant.PieceAnimatorStop:
+                m_viewComponent.StopIdle();
+                break;
+            case NotificationConstant.RoundEnd:
+                m_viewComponent.StopFlash();
+                break;
             default:
                 break;
         }
@@ -114,6 +129,21 @@ public class PieceItem02Mediator : Mediator
     public void NotifyAttackOther()
     {
         SendNotification(NotificationConstant.OnAttackOther);
+    }
+
+    public void NotifyShowTips(object body)
+    {
+        SendNotification(NotificationConstant.ShowTips, body);
+    }
+
+    public void NotifyShowRedTips(object body)
+    {
+        SendNotification(NotificationConstant.ShowRedTips, body);
+    }
+
+    public void NotifySomeoneDead()
+    {
+        SendNotification(NotificationConstant.SomeoneDead);
     }
 
     private void IsCheck(int color)

@@ -16,7 +16,7 @@ MonoBehaviour:
   - TweenName: rotate_start
     TweenType: 2
     EaseType: 7
-    To: {x: 50.2, y: 0, z: 0}
+    To: {x: 45, y: 0, z: 0}
     Color: {r: 1, g: 1, b: 1, a: 1}
     Fade: 1
     ToText: 
@@ -31,7 +31,7 @@ MonoBehaviour:
   - TweenName: move_start
     TweenType: 9
     EaseType: 7
-    To: {x: 0, y: 17.8, z: -12.8}
+    To: {x: 0, y: 48, z: -43}
     Color: {r: 1, g: 1, b: 1, a: 1}
     Fade: 1
     ToText: 

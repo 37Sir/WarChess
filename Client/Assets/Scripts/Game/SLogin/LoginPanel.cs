@@ -39,7 +39,7 @@ public class LoginPanel
     {
         App.SoundManager.PlaySoundClip(Config.Sound.GameStart);
         Debug.Log("login panel Opened");
-        App.NetworkManager.SetConfig("192.168.90.12", 10000, (int)Config.NetworkType.TCP, 512, 5000, 1, 1, 5000);
+        App.NetworkManager.SetConfig(Config.ServerHost, Config.ServerHostPort, (int)Config.NetworkType.TCP, 512, 5000, 1, 1, 5000);
         m_mediator.NotifyLobbyConnect();
     }
 

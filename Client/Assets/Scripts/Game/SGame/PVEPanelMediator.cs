@@ -70,11 +70,6 @@ public class PVEPanelMediator : Mediator
         }
     }
 
-    private void DoMove(Vector2 from, Vector2 to)
-    {
-
-    }
-
     public void InitBoardData()
     {
         App.ChessLogic.Init();     //初始化走棋逻辑
