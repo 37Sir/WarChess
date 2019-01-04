@@ -52,6 +52,7 @@ public class PVP02Panel
     private GameObject m_EnemyEnergy;
     private Button m_SelfSay;
     private GameObject m_EnemySay;
+    private Text m_SummonInfo;
 
     public bool isTurn = true;
     public bool canNext = true;
@@ -59,7 +60,7 @@ public class PVP02Panel
     private bool m_isTest = false;
     private bool m_needSendEndTurn = false;
     
-    public int roundNum = 0;
+    public int summonIndex = 0;
     private int m_selectType = -1;
     public Config.PieceColor selfColor = Config.PieceColor.WHITE;//自己的颜色
     private IEnumerator m_roundTimer;   //计时器
@@ -159,6 +160,7 @@ public class PVP02Panel
         m_Item2 = m_SelfSay.transform.Find("Select/Item2").GetComponent<Button>();
         m_Item3 = m_SelfSay.transform.Find("Select/Item3").GetComponent<Button>();
         m_Item4 = m_SelfSay.transform.Find("Select/Item4").GetComponent<Button>();
+        m_SummonInfo = gameObject.transform.Find("Container/m_Summon").gameObject.GetComponent<Text>();
     }
 
     public void OpenView(object intent)
@@ -261,7 +263,7 @@ public class PVP02Panel
         m_enemyReady.gameObject.SetActive(false);
         m_mediator.InitBoardData();//初始化棋盘数据
         InitChessBoard();          //初始化棋盘表现
-        roundNum = 1;
+        summonIndex = 0;
         m_mediator.Energy = 1;
         m_mediator.CurPieceNum = 0;
         if (isTurn)
@@ -316,6 +318,8 @@ public class PVP02Panel
     /// </summary>
     private void OnRoundStart()
     {
+        UpdateSummonInfo();
+        m_SummonInfo.gameObject.SetActive(true);
         m_Bottom.GetComponent<TweenPlayer>().PlayOne("move_show");
         StopRoundTimer();
         m_mediator.NotifyRoundBegin(selfColor);       
@@ -338,6 +342,7 @@ public class PVP02Panel
     /// </summary>
     private void StopRoundShow()
     {
+        m_SummonInfo.gameObject.SetActive(false);
         m_mediator.NotifyRoundEnd();
         m_BottomToggle.isOn = false;
         var tweenPlayer = m_Bottom.GetComponent<TweenPlayer>();       
@@ -388,8 +393,6 @@ public class PVP02Panel
             m_mediator.E_MaxEnergy++;
         }
         m_mediator.E_Energy = m_mediator.E_MaxEnergy;
-        roundNum++;
-        Debug.Log("=======RoundEnd======== num: " + roundNum);
         m_EnemyEnergy.SetActive(true);
         var text = m_EnemyEnergy.transform.Find("m_EnergyText").GetComponent<Text>();
         text.text = m_mediator.E_Energy + "/" + m_mediator.E_MaxEnergy;
@@ -444,7 +447,8 @@ public class PVP02Panel
                     temp.transform.parent = m_qizi.transform;
                     temp.SetActive(true);
                     PieceItem02 pieceItem = temp.AddComponent<PieceItem02>();
-                    pieceItem.InitView(temp, new Piece((Config.PieceColor)color, (Config.PieceType)type, x + 1, y + 1), roundNum, false);
+                    summonIndex++;
+                    pieceItem.InitView(temp, new Piece((Config.PieceColor)color, (Config.PieceType)type, x + 1, y + 1), summonIndex, false);
 
                     App.ObjectPoolManager.RegisteObject(pieceName, "FX/" + pieceName, 0, 30, -1);
                     App.ObjectPoolManager.Instantiate(pieceName, (GameObject obj) =>
@@ -703,6 +707,11 @@ public class PVP02Panel
         }
     }
 
+    private void UpdateSummonInfo()
+    {
+        m_SummonInfo.text = "还能召唤" + (Config.MaxPieceNum - m_mediator.CurPieceNum) + "个...";
+    }
+
     /// <summary>
     /// 召唤
     /// </summary>
@@ -747,7 +756,8 @@ public class PVP02Panel
         temp.transform.parent = m_qizi.transform;
         temp.SetActive(true);
         PieceItem02 pieceItem = temp.AddComponent<PieceItem02>();
-        pieceItem.InitView(temp, new Piece((Config.PieceColor)color, (Config.PieceType)newType, (int)point.x, (int)point.y), roundNum, false);
+        summonIndex++;
+        pieceItem.InitView(temp, new Piece((Config.PieceColor)color, (Config.PieceType)newType, (int)point.x, (int)point.y), summonIndex, false);
         pieceItem.canMove = false;
         if (isTurn == true)
         {
@@ -771,7 +781,6 @@ public class PVP02Panel
             effectPlayer.IsOnce = true;
             App.SoundManager.PlaySoundClip(Config.Sound.SummonSuccess);
             App.UIManager.StartCoroutine(_SendPaintEnd(newType));
-            
         });
     }
 
@@ -788,7 +797,7 @@ public class PVP02Panel
                 m_EnergyText.text = m_mediator.Energy + "/" + m_mediator.MaxEnergy;
             }
             m_mediator.CurPieceNum++;
-            Debug.Log("SomeOne is Dead, current piece num is :" + m_mediator.CurPieceNum);
+            UpdateSummonInfo();
         }
         m_mediator.NotifyEndTurn(1);
     }
@@ -1099,7 +1108,6 @@ public class PVP02Panel
             }
             else
             {
-                App.UIManager.OpenPanel("MessagePanel", "非法召唤！canNext == " + canNext);
                 Debug.Log("非法召唤！！");
             }
         }
@@ -1115,7 +1123,6 @@ public class PVP02Panel
             m_mediator.NotifyOtherMove(new Vector2[] { from, to, new Vector2(-1, 0) });//todo response
         }
         Debug.Log("Push====: OtherActive!!!!");
-        roundNum++;
     }
 
     public void OnOnePlayerReady(string name, List<byte[]> packet)
@@ -1222,68 +1229,6 @@ public class PVP02Panel
         }
     }
     #endregion
-
-    /// <summary>
-    /// 棋子复活
-    /// </summary>
-    /// <param name="lastEat"></param>
-    /// <param name="to"></param>
-    private void PieceReborn(int lastEat, Vector2 to)
-    {
-        int color = lastEat / 10;
-        int type = lastEat % 10;
-        string pieceName = "";
-        if (color == (int)Config.PieceColor.BLACK)
-        {
-            pieceName = "Black_";
-        }
-        else
-        {
-            pieceName = "White_";
-        }
-        switch ((Config.PieceType)type)
-        {
-            case Config.PieceType.P:
-                pieceName = pieceName + "P";
-                break;
-            case Config.PieceType.N:
-                pieceName = pieceName + "N";
-                break;
-            case Config.PieceType.B:
-                pieceName = pieceName + "B";
-                break;
-            case Config.PieceType.R:
-                pieceName = pieceName + "R";
-                break;
-            case Config.PieceType.Q:
-                pieceName = pieceName + "Q";
-                break;
-            case Config.PieceType.K:
-                pieceName = pieceName + "K";
-                break;
-        }
-        GameObject temp = GameObject.Instantiate(m_piece);
-        temp.name = to.x + "_" + to.y;
-        temp.transform.parent = m_qizi.transform;
-        temp.SetActive(true);
-        PieceItem pieceItem = temp.AddComponent<PieceItem>();
-        pieceItem.InitView(temp, new Piece((Config.PieceColor)color, (Config.PieceType)type, (int)to.x, (int)to.y), false);
-        pieceItem.isReborn = true;
-        App.ObjectPoolManager.RegisteObject(pieceName, "FX/" + pieceName, 0, 30, -1);
-        App.ObjectPoolManager.Instantiate(pieceName, (GameObject obj) =>
-        {
-            if (color == (int)Config.PieceColor.BLACK)
-            {
-                obj.transform.localRotation = Quaternion.Euler(0, 180, 0);
-            }
-            obj.SetActive(true);
-            obj.transform.parent = temp.transform;
-            obj.transform.localPosition = Vector3.zero;
-            obj.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
-            pieceItem.pieceModel = obj;
-        });
-    }
-
 
     private void RemovePush()
     {

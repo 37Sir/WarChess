@@ -31,7 +31,7 @@ MonoBehaviour:
   - TweenName: move_start
     TweenType: 9
     EaseType: 7
-    To: {x: 0, y: 40, z: 27}
+    To: {x: 0, y: 40, z: 31}
     Color: {r: 1, g: 1, b: 1, a: 1}
     Fade: 1
     ToText: 

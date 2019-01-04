@@ -84,7 +84,7 @@ public class PVP02PanelMediator : Mediator
                 break;
             case NotificationConstant.ShowTips:
                 Vector2 clickPoint = (Vector2)body;
-                if(m_viewComponent.canNext == true)
+                if(m_viewComponent.canNext == true && m_viewComponent.isTurn == true)
                 {
                     m_viewComponent.OnTipsShow(clickPoint);
                 }

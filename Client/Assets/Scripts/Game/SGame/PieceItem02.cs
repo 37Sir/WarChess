@@ -440,7 +440,9 @@ public class PieceItem02 : MonoBehaviour
         var dx = Config.PieceWidth * (to.x - m_X);
         var dy = Config.PieceWidth * (to.y - m_Z);
         attackTween.SetTo(new Vector3(dx, m_Attack.transform.localPosition.y, dy));
-
+        var angle = GetAngleByDeltaXY(dx, dy);
+        var localAngle = (angle) % 360;
+        m_AttackPlayer.gameObject.transform.rotation = Quaternion.Euler(0, localAngle, 0);
         //if (pieceColor == Config.PieceColor.WHITE)
         //{
         //    effectPlayer.LocalRotation = Quaternion.Euler(0, 180, 0);
