@@ -232,7 +232,7 @@ public class PVP02Panel
         }
         m_pvpProxy.SetSelfColor(selfColor);
         //m_userImage.GetComponentInChildren<Text>().text = m_proxy.GetPlayerName();
-        //m_enemyImage.GetComponentInChildren<Text>().text = m_pvpProxy.GetEnemyName();
+        m_enemyImage.GetComponentInChildren<Text>().text = m_pvpProxy.GetEnemyName();
         InitTimer();
         App.SoundManager.PlaySoundClip(Config.Sound.InGameStart);
         var fixedK = App.EffectManager.ScreenFixedK;

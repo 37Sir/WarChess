@@ -54,15 +54,12 @@ public class PieceItem:MonoBehaviour
     private void InitPieceShow(Piece pieceData)
     {
         //不是自己的棋子 不能拖
-        if (isPVE == false)
+        if (m_pvpProxy.GetSelfColor() != pieceData.color)
         {
-            if (m_pvpProxy.GetSelfColor() != pieceData.color)
+            var collider = GetComponent<CapsuleCollider>();
+            if (collider != null)
             {
-                var collider = GetComponent<CapsuleCollider>();
-                if (collider != null)
-                {
-                    collider.enabled = false;
-                }
+                collider.enabled = false;
             }
         }
         SetPiecePos(pieceData.x, pieceData.y);

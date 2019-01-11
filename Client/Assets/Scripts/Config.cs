@@ -19,6 +19,9 @@ public class Config{
     public static readonly string EffectConfigPath = "Assets/Resources/ArtRes/Effects/EffectConfig.asset";
 
     public static float PieceWidth = 2f;
+    public static float MoveStepTime = 0.1f;
+    public static float AttackStepTime = 0.1f;
+    public static float RotateTime = 0.8f;
 
     public static int MaxPieceNum = 6;//召唤棋子上限
 

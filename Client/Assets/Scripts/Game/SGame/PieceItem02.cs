@@ -128,6 +128,7 @@ public class PieceItem02 : MonoBehaviour
     /// </summary>
     public void BeAttached()
     {
+        Debug.Log("被打了~ m_x=" + m_X + "m_z=" + m_Z);
         App.SoundManager.PlaySoundClip(Config.Sound.BMagicAttack);
         var effectPlayer = App.EffectManager.LoadEffect(m_gameObject, "normal_dead");
         effectPlayer.IsOnce = true;
@@ -313,7 +314,7 @@ public class PieceItem02 : MonoBehaviour
         //有棋子播放攻击表现
         if (eatPiece >= 0)
         {
-            Tween rotate_start = m_ModelTween.AddClip("rotate_start", 1);
+            Tween rotate_start = m_ModelTween.AddClip("rotate_start", Config.RotateTime);
             rotate_start.SetTweenType(TweenType.LocalRotation);
             rotate_start.SetTo(new Vector3(0, localAngle, 0));
             rotate_start.SetOnComplete(ShowAttack, args);
@@ -324,7 +325,7 @@ public class PieceItem02 : MonoBehaviour
         else
         {
             Debug.Log("localAngel==============" + localAngle);
-            Tween rotate_start = m_ModelTween.AddClip("rotate_start", 1);
+            Tween rotate_start = m_ModelTween.AddClip("rotate_start", Config.RotateTime);
             rotate_start.SetTweenType(TweenType.LocalRotation);
             rotate_start.SetTo(new Vector3(0, localAngle, 0));
             rotate_start.SetOnComplete(OnRotate1Complete, args);
@@ -341,11 +342,11 @@ public class PieceItem02 : MonoBehaviour
         var temp = (object[])args;
         var to = (Vector2)temp[1];
         var from = (Vector2)temp[0];
-        Tween move_pos = m_TweenPlayer.AddClip("move", 2);
+        Tween move_pos = m_TweenPlayer.AddClip("move", Config.RotateTime);
         move_pos.SetTweenType(TweenType.LocalPosition);
         move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
         var steps = CalMoveSteps(from, to);
-        move_pos.SetDuration(steps * 0.5f);
+        move_pos.SetDuration(steps * Config.MoveStepTime);
         move_pos.SetOnComplete(OnRotate2, temp);
         m_TweenPlayer.StartPlay();
     }
@@ -359,7 +360,7 @@ public class PieceItem02 : MonoBehaviour
         var temp = (object[])args;
         var to = (Vector2)temp[1];
         var from = (Vector2)temp[0];
-        Tween rotate_start = m_ModelTween.AddClip("rotate_start", 1);
+        Tween rotate_start = m_ModelTween.AddClip("rotate_start", Config.RotateTime);
         rotate_start.SetTweenType(TweenType.LocalRotation);
         if (selfColor == Config.PieceColor.BLACK)
         {
@@ -430,7 +431,7 @@ public class PieceItem02 : MonoBehaviour
 
         TweenPlayer m_AttackPlayer = m_Attack.AddComponent<TweenPlayer>();
         var steps = CalMoveSteps(from, to);
-        Tween attackTween = m_AttackPlayer.AddClip("attack", steps * 0.2f);
+        Tween attackTween = m_AttackPlayer.AddClip("attack", steps * Config.AttackStepTime);
         attackTween.SetTweenType(TweenType.LocalPosition);
         attackTween.SetDelayTime(0.8f);
         attackTween.SetOnComplete(OnRemoteAttackComplete, args);
@@ -459,7 +460,7 @@ public class PieceItem02 : MonoBehaviour
         var from = (Vector2)args[0];
         var to = (Vector2)args[1];
         var steps = CalMoveSteps(from, to);
-        Tween move_pos = m_TweenPlayer.AddClip("move", steps * 0.5f);
+        Tween move_pos = m_TweenPlayer.AddClip("move", steps * Config.MoveStepTime);
         move_pos.SetTweenType(TweenType.LocalPosition);
         move_pos.SetTo(new Vector3((attackPoint.x - 1) * Config.PieceWidth, 0, (attackPoint.y - 1) * Config.PieceWidth));
         move_pos.SetOnComplete(OnMeleeMoveComplete, args);
@@ -478,7 +479,7 @@ public class PieceItem02 : MonoBehaviour
         Tween move_pos = m_TweenPlayer.AddClip("move", 1);
         move_pos.SetDelayTime(0.5f);
         var steps = CalMoveSteps(from, to);
-        move_pos.SetDuration(steps * 0.6f);
+        move_pos.SetDuration(steps * Config.MoveStepTime);
         move_pos.SetTweenType(TweenType.LocalPosition);
         move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
         move_pos.SetOnComplete(OnRotate2, args);
@@ -495,9 +496,9 @@ public class PieceItem02 : MonoBehaviour
         {
             m_pieceAnimator = pieceModel.GetComponent<Animator>();
         }
-        m_pieceAnimator.Play("Attack");
-        App.SoundManager.PlaySoundClip(Config.Sound.PhysAttack, 0.3f);
+        StartCoroutine(_OnMeleeStartAttack(args));
         var to = (Vector2)args[1];
+        App.SoundManager.PlaySoundClip(Config.Sound.PhysAttack, 0.3f);
         Tween move_pos = m_TweenPlayer.AddClip("move", 0.5f);
         move_pos.SetDelayTime(1);
         move_pos.SetTweenType(TweenType.LocalPosition);
@@ -505,6 +506,29 @@ public class PieceItem02 : MonoBehaviour
         move_pos.SetOnComplete(OnRotate2, args);
         m_TweenPlayer.StartPlay();
     }
+
+    private IEnumerator _OnMeleeStartAttack(object[] args)
+    {
+        yield return new WaitForSeconds(0.4f);
+        var to = (Vector2)args[1];
+        var from = (Vector2)args[0];
+        var item = GameObject.Find(to.x + "_" + to.y);
+        item.GetComponent<PieceItem02>().BeAttached();
+        m_pieceAnimator.Play("Attack");
+    }
+
+    //private void Example()
+    //{
+    //    int x = 0;
+    //    int y = 0;
+    //    int index = 0;
+
+    //    if (index >= 1 && index <= 64)
+    //    {
+
+    //    }
+    //    if(!(index & 0x88))
+    //}
 
     private void OnCompleteMove(object args)
     {
@@ -611,7 +635,7 @@ public class PieceItem02 : MonoBehaviour
         move_pos.SetTweenType(TweenType.LocalPosition);
         move_pos.SetTo(new Vector3((to.x - 1) * Config.PieceWidth, 0, (to.y - 1) * Config.PieceWidth));
         var steps = CalMoveSteps(from, to);
-        move_pos.SetDuration(steps * 0.5f);
+        move_pos.SetDuration(steps * Config.MoveStepTime);
         move_pos.SetOnComplete(OnOtherRotate2, temp);
         m_TweenPlayer.StartPlay();
         m_otherBody = new Vector2[] { from, to, type };
@@ -627,7 +651,7 @@ public class PieceItem02 : MonoBehaviour
         var temp = (object[])args;
         var to = (Vector2)temp[1];
         var from = (Vector2)temp[0];
-        Tween rotate_start = m_ModelTween.AddClip("rotate_start", 1);
+        Tween rotate_start = m_ModelTween.AddClip("rotate_start", Config.RotateTime);
         rotate_start.SetTweenType(TweenType.LocalRotation);
         if (selfColor == Config.PieceColor.BLACK)
         {

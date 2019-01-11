@@ -233,15 +233,29 @@ public class PVEPanel
             {
                 case 0:
                     Move simpleMove = App.ChessAI.GetSimpleNextMove((int)AIColor);
-                    Debug.Log("move from" + simpleMove.From + " to" + simpleMove.To);
-                    var simpleItem = GameObject.Find((simpleMove.From.x + 1) + "_" + (simpleMove.From.y + 1));
-                    simpleItem.GetComponent<PieceItem>().AIMove(simpleMove);
+                    if(simpleMove == null)
+                    {
+                        OnGameOver(1 - selfColor);
+                    }
+                    else
+                    {
+                        Debug.Log("move from" + simpleMove.From + " to" + simpleMove.To);
+                        var simpleItem = GameObject.Find((simpleMove.From.x + 1) + "_" + (simpleMove.From.y + 1));
+                        simpleItem.GetComponent<PieceItem>().AIMove(simpleMove);
+                    }
                     break;
                 case 1:
                     Move normalMove = App.ChessAI.GetNormalNextMove((int)AIColor);
-                    Debug.Log("move from" + normalMove.From + " to" + normalMove.To);
-                    var normalItem = GameObject.Find((normalMove.From.x + 1) + "_" + (normalMove.From.y + 1));
-                    normalItem.GetComponent<PieceItem>().AIMove(normalMove);
+                    if (normalMove == null)
+                    {
+                        OnGameOver(1 - selfColor);
+                    }
+                    else
+                    {
+                        Debug.Log("move from" + normalMove.From + " to" + normalMove.To);
+                        var normalItem = GameObject.Find((normalMove.From.x + 1) + "_" + (normalMove.From.y + 1));
+                        normalItem.GetComponent<PieceItem>().AIMove(normalMove);
+                    }
                     break;
                 case 2:
                     Move hardMove = App.ChessAI.GetHardNextMove((int)AIColor);

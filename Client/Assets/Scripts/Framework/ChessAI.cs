@@ -139,8 +139,12 @@ namespace Framework
         public Move GetSimpleNextMove(int color)
         {
             var moves = App.ChessLogic.GetAllMoves(color);
+            if(moves.Count == 0)
+            {
+                return null;
+            }
             int maxIndex = 0;
-            double maxValue = 0;
+            double maxValue = -9999;
             int tempIndex = 0;
             foreach(var move in moves)
             {
@@ -176,7 +180,11 @@ namespace Framework
         {
             int otherColor = 1 - color; //玩家的颜色
             int depth = 2;              //搜索树的深度
-
+            var moves = App.ChessLogic.GetAllMoves(color);
+            if(moves.Count == 0)
+            {
+                return null;
+            }
             MoveSearchHelper root = new MoveSearchHelper(); //根节点
             root.board = App.ChessLogic.CopyBoard();        //原始盘面
             root.nextColor = color;

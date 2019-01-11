@@ -47,8 +47,7 @@ public class PieceItem02Mediator : Mediator
                 m_viewComponent.DoMove((Vector2)move[0], (Vector2)move[1], (Vector2)move[2]);
                 break;
 
-            case NotificationConstant.OnMoveEnd:
-                
+            case NotificationConstant.OnMoveEnd:                
                 Vector2[] endMove = (Vector2[])body;
                 var from = endMove[0];
                 var to = endMove[1];
@@ -56,6 +55,7 @@ public class PieceItem02Mediator : Mediator
                 Debug.Log("OnMoveEnd: from ==" + from + " to== " + to + "m_X:" + m_viewComponent.m_X + "m_Z: " + m_viewComponent.m_Z);
                 if (to.x == m_viewComponent.m_X && to.y == m_viewComponent.m_Z)
                 {
+                    Debug.Log("OnMoveEnd beAttached completed!!!");
                     m_viewComponent.BeAttached();
                 }
                 if (from.x == m_viewComponent.m_X && from.y == m_viewComponent.m_Z)
