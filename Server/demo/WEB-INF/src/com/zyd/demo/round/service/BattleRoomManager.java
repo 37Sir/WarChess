@@ -221,6 +221,9 @@ public class BattleRoomManager extends BaseService {
 	 * @throws BaseException */
 	public PlayerPaintingEndResponse onRequest(String token,int type) throws BaseException {
 	    String userKey = token;
+	    if (!userToRoomIdMap.containsKey(userKey) && !userToRoomIdMap0.containsKey(userKey)) {
+	          return PlayerPaintingEndResponse.newBuilder().build();
+	    }
 	     //0为普通模式 1为新模式
 	    if (type == 0) {
     		BattleRoom battleRoom = null;
@@ -239,7 +242,7 @@ public class BattleRoomManager extends BaseService {
 	        Long roomId = userToRoomIdMap0.get(userKey);
 	        User user = userMatchInfoMap0.get(userKey);
 	        if (roomId != null) {
-	          chessRoom = chessRoomMap.get(roomId);
+	            chessRoom = chessRoomMap.get(roomId);
 	        }
 	        if (chessRoom == null || user == null) {
 	            logger.warn("PLAYER_NOT_MATCH_SUCCESS userName:{}",token);

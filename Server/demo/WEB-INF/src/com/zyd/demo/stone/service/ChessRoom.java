@@ -148,8 +148,13 @@ public class ChessRoom {
                 int index = actInfo.getCallInfo().getIndex();
                 int type = actInfo.getCallInfo().getType();
                 if (my.containsKey(index) || other.containsKey(index)) {
-                    logger.warn("PLAYER_INDEX_HAVA_CHESSuserName:{}",user.getUserName());
+                    logger.warn("PLAYER_INDEX_HAVA_CHESS userName:{}",user.getUserName());
                     throw new BaseException(ErrorCode.PLAYER_INDEX_HAVA_CHESS_VALUE); 
+                }
+                //检查棋子个数，最多6个
+                if (my.size() >= 6) {
+                    logger.warn("PLAYER_CHESS_IS_SIX userName:{}",user.getUserName());
+                    throw new BaseException(ErrorCode.PLAYER_CHESS_IS_SIX_VALUE);     
                 }
                 //检查召唤位置
                 checkIsCanCall(index,user);

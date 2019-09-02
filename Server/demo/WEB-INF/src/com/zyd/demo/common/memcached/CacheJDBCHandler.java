@@ -104,7 +104,6 @@ public class CacheJDBCHandler extends MemcachedHandler {
             cacheKey = CacheKeyUtil.getCacheKeyNoRoute(tableName, String.valueOf(objUser.getId()));
             // 新建user，同时缓存user
             setEncodeValue(cacheKey, DemoConstants.CACHE_DATA_DAY, obj);
-            return null;
         } else {
           logger.error("not found table:{}", tableName);
         }

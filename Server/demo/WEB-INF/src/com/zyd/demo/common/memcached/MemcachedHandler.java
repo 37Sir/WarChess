@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
+import com.zyd.demo.common.enumuration.MysqlHandleType;
 import com.zyd.demo.common.enumuration.TableName;
 import com.zyd.demo.common.jdbc.MapperHelper;
 import com.zyd.demo.common.jdbc.MapperHelper.DBCacheMissHandler;
@@ -135,13 +136,10 @@ public class MemcachedHandler {
         }
         return null;
     }
-    //更新数据库和缓存
+    //更新缓存，并将数据库的更新放在队列中，定时异步刷
     public boolean setCacheEncodeWithDB(String cacheKey, String tableName, int expr, final Object object) {
-        if (tableName.equals(TableName.USER.getTableName())) {
-            User obj = (User) object;
-            mapperHelper.getUserMapper().updateByPrimaryKey(obj);
-        } 
-  
+        SynchronizationMysql s = new SynchronizationMysql(tableName,object,MysqlHandleType.UPDATE.getType());
+        ScheduledCacheToMysql.queue.add(s);
         return setEncodeValue(cacheKey, expr, object);
     }
     

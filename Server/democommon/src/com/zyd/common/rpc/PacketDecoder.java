@@ -49,13 +49,12 @@ public class PacketDecoder extends ByteToMessageDecoder {
               return;
           }
           decoding.buffers.add(in.readBytes(length - 1));
-      }
-      else {
+      } else {
           out.add(decoding);
-          ReferenceCountUtil.release(decoding.buffers);
           decoding = new Packet();
-          ReferenceCountUtil.release(out);
       }
+      ReferenceCountUtil.release(out);
+      ReferenceCountUtil.release(decoding.buffers);
   }
 
 }
